@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'scss/materialize';
+
+
+header, main, footer {
+  padding-left: 260px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+.brand-logo img {
+  height: 64px;
+  padding: 15px;
+}
+
+.select-wrapper input
+{
+  height: 48px !important;
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
+}
+
+.select-wrapper
+{
+  height: 48px !important;
+}
+
+.select-wrapper .caret
+{
+  color: white !important;
+  top: 0 !important;
+}
+
+.secondary_nav .input-field
+{
+  width: 200px;
+}
+
+.secondary_nav .input-field:first-child
+{
+  margin-left: 25px !important;
+  margin-right: 10px !important;
+}
+
+.secondary_nav .input-field:last-child
+{
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+.secondary_nav nav {
+  height: 48px;
+  line-height: 48px;
+}
+
+.secondary_nav nav .button-collapse i {
+  height: 48px;
+  line-height: 48px;
+}
+
+.waves-effect.waves-brown .waves-ripple {
+  /* The alpha value allows the text and background color
+  of the button to still show through. */
+  background-color: rgba(0, 154, 199, 0.65);
+}
+
+#slide-out .active
+{
+  background-color: rgba(0,0,0,0.05) !important;
+}
+
+//#sidenav-overlay
+//{
+//  position: fixed;
+//  top: 0;
+//  left: 260px !important;
+//  right: 0;
+//  height: 120vh;
+//  background-color: rgba(0,0,0,0.5);
+//  z-index: 1000 !important;
+//  will-change: opacity;
+//}
