@@ -10,7 +10,7 @@
                     <p>{{getAbstract(offer.body)}}</p>
                 </div>
                 <div class="card-action">
-                    <a href="#" style="text-transform: uppercase;">{{offer.field_cost}}</a>
+                    <a [routerLink]="['details', offer.id]" style="text-transform: uppercase;">{{offer.field_cost}}</a>
                 </div>
             </div>
         </div>

@@ -9,6 +9,7 @@ export class ServicesComponent implements OnInit {
 
     constructor() {
         this.offers = [{
+            id: 1,
             title: 'Research Consulting',
             image: this.dummyImageSrc(),
             body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
@@ -38,6 +39,7 @@ export class ServicesComponent implements OnInit {
             field_support: 'j.bauer@auckland.ac.nz'
         },
             {
+                id: 2,
                 title: 'Statistical Support',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
@@ -66,6 +68,7 @@ export class ServicesComponent implements OnInit {
                 field_support: 'j.bauer@auckland.ac.nz'
             },
             {
+                id: 3,
                 title: '3D Printing',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
@@ -94,6 +97,7 @@ export class ServicesComponent implements OnInit {
                 field_support: 'j.bauer@auckland.ac.nz'
             },
             {
+                id: 4,
                 title: 'Auckland Science Analytical Services',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
@@ -122,6 +126,7 @@ export class ServicesComponent implements OnInit {
                 field_support: 'j.bauer@auckland.ac.nz'
             },
             {
+                id: 5,
                 title: '3D Visualisation Suite',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
@@ -151,6 +156,7 @@ export class ServicesComponent implements OnInit {
                 field_support: 'j.bauer@auckland.ac.nz'
             },
             {
+                id: 6,
                 title: '3D Visualisation Suite',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
@@ -180,6 +186,7 @@ export class ServicesComponent implements OnInit {
                 field_support: 'j.bauer@auckland.ac.nz'
             },
             {
+                id: 7,
                 title: '3D Visualisation Suite',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
@@ -209,6 +216,7 @@ export class ServicesComponent implements OnInit {
                 field_support: 'j.bauer@auckland.ac.nz'
             },
             {
+                id: 8,
                 title: '3D Visualisation Suite',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
@@ -238,6 +246,7 @@ export class ServicesComponent implements OnInit {
                 field_support: 'j.bauer@auckland.ac.nz'
             },
             {
+                id: 9,
                 title: '3D Visualisation Suite',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
@@ -267,6 +276,7 @@ export class ServicesComponent implements OnInit {
                 field_support: 'j.bauer@auckland.ac.nz'
             },
             {
+                id: 10,
                 title: '3D Visualisation Suite',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
@@ -296,6 +306,7 @@ export class ServicesComponent implements OnInit {
                 field_support: 'j.bauer@auckland.ac.nz'
             },
             {
+                id: 11,
                 title: '3D Visualisation Suite',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
@@ -325,6 +336,7 @@ export class ServicesComponent implements OnInit {
                 field_support: 'j.bauer@auckland.ac.nz'
             },
             {
+                id: 12,
                 title: '3D Visualisation Suite',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
