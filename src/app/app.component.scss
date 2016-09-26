@@ -1,0 +1,95 @@
+
+header, main, footer {
+  padding-left: 260px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+nav .nav-wrapper form, nav .nav-wrapper form .input-field{
+  height: 100%;
+}
+
+.side-nav li a {
+  color: rgba(0, 0, 0, 0.87);
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 32px;
+}
+
+.brand-logo img {
+  height: 64px;
+  padding: 15px;
+}
+
+.select-wrapper input
+{
+  height: 48px !important;
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
+}
+
+.select-wrapper
+{
+  height: 48px !important;
+}
+
+#sidenav-overlay
+{
+  position: fixed;
+  top: 0;
+  left: 260px !important;
+  right: 0;
+  height: 120vh;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1000 !important;
+  will-change: opacity;
+}
+
+.secondary_nav .input-field
+{
+  width: 200px;
+}
+
+.secondary_nav .input-field:first-child
+{
+  margin-left: 25px !important;
+  margin-right: 10px !important;
+}
+
+.secondary_nav .input-field:last-child
+{
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+.select-wrapper .caret
+{
+  color: white !important;
+  top: 0 !important;
+}
+
+.secondary_nav nav {
+  height: 48px;
+  line-height: 48px;
+}
+
+.secondary_nav nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+  height: 48px;
+  line-height: 48px;
+}
+
+.secondary_nav nav .button-collapse i {
+  height: 48px;
+  line-height: 48px;
+}
+
+.secondary_nav nav .brand-logo {
+  font-size: 1.6rem;
+}

@@ -1,15 +1,18 @@
 <div style="margin: 50px;">
-  <div class="row">
-    <div *ngFor="let offer of offers" class="col s12 m6 l6">
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title" style="white-space: nowrap; text-overflow: ellipsis;">{{offer.title}}</span>
-          <p>{{getAbstract(offer.body)}}</p>
+    <div class="row">
+        <div *ngFor="let offer of offers" class="col s12 m6 l6">
+            <div class="card">
+                <div class="card-image">
+                    <img [src]="offer.image">
+                </div>
+                <div class="card-content">
+                    <span class="card-title">{{offer.title}}</span>
+                    <p>{{getAbstract(offer.body)}}</p>
+                </div>
+                <div class="card-action">
+                    <a href="#" style="text-transform: uppercase;">{{offer.field_cost}}</a>
+                </div>
+            </div>
         </div>
-        <div class="card-action">
-          <a href="#" style="text-transform: uppercase;">{{offer.field_cost}}</a>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
