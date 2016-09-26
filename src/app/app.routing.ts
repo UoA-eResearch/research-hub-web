@@ -10,7 +10,8 @@ const appRoutes:Routes = [
     {path: 'guides', component: GuidesComponent, data: {title: 'Guides'}},
     {path: 'policies', component: PoliciesComponent, data: {title: 'Policies'}},
     {path: 'services', component: ServicesComponent, data: {title: 'Services'}},
-    {path: '', component: ServicesComponent, data: {title: 'Services'}}
+    {path: '', redirectTo: '/services', pathMatch: 'full' },
+    {path: '**', redirectTo: '/services', pathMatch: 'full'}
 ];
 
 export const appRoutingProviders:any[] = [];
