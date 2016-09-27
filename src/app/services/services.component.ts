@@ -10,7 +10,7 @@ export class ServicesComponent implements OnInit {
     constructor() {
         this.offers = [{
             id: 1,
-            title: 'Research Consulting',
+            title: 'Research Consul...',
             image: this.dummyImageSrc(),
             body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
             '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -98,7 +98,7 @@ export class ServicesComponent implements OnInit {
             },
             {
                 id: 4,
-                title: 'Auckland Science Analytical Services',
+                title: 'Auckland Scien...',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
                 '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -127,7 +127,7 @@ export class ServicesComponent implements OnInit {
             },
             {
                 id: 5,
-                title: '3D Visualisation Suite',
+                title: '3D Visualisatio...',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
                 '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -157,7 +157,7 @@ export class ServicesComponent implements OnInit {
             },
             {
                 id: 6,
-                title: '3D Visualisation Suite',
+                title: '3D Visualisatio...',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
                 '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -187,7 +187,7 @@ export class ServicesComponent implements OnInit {
             },
             {
                 id: 7,
-                title: '3D Visualisation Suite',
+                title: '3D Visualisatio...',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
                 '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -217,7 +217,7 @@ export class ServicesComponent implements OnInit {
             },
             {
                 id: 8,
-                title: '3D Visualisation Suite',
+                title: '3D Visualisatio...',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
                 '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -247,7 +247,7 @@ export class ServicesComponent implements OnInit {
             },
             {
                 id: 9,
-                title: '3D Visualisation Suite',
+                title: '3D Visualisatio...',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
                 '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -277,7 +277,7 @@ export class ServicesComponent implements OnInit {
             },
             {
                 id: 10,
-                title: '3D Visualisation Suite',
+                title: '3D Visualisatio...',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
                 '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -307,7 +307,7 @@ export class ServicesComponent implements OnInit {
             },
             {
                 id: 11,
-                title: '3D Visualisation Suite',
+                title: '3D Visualisatio...',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
                 '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -337,7 +337,7 @@ export class ServicesComponent implements OnInit {
             },
             {
                 id: 12,
-                title: '3D Visualisation Suite',
+                title: '3D Visualisatio...',
                 image: this.dummyImageSrc(),
                 body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
                 '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -376,7 +376,7 @@ export class ServicesComponent implements OnInit {
             rand *= Math.random();
         }
 
-        return "http://lorempixel.com/400/200/technics?dummy=".concat(rand.toString());
+        return "http://lorempixel.com/160/245/technics?dummy=".concat(rand.toString());
     }
 
     ngOnInit() {

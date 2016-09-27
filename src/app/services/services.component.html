@@ -1,16 +1,17 @@
-<div style="margin: 50px;">
+
+<div style="margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px; width: 800px;padding-left: 35px;padding-right: 35px;padding-top: 35px;">
     <div class="row">
-        <div *ngFor="let offer of offers" class="col s12 m6 l6">
+        <div *ngFor="let offer of offers" class="col s12 m4 l3">
             <div class="card">
-                <div class="card-image">
-                    <img [src]="offer.image">
+                <div class="card-image" >
+                    <img style="border-radius: 1px;min-width: 160px;min-height: 245px;" [src]="offer.image">
                 </div>
-                <div class="card-content">
-                    <span class="card-title">{{offer.title}}</span>
-                    <p>{{getAbstract(offer.body)}}</p>
+                <div class="card-content" style="padding:15px;">
+                    <span class="product-title">{{offer.title}}</span>
+                    <span class="product-category">{{offer.field_category}}</span>
                 </div>
-                <div class="card-action">
-                    <a [routerLink]="['details', offer.id]" style="text-transform: uppercase;">{{offer.field_cost}}</a>
+                <div class="card-action" style="text-align: right;">
+                    <a [routerLink]="['details', offer.id]" style="text-transform: uppercase;margin-right: 0;">{{offer.field_cost}}</a>
                 </div>
             </div>
         </div>

@@ -79,6 +79,29 @@ header, main, footer {
   line-height: 30px !important;
 }
 
+.product-title
+{
+  @extend .card-title;
+  display: block;
+  font-size: 16px !important;
+  line-height: 16px !important;
+  font-weight: 400 !important;
+  width: 160px !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+.product-category
+{
+  @extend .card-title;
+  font-size: 13px !important;
+  line-height: 13px !important;
+  white-space: nowrap !important;
+  width: 160px !important;
+  font-weight: 400 !important;
+  text-overflow: ellipsis !important;
+}
+
 .info-title
 {
   @extend .card-title;
