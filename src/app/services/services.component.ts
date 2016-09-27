@@ -376,7 +376,7 @@ export class ServicesComponent implements OnInit {
             rand *= Math.random();
         }
 
-        return "http://lorempixel.com/160/245/technics?dummy=".concat(rand.toString());
+        return "http://lorempixel.com/160/200/technics?dummy=".concat(rand.toString());
     }
 
     ngOnInit() {
@@ -384,7 +384,7 @@ export class ServicesComponent implements OnInit {
     }
 
     getAbstract(text) {
-        var maxWords = 50;
+        var maxWords = 10;
         return text.split(" ").splice(0, maxWords).join(" ") + "...";
     }
 }
