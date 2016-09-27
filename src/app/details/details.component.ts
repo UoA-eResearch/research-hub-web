@@ -36,6 +36,7 @@ export class DetailsComponent implements OnInit {
             field_eligibility: 'People with money',
             field_requirements: 'Project description and money',
             field_cost: 'Free',
+            field_support_name: 'Jack Bauer',
             field_support: 'j.bauer@auckland.ac.nz'
         };
     }
@@ -49,7 +50,7 @@ export class DetailsComponent implements OnInit {
             rand *= Math.random();
         }
 
-        return "http://lorempixel.com/400/200/technics?dummy=".concat(rand.toString());
+        return "http://lorempixel.com/400/400/technics?dummy=".concat(rand.toString());
     }
 
     ngOnInit() {

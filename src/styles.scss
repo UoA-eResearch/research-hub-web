@@ -71,3 +71,25 @@ header, main, footer {
 {
   background-color: #e1e1e1 !important;
 }
+
+.product-details-title
+{
+  @extend .card-title;
+  font-size: 30px !important;
+  line-height: 30px !important;
+}
+
+.info-title
+{
+  @extend .card-title;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.info-category
+{
+  @extend .card-title;
+  font-size: 14px !important;
+  text-transform: uppercase;
+  font-weight: 400 !important;
+}
