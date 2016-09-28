@@ -5,10 +5,10 @@ import {OnInit} from "@angular/core";
     templateUrl: './services.component.html'
 })
 export class ServicesComponent implements OnInit {
-    offers:any[];
+    services:any[];
 
     constructor() {
-        this.offers = [{
+        this.services = [{
             id: 1,
             title: 'Research Consul...',
             image: this.dummyImageSrc(),

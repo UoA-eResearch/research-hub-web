@@ -10,8 +10,11 @@ import {ModuleWithProviders} from "@angular/core";
 const appRoutes:Routes = [
     {path: 'playlist', outlet: 'filters', component: FiltersComponent},
     {path: 'education', component: EducationComponent},
+    {path: 'education/details/:id', component: DetailsComponent},
     {path: 'guides', component: GuidesComponent},
+    {path: 'guides/details/:id', component: DetailsComponent},
     {path: 'policies', component: PoliciesComponent},
+    {path: 'policies/details/:id', component: DetailsComponent},
     {path: 'services', component: ServicesComponent},
     {path: 'services/details/:id', component: DetailsComponent},
     {path: '', redirectTo: '/services', pathMatch: 'full' },
