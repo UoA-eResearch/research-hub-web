@@ -5,18 +5,19 @@ import {OnInit} from "@angular/core";
     templateUrl: './policies.component.html'
 })
 export class PoliciesComponent implements OnInit {
-  offers:any[];
+  policies:any[];
 
   constructor() {
-    this.offers = [{
-      title: 'Research Consulting',
-      image: '',
+    this.policies = [{
+      id: 1,
+      title: 'Research Consul...',
+      image: this.dummyImageSrc(),
       body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
       '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
       ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
       'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
       'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-      field_category: 'Service',
+      field_category: 'Policy',
       field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
       'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
       'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
@@ -38,14 +39,15 @@ export class PoliciesComponent implements OnInit {
       field_support: 'j.bauer@auckland.ac.nz'
     },
       {
+        id: 2,
         title: 'Statistical Support',
-        image: '',
+        image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
         'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
         'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_category: 'Service',
+        field_category: 'Policy',
         field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
         'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
         'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
@@ -60,20 +62,21 @@ export class PoliciesComponent implements OnInit {
         '(LoadUI) Functional testing (SOAPUI, Cucumber/gerkin, ) Performance testing (Jmeter) Browser and ' +
         'device testing (browserstack) Integration testing Consultation (best practice, tuition, assitance ' +
         'to turn business rules into automated tests) UNICODE testing Accessibility support and WCAG 2.0 ' +
-        'compliance User acceptance testing',            field_eligibility: 'People with money',
+        'compliance User acceptance testing', field_eligibility: 'People with money',
         field_requirements: 'Project description and money',
         field_cost: 'Free',
         field_support: 'j.bauer@auckland.ac.nz'
       },
       {
+        id: 3,
         title: '3D Printing',
-        image: '',
+        image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
         'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
         'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_category: 'Service',
+        field_category: 'Policy',
         field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
         'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
         'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
@@ -88,20 +91,21 @@ export class PoliciesComponent implements OnInit {
         '(LoadUI) Functional testing (SOAPUI, Cucumber/gerkin, ) Performance testing (Jmeter) Browser and ' +
         'device testing (browserstack) Integration testing Consultation (best practice, tuition, assitance ' +
         'to turn business rules into automated tests) UNICODE testing Accessibility support and WCAG 2.0 ' +
-        'compliance User acceptance testing',            field_eligibility: 'People with money',
+        'compliance User acceptance testing', field_eligibility: 'People with money',
         field_requirements: 'Project description and money',
         field_cost: 'Free',
         field_support: 'j.bauer@auckland.ac.nz'
       },
       {
-        title: 'Auckland Science Analytical Services',
-        image: '',
+        id: 4,
+        title: 'Auckland Scien...',
+        image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
         'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
         'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_category: 'Service',
+        field_category: 'Policy',
         field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
         'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
         'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
@@ -116,49 +120,21 @@ export class PoliciesComponent implements OnInit {
         '(LoadUI) Functional testing (SOAPUI, Cucumber/gerkin, ) Performance testing (Jmeter) Browser and ' +
         'device testing (browserstack) Integration testing Consultation (best practice, tuition, assitance ' +
         'to turn business rules into automated tests) UNICODE testing Accessibility support and WCAG 2.0 ' +
-        'compliance User acceptance testing',            field_eligibility: 'People with money',
+        'compliance User acceptance testing', field_eligibility: 'People with money',
         field_requirements: 'Project description and money',
         field_cost: 'Free',
         field_support: 'j.bauer@auckland.ac.nz'
       },
       {
-        title: '3D Visualisation Suite',
-        image: '',
+        id: 5,
+        title: '3D Visualisatio...',
+        image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
         'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
         'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_category: 'Service',
-        field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
-        'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
-        'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
-        'mlkshk meh viral schlitz photo booth biodiesel. Wolf DIY before they sold out, austin actually ' +
-        'pop-up portland forage chicharrones. +1 cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_considerations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock ' +
-        'yuccie intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn' +
-        ' kogi sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, ' +
-        'marfa mlkshk meh viral schlitz photo booth biodiesel. Wolf DIY before they sold out, austin actually' +
-        ' pop-up portland forage chicharrones. +1 cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_features: 'Test planning and management (support and consultation or $ service) Load testing ' +
-        '(LoadUI) Functional testing (SOAPUI, Cucumber/gerkin, ) Performance testing (Jmeter) Browser and ' +
-        'device testing (browserstack) Integration testing Consultation (best practice, tuition, assitance ' +
-        'to turn business rules into automated tests) UNICODE testing Accessibility support and WCAG 2.0 ' +
-        'compliance User acceptance testing',
-        field_eligibility: 'People with money',
-        field_requirements: 'Project description and money',
-        field_cost: 'Free',
-        field_support: 'j.bauer@auckland.ac.nz'
-      },
-      {
-        title: '3D Visualisation Suite',
-        image: '',
-        body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
-        '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
-        ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
-        'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
-        'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_category: 'Service',
+        field_category: 'Policy',
         field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
         'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
         'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
@@ -180,14 +156,15 @@ export class PoliciesComponent implements OnInit {
         field_support: 'j.bauer@auckland.ac.nz'
       },
       {
-        title: '3D Visualisation Suite',
-        image: '',
+        id: 6,
+        title: '3D Visualisatio...',
+        image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
         'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
         'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_category: 'Service',
+        field_category: 'Policy',
         field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
         'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
         'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
@@ -209,14 +186,15 @@ export class PoliciesComponent implements OnInit {
         field_support: 'j.bauer@auckland.ac.nz'
       },
       {
-        title: '3D Visualisation Suite',
-        image: '',
+        id: 7,
+        title: '3D Visualisatio...',
+        image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
         'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
         'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_category: 'Service',
+        field_category: 'Policy',
         field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
         'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
         'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
@@ -238,14 +216,15 @@ export class PoliciesComponent implements OnInit {
         field_support: 'j.bauer@auckland.ac.nz'
       },
       {
-        title: '3D Visualisation Suite',
-        image: '',
+        id: 8,
+        title: '3D Visualisatio...',
+        image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
         'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
         'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_category: 'Service',
+        field_category: 'Policy',
         field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
         'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
         'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
@@ -267,14 +246,15 @@ export class PoliciesComponent implements OnInit {
         field_support: 'j.bauer@auckland.ac.nz'
       },
       {
-        title: '3D Visualisation Suite',
-        image: '',
+        id: 9,
+        title: '3D Visualisatio...',
+        image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
         'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
         'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_category: 'Service',
+        field_category: 'Policy',
         field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
         'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
         'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
@@ -296,14 +276,15 @@ export class PoliciesComponent implements OnInit {
         field_support: 'j.bauer@auckland.ac.nz'
       },
       {
-        title: '3D Visualisation Suite',
-        image: '',
+        id: 10,
+        title: '3D Visualisatio...',
+        image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
         'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
         'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_category: 'Service',
+        field_category: 'Policy',
         field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
         'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
         'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
@@ -325,14 +306,45 @@ export class PoliciesComponent implements OnInit {
         field_support: 'j.bauer@auckland.ac.nz'
       },
       {
-        title: '3D Visualisation Suite',
-        image: '',
+        id: 11,
+        title: '3D Visualisatio...',
+        image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
         'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
         'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-        field_category: 'Service',
+        field_category: 'Policy',
+        field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
+        'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
+        'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
+        'mlkshk meh viral schlitz photo booth biodiesel. Wolf DIY before they sold out, austin actually ' +
+        'pop-up portland forage chicharrones. +1 cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
+        field_considerations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock ' +
+        'yuccie intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn' +
+        ' kogi sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, ' +
+        'marfa mlkshk meh viral schlitz photo booth biodiesel. Wolf DIY before they sold out, austin actually' +
+        ' pop-up portland forage chicharrones. +1 cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
+        field_features: 'Test planning and management (support and consultation or $ service) Load testing ' +
+        '(LoadUI) Functional testing (SOAPUI, Cucumber/gerkin, ) Performance testing (Jmeter) Browser and ' +
+        'device testing (browserstack) Integration testing Consultation (best practice, tuition, assitance ' +
+        'to turn business rules into automated tests) UNICODE testing Accessibility support and WCAG 2.0 ' +
+        'compliance User acceptance testing',
+        field_eligibility: 'People with money',
+        field_requirements: 'Project description and money',
+        field_cost: 'Free',
+        field_support: 'j.bauer@auckland.ac.nz'
+      },
+      {
+        id: 12,
+        title: '3D Visualisatio...',
+        image: this.dummyImageSrc(),
+        body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
+        '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
+        ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
+        'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
+        'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
+        field_category: 'Policy',
         field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
         'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
         'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
@@ -355,12 +367,24 @@ export class PoliciesComponent implements OnInit {
       }];
   }
 
+  dummyImageSrc()
+  {
+    let rand = 1;
+
+    for(let i = 0; i < 5; i++)
+    {
+      rand *= Math.random();
+    }
+
+    return "http://lorempixel.com/160/200/abstract?dummy=".concat(rand.toString());
+  }
+
   ngOnInit() {
 
   }
 
   getAbstract(text) {
-    var maxWords = 50;
+    var maxWords = 10;
     return text.split(" ").splice(0, maxWords).join(" ") + "...";
   }
 }

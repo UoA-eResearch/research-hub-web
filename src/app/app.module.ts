@@ -8,6 +8,8 @@ import {EducationComponent} from "./education/education.component";
 import {GuidesComponent} from "./guides/guides.component";
 import {PoliciesComponent} from "./policies/policies.component";
 import {ServicesComponent} from "./services/services.component";
+import {DetailsComponent} from "./details/details.component";
+import {FiltersComponent} from "./filters/filters.component";
 
 import {routing, appRoutingProviders} from './app.routing';
 
@@ -17,7 +19,9 @@ import {routing, appRoutingProviders} from './app.routing';
         EducationComponent,
         GuidesComponent,
         PoliciesComponent,
-        ServicesComponent
+        ServicesComponent,
+        DetailsComponent,
+        FiltersComponent
     ],
     imports: [
         BrowserModule,

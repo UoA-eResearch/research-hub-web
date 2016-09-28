@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 declare var $:any;
 
 @Component({
@@ -7,6 +8,14 @@ declare var $:any;
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+    router: Router;
+
+    constructor(router: Router)
+    {
+      this.router = router;
+      console.log(this.router);
+    }
+
     ngOnInit() {
         $('.button-collapse').sideNav({
                 menuWidth: 260, // Default is 240
@@ -22,6 +31,6 @@ export class AppComponent implements OnInit {
 
     setActive()
     {
-        
+
     }
 }
