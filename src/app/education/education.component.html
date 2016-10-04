@@ -1,10 +1,10 @@
 
-<div style="margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 50px; width: 1000px;padding-left: 35px;padding-right: 35px;padding-top: 35px;">
+<div class="product-list">
   <div class="row">
-    <div *ngFor="let education of educations" class="col s12 m4 l3">
+    <div *ngFor="let education of educations" class="col s12 m4 l2">
       <div class="card">
         <div class="card-image" >
-          <img style="border-radius: 1px;min-width: 160px;min-height: 200px;" [src]="education.image">
+          <img class="product-image" [src]="education.image">
         </div>
         <div class="card-content" style="padding:15px;">
           <span class="product-title">{{education.title}}</span>

@@ -116,3 +116,39 @@ header, main, footer {
   text-transform: uppercase;
   font-weight: 400 !important;
 }
+
+@media #{$small-and-down} {
+  .product-list
+  {
+    margin: 20px;
+  }
+
+  .product-image
+  {
+    border-radius: 1px;
+    min-width: 160px;
+    min-height: 200px;
+  }
+}
+
+@media #{$medium-and-up} {
+  .product-list
+  {
+    width: 800px;
+    margin: 20px auto 20px auto;
+    padding: 0 20px 0 20px;
+  }
+}
+
+@media #{$medium-and-down} {
+
+}
+
+@media #{$large-and-up} {
+  .product-list
+  {
+    width: 1400px;
+    margin: 50px auto 50px auto;
+    padding: 0 50px 0 50px;
+  }
+}
