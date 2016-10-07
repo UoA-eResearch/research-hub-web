@@ -1,4 +1,4 @@
-<div class="navbar-fixed">
+<div >
   <nav>
     <div class="nav-wrapper">
       <a class="brand-logo left" style="margin-left:-8px;"><img src="assets/example-logo-white.png"/></a>
@@ -15,9 +15,9 @@
 </div>
 
 <header>
-  <div class="navbar-fixed secondary_nav" style="height: 48px;">
+  <div class="secondary_nav" style="height: 48px;">
     <nav>
-      <ul id="slide-out" class="side-nav fixed collapsible">
+      <ul id="slide-out" class="side-nav fixed collapsible" style="height: 320px;overflow-y: hidden;overflow-x: hidden;position: absolute;top: 0; left: 0;">
         <div style="width: 260px; height: 64px;"><img style="height: 64px;padding: 15px;"
                                                       src="assets/example-logo.png"/></div>
         <li><a routerLink="/home" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
@@ -30,11 +30,8 @@
           class="material-icons">flag</i>Guides</a></li>
         <li><a routerLink="/policies" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
           class="material-icons">thumbs_up_down</i>Policies</a></li>
-        <li>
-          <div class="divider"></div>
-        </li>
       </ul>
-      <div class="nav-wrapper">
+      <div class="nav-wrapper inset-content">
         <a href="#" data-activates="slide-out" class="button-collapse"><i
           style="margin-left: 20px; font-size: 24px;" class="material-icons">menu</i></a>
         <ul class="left hide-on-small-and-down" [hidden]="!router.isActive('services')">

@@ -1,12 +1,23 @@
 @import 'scss/materialize';
 
 
-header, main, footer {
+//header, main, footer {
+//  padding-left: 260px;
+//}
+//
+//@media only screen and (max-width : 992px) {
+//  header, main, footer {
+//    padding-left: 0;
+//  }
+//}
+
+
+.inset-content {
   padding-left: 260px;
 }
 
 @media only screen and (max-width : 992px) {
-  header, main, footer {
+  .inset-content {
     padding-left: 0;
   }
 }
@@ -176,7 +187,7 @@ header, main, footer {
   .uoa-container div div
   {
     width: 300px;
-    margin-right: 100px;
+    margin-right: 150px;
   }
 
   .home-description {
@@ -227,11 +238,11 @@ header, main, footer {
   .uoa-container div div
   {
     width: 300px;
-    margin-right: 250px !important;
+    margin-right: 200px !important;
   }
 
   .home-description {
-    height: 350px;
+    height: 500px;
   }
 
   .home-description div
