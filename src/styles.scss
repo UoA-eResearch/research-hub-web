@@ -141,12 +141,7 @@
   }
 
   .home-description {
-    height: 700px;
-  }
-
-  .home-description div
-  {
-    margin-top: 150px;
+    height: 300px;
   }
 
   .uoa-container {
@@ -191,7 +186,7 @@
   }
 
   .home-description {
-    height: 350px;
+    height: 50px;
   }
 
   .home-description div
@@ -220,7 +215,11 @@
 }
 
 @media #{$medium-and-down} {
-
+  .button-collapse
+  {
+    float: none !important;
+    //display: none;
+  }
 }
 
 @media #{$large-and-up} {
@@ -242,7 +241,7 @@
   }
 
   .home-description {
-    height: 500px;
+    height: 50px;
   }
 
   .home-description div
@@ -256,6 +255,14 @@
     margin: 50px auto 50px auto;
     padding: 0 50px 0 50px;
   }
+}
+
+.product-list-title
+{
+  font-size: 28px;
+  color: #333333;
+  font-weight: 100;
+  font-family: Roboto;
 }
 
 .uoa-brand-shape {

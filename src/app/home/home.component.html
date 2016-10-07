@@ -4,7 +4,8 @@
       <div class="uoa-header__content uoa-brand-shape">
         <div class="uoa-brand-shape__content" style="padding: 15px;">
           <h1 style="font-size: 37px;">Accelerate your research</h1>
-          <p data-truncate-length="140" style="font-size: 18px;">Connecting you with resources and support services to enhance and accelerate you research.</p>
+          <p data-truncate-length="140" style="font-size: 18px;">Connecting you with resources and support services to
+            enhance and accelerate you research.</p>
         </div>
       </div>
     </div>
@@ -18,28 +19,135 @@
   </div>
 </div>
 <div class="section white home-description valign-wrapper">
-  <div class="row container uoa light-blue">
-      <p class="white-text text-darken-3 lighten-3 valign" style="font-size: 20px;">
-        The Research Hub is a catalogue of research services from across the University of Auckland in a single
-        location to make it easy to find, access, or request resources you need to conduct your research.
-      </p>
-  </div>
+  <!--<div class="row container uoa light-blue" style="padding: 30px;">-->
+  <!--<p class="white-text text-darken-3 lighten-3 valign" style="font-size: 20px;">-->
+  <!--The Research Hub is a catalogue of research services from across the University of Auckland in a single-->
+  <!--location to make it easy to find, access, or request resources you need to conduct your research.-->
+  <!--</p>-->
+  <!--</div>-->
 </div>
-<div class="parallax-container" style="height: 350px;">
-  <div class="parallax"><img src="assets/lifecycle.jpg"></div>
-</div>
-<div class="section white" style="height: 500px;">
+<!--<div class="parallax-container" style="height: 350px;">-->
+<!--<div class="parallax"><img src="assets/lifecycle.jpg"></div>-->
+<!--</div>-->
+<div class="section white" style="padding-bottom: 0;padding-top: 0;">
   <div class="row container">
-    <h2 class="header">Lifecycle</h2>
-    <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+    <span class="product-list-title">Plan &amp; Design</span>
+    <div class="product-list" style="margin-bottom: 0; margin-top: 20px; !important; ">
+      <div class="row">
+        <div *ngFor="let product of products; let i = index;" class="col s12 m4 l2">
+          <div *ngIf="i<5" class="card">
+            <div class="card-image" >
+              <img class="product-image" [src]="product.image">
+            </div>
+            <div class="card-content" style="padding:15px;">
+              <span class="product-title">{{product.title}}</span>
+              <span class="product-category">{{product.field_category}}</span>
+            </div>
+            <div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">
+              <a [routerLink]="['details', product.id]" style="text-transform: uppercase;margin-right: 0;">{{product.field_cost}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+<div class="section white" style="padding-bottom: 0;padding-top: 0;">
+  <div class="row container">
+    <span class="product-list-title">Create, Collect &amp; Capture</span>
+    <div class="product-list" style="margin-bottom: 0; margin-top: 20px; !important; ">
+      <div class="row">
+        <div *ngFor="let product of products; let i = index;" class="col s12 m4 l2">
+          <div *ngIf="i<5" class="card">
+            <div class="card-image" >
+              <img class="product-image" [src]="product.image">
+            </div>
+            <div class="card-content" style="padding:15px;">
+              <span class="product-title">{{product.title}}</span>
+              <span class="product-category">{{product.field_category}}</span>
+            </div>
+            <div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">
+              <a [routerLink]="['details', product.id]" style="text-transform: uppercase;margin-right: 0;">{{product.field_cost}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section white" style="padding-bottom: 0;padding-top: 0;">
+  <div class="row container">
+    <span class="product-list-title">Analyse &amp; Interpret</span>
+    <div class="product-list" style="margin-bottom: 0; margin-top: 20px; !important; ">
+      <div class="row">
+        <div *ngFor="let product of products; let i = index;" class="col s12 m4 l2">
+          <div *ngIf="i<5" class="card">
+            <div class="card-image" >
+              <img class="product-image" [src]="product.image">
+            </div>
+            <div class="card-content" style="padding:15px;">
+              <span class="product-title">{{product.title}}</span>
+              <span class="product-category">{{product.field_category}}</span>
+            </div>
+            <div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">
+              <a [routerLink]="['details', product.id]" style="text-transform: uppercase;margin-right: 0;">{{product.field_cost}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section white" style="padding-bottom: 0;padding-top: 0;">
+  <div class="row container">
+    <span class="product-list-title">Publish &amp; Report</span>
+    <div class="product-list" style="margin-bottom: 0; margin-top: 20px; !important; ">
+      <div class="row">
+        <div *ngFor="let product of products; let i = index;" class="col s12 m4 l2">
+          <div *ngIf="i<5" class="card">
+            <div class="card-image" >
+              <img class="product-image" [src]="product.image">
+            </div>
+            <div class="card-content" style="padding:15px;">
+              <span class="product-title">{{product.title}}</span>
+              <span class="product-category">{{product.field_category}}</span>
+            </div>
+            <div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">
+              <a [routerLink]="['details', product.id]" style="text-transform: uppercase;margin-right: 0;">{{product.field_cost}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section white" style="padding-bottom: 0;padding-top: 0;margin-bottom: 50px;">
+  <div class="row container">
+    <span class="product-list-title">Discover &amp; Reuse</span>
+    <div class="product-list" style="margin-bottom: 0; margin-top: 20px; !important; ">
+      <div class="row">
+        <div *ngFor="let product of products; let i = index;" class="col s12 m4 l2">
+          <div *ngIf="i<5" class="card">
+            <div class="card-image" >
+              <img class="product-image" [src]="product.image">
+            </div>
+            <div class="card-content" style="padding:15px;">
+              <span class="product-title">{{product.title}}</span>
+              <span class="product-category">{{product.field_category}}</span>
+            </div>
+            <div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">
+              <a [routerLink]="['details', product.id]" style="text-transform: uppercase;margin-right: 0;">{{product.field_cost}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="parallax-container" style="height: 350px;">
   <div class="parallax"><img src="assets/parallax1.jpg"></div>
-</div>
-<div class="section white" style="height: 500px;">
-  <div class="row container">
-    <h2 class="header">Lifecycle</h2>
-    <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
-  </div>
 </div>
