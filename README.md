@@ -3,7 +3,26 @@
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.15.
 
+## Environment setup
+Install [Node 4](https://nodejs.org/en/download/) or higher with NPM 3 or higher.
+
+Install angular-cli
+```bash
+npm install -g angular-cli
+```
+
+
 ## Development server
+Navigate to project directory, e.g:
+```bash
+cd ~/workspace/research-hub
+```
+
+Update dependencies:
+```bash
+npm install
+```
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
