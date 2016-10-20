@@ -1,7 +1,8 @@
 # ResearchHub
 
-
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.15.
+* ResearchHub is built with Angular 2.
+* The [Materialize CSS framework](http://materializecss.com/) is used on the front end.
+* This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.15.
 
 ## Environment setup
 Install [Node 4](https://nodejs.org/en/download/) or higher with NPM 3 or higher.
