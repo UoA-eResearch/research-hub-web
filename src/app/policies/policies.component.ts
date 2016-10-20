@@ -1,13 +1,15 @@
-import {Component} from "@angular/core";
+import {Component, OnDestroy} from "@angular/core";
 import {OnInit} from "@angular/core";
+import {SearchService} from "../app.search.service";
 
 @Component({
     templateUrl: './policies.component.html'
 })
-export class PoliciesComponent implements OnInit {
+export class PoliciesComponent implements OnInit, OnDestroy {
   policies:any[];
+  private searchSubscription: any;
 
-  constructor() {
+  constructor(private searchService:SearchService) {
     this.policies = [{
       id: 1,
       title: 'Research Consul...',
@@ -380,7 +382,15 @@ export class PoliciesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.searchSubscription = this.searchService.searchChange.subscribe((value) => {
+      console.log('Search value: ' + value);
+    });
+  }
 
+  ngOnDestroy()
+  {
+    console.log('destroy');
+    this.searchSubscription.unsubscribe();
   }
 
   getAbstract(text) {
