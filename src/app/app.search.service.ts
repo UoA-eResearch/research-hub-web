@@ -3,11 +3,26 @@ import {Subject} from "rxjs/Rx";
 
 @Injectable()
 export class SearchService {
-  private value: string;
-  searchChange: Subject<string> = new Subject<string>();
+  private searchTerm: string;
+  private subcategories: string[];
+  searchChange: Subject<any> = new Subject<any>();
 
-  setSearchValue(value) {
-    this.value = value;
-    this.searchChange.next(this.value);
+  getSearch()
+  {
+    return {
+      "searchTerm": this.searchTerm,
+      "subcategories": this.subcategories
+    };
+  }
+
+  setSearchTerm(searchTerm) {
+    this.searchTerm = searchTerm;
+    this.searchChange.next(this.getSearch());
+  }
+
+  setSubcategories(subcategories)
+  {
+    this.subcategories = subcategories;
+    this.searchChange.next(this.getSearch());
   }
 }

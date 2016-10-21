@@ -1,7 +1,7 @@
 <div class="inset-content">
   <div class="product-list">
       <div class="row">
-          <div *ngFor="let service of services" class="col s12 m4 l2">
+          <div *ngFor="let service of services | async" class="col s12 m4 l2">
               <div class="card">
                   <div class="card-image" >
                       <img class="product-image" [src]="service.image">
@@ -14,7 +14,7 @@
                       <p style="font-size: 13px;">{{getAbstract(service.body)}}</p>
                   </div>
                   <div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">
-                      <a [routerLink]="['details', service.id]" style="text-transform: uppercase;margin-right: 0;">{{service.field_cost}}</a>
+                      <a [routerLink]="['details', service._id]" style="text-transform: uppercase;margin-right: 0;">{{service.field_cost}}</a>
                   </div>
               </div>
           </div>
