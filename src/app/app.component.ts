@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, ApplicationRef} from '@angular/core';
 import {Router} from "@angular/router";
 import {SearchService} from "./app.search.service";
 import {DrupalService} from "./app.drupal.service";
@@ -12,26 +12,78 @@ declare var $:any;
 })
 export class AppComponent implements OnInit {
   router:Router;
-  lifeCycleCategories: String[] = ['Plan and Design', 'Create, Collect, Capture', 'Analyze and Interpret', 'Publish and Report', 'Discover and Reuse'];
   lifeCycle: string = "";
-  serviceTypeCategories: String[] = ['Analysis', 'Communication', 'Computing', 'Consulting', 'Data', 'Equipment', 'Publishing', 'Visualisation'];
   serviceType: string = "";
+  programme: string = "";
+  studyLevel: string = "";
+  policyArea: string = "";
 
+  lifeCycleCategories: String[] = ['Plan and Design', 'Create, Collect, Capture', 'Analyze and Interpret', 'Publish and Report', 'Discover and Reuse'];
+  serviceTypeCategories: String[] = ['Analysis', 'Communication', 'Computing', 'Consulting', 'Data', 'Equipment', 'Publishing', 'Visualisation'];
+  programmeCategories: String[] = ['Architectural Studies', 'Arts', 'Commerce', 'Dance Studies', 'Education',
+    'Engineering', 'Fine Arts', 'Health Sciences', 'Laws', 'Medicine and Bachelor of Surgery', 'Music',
+    'Nursing', 'Optometry', 'Pharmacy', 'Urban Planning', 'Property', 'Science', 'Science in Biomedical Science',
+    'Social Work', 'Teaching'];
+  studyLevelCategories: String[] = ['Study Level', 'Bachelor degrees', 'Graduate diplomas', 'Diplomas',
+    'Postgraduate certificates', 'Postgraduate diplomas', 'Masters degrees', 'Doctoral degrees'];
+  policyAreaCategories: String[] = ['Equity', 'Finance', 'Forms', 'Health, safety and wellbeing', 'Human resources',
+    'Information technology', 'Learning and teaching', 'Legislative compliance', 'Organization and governance',
+    'Research', 'Policy development and review'];
 
   constructor(router:Router, private searchService: SearchService) {
     this.router = router;
-    console.log(this.lifeCycle);
   }
 
   setSearchTerm(term)
   {
     this.searchService.setSearchTerm(term);
-    console.log('lifecycle: ' + this.lifeCycle)
   }
 
-  onChange(newValue)
+  isServicesActive()
   {
-    console.log('change!' + newValue);
+    return this.router.isActive('services', true);
+  }
+
+  isEducationActive()
+  {
+    return this.router.isActive('education', true);
+  }
+
+  isGuidesActive()
+  {
+    return this.router.isActive('guides', true);
+  }
+
+  isPoliciesActive()
+  {
+    return this.router.isActive('policies', true);
+  }
+
+  updateSubcategories()
+  {
+    let subcategories = [];
+
+    if(this.isServicesActive())
+    {
+      subcategories.push({"lifeCycle": this.lifeCycle});
+      subcategories.push({"serviceType": this.serviceType});
+    }
+    else if(this.isEducationActive() || this.isGuidesActive())
+    {
+      subcategories.push({"programme": this.programme});
+      subcategories.push({"studyLevel": this.studyLevel});
+    }
+    else if(this.isPoliciesActive())
+    {
+      subcategories.push({"policyArea": this.policyArea});
+    }
+
+    this.searchService.setSubcategories(subcategories);
+  }
+
+  onChange(event)
+  {
+    console.log('event', event);
   }
 
   ngOnInit() {
@@ -42,18 +94,30 @@ export class AppComponent implements OnInit {
       }
     );
 
-
-
-    $(document).ready(function () {
+    $(document).ready(() => {
       $('select').material_select();
       $('select').change((e) => {
-        console.log('select: ' + e);
-        //this.lifeCycle[e.currentTarget.name] = e.currentTarget.value;
+        switch(e.currentTarget.id) {
+          case "lifeCycleSelect":
+            this.lifeCycle = e.currentTarget.value;
+            break;
+          case "serviceTypeSelect":
+            this.serviceType = e.currentTarget.value;
+            break;
+          case "programmeSelect":
+            this.programme = e.currentTarget.value;
+            break;
+          case "studyLevelSelect":
+            this.studyLevel = e.currentTarget.value;
+            break;
+          case "policyAreaSelect":
+            this.policyArea = e.currentTarget.value;
+            break;
+          default:
+            console.log('Error: ', e.currentTarget.id, "doesn't exist");
+        }
+        this.updateSubcategories();
       });
     });
-  }
-
-  setActive() {
-
   }
 }
