@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     'Engineering', 'Fine Arts', 'Health Sciences', 'Laws', 'Medicine and Bachelor of Surgery', 'Music',
     'Nursing', 'Optometry', 'Pharmacy', 'Urban Planning', 'Property', 'Science', 'Science in Biomedical Science',
     'Social Work', 'Teaching'];
-  studyLevelCategories: String[] = ['Study Level', 'Bachelor degrees', 'Graduate diplomas', 'Diplomas',
+  studyLevelCategories: String[] = ['Bachelor degrees', 'Graduate diplomas', 'Diplomas',
     'Postgraduate certificates', 'Postgraduate diplomas', 'Masters degrees', 'Doctoral degrees'];
   policyAreaCategories: String[] = ['Equity', 'Finance', 'Forms', 'Health, safety and wellbeing', 'Human resources',
     'Information technology', 'Learning and teaching', 'Legislative compliance', 'Organization and governance',
@@ -71,17 +71,19 @@ export class AppComponent implements OnInit {
 
     if(this.isServicesActive())
     {
-      subcategories.push({"lifeCycle": this.lifeCycle});
-      subcategories.push({"serviceType": this.serviceType});
+      subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
+      subcategories.push({key: "field_service_type", value: this.serviceType});
     }
     else if(this.isEducationActive() || this.isGuidesActive())
     {
-      subcategories.push({"programme": this.programme});
-      subcategories.push({"studyLevel": this.studyLevel});
+      subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
+      subcategories.push({key: "field_programme", value: this.programme});
+      subcategories.push({key: "field_study_level", value: this.studyLevel});
     }
     else if(this.isPoliciesActive())
     {
-      subcategories.push({"policyArea": this.policyArea});
+      subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
+      subcategories.push({key: "field_policy_area", value: this.policyArea});
     }
 
     this.searchService.setSubcategories(subcategories);

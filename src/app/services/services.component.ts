@@ -15,7 +15,7 @@ export class ServicesComponent implements OnInit {
       .searchChange
       .debounceTime(400)
       .distinctUntilChanged()
-      .switchMap(value => this.drupalService.searchCategory('services', value.searchTerm));
+      .switchMap(value => this.drupalService.searchCategory('services', value.searchTerm, value.subcategories));
   }
 
   ngOnInit() {
