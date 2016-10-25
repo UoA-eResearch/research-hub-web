@@ -19,10 +19,10 @@ export class DrupalService {
   rawSearch(category:string, term:string, subcategories:any[]) {
     var search = new URLSearchParams();
 
-    if (term != undefined)
+    if (term != undefined && term.trim() != "") {
       search.set('q', term);
-
-    if (subcategories != undefined) {
+    }
+    else if (subcategories != undefined) {
       for (let subcat of subcategories) {
         if (subcat.value != "" && subcat.value != undefined)
           search.set(subcat.key, subcat.value);
