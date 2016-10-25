@@ -1,14 +1,16 @@
-import {Component} from "@angular/core";
+import {Component, OnDestroy} from "@angular/core";
 import {OnInit} from "@angular/core";
+import {SearchService} from "../app.search.service";
 declare var $:any;
 
 @Component({
     templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   products:any[];
+  private searchSubscription: any;
 
-  constructor() {
+  constructor(private searchService:SearchService) {
     this.products = [{
       id: 1,
       title: 'Research Consul...',
@@ -385,10 +387,20 @@ export class HomeComponent implements OnInit {
     return text.split(" ").splice(0, maxWords).join(" ") + "...";
   }
 
-    ngOnInit() {
-      $(document).ready(function(){
-        $('.parallax').parallax();
-      });
-    }
+  ngOnInit() {
+    this.searchSubscription = this.searchService.searchChange.subscribe((value) => {
+      console.log('Search value: ' + value);
+    });
+
+    $(document).ready(function(){
+      $('.parallax').parallax();
+    });
+  }
+
+  ngOnDestroy()
+  {
+    console.log('destroy');
+    this.searchSubscription.unsubscribe();
+  }
 
 }

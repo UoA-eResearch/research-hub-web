@@ -5,7 +5,7 @@
 
       <form style="margin-left: 260px;">
         <div class="input-field">
-          <input id="search" type="search" required style=" margin-bottom: 0;">
+          <input #search type="search" style=" margin-bottom: 0;" (keyup)="setSearchTerm(search.value)">
           <label for="search"><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
         </div>
@@ -34,88 +34,36 @@
       <div class="nav-wrapper inset-content">
         <a href="#" data-activates="slide-out" class="button-collapse"><i
           style="margin-left: 20px; font-size: 24px;" class="material-icons">menu</i></a>
-        <ul class="left hide-on-small-and-down" [hidden]="!router.isActive('services')">
-          <li class="input-field">
-            <select>
-              <option value="" disabled selected>Research Lifecycle</option>
-              <option value="1">Plan and Design</option>
-              <option value="2">Create, Collect, Capture</option>
-              <option value="3">Analyze and Interpret</option>
-              <option value="4">Publish and Report</option>
-              <option value="5">Discover and Reuse</option>
-            </select>
-          </li>
-          <li class="input-field">
-            <select>
-              <option value="" disabled selected>Service Type</option>
-              <option value="1">Analysis</option>
-              <option value="2">Communication</option>
-              <option value="5">Computing</option>
-              <option value="3">Consulting</option>
-              <option value="4">Data Management</option>
-              <option value="6">Equipment</option>
-              <option value="6">Publishing</option>
-              <option value="1">Visualisation</option>
-            </select>
-          </li>
-        </ul>
 
-        <ul class="left hide-on-small-and-down" [hidden]="!router.isActive('education') && !router.isActive('guides')">
-          <li class="input-field">
-            <select>
-              <option value="" disabled selected>Programme</option>
-              <option value="1">Architectural Studies</option>
-              <option value="2">Arts</option>
-              <option value="3">Commerce</option>
-              <option value="4">Dance Studies</option>
-              <option value="5">Education</option>
-              <option value="6">Engineering</option>
-              <option value="7">Fine Arts</option>
-              <option value="8">Health Sciences</option>
-              <option value="9">Laws</option>
-              <option value="10">Medicine and Bachelor of Surgery</option>
-              <option value="11">Music</option>
-              <option value="12">Nursing</option>
-              <option value="13">Optometry</option>
-              <option value="14">Pharmacy</option>
-              <option value="15">Physical Education</option>
-              <option value="16">Urban Planning</option>
-              <option value="17">Property</option>
-              <option value="18">Science</option>
-              <option value="19">Science in Biomedical Science</option>
-              <option value="20">Social Work</option>
-              <option value="21">Teaching</option>
+        <ul class="left hide-on-small-and-down">
+          <li class="input-field" [hidden]="!isServicesActive() && !isEducationActive() && !isGuidesActive() && !isPoliciesActive()">
+            <select id="lifeCycleSelect" [ngModel]="lifeCycle">
+              <option [value]="" selected>Research Lifecycle</option>
+              <option *ngFor="let category of lifeCycleCategories" [value]="category">{{category}}</option>
             </select>
           </li>
-          <li class="input-field">
-            <select>
-              <option value="" disabled selected>Study Level</option>
-              <option value="1">Bachelor degrees</option>
-              <option value="2">Graduate diplomas</option>
-              <option value="3">Diplomas</option>
-              <option value="4">Postgraduate certificates</option>
-              <option value="5">Postgraduate diplomas</option>
-              <option value="6">Masters degrees</option>
-              <option value="7">Doctoral degrees</option>
+          <li class="input-field" [hidden]="!isServicesActive()">
+            <select id="serviceTypeSelect" [ngModel]="serviceType">
+              <option [value]="" selected>Service Type</option>
+              <option *ngFor="let category of serviceTypeCategories" [value]="category">{{category}}</option>
             </select>
           </li>
-        </ul>
-
-        <ul class="left hide-on-small-and-down" [hidden]="!router.isActive('policies')" >
-          <li class="input-field" style="margin-left: 25px !important;">
-            <select>
-              <option value="" disabled selected>Policy area</option>
-              <option value="1">Equity</option>
-              <option value="2">Finance</option>
-              <option value="3">Forms</option>
-              <option value="4">Health, safety and wellbeing</option>
-              <option value="5">Human resources</option>
-              <option value="6">Information technology</option>
-              <option value="7">Learning and teaching</option>
-              <option value="8">Legislative compliance</option>
-              <option value="9">Organization and governance</option>
-              <option value="10">Research</option>
-              <option value="11">Policy development and review</option>
+          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive()">
+            <select id="programmeSelect" [ngModel]="programme">
+              <option [value]="" selected>Programme</option>
+              <option *ngFor="let category of programmeCategories" [value]="category">{{category}}</option>
+            </select>
+          </li>
+          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive()">
+            <select id="studyLevelSelect" [ngModel]="studyLevel">
+              <option [value]="" selected>Study Level</option>
+              <option *ngFor="let category of studyLevelCategories" [value]="category">{{category}}</option>
+            </select>
+          </li>
+          <li class="input-field" [hidden]="!isPoliciesActive()">
+            <select id="policyAreaSelect" [ngModel]="policyArea">
+              <option [value]="" selected>Policy Area</option>
+              <option *ngFor="let category of policyAreaCategories" [value]="category">{{category}}</option>
             </select>
           </li>
         </ul>

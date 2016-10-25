@@ -9,8 +9,8 @@ import {GuidesComponent} from "./guides/guides.component";
 import {PoliciesComponent} from "./policies/policies.component";
 import {ServicesComponent} from "./services/services.component";
 import {DetailsComponent} from "./details/details.component";
-import {FiltersComponent} from "./filters/filters.component";
 import {HomeComponent} from "./home/home.component";
+import { JsonpModule } from '@angular/http';
 
 import {routing, appRoutingProviders} from './app.routing';
 
@@ -22,10 +22,10 @@ import {routing, appRoutingProviders} from './app.routing';
         PoliciesComponent,
         ServicesComponent,
         DetailsComponent,
-        FiltersComponent,
         HomeComponent
     ],
     imports: [
+        JsonpModule,
         BrowserModule,
         FormsModule,
         HttpModule,
