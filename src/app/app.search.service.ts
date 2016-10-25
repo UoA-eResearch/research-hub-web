@@ -15,6 +15,11 @@ export class SearchService {
     };
   }
 
+  findAll()
+  {
+    this.searchChange.next({});
+  }
+
   setSearchTerm(searchTerm) {
     this.searchTerm = searchTerm;
     this.searchChange.next(this.getSearch());

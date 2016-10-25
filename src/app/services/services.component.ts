@@ -1,25 +1,27 @@
-import {Component} from "@angular/core";
+import {Component, AfterViewInit} from "@angular/core";
 import {OnInit, OnDestroy} from "@angular/core";
 import {SearchService} from "../app.search.service";
 import {DrupalService} from "../app.drupal.service";
 import {Observable} from "rxjs/Rx";
+import {Http} from "@angular/http";
 
 @Component({
   templateUrl: './services.component.html'
 })
-export class ServicesComponent implements OnInit {
+export class ServicesComponent implements OnInit, AfterViewInit {
   services: Observable<Array<string>>;
 
-  constructor(private searchService:SearchService, private drupalService: DrupalService) {
-    this.services = this.searchService
-      .searchChange
-      .debounceTime(400)
-      .distinctUntilChanged()
-      .switchMap(value => this.drupalService.searchCategory('services', value.searchTerm, value.subcategories));
+  constructor(private searchService:SearchService, private drupalService: DrupalService, private http: Http) {
+
   }
 
   ngOnInit() {
-    // this.searchService.setSearchValue("a");
+    this.services = this.drupalService.search('services', this.searchService.searchChange);
+  }
+
+  ngAfterViewInit()
+  {
+    this.searchService.findAll();
   }
 
   getAbstract(text) {

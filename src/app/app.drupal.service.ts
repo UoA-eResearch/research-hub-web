@@ -1,35 +1,39 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Subject} from "rxjs/Rx";
-import {Jsonp, Http, URLSearchParams} from "@angular/http";
+import {Http, URLSearchParams} from "@angular/http";
 
 @Injectable()
 export class DrupalService {
   private rootUrl = "http://localhost:3027/";
 
-  constructor(private http: Http) {}
-
-  getCategory(category)
-  {
-    return this.http
-      .get(this.rootUrl + category)
-      .map((response) => response.json());
+  constructor(private http:Http) {
   }
 
-  searchCategory (category:string, term: string, subcategories: any[]) {
-    console.log('search. category: ', category, 'term', term, 'subcats', subcategories);
+  search(category:string, searchChange:Subject<any>, debounceDuration = 400) {
+    return searchChange
+      .debounceTime(debounceDuration)
+      .distinctUntilChanged()
+      .switchMap(value => this.rawSearch(category, value.searchTerm, value.subcategories));
+  }
 
+  rawSearch(category:string, term:string, subcategories:any[]) {
     var search = new URLSearchParams();
 
-    if(term != undefined)
+    if (term != undefined)
       search.set('q', term);
 
-    for (let subcat of subcategories) {
-      if(subcat.value != "" && subcat.value != undefined)
-        search.set(subcat.key, subcat.value);
+    if (subcategories != undefined) {
+      for (let subcat of subcategories) {
+        if (subcat.value != "" && subcat.value != undefined)
+          search.set(subcat.key, subcat.value);
+      }
     }
 
     return this.http
-      .get(this.rootUrl + category, { search })
+      .get(this.rootUrl + category, {search})
       .map((response) => response.json());
   }
 }
+
+
+
