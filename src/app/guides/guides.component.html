@@ -1,14 +1,14 @@
 <div class="inset-content">
   <div class="product-list">
     <div class="row">
-      <div *ngFor="let guide of guides" class="col s12 m4 l2">
+      <div *ngFor="let guide of guides | async" class="col s12 m4 l2">
         <div class="card">
           <div class="card-image" >
             <img class="product-image" [src]="guide.image">
           </div>
           <div class="card-content" style="padding:15px;">
             <span class="product-title">{{guide.title}}</span>
-            <span class="product-category">{{guide.field_category}}</span>
+            <span class="product-category">{{guide.field_programme}}</span>
           </div>
           <div class="card-content" style="padding-top:0;padding-left:15px;padding-right:15px;">
             <p style="font-size: 13px;">{{getAbstract(guide.body)}}</p>

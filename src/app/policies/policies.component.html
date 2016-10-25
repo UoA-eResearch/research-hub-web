@@ -1,14 +1,14 @@
 <div class="inset-content">
   <div class="product-list">
     <div class="row">
-      <div *ngFor="let policy of policies" class="col s12 m4 l2">
+      <div *ngFor="let policy of policies | async" class="col s12 m4 l2">
         <div class="card">
           <div class="card-image" >
             <img class="product-image" [src]="policy.image">
           </div>
           <div class="card-content" style="padding:15px;">
             <span class="product-title">{{policy.title}}</span>
-            <span class="product-category">{{policy.field_category}}</span>
+            <span class="product-category">{{policy.field_policy_area}}</span>
           </div>
           <div class="card-content" style="padding-top:0;padding-left:15px;padding-right:15px;">
             <p style="font-size: 13px;">{{getAbstract(policy.body)}}</p>

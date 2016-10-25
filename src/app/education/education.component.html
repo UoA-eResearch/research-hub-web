@@ -1,7 +1,7 @@
 <div class="inset-content">
   <div class="product-list">
     <div class="row">
-      <div *ngFor="let education of educations" class="col s12 m4 l2">
+      <div *ngFor="let education of educations | async" class="col s12 m4 l2">
         <div class="card">
           <div class="card-image" >
             <img class="product-image" [src]="education.image">
