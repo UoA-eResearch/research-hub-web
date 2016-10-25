@@ -1,5 +1,5 @@
 import {Component, OnInit, ChangeDetectorRef, ApplicationRef} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router, NavigationEnd} from "@angular/router";
 import {SearchService} from "./app.search.service";
 import {DrupalService} from "./app.drupal.service";
 declare var $:any;
@@ -32,6 +32,12 @@ export class AppComponent implements OnInit {
 
   constructor(router:Router, private searchService: SearchService) {
     this.router = router;
+
+    //Reset all select boxes when route changes
+    router.events.subscribe((val) => {
+      $("select").val("");
+      $('select').material_select();
+    });
   }
 
   setSearchTerm(term)
@@ -81,12 +87,8 @@ export class AppComponent implements OnInit {
     this.searchService.setSubcategories(subcategories);
   }
 
-  onChange(event)
-  {
-    console.log('event', event);
-  }
-
   ngOnInit() {
+    console.log('init!');
     $('.button-collapse').sideNav({
         menuWidth: 260, // Default is 240
         edge: 'left', // Choose the horizontal origin
@@ -95,6 +97,7 @@ export class AppComponent implements OnInit {
     );
 
     $(document).ready(() => {
+      //Update model when select dropdowns changed
       $('select').material_select();
       $('select').change((e) => {
         switch(e.currentTarget.id) {

@@ -34,44 +34,47 @@
       <div class="nav-wrapper inset-content">
         <a href="#" data-activates="slide-out" class="button-collapse"><i
           style="margin-left: 20px; font-size: 24px;" class="material-icons">menu</i></a>
-        <ul class="left hide-on-small-and-down" [hidden]="!isServicesActive()">
-          <li class="input-field">
-            <select id="lifeCycleSelect" [ngModel]="lifeCycle" (change)="onChange($event)">
+
+        <ul class="left hide-on-small-and-down">
+          <li class="input-field" [hidden]="!isServicesActive() && !isEducationActive() && !isGuidesActive() && !isPoliciesActive()">
+            <select id="lifeCycleSelect" [ngModel]="lifeCycle">
               <option [value]="" disabled selected>Research Lifecycle</option>
               <option *ngFor="let category of lifeCycleCategories" [value]="category">{{category}}</option>
             </select>
           </li>
-          <li class="input-field">
+          <li class="input-field" [hidden]="!isServicesActive()">
             <select id="serviceTypeSelect" [ngModel]="serviceType">
               <option [value]="" disabled selected>Service Type</option>
               <option *ngFor="let category of serviceTypeCategories" [value]="category">{{category}}</option>
             </select>
           </li>
-        </ul>
-
-        <ul class="left hide-on-small-and-down" [hidden]="!isEducationActive() && !isGuidesActive()">
-          <li class="input-field">
+          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive()">
             <select id="programmeSelect" [ngModel]="programme">
               <option [value]="" disabled selected>Programme</option>
               <option *ngFor="let category of programmeCategories" [value]="category">{{category}}</option>
             </select>
           </li>
-          <li class="input-field">
+          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive()">
             <select id="studyLevelSelect" [ngModel]="studyLevel">
               <option [value]="" disabled selected>Study Level</option>
               <option *ngFor="let category of studyLevelCategories" [value]="category">{{category}}</option>
             </select>
           </li>
-        </ul>
-
-        <ul class="left hide-on-small-and-down" [hidden]="!isPoliciesActive()">
-          <li class="input-field" style="padding-left: 14px;">
+          <li class="input-field" [hidden]="!isPoliciesActive()">
             <select id="policyAreaSelect" [ngModel]="policyArea">
               <option [value]="" disabled selected>Policy Area</option>
               <option *ngFor="let category of policyAreaCategories" [value]="category">{{category}}</option>
             </select>
           </li>
         </ul>
+
+        <!--<ul class="left hide-on-small-and-down" >-->
+
+        <!--</ul>-->
+
+        <!--<ul class="left hide-on-small-and-down" >-->
+
+        <!--</ul>-->
       </div>
     </nav>
   </div>
