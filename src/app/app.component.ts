@@ -2,6 +2,7 @@ import {Component, OnInit, ChangeDetectorRef, ApplicationRef} from '@angular/cor
 import {Router, NavigationEnd} from "@angular/router";
 import {SearchService} from "./app.search.service";
 import {DrupalService} from "./app.drupal.service";
+import * as moment from 'moment';
 declare var $:any;
 
 @Component({
@@ -38,6 +39,11 @@ export class AppComponent implements OnInit {
       $("select").val("");
       $('select').material_select();
     });
+  }
+
+  getYear()
+  {
+    return moment().year();
   }
 
   setSearchTerm(term)
