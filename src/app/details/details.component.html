@@ -4,23 +4,23 @@
       <div class="row">
         <div class="col s4 m4 l4" style="padding-right: 20px;">
           <div class="card-image">
-            <img style="border-radius: 25px;max-width: 180px;max-height: 180px;" [src]="product.image">
+            <img style="border-radius: 25px;max-width: 180px;max-height: 180px;" [src]="details.image">
           </div>
         </div>
         <div class="col s8 m8 l8">
           <div class="row">
             <div class="col l12">
-              <span class="product-details-title">{{product.title}}</span>
+              <span class="product-details-title">{{details.title}}</span>
             </div>
           </div>
 
           <div class="row">
             <div class="col l3">
-              <a href="#">{{product.field_support_name}}</a>
+              <a href="#">{{details.field_summary}}</a>
             </div>
 
             <div class="col l3">
-              <a href="#">{{product.field_category}}</a>
+              <a href="#">{{details.field_category}}</a>
             </div>
 
             <div class="col l6" style="text-align: right;line-height: 22px;">
@@ -47,7 +47,7 @@
 
       <div class="row" style="padding-top: 20px;">
         <div class="col l12">
-          <p>{{product.body}}</p>
+          <p>{{details.field_summary}}</p>
         </div>
       </div>
     </div>
@@ -62,23 +62,23 @@
       <div class="row">
         <div class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Eligibility</span>
-          <p>{{product.field_eligibility}}</p>
+          <p>{{details.field_eligibility}}</p>
         </div>
 
         <div class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Requirements</span>
-          <p>{{product.field_requirements}}</p>
+          <p>{{details.field_requirements}}</p>
         </div>
 
         <div class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Cost</span>
-          <p>{{product.field_cost}}</p>
+          <p>{{details.field_cost}}</p>
         </div>
 
         <div class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Support</span>
           <p><a href="#">Visit website</a></p>
-          <p><a href="#">Email {{product.field_support}}</a></p>
+          <p><a href="#">Email {{details.field_support}}</a></p>
         </div>
       </div>
     </div>
@@ -94,17 +94,17 @@
       <div class="row">
         <div class="col s12 m6 l4" style="margin-bottom: 15px;">
           <span class="info-title">Features</span>
-          <p>{{product.field_features}}</p>
+          <p>{{details.field_features}}</p>
         </div>
 
         <div class="col s12 m6 l4" style="margin-bottom: 15px;">
           <span class="info-title">Limitations</span>
-          <p>{{product.field_limitations}}</p>
+          <p>{{details.field_limitations}}</p>
         </div>
 
         <div class="col s12 m6 l4" style="margin-bottom: 15px;">
           <span class="info-title">Considerations</span>
-          <p>{{product.field_considerations}}</p>
+          <p>{{details.field_considerations}}</p>
         </div>
       </div>
     </div>
