@@ -4,7 +4,7 @@
       <div *ngFor="let guide of guides | async | slice:1" class="col s12 m4 l2">
         <div class="card">
           <div class="card-image" >
-            <img class="product-image" src="../assets/edu1.png">
+           <img class="product-image" src="http://lorempixel.com/160/200/abstract">
           </div>
           <div class="card-content" style="padding:15px;">
             <span class="product-title"><a [routerLink]="['guidedetails', guide.nid]" style="text-transform: uppercase;margin-right: 0;">{{guide.title}}</a></span>

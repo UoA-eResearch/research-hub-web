@@ -5,10 +5,10 @@
        <div *ngFor="let education of educations | async | slice:1" class="col s12 m4 l2">
          <div class="card">
           <div class="card-image" >
-              <img class="product-image" src="../assets/edu1.png">
+              <img class="product-image" src="http://lorempixel.com/160/200/technics">
           </div>
           <div class="card-content" style="padding:15px;">
-            <span class="product-title"><a [routerLink]="['edudetails', education.nid]" style="text-transform: uppercase;margin-right: 0;">{{education.title}}</a></span>
+              <span class="product-title"><div><a [routerLink]="['edudetails', education.nid]" style="text-transform: uppercase;margin-right: 0;">{{education.title}}</a></div></span>
             <span class="product-category">{{education.type}}</span>
           </div>
           <!--<div class="card-content" style="padding-top:0;padding-left:15px;padding-right:15px;">
