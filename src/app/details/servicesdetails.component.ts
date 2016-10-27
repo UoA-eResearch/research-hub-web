@@ -1,35 +1,30 @@
 import {Component, AfterViewInit} from "@angular/core";
 import {OnInit} from "@angular/core";
-import {SearchService} from "../app.search.service";
 import {DrupalService} from "../app.drupal.service";
 import {Observable} from "rxjs/Rx";
+import {SearchService} from "../app.search.service";
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'servicesdetails',
-    templateUrl: './details.component.html'
+    templateUrl: './servicesdetails.component.html'
 })
 export class ServicesdetailsComponent implements OnInit, AfterViewInit {
-    id: number;
-    private sub: any;
+    id: string;
     details: Observable<Array<string>>;
       
   constructor(private searchService:SearchService, private drupalService: DrupalService, private route: ActivatedRoute) {
-
+       
   }
 
   ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {this.id = +params['id']});
-        console.log(this.sub);
+        console.log("in services details init");
+        this.id = this.route.snapshot.params['id'];
         console.log(this.id);
-        this.details = this.drupalService.detailsearch(this.sub, this.searchService.searchChange);
+        this.details = this.drupalService.contentdetailsearch(this.id, this.searchService.searchChange);
+        console.log(this.details);
   }
-
-  ngOnDestroy() {
-         this.sub.unsubscribe();
-  }
-  ngAfterViewInit()
+        ngAfterViewInit()
   {
-    this.searchService.findAll();
+  //  this.searchService.findAll();
   }
 }

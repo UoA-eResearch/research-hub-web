@@ -7,7 +7,7 @@
             <img class="product-image" src="http://lorempixel.com/160/200/technics">
             </div>
             <div class="card-content">
-                <span class="product-title"><a style="text-transform: uppercase;margin-right: 0;" [routerLink]="['servicesdetails', service.nid]">{{service.title}}</a></span>
+                <span class="product-title"><a [routerLink]="['servicesdetails', service.nid]" style="text-transform: uppercase;margin-right: 0;">{{service.title}}</a></span>
                 <span class="product-category">{{service.type}}</span>
             </div>
   <!--<div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">

@@ -3,6 +3,7 @@ import {EducationComponent} from "./education/education.component";
 import {GuidesComponent} from "./guides/guides.component";
 import {PoliciesComponent} from "./policies/policies.component";
 import {ServicesComponent} from "./services/services.component";
+import {DetailsComponent} from "./details/details.component";
 import {EdudetailsComponent} from "./details/edudetails.component";
 import {GuidedetailsComponent} from "./details/guidedetails.component";
 import {PolicydetailsComponent} from "./details/policydetails.component";
@@ -14,6 +15,7 @@ const appRoutes:Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'education', component: EducationComponent},
     {path: 'education/edudetails/:id', component: EdudetailsComponent},
+    {path: 'details/:id', component: DetailsComponent},
     {path: 'guides', component: GuidesComponent},
     {path: 'guides/guidedetails/:id', component: GuidedetailsComponent},
     {path: 'policies', component: PoliciesComponent},
