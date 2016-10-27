@@ -1,21 +1,22 @@
 <div class="inset-content">
   <div class="product-list">
     <div class="row">
-      <div *ngFor="let education of educations | async" class="col s12 m4 l2">
-        <div class="card">
+        
+       <div *ngFor="let education of educations | async | slice:1" class="col s12 m4 l2">
+         <div class="card">
           <div class="card-image" >
-            <img class="product-image" [src]="education.image">
+              <img class="product-image" src="http://lorempixel.com/160/200/technics">
           </div>
           <div class="card-content" style="padding:15px;">
-            <span class="product-title">{{education.title}}</span>
-            <span class="product-category">{{education.field_category}}</span>
+              <span class="product-title"><div><a [routerLink]="['edudetails', education.nid]" style="text-transform: uppercase;margin-right: 0;">{{education.title}}</a></div></span>
+            <span class="product-category">{{education.type}}</span>
           </div>
-          <div class="card-content" style="padding-top:0;padding-left:15px;padding-right:15px;">
-            <p style="font-size: 13px;">{{getAbstract(education.body)}}</p>
+          <!--<div class="card-content" style="padding-top:0;padding-left:15px;padding-right:15px;">
+             <p style="font-size: 13px;">{{education.webUrl}}</p>
           </div>
           <div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">
-            <a [routerLink]="['details', education.id]" style="text-transform: uppercase;margin-right: 0;">{{education.field_cost}}</a>
-          </div>
+            <a [routerLink]="['details', education.nid]" style="text-transform: uppercase;margin-right: 0;">{{education.fields.field_summary.und.value}}</a>
+          </div>-->
         </div>
       </div>
     </div>

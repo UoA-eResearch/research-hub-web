@@ -1,21 +1,21 @@
 <div class="inset-content">
   <div class="product-list">
     <div class="row">
-      <div *ngFor="let policy of policies | async" class="col s12 m4 l2">
+      <div *ngFor="let policy of policies | async | slice:1" class="col s12 m4 l2">
         <div class="card">
           <div class="card-image" >
-            <img class="product-image" [src]="policy.image">
+              <img class="product-image" src="http://lorempixel.com/160/200/technics">
           </div>
           <div class="card-content" style="padding:15px;">
-            <span class="product-title">{{policy.title}}</span>
-            <span class="product-category">{{policy.field_policy_area}}</span>
+            <span class="product-title"><a [routerLink]="['policydetails', policy.nid]" style="text-transform: uppercase;margin-right: 0;">{{policy.title}}</a></span>
+            <span class="product-category">{{policy.type}}</span>
           </div>
-          <div class="card-content" style="padding-top:0;padding-left:15px;padding-right:15px;">
-            <p style="font-size: 13px;">{{getAbstract(policy.body)}}</p>
+          <!--<div class="card-content" style="padding-top:0;padding-left:15px;padding-right:15px;">
+             <p style="font-size: 13px;">{{policy.webUrl}}</p>
           </div>
           <div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">
-            <a [routerLink]="['details', policy.id]" style="text-transform: uppercase;margin-right: 0;">{{policy.field_cost}}</a>
-          </div>
+            <a [routerLink]="['details', policy.nid]" style="text-transform: uppercase;margin-right: 0;">{{policy.fields.field_summary.und.value}}</a>
+          </div>-->
         </div>
       </div>
     </div>
