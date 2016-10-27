@@ -8,10 +8,7 @@ import {EducationComponent} from "./education/education.component";
 import {GuidesComponent} from "./guides/guides.component";
 import {PoliciesComponent} from "./policies/policies.component";
 import {ServicesComponent} from "./services/services.component";
-import {EdudetailsComponent} from "./details/edudetails.component";
-import {GuidedetailsComponent} from "./details/guidedetails.component";
-import {PolicydetailsComponent} from "./details/policydetails.component";
-import {ServicesdetailsComponent} from "./details/servicesdetails.component";
+import {DetailsComponent} from "./details/details.component";
 import {HomeComponent} from "./home/home.component";
 import { JsonpModule } from '@angular/http';
 
@@ -24,10 +21,7 @@ import {routing, appRoutingProviders} from './app.routing';
         GuidesComponent,
         PoliciesComponent,
         ServicesComponent,
-        EdudetailsComponent,
-        GuidedetailsComponent,
-        PolicydetailsComponent,
-        ServicesdetailsComponent,
+        DetailsComponent,
         HomeComponent
     ],
     imports: [
