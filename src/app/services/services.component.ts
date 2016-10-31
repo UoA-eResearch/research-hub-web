@@ -15,7 +15,7 @@ export class ServicesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.services = this.drupalService.contentsearch('service', this.searchService.searchChange);
+      this.services = this.drupalService.contentsearch('service', this.searchService.searchChange);
       console.log(this.services);
   }
 

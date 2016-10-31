@@ -1,30 +1,27 @@
-<div class="inset-content">
+<div *ngIf="product" class="inset-content">
   <div class="card product-detail">
     <div class="card-content">
       <div class="row">
-          <!--
         <div class="col s4 m4 l4" style="padding-right: 20px;">
           <div class="card-image">
-            <img style="border-radius: 25px;max-width: 180px;max-height: 180px;" src="http://lorempixel.com/180/180/technics">
-            
-                <h1>{{details.title}}</h1>
-            
+            <img style="border-radius: 25px;max-width: 180px;max-height: 180px;" src="http://lorempixel.com/160/200/technics">
           </div>
         </div>
         <div class="col s8 m8 l8">
           <div class="row">
             <div class="col l12">
-              <span class="product-details-title">{{details.title}}</span>
+              <span class="product-details-title">{{product.title}}</span>
             </div>
           </div>
 
           <div class="row">
+            <!--<div *ngFor="let field_category of product.fields.field_category.und; let i=index" class="col l3">
+            <a href="#">{{field_category[i].tid}}</a>
+            </div>-->
+       
+    
             <div class="col l3">
-              <a href="#">{{details.field_summary}}</a>
-            </div>
-
-            <div class="col l3">
-              <a href="#">{{details.field_category}}</a>
+              <a href="#">{{product.fields.field_category.und[0].tid}}</a>
             </div>
 
             <div class="col l6" style="text-align: right;line-height: 22px;">
@@ -51,7 +48,7 @@
 
       <div class="row" style="padding-top: 20px;">
         <div class="col l12">
-          <p>{{details.field_summary}}</p>
+          <p>{{product.body}}</p>
         </div>
       </div>
     </div>
@@ -66,23 +63,23 @@
       <div class="row">
         <div class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Eligibility</span>
-          <p>{{details.field_eligibility}}</p>
+          <p>{{product.field_eligibility.und[0].value}}</p>
         </div>
 
         <div class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Requirements</span>
-          <p>{{details.field_requirements}}</p>
+          <p>{{product.field_requirements.und.value}}</p>
         </div>
 
         <div class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Cost</span>
-          <p>{{details.field_cost}}</p>
+          <p>{{product.field_cost.und.value}}</p>
         </div>
 
         <div class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Support</span>
           <p><a href="#">Visit website</a></p>
-          <p><a href="#">Email {{details.field_support}}</a></p>
+          <p><a href="#">Email {{product.field_support.und.value}}</a></p>
         </div>
       </div>
     </div>
@@ -98,18 +95,24 @@
       <div class="row">
         <div class="col s12 m6 l4" style="margin-bottom: 15px;">
           <span class="info-title">Features</span>
-          <p>{{details.field_features}}</p>
+          <p>{{product.field_features.und.value}}</p>
         </div>
 
         <div class="col s12 m6 l4" style="margin-bottom: 15px;">
           <span class="info-title">Limitations</span>
-          <p>{{details.field_limitations}}</p>
+          <p>{{product.field_cons.und.value}}</p>
         </div>
 
         <div class="col s12 m6 l4" style="margin-bottom: 15px;">
           <span class="info-title">Considerations</span>
-          <p>{{details.field_considerations}}</p>
+          <p>{{product.field_considerations.und.value}}</p>
         </div>
+          
+        <div class="col s12 m6 l4" style="margin-bottom: 15px;">
+          <span class="info-title">Contact Email</span>
+          <p>{{product.field_contact_email.und.email}}</p>
+        </div>
+         
       </div>
     </div>
 
@@ -165,9 +168,7 @@
             </li>
           </ul>
         </div>
-               -->
       </div>
     </div>
   </div>
 </div>
-

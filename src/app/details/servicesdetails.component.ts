@@ -4,27 +4,36 @@ import {DrupalService} from "../app.drupal.service";
 import {Observable} from "rxjs/Rx";
 import {SearchService} from "../app.search.service";
 import { ActivatedRoute } from '@angular/router';
+import {Http, Response, URLSearchParams, Headers} from "@angular/http";
 
 @Component({
     templateUrl: './servicesdetails.component.html'
 })
 export class ServicesdetailsComponent implements OnInit, AfterViewInit {
     id: string;
-    details: Observable<Array<string>>;
-      
-  constructor(private searchService:SearchService, private drupalService: DrupalService, private route: ActivatedRoute) {
-       
+    product:any;
+  
+  constructor(private http:Http, private searchService:SearchService, private drupalService: DrupalService, private route: ActivatedRoute) {
+        
   }
-
+private handleError(error: Response){
+    console.error(error);
+    return Observable.throw(error.json().error || 'Server error');
+}
   ngOnInit() {
+            
         console.log("in services details init");
         this.id = this.route.snapshot.params['id'];
-        console.log(this.id);
-        this.details = this.drupalService.contentdetailsearch(this.id, this.searchService.searchChange);
-        console.log(this.details);
+
+        this.http.get(this.drupalService.thisUrl + "/" + this.id)
+        .map(res => res.json())
+        .subscribe(
+        data => this.product = data,
+        err => console.log(err),
+        () => console.log('Completed', this.product));      
   }
-        ngAfterViewInit()
+  ngAfterViewInit()
   {
-  //  this.searchService.findAll();
+    this.searchService.findAll();
   }
 }
