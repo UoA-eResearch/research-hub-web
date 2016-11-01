@@ -7,33 +7,28 @@ import { ActivatedRoute } from '@angular/router';
 import {Http, Response, URLSearchParams, Headers} from "@angular/http";
 
 @Component({
-    templateUrl: './details.component.html'
+    templateUrl: './policydetails.component.html'
 })
 export class PolicydetailsComponent implements OnInit, AfterViewInit {
     id: string;
     product:any;
   
   constructor(private http:Http, private searchService:SearchService, private drupalService: DrupalService, private route: ActivatedRoute) {
-        
-  }
-private handleError(error: Response){
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
-}
-  ngOnInit() {
-            
-        console.log("in policy details init");
+        let doheaders = new Headers();
+        doheaders.set('Accept', 'application/json');    
+        console.log("in education details init");
         this.id = this.route.snapshot.params['id'];
 
-        this.http.get(this.drupalService.thisUrl + "/" + this.id)
+        this.http.get(this.drupalService.thisUrl + "/" + this.id, {headers:doheaders})
         .map(res => res.json())
         .subscribe(
         data => this.product = data,
         err => console.log(err),
         () => console.log('Completed', this.product));      
   }
+  ngOnInit() { 
+  }
   ngAfterViewInit()
   {
-    this.searchService.findAll();
   }
 }
