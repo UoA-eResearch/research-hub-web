@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   policyArea: string = "";
 
   lifeCycleCategories: String[] = ['Plan and Design', 'Create, Collect, Capture', 'Analyze and Interpret', 'Publish and Report', 'Discover and Reuse'];
-  serviceTypeCategories: String[] = ['Analysis', 'Communication', 'Computing', 'Consulting', 'Data', 'Equipment', 'Publishing', 'Visualisation'];
+  serviceTypeCategories: String[] = ['Research Computing', 'Research Data', 'Analysis and Visualisation', 'Specialised Equipment', 'Consultation Services', 'Communication and Publishing'];
   programmeCategories: String[] = ['Architectural Studies', 'Arts', 'Commerce', 'Dance Studies', 'Education',
     'Engineering', 'Fine Arts', 'Health Sciences', 'Laws', 'Medicine and Bachelor of Surgery', 'Music',
     'Nursing', 'Optometry', 'Pharmacy', 'Urban Planning', 'Property', 'Science', 'Science in Biomedical Science',

@@ -66,25 +66,42 @@
         </div>
       </div>
       <div class="row">
-        <div *ngIf="product.fields.field_eligibility" class="col s12 m6 l6" style="margin-bottom: 15px;">
+        <div *ngIf="product.fields.field_eligibility && product.fields.field_eligibility.und" class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Eligibility</span>
           <p *ngFor="let eligible of product.fields.field_eligibility.und; let i=index">{{eligible.value}}</p>
         </div>
+        <div *ngIf="product.fields.field_eligibility && product.fields.field_eligibility['0']" class="col s12 m6 l6" style="margin-bottom: 15px;">
+          <span class="info-title">Eligibility</span>
+          <p *ngFor="let eligible of product.fields.field_eligibility; let i=index">{{eligible.value}}</p>
+        </div>
 
-        <div *ngIf="product.fields.field_requirements" class="col s12 m6 l6" style="margin-bottom: 15px;">
+        <div *ngIf="product.fields.field_requirements && product.fields.field_requirements.und" class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Requirements</span>
           <p *ngFor="let reqs of product.fields.field_requirements.und; let i=index">{{reqs.value}}</p>
         </div>
-
-        <div *ngIf="product.fields.field_cost" class="col s12 m6 l6" style="margin-bottom: 15px;">
+        <div *ngIf="product.fields.field_requirements && product.fields.field_requirements['0']" class="col s12 m6 l6" style="margin-bottom: 15px;">
+          <span class="info-title">Requirements</span>
+          <p *ngFor="let reqs of product.fields.field_requirements; let i=index">{{reqs.value}}</p>
+        </div>
+          
+        <div *ngIf="product.fields.field_cost && product.fields.field_cost.und" class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Cost</span>
           <p *ngFor="let cost of product.fields.field_cost.und; let i=index">{{cost.value}}</p>
         </div>
+        <div *ngIf="product.fields.field_cost && product.fields.field_cost['0']" class="col s12 m6 l6" style="margin-bottom: 15px;">
+          <span class="info-title">Cost</span>
+          <p *ngFor="let cost of product.fields.field_cost; let i=index">{{cost.value}}</p>
+        </div>
 
-        <div *ngIf="product.fields.field_support" class="col s12 m6 l6" style="margin-bottom: 15px;">
+        <div *ngIf="product.fields.field_support && product.fields.field_support.und" class="col s12 m6 l6" style="margin-bottom: 15px;">
           <span class="info-title">Support</span>
           <p *ngFor="let emails of product.fields.field_contact_email.und; let i=index"><a href="mailto:{{emails.email}}">Email</a></p>
           <p *ngFor="let support of product.fields.field_support.und; let i=index">{{support.value}}</p>
+        </div>
+        <div *ngIf="product.fields.field_support && product.fields.field_support['0']" class="col s12 m6 l6" style="margin-bottom: 15px;">
+          <span class="info-title">Support</span>
+          <p *ngFor="let emails of product.fields.field_contact_email; let i=index"><a href="mailto:{{emails.email}}">Email</a></p>
+          <p *ngFor="let support of product.fields.field_support; let i=index">{{support.value}}</p>
         </div>
       </div>
     </div>
@@ -98,37 +115,61 @@
         </div>
       </div>
       <div class="row">
-        <div *ngIf="product.fields.field_features" class="col s12 m6 l4" style="margin-bottom: 15px;">
+        <div *ngIf="product.fields.field_features && product.fields.field_features.und" class="col s12 m6 l4" style="margin-bottom: 15px;">
           <span class="info-title">Features</span>
           <p *ngFor="let feature of product.fields.field_features.und; let i=index"><img align="top" src='assets/bluebp1.png'>{{feature.value}}</p>
         </div>
+        <div *ngIf="product.fields.field_features && product.fields.field_features['0']" class="col s12 m6 l4" style="margin-bottom: 15px;">
+          <span class="info-title">Features</span>
+          <p *ngFor="let feature of product.fields.field_features; let i=index"><img align="top" src='assets/bluebp1.png'>{{feature.value}}</p>
+        </div>
 
-        <div *ngIf="product.fields.field_cons" class="col s12 m6 l4" style="margin-bottom: 15px;">
+        <div *ngIf="product.fields.field_cons && product.fields.field_cons.und" class="col s12 m6 l4" style="margin-bottom: 15px;">
           <span class="info-title">Limitations</span>
           <p *ngFor="let limit of product.fields.field_cons.und; let i=index"><img align="top" src='assets/bluebp1.png'>{{limit.value}}</p>
         </div>
-
-        <div *ngIf="product.fields.field_considerations"  class="col s12 m6 l4" style="margin-bottom: 15px;">
+        <div *ngIf="product.fields.field_cons && product.fields.field_cons['0']" class="col s12 m6 l4" style="margin-bottom: 15px;">
+          <span class="info-title">Limitations</span>
+          <p *ngFor="let limit of product.fields.field_cons; let i=index"><img align="top" src='assets/bluebp1.png'>{{limit.value}}</p>
+        </div>
+          
+        <div *ngIf="product.fields.field_considerations && product.fields.field_considerations.und"  class="col s12 m6 l4" style="margin-bottom: 15px;">
           <span class="info-title">Considerations</span>
           <p *ngFor="let cons of product.fields.field_considerations.und; let i=index"><img align="top" src='assets/bluebp1.png'>{{cons.value}}</p>
+        </div>
+        <div *ngIf="product.fields.field_considerations && product.fields.field_considerations['0']"  class="col s12 m6 l4" style="margin-bottom: 15px;">
+          <span class="info-title">Considerations</span>
+          <p *ngFor="let cons of product.fields.field_considerations; let i=index"><img align="top" src='assets/bluebp1.png'>{{cons.value}}</p>
         </div>
         </div>
         
         <div class="divider"></div>
         
-        <div *ngIf="product.fields.field_contact_email" class="col" style="margin-bottom: 15px;">
+        <div *ngIf="product.fields.field_contact_email && product.fields.field_contact_email.und" class="col" style="margin-bottom: 15px;">
           <span class="info-title">Contact Email</span>
           <p *ngFor="let emails of product.fields.field_contact_email.und; let i=index"><a href="mailto:{{emails.email}}">{{emails.email}}</a></p>
         </div>
+        <div *ngIf="product.fields.field_contact_email && product.fields.field_contact_email['0']" class="col" style="margin-bottom: 15px;">
+          <span class="info-title">Contact Email</span>
+          <p *ngFor="let emails of product.fields.field_contact_email; let i=index"><a href="mailto:{{emails.email}}">{{emails.email}}</a></p>
+        </div>
         
-        <div *ngIf="product.fields.field_help_faqs" class="col" style="margin-bottom: 15px;">
+        <div *ngIf="product.fields.field_help_faqs && product.fields.field_help_faqs.und" class="col" style="margin-bottom: 15px;">
           <span class="info-title">Help and FAQs</span>
           <p *ngFor="let help of product.fields.field_help_faqs.und; let i=index"><a href="{{help.url}}">{{help.title}}</a></p>
         </div>
+        <div *ngIf="product.fields.field_help_faqs && product.fields.field_help_faqs['0']" class="col" style="margin-bottom: 15px;">
+          <span class="info-title">Help and FAQs</span>
+          <p *ngFor="let help of product.fields.field_help_faqs; let i=index"><a href="{{help.url}}">{{help.title}}</a></p>
+        </div>
         
-        <div *ngIf="product.fields.field_see_also" class="col" style="margin-bottom: 15px;">
+        <div *ngIf="product.fields.field_see_also && product.fields.field_see_also.und" class="col" style="margin-bottom: 15px;">
           <span class="info-title">See also</span>
           <p *ngFor="let see of product.fields.field_see_also.und; let i=index"><a href="{{see.url}}">{{see.title}}</a></p>
+        </div>
+        <div *ngIf="product.fields.field_see_also && product.fields.field_see_also['0']" class="col" style="margin-bottom: 15px;">
+          <span class="info-title">See also</span>
+          <p *ngFor="let see of product.fields.field_see_also; let i=index"><a href="{{see.url}}">{{see.title}}</a></p>
         </div>
         
       
