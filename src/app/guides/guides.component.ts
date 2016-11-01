@@ -15,7 +15,7 @@ export class GuidesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.guides = this.drupalService.search('guides', this.searchService.searchChange);
+    this.guides = this.drupalService.contentsearch('guide', this.searchService.searchChange);
   }
 
   ngAfterViewInit()

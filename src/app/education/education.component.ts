@@ -15,7 +15,7 @@ export class EducationComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.educations = this.drupalService.search('education', this.searchService.searchChange);
+    this.educations = this.drupalService.contentsearch('education', this.searchService.searchChange);
   }
 
   ngAfterViewInit()
