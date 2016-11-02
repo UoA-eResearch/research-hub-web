@@ -1,59 +1,29 @@
-import {Component} from "@angular/core";
+import {Component, AfterViewInit} from "@angular/core";
 import {OnInit} from "@angular/core";
+import {DrupalService} from "../app.drupal.service";
+import {Observable} from "rxjs/Rx";
+import {SearchService} from "../app.search.service";
+import { ActivatedRoute } from '@angular/router';
+import {Http, Response, URLSearchParams, Headers} from "@angular/http";
 
 @Component({
     templateUrl: './details.component.html'
 })
-export class DetailsComponent implements OnInit {
-    product:any;
+export class DetailsComponent {
+     id: string;
+     product:any;
+  
+  constructor(private http:Http, private searchService:SearchService, private drupalService: DrupalService, private route: ActivatedRoute) {
+         let doheaders = new Headers();
+        doheaders.set('Accept', 'application/json');    
+        console.log("in education details init");
+        this.id = this.route.snapshot.params['id'];
 
-    constructor() {
-        this.product = {
-            id: 1,
-            title: 'Research Consulting',
-            image: this.dummyImageSrc(),
-            body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
-            '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
-            ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
-            'booth biodiesel. Wolf DIY before they sold out, austin actually pop-up portland forage chicharrones. +1 ' +
-            'cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-            field_category: 'Service',
-            field_limitations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie ' +
-            'intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi ' +
-            'sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa ' +
-            'mlkshk meh viral schlitz photo booth biodiesel. Wolf DIY before they sold out, austin actually ' +
-            'pop-up portland forage chicharrones. +1 cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-            field_considerations: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock ' +
-            'yuccie intelligentsia 3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn' +
-            ' kogi sartorial. Selvage fap chambray poutine direct trade iPhone. Chicharrones synth gentrify, ' +
-            'marfa mlkshk meh viral schlitz photo booth biodiesel. Wolf DIY before they sold out, austin actually' +
-            ' pop-up portland forage chicharrones. +1 cred pabst squid. Godard photo booth pitchfork tilde 8-bit.',
-            field_features: 'Test planning and management (support and consultation or $ service) Load testing ' +
-            '(LoadUI) Functional testing (SOAPUI, Cucumber/gerkin, ) Performance testing (Jmeter) Browser and ' +
-            'device testing (browserstack) Integration testing Consultation (best practice, tuition, assitance ' +
-            'to turn business rules into automated tests) UNICODE testing Accessibility support and WCAG 2.0 ' +
-            'compliance User acceptance testing',
-            field_eligibility: 'People with money',
-            field_requirements: 'Project description and money',
-            field_cost: 'Free',
-            field_support_name: 'Jack Bauer',
-            field_support: 'j.bauer@auckland.ac.nz'
-        };
-    }
-
-    dummyImageSrc()
-    {
-        let rand = 1;
-
-        for(let i = 0; i < 5; i++)
-        {
-            rand *= Math.random();
-        }
-
-        return "http://lorempixel.com/400/400/technics?dummy=".concat(rand.toString());
-    }
-
-    ngOnInit() {
-
-    }
+        this.http.get(this.drupalService.thisUrl + "/" + this.id, {headers:doheaders})
+        .map(res => res.json())
+        .subscribe(
+        data => this.product = data,
+        err => console.log(err),
+        () => console.log('Completed', this.product));    
+  }
 }

@@ -15,7 +15,7 @@ const appRoutes:Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'education', component: EducationComponent},
     {path: 'education/edudetails/:id', component: EdudetailsComponent},
-    {path: 'details/:id', component: DetailsComponent},
+    {path: 'home/details/:id', component: DetailsComponent},
     {path: 'guides', component: GuidesComponent},
     {path: 'guides/guidedetails/:id', component: GuidedetailsComponent},
     {path: 'policies', component: PoliciesComponent},
