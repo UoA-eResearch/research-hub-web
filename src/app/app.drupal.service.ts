@@ -65,7 +65,7 @@ export class DrupalService {
     let doheaders = new Headers();
     doheaders.set('Accept', 'application/json');
       return this.http
-      .get(this.thisUrl + "?type=" + category, {search:dosearch, headers:doheaders})
+      .get(this.thisUrl + "?sort=nid&sort_order=ASC&&limit=10000&type=" + category, {search:dosearch, headers:doheaders})
       .map((response) => response.json());
    
   }
