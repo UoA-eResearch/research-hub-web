@@ -12,10 +12,10 @@ import {Http, Response, URLSearchParams, Headers} from "@angular/http";
 export class EdudetailsComponent implements OnInit, AfterViewInit {
     id: string;
     product:any;
-  
+
   constructor(private http:Http, private searchService:SearchService, private drupalService: DrupalService, private route: ActivatedRoute) {
          let doheaders = new Headers();
-        doheaders.set('Accept', 'application/json');    
+        doheaders.set('Accept', 'application/json');
         console.log("in education details init");
         this.id = this.route.snapshot.params['id'];
 
@@ -24,12 +24,13 @@ export class EdudetailsComponent implements OnInit, AfterViewInit {
         .subscribe(
         data => this.product = data,
         err => console.log(err),
-        () => console.log('Completed', this.product));    
+        () => console.log('Completed', this.product));
   }
 
-  ngOnInit() {        
+  ngOnInit() {
   }
   ngAfterViewInit()
   {
+    window.scrollTo(0,0);
   }
 }

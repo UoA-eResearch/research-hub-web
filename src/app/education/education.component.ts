@@ -20,6 +20,7 @@ export class EducationComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit()
   {
+    window.scrollTo(0,0);
     this.searchService.findAll();
   }
 
