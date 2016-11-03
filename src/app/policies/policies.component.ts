@@ -15,7 +15,7 @@ export class PoliciesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.policies = this.drupalService.search('policies', this.searchService.searchChange);
+    this.policies = this.drupalService.contentsearch('policies', this.searchService.searchChange);
   }
 
   ngAfterViewInit()
