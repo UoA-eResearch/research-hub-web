@@ -10,9 +10,13 @@ import {PolicydetailsComponent} from "./details/policydetails.component";
 import {ServicesdetailsComponent} from "./details/servicesdetails.component";
 import {HomeComponent} from "./home/home.component";
 import {ModuleWithProviders} from "@angular/core";
+import {LifecycleComponent} from "./lifecycle/lifecycle.component";
+import {ShowcaseComponent} from "./showcase/showcase.component";
 
 const appRoutes:Routes = [
     {path: 'home', component: HomeComponent},
+    {path: 'lifecycle', component: LifecycleComponent},
+    {path: 'showcase', component: ShowcaseComponent},
     {path: 'education', component: EducationComponent},
     {path: 'education/edudetails/:id', component: EdudetailsComponent},
     {path: 'details/:id', component: DetailsComponent},
