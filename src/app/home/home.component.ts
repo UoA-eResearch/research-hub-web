@@ -37,8 +37,8 @@ constructor(private http:Http, private searchService:SearchService, private drup
   }
 
   ngOnInit() {
-      //this.products = this.drupalService.frontsearch(this.searchService.searchChange);
-    //  console.log(this.products);
+      this.products = this.drupalService.search(this.searchService.searchChange);
+      console.log(this.products);
   }
 
   ngAfterViewInit()
