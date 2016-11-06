@@ -7,8 +7,9 @@ import {Observable} from "rxjs/Rx";
 export class DrupalService {
   //private rootUrl = "https://localhost:3027/";
   thisUrl = "https://researchit.cer.auckland.ac.nz/api/content";
-  
+  products: Observable<Array<string>>;
   dosearch:any;
+      
   constructor(private http:Http) {
     
   }
@@ -32,7 +33,15 @@ export class DrupalService {
       .distinctUntilChanged()
       .switchMap(value => this.rawContentSearch(category, value.searchTerm, value.subcategories));
   }
-      
+     
+  frontsearch(category:string, searchChange:Subject<any>, debounceDuration = 400) {
+    console.log("in front search");
+    return searchChange
+      .debounceTime(debounceDuration)
+      .distinctUntilChanged()
+      .switchMap(value => this.rawFrontSearch(category, value.searchTerm, value.subcategories));
+  }
+         
   rawSearch(category:string, term:string, subcategories:any[]) {
      this.dosearch=new URLSearchParams();
       console.log(this.dosearch);
@@ -72,6 +81,27 @@ export class DrupalService {
     return this.http
       .get(this.thisUrl + "?sort=nid&fields=all&sort_order=ASC&&limit=10000&type=" + category, {search:this.dosearch, headers:doheaders})
       .map((response) => this.extractData(response, category, subcategories));
+  }
+  
+  rawFrontSearch(category:string, term:string, subcategories:any[]) {
+     this.dosearch=new URLSearchParams();
+    if (term != undefined && term.trim() != "") {
+      this.dosearch.set('search_string', term);
+    }
+    else if (subcategories != undefined) {
+      for (let subcat of subcategories) {
+        if (subcat.value != "" && subcat.value != undefined)
+          this.dosearch.set(subcat.key, subcat.value);
+      }
+    }
+    console.log('do search'+this.dosearch);
+    console.log(this.thisUrl + "?fields=all&sort_order=ASC&&limit=10000");
+    let doheaders = new Headers();
+    doheaders.set('Accept', 'application/json'); 
+   
+    return this.http
+      .get(this.thisUrl + "?fields=all&sort_order=ASC&&limit=10000", {search:this.dosearch, headers:doheaders})
+      .map((response)=>response.json());
   }
   
     private getserviceType(subcategories)
