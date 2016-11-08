@@ -92,7 +92,7 @@
         <div *ngFor="let product of products|async">
             <div *ngIf="product">
                 <div *ngFor="let tax of product.taxonomy">
-                        <div *ngIf="tax.name=='Plan & Design' && getCounter()<5" class="card col s12 m4 l2">
+                        <div *ngIf="tax.name=='Plan & Design' && count<5" class="card col s12 m4 l2">
                         <div>{{IncCounter()}}</div>
                         <div class="card card-image">
                           <img class="product-image" src="http://lorempixel.com/160/200/technics">
@@ -107,9 +107,10 @@
           <!--</div>-->
         </div>
       </div>
-        </div>
+     </div>
   </div>
 </div>
+<div>{{resetCounter()}}</div>
 <div class="section white" style="padding-bottom: 0;padding-top: 0;">
   <div class="row container">
     <span class="product-list-title">Create, Collect &amp; Capture</span>
@@ -119,7 +120,7 @@
         <div *ngFor="let product of products|async">
             <div *ngIf="product">
                 <div *ngFor="let tax of product.taxonomy">
-                        <div *ngIf="tax.name=='Create Collect Capture' && getCounter()<10" class="card col s12 m4 l2">
+                        <div *ngIf="tax.name=='Create Collect Capture' && count<10" class="card col s12 m4 l2">
                         <div>{{IncCounter()}}</div>
                         <div class="card-image">
                           <img class="product-image" src="http://lorempixel.com/160/200/technics">
@@ -136,7 +137,7 @@
         </div>
        
     </div>
-
+<div>{{resetCounter()}}</div>
 <div class="section white" style="padding-bottom: 0;padding-top: 0;">
   <div class="row container">
     <span class="product-list-title">Analyse &amp; Interpret</span>
@@ -145,15 +146,15 @@
         
         <div *ngFor="let product of products|async">
             <div *ngIf="product">
-                <div *ngFor="let tax of product.taxonomy">
-                        <div *ngIf="tax.name=='Create Collect Capture' && getCounter()<15" class="card col s12 m4 l2">
+                <div *ngFor="let tax of product.taxonomy">    
+                        <div *ngIf="tax.name=='Analyze & Interpret'  && getCounter()<15" class="card col s12 m4 l2">
                         <div>{{IncCounter()}}</div>
                         <div class="card-image">
-                          <img class="product-image" src="http://lorempixel.com/160/200/technics">
+                            <img class="product-image" src="http://lorempixel.com/160/200/technics">
                         </div>
                         <div class="card-content" style="padding:15px;">
-                        <span class="product-title"><div><a [routerLink]="['details', product.nid]" style="text-transform: uppercase;margin-right: 0;">{{product.title}}</a></div></span>
-                        <span class="product-category">{{product.type}}</span>
+                            <span class="product-title"><div><a [routerLink]="['details', product.nid]" style="text-transform: uppercase;margin-right: 0;">{{product.title}}</a></div></span>
+                            <span class="product-category">{{product.type}}</span>
                         </div>
                         </div>
                 </div>
@@ -162,7 +163,7 @@
         </div>
     
     </div>
-
+<div>{{resetCounter()}}</div>
 <div class="section white" style="padding-bottom: 0;padding-top: 0;">
   <div class="row container">
     <span class="product-list-title">Publish &amp; Report</span>
@@ -188,7 +189,7 @@
       
       </div>
     </div>
-
+<div>{{resetCounter()}}</div>
 <div class="section white" style="padding-bottom: 0;padding-top: 0;margin-bottom: 50px;">
   <div class="row container">
     <span class="product-list-title">Discover &amp; Reuse</span>
@@ -198,7 +199,7 @@
         <div *ngFor="let product of products| async">
             <div *ngIf="product">
                 <div *ngFor="let tax of product.taxonomy">
-                        <div *ngIf="tax.name=='Discover & Re-use' && getCounter()<25" class="card col s12 m4 l2">
+                        <div *ngIf="tax.name=='Discover & Reuse' && getCounter()<25" class="card col s12 m4 l2">
                         <div>{{IncCounter()}}</div>
                         <div class="card-image">
                           <img class="product-image" src="http://lorempixel.com/160/200/technics">

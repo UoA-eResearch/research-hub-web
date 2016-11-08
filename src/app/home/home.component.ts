@@ -10,7 +10,7 @@ import {DrupalService} from "../app.drupal.service";
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   products: Observable<Array<string>>;
   private searchSubscription: any;
-  count=0;
+  count : number = 0;
       
   constructor(private searchService:SearchService, private drupalService: DrupalService) {
 

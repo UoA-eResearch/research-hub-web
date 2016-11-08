@@ -23,9 +23,4 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     window.scrollTo(0,0);
     this.searchService.findAll();
   }
-
-  getAbstract(text) {
-    var maxWords = 10;
-    return text.split(" ").splice(0, maxWords).join(" ") + "...";
-  }
 }

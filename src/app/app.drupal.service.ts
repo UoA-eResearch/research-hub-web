@@ -73,14 +73,22 @@ export class DrupalService {
           this.dosearch.set(subcat.key, subcat.value);
       }
     }
-    console.log('do search'+this.dosearch);
+    console.log('category: '+category);
     
     let doheaders = new Headers();
     doheaders.set('Accept', 'application/json'); 
-   
-    return this.http
+   if (category=='lifecycle')
+   {
+      return this.http
+      .get(this.thisUrl + "?sort=nid&fields=all&sort_order=ASC&&limit=10000", {search:this.dosearch, headers:doheaders})
+      .map((response) => this.extractData(response, category, subcategories));
+    }
+    else
+    {
+       return this.http
       .get(this.thisUrl + "?sort=nid&fields=all&sort_order=ASC&&limit=10000&type=" + category, {search:this.dosearch, headers:doheaders})
       .map((response) => this.extractData(response, category, subcategories));
+    }    
   }
   
   rawFrontSearch(category:string, term:string, subcategories:any[]) {
@@ -204,7 +212,7 @@ export class DrupalService {
       return policyArea;
      }
   private extractData(response, category, subcategories) {
-     let res = response.json();
+     let res = this.cleanData(response);
      let transRes = [];
    //  console.log('data: ', res);
    //  console.log('sub categories: ', subcategories);
@@ -428,6 +436,146 @@ export class DrupalService {
             && (resLifeCycle!='' || resLifeCycle!='Research Lifecycle')
             && (policyCounter==1)
             && (resCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+         }
+         if (category=='lifecycle')
+         { 
+            console.log('in lifecycle');
+            if ((resLifeCycle!='' || resLifeCycle!='Research Lifecycle')
+            && (serviceType=='' || serviceType=='Service Type')
+            && (Prog =='' || Prog=='Programme')
+            && (studyLevel =='' || studyLevel=='Study Level')
+            && (resCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle=='' || resLifeCycle=='Research Lifecycle')
+            && (serviceType!='' || serviceType!='Service Type')
+            && (Prog =='' || Prog=='Programme')
+            && (studyLevel =='' || studyLevel=='Study Level')
+            && (serCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle=='' || resLifeCycle=='Research Lifecycle')
+            && (serviceType=='' || serviceType=='Service Type')
+            && (Prog !='' || Prog!='Programme')
+            && (studyLevel =='' || studyLevel=='Study Level')
+            && (progCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle=='' || resLifeCycle=='Research Lifecycle')
+            && (serviceType=='' || serviceType=='Service Type')
+            && (Prog =='' || Prog=='Programme')
+            && (studyLevel !='' || studyLevel!='Study Level')
+            && (studyCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle!='' || resLifeCycle!='Research Lifecycle')
+            && (serviceType!='' || serviceType!='Service Type')
+            && (Prog =='' || Prog=='Programme')
+            && (studyLevel =='' || studyLevel=='Study Level')
+            && (resCounter==1)
+            && (serCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle!='' || resLifeCycle!='Research Lifecycle')
+            && (serviceType!='' || serviceType!='Service Type')
+            && (Prog !='' || Prog!='Programme')
+            && (studyLevel =='' || studyLevel=='Study Level')
+            && (resCounter==1)
+            && (progCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle=='' || resLifeCycle=='Research Lifecycle')
+            && (serviceType=='' || serviceType=='Service Type')
+            && (Prog !='' || Prog!='Programme')
+            && (studyLevel !='' || studyLevel!='Study Level')
+            && (progCounter==1)
+            && (studyCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle=='' || resLifeCycle=='Research Lifecycle')
+            && (serviceType!='' || serviceType!='Service Type')
+            && (Prog !='' || Prog!='Programme')
+            && (studyLevel !='' || studyLevel!='Study Level')
+            && (serCounter==1)
+            && (progCounter==1)
+            && (studyCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle!='' || resLifeCycle!='Research Lifecycle')
+            && (serviceType=='' || serviceType=='Service Type')
+            && (Prog !='' || Prog!='Programme')
+            && (studyLevel !='' || studyLevel!='Study Level')
+            && (resCounter==1)
+            && (progCounter==1)
+            && (studyCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle!='' || resLifeCycle!='Research Lifecycle')
+            && (serviceType=='' || serviceType=='Service Type')
+            && (Prog =='' || Prog=='Programme')
+            && (studyLevel !='' || studyLevel!='Study Level')
+            && (resCounter==1)
+            && (studyCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle!='' || resLifeCycle!='Research Lifecycle')
+            && (serviceType=='' || serviceType=='Service Type')
+            && (Prog !='' || Prog!='Programme')
+            && (studyLevel =='' || studyLevel=='Study Level')
+            && (resCounter==1)
+            && (progCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle!='' || resLifeCycle!='Research Lifecycle')
+            && (serviceType!='' || serviceType!='Service Type')
+            && (Prog =='' || Prog=='Programme')
+            && (studyLevel !='' || studyLevel!='Study Level')
+            && (resCounter==1)
+            && (serCounter==1)
+            && (studyCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle=='' || resLifeCycle=='Research Lifecycle')
+            && (serviceType!='' || serviceType!='Service Type')
+            && (Prog !='' || Prog!='Programme')
+            && (studyLevel =='' || studyLevel=='Study Level')
+            && (serCounter==1)
+            && (progCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle=='' || resLifeCycle=='Research Lifecycle')
+            && (serviceType!='' || serviceType!='Service Type')
+            && (Prog =='' || Prog=='Programme')
+            && (studyLevel !='' || studyLevel!='Study Level')
+            && (serCounter==1)
+            && (studyCounter==1))
+            {
+                transRes.push(res[i]);
+            }
+            if ((resLifeCycle!='' || resLifeCycle!='Research Lifecycle')
+            && (serviceType!='' || serviceType!='Service Type')
+            && (Prog !='' || Prog!='Programme')
+            && (studyLevel !='' || studyLevel!='Study Level')
+            && (resCounter==1)
+            && (serCounter==1)
+            && (progCounter==1)
+            && (studyCounter==1))
             {
                 transRes.push(res[i]);
             }

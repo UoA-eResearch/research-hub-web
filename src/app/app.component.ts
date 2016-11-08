@@ -70,7 +70,12 @@ export class AppComponent implements OnInit {
   {
     return this.router.isActive('policies', true);
   }
-
+  
+  isLifecycleActive()
+  {
+    return this.router.isActive('lifecycle', true);
+  }
+  
   updateSubcategories()
   {
     let subcategories = [];
@@ -91,7 +96,15 @@ export class AppComponent implements OnInit {
       subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
       subcategories.push({key: "field_policy_area", value: this.policyArea});
     }
-
+    else if(this.isLifecycleActive())
+    {
+      subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
+      subcategories.push({key: "field_service_type", value: this.serviceType});
+      subcategories.push({key: "field_programme", value: this.programme});
+      subcategories.push({key: "field_study_level", value: this.studyLevel});
+      subcategories.push({key: "field_policy_area", value: this.policyArea});
+    }
+    
     this.searchService.setSubcategories(subcategories);
   }
 
