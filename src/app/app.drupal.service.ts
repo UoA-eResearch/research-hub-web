@@ -214,7 +214,6 @@ export class DrupalService {
      }
   private extractData(response, category, subcategories) {
      let res = response.json();
-     //let res = this.cleanData(response);
      let transRes = [];
    //  console.log('data: ', res);
    //  console.log('sub categories: ', subcategories);
@@ -243,12 +242,19 @@ export class DrupalService {
      && (studyLevel=='' || studyLevel=='Study Level')
      && (policyArea=='' || policyArea=='Policy Area'))
      {
-        console.log(res.slice(1,res.length));
-        transRes=res.slice(1,res.length);
+        for(var i=1;i<res.length;i++)
+        {
+            //console.log(res.slice(1,res.length));
+            //transRes=res.slice(1,res.length);
+            if(res[i]!=null)
+            {transRes.push(res[i]);}
+        }
      }
      else
      {   
       for (var i=1;i<res.length;i++) {
+      if(res[i]!=null)
+      {
       var serCounter=0;
       var resCounter=0;
       var progCounter=0;
@@ -582,6 +588,7 @@ export class DrupalService {
                 transRes.push(res[i]);
             }
          }
+       }
        }
        }
        console.log(transRes);
