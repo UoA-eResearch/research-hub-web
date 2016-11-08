@@ -74,6 +74,7 @@ export class DrupalService {
       }
     }
     console.log('category: '+category);
+    console.log('do search: '+this.dosearch);
     
     let doheaders = new Headers();
     doheaders.set('Accept', 'application/json'); 
@@ -212,7 +213,8 @@ export class DrupalService {
       return policyArea;
      }
   private extractData(response, category, subcategories) {
-     let res = this.cleanData(response);
+     let res = response.json();
+     //let res = this.cleanData(response);
      let transRes = [];
    //  console.log('data: ', res);
    //  console.log('sub categories: ', subcategories);
