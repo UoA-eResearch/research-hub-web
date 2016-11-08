@@ -13,6 +13,24 @@
 //  }
 //}
 
+.promo i {
+  margin: 40px 0;
+  color: #00467f;
+  font-size: 7rem;
+  display: block;
+}
+
+.promo-caption {
+  //line-height: 1.5;
+  //font-family: "Roboto", sans-serif;
+  //font-weight: normal;
+  color: rgba(0,0,0,0.71);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
 .github-fork-ribbon.left-bottom:before
 {
   background-color: #009ac7;
@@ -157,7 +175,7 @@
   }
 
   .home-description {
-    height: 300px;
+    margin-top: 350px;
   }
 
   .uoa-container {
@@ -201,13 +219,13 @@
     margin-right: 150px;
   }
 
-  .home-description {
-    height: 50px;
-  }
+  //.home-description {
+  //  height: 50px;
+  //}
 
-  .home-description div
+  .home-description
   {
-    margin-top: 100px;
+    margin-top: 150px;
   }
 
   .product-detail
@@ -256,13 +274,13 @@
     margin-right: 200px !important;
   }
 
-  .home-description {
-    height: 50px;
-  }
+  //.home-description {
+  //  height: 50px;
+  //}
 
-  .home-description div
+  .home-description
   {
-    margin-top: 75px;
+    margin-top: 150px;
   }
 
   .product-list
@@ -499,8 +517,7 @@
   padding-top: 2rem;
   padding-bottom: 2rem;
   overflow: hidden;
-  position: relative;
-  background: #00467f; }
+  position: relative;}
 .uoa-flex-text-img--large img {
   position: absolute;
   width: 100%;

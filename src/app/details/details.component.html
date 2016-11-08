@@ -18,8 +18,7 @@
             <!--<div *ngFor="let field_category of product.fields.field_category.und; let i=index" class="col l3">
             <a href="#">{{field_category[i].tid}}</a>
             </div>
-       
-    
+            </div>
             <div class="col l3">
               <a href="#">{{product.fields.field_category.und["0"].tid}}</a>
             </div>-->
@@ -136,7 +135,12 @@
         <div *ngIf="product.fields.field_considerations && product.fields.field_considerations.und"  class="col s12 m6 l4" style="margin-bottom: 15px;">
           <span class="info-title">Considerations</span>
           <p *ngFor="let cons of product.fields.field_considerations.und; let i=index"><img align="top" src='assets/bluebp1.png'>{{cons.value}}</p>
+
+        <div class="col s12 m6 l4" style="margin-bottom: 15px;">
+          <span class="info-title">Contact Email</span>
+          <p>{{product.field_contact_email.und.email}}</p>
         </div>
+          
         <div *ngIf="product.fields.field_considerations && product.fields.field_considerations['0']"  class="col s12 m6 l4" style="margin-bottom: 15px;">
           <span class="info-title">Considerations</span>
           <p *ngFor="let cons of product.fields.field_considerations; let i=index"><img align="top" src='assets/bluebp1.png'>{{cons.value}}</p>
@@ -171,8 +175,7 @@
           <span class="info-title">See also</span>
           <p *ngFor="let see of product.fields.field_see_also; let i=index"><a href="{{see.url}}">{{see.title}}</a></p>
         </div>
-        
-      
+      </div>
     </div>
 
     <div class="divider"></div>

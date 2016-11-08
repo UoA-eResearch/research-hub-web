@@ -15,8 +15,9 @@ import {PolicydetailsComponent} from "./details/policydetails.component";
 import {ServicesdetailsComponent} from "./details/servicesdetails.component";
 import {HomeComponent} from "./home/home.component";
 import { JsonpModule } from '@angular/http';
-
 import {routing, appRoutingProviders} from './app.routing';
+import {LifecycleComponent} from "./lifecycle/lifecycle.component";
+import {ShowcaseComponent} from "./showcase/showcase.component";
 
 @NgModule({
     declarations: [
@@ -30,6 +31,8 @@ import {routing, appRoutingProviders} from './app.routing';
         GuidedetailsComponent,
         PolicydetailsComponent,
         ServicesdetailsComponent,
+        LifecycleComponent,
+        ShowcaseComponent,
         HomeComponent
     ],
     imports: [

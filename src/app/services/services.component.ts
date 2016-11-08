@@ -16,11 +16,11 @@ export class ServicesComponent implements OnInit, AfterViewInit {
       
   ngOnInit() {
       this.services = this.drupalService.contentsearch('service', this.searchService.searchChange);
-      console.log(this.services);
   }
 
   ngAfterViewInit()
   {
+    window.scrollTo(0,0);
     this.searchService.findAll();
   }
 

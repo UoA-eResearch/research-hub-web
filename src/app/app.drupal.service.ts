@@ -101,9 +101,21 @@ export class DrupalService {
    
     return this.http
       .get(this.thisUrl + "?fields=all&sort_order=ASC&&limit=10000", {search:this.dosearch, headers:doheaders})
-      .map((response)=>response.json());
+      .map((response) => this.cleanData(response));
   }
-  
+  private cleanData(response) {
+     let res = response.json();
+     let transRes = [];
+     for (var i=1;i<res.length;i++) 
+     {
+        if(res[i]!=null)
+        {
+            transRes.push(res[i]);
+        }
+     }
+     return transRes;
+     }
+     
     private getserviceType(subcategories)
      {
      var serviceType='';
@@ -194,9 +206,9 @@ export class DrupalService {
   private extractData(response, category, subcategories) {
      let res = response.json();
      let transRes = [];
-     console.log('data: ', res);
-     console.log('sub categories: ', subcategories);
-     console.log('category: ', category);
+   //  console.log('data: ', res);
+   //  console.log('sub categories: ', subcategories);
+   //  console.log('category: ', category);
      
      var serviceType='';
      serviceType=this.getserviceType(subcategories);
@@ -209,11 +221,11 @@ export class DrupalService {
      var policyArea='';
      policyArea=this.getPolicyArea(subcategories);
      
-     console.log('['+resLifeCycle+']');
-     console.log('['+serviceType+']');
-     console.log('['+Prog+']');
-     console.log('['+studyLevel+']');
-     console.log('['+policyArea+']');
+   //  console.log('['+resLifeCycle+']');
+  //   console.log('['+serviceType+']');
+  //   console.log('['+Prog+']');
+  //   console.log('['+studyLevel+']');
+  //   console.log('['+policyArea+']');
      // If nothing selected, return all
      if ((serviceType=='' || serviceType=='Service Type')
      && (resLifeCycle=='' || resLifeCycle=='Research Lifecycle')
