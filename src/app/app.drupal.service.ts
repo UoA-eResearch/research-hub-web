@@ -8,9 +8,10 @@ export class DrupalService {
   //private rootUrl = "https://localhost:3027/";
   thisUrl = "https://researchit.cer.auckland.ac.nz/api/content";
   products: Observable<Array<string>>;
+  combos: any[];
   dosearch:any;
       
-  constructor(private http:Http) {
+ constructor(private http:Http) {
     
   }
  getparams()
@@ -112,6 +113,173 @@ export class DrupalService {
       .get(this.thisUrl + "?fields=all&sort_order=ASC&&limit=10000", {search:this.dosearch, headers:doheaders})
       .map((response) => this.cleanData(response));
   }
+  
+  populateTaxonomies(category:string, searchChange:Subject<any>, debounceDuration = 400)
+  {
+    console.log("in populate teaxonomies");
+    return searchChange
+      .debounceTime(debounceDuration)
+      .distinctUntilChanged()
+      .switchMap(value => this.callPopulateTaxonomies(category, value.searchTerm, value.subcategories));
+  }
+  
+  private callPopulateTaxonomies(category:string, term:string, subcategories:any[])
+  {
+    let doheaders = new Headers();
+    doheaders.set('Accept', 'application/json');
+    if(category=='cat_lifecycle')
+    {
+    return this.http
+    .get(this.thisUrl + "?fields=all&sort_order=ASC&&limit=10000", {headers:doheaders})
+    .map((response) => this.getLifecycleCat(response));
+    }
+    if(category=='cat_service')
+    {
+    return this.http
+    .get(this.thisUrl + "?fields=all&sort_order=ASC&&limit=10000", {headers:doheaders})
+    .map((response) => this.getServiceCat(response));
+    }
+    if(category=='cat_prog')
+    {
+    return this.http
+    .get(this.thisUrl + "?fields=all&sort_order=ASC&&limit=10000", {headers:doheaders})
+    .map((response) => this.getProgCat(response));
+    }
+    if(category=='cat_study')
+    {
+    return this.http
+    .get(this.thisUrl + "?fields=all&sort_order=ASC&&limit=10000", {headers:doheaders})
+    .map((response) => this.getStudyCat(response));
+    }
+    if(category=='cat_policy')
+    {
+    return this.http
+    .get(this.thisUrl + "?fields=all&sort_order=ASC&&limit=10000", {headers:doheaders})
+    .map((response) => this.getPolicyCat(response));
+    }
+  }
+  
+  private getLifecycleCat(response)
+  {
+    let res = response.json();
+    let combo=[];
+    let obj=[];
+    for (var i=1;i<res.length;i++) 
+    {
+        if(res[i]!=null)
+        {
+            for(let taxon of res[i].taxonomy)
+            {     if (taxon.vid==3)
+                  {
+                    if(obj.indexOf(taxon.tid)==-1)
+                    {
+                    combo.push({key: taxon.tid, value: taxon.name});
+                    obj.push(taxon.tid);
+                    }
+                  }
+            }
+        }
+    }
+    console.log(combo);
+    return combo;
+  }
+  private getServiceCat(response)
+  {
+    let res = response.json();
+    let combo=[];
+    let obj=[];
+    for (var i=1;i<res.length;i++) 
+    {
+        if(res[i]!=null)
+        {
+            for(let taxon of res[i].taxonomy)
+            {     if (taxon.vid==2)
+                  {
+                    if(obj.indexOf(taxon.tid)==-1)
+                    {
+                    combo.push({key: taxon.tid, value: taxon.name});
+                    obj.push(taxon.tid);
+                    }
+                  }
+            }
+        }
+    }
+    console.log(combo);
+    return combo;
+  }
+  private getProgCat(response)
+  {
+    let res = response.json();
+    let combo=[];
+    let obj=[];
+    for (var i=1;i<res.length;i++) 
+    {
+        if(res[i]!=null)
+        {
+            for(let taxon of res[i].taxonomy)
+            {     if (taxon.vid==5)
+                  {
+                    if(obj.indexOf(taxon.tid)==-1)
+                    {
+                    combo.push({key: taxon.tid, value: taxon.name});
+                    obj.push(taxon.tid);
+                    }
+                  }
+            }
+        }
+    }
+    console.log(combo);
+    return combo;
+  }
+  private getStudyCat(response)
+  {
+    let res = response.json();
+    let combo=[];
+    let obj=[];
+    for (var i=1;i<res.length;i++) 
+    {
+        if(res[i]!=null)
+        {
+            for(let taxon of res[i].taxonomy)
+            {     if (taxon.vid==6)
+                  {
+                    if(obj.indexOf(taxon.tid)==-1)
+                    {
+                    combo.push({key: taxon.tid, value: taxon.name});
+                    obj.push(taxon.tid);
+                    }
+                  }
+            }
+        }
+    }
+    console.log(combo);
+    return combo;
+  }
+  private getPolicyCat(response)
+  {
+    let res = response.json();
+    let combo=[];
+    let obj=[];
+    for (var i=1;i<res.length;i++) 
+    {
+        if(res[i]!=null)
+        {
+            for(let taxon of res[i].taxonomy)
+            {     if (taxon.vid==7)
+                  {
+                    if(obj.indexOf(taxon.tid)==-1)
+                    {
+                    combo.push({key: taxon.tid, value: taxon.name});
+                    obj.push(taxon.tid);
+                    }
+                  }
+            }
+        }
+    }
+    console.log(combo);
+    return combo;
+  }
+  
   private cleanData(response) {
      let res = response.json();
      let transRes = [];
@@ -134,9 +302,7 @@ export class DrupalService {
            {
             if (subcat.key=='field_service_type')
             {
-                var val=subcat.value;
-                console.log('subcat:' +subcat.value);
-                serviceType=val.replace('and', '&').trim();
+                serviceType=subcat.value;
             }
            }
         }
@@ -153,8 +319,7 @@ export class DrupalService {
            {
            if (subcat.key=='field_research_lifecycle_stage')
            {
-                var val=subcat.value;
-                resLifeCycle=val.replace('and', '&').trim();
+                resLifeCycle=subcat.value;
            }
            }
       }
@@ -170,8 +335,7 @@ export class DrupalService {
            {
            if (subcat.key=='field_programme')
            {
-                var val=subcat.value;
-                prog=val.replace('and', '&').trim();
+                prog=subcat.value;
            }
            }
       }
@@ -188,8 +352,7 @@ export class DrupalService {
            {
            if (subcat.key=='field_study_level')
            {
-                var val=subcat.value;
-                studyLevel=val.replace('and', '&').trim();
+                studyLevel=subcat.value;
            }
            }
       }
@@ -205,8 +368,7 @@ export class DrupalService {
            {
            if (subcat.key=='field_policy_area')
            {
-                var val=subcat.value;
-                policyArea=val.replace('and', '&').trim();
+                policyArea=subcat.value;
            }
            }
       }
@@ -236,11 +398,11 @@ export class DrupalService {
   //   console.log('['+studyLevel+']');
   //   console.log('['+policyArea+']');
      // If nothing selected, return all
-     if ((serviceType=='' || serviceType=='Service Type')
-     && (resLifeCycle=='' || resLifeCycle=='Research Lifecycle')
-     && (Prog=='' || Prog=='Programme') 
-     && (studyLevel=='' || studyLevel=='Study Level')
-     && (policyArea=='' || policyArea=='Policy Area'))
+     if ((serviceType=='')
+     && (resLifeCycle=='')
+     && (Prog=='') 
+     && (studyLevel=='')
+     && (policyArea==''))
      {
         for(var i=1;i<res.length;i++)
         {
@@ -263,19 +425,19 @@ export class DrupalService {
   
       for(let taxon of res[i].taxonomy)
          {  console.log('taxonomy'+taxon.name);
-            if (taxon.name==serviceType)
+            if (taxon.tid==serviceType)
             {console.log('service type'+ taxon.name+'matched');
             serCounter++;}
-            if (taxon.name==resLifeCycle)
+            if (taxon.tid==resLifeCycle)
             {console.log('life cycle'+ taxon.name+'matched');
             resCounter++;}
-            if (taxon.name==Prog)
+            if (taxon.tid==Prog)
             {console.log('programme'+ taxon.name+'matched');
             progCounter++;}
-            if (taxon.name==studyLevel)
+            if (taxon.tid==studyLevel)
             {console.log('study level '+ taxon.name+'matched');
             studyCounter++;} 
-            if (taxon.name==policyArea)
+            if (taxon.tid==policyArea)
             {console.log('Policy area '+ taxon.name+'matched');
             policyCounter++;}
          }
@@ -497,6 +659,7 @@ export class DrupalService {
             && (Prog !='' || Prog!='Programme')
             && (studyLevel =='' || studyLevel=='Study Level')
             && (resCounter==1)
+            && (serCounter==1)
             && (progCounter==1))
             {
                 transRes.push(res[i]);
@@ -595,6 +758,3 @@ export class DrupalService {
     return transRes || { };
   }
 }
-
-
-

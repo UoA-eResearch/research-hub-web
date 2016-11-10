@@ -2,6 +2,7 @@ import {Component, OnInit, ChangeDetectorRef, ApplicationRef} from '@angular/cor
 import {Router, NavigationEnd} from "@angular/router";
 import {SearchService} from "./app.search.service";
 import {DrupalService} from "./app.drupal.service";
+import {Observable} from "rxjs/Rx";
 import * as moment from 'moment';
 declare var $:any;
 
@@ -18,29 +19,30 @@ export class AppComponent implements OnInit {
   programme: string = "";
   studyLevel: string = "";
   policyArea: string = "";
+    
+  lifeCycleCategories: Observable<Array<string>>;
+  serviceTypeCategories: Observable<Array<string>>;
+  programmeCategories: Observable<Array<string>>;
+  studyLevelCategories: Observable<Array<string>>;
+  policyAreaCategories: Observable<Array<string>>;
 
-  lifeCycleCategories: String[] = ['Plan and Design', 'Create Collect Capture', 'Analyze and Interpret', 'Publish and Report', 'Discover and Reuse'];
-  serviceTypeCategories: String[] = ['Research Computing', 'Research Data', 'Analysis and Visualisation', 'Specialised Equipment', 'Consultation Services', 'Communication and Publishing'];
-  programmeCategories: String[] = ['Architectural Studies', 'Arts', 'Commerce', 'Dance Studies', 'Education',
-    'Engineering', 'Fine Arts', 'Health Sciences', 'Laws', 'Medicine and Bachelor of Surgery', 'Music',
-    'Nursing', 'Optometry', 'Pharmacy', 'Urban Planning', 'Property', 'Science', 'Science in Biomedical Science',
-    'Social Work', 'Teaching'];
-  studyLevelCategories: String[] = ['Bachelor degrees', 'Graduate diplomas', 'Diplomas',
-    'Postgraduate certificates', 'Postgraduate diplomas', 'Masters degrees', 'Doctoral degrees'];
-  policyAreaCategories: String[] = ['Equity', 'Finance', 'Forms', 'Health, safety and wellbeing', 'Human resources',
-    'Information technology', 'Learning and teaching', 'Legislative compliance', 'Organization and governance',
-    'Research', 'Policy development and review'];
-
-  constructor(router:Router, private searchService: SearchService) {
+  constructor(router:Router, private searchService: SearchService, private drupalService: DrupalService) {
     this.router = router;
-
     //Reset all select boxes when route changes
     router.events.subscribe((val) => {
       $("select").val("");
       $('select').material_select();
     });
   }
-    
+  populateCombos()
+  {
+    this.lifeCycleCategories=this.drupalService.populateTaxonomies('cat_lifecycle', this.searchService.searchChange);
+    this.serviceTypeCategories=this.drupalService.populateTaxonomies('cat_service', this.searchService.searchChange);
+    this.programmeCategories=this.drupalService.populateTaxonomies('cat_prog', this.searchService.searchChange);
+    this.studyLevelCategories=this.drupalService.populateTaxonomies('cat_study', this.searchService.searchChange);
+    this.policyAreaCategories=this.drupalService.populateTaxonomies('cat_policy', this.searchService.searchChange);
+  }
+  
   getYear()
    {
      return moment().year();
@@ -110,6 +112,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.log('init!');
+    this.populateCombos();
     $('.button-collapse').sideNav({
         menuWidth: 260, // Default is 240
         edge: 'left', // Choose the horizontal origin
