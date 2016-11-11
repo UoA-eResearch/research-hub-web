@@ -7,6 +7,11 @@ import {Observable} from "rxjs/Rx";
 export class DrupalService {
   //private rootUrl = "https://localhost:3027/";
   thisUrl = "https://researchit.cer.auckland.ac.nz/api/content";
+  vid_service=2;
+  vid_lifecycle=3;
+  vid_policy=4;
+  vid_prog=5;
+  vid_study=7;
   products: Observable<Array<string>>;
   combos: any[];
   dosearch:any;
@@ -169,7 +174,7 @@ export class DrupalService {
         if(res[i]!=null)
         {
             for(let taxon of res[i].taxonomy)
-            {     if (taxon.vid==3)
+            {     if (taxon.vid==this.vid_lifecycle)
                   {
                     if(obj.indexOf(taxon.tid)==-1)
                     {
@@ -193,7 +198,7 @@ export class DrupalService {
         if(res[i]!=null)
         {
             for(let taxon of res[i].taxonomy)
-            {     if (taxon.vid==2)
+            {     if (taxon.vid==this.vid_service)
                   {
                     if(obj.indexOf(taxon.tid)==-1)
                     {
@@ -217,7 +222,7 @@ export class DrupalService {
         if(res[i]!=null)
         {
             for(let taxon of res[i].taxonomy)
-            {     if (taxon.vid==5)
+            {     if (taxon.vid==this.vid_prog)
                   {
                     if(obj.indexOf(taxon.tid)==-1)
                     {
@@ -241,7 +246,7 @@ export class DrupalService {
         if(res[i]!=null)
         {
             for(let taxon of res[i].taxonomy)
-            {     if (taxon.vid==6)
+            {     if (taxon.vid==this.vid_study)
                   {
                     if(obj.indexOf(taxon.tid)==-1)
                     {
@@ -265,7 +270,7 @@ export class DrupalService {
         if(res[i]!=null)
         {
             for(let taxon of res[i].taxonomy)
-            {     if (taxon.vid==7)
+            {     if (taxon.vid==this.vid_policy)
                   {
                     if(obj.indexOf(taxon.tid)==-1)
                     {
