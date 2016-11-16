@@ -1,10 +1,10 @@
 <div class="inset-content">
   <div class="product-list">
-    <div class="row">
+    <div #productList class="row">
       <div class="col s12 m12 l12 center-align hub-spinner" *ngIf="(services | async)?.length==undefined">
         <spinner></spinner>
       </div>
-      <div *ngFor="let service of services | async | slice:1" class="col s12 m4 l2">
+      <div *ngFor="let service of services | async | slice:1" class="col" [ngClass]="getColClasses()">
         <div class="card" style="cursor:pointer;cursor:hand;">
           <div class="card-image" [routerLink]="['servicesdetails', service.nid]">
             <img class="product-image" src="http://lorempixel.com/160/200/technics">
@@ -16,7 +16,7 @@
           <div class="card-action product-action">
             <div class="row">
               <div class="col s8 left-align"><a [routerLink]="['servicesdetails', service.nid]"><stars [stars]="4.5"></stars></a></div>
-              <div class="col s4 right-align"><a [routerLink]="['servicesdetails', service.nid]">FREE</a></div>
+              <div class="col s4 right-align"><a [routerLink]="['servicesdetails', service.nid]">VIEW</a></div>
             </div>
           </div>
         </div>
