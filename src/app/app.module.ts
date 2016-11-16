@@ -19,6 +19,7 @@ import {routing, appRoutingProviders} from './app.routing';
 import {LifecycleComponent} from "./lifecycle/lifecycle.component";
 import {ShowcaseComponent} from "./showcase/showcase.component";
 import {SpinnerComponent} from "./spinner/spinner.component";
+import {StarsComponent} from "./stars/stars.component";
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {SpinnerComponent} from "./spinner/spinner.component";
         LifecycleComponent,
         ShowcaseComponent,
         HomeComponent,
-        SpinnerComponent
+        SpinnerComponent,
+      StarsComponent
     ],
     imports: [
         JsonpModule,
