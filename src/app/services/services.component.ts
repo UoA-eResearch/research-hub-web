@@ -5,14 +5,21 @@ import {DrupalService} from "../app.drupal.service";
 import {Observable} from "rxjs/Rx";
 
 @Component({
-  templateUrl: './services.component.html'
+  templateUrl: './services.component.html',
+  styleUrls: ['./services.component.scss']
 })
 export class ServicesComponent implements OnInit, AfterViewInit {
   services: Observable<Array<string>>;
+  loading: boolean;
 
   constructor(private searchService:SearchService, private drupalService: DrupalService) {
 
   }
+  //
+  // isLoading()
+  // {
+  //   return this.services.
+  // }
 
   ngOnInit() {
       this.services = this.drupalService.contentsearch('service', this.searchService.searchChange);

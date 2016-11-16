@@ -18,6 +18,8 @@ import { JsonpModule } from '@angular/http';
 import {routing, appRoutingProviders} from './app.routing';
 import {LifecycleComponent} from "./lifecycle/lifecycle.component";
 import {ShowcaseComponent} from "./showcase/showcase.component";
+import {SpinnerComponent} from "./spinner/spinner.component";
+
 
 @NgModule({
     declarations: [
@@ -33,7 +35,8 @@ import {ShowcaseComponent} from "./showcase/showcase.component";
         ServicesdetailsComponent,
         LifecycleComponent,
         ShowcaseComponent,
-        HomeComponent
+        HomeComponent,
+        SpinnerComponent
     ],
     imports: [
         JsonpModule,

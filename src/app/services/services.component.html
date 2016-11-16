@@ -1,20 +1,24 @@
 <div class="inset-content">
-<div class="product-list">
-<div class="row">
-    <div *ngFor="let service of services | async | slice:1" class="col s12 m4 l2">
+  <div class="product-list">
+    <div class="row">
+      <div class="col s12 m12 l12 center-align hub-spinner" *ngIf="(services | async)?.length==undefined">
+        <spinner></spinner>
+      </div>
+      <div *ngFor="let service of services | async | slice:1" class="col s12 m4 l2">
         <div class="card" style="white-space: nowrap; overflow-wrap: break-word; word-wrap: break-word;">
-            <div class="card-image" >
+          <div class="card-image">
             <img class="product-image" src="http://lorempixel.com/160/200/technics">
-            </div>
-            <div class="card-content">
-                <span class="product-title"><a [routerLink]="['servicesdetails', service.nid]" style="text-transform: uppercase;margin-right: 0;">{{service.title}}</a></span>
-                <span class="product-category">{{service.type}}</span>
-            </div>
-  <!--<div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">
-      <a [routerLink]="['servicesdetails', service.nid]" style="text-transform: uppercase;margin-right: 0;">{{service.title}}</a>
-  </div>-->
+          </div>
+          <div class="card-content">
+            <span class="product-title"><a [routerLink]="['servicesdetails', service.nid]"
+                                           style="text-transform: uppercase;margin-right: 0;">{{service.title}}</a></span>
+            <span class="product-category">{{service.type}}</span>
+          </div>
+          <div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">
+              <a [routerLink]="['servicesdetails', service.nid]" style="text-transform: uppercase;margin-right: 0;">{{service.title}}</a>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
 </div>
