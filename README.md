@@ -64,12 +64,13 @@ Setup the University of Auckand web proxy.
 ```bash
 export http_proxy=http://squid.auckland.ac.nz:3128
 export https_proxy=http://squid.auckland.ac.nz:3128
+sudo git config --global http.proxy $http_proxy
 ```
 
 Install [Node v4](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions).
 ```bash
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-apt-get install -y nodejs
+sudo apt-get install -y nodejs
 ```
 
 Setup University of Auckand web proxy for npm and update npm to the latest version.
