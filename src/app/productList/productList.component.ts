@@ -14,7 +14,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   productWidth: number = 180;
   products:Observable<Array<string>>;
 
-  constructor(private route: ActivatedRoute, private router: Router, private searchService:SearchService, private drupalService:DrupalService) {
+  constructor(private route: ActivatedRoute, private searchService:SearchService, private drupalService:DrupalService) {
 
   }
 
@@ -31,11 +31,6 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     console.log('after view init');
     window.scrollTo(0, 0);
     this.searchService.findAll();
-  }
-
-  openProductDetails(productId)
-  {
-    this.router.navigate(['productList', this.productType, 'productDetails', productId]);
   }
 
   getColClasses() {

@@ -10,6 +10,7 @@ import {LifecycleComponent} from "./lifecycle/lifecycle.component";
 import {ShowcaseComponent} from "./showcase/showcase.component";
 import {SpinnerComponent} from "./spinner/spinner.component";
 import {StarsComponent} from "./stars/stars.component";
+import {ProductOverviewComponent} from "./productOverview/productOverview.component";
 import {ProductListComponent} from "./productList/productList.component";
 import {ProductDetailsComponent} from "./productDetails/productDetails.component";
 
@@ -18,6 +19,7 @@ import {ProductDetailsComponent} from "./productDetails/productDetails.component
     declarations: [
         AppComponent,
         LifecycleComponent,
+        ProductOverviewComponent,
         ProductListComponent,
         ProductDetailsComponent,
         ShowcaseComponent,
