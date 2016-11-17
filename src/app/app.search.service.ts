@@ -27,7 +27,6 @@ export class SearchService {
 
   setSubcategories(subcategories)
   {
-    console.log('update subcats');
     this.subcategories = subcategories;
     this.searchChange.next(this.getSearch());
   }

@@ -11,6 +11,14 @@
         </div>
       </form>
     </div>
+       <!--<div class="waves-effect waves-brown topcorner">
+       <input value="Login" type="button" ng-show="!isLoggedIn" onclick="saml_login()" class="btn btn-primary btn-lg">
+       <input value="Logout" type="button" ui-sref='logged-out' ng-show="isLoggedIn" onclick="logout()" class="btn btn-primary btn-lg">
+       </div>-->
+       <div class="waves-effect topcorner">
+       <input *ngIf="isLoggedIn==false" value="Sign in" type="button" class="btn btn-primary btn-lg">
+       <input *ngIf="isLoggedIn==true" value="Logout" type="button" class="btn btn-primary btn-lg">
+       </div>
   </nav>
 </div>
 

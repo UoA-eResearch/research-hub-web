@@ -16,15 +16,13 @@ export class ServicesdetailsComponent implements OnInit, AfterViewInit {
   constructor(private http:Http, private searchService:SearchService, private drupalService: DrupalService, private route: ActivatedRoute) {
         let doheaders = new Headers();
         doheaders.set('Accept', 'application/json');
-        console.log("in services details init");
         this.id = this.route.snapshot.params['id'];
 
         this.http.get(this.drupalService.thisUrl + "/" + this.id, {headers:doheaders})
         .map(res => JSON.parse(JSON.stringify(res.json())))
         .subscribe(
         data => this.product = data,
-        err => console.log(err),
-        () => console.log('Completed', this.product));
+        err => console.log(err));
   }
 
   ngOnInit() {

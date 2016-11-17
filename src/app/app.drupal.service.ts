@@ -13,6 +13,7 @@ export class DrupalService {
   vid_prog=5;
   vid_study=7;
   products: Observable<Array<string>>;
+  mydata:any;
   combos: any[];
   dosearch:any;
       
@@ -25,7 +26,6 @@ export class DrupalService {
  }
  
  search(category:string, searchChange:Subject<any>, debounceDuration = 400) {
-    console.log("in search");
     return searchChange
       .debounceTime(debounceDuration)
       .distinctUntilChanged()
@@ -41,7 +41,6 @@ export class DrupalService {
   }
      
   frontsearch(category:string, searchChange:Subject<any>, debounceDuration = 400) {
-    console.log("in front search");
     return searchChange
       .debounceTime(debounceDuration)
       .distinctUntilChanged()
@@ -50,7 +49,6 @@ export class DrupalService {
          
   rawSearch(category:string, term:string, subcategories:any[]) {
      this.dosearch=new URLSearchParams();
-      console.log(this.dosearch);
     if (term != undefined && term.trim() != "") {
       this.dosearch.set('search_string', term);
     }
@@ -79,11 +77,10 @@ export class DrupalService {
           this.dosearch.set(subcat.key, subcat.value);
       }
     }
-    console.log('category: '+category);
-    console.log('do search: '+this.dosearch);
     
     let doheaders = new Headers();
-    doheaders.set('Accept', 'application/json'); 
+    doheaders.set('Accept', 'application/json');  
+    
    if (category=='lifecycle')
    {
       return this.http
@@ -97,7 +94,7 @@ export class DrupalService {
       .map((response) => this.extractData(response, category, subcategories));
     }    
   }
-  
+
   rawFrontSearch(category:string, term:string, subcategories:any[]) {
      this.dosearch=new URLSearchParams();
     if (term != undefined && term.trim() != "") {
@@ -109,8 +106,7 @@ export class DrupalService {
           this.dosearch.set(subcat.key, subcat.value);
       }
     }
-    console.log('do search'+this.dosearch);
-    console.log(this.thisUrl + "?fields=all&sort_order=ASC&&limit=10000");
+
     let doheaders = new Headers();
     doheaders.set('Accept', 'application/json'); 
    
@@ -121,7 +117,6 @@ export class DrupalService {
   
   populateTaxonomies(category:string, searchChange:Subject<any>, debounceDuration = 400)
   {
-    console.log("in populate teaxonomies");
     return searchChange
       .debounceTime(debounceDuration)
       .distinctUntilChanged()
@@ -185,7 +180,6 @@ export class DrupalService {
             }
         }
     }
-    console.log(combo);
     return combo;
   }
   private getServiceCat(response)
@@ -209,7 +203,6 @@ export class DrupalService {
             }
         }
     }
-    console.log(combo);
     return combo;
   }
   private getProgCat(response)
@@ -233,7 +226,6 @@ export class DrupalService {
             }
         }
     }
-    console.log(combo);
     return combo;
   }
   private getStudyCat(response)
@@ -257,7 +249,6 @@ export class DrupalService {
             }
         }
     }
-    console.log(combo);
     return combo;
   }
   private getPolicyCat(response)
@@ -281,7 +272,6 @@ export class DrupalService {
             }
         }
     }
-    console.log(combo);
     return combo;
   }
   
@@ -382,9 +372,6 @@ export class DrupalService {
   private extractData(response, category, subcategories) {
      let res = response.json();
      let transRes = [];
-   //  console.log('data: ', res);
-   //  console.log('sub categories: ', subcategories);
-   //  console.log('category: ', category);
      
      var serviceType='';
      serviceType=this.getserviceType(subcategories);
@@ -397,11 +384,6 @@ export class DrupalService {
      var policyArea='';
      policyArea=this.getPolicyArea(subcategories);
      
-   //  console.log('['+resLifeCycle+']');
-  //   console.log('['+serviceType+']');
-  //   console.log('['+Prog+']');
-  //   console.log('['+studyLevel+']');
-  //   console.log('['+policyArea+']');
      // If nothing selected, return all
      if ((serviceType=='')
      && (resLifeCycle=='')
@@ -411,7 +393,6 @@ export class DrupalService {
      {
         for(var i=1;i<res.length;i++)
         {
-            //console.log(res.slice(1,res.length));
             //transRes=res.slice(1,res.length);
             if(res[i]!=null)
             {transRes.push(res[i]);}
@@ -429,26 +410,23 @@ export class DrupalService {
       var policyCounter=0;
   
       for(let taxon of res[i].taxonomy)
-         {  console.log('taxonomy'+taxon.name);
+         {  
             if (taxon.tid==serviceType)
-            {console.log('service type'+ taxon.name+'matched');
+            {
             serCounter++;}
             if (taxon.tid==resLifeCycle)
-            {console.log('life cycle'+ taxon.name+'matched');
+            {
             resCounter++;}
             if (taxon.tid==Prog)
-            {console.log('programme'+ taxon.name+'matched');
+            {
             progCounter++;}
             if (taxon.tid==studyLevel)
-            {console.log('study level '+ taxon.name+'matched');
+            {
             studyCounter++;} 
             if (taxon.tid==policyArea)
-            {console.log('Policy area '+ taxon.name+'matched');
+            {
             policyCounter++;}
          }
-         console.log(res[i].title);
-         console.log(serCounter);
-         console.log(resCounter);
          if (category=='service')
          { 
             // If research life cycle selected and service Type not selected
@@ -533,9 +511,6 @@ export class DrupalService {
          }
          if (category=='guide')
          { 
-         console.log('resLifeCycle: '+resLifeCycle);
-         console.log('program: '+Prog);
-         console.log('study level: '+ studyLevel);
             if ((resLifeCycle!='' || resLifeCycle!='Research Lifecycle')
             && (Prog =='' || Prog=='Programme')
             && (studyLevel =='' || studyLevel=='Study Level')
@@ -617,7 +592,6 @@ export class DrupalService {
          }
          if (category=='lifecycle')
          { 
-            console.log('in lifecycle');
             if ((resLifeCycle!='' || resLifeCycle!='Research Lifecycle')
             && (serviceType=='' || serviceType=='Service Type')
             && (Prog =='' || Prog=='Programme')
@@ -759,7 +733,6 @@ export class DrupalService {
        }
        }
        }
-       console.log(transRes);
     return transRes || { };
   }
 }

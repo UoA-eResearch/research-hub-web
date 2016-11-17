@@ -14,6 +14,12 @@ declare var $:any;
 })
 export class AppComponent implements OnInit {
   router:Router;
+  
+  basePath = "/";
+  redirectHash = "";
+  redirectPath;
+  isLoggedIn=false;
+  
   lifeCycle: string = "";
   serviceType: string = "";
   programme: string = "";
@@ -34,6 +40,7 @@ export class AppComponent implements OnInit {
       $('select').material_select();
     });
   }
+          
   populateCombos()
   {
     this.lifeCycleCategories=this.drupalService.populateTaxonomies('cat_lifecycle', this.searchService.searchChange);
