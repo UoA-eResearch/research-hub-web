@@ -1,6 +1,7 @@
 FROM          uoacer/httpd-angular2-base
-MAINTAINER    James Diprose
+MAINTAINER    James Diprose "j.diprose@auckland.ac.nz"
 
+# Copies all files and maintains directory structure
 COPY          / /research-hub/
 
 # Build research hub with angular-cli
