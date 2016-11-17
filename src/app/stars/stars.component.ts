@@ -13,17 +13,14 @@ export class StarsComponent {
   }
 
   getStarIcon(index) {
-    if(index <= this.stars)
-    {
+    let starsCeil = Math.ceil(this.stars);
+
+    if (index <= this.stars) {
       return 'star';
     }
-
-    let remainder = 1 - index % this.stars;
-    if(remainder >= 0.5)
-    {
-      return 'star_half'
+    else if (index <= starsCeil && (starsCeil - this.stars) > 0.5) {
+      return 'star_half';
     }
-
     return 'star_border'
   }
 }
