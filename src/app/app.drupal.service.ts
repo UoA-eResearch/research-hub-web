@@ -14,6 +14,11 @@ export class DrupalService {
 
   }
 
+  getProducts(productType)
+  {
+
+  }
+
   getProduct(productId)
   {
     let headers = new Headers();
@@ -30,7 +35,7 @@ export class DrupalService {
       .switchMap(value => this.rawSearch(category, value.searchTerm, value.subcategories));
   }
 
-  contentsearch(category:string, searchChange:Subject<any>, debounceDuration = 400) {
+  contentSearch(category:string, searchChange:Subject<any>, debounceDuration = 400) {
     return searchChange
       .debounceTime(debounceDuration)
       .distinctUntilChanged()

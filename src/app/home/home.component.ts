@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from "@angular/core";
+import {Component, OnDestroy, ViewChild} from "@angular/core";
 import {OnInit} from "@angular/core";
 import {SearchService} from "../app.search.service";
 declare var $:any;
@@ -8,14 +8,18 @@ declare var $:any;
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  @ViewChild('productList') productList;
+  productWidth: number = 250;
   products:any[];
   private searchSubscription: any;
+
 
   constructor(private searchService:SearchService) {
     this.products = [{
       id: 1,
       title: 'Research Consul...',
       image: this.dummyImageSrc(),
+      type: "blah",
       body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
       '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
       ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
@@ -46,6 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         id: 2,
         title: 'Statistical Support',
         image: this.dummyImageSrc(),
+        type: "blah",
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
@@ -75,6 +80,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         id: 3,
         title: '3D Printing',
         image: this.dummyImageSrc(),
+        type: "blah",
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
@@ -104,6 +110,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         id: 4,
         title: 'Auckland Scien...',
         image: this.dummyImageSrc(),
+        type: "blah",
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
@@ -132,6 +139,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       {
         id: 5,
         title: '3D Visualisatio...',
+        type: "blah",
         image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -162,6 +170,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       {
         id: 6,
         title: '3D Visualisatio...',
+        type: "blah",
         image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -192,6 +201,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       {
         id: 7,
         title: '3D Visualisatio...',
+        type: "blah",
         image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -222,6 +232,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       {
         id: 8,
         title: '3D Visualisatio...',
+        type: "blah",
         image: this.dummyImageSrc(),
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
@@ -253,6 +264,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         id: 9,
         title: '3D Visualisatio...',
         image: this.dummyImageSrc(),
+        type: "blah",
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
@@ -283,6 +295,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         id: 10,
         title: '3D Visualisatio...',
         image: this.dummyImageSrc(),
+        type: "blah",
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
@@ -313,6 +326,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         id: 11,
         title: '3D Visualisatio...',
         image: this.dummyImageSrc(),
+        type: "blah",
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
@@ -343,6 +357,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         id: 12,
         title: '3D Visualisatio...',
         image: this.dummyImageSrc(),
+        type: "blah",
         body: 'Post-ironic wayfarers squid, heirloom truffaut occupy ugh locavore hammock yuccie intelligentsia ' +
         '3 wolf moon aesthetic. Church-key jean shorts vegan, waistcoat chia brooklyn kogi sartorial. Selvage fap' +
         ' chambray poutine direct trade iPhone. Chicharrones synth gentrify, marfa mlkshk meh viral schlitz photo ' +
@@ -369,6 +384,18 @@ export class HomeComponent implements OnInit, OnDestroy {
         field_cost: 'Free',
         field_support: 'j.bauer@auckland.ac.nz'
       }];
+  }
+
+  getColClasses() {
+    let productsPerRow = this.getMaxProducts();
+    let gridWidth = Math.ceil(12 / productsPerRow);
+    return "s" + gridWidth + " m" + gridWidth + " l" + gridWidth;
+  }
+
+  getMaxProducts()
+  {
+    let numProducts = this.productList.nativeElement.offsetWidth / this.productWidth;
+    return Math.max(Math.min(Math.floor(numProducts), 12), 1);
   }
 
   dummyImageSrc()

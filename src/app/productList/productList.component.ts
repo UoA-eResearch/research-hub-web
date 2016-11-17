@@ -11,11 +11,11 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   @ViewChild('productList') productList;
   routeParamsSub: any;
   productType: string;
-  productWidth: number;
+  productWidth: number = 180;
   products:Observable<Array<string>>;
 
   constructor(private route: ActivatedRoute, private router: Router, private searchService:SearchService, private drupalService:DrupalService) {
-    this.productWidth = 180;
+
   }
 
   ngOnInit() {
@@ -23,7 +23,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     this.routeParamsSub = this.route.params.subscribe(params => {
       console.log('route params changed!', params);
       this.productType = params['type'];
-      this.products = this.drupalService.contentsearch(this.productType, this.searchService.searchChange);
+      this.products = this.drupalService.contentSearch(this.productType, this.searchService.searchChange);
     });
   }
 
