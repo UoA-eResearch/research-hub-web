@@ -1,11 +1,16 @@
-FROM          httpd:2.4
+FROM          uoacer:httpd-angular2-base
 
 MAINTAINER    James Diprose
 RUN           apt-get update -qq
 
-# Copy build files
-COPY          ./dist/ /usr/local/apache2/htdocs/
+COPY          * /research-hub/
 
-# Copy config
-COPY          ./httpd.conf /usr/local/apache2/conf/httpd.conf
+# Build research hub with angilar-cli
+WORKDIR       /research-hub/
+RUN           npm install
+RUN           ng build --target=production --environment=prod
+
+# Configure Apache server
+RUN           cp -a ./dist /usr/local/apache2/htdocs/
+RUN           cp httpd.conf /usr/local/apache2/conf/httpd.conf
 
