@@ -18,8 +18,8 @@
             <!--<div *ngFor="let field_category of product.fields.field_category.und; let i=index" class="col l3">
             <a href="#">{{field_category[i].tid}}</a>
             </div>
-       
-    
+
+
             <div class="col l3">
               <a href="#">{{product.fields.field_category.und["0"].tid}}</a>
             </div>-->
@@ -40,7 +40,7 @@
 
           <div *ngIf="product.fields.field_link" class="row" style="margin-top: 70px;">
             <div class="col l12" style="text-align: right;">
-              <a href="{{product.fields.field_link.und['0'].url}}" class="waves-effect waves-brown btn" style="text-align: right;">Request</a>
+              <!--<a href="{{product.fields.field_link.und['0'].url}}" class="waves-effect waves-brown btn" style="text-align: right;">Request</a>-->
             </div>
           </div>
         </div>
@@ -48,9 +48,9 @@
 
       <div class="row" style="padding-top: 20px;">
         <div class="col l12">
-            <p *ngIf="product.body">{{product.body['0'].value}}</p>
-            <p *ngIf="product.fields.field_summary.und">{{product.fields.field_summary.und['0'].value}}</p>
-            <p *ngIf="product.fields.field_summary['0']">{{product.fields.field_summary['0'].value}}</p>
+          <p *ngIf="product.body">{{product.body['0'].value}}</p>
+          <!--<p *ngIf="product.fields.field_summary.und">{{product.fields.field_summary.und['0'].value}}</p>-->
+          <!--<p *ngIf="product.fields.field_summary['0']">{{product.fields.field_summary['0'].value}}</p>-->
         </div>
       </div>
     </div>
@@ -109,26 +109,26 @@
           <span class="info-title">Considerations</span>
           <p *ngFor="let cons of product.fields.field_considerations.und; let i=index"><img align="top" src='assets/bluebp1.png'>{{cons.value}}</p>
         </div>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div *ngIf="product.fields.field_contact_email" class="col" style="margin-bottom: 15px;">
-          <span class="info-title">Contact Email</span>
-          <p *ngFor="let emails of product.fields.field_contact_email.und; let i=index"><a href="mailto:{{emails.email}}">{{emails.email}}</a></p>
-        </div>
-        
-        <div *ngIf="product.fields.field_help_faqs" class="col" style="margin-bottom: 15px;">
-          <span class="info-title">Help and FAQs</span>
-          <p *ngFor="let help of product.fields.field_help_faqs.und; let i=index"><a href="{{help.url}}">{{help.title}}</a></p>
-        </div>
-        
-        <div *ngIf="product.fields.field_see_also" class="col" style="margin-bottom: 15px;">
-          <span class="info-title">See also</span>
-          <p *ngFor="let see of product.fields.field_see_also.und; let i=index"><a href="{{see.url}}">{{see.title}}</a></p>
-        </div>
-        
-      
+      </div>
+
+      <div class="divider"></div>
+
+      <div *ngIf="product.fields.field_contact_email" class="col" style="margin-bottom: 15px;">
+        <span class="info-title">Contact Email</span>
+        <p *ngFor="let emails of product.fields.field_contact_email.und; let i=index"><a href="mailto:{{emails.email}}">{{emails.email}}</a></p>
+      </div>
+
+      <div *ngIf="product.fields.field_help_faqs" class="col" style="margin-bottom: 15px;">
+        <span class="info-title">Help and FAQs</span>
+        <p *ngFor="let help of product.fields.field_help_faqs.und; let i=index"><a href="{{help.url}}">{{help.title}}</a></p>
+      </div>
+
+      <div *ngIf="product.fields.field_see_also" class="col" style="margin-bottom: 15px;">
+        <span class="info-title">See also</span>
+        <p *ngFor="let see of product.fields.field_see_also.und; let i=index"><a href="{{see.url}}">{{see.title}}</a></p>
+      </div>
+
+
     </div>
 
     <div class="divider"></div>

@@ -53,22 +53,22 @@ export class AppComponent implements OnInit {
 
   isServicesActive()
   {
-    return this.router.isActive('services', true);
+    return this.router.isActive('productList/service', true);
   }
 
   isEducationActive()
   {
-    return this.router.isActive('education', true);
+    return this.router.isActive('productList/education', true);
   }
 
   isGuidesActive()
   {
-    return this.router.isActive('guides', true);
+    return this.router.isActive('productList/guide', true);
   }
 
   isPoliciesActive()
   {
-    return this.router.isActive('policies', true);
+    return this.router.isActive('productList/policy', true);
   }
 
   updateSubcategories()

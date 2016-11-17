@@ -19,19 +19,19 @@
     <nav>
       <ul id="slide-out" class="side-nav fixed collapsible hub-side-nav">
         <div style="width: 260px; height: 64px;"><img style="height: 64px;padding: 15px;" src="assets/example-logo.png"/></div>
-        <li><a routerLink="/home" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
+        <li><a [routerLink]="['home']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
           class="material-icons">home</i>Home</a></li>
-        <li><a routerLink="/lifecycle" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
+        <li><a [routerLink]="['lifecycle']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
           class="material-icons">loop</i>Lifecycle</a></li>
-        <li><a routerLink="/services" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
+        <li><a [routerLink]="['productList', 'service']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
           class="material-icons">settings</i>Services</a></li>
-        <li><a routerLink="/education" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
+        <li><a [routerLink]="['productList', 'education']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
           class="material-icons">school</i>Education</a></li>
-        <li><a routerLink="/guides" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
+        <li><a [routerLink]="['productList', 'guide']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
           class="material-icons">flag</i>Guides</a></li>
-        <li><a routerLink="/policies" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
+        <li><a [routerLink]="['productList', 'policy']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
           class="material-icons">thumbs_up_down</i>Policies</a></li>
-        <li><a routerLink="/showcase" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
+        <li><a [routerLink]="['showcase']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
           class="material-icons">group</i>Showcase</a></li>
       </ul>
       <div class="nav-wrapper inset-content">
