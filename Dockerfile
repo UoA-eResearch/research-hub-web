@@ -1,7 +1,5 @@
-FROM          uoacer:httpd-angular2-base
-
+FROM          uoacer/httpd-angular2-base
 MAINTAINER    James Diprose
-RUN           apt-get update -qq
 
 COPY          * /research-hub/
 
