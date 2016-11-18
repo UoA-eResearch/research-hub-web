@@ -9,6 +9,7 @@ import {ProductDetailsComponent} from "./productDetails/productDetails.component
 const appRoutes:Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'lifecycle', component: LifecycleComponent},
+    {path: 'lifecycle/:type', component: LifecycleComponent},
     {path: 'showcase', component: ShowcaseComponent},
     {path: 'productList/:type', component: ProductListComponent},
     {path: 'productList/:type/productDetails/:id', component: ProductDetailsComponent},

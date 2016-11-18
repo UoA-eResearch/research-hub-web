@@ -13,6 +13,13 @@ export class ProductOverviewComponent {
 
   }
 
+  getLogo()
+  {
+    if(this.product.fields.field_logo && this.product.fields.field_logo.length > 0)
+      return "https://researchit.cer.auckland.ac.nz:8080/sites/default/files/" + this.product.fields.field_logo[0].filename;
+    return "assets/service.png";
+  }
+
   openProductDetails()
   {
     this.router.navigate(['productList', this.product.type, 'productDetails', this.product.nid]);

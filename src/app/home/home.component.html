@@ -84,145 +84,23 @@
   </div>
 </div>
 
-<div class="section white home-products">
+<div *ngFor="let lifeCycle of researchLifeCycle" class="section white home-products">
     <div class="product-list">
       <div class="row">
-        <div class="col s6 left-align"><span class="product-list-title">Plan &amp; Design</span></div>
-        <div class="col s6 right-align"><a class="waves-effect waves-light btn" [routerLink]="['lifecycle']">more</a></div>
+        <div class="col s6 left-align"><span class="product-list-title">{{lifeCycle.name}}</span></div>
+        <div class="col s6 right-align"><a class="waves-effect waves-light btn" (click)="navigateToLifecycle(lifeCycle)">more</a></div>
       </div>
 
       <div #productList class="row">
-        <div *ngFor="let product of products; let i = index;" class="col" [ngClass]="getColClasses()">
+        <div *ngIf="lifeCycle.products.length == 0" class="col s12 m12 l12 center-align hub-spinner">
+          <spinner></spinner>
+        </div>
+        <div *ngFor="let product of lifeCycle.products; let i = index;" class="col" [ngClass]="getColClasses()">
           <product-overview *ngIf="i < getMaxProducts()" [product]="product"></product-overview>
         </div>
       </div>
     </div>
 </div>
-<div>{{resetCounter()}}</div>
-<div class="section white" style="padding-bottom: 0;padding-top: 0;">
-  <div class="row container">
-    <span class="product-list-title">Plan &amp; Design</span>
-    <div class="product-list" style="margin-bottom: 0; margin-top: 20px; !important; ">
-      <div class="row">
-        <div *ngFor="let product of products|async">
-          <div *ngIf="product">
-            <div *ngFor="let tax of product.taxonomy">
-              <div *ngIf="tax.name=='Plan & Design' && count<5" class="card col s12 m4 l2">
-                <div>{{IncCounter()}}</div>
-                <div class="card card-image">
-                  <img class="product-image" src="http://lorempixel.com/160/200/technics">
-                </div>
-                <div class="card-content" style="padding:15px;">
-                  <span class="product-title"><div><a [routerLink]="['details', product.nid]" style="text-transform: uppercase;margin-right: 0;">{{product.title}}</a></div></span>
-                  <span class="product-category">{{product.type}}</span>
-                </div>
-
-              </div>
-            </div>
-            <!--</div>-->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<!--<div class="section white" style="padding-bottom: 0;padding-top: 0;">-->
-  <!--<div class="row container">-->
-    <!--<span class="product-list-title">Create, Collect &amp; Capture</span>-->
-    <!--<div class="product-list" style="margin-bottom: 0; margin-top: 20px; !important; ">-->
-      <!--<div class="row">-->
-        <!--<div *ngFor="let product of products; let i = index;" class="col s12 m4 l2">-->
-          <!--<div *ngIf="i<5" class="card">-->
-            <!--<div class="card-image">-->
-              <!--<img class="product-image" [src]="product.image">-->
-            <!--</div>-->
-            <!--<div class="card-content" style="padding:15px;">-->
-              <!--<span class="product-title">{{product.title}}</span>-->
-              <!--<span class="product-category">{{product.field_category}}</span>-->
-            <!--</div>-->
-            <!--<div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">-->
-              <!--<a [routerLink]="['details', product.id]" style="text-transform: uppercase;margin-right: 0;">{{product.field_cost}}</a>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-
-<!--<div class="section white" style="padding-bottom: 0;padding-top: 0;">-->
-  <!--<div class="row container">-->
-    <!--<span class="product-list-title">Analyse &amp; Interpret</span>-->
-    <!--<div class="product-list" style="margin-bottom: 0; margin-top: 20px; !important; ">-->
-      <!--<div class="row">-->
-        <!--<div *ngFor="let product of products; let i = index;" class="col s12 m4 l2">-->
-          <!--<div *ngIf="i<5" class="card">-->
-            <!--<div class="card-image">-->
-              <!--<img class="product-image" [src]="product.image">-->
-            <!--</div>-->
-            <!--<div class="card-content" style="padding:15px;">-->
-              <!--<span class="product-title">{{product.title}}</span>-->
-              <!--<span class="product-category">{{product.field_category}}</span>-->
-            <!--</div>-->
-            <!--<div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">-->
-              <!--<a [routerLink]="['details', product.id]" style="text-transform: uppercase;margin-right: 0;">{{product.field_cost}}</a>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-
-<!--<div class="section white" style="padding-bottom: 0;padding-top: 0;">-->
-  <!--<div class="row container">-->
-    <!--<span class="product-list-title">Publish &amp; Report</span>-->
-    <!--<div class="product-list" style="margin-bottom: 0; margin-top: 20px; !important; ">-->
-      <!--<div class="row">-->
-        <!--<div *ngFor="let product of products; let i = index;" class="col s12 m4 l2">-->
-          <!--<div *ngIf="i<5" class="card">-->
-            <!--<div class="card-image">-->
-              <!--<img class="product-image" [src]="product.image">-->
-            <!--</div>-->
-            <!--<div class="card-content" style="padding:15px;">-->
-              <!--<span class="product-title">{{product.title}}</span>-->
-              <!--<span class="product-category">{{product.field_category}}</span>-->
-            <!--</div>-->
-            <!--<div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">-->
-              <!--<a [routerLink]="['details', product.id]" style="text-transform: uppercase;margin-right: 0;">{{product.field_cost}}</a>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-
-<!--<div class="section white" style="padding-bottom: 0;padding-top: 0;margin-bottom: 50px;">-->
-  <!--<div class="row container">-->
-    <!--<span class="product-list-title">Discover &amp; Reuse</span>-->
-    <!--<div class="product-list" style="margin-bottom: 0; margin-top: 20px; !important; ">-->
-      <!--<div class="row">-->
-        <!--<div *ngFor="let product of products; let i = index;" class="col s12 m4 l2">-->
-          <!--<div *ngIf="i<5" class="card">-->
-            <!--<div class="card-image">-->
-              <!--<img class="product-image" [src]="product.image">-->
-            <!--</div>-->
-            <!--<div class="card-content" style="padding:15px;">-->
-              <!--<span class="product-title">{{product.title}}</span>-->
-              <!--<span class="product-category">{{product.field_category}}</span>-->
-            <!--</div>-->
-            <!--<div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">-->
-              <!--<a [routerLink]="['details', product.id]" style="text-transform: uppercase;margin-right: 0;">{{product.field_cost}}</a>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-
-<!--&lt;!&ndash;TODO: add other categories here, including services, educational resources etc.&ndash;&gt;-->
 
 <div class="parallax-container home-category-divider">
   <div class="row container">
@@ -238,7 +116,7 @@
             <span class="uoa-flex-text-img__tag">Explore</span>
             <div class="uoa-flex-text-img__content">
               <h2>Service Type</h2>
-              <p>Find offerings based on service type.</p>
+              <p>Find offerings via the type of service you are after.</p>
             </div>
           </div>
         </div>
@@ -247,27 +125,20 @@
   </div>
 </div>
 
-<!--<div class="section white" style="padding-bottom: 0;padding-top: 0;margin-bottom: 50px;">-->
-  <!--<div class="row container">-->
-    <!--<span class="product-list-title">Discover &amp; Reuse</span>-->
-    <!--<div class="product-list" style="margin-bottom: 0; margin-top: 20px; !important; ">-->
-      <!--<div class="row">-->
-        <!--<div *ngFor="let product of products; let i = index;" class="col s12 m4 l2">-->
-          <!--<div *ngIf="i<5" class="card">-->
-            <!--<div class="card-image">-->
-              <!--<img class="product-image" [src]="product.image">-->
-            <!--</div>-->
-            <!--<div class="card-content" style="padding:15px;">-->
-              <!--<span class="product-title">{{product.title}}</span>-->
-              <!--<span class="product-category">{{product.field_category}}</span>-->
-            <!--</div>-->
-            <!--<div class="card-action" style="text-align: right;padding: 15px;padding-top: 7px; padding-bottom: 7px;">-->
-              <!--<a [routerLink]="['details', product.id]" style="text-transform: uppercase;margin-right: 0;">{{product.field_cost}}</a>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+<div *ngFor="let service of serviceTypes" class="section white home-products">
+  <div class="product-list">
+    <div class="row">
+      <div class="col s6 left-align"><span class="product-list-title">{{service.name}}</span></div>
+      <div class="col s6 right-align"><a class="waves-effect waves-light btn">more</a></div>
+    </div>
 
+    <div #productList class="row">
+      <div *ngIf="service.products.length == 0" class="col s12 m12 l12 center-align hub-spinner">
+        <spinner></spinner>
+      </div>
+      <div *ngFor="let product of service.products; let i = index;" class="col" [ngClass]="getColClasses()">
+        <product-overview *ngIf="i < getMaxProducts()" [product]="product"></product-overview>
+      </div>
+    </div>
+  </div>
+</div>

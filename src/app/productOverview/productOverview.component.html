@@ -1,6 +1,6 @@
 <div class="card" style="cursor:pointer;cursor:hand;">
   <div class="card-image" (click)="openProductDetails()">
-    <img class="product-image" src="http://lorempixel.com/160/200/technics">
+    <img class="product-image" [src]="getLogo()">
   </div>
   <div class="card-content" (click)="openProductDetails()">
     <span class="product-title">{{product.title}}</span>

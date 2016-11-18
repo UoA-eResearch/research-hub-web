@@ -48,31 +48,31 @@
         </a>
 
         <ul style="display:inline-block;">
-          <li class="input-field" [hidden]="!isServicesActive() && !isEducationActive() && !isGuidesActive() && !isPoliciesActive()">
+          <li class="input-field" [hidden]="!isLifecycleActive() && !isServicesActive() && !isEducationActive() && !isGuidesActive() && !isPoliciesActive()">
             <select id="lifeCycleSelect" [ngModel]="lifeCycle">
               <option [value]="" selected>Research Lifecycle</option>
               <option *ngFor="let category of lifeCycleCategories | async" [value]="category.key">{{category.value}}</option>
             </select>
           </li>
-          <li class="input-field" [hidden]="!isServicesActive() && !isLifecycleActive()">
+          <li class="input-field" [hidden]="!isServicesActive()">
             <select id="serviceTypeSelect" [ngModel]="serviceType">
               <option [value]="" selected>Service Type</option>
               <option *ngFor="let category of serviceTypeCategories | async" [value]="category.key">{{category.value}}</option>
             </select>
           </li>
-          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive() && !isLifecycleActive()">
+          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive()">
             <select id="programmeSelect" [ngModel]="programme">
               <option [value]="" selected>Programme</option>
               <option *ngFor="let category of programmeCategories | async" [value]="category.key">{{category.value}}</option>
             </select>
           </li>
-          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive() && !isLifecycleActive()">
+          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive()">
             <select id="studyLevelSelect" [ngModel]="studyLevel">
               <option [value]="" selected>Study Level</option>
               <option *ngFor="let category of studyLevelCategories | async" [value]="category.key">{{category.value}}</option>
             </select>
           </li>
-          <li class="input-field" [hidden]="!isPoliciesActive() && !isLifecycleActive()">
+          <li class="input-field" [hidden]="!isPoliciesActive()">
             <select id="policyAreaSelect" [ngModel]="policyArea">
               <option [value]="" selected>Policy Area</option>
               <option *ngFor="let category of policyAreaCategories | async" [value]="category.key">{{category.value}}</option>
