@@ -11,6 +11,14 @@
         </div>
       </form>
     </div>
+       <!--<div class="waves-effect waves-brown topcorner">
+       <input value="Login" type="button" ng-show="!isLoggedIn" onclick="saml_login()" class="btn btn-primary btn-lg">
+       <input value="Logout" type="button" ui-sref='logged-out' ng-show="isLoggedIn" onclick="logout()" class="btn btn-primary btn-lg">
+       </div>-->
+       <div class="waves-effect topcorner">
+       <input *ngIf="isLoggedIn==false" value="Sign in" type="button" class="btn btn-primary btn-lg">
+       <input *ngIf="isLoggedIn==true" value="Logout" type="button" class="btn btn-primary btn-lg">
+       </div>
   </nav>
 </div>
 
@@ -43,31 +51,31 @@
           <li class="input-field" [hidden]="!isServicesActive() && !isEducationActive() && !isGuidesActive() && !isPoliciesActive()">
             <select id="lifeCycleSelect" [ngModel]="lifeCycle">
               <option [value]="" selected>Research Lifecycle</option>
-              <option *ngFor="let category of lifeCycleCategories" [value]="category">{{category}}</option>
+              <option *ngFor="let category of lifeCycleCategories | async" [value]="category.key">{{category.value}}</option>
             </select>
           </li>
-          <li class="input-field" [hidden]="!isServicesActive()">
+          <li class="input-field" [hidden]="!isServicesActive() && !isLifecycleActive()">
             <select id="serviceTypeSelect" [ngModel]="serviceType">
               <option [value]="" selected>Service Type</option>
-              <option *ngFor="let category of serviceTypeCategories" [value]="category">{{category}}</option>
+              <option *ngFor="let category of serviceTypeCategories | async" [value]="category.key">{{category.value}}</option>
             </select>
           </li>
-          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive()">
+          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive() && !isLifecycleActive()">
             <select id="programmeSelect" [ngModel]="programme">
               <option [value]="" selected>Programme</option>
-              <option *ngFor="let category of programmeCategories" [value]="category">{{category}}</option>
+              <option *ngFor="let category of programmeCategories | async" [value]="category.key">{{category.value}}</option>
             </select>
           </li>
-          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive()">
+          <li class="input-field" [hidden]="!isEducationActive() && !isGuidesActive() && !isLifecycleActive()">
             <select id="studyLevelSelect" [ngModel]="studyLevel">
               <option [value]="" selected>Study Level</option>
-              <option *ngFor="let category of studyLevelCategories" [value]="category">{{category}}</option>
+              <option *ngFor="let category of studyLevelCategories | async" [value]="category.key">{{category.value}}</option>
             </select>
           </li>
-          <li class="input-field" [hidden]="!isPoliciesActive()">
+          <li class="input-field" [hidden]="!isPoliciesActive() && !isLifecycleActive()">
             <select id="policyAreaSelect" [ngModel]="policyArea">
               <option [value]="" selected>Policy Area</option>
-              <option *ngFor="let category of policyAreaCategories" [value]="category">{{category}}</option>
+              <option *ngFor="let category of policyAreaCategories | async" [value]="category.key">{{category.value}}</option>
             </select>
           </li>
         </ul>
