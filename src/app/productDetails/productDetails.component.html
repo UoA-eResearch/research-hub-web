@@ -1,5 +1,13 @@
-<div *ngIf="product" class="inset-content">
-  <div class="card product-detail">
+<div class="inset-content">
+  <div class="product-list" *ngIf="!product">
+    <div class="row">
+      <div class="col s12 m12 l12 center-align hub-spinner">
+        <spinner></spinner>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="product" class="card product-detail">
     <div class="card-content product-card">
       <div class="row">
         <div class="col s4 m4 l4" style="padding-right: 20px;">
