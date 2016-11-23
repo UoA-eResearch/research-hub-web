@@ -21,6 +21,11 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     this.routeParamsSub = this.route.params.subscribe(params => {
       let productType = params['type'];
       let serviceTypeId = params['serviceTypeId'];
+
+      let subcategories = {};
+      subcategories["field_category"] = serviceTypeId;
+      this.searchService.setSubcategories(subcategories, true);
+
       this.products = this.drupalService.getProducts({type: productType, taxonomyId: serviceTypeId});
     });
   }

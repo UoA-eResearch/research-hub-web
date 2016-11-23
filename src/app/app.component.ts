@@ -14,7 +14,7 @@ declare var $:any;
   providers: [SearchService, DrupalService, ProductService]
 })
 export class AppComponent implements OnInit {
-  router:Router;
+  uiChangeSub: any;
 
   lifeCycle:string = "";
   serviceType:string = "";
@@ -28,12 +28,8 @@ export class AppComponent implements OnInit {
 
   taxonomies = {research_lifecycle: "3", service_type: "2", programme: "7", study_level: "8"};
 
-  constructor(router:Router, private searchService:SearchService, private drupalService:DrupalService) {
-    this.router = router;
-    //Reset all select boxes when route changes
-    router.events.subscribe((val) => {
-      this.refreshSelect();
-    });
+  constructor(private router:Router, private searchService:SearchService, private drupalService:DrupalService) {
+
   }
 
   getTaxonomies() {
@@ -52,15 +48,10 @@ export class AppComponent implements OnInit {
     .delay(500)
     .subscribe(
       data => {
-        this.refreshSelect()
+        $('select').material_select();
       },
       err => console.error(err)
     );
-  }
-
-  refreshSelect() {
-    $("select").val("");
-    $('select').material_select();
   }
 
   getYear() {
@@ -84,37 +75,53 @@ export class AppComponent implements OnInit {
   }
 
   updateSubcategories() {
-    let subcategories = [];
-
-    // if(this.isServicesActive())
-    // {
-    //   subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
-    //   subcategories.push({key: "field_service_type", value: this.serviceType});
-    // }
-    // else if(this.isEducationActive() || this.isGuidesActive())
-    // {
-    //   subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
-    //   subcategories.push({key: "field_programme", value: this.programme});
-    //   subcategories.push({key: "field_study_level", value: this.studyLevel});
-    // }
-    // else if(this.isPoliciesActive())
-    // {
-    //   subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
-    //   subcategories.push({key: "field_policy_area", value: this.policyArea});
-    // }
-    // else if(this.isLifecycleActive())
-    // {
-    //   subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
-    //   subcategories.push({key: "field_service_type", value: this.serviceType});
-    //   subcategories.push({key: "field_programme", value: this.programme});
-    //   subcategories.push({key: "field_study_level", value: this.studyLevel});
-    //   subcategories.push({key: "field_policy_area", value: this.policyArea});
-    // }
-    //
-    // this.searchService.setSubcategories(subcategories);
+    let subcategories = {};
+    subcategories["field_research_lifecycle_stage"] = this.lifeCycle;
+    subcategories["field_category"] = this.serviceType;
+    subcategories["field_programme"] = this.programme;
+    subcategories["field_study_level"] = this.studyLevel;
+    this.searchService.setSubcategories(subcategories);
   }
 
+  ngOnDestroy() {
+    this.uiChangeSub.unsubscribe();
+  }
+
+  //Update dropdowns when route value changes
   ngOnInit() {
+    this.uiChangeSub = this.searchService.uiChange.subscribe(data => {
+      let subcategories = data['subcategories'];
+      let lifeCycle = subcategories['field_research_lifecycle_stage'];
+      let serviceType = subcategories['field_category'];
+      let programme = subcategories['field_programme'];
+      let studyLevel = subcategories['field_study_level'];
+
+      //Set all to none
+      $("select").val("");
+
+      if(lifeCycle) {
+        this.lifeCycle = lifeCycle;
+        $("#lifeCycleSelect").val(lifeCycle);
+      }
+
+      if(serviceType) {
+        this.serviceType = serviceType;
+        $("#serviceTypeSelect").val(serviceType);
+      }
+
+      if(programme) {
+        this.programme = programme;
+        $("#programmeSelect").val(programme);
+      }
+
+      if(studyLevel) {
+        this.studyLevel = studyLevel;
+        $("#studyLevelSelect").val(studyLevel);
+      }
+
+      $('select').material_select();
+    });
+
     this.getTaxonomies();
 
     $('.button-collapse').sideNav({
@@ -127,6 +134,7 @@ export class AppComponent implements OnInit {
     $(document).ready(() => {
       //Update model when select dropdowns changed
       $('select').change((e) => {
+        console.log('update select');
         switch (e.currentTarget.id) {
           case "lifeCycleSelect":
             this.lifeCycle = e.currentTarget.value;

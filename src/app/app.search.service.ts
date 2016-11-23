@@ -4,8 +4,9 @@ import {Subject} from "rxjs/Rx";
 @Injectable()
 export class SearchService {
   private searchTerm: string;
-  private subcategories: string[];
+  private subcategories: any;
   searchChange: Subject<any> = new Subject<any>();
+  uiChange: Subject<any> = new Subject<any>();
 
   getSearch()
   {
@@ -25,9 +26,12 @@ export class SearchService {
     this.searchChange.next(this.getSearch());
   }
 
-  setSubcategories(subcategories)
+  setSubcategories(subcategories, updateUI=false)
   {
     this.subcategories = subcategories;
     this.searchChange.next(this.getSearch());
+
+    if(updateUI)
+      this.uiChange.next(this.getSearch())
   }
 }

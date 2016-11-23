@@ -20,6 +20,11 @@ export class LifecycleComponent implements AfterViewInit {
   ngOnInit() {
     this.routeParamsSub = this.route.params.subscribe(params => {
       let lifeCycleId = params['id'];
+
+      let subcategories = {};
+      subcategories["field_research_lifecycle_stage"] = lifeCycleId;
+      this.searchService.setSubcategories(subcategories, true);
+
       this.products = this.drupalService.getProducts({taxonomyId: lifeCycleId});
     });
   }
