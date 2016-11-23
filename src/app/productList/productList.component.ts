@@ -10,7 +10,6 @@ import {Observable} from "rxjs/Rx";
 export class ProductListComponent implements OnInit, AfterViewInit {
   @ViewChild('productList') productList;
   routeParamsSub: any;
-  productType: string;
   productWidth: number = 180;
   products:Observable<Array<string>>;
 
@@ -19,18 +18,15 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log('init!');
     this.routeParamsSub = this.route.params.subscribe(params => {
-      console.log('route params changed!', params);
-      this.productType = params['type'];
-      this.products = this.drupalService.contentSearch(this.productType, this.searchService.searchChange);
+      let productType = params['type'];
+      let serviceTypeId = params['serviceTypeId'];
+      this.products = this.drupalService.getProducts({type: productType, taxonomyId: serviceTypeId});
     });
   }
 
   ngAfterViewInit() {
-    console.log('after view init');
     window.scrollTo(0, 0);
-    this.searchService.findAll();
   }
 
   getColClasses() {
