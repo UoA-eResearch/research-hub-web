@@ -10,7 +10,6 @@ import {Router, ActivatedRoute} from "@angular/router";
 export class LifecycleComponent implements AfterViewInit {
   @ViewChild('productList') productList;
   routeParamsSub: any;
-  productType: string;
   productWidth: number = 180;
   products:Observable<Array<string>>;
 
@@ -20,16 +19,14 @@ export class LifecycleComponent implements AfterViewInit {
 
   ngOnInit() {
     this.routeParamsSub = this.route.params.subscribe(params => {
-      console.log('route params changed!', params);
-      this.productType = params['type'];
-      this.products = this.drupalService.contentSearch(this.productType, this.searchService.searchChange);
+      let lifeCycleId = params['id'];
+      this.products = this.drupalService.getProducts({taxonomyId: lifeCycleId});
     });
   }
 
   ngAfterViewInit() {
-    console.log('after view init');
     window.scrollTo(0, 0);
-    this.searchService.findAll();
+    // this.searchService.findAll();
   }
 
   getColClasses() {
