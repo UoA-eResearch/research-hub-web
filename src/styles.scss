@@ -364,6 +364,19 @@
   }
 }
 
+@media #{$medium-and-down} {
+  nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 48px;
+    line-height: 48px;
+  }
+  nav, nav .nav-wrapper i, nav a.button-collapse {
+    margin-left: 0;
+  }
+  .navbar-fixed {
+    height: 48px;
+  }
+}
+
 .product-list-title
 {
   font-size: 28px;
