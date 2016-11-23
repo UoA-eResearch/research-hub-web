@@ -84,7 +84,7 @@
   </div>
 </div>
 
-<div *ngFor="let lifeCycle of researchLifeCycle" class="section white home-products">
+<div *ngFor="let lifeCycle of lifeCycleTerms | async" class="section white home-products">
     <div class="product-list">
       <div class="row">
         <div class="col s6 left-align"><span class="product-list-title">{{lifeCycle.name}}</span></div>
@@ -92,10 +92,10 @@
       </div>
 
       <div #productList class="row">
-        <div *ngIf="lifeCycle.products.length == 0" class="col s12 m12 l12 center-align hub-spinner">
+        <div *ngIf="getProducts(lifeCycle.id).length == 0" class="col s12 m12 l12 center-align hub-spinner">
           <spinner></spinner>
         </div>
-        <div *ngFor="let product of lifeCycle.products; let i = index;" class="col" [ngClass]="getColClasses()">
+        <div *ngFor="let product of getProducts(lifeCycle.id); let i = index;" class="col" [ngClass]="getColClasses()">
           <product-overview *ngIf="i < getMaxProducts()" [product]="product"></product-overview>
         </div>
       </div>
@@ -125,7 +125,7 @@
   </div>
 </div>
 
-<div *ngFor="let service of serviceTypes" class="section white home-products">
+<div *ngFor="let service of serviceTypeTerms | async" class="section white home-products">
   <div class="product-list">
     <div class="row">
       <div class="col s6 left-align"><span class="product-list-title">{{service.name}}</span></div>
@@ -133,10 +133,51 @@
     </div>
 
     <div #productList class="row">
-      <div *ngIf="service.products.length == 0" class="col s12 m12 l12 center-align hub-spinner">
+      <div *ngIf="getProducts(service.id).length == 0" class="col s12 m12 l12 center-align hub-spinner">
         <spinner></spinner>
       </div>
-      <div *ngFor="let product of service.products; let i = index;" class="col" [ngClass]="getColClasses()">
+      <div *ngFor="let product of getProducts(service.id); let i = index;" class="col" [ngClass]="getColClasses()">
+        <product-overview *ngIf="i < getMaxProducts()" [product]="product"></product-overview>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="parallax-container home-category-divider">
+  <div class="row container">
+    <div class="parallax">
+      <img src="assets/lifecycle.jpg">
+    </div>
+  </div>
+  <div class="row">
+    <div class="uoa-flex-text-img uoa-flex-text-img--large">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 l6 offset-l7">
+            <span class="uoa-flex-text-img__tag">Explore</span>
+            <div class="uoa-flex-text-img__content">
+              <h2>Education</h2>
+              <p>Find educational offerings to equip you to tackle that difficult research problem.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section white home-products">
+  <div class="product-list">
+    <div class="row">
+      <div class="col s6 left-align"><span class="product-list-title">Computing Education</span></div>
+      <div class="col s6 right-align"><a class="waves-effect waves-light btn">more</a></div>
+    </div>
+
+    <div #productList class="row">
+      <div *ngIf="educationalProducts.length == 0" class="col s12 m12 l12 center-align hub-spinner">
+        <spinner></spinner>
+      </div>
+      <div *ngFor="let product of educationalProducts; let i = index;" class="col" [ngClass]="getColClasses()">
         <product-overview *ngIf="i < getMaxProducts()" [product]="product"></product-overview>
       </div>
     </div>
