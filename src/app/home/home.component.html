@@ -53,7 +53,7 @@
     <div class="section">
       <div class="row center">
         <h3 class="light header" style="color: #00467f;">Research showcase</h3>
-        <p class="col s8 offset-s2 caption">See what fellow University of Auckland researchers have created with Research Hub services.
+        <p class="col s8 offset-s2 light center">See what fellow University of Auckland researchers have created with Research Hub services.
           Get inspired by these research projects and submit your own projects to be displayed here.</p>
         <a [routerLink]="['/showcase']" class="btn-large waves-effect waves-light">Explore our Showcase</a>
       </div>
@@ -129,7 +129,7 @@
   <div class="product-list">
     <div class="row">
       <div class="col s6 left-align"><span class="product-list-title">{{service.name}}</span></div>
-      <div class="col s6 right-align"><a class="waves-effect waves-light btn">more</a></div>
+      <div class="col s6 right-align"><a class="waves-effect waves-light btn" (click)="navigateToServices(service.id)">more</a></div>
     </div>
 
     <div #productList class="row">
@@ -170,7 +170,7 @@
   <div class="product-list">
     <div class="row">
       <div class="col s6 left-align"><span class="product-list-title">Computing Education</span></div>
-      <div class="col s6 right-align"><a class="waves-effect waves-light btn">more</a></div>
+      <div class="col s6 right-align"><a class="waves-effect waves-light btn" [routerLink]="['/productList', 'education']">more</a></div>
     </div>
 
     <div #productList class="row">

@@ -25,6 +25,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.router.navigate(['lifecycle', lifeCycle.id]);
   }
 
+  navigateToServices(serviceTypeId) {
+    this.router.navigate(['productList', 'service', serviceTypeId]);
+  }
+
   getColClasses() {
     let productsPerRow = this.getMaxProducts();
     let gridWidth = Math.ceil(12 / productsPerRow);
