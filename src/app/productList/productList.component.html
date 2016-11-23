@@ -4,7 +4,7 @@
       <div class="col s12 m12 l12 center-align hub-spinner" *ngIf="(products | async)?.length==undefined">
         <spinner></spinner>
       </div>
-      <div *ngFor="let product of products | async | slice:1" class="col" [ngClass]="getColClasses()">
+      <div *ngFor="let product of products | async" class="col" [ngClass]="getColClasses()">
         <product-overview [product]="product"></product-overview>
       </div>
     </div>
