@@ -13,7 +13,7 @@ import {StarsComponent} from "./stars/stars.component";
 import {ProductOverviewComponent} from "./productOverview/productOverview.component";
 import {ProductListComponent} from "./productList/productList.component";
 import {ProductDetailsComponent} from "./productDetails/productDetails.component";
-
+import {ComingSoonComponent} from "./comingSoon/comingSoon.component";
 
 @NgModule({
     declarations: [
@@ -25,7 +25,8 @@ import {ProductDetailsComponent} from "./productDetails/productDetails.component
         ShowcaseComponent,
         HomeComponent,
         SpinnerComponent,
-        StarsComponent
+        StarsComponent,
+        ComingSoonComponent
     ],
     imports: [
         JsonpModule,
