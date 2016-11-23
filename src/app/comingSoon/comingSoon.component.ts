@@ -1,3 +1,4 @@
+import {AfterViewInit} from "@angular/core";
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 
@@ -5,7 +6,7 @@ import {Router} from "@angular/router";
   selector: 'comming-soon',
   templateUrl: './comingSoon.component.html'
 })
-export class ComingSoonComponent
+export class ComingSoonComponent implements AfterViewInit
 {
 
   constructor(private router:Router) {
@@ -21,5 +22,9 @@ export class ComingSoonComponent
     else if(this.router.isActive('showcase', true))
       return "research projects to showcase";
     return "";
+  }
+
+  ngAfterViewInit() {
+    window.scrollTo(0, 0);
   }
 }
