@@ -1,5 +1,5 @@
 <div class="card" style="cursor:pointer;cursor:hand;">
-  <div class="card-image" style="padding: 20px;" (click)="openProductDetails()">
+  <div class="card-image" (click)="openProductDetails()">
     <img class="product-image" [src]="productService.getLogoUrl(product)">
   </div>
   <div class="card-content" (click)="openProductDetails()">
