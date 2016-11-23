@@ -74,7 +74,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     this.drupalService.getProducts({type: "education"}).subscribe(
       data => {
-        console.log("education", data);
         this.educationalProducts = data;
       }
     );
@@ -82,28 +81,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     $(document).ready(function () {
       $('.parallax').parallax();
     });
-
-    // for (let i = 0; i < this.researchLifeCycle.length; i++) {
-    //   let researchLifeCycle = this.researchLifeCycle[i];
-    //   this.drupalService.getProducts(researchLifeCycle.id).subscribe(
-    //     data => {
-    //       researchLifeCycle.products = data;
-    //     },
-    //     err => console.error(err),
-    //     () => console.log('Finished getting lifecycle:', researchLifeCycle.name)
-    //   );
-    // }
-    //
-    // for (let i = 0; i < this.serviceTypes.length; i++) {
-    //   let serviceTypes = this.serviceTypes[i];
-    //   // this.drupalService.getProducts(serviceTypes.id).subscribe(
-    //   //   data => {
-    //   //     serviceTypes.products = data;
-    //   //   },
-    //   //   err => console.error(err),
-    //   //   () => console.log('Finished getting services:', serviceTypes.name)
-    //   // );
-    // }
   }
 
   ngAfterViewInit() {
