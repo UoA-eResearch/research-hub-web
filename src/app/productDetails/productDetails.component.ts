@@ -2,16 +2,18 @@ import {Component, AfterViewInit} from "@angular/core";
 import {OnInit} from "@angular/core";
 import {DrupalService} from "../app.drupal.service";
 import { ActivatedRoute } from '@angular/router';
+import {ProductService} from "../app.product.service";
 
 @Component({
-  templateUrl: './productDetails.component.html'
+  styleUrls: ['./productDetails.component.scss'],
+  templateUrl: './productDetails.component.html',
 })
 export class ProductDetailsComponent implements OnInit, AfterViewInit {
   product:any;
   productId: string;
   routeParamsSub: any;
 
-  constructor(private route: ActivatedRoute, private drupalService: DrupalService) {
+  constructor(private route: ActivatedRoute, private drupalService: DrupalService, private productService: ProductService) {
 
   }
 

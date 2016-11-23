@@ -1,230 +1,184 @@
 <div *ngIf="product" class="inset-content">
   <div class="card product-detail">
-    <div class="card-content">
+    <div class="card-content product-card">
       <div class="row">
         <div class="col s4 m4 l4" style="padding-right: 20px;">
           <div class="card-image">
-            <img style="border-radius: 25px;max-width: 180px;max-height: 180px;" src="http://lorempixel.com/160/200/technics">
+            <img [src]="productService.getLogoUrl(product)">
           </div>
         </div>
         <div class="col s8 m8 l8">
-          <div *ngIf="product.title" class="row">
-            <div class="col l12">
+          <div class="row">
+            <div class="col l8">
               <span class="product-details-title">{{product.title}}</span>
             </div>
-          </div>
-
-          <div class="row">
-            <!--<div *ngFor="let field_category of product.fields.field_category.und; let i=index" class="col l3">
-            <a href="#">{{field_category[i].tid}}</a>
-            </div>
-       
-    
-            <div class="col l3">
-              <a href="#">{{product.fields.field_category.und["0"].tid}}</a>
-            </div>-->
-
-            <div class="col l6" style="text-align: right;line-height: 22px;">
-              <a href="#">
-                <i class="material-icons" style="font-size: 17px;line-height: inherit;">star</i>
-                <i class="material-icons" style="font-size: 17px;line-height: inherit;">star</i>
-                <i class="material-icons" style="font-size: 17px;line-height: inherit;">star</i>
-                <i class="material-icons" style="font-size: 17px;line-height: inherit;">star</i>
-                <i class="material-icons" style="font-size: 17px;line-height: inherit;">star_half</i>
-                <span
-                  style="display: inline-block; padding-left: 7px;line-height: inherit;position: relative; top: -2.5px;">50</span>
-                <i class="material-icons" style="font-size: 17px;line-height: inherit;">person</i>
+            <div class="col l4">
+              <a class="review-overview">
+                <stars [stars]="4.3"></stars>
+                <span style="">50</span>
+                <i class="material-icons">person</i>
               </a>
             </div>
           </div>
-
-          <div *ngIf="product.fields.field_link" class="row" style="margin-top: 70px;">
-            <div *ngIf="product.fields.field_link['0']" class="col l12" style="text-align: right;">
-              <a href="{{product.fields.field_link['0'].url}}" class="waves-effect waves-brown btn" style="text-align: right;">Request</a>
+          <div class="row">
+            <div class="col">
+              <a>{{productService.getTermNames(product.field_service_provider)}}</a>
             </div>
-            <div *ngIf="product.fields.field_link.und" class="col l12" style="text-align: right;">
-              <a href="{{product.fields.field_link.und['0'].url}}" class="waves-effect waves-brown btn" style="text-align: right;">Request</a>
+            <div class="col" style="text-transform: capitalize;">
+              <a>{{product.type}}</a>
+            </div>
+            <div *ngIf="productService.isService(product)" class="col">
+              <a>{{productService.getTermNames(product.field_category)}}</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col right">
+              <a style="margin-top:50px;margin-right: 5px;" class="waves-effect waves-light btn" target="_blank" [href]="product.field_link.url">Launch</a>
             </div>
           </div>
         </div>
       </div>
-
       <div class="row" style="padding-top: 20px;">
-        <div class="col l12">
-             <p *ngIf="product.body">{{product.body['0'].value}}</p>
-            <p *ngIf="product.fields.field_summary.und">{{product.fields.field_summary.und['0'].value}}</p>
-            <p *ngIf="product.fields.field_summary['0']">{{product.fields.field_summary['0'].value}}</p>
-        </div>
+        <div class="col l12 product-details-body" [innerHtml]="productService.getBodyHtml(product)"></div>
       </div>
     </div>
 
-    <div class="divider"></div>
-    <div class="card-content">
-      <div class="row" style="margin-bottom: 0;">
+    <div class="divider" *ngIf="productService.isEducation(product)"></div>
+    <div class="card-content product-card" *ngIf="productService.isEducation(product)">
+      <div class="row">
         <div class="col">
           <span class="info-category">Overview</span>
         </div>
       </div>
       <div class="row">
-        <div *ngIf="product.fields.field_eligibility && product.fields.field_eligibility.und" class="col s12 m6 l6" style="margin-bottom: 15px;">
-          <span class="info-title">Eligibility</span>
-          <p *ngFor="let eligible of product.fields.field_eligibility.und; let i=index">{{eligible.value}}</p>
+        <div class="col s12 m6 l6">
+          <span class="info-title">Study Level</span>
+          <ul>
+            <li><span>{{productService.getTermNames(product.field_study_level)}}</span></li>
+          </ul>
         </div>
-        <div *ngIf="product.fields.field_eligibility && product.fields.field_eligibility['0']" class="col s12 m6 l6" style="margin-bottom: 15px;">
-          <span class="info-title">Eligibility</span>
-          <p *ngFor="let eligible of product.fields.field_eligibility; let i=index">{{eligible.value}}</p>
+        <div class="col s12 m6 l6">
+          <span class="info-title">Programme Relevance</span>
+          <ul>
+            <li><span>{{productService.getTermNames(product.field_programme)}}</span></li>
+          </ul>
         </div>
-
-        <div *ngIf="product.fields.field_requirements && product.fields.field_requirements.und" class="col s12 m6 l6" style="margin-bottom: 15px;">
-          <span class="info-title">Requirements</span>
-          <p *ngFor="let reqs of product.fields.field_requirements.und; let i=index">{{reqs.value}}</p>
-        </div>
-        <div *ngIf="product.fields.field_requirements && product.fields.field_requirements['0']" class="col s12 m6 l6" style="margin-bottom: 15px;">
-          <span class="info-title">Requirements</span>
-          <p *ngFor="let reqs of product.fields.field_requirements; let i=index">{{reqs.value}}</p>
-        </div>
-          
-        <div *ngIf="product.fields.field_cost && product.fields.field_cost.und" class="col s12 m6 l6" style="margin-bottom: 15px;">
+      </div>
+      <div class="row">
+        <div class="col s12 m6 l6">
           <span class="info-title">Cost</span>
-          <p *ngFor="let cost of product.fields.field_cost.und; let i=index">{{cost.value}}</p>
+          <ul>
+            <li><span>{{product.field_cost}}</span></li>
+          </ul>
         </div>
-        <div *ngIf="product.fields.field_cost && product.fields.field_cost['0']" class="col s12 m6 l6" style="margin-bottom: 15px;">
-          <span class="info-title">Cost</span>
-          <p *ngFor="let cost of product.fields.field_cost; let i=index">{{cost.value}}</p>
-        </div>
-
-        <div *ngIf="product.fields.field_support && product.fields.field_support.und" class="col s12 m6 l6" style="margin-bottom: 15px;">
-          <span class="info-title">Support</span>
-          <p *ngFor="let emails of product.fields.field_contact_email.und; let i=index"><a href="mailto:{{emails.email}}">Email</a></p>
-          <p *ngFor="let support of product.fields.field_support.und; let i=index">{{support.value}}</p>
-        </div>
-        <div *ngIf="product.fields.field_support && product.fields.field_support['0']" class="col s12 m6 l6" style="margin-bottom: 15px;">
-          <span class="info-title">Support</span>
-          <p *ngFor="let emails of product.fields.field_contact_email; let i=index"><a href="mailto:{{emails.email}}">Email</a></p>
-          <p *ngFor="let support of product.fields.field_support; let i=index">{{support.value}}</p>
+        <div class="col s12 m6 l6">
+          <span class="info-title">Contact</span>
+          <ul>
+            <li><span>{{product.field_contact_email}}</span></li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <div class="divider"></div>
+    <div class="divider" *ngIf="productService.isService(product)"></div>
+    <div class="card-content product-card" *ngIf="productService.isService(product)">
+      <div class="row">
+        <div class="col">
+          <span class="info-category">Overview</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m6 l6">
+          <span class="info-title">Eligibility</span>
+          <ul>
+            <li><span>{{productService.getTermNames(product.field_eligibility)}}</span></li>
+          </ul>
+        </div>
+        <div class="col s12 m6 l6">
+          <span class="info-title">Requirements</span>
+          <ul>
+            <li *ngFor="let text of product.field_requirements"><span>{{text}}</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m6 l6">
+          <span class="info-title">Cost</span>
+          <ul>
+            <li><span>{{product.field_cost}}</span></li>
+          </ul>
+        </div>
+        <div class="col s12 m6 l6">
+          <span class="info-title">Lifecycle</span>
+          <ul>
+            <li><span>{{productService.getTermNames(product.field_research_lifecycle_stage)}}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-    <div class="card-content">
-      <div class="row" style="margin-bottom: 0;">
+    <div class="divider" *ngIf="productService.isService(product)"></div>
+    <div class="card-content product-card" *ngIf="productService.isService(product)">
+      <div class="row">
         <div class="col">
           <span class="info-category">Details</span>
         </div>
       </div>
       <div class="row">
-        <div *ngIf="product.fields.field_features && product.fields.field_features.und" class="col s12 m6 l4" style="margin-bottom: 15px;">
+        <div class="col l12">
           <span class="info-title">Features</span>
-          <p *ngFor="let feature of product.fields.field_features.und; let i=index"><img align="top" src='assets/bluebp1.png'>{{feature.value}}</p>
-        </div>
-        <div *ngIf="product.fields.field_features && product.fields.field_features['0']" class="col s12 m6 l4" style="margin-bottom: 15px;">
-          <span class="info-title">Features</span>
-          <p *ngFor="let feature of product.fields.field_features; let i=index"><img align="top" src='assets/bluebp1.png'>{{feature.value}}</p>
-        </div>
-
-        <div *ngIf="product.fields.field_cons && product.fields.field_cons.und" class="col s12 m6 l4" style="margin-bottom: 15px;">
-          <span class="info-title">Limitations</span>
-          <p *ngFor="let limit of product.fields.field_cons.und; let i=index"><img align="top" src='assets/bluebp1.png'>{{limit.value}}</p>
-        </div>
-        <div *ngIf="product.fields.field_cons && product.fields.field_cons['0']" class="col s12 m6 l4" style="margin-bottom: 15px;">
-          <span class="info-title">Limitations</span>
-          <p *ngFor="let limit of product.fields.field_cons; let i=index"><img align="top" src='assets/bluebp1.png'>{{limit.value}}</p>
-        </div>
-          
-        <div *ngIf="product.fields.field_considerations && product.fields.field_considerations.und"  class="col s12 m6 l4" style="margin-bottom: 15px;">
-          <span class="info-title">Considerations</span>
-          <p *ngFor="let cons of product.fields.field_considerations.und; let i=index"><img align="top" src='assets/bluebp1.png'>{{cons.value}}</p>
-        </div>
-        <div *ngIf="product.fields.field_considerations && product.fields.field_considerations['0']"  class="col s12 m6 l4" style="margin-bottom: 15px;">
-          <span class="info-title">Considerations</span>
-          <p *ngFor="let cons of product.fields.field_considerations; let i=index"><img align="top" src='assets/bluebp1.png'>{{cons.value}}</p>
-        </div>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div *ngIf="product.fields.field_contact_email && product.fields.field_contact_email.und" class="col" style="margin-bottom: 15px;">
-          <span class="info-title">Contact Email</span>
-          <p *ngFor="let emails of product.fields.field_contact_email.und; let i=index"><a href="mailto:{{emails.email}}">{{emails.email}}</a></p>
-        </div>
-        <div *ngIf="product.fields.field_contact_email && product.fields.field_contact_email['0']" class="col" style="margin-bottom: 15px;">
-          <span class="info-title">Contact Email</span>
-          <p *ngFor="let emails of product.fields.field_contact_email; let i=index"><a href="mailto:{{emails.email}}">{{emails.email}}</a></p>
-        </div>
-        
-        <div *ngIf="product.fields.field_help_faqs && product.fields.field_help_faqs.und" class="col" style="margin-bottom: 15px;">
-          <span class="info-title">Help and FAQs</span>
-          <p *ngFor="let help of product.fields.field_help_faqs.und; let i=index"><a href="{{help.url}}">{{help.title}}</a></p>
-        </div>
-        <div *ngIf="product.fields.field_help_faqs && product.fields.field_help_faqs['0']" class="col" style="margin-bottom: 15px;">
-          <span class="info-title">Help and FAQs</span>
-          <p *ngFor="let help of product.fields.field_help_faqs; let i=index"><a href="{{help.url}}">{{help.title}}</a></p>
-        </div>
-        
-        <div *ngIf="product.fields.field_see_also && product.fields.field_see_also.und" class="col" style="margin-bottom: 15px;">
-          <span class="info-title">See also</span>
-          <p *ngFor="let see of product.fields.field_see_also.und; let i=index"><a href="{{see.url}}">{{see.title}}</a></p>
-        </div>
-        <div *ngIf="product.fields.field_see_also && product.fields.field_see_also['0']" class="col" style="margin-bottom: 15px;">
-          <span class="info-title">See also</span>
-          <p *ngFor="let see of product.fields.field_see_also; let i=index"><a href="{{see.url}}">{{see.title}}</a></p>
-        </div>
-        
-      
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="card-content">
-      <div class="row" style="margin-bottom: 0;">
-        <div class="col">
-          <span class="info-category">Reviews</span>
+          <ul>
+            <li *ngFor="let text of product.field_features"><span>{{text}}</span></li>
+          </ul>
         </div>
       </div>
       <div class="row">
-        <div class="col s12 m6 l6" style="margin-bottom: 15px;">
-          <ul class="collection" style="border: none;">
-            <li class="collection-item avatar">
-              <img src="assets/roona.jpg" alt="" class="circle">
-              <span class="title">Glenn Ervin</span>
-              <p>On estimating. Side in so life past. Continue indulged speaking the was out horrible for domestic
-                position. Seeing... </p>
-            </li>
+        <div class="col l12">
+          <span class="info-title">Limitations</span>
+          <ul>
+            <li *ngFor="let text of product.field_cons"><span>{{text}}</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col l12">
+          <span class="info-title">Considerations</span>
+          <ul>
+            <li *ngFor="let text of product.field_considerations"><span>{{text}}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider" *ngIf="productService.isService(product)"></div>
+    <div class="card-content product-card" *ngIf="productService.isService(product)">
+      <div class="row">
+        <div class="col">
+          <span class="info-category">Support</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col l12">
+          <span class="info-title">Support</span>
+          <ul>
+            <li *ngFor="let text of product.field_support"><span>{{text}}</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col l6">
+          <span class="info-title">Help & FAQs</span>
+          <ul>
+            <li *ngFor="let item of product.field_help_faqs"><span><a target="_blank" [href]="item.url">{{item.title}}</a></span></li>
           </ul>
         </div>
 
-        <div class="col s12 m6 l6" style="margin-bottom: 15px;">
-          <ul class="collection" style="border: none;">
-            <li class="collection-item avatar">
-              <img src="assets/moona.jpg" alt="" class="circle">
-              <span class="title">Valorie Wanamaker</span>
-              <p>New had happen unable uneasy. Drawings can followed improved out sociable not. Earnestly so do instantly
-                pretended... </p>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col s12 m6 l6" style="margin-bottom: 15px;">
-          <ul class="collection" style="border: none;">
-            <li class="collection-item avatar">
-              <img src="assets/yuna.jpg" alt="" class="circle">
-              <span class="title">Dot Kidder</span>
-              <p>See general few civilly amiable pleased account carried. Excellence projecting is devonshire
-                dispatched... </p>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col s12 m6 l6" style="margin-bottom: 15px;">
-          <ul class="collection" style="border: none;">
-            <li class="collection-item avatar">
-              <img src="assets/una.jpg" alt="" class="circle">
-              <span class="title">Al Eugene</span>
-              <p>Rather her you not esteem men settle genius excuse. Deal say over you age from. Comparison new ham
-                melancholy son...</p>
-            </li>
+        <div class="col l6">
+          <span class="info-title">Contact</span>
+          <ul>
+            <li><span>{{product.field_contact_email}}</span></li>
           </ul>
         </div>
       </div>
