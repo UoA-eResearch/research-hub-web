@@ -2,6 +2,7 @@ import {Component, OnInit, ChangeDetectorRef, ApplicationRef} from '@angular/cor
 import {Router, NavigationEnd} from "@angular/router";
 import {SearchService} from "./app.search.service";
 import {DrupalService} from "./app.drupal.service";
+import {ProductService} from "./app.product.service";
 import {Observable} from "rxjs/Rx";
 import * as moment from 'moment';
 declare var $:any;
@@ -10,116 +11,112 @@ declare var $:any;
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [SearchService, DrupalService]
+  providers: [SearchService, DrupalService, ProductService]
 })
 export class AppComponent implements OnInit {
   router:Router;
-  
-  basePath = "/";
-  redirectHash = "";
-  redirectPath;
-  isLoggedIn=false;
-  
-  lifeCycle: string = "";
-  serviceType: string = "";
-  programme: string = "";
-  studyLevel: string = "";
-  policyArea: string = "";
-    
-  lifeCycleCategories: Observable<Array<string>>;
-  serviceTypeCategories: Observable<Array<string>>;
-  programmeCategories: Observable<Array<string>>;
-  studyLevelCategories: Observable<Array<string>>;
-  policyAreaCategories: Observable<Array<string>>;
 
-  constructor(router:Router, private searchService: SearchService, private drupalService: DrupalService) {
+  lifeCycle:string = "";
+  serviceType:string = "";
+  programme:string = "";
+  studyLevel:string = "";
+
+  lifeCycleTerms:Observable<Array<string>>;
+  serviceTypeTerms:Observable<Array<string>>;
+  programmeTerms:Observable<Array<string>>;
+  studyLevelTerms:Observable<Array<string>>;
+
+  taxonomies = {research_lifecycle: "3", service_type: "2", programme: "7", study_level: "8"};
+
+  constructor(router:Router, private searchService:SearchService, private drupalService:DrupalService) {
     this.router = router;
     //Reset all select boxes when route changes
     router.events.subscribe((val) => {
-      $("select").val("");
-      $('select').material_select();
+      this.refreshSelect();
     });
   }
-          
-  populateCombos()
-  {
-    this.lifeCycleCategories=this.drupalService.populateTaxonomies('cat_lifecycle', this.searchService.searchChange);
-    this.serviceTypeCategories=this.drupalService.populateTaxonomies('cat_service', this.searchService.searchChange);
-    this.programmeCategories=this.drupalService.populateTaxonomies('cat_prog', this.searchService.searchChange);
-    this.studyLevelCategories=this.drupalService.populateTaxonomies('cat_study', this.searchService.searchChange);
-    this.policyAreaCategories=this.drupalService.populateTaxonomies('cat_policy', this.searchService.searchChange);
+
+  getTaxonomies() {
+    this.lifeCycleTerms = this.drupalService.getTaxonomy(this.taxonomies.research_lifecycle);
+    this.serviceTypeTerms = this.drupalService.getTaxonomy(this.taxonomies.service_type);
+    this.programmeTerms = this.drupalService.getTaxonomy(this.taxonomies.programme);
+    this.studyLevelTerms = this.drupalService.getTaxonomy(this.taxonomies.study_level);
+
+    //Reset all select boxes when data changed
+    Observable.forkJoin(
+      this.lifeCycleTerms,
+      this.serviceTypeTerms,
+      this.programmeTerms,
+      this.studyLevelTerms
+    )
+    .delay(500)
+    .subscribe(
+      data => {
+        this.refreshSelect()
+      },
+      err => console.error(err)
+    );
   }
-  
-  getYear()
-   {
-     return moment().year();
-   }
- 
-  setSearchTerm(term)
-  {
+
+  refreshSelect() {
+    $("select").val("");
+    $('select').material_select();
+  }
+
+  getYear() {
+    return moment().year();
+  }
+
+  setSearchTerm(term) {
     this.searchService.setSearchTerm(term);
   }
 
-  isServicesActive()
-  {
-    return this.router.isActive('productList/service', true);
+  isLifecycleActive() {
+    return this.router.isActive('lifecycle', false) && !this.router.isActive('productList/lifecycle/productDetails', false);
   }
 
-  isEducationActive()
-  {
-    return this.router.isActive('productList/education', true);
+  isServicesActive() {
+    return this.router.isActive('productList/service', false) && !this.router.isActive('productList/service/productDetails', false);
   }
 
-  isGuidesActive()
-  {
-    return this.router.isActive('productList/guide', true);
+  isEducationActive() {
+    return this.router.isActive('productList/education', false) && !this.router.isActive('productList/education/productDetails', false);
   }
 
-  isPoliciesActive()
-  {
-    return this.router.isActive('productList/policy', true);
-  }
-  
-  isLifecycleActive()
-  {
-    return this.router.isActive('lifecycle', true);
-  }
-  
-  updateSubcategories()
-  {
+  updateSubcategories() {
     let subcategories = [];
 
-    if(this.isServicesActive())
-    {
-      subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
-      subcategories.push({key: "field_service_type", value: this.serviceType});
-    }
-    else if(this.isEducationActive() || this.isGuidesActive())
-    {
-      subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
-      subcategories.push({key: "field_programme", value: this.programme});
-      subcategories.push({key: "field_study_level", value: this.studyLevel});
-    }
-    else if(this.isPoliciesActive())
-    {
-      subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
-      subcategories.push({key: "field_policy_area", value: this.policyArea});
-    }
-    else if(this.isLifecycleActive())
-    {
-      subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
-      subcategories.push({key: "field_service_type", value: this.serviceType});
-      subcategories.push({key: "field_programme", value: this.programme});
-      subcategories.push({key: "field_study_level", value: this.studyLevel});
-      subcategories.push({key: "field_policy_area", value: this.policyArea});
-    }
-    
-    this.searchService.setSubcategories(subcategories);
+    // if(this.isServicesActive())
+    // {
+    //   subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
+    //   subcategories.push({key: "field_service_type", value: this.serviceType});
+    // }
+    // else if(this.isEducationActive() || this.isGuidesActive())
+    // {
+    //   subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
+    //   subcategories.push({key: "field_programme", value: this.programme});
+    //   subcategories.push({key: "field_study_level", value: this.studyLevel});
+    // }
+    // else if(this.isPoliciesActive())
+    // {
+    //   subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
+    //   subcategories.push({key: "field_policy_area", value: this.policyArea});
+    // }
+    // else if(this.isLifecycleActive())
+    // {
+    //   subcategories.push({key: "field_research_lifecycle_stage", value: this.lifeCycle});
+    //   subcategories.push({key: "field_service_type", value: this.serviceType});
+    //   subcategories.push({key: "field_programme", value: this.programme});
+    //   subcategories.push({key: "field_study_level", value: this.studyLevel});
+    //   subcategories.push({key: "field_policy_area", value: this.policyArea});
+    // }
+    //
+    // this.searchService.setSubcategories(subcategories);
   }
 
   ngOnInit() {
-    console.log('init!');
-    this.populateCombos();
+    this.getTaxonomies();
+
     $('.button-collapse').sideNav({
         menuWidth: 260, // Default is 240
         edge: 'left', // Choose the horizontal origin
@@ -129,9 +126,8 @@ export class AppComponent implements OnInit {
 
     $(document).ready(() => {
       //Update model when select dropdowns changed
-      $('select').material_select();
       $('select').change((e) => {
-        switch(e.currentTarget.id) {
+        switch (e.currentTarget.id) {
           case "lifeCycleSelect":
             this.lifeCycle = e.currentTarget.value;
             break;
@@ -143,9 +139,6 @@ export class AppComponent implements OnInit {
             break;
           case "studyLevelSelect":
             this.studyLevel = e.currentTarget.value;
-            break;
-          case "policyAreaSelect":
-            this.policyArea = e.currentTarget.value;
             break;
           default:
             console.log('Error: ', e.currentTarget.id, "doesn't exist");
