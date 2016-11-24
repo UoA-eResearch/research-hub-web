@@ -74,15 +74,6 @@ export class AppComponent implements OnInit {
     return this.router.isActive('productList/education', false) && !this.router.isActive('productList/education/productDetails', false);
   }
 
-  updateSubcategories() {
-    let subcategories = {};
-    subcategories["field_research_lifecycle_stage"] = this.lifeCycle;
-    subcategories["field_category"] = this.serviceType;
-    subcategories["field_programme"] = this.programme;
-    subcategories["field_study_level"] = this.studyLevel;
-    this.searchService.setSubcategories(subcategories);
-  }
-
   ngOnDestroy() {
     this.uiChangeSub.unsubscribe();
   }
@@ -137,16 +128,16 @@ export class AppComponent implements OnInit {
         console.log('update select');
         switch (e.currentTarget.id) {
           case "lifeCycleSelect":
-            this.lifeCycle = e.currentTarget.value;
+              this.lifeCycle = e.currentTarget.value;
             break;
           case "serviceTypeSelect":
-            this.serviceType = e.currentTarget.value;
+              this.serviceType = e.currentTarget.value;
             break;
           case "programmeSelect":
-            this.programme = e.currentTarget.value;
+              this.programme = e.currentTarget.value;
             break;
           case "studyLevelSelect":
-            this.studyLevel = e.currentTarget.value;
+              this.studyLevel = e.currentTarget.value;
             break;
           default:
             console.log('Error: ', e.currentTarget.id, "doesn't exist");
@@ -154,5 +145,14 @@ export class AppComponent implements OnInit {
         this.updateSubcategories();
       });
     });
+  }
+
+  updateSubcategories() {
+    let subcategories = {};
+    subcategories["field_research_lifecycle_stage"] = this.lifeCycle;
+    subcategories["field_category"] = this.serviceType;
+    subcategories["field_programme"] = this.programme;
+    subcategories["field_study_level"] = this.studyLevel;
+    this.searchService.updateSearchParameters(undefined, subcategories);
   }
 }

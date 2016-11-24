@@ -50,25 +50,25 @@
         <ul style="display:inline-block;">
           <li class="input-field" [hidden]="!isLifecycleActive() && !isServicesActive() && !isEducationActive()">
             <select id="lifeCycleSelect" [ngModel]="lifeCycle">
-              <option [value]="" selected>Research Lifecycle</option>
+              <option [value]="undefined" selected>Research Lifecycle</option>
               <option *ngFor="let term of lifeCycleTerms | async" [value]="term.id">{{term.name}}</option>
             </select>
           </li>
           <li class="input-field" [hidden]="!isServicesActive()">
             <select id="serviceTypeSelect" [ngModel]="serviceType">
-              <option [value]="" selected>Service Type</option>
+              <option [value]="undefined" selected>Service Type</option>
               <option *ngFor="let term of serviceTypeTerms | async" [value]="term.id">{{term.name}}</option>
             </select>
           </li>
           <li class="input-field" [hidden]="!isEducationActive()">
             <select id="programmeSelect" [ngModel]="programme">
-              <option [value]="" selected>Programme</option>
+              <option [value]="undefined" selected>Programme</option>
               <option *ngFor="let term of programmeTerms | async" [value]="term.id">{{term.name}}</option>
             </select>
           </li>
           <li class="input-field" [hidden]="!isEducationActive()">
             <select id="studyLevelSelect" [ngModel]="programme">
-              <option [value]="" selected>Study Level</option>
+              <option [value]="undefined" selected>Study Level</option>
               <option *ngFor="let term of studyLevelTerms | async" [value]="term.id">{{term.name}}</option>
             </select>
           </li>
