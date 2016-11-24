@@ -13,7 +13,7 @@ const appRoutes:Routes = [
     {path: 'policies', component: ComingSoonComponent},
     {path: 'showcase', component: ComingSoonComponent},
     {path: 'lifecycle', component: LifecycleComponent},
-    {path: 'lifecycle/:id', component: LifecycleComponent},
+    {path: 'lifecycle/:lifeCycleId', component: LifecycleComponent},
     {path: 'showcase', component: ShowcaseComponent},
     {path: 'productList/:type', component: ProductListComponent},
     {path: 'productList/:type/:serviceTypeId', component: ProductListComponent},
