@@ -18,19 +18,22 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.products = this.drupalService.productSearch(this.searchService.searchChange, 0);
+
     this.routeParamsSub = this.route.params.subscribe(params => {
       let productType = params['type'];
       let serviceTypeId = params['serviceTypeId'];
+      console.log(productType, "init!");
 
       let subcategories = {};
       subcategories["field_category"] = serviceTypeId;
-      this.searchService.setSubcategories(subcategories, true);
-
-      this.products = this.drupalService.getProducts({type: productType, taxonomyId: serviceTypeId});
+      
+      this.searchService.updateSearchParameters(productType, subcategories, true);
     });
   }
 
   ngAfterViewInit() {
+    this.searchService.findAll();
     window.scrollTo(0, 0);
   }
 
