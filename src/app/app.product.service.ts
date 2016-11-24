@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs/Rx";
-import 'marked';
-import * as marked from 'marked';
 import {DrupalService} from "./app.drupal.service";
+declare var marked:any;
 
 @Injectable()
 export class ProductService {

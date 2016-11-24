@@ -18,6 +18,7 @@
         "styles.scss"
       ],
       "scripts": [
+        "../node_modules/marked/marked.min.js",
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/materialize-css/dist/js/materialize.js"
       ],
