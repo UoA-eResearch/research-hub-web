@@ -5,33 +5,50 @@ import {Subject} from "rxjs/Rx";
 export class SearchService {
   private searchTerm: string;
   private subcategories: any;
+  private productType: string;
   searchChange: Subject<any> = new Subject<any>();
   uiChange: Subject<any> = new Subject<any>();
 
   getSearch()
   {
     return {
+      "productType": this.productType,
       "searchTerm": this.searchTerm,
-      "subcategories": this.subcategories
+      "subcategories": this.subcategories,
+      "termIds": this.getTermIds()
     };
+  }
+
+  getTermIds()
+  {
+    let termIds = [];
+    for (var key in this.subcategories) {
+      if (this.subcategories.hasOwnProperty(key)) {
+        let value = this.subcategories[key];
+        if(value && value != "null")
+          termIds.push(value)
+      }
+    }
+    return termIds;
   }
 
   findAll()
   {
-    this.searchChange.next({});
-  }
-
-  setSearchTerm(searchTerm) {
-    this.searchTerm = searchTerm;
     this.searchChange.next(this.getSearch());
   }
 
-  setSubcategories(subcategories, updateUI=false)
+  updateSearchParameters(productType, subcategories, updateUI=false)
   {
+    this.productType = productType;
     this.subcategories = subcategories;
     this.searchChange.next(this.getSearch());
 
     if(updateUI)
       this.uiChange.next(this.getSearch())
+  }
+
+  setSearchTerm(searchTerm) {
+    this.searchTerm = searchTerm;
+    this.searchChange.next(this.getSearch());
   }
 }
