@@ -1,8 +1,8 @@
-import {Component, AfterViewInit, OnInit, ViewChild} from "@angular/core";
+import {Component, AfterViewInit, ViewChild} from "@angular/core";
 import {SearchService} from "../app.search.service";
 import {Observable} from "rxjs/Rx";
 import {DrupalService} from "../app.drupal.service";
-import {Router, ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   templateUrl: './lifecycle.component.html'
@@ -18,20 +18,19 @@ export class LifecycleComponent implements AfterViewInit {
   }
 
   ngOnInit() {
-    this.routeParamsSub = this.route.params.subscribe(params => {
-      let lifeCycleId = params['id'];
+    this.products = this.drupalService.productSearch(this.searchService.searchChange, 0);
 
+    this.routeParamsSub = this.route.params.subscribe(params => {
+      let lifeCycleId = params['lifeCycleId'];
       let subcategories = {};
       subcategories["field_research_lifecycle_stage"] = lifeCycleId;
-      this.searchService.setSubcategories(subcategories, true);
-
-      this.products = this.drupalService.getProducts({taxonomyId: lifeCycleId});
+      this.searchService.updateSearchParameters(undefined, subcategories, true);
     });
   }
 
   ngAfterViewInit() {
     window.scrollTo(0, 0);
-    // this.searchService.findAll();
+    this.searchService.findAll();
   }
 
   getColClasses() {
