@@ -30,14 +30,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   getColClasses() {
-    let productsPerRow = this.getMaxProducts();
-    let gridWidth = Math.ceil(12 / productsPerRow);
+    let productsPerRow = this.productList.nativeElement.offsetWidth / this.productWidth;
+    let gridWidth = Math.floor(12 / productsPerRow);
     return "s" + gridWidth + " m" + gridWidth + " l" + gridWidth;
   }
 
   getMaxProducts() {
-    let numProducts = this.productList.nativeElement.offsetWidth / this.productWidth;
-    return Math.max(Math.min(Math.floor(numProducts), 12), 1);
+    let productsPerRow = this.productList.nativeElement.offsetWidth / this.productWidth;
+    let gridWidth = Math.floor(12 / productsPerRow);
+    let totalProducts = Math.floor(12 / gridWidth);
+    console.log(productsPerRow, gridWidth, totalProducts);
+    return Math.max(Math.min(totalProducts, 12), 1);
   }
 
   getProducts(taxonomyId)
@@ -52,7 +55,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   {
     for (let i = 0; i < data.length; i++) {
       let termId = data[i]["id"];
-      this.drupalService.getProducts({taxonomyId: termId}).subscribe(
+      this.drupalService.getProducts(undefined, [termId]).subscribe(
         data => {
           this.allProducts[termId] = data;
         }
@@ -76,7 +79,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
     );
 
-    this.drupalService.getProducts({type: "education"}).subscribe(
+    this.drupalService.getProducts("education", []).subscribe(
       data => {
         this.educationalProducts = data;
       }
