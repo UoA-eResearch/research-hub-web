@@ -96,7 +96,7 @@
           <spinner></spinner>
         </div>
         <div *ngFor="let product of getProducts(lifeCycle.id); let i = index;" class="col" [ngClass]="getColClasses()">
-          <product-overview *ngIf="i < getMaxProducts()" [product]="product"></product-overview>
+          <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'lifecycle'" [product]="product"></product-overview>
         </div>
       </div>
     </div>
@@ -137,7 +137,7 @@
         <spinner></spinner>
       </div>
       <div *ngFor="let product of getProducts(service.id); let i = index;" class="col" [ngClass]="getColClasses()">
-        <product-overview *ngIf="i < getMaxProducts()" [product]="product"></product-overview>
+        <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'productList'" [product]="product"></product-overview>
       </div>
     </div>
   </div>
@@ -178,7 +178,7 @@
         <spinner></spinner>
       </div>
       <div *ngFor="let product of educationalProducts; let i = index;" class="col" [ngClass]="getColClasses()">
-        <product-overview *ngIf="i < getMaxProducts()" [product]="product"></product-overview>
+        <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'productList'" [product]="product"></product-overview>
       </div>
     </div>
   </div>

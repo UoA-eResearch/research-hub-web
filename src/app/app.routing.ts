@@ -14,6 +14,7 @@ const appRoutes:Routes = [
     {path: 'showcase', component: ComingSoonComponent},
     {path: 'lifecycle', component: LifecycleComponent},
     {path: 'lifecycle/:lifeCycleId', component: LifecycleComponent},
+    {path: 'lifecycle/:type/productDetails/:id', component: ProductDetailsComponent},
     {path: 'showcase', component: ShowcaseComponent},
     {path: 'productList/:type', component: ProductListComponent},
     {path: 'productList/:type/:serviceTypeId', component: ProductListComponent},

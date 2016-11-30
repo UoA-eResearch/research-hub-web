@@ -5,7 +5,7 @@
         <spinner></spinner>
       </div>
       <div *ngFor="let product of products | async" class="col" [ngClass]="getColClasses()">
-        <product-overview [product]="product"></product-overview>
+        <product-overview [parentRoute]="'productList'" [product]="product"></product-overview>
       </div>
     </div>
   </div>

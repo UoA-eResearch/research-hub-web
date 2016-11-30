@@ -42,9 +42,14 @@
         <li><a [routerLink]="['showcase']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
           class="material-icons">group</i>Showcase</a></li>
       </ul>
+
       <div class="nav-wrapper inset-content">
         <a href="#" data-activates="slide-out" class="button-collapse">
           <i style="margin-left: 20px; font-size: 24px;" class="material-icons">menu</i>
+        </a>
+
+        <a href="#" style="display: inline-block; line-height: 48px; height: 48px; margin-left: 20px;vertical-align: top;" *ngIf="isProductDetailsActive()" (click)="back()">
+          <i class="material-icons" style="display: inline-block; line-height: 48px; height: 48px;">chevron_left</i><span style="vertical-align: top;">Back</span>
         </a>
 
         <ul style="display:inline-block;">
@@ -73,6 +78,8 @@
             </select>
           </li>
         </ul>
+
+
       </div>
     </nav>
   </div>

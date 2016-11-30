@@ -6,6 +6,7 @@ import {ProductService} from "./app.product.service";
 import {Observable} from "rxjs/Rx";
 import * as moment from 'moment';
 declare var $:any;
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit {
 
   taxonomies = {research_lifecycle: "3", service_type: "2", programme: "7", study_level: "8"};
 
-  constructor(private router:Router, private searchService:SearchService, private drupalService:DrupalService) {
+  constructor(private router:Router, private searchService:SearchService, private drupalService:DrupalService, private location: Location) {
 
   }
 
@@ -54,6 +55,18 @@ export class AppComponent implements OnInit {
     );
   }
 
+  back()
+  {
+    this.location.back();
+  }
+
+  isProductDetailsActive() {
+    return this.router.isActive('lifecycle/education/productDetails', false) ||
+           this.router.isActive('lifecycle/service/productDetails', false) ||
+           this.router.isActive('productList/service/productDetails', false) ||
+           this.router.isActive('productList/education/productDetails', false);
+  }
+
   getYear() {
     return moment().year();
   }
@@ -62,16 +75,21 @@ export class AppComponent implements OnInit {
     this.searchService.setSearchTerm(term);
   }
 
+  isHomeActive()
+  {
+    return this.router.isActive('home', true);
+  }
+
   isLifecycleActive() {
-    return this.router.isActive('lifecycle', false) && !this.router.isActive('productList/lifecycle/productDetails', false);
+    return this.router.isActive('lifecycle', false) && !this.isProductDetailsActive();
   }
 
   isServicesActive() {
-    return this.router.isActive('productList/service', false) && !this.router.isActive('productList/service/productDetails', false);
+    return this.router.isActive('productList/service', false) && !this.isProductDetailsActive();
   }
 
   isEducationActive() {
-    return this.router.isActive('productList/education', false) && !this.router.isActive('productList/education/productDetails', false);
+    return this.router.isActive('productList/education', false) && !this.isProductDetailsActive();
   }
 
   ngOnDestroy() {

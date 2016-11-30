@@ -9,13 +9,14 @@ import {ProductService} from "../app.product.service";
 })
 export class ProductOverviewComponent {
   @Input() product:any;
+  @Input() parentRoute:string;
 
   constructor(private router: Router, private productService: ProductService) {
 
   }
-  
+
   openProductDetails()
   {
-    this.router.navigate(['productList', this.product.type, 'productDetails', this.product.nid]);
+    this.router.navigate([this.parentRoute, this.product.type, 'productDetails', this.product.nid]);
   }
 }
