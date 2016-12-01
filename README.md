@@ -55,51 +55,15 @@ The Research Hub is build with the angular-cli and hosted on an Apache Http
 server in a Docker container.
 
 ### Prerequisites
-Install git, curl and build-essential (so you can compile native npm extensions).
-```bash
-sudo apt-get install git curl build-essential
-```
-
-Setup the University of Auckand web proxy.
-```bash
-export http_proxy=http://squid.auckland.ac.nz:3128
-export https_proxy=http://squid.auckland.ac.nz:3128
-sudo git config --global http.proxy $http_proxy
-```
-
-Install [Node v4](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions).
-```bash
-curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-sudo apt-get install -y nodejs
-```
-
-Setup University of Auckand web proxy for npm and update npm to the latest version.
-```bash
-sudo npm config set proxy http://squid.auckland.ac.nz:3128
-sudo npm config set https-proxy http://squid.auckland.ac.nz:3128
-sudo npm install -g npm
-```
-
-Install the [angular-cli](https://github.com/angular/angular-cli) for Angular 2. --unsafe-perm was needed otherwise angular-cli failed...
-```bash
-sudo npm install --unsafe-perm -g angular-cli
-```
-
 Install Docker by following [these instructions](https://docs.docker.com/engine/installation/linux/ubuntulinux/).
 
 ### Deployment
 Clone the research-hub repository.
-```bash
-git clone https://github.com/UoA-eResearch/research-hub.git
-```
-
-Build the Docker container.
-```bash
-cd research-hub
-docker build -t research-hub .
-```
 
 Run the Docker container.
 ```bash
-docker run --restart=always -p 80:80 443:443 -d research-hub
+sudo docker --restart=always run -p 80:80 -p 443:443 -v /research-hub:/usr/local/apache2/conf/keys -d uoacer/research-hub
 ```
+
+
+
