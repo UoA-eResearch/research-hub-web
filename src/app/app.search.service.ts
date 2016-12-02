@@ -22,10 +22,12 @@ export class SearchService {
   getTermIds()
   {
     let termIds = [];
+    console.log('subcats: ', this.subcategories);
     for (var key in this.subcategories) {
       if (this.subcategories.hasOwnProperty(key)) {
         let value = this.subcategories[key];
-        if(value && value != "null")
+        console.log(value);
+        if(value && value != "null" && value != "undefined")
           termIds.push(value)
       }
     }
