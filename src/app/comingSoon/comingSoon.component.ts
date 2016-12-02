@@ -1,16 +1,25 @@
-import {AfterViewInit} from "@angular/core";
+import {AfterViewInit, OnInit} from "@angular/core";
 import {Component} from "@angular/core";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
+import {SearchService} from "../app.search.service";
 
 @Component({
   selector: 'comming-soon',
   templateUrl: './comingSoon.component.html'
 })
-export class ComingSoonComponent implements AfterViewInit
-{
+export class ComingSoonComponent implements OnInit, AfterViewInit {
 
-  constructor(private router:Router) {
+  routeParamsSub: any;
 
+  constructor(private router:Router, private searchService:SearchService, private route: ActivatedRoute) {
+
+  }
+
+  ngOnInit()
+  {
+    this.routeParamsSub = this.route.params.subscribe(params => {
+      this.searchService.updateSearchParameters(undefined, {}, true);
+    });
   }
 
   getName()
@@ -26,5 +35,9 @@ export class ComingSoonComponent implements AfterViewInit
 
   ngAfterViewInit() {
     window.scrollTo(0, 0);
+  }
+
+  ngOnDestroy() {
+    this.routeParamsSub.unsubscribe();
   }
 }
