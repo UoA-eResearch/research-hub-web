@@ -10,8 +10,14 @@ import {ActivatedRoute} from "@angular/router";
 export class LifecycleComponent implements AfterViewInit {
   @ViewChild('productList') productList;
   routeParamsSub: any;
+  productsSub: any;
+  searchSub: any;
+  showSpinner: boolean = true;
+  showProducts: boolean = false;
+  showNoResults: boolean = false;
   productWidth: number = 180;
   products:Observable<Array<string>>;
+  timers: any[] = [];
 
   constructor(private route: ActivatedRoute, private searchService:SearchService, private drupalService:DrupalService) {
 
@@ -20,11 +26,38 @@ export class LifecycleComponent implements AfterViewInit {
   ngOnInit() {
     this.products = this.drupalService.productSearch(this.searchService.searchChange, 0);
 
+    this.productsSub = this.products.subscribe(data => {
+      let timerA = setTimeout(() => {
+        this.showSpinner = false;
+      }, 500);
+
+      let timerB = setTimeout(() => {
+        this.showProducts = data.length > 0;
+      }, 1000);
+
+      let timerC = setTimeout(() => {
+        this.showNoResults = data.length == 0;
+      }, 1500);
+
+      this.timers = [timerA, timerB, timerC];
+    });
+
     this.routeParamsSub = this.route.params.subscribe(params => {
       let lifeCycleId = params['lifeCycleId'];
       let subcategories = {};
       subcategories["field_research_lifecycle_stage"] = lifeCycleId;
       this.searchService.updateSearchParameters(undefined, subcategories, true);
+    });
+
+    this.searchSub = this.searchService.searchChange.distinctUntilChanged().subscribe(data => {
+      for(let i = 0; i < this.timers.length; i++)
+      {
+        clearTimeout(this.timers[i]);
+      }
+      this.timers = [];
+      this.showSpinner = true;
+      this.showProducts = false;
+      this.showNoResults = false;
     });
   }
 
@@ -41,5 +74,7 @@ export class LifecycleComponent implements AfterViewInit {
 
   ngOnDestroy() {
     this.routeParamsSub.unsubscribe();
+    this.productsSub.unsubscribe();
+    this.searchSub.unsubscribe();
   }
 }

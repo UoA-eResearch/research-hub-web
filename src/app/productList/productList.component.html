@@ -1,11 +1,16 @@
 <div class="inset-content">
   <div class="product-list">
     <div #productList class="row">
-      <div class="col s12 m12 l12 center-align hub-spinner" *ngIf="(products | async)?.length==undefined">
+      <div class="col s12 m12 l12 center-align hub-spinner" [hidden]="!showSpinner">
         <spinner></spinner>
       </div>
-      <div *ngFor="let product of products | async" class="col" [ngClass]="getColClasses()">
-        <product-overview [parentRoute]="'productList'" [product]="product"></product-overview>
+      <div class="col s12 m12 l12 center-align hub-spinner" [hidden]="!showNoResults">
+        <no-results></no-results>
+      </div>
+      <div [hidden]="!showProducts">
+        <div *ngFor="let product of products | async" class="col" [ngClass]="getColClasses()">
+          <product-overview [parentRoute]="'productList'" [product]="product"></product-overview>
+        </div>
       </div>
     </div>
   </div>
