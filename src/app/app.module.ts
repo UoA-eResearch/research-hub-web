@@ -14,6 +14,7 @@ import {ProductOverviewComponent} from "./productOverview/productOverview.compon
 import {ProductListComponent} from "./productList/productList.component";
 import {ProductDetailsComponent} from "./productDetails/productDetails.component";
 import {ComingSoonComponent} from "./comingSoon/comingSoon.component";
+import {NoResultsComponent} from "./noResults/noResults.component";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {ComingSoonComponent} from "./comingSoon/comingSoon.component";
         HomeComponent,
         SpinnerComponent,
         StarsComponent,
-        ComingSoonComponent
+        ComingSoonComponent,
+        NoResultsComponent
     ],
     imports: [
         JsonpModule,
