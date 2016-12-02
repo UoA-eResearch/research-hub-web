@@ -99,6 +99,11 @@ export class AppComponent implements OnInit {
   //Update dropdowns when route value changes
   ngOnInit() {
     this.uiChangeSub = this.searchService.uiChange.subscribe(data => {
+      //Reset search box
+      console.log('reset search');
+      $("#search").val("");
+      this.setSearchTerm("");
+
       let subcategories = data['subcategories'];
       let lifeCycle = subcategories['field_research_lifecycle_stage'];
       let serviceType = subcategories['field_category'];
@@ -107,6 +112,10 @@ export class AppComponent implements OnInit {
 
       //Set all to none
       $("select").val("");
+      this.lifeCycle = "";
+      this.serviceType = "";
+      this.programme = "";
+      this.studyLevel = "";
 
       if(lifeCycle) {
         this.lifeCycle = lifeCycle;
