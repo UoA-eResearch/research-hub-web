@@ -4,8 +4,8 @@
       <a class="brand-logo left" style="margin-left:-8px;"><img src="assets/example-logo-white.png"/></a>
 
       <form style="margin-left: 260px;">
-        <div class="input-field">
-          <input #search type="search" style=" margin-bottom: 0;" (keyup)="setSearchTerm(search.value)">
+        <div class="input-field" [hidden]="isProductDetailsActive()">
+          <input #search id="search" type="search" style=" margin-bottom: 0;" (keyup)="setSearchTerm(search.value)">
           <label for="search"><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
         </div>
