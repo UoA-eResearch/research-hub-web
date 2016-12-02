@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, AfterViewInit} from "@angular/core";
 import {DrupalService} from "../app.drupal.service";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
+import {SearchService} from "../app.search.service";
 import {Observable} from "rxjs/Rx";
 declare var $:any;
 
@@ -16,8 +17,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   private serviceTypeTerms:Observable<Array<string>>;
   private educationalProducts = [];
   private allProducts = {};
+  private routeParamsSub: any;
 
-  constructor(private drupalService:DrupalService, private router:Router) {
+  constructor(private drupalService:DrupalService, private router:Router, private searchService:SearchService, private route: ActivatedRoute) {
 
   }
 
@@ -63,6 +65,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.routeParamsSub = this.route.params.subscribe(params => {
+      this.searchService.updateSearchParameters(undefined, {}, true);
+    });
+
     this.lifeCycleTerms = this.drupalService.getTaxonomy(this.taxonomies.research_lifecycle);
     this.serviceTypeTerms = this.drupalService.getTaxonomy(this.taxonomies.service_type);
 
@@ -91,5 +97,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     window.scrollTo(0, 0);
+  }
+
+  ngOnDestroy() {
+    this.routeParamsSub.unsubscribe();
   }
 }
