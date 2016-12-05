@@ -62,7 +62,7 @@ Clone the research-hub repository.
 
 Run the Docker container.
 ```bash
-sudo docker --restart=always run -p 80:80 -p 443:443 -v /research-hub:/usr/local/apache2/conf/keys -d uoacer/research-hub
+sudo docker run --restart=always -p 80:80 -p 443:443 -v /research-hub:/usr/local/apache2/conf/keys -d uoacer/research-hub
 ```
 
 
