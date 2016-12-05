@@ -244,6 +244,17 @@
 }
 
 @media #{$small-and-down} {
+
+  .home-category-divider * div.uoa-flex-text-img__content
+  {
+    height: 200px;
+  }
+
+  .uoa-category-banner
+  {
+    margin: 50px;
+  }
+
   .home-banner
   {
     height: 300px;
@@ -252,20 +263,12 @@
   .product-list
   {
     margin: 20px;
-    //min-width: 160px !important;
   }
-
-  .home-description {
-    //margin-top: 350px;
-  }
-
   .uoa-container {
     margin-left: auto;
     margin-right: auto;
     padding-left: 0.555rem;
     padding-right: 0.555rem;
-    //position: absolute;
-    //top: 350px;
   }
 
   .uoa-container-col
@@ -292,35 +295,40 @@
 }
 
 @media #{$medium-and-up} {
+  .aligner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .align-item-bottom {
+    align-self: flex-end;
+  }
+
+  .uoa-category-banner
+  {
+    margin-right: 50px;
+  }
+
   .home-banner
   {
-    height: 400px;
+    height: 56vw;
   }
 
   .uoa-container {
     width: 100%;
-    //top: 180px;
   }
 
-  .uoa-container-col
+  .uoa-container > div
   {
-    margin-top: 100px;
+    margin-bottom: -50px !important;
   }
 
   .uoa-container div div
   {
     width: 300px;
-    margin-right: 160px;
+    margin-right: 150px !important;
   }
-
-  //.home-description {
-  //  height: 50px;
-  //}
-
-  //.home-description
-  //{
-  //  margin-top: 150px;
-  //}
 
   .product-detail
   {
@@ -337,57 +345,20 @@
 
   .product-list
   {
-    //width: 800px;
     margin: 20px auto 20px auto;
     padding: 0 20px 0 20px;
   }
 }
 
-@media #{$medium-and-down} {
-
-}
-
 @media #{$large-and-up} {
-  .home-banner
-  {
-    height: 600px;
-  }
-
-  .uoa-container {
-    //position: absolute;
-    width: 100%;
-    //margin-top: 300px;
-    //top: 380px;
-  }
-
-  .uoa-container-col
-  {
-    margin-top: 300px;
-  }
-
-  //.uoa-container div.row
-  //{
-  //  margin-top: 100px;
-  //}
-
-  .uoa-container div div
-  {
-    width: 300px;
-    margin-right: 200px !important;
-  }
-
-  //.home-description {
-  //  height: 50px;
-  //}
-
-  .home-description
-  {
-    //margin-top: 150px;
+  .home-divier-aligner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .product-list
   {
-    //width: 1400px;
     margin: 50px auto 50px auto;
     padding: 0 50px 0 50px;
   }
@@ -405,6 +376,31 @@
     height: 48px;
   }
 }
+
+@media #{$medium-and-down} {
+  .home-category-divider
+  {
+    height: 350px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}
+
+@media #{$large-and-up} {
+
+  .home-category-divider
+  {
+    height: 25vw;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  .home-category-divider * div.uoa-flex-text-img__content
+  {
+    height: 15vw;
+  }
+}
+
 
 .product-list-title
 {
@@ -629,8 +625,6 @@
   .uoa-flex-text-img--large .uoa-flex-text-img__content h2 {
     font-size: 1.5625rem; } }
 .uoa-flex-text-img--large {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
   overflow: hidden;
   position: relative;}
 .uoa-flex-text-img--large img {
@@ -646,3 +640,4 @@
 .home-description {
   margin-top: 50px;
 }
+
