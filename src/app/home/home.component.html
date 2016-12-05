@@ -1,59 +1,66 @@
-<div class="uoa-container">
-  <div class="row">
-    <div class="col right">
-      <div class="uoa-header__content uoa-brand-shape">
-        <div class="uoa-brand-shape__content" style="padding: 15px;">
-          <h1 style="font-size: 37px;">Accelerate your research</h1>
-          <p data-truncate-length="140" style="font-size: 18px;">Services, educational resources, guides and policy documents for University of Auckland researchers.</p>
+<div class="home-banner"
+     style="background-image: url('https://researchit.cer.auckland.ac.nz/sites/default/files/research-hub.jpg'); background-size: cover; background-position: 50% 0;">
+  <div class="uoa-container">
+    <div class="row">
+      <div class="col right uoa-container-col">
+        <div class="uoa-header__content uoa-brand-shape">
+          <div class="uoa-brand-shape__content" style="padding: 15px;">
+            <h1 style="font-size: 37px;">Accelerate your research</h1>
+            <p style="font-size: 18px;">Services, educational resources, guides and policy
+              documents for University of Auckland researchers.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-<div class="parallax-container home-banner">
-  <div class="row container">
-    <div class="parallax">
-      <img src="assets/hub.jpg">
     </div>
   </div>
 </div>
 
 <div class="container home-description">
   <div class="section">
-      <div class="row">
-        <h3 class="col s12 light center header" style="color: #00467f;">The Research Hub connects you with resources to enhance and accelerate your research</h3>
+    <div class="row">
+      <h3 class="col s12 light center header" style="color: #00467f;">The Research Hub connects you with resources to
+        enhance and accelerate your research</h3>
+    </div>
+    <div class="row">
+      <div class="col s12 m4">
+        <div class="center promo">
+          <i class="material-icons">flash_on</i>
+          <p class="promo-caption">Speeds up Research</p>
+          <p class="light center">We did the hard yards to provide you with a one stop shop of services, educational
+            resources, guides and policies offered by the University of Auckland. Simply select the type of offering you
+            are after or use the search bar at the top of the page to find offerings relevant to your research!</p>
+        </div>
       </div>
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="center promo">
-            <i class="material-icons">flash_on</i>
-            <p class="promo-caption">Speeds up Research</p>
-            <p class="light center">We did the hard yards to provide you with a one stop shop of services, educational resources, guides and policies offered by the University of Auckland. Simply select the type of offering you are after or use the search bar at the top of the page to find offerings relevant to your research!</p>
-          </div>
-        </div>
 
-        <div class="col s12 m4">
-          <div class="center promo">
-            <i class="material-icons">school</i>
-            <p class="promo-caption">Researcher Focused</p>
-            <p class="light center">The Research Hub has been organised to allow you to search and filter research offerings through a number of different categories, including research lifecycle stage, discipline area, service type, study level and policy area. This enables you to quickly find offerings that are relevant to your research needs.</p>
-          </div>
+      <div class="col s12 m4">
+        <div class="center promo">
+          <i class="material-icons">school</i>
+          <p class="promo-caption">Researcher Focused</p>
+          <p class="light center">The Research Hub has been organised to allow you to search and filter research
+            offerings through a number of different categories, including research lifecycle stage, discipline area,
+            service type, study level and policy area. This enables you to quickly find offerings that are relevant to
+            your research needs.</p>
         </div>
+      </div>
 
-        <div class="col s12 m4">
-          <div class="center promo">
-            <i class="material-icons">list</i>
-            <p class="promo-caption">Details</p>
-            <p class="light center">Each offering is described in detail, including the features, limitations, considerations, eligibility requirements, cost and where to find support. Each offering has a section with reviews written by fellow researchers, write a review to help other researchers if you are feeling generous!</p>
+      <div class="col s12 m4">
+        <div class="center promo">
+          <i class="material-icons">list</i>
+          <p class="promo-caption">Details</p>
+          <p class="light center">Each offering is described in detail, including the features, limitations,
+            considerations, eligibility requirements, cost and where to find support. Each offering has a section with
+            reviews written by fellow researchers, write a review to help other researchers if you are feeling
+            generous!</p>
 
-          </div>
         </div>
+      </div>
     </div>
     <div class="divider"></div>
     <div class="section">
       <div class="row center">
         <h3 class="light header" style="color: #00467f;">Research showcase</h3>
-        <p class="col s8 offset-s2 light center">See what fellow University of Auckland researchers have created with Research Hub services.
+        <p class="col s8 offset-s2 light center">See what fellow University of Auckland researchers have created with
+          Research Hub services.
           Get inspired by these research projects and submit your own projects to be displayed here.</p>
         <a [routerLink]="['/showcase']" class="btn-large waves-effect waves-light">Explore our Showcase</a>
       </div>
@@ -64,48 +71,7 @@
 <div class="parallax-container home-category-divider">
   <div class="row container">
     <div class="parallax">
-      <img src="assets/lifecycle.jpg">
-    </div>
-  </div>
-  <div class="row">
-      <div class="uoa-flex-text-img uoa-flex-text-img--large">
-        <div class="container">
-          <div class="row">
-            <div class="col s12 l6 offset-l7">
-              <span class="uoa-flex-text-img__tag">Explore</span>
-              <div class="uoa-flex-text-img__content">
-                <h2>Research Lifecycle</h2>
-                <p>Find offerings relevant to the current state of your research.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </div>
-</div>
-
-<div *ngFor="let lifeCycle of lifeCycleTerms | async" class="section white home-products">
-    <div class="product-list">
-      <div class="row">
-        <div class="col s6 left-align"><span class="product-list-title">{{lifeCycle.name}}</span></div>
-        <div class="col s6 right-align"><a class="waves-effect waves-light btn" (click)="navigateToLifecycle(lifeCycle)">more</a></div>
-      </div>
-
-      <div #productList class="row">
-        <div *ngIf="getProducts(lifeCycle.id).length == 0" class="col s12 m12 l12 center-align hub-spinner">
-          <spinner></spinner>
-        </div>
-        <div *ngFor="let product of getProducts(lifeCycle.id); let i = index;" class="col" [ngClass]="getColClasses()">
-          <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'lifecycle'" [product]="product"></product-overview>
-        </div>
-      </div>
-    </div>
-</div>
-
-<div class="parallax-container home-category-divider">
-  <div class="row container">
-    <div class="parallax">
-      <img src="assets/lifecycle.jpg">
+      <img style="width: 100%;" src="https://researchit.cer.auckland.ac.nz/sites/default/files/lifecycle_0.jpg">
     </div>
   </div>
   <div class="row">
@@ -115,7 +81,50 @@
           <div class="col s12 l6 offset-l7">
             <span class="uoa-flex-text-img__tag">Explore</span>
             <div class="uoa-flex-text-img__content">
-              <h2>Service Type</h2>
+              <h2>Lifecycle</h2>
+              <p>Find offerings relevant to the current state of your research.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let lifeCycle of lifeCycleTerms | async" class="section white home-products">
+  <div class="product-list">
+    <div class="row">
+      <div class="col s6 left-align"><span class="product-list-title">{{lifeCycle.name}}</span></div>
+      <div class="col s6 right-align"><a class="waves-effect waves-light btn" (click)="navigateToLifecycle(lifeCycle)">more</a>
+      </div>
+    </div>
+
+    <div #productList class="row">
+      <div *ngIf="getProducts(lifeCycle.id).length == 0" class="col s12 m12 l12 center-align hub-spinner">
+        <spinner></spinner>
+      </div>
+      <div *ngFor="let product of getProducts(lifeCycle.id); let i = index;" class="col" [ngClass]="getColClasses()">
+        <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'lifecycle'"
+                          [product]="product"></product-overview>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="parallax-container home-category-divider">
+  <div class="row container">
+    <div class="parallax">
+      <img style="width: 100%;" src="https://researchit.cer.auckland.ac.nz/sites/default/files/services.jpg">
+    </div>
+  </div>
+  <div class="row">
+    <div class="uoa-flex-text-img uoa-flex-text-img--large">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 l6 offset-l7">
+            <span class="uoa-flex-text-img__tag">Explore</span>
+            <div class="uoa-flex-text-img__content">
+              <h2>Services</h2>
               <p>Find offerings via the type of service you are after.</p>
             </div>
           </div>
@@ -129,7 +138,8 @@
   <div class="product-list">
     <div class="row">
       <div class="col s6 left-align"><span class="product-list-title">{{service.name}}</span></div>
-      <div class="col s6 right-align"><a class="waves-effect waves-light btn" (click)="navigateToServices(service.id)">more</a></div>
+      <div class="col s6 right-align"><a class="waves-effect waves-light btn" (click)="navigateToServices(service.id)">more</a>
+      </div>
     </div>
 
     <div #productList class="row">
@@ -137,7 +147,8 @@
         <spinner></spinner>
       </div>
       <div *ngFor="let product of getProducts(service.id); let i = index;" class="col" [ngClass]="getColClasses()">
-        <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'productList'" [product]="product"></product-overview>
+        <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'productList'"
+                          [product]="product"></product-overview>
       </div>
     </div>
   </div>
@@ -146,7 +157,7 @@
 <div class="parallax-container home-category-divider">
   <div class="row container">
     <div class="parallax">
-      <img src="assets/lifecycle.jpg">
+      <img style="width: 100%;" src="https://researchit.cer.auckland.ac.nz/sites/default/files/education.jpg">
     </div>
   </div>
   <div class="row">
@@ -170,7 +181,8 @@
   <div class="product-list">
     <div class="row">
       <div class="col s6 left-align"><span class="product-list-title">Computing Education</span></div>
-      <div class="col s6 right-align"><a class="waves-effect waves-light btn" [routerLink]="['/productList', 'education']">more</a></div>
+      <div class="col s6 right-align"><a class="waves-effect waves-light btn"
+                                         [routerLink]="['/productList', 'education']">more</a></div>
     </div>
 
     <div #productList class="row">
@@ -178,7 +190,8 @@
         <spinner></spinner>
       </div>
       <div *ngFor="let product of educationalProducts; let i = index;" class="col" [ngClass]="getColClasses()">
-        <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'productList'" [product]="product"></product-overview>
+        <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'productList'"
+                          [product]="product"></product-overview>
       </div>
     </div>
   </div>
