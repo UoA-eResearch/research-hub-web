@@ -34,7 +34,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   getColClasses() {
     let productsPerRow = this.productList.nativeElement.offsetWidth / this.productWidth;
     let gridWidth = Math.floor(12 / productsPerRow);
-    return "s" + gridWidth + " m" + gridWidth + " l" + gridWidth;
+    let smallGridWidth = gridWidth;
+
+    if(Math.floor(productsPerRow) <= 1)
+      smallGridWidth = 12;
+
+    return "s" + smallGridWidth + " m" + gridWidth + " l" + gridWidth;
   }
 
   getMaxProducts() {
