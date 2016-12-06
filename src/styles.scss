@@ -281,7 +281,8 @@
   .product-detail
   {
     margin: 20px;
-    min-width: 300px;
+    width: 90%;
+    //min-width: 300px;
   }
 }
 
@@ -347,7 +348,8 @@
     margin-right: auto;
     margin-top: 50px;
     margin-bottom: 50px;
-    width: 800px;
+    width: 90%;
+    max-width: 800px;
     padding-left: 35px;
     padding-right: 35px;
     padding-top: 35px;
