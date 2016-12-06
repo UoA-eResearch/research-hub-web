@@ -119,8 +119,6 @@ export class DrupalService {
   }
 
   getProductsSearch(type, searchTerm, termIds) {
-    console.log('type', type, 'searchTerm', searchTerm, 'termIds', termIds);
-
     let search = new URLSearchParams();
 
     if (type)

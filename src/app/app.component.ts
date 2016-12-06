@@ -100,7 +100,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.uiChangeSub = this.searchService.uiChange.subscribe(data => {
       //Reset search box
-      console.log('reset search');
       $("#search").val("");
       this.setSearchTerm("");
 
@@ -152,7 +151,6 @@ export class AppComponent implements OnInit {
     $(document).ready(() => {
       //Update model when select dropdowns changed
       $('select').change((e) => {
-        console.log('update select');
         switch (e.currentTarget.id) {
           case "lifeCycleSelect":
               this.lifeCycle = e.currentTarget.value;
