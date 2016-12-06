@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.routeParamsSub = this.route.params.subscribe(params => {
-      this.searchService.updateSearchParameters(undefined, {}, true);
+      this.searchService.updateAllSearchParameters(undefined, {}, true);
     });
 
     this.lifeCycleTerms = this.drupalService.getTaxonomy(this.taxonomies.research_lifecycle);

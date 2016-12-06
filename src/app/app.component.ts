@@ -180,6 +180,6 @@ export class AppComponent implements OnInit {
     subcategories["field_category"] = this.serviceType;
     subcategories["field_programme"] = this.programme;
     subcategories["field_study_level"] = this.studyLevel;
-    this.searchService.updateSearchParameters(undefined, subcategories);
+    this.searchService.updateSubcategories(subcategories);
   }
 }

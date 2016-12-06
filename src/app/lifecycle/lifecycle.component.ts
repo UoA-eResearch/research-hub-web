@@ -46,7 +46,7 @@ export class LifecycleComponent implements AfterViewInit {
       let lifeCycleId = params['lifeCycleId'];
       let subcategories = {};
       subcategories["field_research_lifecycle_stage"] = lifeCycleId;
-      this.searchService.updateSearchParameters(undefined, subcategories, true);
+      this.searchService.updateAllSearchParameters(undefined, subcategories, true);
     });
 
     this.searchSub = this.searchService.searchChange.distinctUntilChanged().subscribe(data => {

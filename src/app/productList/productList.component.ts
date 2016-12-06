@@ -47,7 +47,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
       let serviceTypeId = params['serviceTypeId'];
       let subcategories = {};
       subcategories["field_category"] = serviceTypeId;
-      this.searchService.updateSearchParameters(productType, subcategories, true);
+      this.searchService.updateAllSearchParameters(productType, subcategories, true);
     });
 
     this.searchSub = this.searchService.searchChange.distinctUntilChanged().subscribe(data => {

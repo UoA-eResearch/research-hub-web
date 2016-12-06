@@ -39,7 +39,25 @@ export class SearchService {
     this.searchChange.next(this.getSearch());
   }
 
-  updateSearchParameters(productType, subcategories, updateUI=false)
+  updateProductType(productType, updateUI=false)
+  {
+    this.productType = productType;
+    this.searchChange.next(this.getSearch());
+
+    if(updateUI)
+      this.uiChange.next(this.getSearch())
+  }
+
+  updateSubcategories(subcategories, updateUI=false)
+  {
+    this.subcategories = subcategories;
+    this.searchChange.next(this.getSearch());
+
+    if(updateUI)
+      this.uiChange.next(this.getSearch())
+  }
+
+  updateAllSearchParameters(productType, subcategories, updateUI=false)
   {
     this.productType = productType;
     this.subcategories = subcategories;
