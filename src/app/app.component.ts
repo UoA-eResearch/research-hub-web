@@ -55,6 +55,13 @@ export class AppComponent implements OnInit {
     );
   }
 
+  getSecondaryMenuClass()
+  {
+    if(this.router.isActive('home', true) || this.router.isActive('showcase', true) || this.router.isActive('policies', true) || this.router.isActive('guides', true))
+      return "secondary-menu-bar";
+    return "";
+  }
+
   back()
   {
     this.location.back();

@@ -284,6 +284,7 @@
     width: 90%;
     //min-width: 300px;
   }
+
 }
 
 .product-card
@@ -297,7 +298,22 @@
   margin-bottom: 5px;
 }
 
+.secondary-menu-bar
+{
+  width: 258px;
+  height: 0;
+}
+
+@media only screen and (max-width : 992px) {
+  .secondary-menu-bar
+  {
+    width: 100%;
+    height: 48px;
+  }
+}
+
 @media #{$medium-and-up} {
+
   .aligner {
     display: flex;
     align-items: center;

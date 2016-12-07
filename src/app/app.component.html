@@ -4,10 +4,10 @@
       <a class="brand-logo left" style="margin-left:-8px;"><img src="assets/logo-white.svg"/></a>
 
       <form style="margin-left: 260px;">
-        <div class="input-field" [hidden]="isProductDetailsActive()">
-          <input #search id="search" type="search" style=" margin-bottom: 0;" (keyup)="setSearchTerm(search.value)">
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
+        <div class="input-field" [hidden]="isProductDetailsActive()" style="height: 64px;">
+          <input #search id="search" type="search" style=" margin-bottom: 0;height: 64px;" (keyup)="setSearchTerm(search.value)">
+          <label for="search"><i class="material-icons" style="height: 64px;line-height: 64px;">search</i></label>
+          <i class="material-icons" style="height: 64px;line-height: 64px;">close</i>
         </div>
       </form>
     </div>
@@ -23,7 +23,7 @@
 </div>
 
 <header>
-  <div class="secondary_nav" style="height: 48px;">
+  <div class="secondary_nav" [ngClass]="getSecondaryMenuClass()">
     <nav>
       <ul id="slide-out" class="side-nav fixed collapsible hub-side-nav">
         <div style="width: 260px; height: 64px;"><img style="height: 64px;padding: 15px;" src="assets/logo.svg"/></div>
