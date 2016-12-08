@@ -9,6 +9,7 @@ import {ComingSoonComponent} from "./comingSoon/comingSoon.component";
 
 const appRoutes:Routes = [
     {path: 'home', component: HomeComponent},
+    {path: 'home/search', component: ProductListComponent},
     {path: 'guides', component: ComingSoonComponent},
     {path: 'policies', component: ComingSoonComponent},
     {path: 'showcase', component: ComingSoonComponent},

@@ -55,6 +55,15 @@ export class AppComponent implements OnInit {
     );
   }
 
+  setSearchTerm(term)
+  {
+    if(term != "" && this.router.isActive('home', true))
+    {
+      this.router.navigate(['home/search']);
+    }
+    this.searchService.setSearchTerm(term);
+  }
+
   getSecondaryMenuClass()
   {
     if(this.router.isActive('home', true) || this.router.isActive('showcase', true) || this.router.isActive('policies', true) || this.router.isActive('guides', true))
@@ -64,7 +73,14 @@ export class AppComponent implements OnInit {
 
   back()
   {
-    this.location.back();
+    if(this.router.isActive('home/search', true))
+      this.router.navigate(['home']);
+    else
+      this.location.back();
+  }
+
+  showBackBtn() {
+    return this.isProductDetailsActive() || this.router.isActive('home/search', true);
   }
 
   isProductDetailsActive() {
@@ -76,10 +92,6 @@ export class AppComponent implements OnInit {
 
   getYear() {
     return moment().year();
-  }
-
-  setSearchTerm(term) {
-    this.searchService.setSearchTerm(term);
   }
 
   isHomeActive()
@@ -106,9 +118,12 @@ export class AppComponent implements OnInit {
   //Update dropdowns when route value changes
   ngOnInit() {
     this.uiChangeSub = this.searchService.uiChange.subscribe(data => {
-      //Reset search box
-      $("#search").val("");
-      this.setSearchTerm("");
+
+      if(!this.router.isActive('home/search', true)) {
+        //Reset search box
+        $("#search").val("");
+        this.setSearchTerm("");
+      }
 
       let subcategories = data['subcategories'];
       let lifeCycle = subcategories['field_research_lifecycle_stage'];
