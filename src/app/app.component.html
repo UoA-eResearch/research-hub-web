@@ -1,5 +1,5 @@
 <div>
-  <nav>
+  <nav style="height: 64px;">
     <div class="nav-wrapper">
       <a class="brand-logo left" style="margin-left:-8px;"><img src="assets/logo-white.svg"/></a>
 
@@ -95,9 +95,9 @@
       <div class="col l4 offset-l2 s12">
         <h5 class="white-text">Help &amp; Support</h5>
         <ul>
-          <li><a class="grey-text text-lighten-3" href="http://www.eresearch.auckland.ac.nz/en/centre-for-eresearch/our-centre.html">About the Centre for eResearch</a></li>
-          <li><a class="grey-text text-lighten-3" href="http://www.eresearch.auckland.ac.nz/en/centre-for-eresearch/contact-us.html">Contact us</a></li>
-          <li><a class="grey-text text-lighten-3" href="mailto:eresearch-support@list.auckland.ac.nz">Provide Feedback</a></li>
+          <li><a class="grey-text text-lighten-3" target='_blank' href="http://www.eresearch.auckland.ac.nz/en/centre-for-eresearch/our-centre.html">About the Centre for eResearch</a></li>
+          <li><a class="grey-text text-lighten-3" target='_blank' href="http://www.eresearch.auckland.ac.nz/en/centre-for-eresearch/contact-us.html">Contact us</a></li>
+          <li><a class="grey-text text-lighten-3" target='_blank' href="https://docs.google.com/forms/d/1fX1syILMvaTyUkb4a3C9pDdPNL9wCkfOy4NOy2h_1pM" (click)="trackFeedback()">Provide Feedback</a></li>
         </ul>
       </div>
     </div>
@@ -109,4 +109,4 @@
   </div>
 </footer>
 
-<a class="github-fork-ribbon left-bottom fixed" target='_blank' href="https://docs.google.com/forms/d/1fX1syILMvaTyUkb4a3C9pDdPNL9wCkfOy4NOy2h_1pM" title="Beta site feedback">Beta site feedback</a>
+<a class="github-fork-ribbon left-bottom fixed" target='_blank' href="https://docs.google.com/forms/d/1fX1syILMvaTyUkb4a3C9pDdPNL9wCkfOy4NOy2h_1pM" (click)="trackFeedback()" title="Beta site feedback">Beta site feedback</a>

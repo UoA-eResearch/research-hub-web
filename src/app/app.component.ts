@@ -1,12 +1,14 @@
 import {Component, OnInit, ChangeDetectorRef, ApplicationRef} from '@angular/core';
-import {Router, NavigationEnd} from "@angular/router";
+import {Router, NavigationEnd, Event} from "@angular/router";
 import {SearchService} from "./app.search.service";
 import {DrupalService} from "./app.drupal.service";
 import {ProductService} from "./app.product.service";
 import {Observable} from "rxjs/Rx";
 import * as moment from 'moment';
 declare var $:any;
+declare let _gaq:any;
 import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
@@ -21,6 +23,7 @@ export class AppComponent implements OnInit {
   serviceType:string = "";
   programme:string = "";
   studyLevel:string = "";
+  goingBack: boolean = false;
 
   lifeCycleTerms:Observable<Array<string>>;
   serviceTypeTerms:Observable<Array<string>>;
@@ -30,7 +33,29 @@ export class AppComponent implements OnInit {
   taxonomies = {research_lifecycle: "3", service_type: "2", programme: "7", study_level: "8"};
 
   constructor(private router:Router, private searchService:SearchService, private drupalService:DrupalService, private location: Location) {
+    this.router.events.subscribe(
+      (event: Event) => {
+        if (event instanceof NavigationEnd) {
+          if(this.goingBack && event.urlAfterRedirects.startsWith("/home"))
+          {
+            this.goingBack = false;
+            return;
+          }
+          
+          _gaq.push(['_setAccount', 'UA-77710107-2']);
+          _gaq.push(['_trackPageview', AppComponent.formatPageName(event.urlAfterRedirects)]);
+        }
+      });
+  }
 
+  static formatPageName(url)
+  {
+    if(url.startsWith("/lifecycle") && !url.includes("productDetails"))
+    {
+      return "/lifecycle";
+    }
+
+    return url;
   }
 
   getTaxonomies() {
@@ -73,10 +98,13 @@ export class AppComponent implements OnInit {
 
   back()
   {
-    if(this.router.isActive('home/search', true))
-      this.router.navigate(['home']);
-    else
+    if(this.router.isActive('home/search', true)) {
+      this.router.navigate(['/']);
+    }
+    else {
+      this.goingBack = true;
       this.location.back();
+    }
   }
 
   showBackBtn() {
@@ -192,6 +220,12 @@ export class AppComponent implements OnInit {
         this.updateSubcategories();
       });
     });
+  }
+
+  trackFeedback()
+  {
+    _gaq.push(['_setAccount', 'UA-77710107-2']);
+    _gaq.push(['_trackEvent', 'feedback', 'clicked'])
   }
 
   updateSubcategories() {

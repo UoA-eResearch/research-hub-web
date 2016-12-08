@@ -22,8 +22,7 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       this.productId = params['id'];
       this.drupalService.getProduct(this.productId).subscribe(
         data => { this.product = data},
-        err => console.error(err),
-        () => console.log('done')
+        err => console.error(err)
       );
     });
   }

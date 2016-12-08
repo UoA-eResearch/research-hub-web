@@ -15,7 +15,6 @@ import {ProductListComponent} from "./productList/productList.component";
 import {ProductDetailsComponent} from "./productDetails/productDetails.component";
 import {ComingSoonComponent} from "./comingSoon/comingSoon.component";
 import {NoResultsComponent} from "./noResults/noResults.component";
-import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 
 @NgModule({
@@ -37,8 +36,7 @@ import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
         BrowserModule,
         FormsModule,
         HttpModule,
-        routing,
-        Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ])
+        routing
     ],
     providers: [appRoutingProviders],
     bootstrap: [AppComponent]
