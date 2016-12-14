@@ -335,13 +335,12 @@
     width: 350px;
     margin-left: auto;
     margin-right: 11.250px;
-    //margin-right: 50px;
   }
 
   .home-banner
   {
-    height: 56vw;
-    max-height: 800px;
+    height: 44vw;
+    max-height: 700px;
   }
 
   .uoa-container {
@@ -350,6 +349,8 @@
 
   .uoa-container > div
   {
+    float: left;
+    width: 100%;
     margin-bottom: -50px !important;
   }
 
