@@ -58,11 +58,17 @@ server in a Docker container.
 Install Docker by following [these instructions](https://docs.docker.com/engine/installation/linux/ubuntulinux/).
 
 ### Deployment
-Clone the research-hub repository.
+* Production and staging containers are automatically built on [Docker Hub](hub.docker.com).
+* [Watchtower](https://github.com/CenturyLinkLabs/watchtower) is used to automatically update staging and production when new images are built.
+* To deploy a new production version of the Research Hub, update the production tag name on [uoacer/research-hub](https://hub.docker.com/r/uoacer/research-hub/).
+* To deploy a new staging version of the Research Hub, commit to the `staging` branch.
 
-Run the Docker container.
+Setup the running docker containers with the following commands:
 ```bash
-sudo docker run --restart=always -p 80:80 -p 443:443 -v /research-hub:/usr/local/apache2/conf/keys -d uoacer/research-hub
+sudo su -
+docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock centurylink/watchtower --cleanup
+docker run --restart=always -p 80:80 -p 443:443 -v /research-hub:/usr/local/apache2/conf/keys -d uoacer/research-hub:production
+docker run --restart=always -p 8080:443 -v /research-hub:/usr/local/apache2/conf/keys -d uoacer/research-hub:staging
 ```
 
 
