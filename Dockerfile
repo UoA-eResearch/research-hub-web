@@ -11,5 +11,5 @@ RUN           ng build --target=production --environment=prod
 
 # Configure Apache server
 RUN           cp -a ./dist/. /usr/local/apache2/htdocs/
-RUN           cp staging-httpd.conf /usr/local/apache2/conf/httpd.conf
-RUN           cp staging-httpd-ssl.conf /usr/local/apache2/conf/extra/httpd-ssl.conf
+RUN           cp httpd.conf /usr/local/apache2/conf/httpd.conf
+RUN           cp httpd-ssl.conf /usr/local/apache2/conf/extra/httpd-ssl.conf
