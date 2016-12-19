@@ -43,10 +43,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   getMaxProducts() {
-    let productsPerRow = this.productList.nativeElement.offsetWidth / this.productWidth;
-    let gridWidth = Math.floor(12 / productsPerRow);
-    let totalProducts = Math.floor(12 / gridWidth);
-    return Math.max(Math.min(totalProducts, 12), 1);
+    if(this.productList && this.productList.nativeElement) {
+      let productsPerRow = this.productList.nativeElement.offsetWidth / this.productWidth;
+
+      if(Math.floor(productsPerRow) <= 1)
+        productsPerRow = 1;
+
+      let gridWidth = Math.floor(12 / productsPerRow);
+      let totalProducts = Math.floor(12 / gridWidth);
+      console.log(productsPerRow, gridWidth, totalProducts);
+      return Math.max(Math.min(totalProducts, 12), 1);
+    }
+    return 0;
   }
 
   getProducts(taxonomyId)

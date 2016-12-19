@@ -6,7 +6,7 @@
         <div class="uoa-header__content uoa-brand-shape">
           <div class="uoa-brand-shape__content" style="padding: 15px;">
             <h1 style="font-size: 37px;">Accelerate your research</h1>
-            <p style="font-size: 18px;">Services, educational resources, guides and policies for University of Auckland researchers.</p>
+            <p style="font-size: 18px;">Services and educational resources for University of Auckland researchers.</p>
           </div>
         </div>
       </div>
@@ -86,19 +86,17 @@
 
 <div *ngFor="let lifeCycle of lifeCycleTerms | async" class="section white home-products">
   <div class="product-list">
-    <div class="row">
-      <div class="col s6 left-align"><span class="product-list-title">{{lifeCycle.name}}</span></div>
-      <div class="col s6 right-align"><a class="waves-effect waves-light btn" (click)="navigateToLifecycle(lifeCycle)">more</a>
-      </div>
+    <div class="product-list-header row valign-wrapper">
+      <div class="col s7 m6 left-align valign" style="padding: 0;"><span class="product-list-title">{{lifeCycle.name}}</span></div>
+      <div class="col s5 m6 right-align valign" style="padding: 0;"><a class="waves-effect waves-light btn" (click)="navigateToServices(lifeCycle.id)">more</a></div>
     </div>
 
-    <div #productList class="row">
+    <div class="product-list-body row" #productList>
       <div *ngIf="getProducts(lifeCycle.id).length == 0" class="col s12 m12 l12 center-align hub-spinner">
         <spinner></spinner>
       </div>
-      <div *ngFor="let product of getProducts(lifeCycle.id); let i = index;" class="col" [ngClass]="getColClasses()">
-        <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'lifecycle'"
-                          [product]="product"></product-overview>
+      <div *ngFor="let product of getProducts(lifeCycle.id) | slice:0:getMaxProducts()" class="col" [ngClass]="getColClasses()">
+        <product-overview [parentRoute]="'lifecycle'" [product]="product"></product-overview>
       </div>
     </div>
   </div>
@@ -123,19 +121,17 @@
 
 <div *ngFor="let service of serviceTypeTerms | async" class="section white home-products">
   <div class="product-list">
-    <div class="row">
-      <div class="col s6 left-align"><span class="product-list-title">{{service.name}}</span></div>
-      <div class="col s6 right-align"><a class="waves-effect waves-light btn" (click)="navigateToServices(service.id)">more</a>
-      </div>
+    <div class="product-list-header row valign-wrapper">
+      <div class="col s7 m6 left-align valign" style="padding: 0;"><span class="product-list-title">{{service.name}}</span></div>
+      <div class="col s5 m6 right-align valign" style="padding: 0;"><a class="waves-effect waves-light btn" (click)="navigateToServices(service.id)">more</a></div>
     </div>
 
-    <div #productList class="row">
+    <div #productList class="product-list-body row">
       <div *ngIf="getProducts(service.id).length == 0" class="col s12 m12 l12 center-align hub-spinner">
         <spinner></spinner>
       </div>
-      <div *ngFor="let product of getProducts(service.id); let i = index;" class="col" [ngClass]="getColClasses()">
-        <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'productList'"
-                          [product]="product"></product-overview>
+      <div *ngFor="let product of getProducts(service.id) | slice:0:getMaxProducts()" class="col" [ngClass]="getColClasses()">
+        <product-overview [parentRoute]="'productList'" [product]="product"></product-overview>
       </div>
     </div>
   </div>
@@ -160,19 +156,17 @@
 
 <div class="section white home-products">
   <div class="product-list">
-    <div class="row">
-      <div class="col s6 left-align"><span class="product-list-title">Computing Education</span></div>
-      <div class="col s6 right-align"><a class="waves-effect waves-light btn"
-                                         [routerLink]="['/productList', 'education']">more</a></div>
+    <div class="product-list-header row valign-wrapper">
+      <div class="col s7 m6 left-align valign" style="padding: 0;"><span class="product-list-title">Computing Education</span></div>
+      <div class="col s5 m6 right-align valign" style="padding: 0;"><a class="waves-effect waves-light btn" [routerLink]="['/productList', 'education']">more</a></div>
     </div>
 
-    <div #productList class="row">
+    <div #productList class="product-list-body row">
       <div *ngIf="educationalProducts.length == 0" class="col s12 m12 l12 center-align hub-spinner">
         <spinner></spinner>
       </div>
-      <div *ngFor="let product of educationalProducts; let i = index;" class="col" [ngClass]="getColClasses()">
-        <product-overview *ngIf="i < getMaxProducts()" [parentRoute]="'productList'"
-                          [product]="product"></product-overview>
+      <div *ngFor="let product of educationalProducts | slice:0:getMaxProducts()" class="col" [ngClass]="getColClasses()">
+        <product-overview [parentRoute]="'productList'" [product]="product"></product-overview>
       </div>
     </div>
   </div>
