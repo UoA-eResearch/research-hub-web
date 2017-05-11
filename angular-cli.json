@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.21",
+    "version": "1.0.3",
     "name": "research-hub"
   },
   "apps": [
@@ -10,7 +10,7 @@
       "assets": [
         "assets",
         "favicon.ico",
-        "fonts/roboto"
+        { "glob": "**/*", "input": "../node_modules/materialize-css/fonts/", "output": "./fonts/" }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -26,8 +26,8 @@
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/materialize-css/dist/js/materialize.js"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
