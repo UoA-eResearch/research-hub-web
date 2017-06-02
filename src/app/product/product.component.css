@@ -1,0 +1,30 @@
+
+.product
+
+.product-title {
+  color: #212121 !important;
+  padding: 20px;
+  cursor: pointer;
+  cursor: hand;
+  display: block;
+  font-size: 16px !important;
+  line-height: 16px !important;
+  font-weight: 400 !important;
+  width: inherit !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+.product-category {
+  color: #616161 !important;
+  cursor: pointer;
+  cursor: hand;
+  text-transform: capitalize;
+  font-size: 13px !important;
+  line-height: 13px !important;
+  white-space: nowrap !important;
+  width: inherit !important;
+  font-weight: 400 !important;
+  text-overflow: ellipsis !important;
+}

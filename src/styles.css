@@ -1,0 +1,60 @@
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.primary-header {
+  background-color: #f5f5f5;
+}
+
+h2
+{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  margin: 0;
+  padding-left: 35px;
+}
+
+.primary-header > h1
+{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0;
+  padding: 50px;
+  width: 30%;
+}
+
+/* Not sure why doesn't work from within component */
+.product-grid
+{
+  min-width: 250px;
+}
+
+.product-grid > div > md-grid-tile
+{
+  background-color: transparent;
+}
+
+
+.product-grid > div > md-grid-tile > figure {
+  background-color: yellow !important;
+  margin: 12px !important;
+  height: auto !important;
+}
+
+.product-grid > div > md-grid-tile > figure > app-product {
+  height: 100%;
+  width: 100%;
+}
+
+.product-grid > div > md-grid-tile > figure > app-product > md-card {
+  padding: 0 !important;
+}
+
+.product-grid > div > md-grid-tile > figure > app-product > md-card > .mat-card-image {
+  width: 100%;
+  margin: 0;
+}

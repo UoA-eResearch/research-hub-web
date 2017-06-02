@@ -1,0 +1,37 @@
+
+<div class="container">
+  <md-toolbar>
+    <div *ngIf="!sharedDataService.getShowLogo()">
+      <h2><md-icon>blur_on</md-icon><span style="padding-left: 20px;">Hub</span></h2>
+    </div>
+    <div style="margin-left: auto;">
+      <!--<button md-button routerLink="/home">Home</button>-->
+      <button md-button routerLink="/about">About</button>
+      <button md-button routerLink="/contact">Contact</button>
+    </div>
+  </md-toolbar>
+
+  <div class="header">
+    <div class="header-title">
+      <h1 *ngIf="sharedDataService.getShowLogo()"><md-icon>blur_on</md-icon><span style="padding-left: 20px;">Hub</span></h1>
+      <h1 *ngIf="!sharedDataService.getShowLogo()">{{title}}</h1>
+    </div>
+
+    <div class="header-search">
+      <!--<button md-button style="display: inline-block;width: 24px;"><md-icon>menu</md-icon></button>-->
+      <app-search [(searchText)]="searchText" [(category)]="category" (searchTextChange)="searchTextChanged($event)"></app-search>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <img src="assets/uoa-logo.svg">
+  </div>
+  <div class="footer-copyright">
+    <p>Copyright © {{getYear()}}, The Centre for eResearch, The University of Auckland</p>
+  </div>
+</footer>
+

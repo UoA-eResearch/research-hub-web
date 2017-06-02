@@ -1,0 +1,11 @@
+<div>
+  <md-select class="search-select"  style="display: inline-block;" floatPlaceholder="never" placeholder="Resources" [(ngModel)]="category">
+    <md-option *ngFor="let category of categories" [value]="category.value">
+      {{category.value}}
+    </md-option>
+  </md-select>
+
+  <md-input-container class="search-box" floatPlaceholder="never">
+    <input mdInput type="search" placeholder="Search" [(ngModel)]="searchText">
+  </md-input-container>
+</div>

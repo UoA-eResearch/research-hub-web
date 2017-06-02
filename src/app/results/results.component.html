@@ -1,0 +1,18 @@
+<md-sidenav-container class="filter-sidenav-container">
+  <md-sidenav #filterSideNav mode="side" opened="true">
+    <p>sidenav</p>
+  </md-sidenav>
+
+  <div #productGrid class="content">
+    <!--<button md-button style="position: absolute; top: 100px; left: 50px;">Open</button>-->
+    <md-grid-list class="product-grid" [cols]="numCols" rowHeight="1:1.5">
+      <md-grid-tile *ngFor="let product of products">
+        <app-product></app-product>
+        <!--<p>hello</p>-->
+      </md-grid-tile>
+    </md-grid-list>
+  </div>
+</md-sidenav-container>
+
+
+

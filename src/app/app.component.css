@@ -1,0 +1,239 @@
+
+.example-sidenav-fab-container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-fab-container md-sidenav {
+  max-width: 200px;
+}
+
+.example-sidenav-fab-container .mat-sidenav-content,
+.example-sidenav-fab-container md-sidenav {
+  display: flex;
+  overflow: visible;
+}
+
+.example-scrolling-content {
+  overflow: auto;
+}
+
+.example-fab {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
+
+.search-select {
+  width: 100px;
+  padding-right: 20px;
+}
+
+.search-box {
+  width: calc(100% - 130px);
+  display: inline;
+}
+
+
+
+.filter-sidenav-container md-sidenav {
+  min-width: 250px;
+}
+
+md-grid-tile {
+  background: lightblue;
+}
+
+.content {
+  padding: 50px;
+}
+
+
+
+/* Small */
+@media (max-width: 600px) {
+  .content
+  {
+    padding: 10px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Medium */
+@media (min-width: 601px) and (max-width: 992px) {
+  .content
+  {
+    padding: 10px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Large */
+@media (min-width: 993px) and (max-width: 1199px) {
+  .content
+  {
+    padding: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+}
+
+/* Extra large */
+@media (min-width: 1200px) and (max-width: 1919px) {
+  .content
+  {
+    padding: 50px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Extra extra large */
+@media (min-width: 1920px) {
+  .content
+  {
+    padding: 50px;
+    max-width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.container
+{
+  min-height: calc(100vh - 229px);
+}
+
+footer {
+  margin-top: 37px;
+  height: 192px;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo {
+  order: 1;
+  flex: 1;
+  margin-left: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.footer-copyright {
+  width: 100%;
+  order: 1;
+  flex: 1;
+  margin-right: 0;
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.footer-logo > img {
+  display: block;
+  height: 70px;
+}
+
+
+.footer-copyright > p {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+
+@media (min-width: 800px) {
+
+  .container
+  {
+    min-height: calc(100vh - 133px);
+  }
+
+  footer {
+    height: 96px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    margin-left: 40px;
+    flex: 2;
+    justify-content: flex-start;
+  }
+
+  .footer-copyright {
+    order: 1;
+    flex: 4;
+    justify-content: flex-end;
+    margin-right: 40px;
+  }
+}
+
+.example-header-image {
+  background-image: url('../assets/shiba.jpg');
+  background-size: cover;
+}
+
+
+.header {
+  padding: 20px;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-title {
+  order: 1;
+  flex: 1;
+}
+
+.header-search {
+  width: 100%;
+  order: 1;
+  flex: 1;
+}
+
+.header-title > h1 {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0;
+}
+
+
+
+@media (min-width: 800px) {
+  .header {
+    flex-direction: row;
+    padding: 50px;
+  }
+
+  .header-title
+  {
+    padding-bottom: 10px;
+  }
+
+  .header-search {
+    flex: 3;
+    margin-right: 50px;
+  }
+}
+
+
+
