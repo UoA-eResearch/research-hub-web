@@ -45,16 +45,16 @@ h2
   height: auto !important;
 }
 
-.product-grid > div > md-grid-tile > figure > app-product {
+.product-grid > div > md-grid-tile > figure > app-product-overview {
   height: 100%;
   width: 100%;
 }
 
-.product-grid > div > md-grid-tile > figure > app-product > md-card {
+.product-grid > div > md-grid-tile > figure > app-product-overview > md-card {
   padding: 0 !important;
 }
 
-.product-grid > div > md-grid-tile > figure > app-product > md-card > .mat-card-image {
+.product-grid > div > md-grid-tile > figure > app-product-overview > md-card > .mat-card-image {
   width: 100%;
   margin: 0;
 }
