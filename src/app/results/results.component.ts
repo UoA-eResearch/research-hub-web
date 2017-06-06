@@ -1,8 +1,8 @@
 import {Component, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {MdSidenav} from "@angular/material";
-import {SharedDataService} from "../app.sharedData.service";
-import {ActivatedRoute} from "@angular/router";
-import {Subscription} from "rxjs/Subscription";
+import {MdSidenav} from '@angular/material';
+import {SharedDataService} from '../app.sharedData.service';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 
 
 @Component({
@@ -21,22 +21,22 @@ export class ResultsComponent implements OnInit, OnDestroy {
   searchText = '';
 
   products = [
-    {title: 'One'},
-    {title: 'Two'},
-    {title: 'Three'},
-    {title: 'Four'},
-    {title: 'Five'},
-    {title: 'Six'},
-    {title: 'Seven'},
-    {title: 'Eight'},
-    {title: 'Nine'},
-    {title: 'Ten'},
-    {title: 'Three'},
-    {title: 'Four'},
-    {title: 'Five'},
-    {title: 'Six'},
-    {title: 'Seven'},
-    {title: 'Eight'}
+    {name: 'One', id: 1, category: 'Test'},
+    {name: 'Two', id: 1, category: 'Test'},
+    {name: 'Three', id: 1, category: 'Test'},
+    {name: 'Four', id: 1, category: 'Test'},
+    {name: 'Five', id: 1, category: 'Test'},
+    {name: 'Six', id: 1, category: 'Test'},
+    {name: 'Seven', id: 1, category: 'Test'},
+    {name: 'Eight', id: 1, category: 'Test'},
+    {name: 'Nine', id: 1, category: 'Test'},
+    {name: 'Ten', id: 1, category: 'Test'},
+    {name: 'Three', id: 1, category: 'Test'},
+    {name: 'Four', id: 1, category: 'Test'},
+    {name: 'Five', id: 1, category: 'Test'},
+    {name: 'Six', id: 1, category: 'Test'},
+    {name: 'Seven', id: 1},
+    {name: 'Eight', id: 1}
   ];
 
   constructor(private sharedDataService: SharedDataService, private route: ActivatedRoute) {
@@ -46,9 +46,9 @@ export class ResultsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.routeParamsSub = this.route.params.subscribe(params => {
       this.searchText = params['searchText'];
-      // console.log("Params", params);
+      // console.log('Params', params);
     });
-    this.sharedDataService.setTitle("Home", true);
+    this.sharedDataService.setTitle('Home', true);
     this.updateSideNav();
     this.calcNumCols();
   }
