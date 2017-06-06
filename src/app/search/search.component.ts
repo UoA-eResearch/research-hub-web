@@ -1,4 +1,8 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Subject} from 'rxjs/Subject';
+import {AnalyticsService} from '../app.analytics.service';
+import {SearchService} from '../app.search.service';
+
 
 @Component({
   selector: 'app-search',
@@ -25,13 +29,14 @@ export class SearchComponent implements OnInit {
   categoryValue;
   @Output() searchTextChange = new EventEmitter();
   @Output() categoryChange = new EventEmitter();
+  searchTextSubject: Subject<String> = new Subject();
 
-  constructor() {
+  constructor(private analyticsService: AnalyticsService, private searchService: SearchService) {
 
   }
 
   ngOnInit() {
-
+    this.searchTextSubject.debounceTime(1000).subscribe((searchText) => this.analyticsService.trackSearch(this.categoryValue, searchText));
   }
 
   @Input()
@@ -47,10 +52,13 @@ export class SearchComponent implements OnInit {
   set searchText(val) {
     this.searchTextValue = val;
     this.searchTextChange.emit(val);
+    this.searchTextSubject.next(val);
+    this.searchService.setSearchText(val);
   }
 
   set category(val) {
     this.categoryValue = val;
     this.categoryChange.emit(val);
+    this.searchService.setSearchCategory(val);
   }
 }
