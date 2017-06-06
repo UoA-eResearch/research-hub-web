@@ -16,9 +16,12 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { ResultsComponent } from './results/results.component';
-import { ProductComponent } from './product/product.component';
+import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { SearchComponent } from './search/search.component';
-import {SharedDataService} from "./app.sharedData.service";
+import {SharedDataService} from './app.sharedData.service';
+import {AnalyticsService} from './app.analytics.service';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import {SearchService} from './app.search.service';
 
 @NgModule({
   declarations: [
@@ -27,8 +30,9 @@ import {SharedDataService} from "./app.sharedData.service";
     ContactComponent,
     HomeComponent,
     ResultsComponent,
-    ProductComponent,
-    SearchComponent
+    ProductOverviewComponent,
+    SearchComponent,
+    ProductDetailsComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -48,7 +52,7 @@ import {SharedDataService} from "./app.sharedData.service";
     MdListModule,
     routing
   ],
-  providers: [appRoutingProviders, SharedDataService],
+  providers: [appRoutingProviders, SharedDataService, AnalyticsService, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
