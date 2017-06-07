@@ -5,21 +5,22 @@ declare const trackingCode: 'UA-77710107-3';
 @Injectable()
 export class AnalyticsService {
 
-  trackPageView(pageName) {
-    ga('set', 'page', pageName);
+  trackPageView(url, title) {
+    ga('set', 'page', url);
+    ga('set', 'title', title);
     ga('send', 'pageview');
   }
 
   trackSearch(category, text) {
-    ga('send', 'pageview', '/search?q=' + text + '&sc=' + category);
+    const searchUrl = '/search?q=' + text + '&sc=' + category;
+    ga('set', 'page', searchUrl);
+    ga('send', 'pageview', );
   }
 
-  trackFeedback() {
-    ga('send', {
-      hitType: 'event',
-      eventCategory: 'Feedback',
-      eventAction: 'Feedback',
-      eventLabel: 'Feedback'
-    });
+  trackOutboundLink(url) {
+    ga('set', 'eventCategory', 'Outbound Link');
+    ga('set', 'eventAction', 'click');
+    ga('set', 'eventLabel', url);
+    ga('send', 'event');
   }
 }
