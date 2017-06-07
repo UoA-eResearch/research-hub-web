@@ -28,10 +28,12 @@
 
 <footer>
   <div class="footer-logo">
-    <img src="assets/uoa-logo.svg">
+    <a href="https://auckland.ac.nz" target="_blank" (click)="trackOutboundLink($event)"><img src="assets/uoa-logo.svg"></a>
   </div>
   <div class="footer-copyright">
-    <p>Copyright © {{getYear()}}, The Centre for eResearch, The University of Auckland</p>
+    <a href="http://eresearch.auckland.ac.nz" target="_blank" (click)="trackOutboundLink($event)">Copyright © {{getYear()}}, The Centre for eResearch, The University of Auckland</a>
   </div>
 </footer>
+
+<a class="github-fork-ribbon left-bottom fixed" target='_blank' href="https://docs.google.com/forms/d/1fX1syILMvaTyUkb4a3C9pDdPNL9wCkfOy4NOy2h_1pM" (click)="trackOutboundLink($event)" title="Feedback">Feedback</a>
 
