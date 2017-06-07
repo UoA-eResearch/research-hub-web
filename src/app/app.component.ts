@@ -20,24 +20,9 @@ export class AppComponent implements OnInit {
 
   constructor(private sharedDataService: SharedDataService,
               private router: Router,
-              private analyticsService: AnalyticsService) {
-
-    // Track page views
-    this.router.events.subscribe(
-      (event: Event) => {
-        if (event instanceof NavigationEnd) {
-          const urlAndParams = event.urlAfterRedirects.split('/');
-
-          if (urlAndParams.length > 1) {
-            const pageName = urlAndParams[1];
-            console.log('pageName: ', pageName);
-            analyticsService.trackPageView(pageName);
-          }
-        }
-      });
+              private analyticsService: AnalyticsService,
+              private route: ActivatedRoute) {
   }
-
-
 
   ngOnInit() {
     this.sharedDataService.titleChange.distinctUntilChanged().subscribe(title => {
@@ -47,6 +32,10 @@ export class AppComponent implements OnInit {
 
   getYear() {
     return moment().year();
+  }
+
+  trackOutboundLink(event) {
+    this.analyticsService.trackOutboundLink(event.target.href);
   }
 
   searchTextChanged(searchText) {
