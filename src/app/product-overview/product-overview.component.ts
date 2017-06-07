@@ -16,6 +16,6 @@ export class ProductOverviewComponent implements OnInit {
   }
 
   openProductDetails() {
-    this.router.navigate(['details', this.product.id]);
+    this.router.navigate(['details', this.product.id, this.product.name]);
   }
 }
