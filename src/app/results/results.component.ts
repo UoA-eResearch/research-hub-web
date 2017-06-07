@@ -3,6 +3,8 @@ import {MdSidenav} from '@angular/material';
 import {SharedDataService} from '../app.sharedData.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
+import {AnalyticsService} from '../app.analytics.service';
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -11,7 +13,7 @@ import {Subscription} from 'rxjs/Subscription';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnInit, OnDestroy {
-
+  title = 'Results';
   @ViewChild('productGrid') productGrid;
   @ViewChild('filterSideNav') filterSideNav: MdSidenav;
   routeParamsSub: Subscription;
@@ -21,34 +23,35 @@ export class ResultsComponent implements OnInit, OnDestroy {
   searchText = '';
 
   products = [
-    {name: 'One', id: 1, category: 'Test'},
-    {name: 'Two', id: 1, category: 'Test'},
-    {name: 'Three', id: 1, category: 'Test'},
-    {name: 'Four', id: 1, category: 'Test'},
-    {name: 'Five', id: 1, category: 'Test'},
-    {name: 'Six', id: 1, category: 'Test'},
-    {name: 'Seven', id: 1, category: 'Test'},
-    {name: 'Eight', id: 1, category: 'Test'},
-    {name: 'Nine', id: 1, category: 'Test'},
-    {name: 'Ten', id: 1, category: 'Test'},
-    {name: 'Three', id: 1, category: 'Test'},
-    {name: 'Four', id: 1, category: 'Test'},
-    {name: 'Five', id: 1, category: 'Test'},
-    {name: 'Six', id: 1, category: 'Test'},
-    {name: 'Seven', id: 1},
-    {name: 'Eight', id: 1}
+    {name: 'One', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Two', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Three', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Four', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Five', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Six', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Seven', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Eight', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Nine', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Ten', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Three', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Four', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Five', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Six', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Seven', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'},
+    {name: 'Eight', id: 1, category: 'Test', abstract: 'Discover and review healthy food options in New Zealand with Foodback'}
   ];
 
-  constructor(private sharedDataService: SharedDataService, private route: ActivatedRoute) {
+  constructor(private sharedDataService: SharedDataService, private route: ActivatedRoute, private location: Location,
+              private analyticsService: AnalyticsService) {
 
   }
 
   ngOnInit() {
+    this.sharedDataService.setTitle(this.title, true);
     this.routeParamsSub = this.route.params.subscribe(params => {
       this.searchText = params['searchText'];
-      // console.log('Params', params);
     });
-    this.sharedDataService.setTitle('Home', true);
+
     this.updateSideNav();
     this.calcNumCols();
   }
