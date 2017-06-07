@@ -4,13 +4,10 @@
   </md-sidenav>
 
   <div #productGrid class="content">
-    <md-grid-list class="product-grid" [cols]="numCols" rowHeight="1:1.5">
+    <md-grid-list class="product-grid" [cols]="numCols" rowHeight="1:1.6">
       <md-grid-tile *ngFor="let product of products">
         <app-product-overview [product]="product"></app-product-overview>
       </md-grid-tile>
     </md-grid-list>
   </div>
 </md-sidenav-container>
-
-
-
