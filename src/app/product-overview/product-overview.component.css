@@ -3,10 +3,3 @@
   font-size: 13px !important;
   color: #616161 !important;
 }
-
-@media (max-width: 400px) {
-  .product-abstract
-  {
-    display: none;
-  }
-}
