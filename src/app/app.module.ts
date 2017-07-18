@@ -22,6 +22,7 @@ import {SharedDataService} from './app.sharedData.service';
 import {AnalyticsService} from './app.analytics.service';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import {SearchService} from './app.search.service';
+import {ApiService} from './app.api.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import {SearchService} from './app.search.service';
     MdListModule,
     routing
   ],
-  providers: [appRoutingProviders, SharedDataService, AnalyticsService, SearchService],
+  providers: [appRoutingProviders, SharedDataService, AnalyticsService, SearchService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
