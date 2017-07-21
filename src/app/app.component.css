@@ -1,249 +1,164 @@
 
-.github-fork-ribbon.left-bottom:before {
-  background-color: #009ac7;
+/*
+ * Text styles
+ */
+
+html {
+  font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
 }
 
-.github-fork-ribbon.left-bottom {
-  box-sizing: unset;
+h1 {
+  color: white;
 }
 
-.example-sidenav-fab-container {
-  width: 500px;
-  height: 300px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+h2 {
+  color: white;
 }
 
-.example-sidenav-fab-container md-sidenav {
-  max-width: 200px;
+h3 {
+  color: white;
 }
 
-.example-sidenav-fab-container .mat-sidenav-content,
-.example-sidenav-fab-container md-sidenav {
-  display: flex;
-  overflow: visible;
+p {
+  color: white;
 }
 
-.example-scrolling-content {
-  overflow: auto;
+a {
+  color: white;
 }
 
-.example-fab {
-  position: absolute;
-  right: 20px;
-  bottom: 10px;
+/*
+ * Button styles
+ */
+
+.md-button-small {
+  min-width: 1% !important;
 }
 
-.search-select {
-  width: 100px;
-  padding-right: 20px;
+.menu-button {
+  margin-left: 10px !important;
+  display: inline-block;
+  color: white !important;
+  top: -3px !important;
 }
 
-.search-box {
-  width: calc(100% - 130px);
-  display: inline;
+/*
+ * SideNav
+ */
+
+.sidenav-container {
+  min-height: calc(100vh);
 }
 
-
-
-.filter-sidenav-container md-sidenav {
+.sidenav-container md-sidenav {
   min-width: 250px;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
 }
 
-md-grid-tile {
-  background: lightblue;
+.sidenav-container md-sidenav md-list {
+  padding-left: 1em;
+  padding-top: 1em;
 }
 
-.content {
-  padding: 50px;
-}
-
-
-
-/* Small */
-@media (max-width: 600px) {
-  .content
-  {
-    padding: 10px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-/* Medium */
-@media (min-width: 601px) and (max-width: 992px) {
-  .content
-  {
-    padding: 10px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-/* Large */
-@media (min-width: 993px) and (max-width: 1199px) {
-  .content
-  {
-    padding: 20px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-
-  }
-}
-
-/* Extra large */
-@media (min-width: 1200px) and (max-width: 1919px) {
-  .content
-  {
-    padding: 50px;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-/* Extra extra large */
-@media (min-width: 1920px) {
-  .content
-  {
-    padding: 50px;
-    max-width: 1800px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-.container
-{
-  min-height: calc(100vh - 229px);
-}
-
-footer {
-  margin-top: 37px;
-  height: 192px;
-  background-color: #f5f5f5;
+.sidenav-content-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
-.footer-logo {
-  order: 1;
+.sidenav-content {
   flex: 1;
-  margin-left: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  min-height: 95vh;
 }
 
-.footer-copyright {
-  width: 100%;
-  order: 1;
-  flex: 1;
-  margin-right: 0;
-  text-align: center;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+.sidenav-content md-toolbar {
+  /*box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12) !important;*/
 }
 
-.footer-logo > a > img {
-  display: block;
-  height: 70px;
+.primary-header {
+  background: #3f51b5;
 }
 
-
-.footer-copyright > a {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  text-decoration: none;
-  color: black;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-
-@media (min-width: 800px) {
-
-  .container
-  {
-    min-height: calc(100vh - 133px);
-  }
-
-  footer {
-    height: 96px;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .footer-logo {
-    margin-left: 40px;
-    flex: 2;
-    justify-content: flex-start;
-  }
-
-  .footer-copyright {
-    order: 1;
-    flex: 4;
-    justify-content: flex-end;
-    margin-right: 40px;
-  }
-}
-
-.example-header-image {
-  background-image: url('../assets/shiba.jpg');
-  background-size: cover;
-}
-
-
-.header {
-  padding: 20px;
-  background-color: #f5f5f5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-title {
-  order: 1;
-  flex: 1;
-}
-
-.header-search {
-  width: 100%;
-  order: 1;
-  flex: 1;
-}
-
-.header-title > h1 {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+.primary-header h1 {
   font-size: 30px;
   font-weight: 300;
   margin: 0;
+  padding: 50px;
 }
 
+/*
+ * Footer
+ */
 
+footer {
+  background-color: #3f51b5;
+  height: 5vh;
+  flex: none;
+  padding-left: 2em;
+  padding-right: 2em;
 
-@media (min-width: 800px) {
-  .header {
-    flex-direction: row;
-    padding: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+footer .logo {
+  flex: 2;
+  justify-content: flex-start;
+}
+
+footer .copyright {
+  text-align: right;
+
+  order: 1;
+  flex: 4;
+  justify-content: flex-end;
+}
+
+footer .logo img {
+  display: block;
+  height: 4vh;
+}
+
+footer .copyright a {
+  text-decoration: none;
+}
+
+/*
+ * Re arrange footer / content on small screens
+ */
+
+@media (max-width: 800px) {
+  footer {
+    flex-direction: column;
+    height: 10vh;
   }
 
-  .header-title
-  {
-    padding-bottom: 10px;
+  footer .logo {
+    flex: 1.6;
+
+    display: flex; /* Also makes this a flexbox which we can centre items in */
+    align-items: center;
   }
 
-  .header-search {
-    flex: 3;
-    margin-right: 50px;
+  footer .copyright {
+    text-align: center;
+    flex: 1;
+  }
+
+  .sidenav-content {
+    min-height: 90vh;
+  }
+
+  .primary-header h1 {
+    padding: 24px;
+    font-size: 20px;
+    display: inline-block;
   }
 }
 
-
-
+@media (max-width: 600px) {
+  .primary-header h1 {
+    padding: 24px 0;
+  }
+}
