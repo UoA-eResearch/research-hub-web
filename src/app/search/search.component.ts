@@ -1,41 +1,72 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {AnalyticsService} from '../app.analytics.service';
 import {SearchService} from '../app.search.service';
+import {ApiService} from "../app.api.service";
+import {Observable} from "rxjs/Observable";
 
+
+import {MdInputContainer, OverlayContainer} from '@angular/material';
+
+// @NgModule({
+//   // ...
+// })
+// export class UnicornCandyAppModule {
+//   constructor(overlayContainer: OverlayContainer) {
+//
+//   }
+// }
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
 
+  @ViewChild('searchInput') search; //: MdInputContainer;
+
   categories = [
-    {value: 'All'},
-    {value: 'Data sources'},
-    {value: 'Facilities'},
-    {value: 'Guides'},
-    {value: 'Instrument'},
-    {value: 'Knowledge articles'},
-    {value: 'People'},
-    {value: 'Policies'},
-    {value: 'Software'},
-    {value: 'Training'},
-    {value: 'Services'}
+    {id: 1, name: 'All Categories'},
+    {id: 2, name: 'Support'},
+    {id: 3, name: 'Training'},
+    {id: 4, name: 'People'},
+    {id: 5, name: 'Collaboration'},
+    {id: 6, name: 'Things'},
+    {id: 7, name: 'Publications'},
+    {id: 8, name: 'Research Advice'},
+    {id: 9, name: 'Policies & Strategy'},
+    {id: 10, name: 'Guides & Tool Chains'},
+    {id: 11, name: 'Events & News'},
   ];
 
+  // categories: Observable<Array<any>>;
   searchTextValue;
-  categoryValue;
+  categoryValue = 1;
   @Output() searchTextChange = new EventEmitter();
   @Output() categoryChange = new EventEmitter();
   searchTextSubject: Subject<String> = new Subject();
 
-  constructor(private analyticsService: AnalyticsService, private searchService: SearchService) {
+  constructor(private analyticsService: AnalyticsService, private searchService: SearchService, private apiService: ApiService, overlayContainer: OverlayContainer) {
+    // overlayContainer.themeClass = 'search-bar-theme';
+  }
 
+  clear() {
+    this.searchText = '';
   }
 
   ngOnInit() {
+    // this.categories = this.apiService.getCategory('contentType').map((data) => {
+    //   data.sort((categoryA, categoryB) => {
+    //     return categoryA['name'].localeCompare(categoryB['name']);
+    //   });
+    //   return data;
+    // });
+    //
+    // this.categories.subscribe(data => {
+    //   console.log('load categories: ', data);
+    // });
+
     this.searchTextSubject.debounceTime(1000).subscribe((searchText) => this.analyticsService.trackSearch(this.categoryValue, searchText));
   }
 

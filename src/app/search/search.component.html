@@ -1,11 +1,22 @@
-<div>
-  <md-select class="search-select"  style="display: inline-block;" floatPlaceholder="never" placeholder="Resources" [(ngModel)]="category">
-    <md-option *ngFor="let category of categories" [value]="category.value">
-      {{category.value}}
-    </md-option>
-  </md-select>
+<div class="search-bar">
+  <div class="select">
+    <md-select floatPlaceholder="never" placeholder="Categories" [(ngModel)]="category">
+      <md-option *ngFor="let category of categories" [value]="category.id">
+        {{category.name}}
+      </md-option>
+    </md-select>
+  </div>
 
-  <md-input-container class="search-box" floatPlaceholder="never">
-    <input mdInput type="search" placeholder="Search" [(ngModel)]="searchText">
-  </md-input-container>
+  <div class="search-box">
+    <md-input-container floatPlaceholder="never">
+      <span mdPrefix><md-icon>search</md-icon></span>
+      <input mdInput #searchInput placeholder="Search" [(ngModel)]="searchText">
+      <button mdSuffix (click)="clear()" md-icon-button>
+        <md-icon>close</md-icon>
+      </button>
+    </md-input-container>
+  </div>
 </div>
+
+
+

@@ -1,0 +1,74 @@
+@import "../../variables";
+@import '~@angular/material/theming';
+
+$md-select-width: 200px;
+$md-select-flex: 1;
+$search-flex: 4;
+
+.search-bar {
+  flex: none;
+  display: flex;
+  flex-direction: row;
+  height: inherit;
+}
+
+.search-bar .select {
+  margin-right: 1em;
+  flex: $md-select-flex;
+  display: flex;
+  align-items: center;
+  max-width: $md-select-width;
+}
+
+.search-bar .select md-select {
+  flex: $md-select-flex;
+  max-width: $md-select-width;
+}
+
+.search-box md-input-container {
+  flex: $search-flex;
+  top: 5px;
+}
+
+.search-box md-icon {
+  font-size: 1.2em;
+}
+
+.search-box button {
+  top: 0.25em;
+}
+
+.search-box md-input-container span:first-child {
+  margin-right: 0.4em;
+}
+
+.search-bar .search-box {
+  flex: $search-flex;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: $small-screen-thresh) {
+  .search-bar {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    height: $mat-toolbar-height-desktop * 2 !important;
+  }
+
+  .search-bar .select md-select {
+    max-width: 100%;
+    width: 100%;
+    flex: 1;
+  }
+
+  .search-bar .select {
+    max-width: 100%;
+    flex: 1;
+    margin-right: 0;
+  }
+
+  .search-bar .search-box {
+    flex: 1;
+  }
+}

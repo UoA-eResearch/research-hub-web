@@ -1,39 +1,10 @@
+@import "../variables";
+@import '../styles';
 
-/*
- * Text styles
- */
-
-html {
-  font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
-}
-
-h1 {
-  color: white;
-}
-
-h2 {
-  color: white;
-}
-
-h3 {
-  color: white;
-}
-
-p {
-  color: white;
-}
-
-a {
-  color: white;
-}
 
 /*
  * Button styles
  */
-
-.md-button-small {
-  min-width: 1% !important;
-}
 
 .menu-button {
   margin-left: 10px !important;
@@ -41,6 +12,45 @@ a {
   color: white !important;
   top: -3px !important;
 }
+
+/*
+ * Fixes so that select lines up with md-input-container elements
+ * and contains same sized text
+ */
+
+.mat-select-trigger {
+  font-size: 20px !important;
+}
+
+.mat-select-underline {
+  bottom: -10px !important;
+}
+
+//
+//md-select {
+//  .mat-select-trigger {
+//    .mat-select-value {
+//      .mat-select-value-text {
+//        color: white !important;
+//      }
+//    }
+//
+//    .mat-select-placeholder {
+//      color: white !important;
+//    }
+//
+//    .mat-select-underline {
+//      color: white !important;
+//      background-color: white !important;
+//    }
+//
+//    .mat-select-arrow {
+//      color: white !important;
+//    }
+//  }
+//}
+
+
 
 /*
  * SideNav
@@ -70,12 +80,8 @@ a {
   min-height: calc(100vh - 100px);
 }
 
-.sidenav-content md-toolbar {
-  /*box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12) !important;*/
-}
-
 .primary-header {
-  background: #3f51b5;
+  background: $color-primary;
 }
 
 .primary-header h1 {
@@ -90,7 +96,7 @@ a {
  */
 
 footer {
-  background-color: #3f51b5;
+  background-color: $color-primary;
   height: 100px;
   flex: none;
   padding-left: 2em;
@@ -125,10 +131,33 @@ footer .copyright a {
 }
 
 /*
+ * Breadcrumb styling
+ */
+
+breadcrumb ul {
+  list-style: none;
+  padding-left: 0.5em;
+}
+
+/*
  * Re arrange footer / content on small screens
  */
 
-@media (max-width: 800px) {
+.primary-toolbar {
+  padding-left: 1em;
+}
+
+app-search {
+  height: inherit;
+  width: 100%;
+}
+
+@media (max-width: $small-screen-thresh) {
+
+  .primary-toolbar, app-search, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
+    height: $mat-toolbar-height-desktop * 2 !important;
+  }
+
   footer {
     flex-direction: column;
     height: 200px;
@@ -152,14 +181,8 @@ footer .copyright a {
   }
 
   .primary-header h1 {
-    padding: 24px;
+    padding: 0;
     font-size: 20px;
     display: inline-block;
-  }
-}
-
-@media (max-width: 600px) {
-  .primary-header h1 {
-    padding: 24px 0;
   }
 }
