@@ -6,28 +6,60 @@ import {NavigationStart, Router, Event, NavigationEnd, ActivatedRoute} from '@an
 import {SharedDataService} from "./app.sharedData.service";
 import {AnalyticsService} from "./app.analytics.service";
 import {LocationStrategy} from "@angular/common";
+import {BreadcrumbService} from 'ng2-breadcrumb/ng2-breadcrumb';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
-  title = '';
-  category = 'All';
-  searchText = '';
+  @ViewChild('sidenav') sidenav: MdSidenav;
+
+  isSideNavOpened = true;
+  isScreenSmall = false;
+  sideNavMode = 'side';
+
+  menuItems = [{name: 'Home', icon: 'home', href: ''},
+                {name: 'Search & Browse', icon: 'search', href: ''},
+                {name: 'Provide Feedback', icon: 'thumbs_up_down', href: ''},
+                {name: 'About CeR', icon: 'info', href: ''},
+                {name: 'Contact Us', icon: 'phone', href: ''}
+  ];
 
   constructor(private sharedDataService: SharedDataService,
               private router: Router,
               private analyticsService: AnalyticsService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private breadcrumbService: BreadcrumbService) {
+
+    breadcrumbService.addFriendlyNameForRoute('/home', 'Home');
+  }
+
+  test() {
+    console.log('hello');
   }
 
   ngOnInit() {
-    this.sharedDataService.titleChange.distinctUntilChanged().subscribe(title => {
-      this.title = title;
-    });
+    this.updateSideNav(window.innerWidth);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.updateSideNav(event.target.innerWidth);
+  }
+
+  updateSideNav(windowWidth) {
+    this.isScreenSmall = windowWidth < 800;
+    if (this.isScreenSmall) {
+      this.sideNavMode = 'over';
+      this.isSideNavOpened = false;
+    } else {
+      this.sideNavMode = 'side';
+      this.isSideNavOpened = true;
+    }
   }
 
   getYear() {
@@ -36,12 +68,5 @@ export class AppComponent implements OnInit {
 
   trackOutboundLink(event) {
     this.analyticsService.trackOutboundLink(event.target.href);
-  }
-
-  searchTextChanged(searchText) {
-    console.log('searchTextChanged', searchText);
-    if (searchText !== '') {
-      this.router.navigate(['results', searchText]);
-    }
   }
 }

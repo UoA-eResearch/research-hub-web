@@ -26,6 +26,18 @@
   bottom: -10px !important;
 }
 
+/*
+ * Navigation list
+ */
+
+.sidenav-container md-list-item md-icon {
+  color: $color-text;
+}
+
+.sidenav-container md-list-item a {
+  //color: $color-text;
+}
+
 //
 //md-select {
 //  .mat-select-trigger {
@@ -135,8 +147,28 @@ footer .copyright a {
  */
 
 breadcrumb ul {
-  list-style: none;
+  //list-style: none;
   padding-left: 0.5em;
+}
+
+//breadcrumb ul li a {
+//  display: inline-block;
+//  width: 60px;
+//}
+
+ul > li {
+  display: inline-block;
+
+  /* You can also add some margins here to make it look prettier */
+  zoom:1;
+  *display:inline;
+  /* this fix is needed for IE7- */
+}
+
+li:not(:first-child):before {
+  padding-left: 0.5em;
+  padding-right: 0.4em;
+  content: "/";
 }
 
 /*
