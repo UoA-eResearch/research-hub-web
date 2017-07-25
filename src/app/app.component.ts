@@ -1,12 +1,8 @@
-import {Component, HostListener, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import * as moment from 'moment';
-import {MdSidenav} from '@angular/material';
-import {NavigationStart, Router, Event, NavigationEnd, ActivatedRoute} from '@angular/router';
-import {SharedDataService} from "./app.sharedData.service";
+import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import * as moment from "moment";
 import {AnalyticsService} from "./app.analytics.service";
-import {LocationStrategy} from "@angular/common";
-import {BreadcrumbService} from 'ng2-breadcrumb/ng2-breadcrumb';
+import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
+import {SideNavComponent} from "./sidenav/sidenav-component";
 
 
 @Component({
@@ -15,51 +11,24 @@ import {BreadcrumbService} from 'ng2-breadcrumb/ng2-breadcrumb';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent implements OnInit {
-  @ViewChild('sidenav') sidenav: MdSidenav;
+export class AppComponent extends SideNavComponent implements OnInit {
 
-  isSideNavOpened = true;
-  isScreenSmall = false;
-  sideNavMode = 'side';
-
-  menuItems = [{name: 'Home', icon: 'home', href: ''},
-                {name: 'Search & Browse', icon: 'search', href: ''},
-                {name: 'Provide Feedback', icon: 'thumbs_up_down', href: ''},
-                {name: 'About CeR', icon: 'info', href: ''},
-                {name: 'Contact Us', icon: 'phone', href: ''}
+  menuItems = [
+    {name: 'Home', icon: 'home', href: ''},
+    {name: 'Search & Browse', icon: 'search', href: ''},
+    {name: 'Provide Feedback', icon: 'thumbs_up_down', href: ''},
+    {name: 'About CeR', icon: 'info', href: ''},
+    {name: 'Contact Us', icon: 'phone', href: ''}
   ];
 
-  constructor(private sharedDataService: SharedDataService,
-              private router: Router,
-              private analyticsService: AnalyticsService,
-              private route: ActivatedRoute,
+  constructor(private analyticsService: AnalyticsService,
               private breadcrumbService: BreadcrumbService) {
-
+    super();
     breadcrumbService.addFriendlyNameForRoute('/home', 'Home');
   }
 
-  test() {
-    console.log('hello');
-  }
-
   ngOnInit() {
-    this.updateSideNav(window.innerWidth);
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.updateSideNav(event.target.innerWidth);
-  }
-
-  updateSideNav(windowWidth) {
-    this.isScreenSmall = windowWidth < 800;
-    if (this.isScreenSmall) {
-      this.sideNavMode = 'over';
-      this.isSideNavOpened = false;
-    } else {
-      this.sideNavMode = 'side';
-      this.isSideNavOpened = true;
-    }
+    this.updateSideNav();
   }
 
   getYear() {
