@@ -1,7 +1,7 @@
 <div class="search-bar">
   <div class="select">
     <md-select floatPlaceholder="never" placeholder="Categories" [(ngModel)]="category">
-      <md-option *ngFor="let category of categories" [value]="category.id">
+      <md-option *ngFor="let category of categoriesValue" [value]="category.id">
         {{category.name}}
       </md-option>
     </md-select>

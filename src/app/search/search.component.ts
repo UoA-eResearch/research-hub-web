@@ -8,27 +8,21 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 })
 export class SearchComponent {
 
-  categories = [
-    {id: 1, name: 'All Categories'},
-    {id: 2, name: 'Support'},
-    {id: 3, name: 'Training'},
-    {id: 4, name: 'People'},
-    {id: 5, name: 'Collaboration'},
-    {id: 6, name: 'Things'},
-    {id: 7, name: 'Publications'},
-    {id: 8, name: 'Research Advice'},
-    {id: 9, name: 'Policies & Strategy'},
-    {id: 10, name: 'Guides & Tool Chains'},
-    {id: 11, name: 'Events & News'},
-  ];
 
+  categoriesValue = [];
   searchTextValue = '';
   categoryValue = '';
   @Output() searchTextChange = new EventEmitter();
   @Output() categoryChange = new EventEmitter();
+  @Output() categoriesChange = new EventEmitter();
 
   constructor() {
 
+  }
+
+  @Input()
+  get categories() {
+    return this.categoriesValue;
   }
 
   @Input()
@@ -39,6 +33,11 @@ export class SearchComponent {
   @Input()
   get category() {
     return this.categoryValue;
+  }
+
+  set categories(val) {
+    this.categoriesValue = val;
+    this.categoriesChange.emit(val);
   }
 
   set searchText(val) {
