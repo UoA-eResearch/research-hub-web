@@ -23,19 +23,13 @@ export class SearchComponent {
   ];
 
   searchTextValue = '';
-  categoryValue = 1;
-  placeholderValue = 'Search';
+  categoryValue = '';
   @Output() searchTextChange = new EventEmitter();
   @Output() categoryChange = new EventEmitter();
 
   constructor() {
 
   }
-
-  // @Input()
-  // get placeholder() {
-  //   return this.placeholderValue;
-  // }
 
   @Input()
   get searchText() {
@@ -45,10 +39,6 @@ export class SearchComponent {
   @Input()
   get category() {
     return this.categoryValue;
-  }
-
-  set placeholder(val) {
-    this.placeholderValue = val;
   }
 
   set searchText(val) {
