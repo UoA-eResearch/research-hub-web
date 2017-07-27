@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {SearchService} from "./search.service";
 
 
 @Component({
@@ -8,16 +9,14 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 })
 export class SearchComponent {
 
-
-  categoriesValue = [];
-  searchTextValue = '';
-  categoryValue = '';
+  private categoriesValue = [];
+  private searchTextValue = '';
+  private categoryValue = '';
   @Output() searchTextChange = new EventEmitter();
   @Output() categoryChange = new EventEmitter();
   @Output() categoriesChange = new EventEmitter();
 
-  constructor() {
-
+  constructor(private searchService: SearchService) {
   }
 
   @Input()
@@ -43,14 +42,16 @@ export class SearchComponent {
   set searchText(val) {
     this.searchTextValue = val;
     this.searchTextChange.emit(val);
+    this.searchService.setSearchText(val);
   }
 
   set category(val) {
     this.categoryValue = val;
     this.categoryChange.emit(val);
+    this.searchService.setCategory(val);
   }
 
-  clear() {
+  clearSearchText() {
     this.searchText = '';
   }
 }
