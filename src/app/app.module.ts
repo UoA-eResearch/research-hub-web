@@ -29,10 +29,10 @@ import {ContactComponent} from "./contact/contact.component";
 import {HomeComponent} from "./home/home.component";
 import {SearchComponent} from "./search/search.component";
 import {AnalyticsService} from "./app.analytics.service";
-import {SearchService} from "./app.search.service";
+import {SearchService} from "./search/search.service";
 import {ApiService} from "./app.api.service";
 import {FeedbackComponent} from "./feedback/feedback.component";
-import {ResultsComponent} from "./results/results.component";
+import {BrowseComponent} from "./browse/browse.component";
 import {NavigationService} from "./navigation.service";
 
 @NgModule({
@@ -43,7 +43,7 @@ import {NavigationService} from "./navigation.service";
     HomeComponent,
     SearchComponent,
     FeedbackComponent,
-    ResultsComponent
+    BrowseComponent
   ],
   imports: [
     Ng2BreadcrumbModule,
