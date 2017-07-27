@@ -36,9 +36,9 @@ export class NavigationService {
       new Category('', '', '', [
         new Category('all', 'All Categories', '', null),
         new Category('support', 'Support', 'help', [
-          new Category('dataManagement', 'Data Management', '', null),
-          new Category('quantitativeMethods', 'Quantitative Methods', '', null),
-          new Category('qualitativeMethods', 'Qualitative Methods', '', null)
+          new Category('dataManagement', 'Data Management', 'settings_system_daydream', null),
+          new Category('quantitativeMethods', 'Quantitative Methods', 'equalizer', null),
+          new Category('qualitativeMethods', 'Qualitative Methods', 'insert_photo', null)
         ]),
         new Category('training', 'Training', 'directions_bike', null),
         new Category('people', 'People', 'face', null),
@@ -60,7 +60,7 @@ export class NavigationService {
       ]);
 
     this.createCategoriesDict('', this.root.categories);
-    this.createFriendlyNames('/results', this.root.categories);
+    this.createFriendlyNames('/browse', this.root.categories);
   }
 
   private createCategoriesDict(parentId: string, categories: [Category]) {
