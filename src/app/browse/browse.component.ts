@@ -21,7 +21,13 @@ export class BrowseComponent implements OnInit {
       const category = this.navigation.getCategory(categoryId);
 
       if (!category.isLeaf()) {
-        this.categories = category.categories;
+        // Remove 'all' category when root category is requested
+        let start = 0;
+        if (categoryId === '/') {
+          start = 1;
+        }
+
+        this.categories = category.categories.slice(start);
       } else {
         this.categories = [];
       }
