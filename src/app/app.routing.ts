@@ -5,14 +5,14 @@ import {HomeComponent} from "./home/home.component";
 import {AboutComponent} from "./about/about.component";
 import {ContactComponent} from "./contact/contact.component";
 import {FeedbackComponent} from "./feedback/feedback.component";
-import {ResultsComponent} from "./results/results.component";
+import {BrowseComponent} from "./browse/browse.component";
 
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'results', component: ResultsComponent},
-  {path: 'results/:categoryId', component: ResultsComponent},
-  {path: 'results/:categoryId/:subcategoryId', component: ResultsComponent},
+  {path: 'browse', component: BrowseComponent},
+  {path: 'browse/:categoryId', component: BrowseComponent},
+  {path: 'browse/:categoryId/:subcategoryId', component: BrowseComponent},
   {path: 'feedback', component: FeedbackComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
