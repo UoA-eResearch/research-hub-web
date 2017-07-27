@@ -10,7 +10,11 @@
       "assets": [
         "assets",
         "favicon.ico",
-        { "glob": "**/*", "input": "../node_modules/@angular/material/prebuilt-themes/", "output": "./material/prebuilt-themes/" }
+        {
+  "glob": "**/*",
+  "input": "../node_modules/@angular/material/prebuilt-themes/",
+  "output": "./material/prebuilt-themes/"
+}
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -20,7 +24,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -52,7 +56,8 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {
+    }
   }
 }
