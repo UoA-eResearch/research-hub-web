@@ -4,10 +4,10 @@ import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-results',
-  templateUrl: './results.component.html',
-  styleUrls: ['./results.component.scss']
+  templateUrl: './browse.component.html',
+  styleUrls: ['./browse.component.scss']
 })
-export class ResultsComponent implements OnInit {
+export class BrowseComponent implements OnInit {
 
   categories = [];
 
