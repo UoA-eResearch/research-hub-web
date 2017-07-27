@@ -8,7 +8,7 @@
       <span>Research Hub</span>
     </md-toolbar>
     <md-nav-list>
-      <md-list-item *ngFor="let item of menuItems">
+      <md-list-item *ngFor="let item of menuItems" [routerLink]="item.href">
         <md-icon md-list-icon>{{item.icon}}</md-icon>
         <a md-line>{{item.name}}</a>
       </md-list-item>
@@ -19,7 +19,7 @@
     <div class="sidenav-content">
       <div class="primary-header">
         <md-toolbar class="primary-toolbar" color="primary">
-          <app-search class="search-bar-theme"></app-search>
+          <app-search class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search>
         </md-toolbar>
 
         <div>

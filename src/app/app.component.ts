@@ -3,6 +3,7 @@ import * as moment from "moment";
 import {AnalyticsService} from "./app.analytics.service";
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {SideNavComponent} from "./sidenav/sidenav-component";
+import {NavigationService} from "./navigation.service";
 
 
 @Component({
@@ -14,17 +15,27 @@ import {SideNavComponent} from "./sidenav/sidenav-component";
 export class AppComponent extends SideNavComponent implements OnInit {
 
   menuItems = [
-    {name: 'Home', icon: 'home', href: ''},
-    {name: 'Search & Browse', icon: 'search', href: ''},
-    {name: 'Provide Feedback', icon: 'thumbs_up_down', href: ''},
-    {name: 'About CeR', icon: 'info', href: ''},
-    {name: 'Contact Us', icon: 'phone', href: ''}
+    {name: 'Home', icon: 'home', href: '/home'},
+    {name: 'Search & Browse', icon: 'search', href: '/browse'},
+    {name: 'Provide Feedback', icon: 'thumbs_up_down', href: '/feedback'},
+    {name: 'About CeR', icon: 'info', href: '/about'},
+    {name: 'Contact Us', icon: 'phone', href: '/contact'}
   ];
 
-  constructor(private analyticsService: AnalyticsService,
-              private breadcrumbService: BreadcrumbService) {
+  categories = [];
+  category = 'all';
+  searchText = '';
+
+  constructor(private breadcrumbService: BreadcrumbService, private navigationService: NavigationService) {
     super();
-    breadcrumbService.addFriendlyNameForRoute('/home', 'Home');
+
+    // Populate categories for search bar
+    this.categories = navigationService.getCategory('/').categories;
+
+    // Create friendly names for menu items in breadcrumbs
+    for (const item of this.menuItems) {
+      breadcrumbService.addFriendlyNameForRoute(item['href'], item['name']);
+    }
   }
 
   ngOnInit() {
@@ -33,9 +44,5 @@ export class AppComponent extends SideNavComponent implements OnInit {
 
   getYear() {
     return moment().year();
-  }
-
-  trackOutboundLink(event) {
-    this.analyticsService.trackOutboundLink(event.target.href);
   }
 }
