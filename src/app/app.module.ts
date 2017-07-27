@@ -34,6 +34,7 @@ import {ApiService} from "./app.api.service";
 import {FeedbackComponent} from "./feedback/feedback.component";
 import {BrowseComponent} from "./browse/browse.component";
 import {NavigationService} from "./navigation.service";
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {NavigationService} from "./navigation.service";
     HomeComponent,
     SearchComponent,
     FeedbackComponent,
-    BrowseComponent
+    BrowseComponent,
+    ResultsComponent
   ],
   imports: [
     Ng2BreadcrumbModule,
