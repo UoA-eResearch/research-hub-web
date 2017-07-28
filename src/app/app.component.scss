@@ -34,36 +34,6 @@
   color: $color-text;
 }
 
-.sidenav-container md-list-item a {
-  //color: $color-text;
-}
-
-//
-//md-select {
-//  .mat-select-trigger {
-//    .mat-select-value {
-//      .mat-select-value-text {
-//        color: white !important;
-//      }
-//    }
-//
-//    .mat-select-placeholder {
-//      color: white !important;
-//    }
-//
-//    .mat-select-underline {
-//      color: white !important;
-//      background-color: white !important;
-//    }
-//
-//    .mat-select-arrow {
-//      color: white !important;
-//    }
-//  }
-//}
-
-
-
 /*
  * SideNav
  */
@@ -147,28 +117,21 @@ footer .copyright a {
  */
 
 breadcrumb ul {
-  //list-style: none;
   padding-left: 0.5em;
 }
 
-//breadcrumb ul li a {
-//  display: inline-block;
-//  width: 60px;
-//}
-
 ul > li {
   display: inline-block;
-
-  /* You can also add some margins here to make it look prettier */
   zoom:1;
-  *display:inline;
-  /* this fix is needed for IE7- */
+  *display:inline;   /* a fix needed for IE7- */
+  cursor: pointer;
 }
 
 li:not(:first-child):before {
   padding-left: 0.5em;
   padding-right: 0.4em;
-  content: "/";
+  content: ">";
+  cursor: default;
 }
 
 /*
