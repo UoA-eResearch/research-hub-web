@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 
 @Injectable()
-export class SearchService {
+export class SearchBarService {
 
   searchChange: Subject<any> = new Subject<any>();
+  searchTextChange: Subject<any> = new Subject<any>();
   searchText: string;
   category: string;
 
@@ -17,6 +18,7 @@ export class SearchService {
 
   setSearchText(searchText) {
     this.searchText = searchText;
+    this.searchTextChange.next(searchText);
     this.searchChange.next(this.getSearchParams());
   }
 
