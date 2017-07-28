@@ -1,5 +1,7 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {SearchService} from "./search.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
+import {SearchBarService} from "../search-bar/search-bar.service";
+import {Subscription} from "rxjs/Subscription";
 
 
 @Component({
@@ -7,51 +9,28 @@ import {SearchService} from "./search.service";
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit, OnDestroy {
 
-  private categoriesValue = [];
-  private searchTextValue = '';
-  private categoryValue = '';
-  @Output() searchTextChange = new EventEmitter();
-  @Output() categoryChange = new EventEmitter();
-  @Output() categoriesChange = new EventEmitter();
+  private loadingData = true;
+  private searchChangeSub: Subscription;
 
-  constructor(private searchService: SearchService) {
+  constructor(private breadcrumbService: BreadcrumbService, private searchBarService: SearchBarService) {
+    this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search Results');
   }
 
-  @Input()
-  get categories() {
-    return this.categoriesValue;
+  onSearchChange(data) {
+    this.loadingData = true;
+    console.log('SearchComponent: searchChange', data);
   }
 
-  @Input()
-  get searchText() {
-    return this.searchTextValue;
+  ngOnInit() {
+    this.onSearchChange(this.searchBarService.getSearchParams()); // Get search parameters on initial page landing
+    this.searchChangeSub = this.searchBarService.searchChange.distinctUntilChanged().subscribe(searchParams => {
+      this.onSearchChange(searchParams);
+    });
   }
 
-  @Input()
-  get category() {
-    return this.categoryValue;
-  }
-
-  set categories(val) {
-    this.categoriesValue = val;
-    this.categoriesChange.emit(val);
-  }
-
-  set searchText(val) {
-    this.searchTextValue = val;
-    this.searchTextChange.emit(val);
-    this.searchService.setSearchText(val);
-  }
-
-  set category(val) {
-    this.categoryValue = val;
-    this.categoryChange.emit(val);
-    this.searchService.setCategory(val);
-  }
-
-  clearSearchText() {
-    this.searchText = '';
+  ngOnDestroy() {
+    this.searchChangeSub.unsubscribe();
   }
 }
