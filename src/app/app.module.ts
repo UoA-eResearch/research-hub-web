@@ -16,7 +16,8 @@ import {
   MdPaginatorModule,
   MdSelectModule,
   MdSidenavModule,
-  MdToolbarModule
+  MdToolbarModule,
+  MdProgressBarModule
 } from "@angular/material";
 import {BreadcrumbService, Ng2BreadcrumbModule} from "ng2-breadcrumb/ng2-breadcrumb";
 
@@ -27,14 +28,15 @@ import {AppComponent} from "./app.component";
 import {AboutComponent} from "./about/about.component";
 import {ContactComponent} from "./contact/contact.component";
 import {HomeComponent} from "./home/home.component";
-import {SearchComponent} from "./search/search.component";
+import {SearchBarComponent} from "./search-bar/search-bar.component";
 import {AnalyticsService} from "./app.analytics.service";
-import {SearchService} from "./search/search.service";
+import {SearchBarService} from "./search-bar/search-bar.service";
 import {ApiService} from "./app.api.service";
 import {FeedbackComponent} from "./feedback/feedback.component";
 import {BrowseComponent} from "./browse/browse.component";
 import {NavigationService} from "./navigation.service";
-import { ResultsComponent } from './results/results.component';
+import { ResultsListComponent } from './results-list/results-list.component';
+import {SearchComponent} from "./search/search.component";
 
 @NgModule({
   declarations: [
@@ -42,10 +44,11 @@ import { ResultsComponent } from './results/results.component';
     AboutComponent,
     ContactComponent,
     HomeComponent,
-    SearchComponent,
+    SearchBarComponent,
     FeedbackComponent,
+    SearchComponent,
     BrowseComponent,
-    ResultsComponent
+    ResultsListComponent
   ],
   imports: [
     Ng2BreadcrumbModule,
@@ -65,9 +68,10 @@ import { ResultsComponent } from './results/results.component';
     MdSidenavModule,
     MdToolbarModule,
     MdListModule,
+    MdProgressBarModule,
     routing
   ],
-  providers: [appRoutingProviders, AnalyticsService, SearchService, ApiService, BreadcrumbService, NavigationService],
+  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, NavigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
