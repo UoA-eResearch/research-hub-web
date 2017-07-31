@@ -10,6 +10,7 @@ import {ResultsListItem} from "../model/ResultsListItemInterface";
 export class ResultsListComponent {
 
   private resultsValue = new Array<ResultsListItem>();
+  private titleValue = '';
   @Output() resultsChange = new EventEmitter();
 
   constructor() {
@@ -20,8 +21,17 @@ export class ResultsListComponent {
     return this.resultsValue;
   }
 
+  @Input()
+  get title() {
+    return this.titleValue;
+  }
+
   set results(val) {
     this.resultsValue = val;
     this.resultsChange.emit(val);
+  }
+
+  set title(val) {
+    this.titleValue = val;
   }
 }

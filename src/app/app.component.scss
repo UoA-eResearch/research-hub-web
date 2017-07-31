@@ -1,6 +1,13 @@
 @import "../variables";
 @import '../styles';
 
+/*
+ * When using Angular 2 [hidden] parameter, hides element and keeps space
+ */
+
+[hidden] {
+  visibility: hidden !important;
+}
 
 /*
  * Button styles
