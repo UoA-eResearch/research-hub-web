@@ -1,5 +1,9 @@
+@import "../../variables";
+
 div.main{
   //max-width: 600px;
+  //display: flex;
+  justify-content: center;
 }
 
 
@@ -9,17 +13,13 @@ div.main{
 
 .summary {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }
 
 .summary-text {
-  //max-width: 500px;
+  max-width: 70%;
   order: 1;
-}
-
-.summary-image {
-  order: 2;
 }
 
 .summary-text p {
@@ -28,8 +28,16 @@ div.main{
   text-align: justify;
 }
 
-.summary-image img {
+.summary-image {
+  order: 2;
+  margin: auto;
+}
 
+.summary-image img {
+  height: auto;
+  width: auto;
+  max-width: 150px;
+  max-height: 150px;
 }
 
 
@@ -41,3 +49,12 @@ div.main{
 .signature span {
   color: black;
 }
+
+//@media all and (max-width: $xs-thresh-max) {
+@media all and (max-width: 320px) {
+  .summary-text {
+    max-width: 100%;
+    text-align: left;
+  }
+}
+

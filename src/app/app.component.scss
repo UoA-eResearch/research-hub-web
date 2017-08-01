@@ -198,6 +198,7 @@ app-search-bar {
 router-outlet + * {
   display: block;
   margin: 5em auto 5em auto;
+
 }
 
 @media (max-width: $xs-thresh-max) {
@@ -209,19 +210,20 @@ router-outlet + * {
 
 @media (min-width: $sm-thresh-min) and (max-width: $sm-thresh-max) {
   router-outlet + * {
-    width: 80%;
+    width: #{$width-percentage};
   }
 }
 
 @media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
   router-outlet + * {
-    width: calc(80% - #{$sidenav-width});
+    //width: calc(80% - #{$sidenav-width});
+    width: calc(#{$width-percentage} - #{$sidenav-width});
   }
 }
 
 @media (min-width: $xl-thresh-min) {
   router-outlet + * {
-    width: calc(80% - #{$sidenav-width});
+    width: calc(#{$width-percentage} - #{$sidenav-width});
     max-width: $xl-thresh-min;
   }
 }
