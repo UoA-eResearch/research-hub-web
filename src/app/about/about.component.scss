@@ -1,3 +1,30 @@
-p {
+div.text{
+  width: 50%;
+  float:left;
+
+}
+
+div.image{
+  float:left;
+}
+
+.title h1 {
+  color: navy;
+}
+
+.summary p {
+  color: black;
+  font-weight: bold;
+  text-align: justify;
+  width:75%;
+}
+
+
+.body p {
+  color: black;
+  text-align: justify;
+}
+
+.signature span {
   color: black;
 }
