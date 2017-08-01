@@ -1,22 +1,35 @@
-div.text{
-  width: 50%;
-  float:left;
-
+div.main{
+  //max-width: 600px;
 }
 
-div.image{
-  float:left;
-}
 
 .title h1 {
   color: navy;
 }
 
-.summary p {
+.summary {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.summary-text {
+  //max-width: 500px;
+  order: 1;
+}
+
+.summary-image {
+  order: 2;
+}
+
+.summary-text p {
   color: black;
   font-weight: bold;
   text-align: justify;
-  width:75%;
+}
+
+.summary-image img {
+
 }
 
 
