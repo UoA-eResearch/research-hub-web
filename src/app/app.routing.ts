@@ -6,12 +6,12 @@ import {AboutComponent} from "./about/about.component";
 import {ContactComponent} from "./contact/contact.component";
 import {FeedbackComponent} from "./feedback/feedback.component";
 import {BrowseComponent} from "./browse/browse.component";
-import {SearchComponent} from "./search/search.component";
+import {SearchResultsComponent} from "./search-results/search-results.component";
 
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'search', component: SearchComponent},
+  {path: 'search', component: SearchResultsComponent},
   {path: 'browse', component: BrowseComponent},
   {path: 'browse/:categoryId', component: BrowseComponent},
   {path: 'browse/:categoryId/:subcategoryId', component: BrowseComponent},

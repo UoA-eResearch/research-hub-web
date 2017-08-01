@@ -36,7 +36,7 @@ import {FeedbackComponent} from "./feedback/feedback.component";
 import {BrowseComponent} from "./browse/browse.component";
 import {NavigationService} from "./navigation.service";
 import { ResultsListComponent } from './results-list/results-list.component';
-import {SearchComponent} from "./search/search.component";
+import {SearchResultsComponent} from "./search-results/search-results.component";
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import {SearchComponent} from "./search/search.component";
     HomeComponent,
     SearchBarComponent,
     FeedbackComponent,
-    SearchComponent,
+    SearchResultsComponent,
     BrowseComponent,
     ResultsListComponent
   ],

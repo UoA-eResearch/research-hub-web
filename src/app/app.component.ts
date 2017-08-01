@@ -27,7 +27,7 @@ export class AppComponent extends SideNavComponent implements OnInit, OnDestroy 
   ];
 
   categories = [];
-  category = 8;
+  category = 'all';
   searchText = '';
 
   constructor(private breadcrumbService: BreadcrumbService, private navigationService: NavigationService,

@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 
+
+export class SearchBarParams {
+  public category: string;
+  public searchText: string;
+}
+
+
 @Injectable()
 export class SearchBarService {
 
@@ -30,7 +37,7 @@ export class SearchBarService {
     return this.searchText;
   }
 
-  getSearchParams() {
-    return {searchText: this.searchText, category: this.category};
+  getSearchParams(): SearchBarParams {
+    return {searchText: this.searchText, category: this.category} as SearchBarParams;
   }
 }

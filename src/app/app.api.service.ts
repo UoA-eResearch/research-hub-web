@@ -1,16 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams, Headers} from '@angular/http';
 import {Subject} from "rxjs/Subject";
+import {Page} from "./model/Page";
+import {Person} from "./model/Person";
+import {Content} from "./model/Content";
 
 
-export class ContentItemsSearchParams {
+export class SearchParams {
   private page = 0;
   private size = 50;
-  private contentTypes: number[];
-  private contentSubtypes: number[];
-  private orgUnits: number[];
-  private researchPhases: number[];
-  private people: number[];
   private searchText: string;
 
   public setPage(page: number) {
@@ -19,26 +17,6 @@ export class ContentItemsSearchParams {
 
   public setSize(size: number) {
     this.size = size;
-  }
-
-  public setContentTypes(contentTypes: number[]) {
-    this.contentTypes = contentTypes;
-  }
-
-  public setContentSubtypes(contentSubtypes: number[]) {
-    this.contentSubtypes = contentSubtypes;
-  }
-
-  public setOrgUnits(orgUnits: number[]) {
-    this.orgUnits = orgUnits;
-  }
-
-  public setResearchPhases(researchPhases: number[]) {
-    this.researchPhases = researchPhases;
-  }
-
-  public setPeople(people: number[]) {
-    this.people = people;
   }
 
   public setSearchText(searchText: string) {
@@ -61,18 +39,6 @@ export class ContentItemsSearchParams {
     params.set('page', page.toString());
     params.set('size', size.toString());
 
-    const names = ['contentTypes', 'contentSubtypes', 'orgUnits', 'researchPhases', 'people'];
-    const variables = [this.contentTypes, this.contentSubtypes, this.orgUnits, this.researchPhases, this.people];
-
-    for (let i = 0; i < names.length; i++) {
-      const name = names[i];
-      const variable = variables[i];
-
-      if (variable != null && variable.length > 0) {
-        params.set(name, variable.join(','));
-      }
-    }
-
     if (this.searchText != null && this.searchText.trim() !== '') {
       params.set('searchText', this.searchText.trim());
     }
@@ -81,22 +47,24 @@ export class ContentItemsSearchParams {
   }
 }
 
+export class ContentItemsSearchParams extends SearchParams {
 
-export class SearchParams {
-  public categories: number[];
-  public subcategories: number[];
-  public searchText: string;
+  private contentTypes: number[];
+  private contentSubtypes: number[];
 
-  constructor() {
-    this.categories = [];
-    this.subcategories = [];
+  public setContentTypes(contentTypes: number[]) {
+    this.contentTypes = contentTypes;
   }
 
-  public getSearchParams() {
-    const params = new URLSearchParams();
+  public setContentSubtypes(contentSubtypes: number[]) {
+    this.contentSubtypes = contentSubtypes;
+  }
 
-    const names = ['categories', 'subcategories'];
-    const variables = [this.categories, this.subcategories];
+  public getUrlSearchParams() {
+    const params = super.getUrlSearchParams();
+
+    const names = ['contentTypes', 'contentSubtypes'];
+    const variables = [this.contentTypes, this.contentSubtypes];
 
     for (let i = 0; i < names.length; i++) {
       const name = names[i];
@@ -105,10 +73,6 @@ export class SearchParams {
       if (variable != null && variable.length > 0) {
         params.set(name, variable.join(','));
       }
-    }
-
-    if (this.searchText != null && this.searchText.trim() !== '') {
-      params.set('searchText', this.searchText.trim());
     }
 
     return params;
@@ -122,40 +86,12 @@ export class ApiService {
   private static PERSON_URL = 'person';
   private static CATEGORY_URL = 'category';
   private static CONTENT_URL = 'content';
-  private static SEARCH_URL = 'search';
   private static ORG_UNIT_URL = 'orgUnit';
   private host = 'http://localhost:8080/';
 
 
-  static getPaginationParams(page = 0, size = 50) {
-    if (page < 0) {
-      page = 0;
-    }
-
-    if (size > 50) {
-      size = 50;
-    }
-
-    const search = new URLSearchParams();
-    search.set('page', page.toString());
-    search.set('size', size.toString());
-
-
-    return search;
-  }
-
   constructor(private http: Http) {
 
-  }
-
-  getSearchResults(searchParams: SearchParams) {
-    const search = searchParams.getSearchParams();
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
-    return this.http
-      .get(this.host + ApiService.SEARCH_URL, {search: search, headers: headers})
-      .map((response) => response.json());
   }
 
   getCategory(categoryName) {
@@ -168,13 +104,13 @@ export class ApiService {
 
   getContentItems(searchParams: ContentItemsSearchParams) {
     const search = searchParams.getUrlSearchParams();
-    console.log('search-bar params', search);
+    console.log('getContentItems', search);
     const headers = new Headers();
     headers.set('Accept', 'application/json');
 
     return this.http
       .get(this.host + ApiService.CONTENT_URL, {search: search, headers: headers})
-      .map((response) => response.json());
+      .map((response) => Page.fromObject(response.json()));
   }
 
   getContentItem(id) {
@@ -183,17 +119,17 @@ export class ApiService {
 
     return this.http
       .get(this.host + ApiService.CONTENT_URL + '/' + id, {headers: headers})
-      .map((response) => response.json());
+      .map((response) => Content.fromObject(response.json()));
   }
 
-  getPeople(page = 0, size = 50) {
-    const search = ApiService.getPaginationParams(page, size);
+  getPeople(searchParams: SearchParams) {
+    const search = searchParams.getUrlSearchParams();
     const headers = new Headers();
     headers.set('Accept', 'application/json');
 
     return this.http
       .get(this.host + ApiService.PERSON_URL, {search: search, headers: headers})
-      .map((response) => response.json());
+      .map((response) => Page.fromObject(response.json()));
   }
 
   getPerson(id) {
@@ -202,11 +138,11 @@ export class ApiService {
 
     return this.http
       .get(this.host + ApiService.PERSON_URL + '/' + id, {headers: headers})
-      .map((response) => response.json());
+      .map((response) => Person.fromObject(response.json()));
   }
 
-  getOrgUnits(page = 0, size = 50) {
-    const search = ApiService.getPaginationParams(page, size);
+  getOrgUnits(searchParams: SearchParams) {
+    const search = searchParams.getUrlSearchParams();
     const headers = new Headers();
     headers.set('Accept', 'application/json');
 
