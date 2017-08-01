@@ -48,7 +48,7 @@ $search-flex: 4;
   align-items: center;
 }
 
-@media (max-width: $small-screen-thresh) {
+@media (max-width: $sm-thresh-max) {
   .search-bar {
     flex: none;
     display: flex;

@@ -2,5 +2,22 @@
 $mat-toolbar-height-desktop: 64px !default;
 $mat-toolbar-height-mobile-portrait: 56px !default;
 $mat-toolbar-height-mobile-landscape: 48px !default;
-$small-screen-thresh: 800px;
 $color-text: #757575;
+$sidenav-width: 250px;
+
+// Screen width thresholds
+$xs-thresh-max: 599px;
+$xs-content-width: 100%;
+
+$sm-thresh-min: 600px;
+$sm-thresh-max: 959px;
+
+$md-thresh-min: 960px;
+$md-thresh-max: 1279px;
+
+$lg-thresh-min: 1280px;
+$lg-thresh-max: 1919px;
+
+$xl-thresh-min: 1920px;
+
+

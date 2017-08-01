@@ -50,7 +50,7 @@
 }
 
 .sidenav-container md-sidenav {
-  min-width: 250px;
+  min-width: $sidenav-width;
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
 }
 
@@ -156,9 +156,9 @@ app-search-bar {
   width: 100%;
 }
 
-@media (max-width: $small-screen-thresh) {
+@media (max-width: $sm-thresh-max) {
 
-  .primary-toolbar, app-search, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
+  .primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
     height: $mat-toolbar-height-desktop * 2 !important;
   }
 
@@ -190,3 +190,39 @@ app-search-bar {
     display: inline-block;
   }
 }
+
+/*
+ * Centring of page content
+ */
+
+router-outlet + * {
+  display: block;
+  margin: 5em auto 5em auto;
+}
+
+@media (max-width: $xs-thresh-max) {
+  router-outlet + * {
+    margin: 2em 1em 2em 1em;
+    width: 100%;
+  }
+}
+
+@media (min-width: $sm-thresh-min) and (max-width: $sm-thresh-max) {
+  router-outlet + * {
+    width: 80%;
+  }
+}
+
+@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
+  router-outlet + * {
+    width: calc(80% - #{$sidenav-width});
+  }
+}
+
+@media (min-width: $xl-thresh-min) {
+  router-outlet + * {
+    width: calc(80% - #{$sidenav-width});
+    max-width: $xl-thresh-min;
+  }
+}
+
