@@ -5,19 +5,65 @@ $mat-toolbar-height-mobile-landscape: 48px !default;
 $color-text: #757575;
 $sidenav-width: 250px;
 
-// Screen width thresholds
-$xs-thresh-max: 599px;
-$xs-content-width: 100%;
+/*
 
-$sm-thresh-min: 600px;
-$sm-thresh-max: 959px;
+  Text and fonts
 
-$md-thresh-min: 960px;
-$md-thresh-max: 1279px;
+ */
 
-$lg-thresh-min: 1280px;
-$lg-thresh-max: 1919px;
 
-$xl-thresh-min: 1920px;
+/*
+
+  Display widths
+
+  https://ux.stackexchange.com/questions/72855/responsive-website-ui-mockups-for-different-devices-and-screens
+
+ */
+
+$width-percentage: 80%;
+
+$mobile-portrait-max: 320px;
+//$mobile-portrait-margin: 25px;
+
+$mobile-landscape-min: 321px;
+$mobile-landscape-max: 480px;
+//$mobile-landscape-margin: 100px;
+
+$tablet-portrait-min: 481px;
+$tablet-portrait-max: 768px;
+//$tablet-portrait-margin: 175px;
+
+$tablet-landscape-min: 769px;
+$tablet-landscape-max: 1024px;
+//$tablet-landscape-margin: 200px;
+
+$desktop-width-min: 1025px;
+//$desktop-margin: 100px;
+
+
+
+// Old Screen width thresholds
+
+//$xs-thresh-max: 599px;
+//$xs-content-width: 100%;
+//$xs-margin: 100px;
+//
+//$sm-thresh-min: 600px;
+//$sm-thresh-max: 959px;
+//$sm-margin: 150px;
+//
+//$md-thresh-min: 960px;
+//$md-thresh-max: 1279px;
+//$md-margin: 100px;
+//
+//$lg-thresh-min: 1280px;
+//$lg-thresh-max: 1919px;
+//$lg-margin: 200px;
+//
+//$xl-thresh-min: 1920px;
+//$xl-margin: 200px;
+//
+
+
 
 

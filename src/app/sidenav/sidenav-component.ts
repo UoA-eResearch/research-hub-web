@@ -17,7 +17,9 @@ export class SideNavComponent {
 
   public updateSideNav() {
     const windowWidth = window.innerWidth;
-    this.isScreenSmall = windowWidth < 959;
+    const desktopMinWidth = 1025; // pixels
+    const desktopMargin = 100; // pixels
+    this.isScreenSmall = windowWidth < desktopMinWidth + 2 * desktopMargin;
     if (this.isScreenSmall) {
       this.sideNavMode = 'over';
       this.isSideNavOpened = false;
