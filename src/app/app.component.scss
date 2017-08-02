@@ -156,40 +156,42 @@ app-search-bar {
   width: 100%;
 }
 
-@media (max-width: $sm-thresh-max) {
+//@media (max-width: $sm-thresh-max) {
+@media (max-width: $tablet-portrait-max) {
 
-  .primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
-    height: $mat-toolbar-height-desktop * 2 !important;
-  }
+    .primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
+      height: $mat-toolbar-height-desktop * 2 !important;
+    }
 
-  footer {
-    flex-direction: column;
-    height: 200px;
-    min-height: 100px;
-  }
+    footer {
+      flex-direction: column;
+      height: 200px;
+      min-height: 100px;
+    }
 
-  footer .logo {
-    flex: 1.6;
+    footer .logo {
+      flex: 1.6;
 
-    display: flex; /* Also makes this a flexbox which we can centre items in */
-    align-items: center;
-  }
+      display: flex; /* Also makes this a flexbox which we can centre items in */
+      align-items: center;
+    }
 
-  footer .copyright {
-    text-align: center;
-    flex: 1;
-  }
+    footer .copyright {
+      text-align: center;
+      flex: 1;
+    }
 
-  .sidenav-content {
-    min-height: calc(100vh - 200px);
-  }
+    .sidenav-content {
+      min-height: calc(100vh - 200px);
+    }
 
-  .primary-header h1 {
-    padding: 0;
-    font-size: 20px;
-    display: inline-block;
-  }
+    .primary-header h1 {
+      padding: 0;
+      font-size: 20px;
+      display: inline-block;
+    }
 }
+
 
 /*
  * Centering of page content
@@ -201,30 +203,90 @@ router-outlet + * {
 
 }
 
-@media (max-width: $xs-thresh-max) {
+@media (max-width: $mobile-portrait-max){
   router-outlet + * {
-    margin: 2em 1em 2em 1em;
-    width: 100%;
+    background-color: red;
+    max-width: calc(#{$mobile-portrait-max} - 2 * #{$mobile-portrait-margin});
   }
 }
 
-@media (min-width: $sm-thresh-min) and (max-width: $sm-thresh-max) {
+@media (min-width: $mobile-landscape-min) and (max-width: $mobile-landscape-max){
   router-outlet + * {
-    width: #{$width-percentage};
+    background-color: blue;
+    max-width: calc(#{$mobile-landscape-max} - 2 * #{$mobile-landscape-margin});
   }
 }
 
-@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
+@media (min-width: $tablet-portrait-min) and (max-width: $tablet-portrait-max){
   router-outlet + * {
-    //width: calc(80% - #{$sidenav-width});
-    width: calc(#{$width-percentage} - #{$sidenav-width});
+    background-color: yellow;
+    max-width: calc(#{$tablet-portrait-max} - 2 * #{$tablet-portrait-margin});
   }
 }
 
-@media (min-width: $xl-thresh-min) {
+@media (min-width: $tablet-landscape-min) and (max-width: $tablet-landscape-max){
   router-outlet + * {
-    width: calc(#{$width-percentage} - #{$sidenav-width});
-    max-width: $xl-thresh-min;
+    background-color: green;
+    max-width: calc(#{$tablet-landscape-max} - 2 * #{$tablet-landscape-margin});
   }
 }
+
+@media (min-width: $desktop-width-min){
+  router-outlet + * {
+    background-color: purple;
+    max-width: calc(#{$desktop-width-min} - 2 * #{$desktop-margin});
+  }
+}
+
+
+
+
+
+
+//// extra small
+//@media (max-width: $xs-thresh-max) {
+//  router-outlet + * {
+//    //margin: 2em 1em 2em 1em;
+//    //width: 100%;
+//    max-width: calc(#{$xs-thresh-max} - 2 * #{$xs-margin});
+//    //background-color: red;
+//  }
+//}
+//
+//// small
+//@media (min-width: $sm-thresh-min) and (max-width: $sm-thresh-max) {
+//  router-outlet + * {
+//    //width: #{$width-percentage};
+//    max-width: calc(#{$sm-thresh-max} - 2 * #{$sm-margin});
+//    //background-color: darkseagreen;
+//  }
+//}
+//
+//// medium
+////@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
+//@media (min-width: $md-thresh-min) and (max-width: $md-thresh-max) {
+//  router-outlet + * {
+//    max-width: calc(#{$md-thresh-max} - #{$sidenav-width} - 2 * #{$md-margin});
+//    //background-color: cornflowerblue;
+//  }
+//}
+//
+//// large
+////@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
+//@media (min-width: $lg-thresh-min) and (max-width: $lg-thresh-max) {
+//  router-outlet + * {
+//    max-width: calc(#{$lg-thresh-max} - #{$sidenav-width} - 2 * #{$lg-margin});
+//    //background-color: lightgoldenrodyellow;
+//  }
+//}
+//
+//// extra large
+//@media (min-width: $xl-thresh-min) {
+//  router-outlet + * {
+////    width: calc(#{$width-percentage} - #{$sidenav-width});
+//    max-width: calc(#{$xl-thresh-min} - #{$sidenav-width} - 2 * #{$xl-margin});
+//    //background-color: tomato;
+//  }
+//}
+
 

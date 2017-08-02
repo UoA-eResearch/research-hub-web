@@ -1,14 +1,12 @@
 @import "../../variables";
 
 div.main{
-  //max-width: 600px;
-  //display: flex;
   justify-content: center;
 }
 
 
 .title h1 {
-  color: navy;
+  color: $color-text;
 }
 
 .summary {
@@ -23,7 +21,7 @@ div.main{
 }
 
 .summary-text p {
-  color: black;
+  color: $color-text;
   font-weight: bold;
   text-align: justify;
 }
@@ -42,12 +40,12 @@ div.main{
 
 
 .body p {
-  color: black;
+  color: $color-text;;
   text-align: justify;
 }
 
 .signature span {
-  color: black;
+  color: $color-text;
 }
 
 //@media all and (max-width: $xs-thresh-max) {
