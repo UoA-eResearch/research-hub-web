@@ -1,7 +1,8 @@
 @import "../../variables";
 
 div.main{
-  justify-content: center;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  line-height: 1.2;
 }
 
 
@@ -23,7 +24,7 @@ div.main{
 .summary-text p {
   color: $color-text;
   font-weight: bold;
-  text-align: justify;
+  text-align: left;
 }
 
 .summary-image {
@@ -40,19 +41,52 @@ div.main{
 
 
 .body p {
-  color: $color-text;;
-  text-align: justify;
+  color: $color-text;
+  text-align: left;
 }
 
 .signature span {
   color: $color-text;
 }
 
-//@media all and (max-width: $xs-thresh-max) {
-@media all and (max-width: 320px) {
+@media (max-width: $mobile-portrait-max){
+
+  div.main {
+    font-size: 90%;
+  }
+
+  .summary {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+  }
+
   .summary-text {
     max-width: 100%;
-    text-align: left;
+    order: 1;
   }
 }
+
+
+@media (min-width: $desktop-width-min){
+
+  div.main {
+    max-width: calc((1360px - #{$sidenav-width}) * 0.8);
+  }
+
+}
+
+// 4k
+@media (min-width: 2560px) {
+  div.main{
+    font-size: 120%;
+  }
+
+  .summary-image img {
+    height: 200%;
+    width: 200%;
+  }
+
+}
+
 
