@@ -1,0 +1,10 @@
+<md-nav-list>
+  <h3 md-subheader *ngIf="titleValue !== ''">{{titleValue}}</h3>
+  <md-list-item *ngFor="let result of resultsValue">
+    <img md-list-avatar src="">
+    <h3 md-line> {{result.title}} </h3>
+    <p md-line>
+      <span> {{result.subtitle}} </span>
+    </p>
+  </md-list-item>
+</md-nav-list>

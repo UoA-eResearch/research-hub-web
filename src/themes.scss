@@ -1,0 +1,26 @@
+@import '~@angular/material/theming';
+
+// Include the common styles for Angular Material. Be sure that you only ever include this mixin once!
+@include mat-core();
+
+
+// Create the hub app theme
+$hub-app-primary: mat-palette($mat-indigo);
+$hub-app-accent: mat-palette($mat-pink, A200, A100, A400);
+$hub-app-background: mat-palette($mat-grey);
+$hub-app-theme: mat-light-theme($hub-app-primary, $hub-app-accent);
+@include angular-material-theme($hub-app-theme);
+
+// Create variables to use throughout the rest of the site
+$color-primary: map-get($hub-app-primary, 500);
+$color-accent: map-get($hub-app-accent, A200);
+$color-background: map-get($hub-app-background, A200);
+
+// Custom themes for specific components
+.search-bar-theme {
+
+  $search-bar-primary: mat-palette($mat-grey, 50);
+  $search-bar-accent: mat-palette($mat-pink, A200, A100, A400);
+  $search-bar-theme: mat-dark-theme($search-bar-primary, $search-bar-accent);
+  @include angular-material-theme($search-bar-theme);
+}

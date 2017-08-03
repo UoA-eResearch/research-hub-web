@@ -1,9 +1,228 @@
-.hub-side-nav
-{
-  height: 420px;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
+@import "../variables";
+@import '../styles';
+
+/*
+ * When using Angular 2 [hidden] parameter, hides element and keeps space
+ */
+
+[hidden] {
+  visibility: hidden !important;
 }
+
+/*
+ * Button styles
+ */
+
+.menu-button {
+  margin-left: 10px !important;
+  display: inline-block;
+  color: white !important;
+  top: -3px !important;
+}
+
+/*
+ * Fixes so that select lines up with md-input-container elements
+ * and contains same sized text
+ */
+
+.mat-select-trigger {
+  font-size: 20px !important;
+}
+
+.mat-select-underline {
+  bottom: -10px !important;
+}
+
+/*
+ * Navigation list
+ */
+
+.sidenav-container md-list-item md-icon {
+  color: $color-text;
+}
+
+/*
+ * SideNav
+ */
+
+.sidenav-container {
+  min-height: calc(100vh);
+}
+
+.sidenav-container md-sidenav {
+  min-width: $sidenav-width;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+}
+
+.sidenav-container md-sidenav md-list {
+  padding-left: 1em;
+  padding-top: 1em;
+}
+
+.sidenav-content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav-content {
+  flex: 1;
+  min-height: calc(100vh - 100px);
+}
+
+.primary-header {
+  background: $color-primary;
+}
+
+.primary-header h1 {
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0;
+  padding: 50px;
+  color: white;
+}
+
+/*
+ * Footer
+ */
+
+footer {
+  background-color: $color-primary;
+  height: 100px;
+  flex: none;
+  padding-left: 2em;
+  padding-right: 2em;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+footer .logo {
+  flex: 2;
+  justify-content: flex-start;
+}
+
+footer .copyright {
+  text-align: right;
+
+  order: 1;
+  flex: 4;
+  justify-content: flex-end;
+}
+
+footer .logo img {
+  display: block;
+  height: 70px;
+}
+
+footer .copyright a {
+  text-decoration: none;
+  color: white;
+}
+
+/*
+ * Breadcrumb styling
+ */
+
+breadcrumb ul {
+  padding-left: 0.5em;
+}
+
+ul > li {
+  display: inline-block;
+  zoom:1;
+  *display:inline;   /* a fix needed for IE7- */
+  cursor: pointer;
+}
+
+li:not(:first-child):before {
+  padding-left: 0.5em;
+  padding-right: 0.4em;
+  content: ">";
+  cursor: default;
+}
+
+/*
+ * Re arrange footer / content on small screens
+ */
+
+.primary-toolbar {
+  padding-left: 1em;
+}
+
+app-search-bar {
+  height: inherit;
+  width: 100%;
+}
+
+@media (max-width: $sm-thresh-max) {
+
+  .primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
+    height: $mat-toolbar-height-desktop * 2 !important;
+  }
+
+  footer {
+    flex-direction: column;
+    height: 200px;
+    min-height: 100px;
+  }
+
+  footer .logo {
+    flex: 1.6;
+
+    display: flex; /* Also makes this a flexbox which we can centre items in */
+    align-items: center;
+  }
+
+  footer .copyright {
+    text-align: center;
+    flex: 1;
+  }
+
+  .sidenav-content {
+    min-height: calc(100vh - 200px);
+  }
+
+  .primary-header h1 {
+    padding: 0;
+    font-size: 20px;
+    display: inline-block;
+  }
+}
+
+/*
+ * Centering of page content
+ */
+
+router-outlet + * {
+  display: block;
+  margin: 5em auto 5em auto;
+}
+
+@media (max-width: $xs-thresh-max) {
+  router-outlet + * {
+    margin: 2em 1em 2em 1em;
+    width: 100%;
+  }
+}
+
+@media (min-width: $sm-thresh-min) and (max-width: $sm-thresh-max) {
+  router-outlet + * {
+    width: 80%;
+  }
+}
+
+@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
+  router-outlet + * {
+    width: calc(80% - #{$sidenav-width});
+  }
+}
+
+@media (min-width: $xl-thresh-min) {
+  router-outlet + * {
+    width: calc(80% - #{$sidenav-width});
+    max-width: $xl-thresh-min;
+  }
+}
+

@@ -1,0 +1,19 @@
+<div class="search-bar">
+  <div class="select">
+    <md-select floatPlaceholder="never" placeholder="Categories" [(ngModel)]="category">
+      <md-option *ngFor="let category of categoriesValue" [value]="category.id">
+        {{category.name}}
+      </md-option>
+    </md-select>
+  </div>
+
+  <div class="search-box">
+    <md-input-container floatPlaceholder="never">
+      <span mdPrefix><md-icon>search</md-icon></span>
+      <input mdInput placeholder="Search" [(ngModel)]="searchText">
+      <button mdSuffix (click)="clearSearchText()" md-icon-button>
+        <md-icon>close</md-icon>
+      </button>
+    </md-input-container>
+  </div>
+</div>

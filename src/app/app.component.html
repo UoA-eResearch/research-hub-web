@@ -1,112 +1,48 @@
-<div>
-  <nav style="height: 64px;">
-    <div class="nav-wrapper">
-      <a class="brand-logo left" style="margin-left:-8px;"><img src="assets/logo-white.svg"/></a>
 
-      <form style="margin-left: 260px;">
-        <div class="input-field" [hidden]="isProductDetailsActive()" style="height: 64px;">
-          <input #search id="search" type="search" style=" margin-bottom: 0;height: 64px;" (keyup)="setSearchTerm(search.value)">
-          <label for="search"><i class="material-icons" style="height: 64px;line-height: 64px;">search</i></label>
-          <i class="material-icons" style="height: 64px;line-height: 64px;">close</i>
+<md-sidenav-container class="sidenav-container">
+  <md-sidenav #sidenav [mode]="sideNavMode" [opened]="isSideNavOpened">
+    <md-toolbar color="primary">
+      <button md-icon-button>
+        <md-icon>device_hub</md-icon>
+      </button>
+      <span>Research Hub</span>
+    </md-toolbar>
+    <md-nav-list>
+      <md-list-item *ngFor="let item of menuItems" [routerLink]="item.href">
+        <md-icon md-list-icon>{{item.icon}}</md-icon>
+        <a md-line>{{item.name}}</a>
+      </md-list-item>
+    </md-nav-list>
+  </md-sidenav>
+
+  <div class="sidenav-content-wrapper">
+    <div class="sidenav-content">
+      <div class="primary-header">
+        <md-toolbar class="primary-toolbar" color="primary">
+          <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
+        </md-toolbar>
+
+        <div>
+          <button md-icon-button class="menu-button" (click)="sidenav.toggle()" *ngIf="isScreenSmall">
+            <md-icon>menu</md-icon>
+          </button>
+          <h1><breadcrumb [useBootstrap]="false"></breadcrumb></h1>
         </div>
-      </form>
+      </div>
+
+      <router-outlet></router-outlet>
     </div>
-       <!--<div class="waves-effect waves-brown topcorner">
-       <input value="Login" type="button" ng-show="!isLoggedIn" onclick="saml_login()" class="btn btn-primary btn-lg">
-       <input value="Logout" type="button" ui-sref='logged-out' ng-show="isLoggedIn" onclick="logout()" class="btn btn-primary btn-lg">
-       </div>-->
-       <div class="waves-effect topcorner">
-       <input *ngIf="isLoggedIn==false" value="Sign in" type="button" class="btn btn-primary btn-lg">
-       <input *ngIf="isLoggedIn==true" value="Logout" type="button" class="btn btn-primary btn-lg">
-       </div>
-  </nav>
-</div>
-
-<header>
-  <div class="secondary_nav" [ngClass]="getSecondaryMenuClass()">
-    <nav>
-      <ul id="slide-out" class="side-nav fixed collapsible hub-side-nav">
-        <div style="width: 260px; height: 64px;"><img style="height: 64px;padding: 15px;" src="assets/logo.svg"/></div>
-        <li><a [routerLink]="['home']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
-          class="material-icons">home</i>Home</a></li>
-        <li><a [routerLink]="['lifecycle']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
-          class="material-icons">loop</i>Lifecycle</a></li>
-        <li><a [routerLink]="['productList', 'service']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
-          class="material-icons">settings</i>Services</a></li>
-        <li><a [routerLink]="['productList', 'education']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
-          class="material-icons">school</i>Education</a></li>
-        <li><a [routerLink]="['guides']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
-          class="material-icons">flag</i>Guides</a></li>
-        <li><a [routerLink]="['policies']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
-          class="material-icons">thumbs_up_down</i>Policies</a></li>
-        <li><a [routerLink]="['showcase']" class="waves-effect waves-brown" [routerLinkActive]="['active']"><i
-          class="material-icons">group</i>Showcase</a></li>
-      </ul>
-
-      <div class="nav-wrapper inset-content">
-        <a href="#" data-activates="slide-out" class="button-collapse">
-          <i style="margin-left: 20px; font-size: 24px;" class="material-icons">menu</i>
+    <footer>
+      <div class="logo">
+        <a href="https://auckland.ac.nz" target="_blank">
+          <img src="assets/uoa-logo.svg">
         </a>
-
-        <a href="#" style="display: inline-block; line-height: 48px; height: 48px; margin-left: 20px;vertical-align: top;" *ngIf="showBackBtn()" (click)="back()">
-          <i class="material-icons" style="display: inline-block; line-height: 48px; height: 48px;">chevron_left</i><span style="vertical-align: top;">Back</span>
+      </div>
+      <div class="copyright">
+        <a href="http://eresearch.auckland.ac.nz" target="_blank">
+          Copyright © {{getYear()}}, The Centre for eResearch, The University of Auckland
         </a>
-
-        <ul style="display:inline-block;">
-          <li class="input-field" [hidden]="!isLifecycleActive() && !isServicesActive() && !isEducationActive()">
-            <select id="lifeCycleSelect" [ngModel]="lifeCycle">
-              <option [value]="undefined" selected>Research Lifecycle</option>
-              <option *ngFor="let term of lifeCycleTerms | async" [value]="term.id">{{term.name}}</option>
-            </select>
-          </li>
-          <li class="input-field" [hidden]="!isServicesActive()">
-            <select id="serviceTypeSelect" [ngModel]="serviceType">
-              <option [value]="undefined" selected>Service Type</option>
-              <option *ngFor="let term of serviceTypeTerms | async" [value]="term.id">{{term.name}}</option>
-            </select>
-          </li>
-          <li class="input-field" [hidden]="!isEducationActive()">
-            <select id="programmeSelect" [ngModel]="programme">
-              <option [value]="undefined" selected>Programme</option>
-              <option *ngFor="let term of programmeTerms | async" [value]="term.id">{{term.name}}</option>
-            </select>
-          </li>
-          <li class="input-field" [hidden]="!isEducationActive()">
-            <select id="studyLevelSelect" [ngModel]="programme">
-              <option [value]="undefined" selected>Study Level</option>
-              <option *ngFor="let term of studyLevelTerms | async" [value]="term.id">{{term.name}}</option>
-            </select>
-          </li>
-        </ul>
       </div>
-    </nav>
+    </footer>
   </div>
-</header>
-
-<main>
-  <router-outlet></router-outlet>
-</main>
-
-<footer class="page-footer uoa dark-grey">
-  <div class="footer-container container" style="padding-top: 20px; padding-bottom: 20px;">
-    <div class="row">
-      <div class="col l6 s12">
-      </div>
-      <div class="col l4 offset-l2 s12">
-        <h5 class="white-text">Help &amp; Support</h5>
-        <ul>
-          <li><a class="grey-text text-lighten-3" target='_blank' href="http://www.eresearch.auckland.ac.nz/en/centre-for-eresearch/our-centre.html">About the Centre for eResearch</a></li>
-          <li><a class="grey-text text-lighten-3" target='_blank' href="http://www.eresearch.auckland.ac.nz/en/centre-for-eresearch/contact-us.html">Contact us</a></li>
-          <li><a class="grey-text text-lighten-3" target='_blank' href="https://docs.google.com/forms/d/1fX1syILMvaTyUkb4a3C9pDdPNL9wCkfOy4NOy2h_1pM" (click)="trackFeedback()">Provide Feedback</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copyright uoa very-dark-grey">
-    <div class="footer-container container">
-      Copyright © {{getYear()}}, The Centre for eResearch, The University of Auckland
-    </div>
-  </div>
-</footer>
-
-<a class="github-fork-ribbon left-bottom fixed" target='_blank' href="https://docs.google.com/forms/d/1fX1syILMvaTyUkb4a3C9pDdPNL9wCkfOy4NOy2h_1pM" (click)="trackFeedback()" title="Beta site feedback">Beta site feedback</a>
+</md-sidenav-container>

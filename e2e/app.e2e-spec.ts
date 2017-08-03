@@ -1,6 +1,6 @@
 import { ResearchHubPage } from './app.po';
 
-describe('research-hub App', function() {
+describe('research-hub-v2 App', () => {
   let page: ResearchHubPage;
 
   beforeEach(() => {

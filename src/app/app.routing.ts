@@ -1,28 +1,26 @@
-import {Routes, RouterModule} from '@angular/router';
-import {HomeComponent} from "./home/home.component";
+import {RouterModule, Routes} from "@angular/router";
 import {ModuleWithProviders} from "@angular/core";
-import {LifecycleComponent} from "./lifecycle/lifecycle.component";
-import {ShowcaseComponent} from "./showcase/showcase.component";
-import {ProductListComponent} from "./productList/productList.component";
-import {ProductDetailsComponent} from "./productDetails/productDetails.component";
-import {ComingSoonComponent} from "./comingSoon/comingSoon.component";
 
-const appRoutes:Routes = [
-    {path: 'home', component: HomeComponent},
-    {path: 'home/search', component: ProductListComponent},
-    {path: 'guides', component: ComingSoonComponent},
-    {path: 'policies', component: ComingSoonComponent},
-    {path: 'showcase', component: ComingSoonComponent},
-    {path: 'lifecycle', component: LifecycleComponent},
-    {path: 'lifecycle/:lifeCycleId', component: LifecycleComponent},
-    {path: 'lifecycle/:type/productDetails/:id', component: ProductDetailsComponent},
-    {path: 'showcase', component: ShowcaseComponent},
-    {path: 'productList/:type', component: ProductListComponent},
-    {path: 'productList/:type/:serviceTypeId', component: ProductListComponent},
-    {path: 'productList/:type/productDetails/:id', component: ProductDetailsComponent},
-    {path: '', redirectTo: '/home', pathMatch: 'full' },
-    {path: '**', redirectTo: '/home', pathMatch: 'full'}
+import {HomeComponent} from "./home/home.component";
+import {AboutComponent} from "./about/about.component";
+import {ContactComponent} from "./contact/contact.component";
+import {FeedbackComponent} from "./feedback/feedback.component";
+import {BrowseComponent} from "./browse/browse.component";
+import {SearchResultsComponent} from "./search-results/search-results.component";
+
+
+const appRoutes: Routes = [
+  {path: 'home', component: HomeComponent},
+  {path: 'search', component: SearchResultsComponent},
+  {path: 'browse', component: BrowseComponent},
+  {path: 'browse/:categoryId', component: BrowseComponent},
+  {path: 'browse/:categoryId/:subcategoryId', component: BrowseComponent},
+  {path: 'feedback', component: FeedbackComponent},
+  {path: 'about', component: AboutComponent},
+  {path: 'contact', component: ContactComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];
 
-export const appRoutingProviders:any[] = [];
-export const routing:ModuleWithProviders = RouterModule.forRoot(appRoutes, {useHash: true});
+export const appRoutingProviders: any[] = [];
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, {useHash: true});
