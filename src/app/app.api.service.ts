@@ -4,6 +4,7 @@ import {Subject} from "rxjs/Subject";
 import {Page} from "./model/Page";
 import {Person} from "./model/Person";
 import {Content} from "./model/Content";
+import {environment} from 'app/../environments/environment';
 
 
 export class SearchParams {
@@ -87,7 +88,7 @@ export class ApiService {
   private static CATEGORY_URL = 'category';
   private static CONTENT_URL = 'content';
   private static ORG_UNIT_URL = 'orgUnit';
-  private host = 'http://localhost:8080/';
+  private host = environment.apiUrl;
 
 
   constructor(private http: Http) {
