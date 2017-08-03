@@ -1,0 +1,27 @@
+<md-card>
+  <form [formGroup]="feedbackForm" novalidate>
+    <div id="form-image-container">
+      <img src="https://static.planetminecraft.com/files/avatar/1939407_1.gif">
+    </div>
+    <p>
+      <md-input-container class="input-full-width">
+        <input mdInput placeholder="Name" formControlName="name" class="input-full-width">
+      </md-input-container>
+    </p>
+    <p>
+      <md-input-container class="input-full-width">
+        <input mdInput placeholder="Email" formControlName="email" >
+      </md-input-container>
+    </p>
+    <p>
+      <md-input-container class="input-full-width">
+        <textarea mdInput placeholder="Comments" formControlName="message"></textarea>
+      </md-input-container>
+    </p>
+    <div id="button-container">
+      <button md-button (click)="onSubmit()">Submit</button>
+    </div>
+  </form>
+  <p>Form value: {{ feedbackForm.value | json }}</p>
+  <p>Form status: {{ feedbackForm.status | json }}</p>
+</md-card>

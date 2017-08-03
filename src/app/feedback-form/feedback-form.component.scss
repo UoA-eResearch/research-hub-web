@@ -1,0 +1,22 @@
+@import "../../variables";
+
+button {
+  background-color: $color-text;
+}
+
+#form-image-container{
+  text-align: right;
+}
+
+#form-image-container img {
+  height:auto;
+  width:50px;
+}
+
+#button-container {
+  text-align: right;
+}
+
+.input-full-width{
+  width:100%;
+}
