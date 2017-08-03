@@ -1,5 +1,3 @@
-Using reactive forms
-
 # ResearchHub
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.
@@ -7,6 +5,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+To run the REST API and database whilst developing, follow [these instructions](https://github.com/UoA-eResearch/research-hub-deploy#development).
 
 ## Code scaffolding
 
