@@ -19,6 +19,7 @@ md-grid-tile {
   display:flex;
   flex-flow: column;
   justify-content: space-between;
+  order: 2;
 }
 
 #featured{
