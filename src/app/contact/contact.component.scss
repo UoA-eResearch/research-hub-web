@@ -19,8 +19,8 @@ md-icon.contact-info-icon {
 }
 
 md-list-item .contact-info-text {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  line-height: 1.2;
+  font-family: $font-family;
+  line-height: $line-height;
   padding-left: 4em;
   color: $color-text;
 }

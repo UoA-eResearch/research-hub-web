@@ -58,12 +58,94 @@ Feedback and Register
   order: 2;
 }
 
+.input-section{
+  min-width:50%;
+}
 
-// large display
+
+@media (max-width: $mobile-portrait-max){
+  .title{
+    font-size: 90%;
+  }
+
+  .input-section{
+    min-width:100%;
+  }
+}
+
+@media (min-width: $mobile-landscape-min) and (max-width: $mobile-landscape-max){
+  .title{
+    font-size: 90%;
+  }
+
+  .input-section{
+    min-width:100%;
+
+  }
+}
+
+//@media (min-width: $tablet-portrait-min) and (max-width: $tablet-portrait-max){
+@media (min-width: $tablet-portrait-min) and (max-width: 995px){
+
+  .input-section{
+    width:100%;
+  }
+
+  #intro-title{
+    order: 1;
+    width:100%;
+  }
+
+  #intro-image{
+    order: 3;
+  }
+
+  #intro-text{
+    order: 2;
+    max-width: 70%;
+  }
+
+  #intro-image img {
+    height: auto;
+  }
+
+
+}
+
+//@media (min-width: $tablet-landscape-min) and (max-width: $tablet-landscape-max){
+@media (min-width: 996px) and (max-width: $tablet-landscape-max){
+
+
+  .input-section{
+    min-width:48%;
+  }
+
+  #intro-title{
+    order: 1;
+    width:100%;
+  }
+
+  #intro-image{
+    order: 3;
+  }
+
+  #intro-text{
+    order: 2;
+    max-width: 70%;
+  }
+
+  #intro-image img {
+    height: auto;
+  }
+
+}
+
+
 @media (min-width: $desktop-width-min){
 
   #main {
-    max-width: calc((1360px - #{$sidenav-width}) * 0.8);
+    //max-width: calc((1360px - #{$sidenav-width}) * 0.8);
+    max-width:$desktop-width-min;
   }
 
   #intro-title{
@@ -76,8 +158,8 @@ Feedback and Register
   }
 
   #intro-image img {
-    height: 80%;
-    width: auto;
+    height: auto;
+    width: 100%;
   }
 
 
@@ -85,5 +167,11 @@ Feedback and Register
     order: 2;
     max-width: 70%;
   }
+
+  .input-section{
+    min-width:48%;
+
+  }
+
 
 }

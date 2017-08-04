@@ -1,4 +1,4 @@
-<md-card>
+<md-card class="feedback-card">
   <form [formGroup]="feedbackForm" novalidate>
     <div id="form-image-container">
       <img src="https://static.planetminecraft.com/files/avatar/1939407_1.gif">
@@ -22,6 +22,8 @@
       <button md-button (click)="onSubmit()">Submit</button>
     </div>
   </form>
+  <!--
   <p>Form value: {{ feedbackForm.value | json }}</p>
   <p>Form status: {{ feedbackForm.status | json }}</p>
+   -->
 </md-card>
