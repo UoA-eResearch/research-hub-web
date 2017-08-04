@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-
+import {Component, OnInit, HostListener} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +7,22 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() {
+  numCols: number;
+  categoryItems: string[] = ['cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7'];
 
+  constructor() {  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.updateSideNav();
+  }
+
+  public updateSideNav() {
+    const windowWidth = window.innerWidth;
+    this.numCols = 3;
   }
 
   ngOnInit() {
-
+    this.updateSideNav();
   }
 }
