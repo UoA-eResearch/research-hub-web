@@ -129,14 +129,14 @@ breadcrumb ul {
   padding-left: 0.5em;
 }
 
-ul > li {
+breadcrumb ul > li {
   display: inline-block;
   zoom:1;
   *display:inline;   /* a fix needed for IE7- */
   cursor: pointer;
 }
 
-li:not(:first-child):before {
+breadcrumb li:not(:first-child):before {
   padding-left: 0.5em;
   padding-right: 0.4em;
   content: ">";
