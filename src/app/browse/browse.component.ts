@@ -5,6 +5,7 @@ import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.ser
 import {Person} from "../model/Person";
 import {getResultsListItems} from "../model/ResultsListItemInterface";
 import {Content} from "../model/Content";
+import {ProgressBarService} from "../app.progress-bar.service";
 
 @Component({
   selector: 'app-browse',
@@ -15,10 +16,9 @@ export class BrowseComponent implements OnInit {
 
   private categories = [];
   private results = [];
-  private loadingData = true;
 
-
-  constructor(private navigation: NavigationService, private route: ActivatedRoute, private apiService: ApiService) {
+  constructor(private navigation: NavigationService, private route: ActivatedRoute, private apiService: ApiService,
+              private progressBarService: ProgressBarService) {
 
   }
 
@@ -28,7 +28,7 @@ export class BrowseComponent implements OnInit {
       const category = this.navigation.getCategory(categoryId);
 
       if (!category.isLeaf()) {
-        this.loadingData = false;
+        this.progressBarService.setHidden();
 
         // Remove 'all' category when root category is requested
         let start = 0;
@@ -40,12 +40,12 @@ export class BrowseComponent implements OnInit {
         this.categories = category.categories.slice(start);
       } else {
         this.categories = [];
-        this.loadingData = true;
+        this.progressBarService.setVisible();
 
         if (category.type === CategoryType.Person) {
           this.apiService.getPeople(new SearchParams()).subscribe(
             page => {
-              this.loadingData = false;
+              this.progressBarService.setHidden();
               this.results = getResultsListItems(Person.fromObjects(page.content));
 
               console.log('Page: ', page.content);
@@ -64,7 +64,7 @@ export class BrowseComponent implements OnInit {
 
           this.apiService.getContentItems(searchParams).subscribe(
             page => {
-              this.loadingData = false;
+              this.progressBarService.setHidden();
               this.results = getResultsListItems(Content.fromObjects(page.content));
 
               console.log('Page: ', page.content);

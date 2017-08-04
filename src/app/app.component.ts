@@ -6,6 +6,7 @@ import {NavigationService} from "./navigation.service";
 import {SearchBarService} from "./search-bar/search-bar.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
+import {ProgressBarService} from "./app.progress-bar.service";
 
 
 @Component({
@@ -31,7 +32,7 @@ export class AppComponent extends SideNavComponent implements OnInit, OnDestroy 
   searchText = '';
 
   constructor(private breadcrumbService: BreadcrumbService, private navigationService: NavigationService,
-              private searchBarService: SearchBarService, private router: Router) {
+              private searchBarService: SearchBarService, private router: Router, private progressBarService: ProgressBarService) {
     super();
 
     // Populate categories for search-bar bar

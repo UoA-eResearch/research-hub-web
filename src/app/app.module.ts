@@ -35,8 +35,9 @@ import {ApiService} from "./app.api.service";
 import {FeedbackComponent} from "./feedback/feedback.component";
 import {BrowseComponent} from "./browse/browse.component";
 import {NavigationService} from "./navigation.service";
-import { ResultsListComponent } from './results-list/results-list.component';
+import {ResultsListComponent} from './results-list/results-list.component';
 import {SearchResultsComponent} from "./search-results/search-results.component";
+import {ProgressBarService} from "./app.progress-bar.service";
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import {SearchResultsComponent} from "./search-results/search-results.component"
     MdProgressBarModule,
     routing
   ],
-  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, NavigationService],
+  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, NavigationService,
+    ProgressBarService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

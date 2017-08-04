@@ -7,6 +7,7 @@ import {getResultsListItems, ResultsListItem} from "../model/ResultsListItemInte
 import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.service";
 import {Person} from "../model/Person";
 import {Content} from "../model/Content";
+import {ProgressBarService} from "../app.progress-bar.service";
 
 
 @Component({
@@ -16,19 +17,18 @@ import {Content} from "../model/Content";
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
 
-  private loadingData = true;
   private searchChangeSub: Subscription;
   private contentResults: Array<ResultsListItem>;
   private peopleResults: Array<ResultsListItem>;
 
   constructor(private breadcrumbService: BreadcrumbService, private searchBarService: SearchBarService,
-              private navigation: NavigationService, private apiService: ApiService) {
+              private navigation: NavigationService, private apiService: ApiService, private progressBarService: ProgressBarService) {
     this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search Results');
   }
 
   onSearchChange(searchBarParams: SearchBarParams) {
     console.log('SearchResultsComponent: searchChange', searchBarParams);
-    this.loadingData = true;
+    this.progressBarService.setVisible();
     const categoryId = NavigationService.getCategoryId([searchBarParams.category]);
     const category = this.navigation.getCategory(categoryId);
 
@@ -50,7 +50,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     this.apiService.getPeople(searchParams).subscribe(
       page => {
-        this.loadingData = false;
+        this.progressBarService.setHidden();
         this.peopleResults = getResultsListItems(Person.fromObjects(page.content));
       }
     );
@@ -66,7 +66,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     this.apiService.getContentItems(contentItemsSearchParams).subscribe(
       page => {
-        this.loadingData = false;
+        this.progressBarService.setHidden();
         this.contentResults = getResultsListItems(Content.fromObjects(page.content));
       }
     );
