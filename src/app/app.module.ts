@@ -5,6 +5,7 @@ import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { FlexLayoutModule } from "@angular/flex-layout";
 import {
   MdButtonModule,
   MdCardModule,
@@ -71,7 +72,8 @@ import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
     MdToolbarModule,
     MdListModule,
     MdProgressBarModule,
-    routing
+    routing,
+    FlexLayoutModule
   ],
   providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, NavigationService],
   bootstrap: [AppComponent]

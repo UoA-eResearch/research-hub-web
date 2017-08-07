@@ -1,30 +1,29 @@
-<div id="main">
-  <div id="categories">
+<div id="main" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5%">
+  <div id="main-left"  fxFlex="grow">
     <h2>Browse</h2>
-    <md-grid-list cols={{numCols}} rowHeight="2:1">
+    <div id="categories">
+      <md-grid-list cols={{numCols}} rowHeight="2:1">
       <md-grid-tile *ngFor="let item of categoryItems">{{item}}</md-grid-tile>
-    </md-grid-list>
+      </md-grid-list>
+    </div>
   </div>
-  <div id="featured-and-search">
+  <div id="main-right"  fxFlex="grow">
+
+    <!--
     <div id="featured">
       <h2>Featured</h2>
-      <div id="featured-item">
-        <div id="featured-item-text">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius magna nisl quis orci.
-            Fusce scelerisque auctor nulla quis facilisis.</p>
-          <!--<p>Quisque sit amet consectetur ligula. Vivamus mollis libero eleifend leo volutpat,-->
-            <!--non dapibus tellus fermentum.</p>-->
-          <!--<p>Cras sed ultrices magna. Duis diam nulla, euismod sed vulputate in, elementum vitae augue.-->
-            <!--Fusce vel diam eu sem semper scelerisque.</p>-->
-        </div>
+      <div id="featured-content" fxLayout="row" fxLayoutGap="5%">
         <div>
-          <md-card id="featured-item-card">
-            <!--<md-card-title>Figshare</md-card-title>-->
-            <img md-card-image src="https://static.planetminecraft.com/files/avatar/1939407_1.gif">
-            <md-card-content>
-              Figshare
+          <md-card>
+            <md-card-title-group>
+              <md-card-title>Figshare</md-card-title>
+              <md-card-subtitle>Centre for eResearch, Libraries and Learning Services</md-card-subtitle>
+              <img md-card-md-image src="https://static.planetminecraft.com/files/avatar/1939407_1.gif">
+            </md-card-title-group>
+            <md-card-content style="padding-top: 5%;">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>
             </md-card-content>
-            <md-card-actions id="featured-item-card-actions">
+            <md-card-actions>
               <button md-button>Details</button>
               <button md-button>Launch</button>
             </md-card-actions>
@@ -32,10 +31,34 @@
         </div>
       </div>
     </div>
+    -->
+
+
+     <div id="featured">
+      <h2>Featured</h2>
+      <div id="featured-content" fxLayout="row wrap" fxLayoutGap="5%">
+        <div id="featured-content-left" fxFlex.xs="grow">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius magna nisl quis</p>
+        </div>
+        <div id="featured-content-right" fxFlex="nogrow">
+          <md-card class="feature-card" class.xs="feature-card-xs">
+            <img md-card-image src="https://static.planetminecraft.com/files/avatar/1939407_1.gif">
+            <md-card-content>
+              Figshare
+            </md-card-content>
+            <md-card-actions>
+              <button md-button>Details</button>
+              <button md-button>Launch</button>
+            </md-card-actions>
+          </md-card>
+        </div>
+      </div>
+     </div>
+
+
     <div id="common-search">
-    <h2>Popular</h2>
-      <p>We have the best search terms don't we folks?</p>
-      <p>The bigliest content</p>
+      <h2>Popular</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius magna nisl quis orci</p>
     </div>
   </div>
 </div>

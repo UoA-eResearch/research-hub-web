@@ -1,94 +1,12 @@
-@import "../../variables";
-
 md-grid-tile {
   background: lightblue;
 }
 
-#main {
-  display:flex;
-  flex-flow: column;
-  justify-content: space-between;
-}
-
-#categories{
-  order: 1;
-  flex-basis:55%;
-}
-
-#featured-and-search{
-  display:flex;
-  flex-flow: column;
-  justify-content: space-between;
-  order: 2;
-}
-
-#featured{
-  width: 100%;
-  order:1;
-  flex-basis:50%;
-}
-
-#featured-item{
-  display:flex;
-  flex-flow: row;
-  justify-content: space-between;
-}
-
-#featured-item-text{
-  max-width:45%;
-}
-
-#featured-item-card {
-
-}
-
-#featured-item-card-actions button {
-  font-size: 100%;
-}
-
-#common-search{
-  order:2;
-  flex-basis:45%;
-}
-
-
-@media (max-width: $mobile-portrait-max){
-
-}
-
-@media (min-width: $mobile-landscape-min) and (max-width: $mobile-landscape-max){
-
-}
-
-@media (min-width: $tablet-portrait-min) and (max-width: $tablet-portrait-max){
-
-  #featured-and-search{
-    display:flex;
-    flex-flow: row;
-    justify-content: space-between;
-  }
-}
-
-@media (min-width: $tablet-landscape-min) and (max-width: $tablet-landscape-max){
-  #main{
-    flex-flow: row;
-  }
-
-  #featured-and-search{
-    order:2;
-    flex-basis:45%;
-  }
-
-}
-
-@media (min-width: $desktop-width-min){
-  #main{
-    flex-flow: row;
-  }
-
-  #featured-and-search{
-    order:2;
-    flex-basis:45%;
-  }
+//@import "../../variables";
+.feature-card button {
+  //font-size:
+  min-width:0px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
