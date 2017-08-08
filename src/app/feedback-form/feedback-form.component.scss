@@ -1,8 +1,10 @@
 @import "../../variables";
+@import "../../themes";
 
-button {
-  background-color: #000080;
+.mat-button {
+  font-family: $body-font-family;
   color: white;
+  background: $color-primary;
 }
 
 #form-image-container{
@@ -24,5 +26,6 @@ button {
 
 .feedback-card{
   //max-width:500px;
+  font-family: $body-font-family;
 }
 
