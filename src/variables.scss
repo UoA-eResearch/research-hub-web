@@ -37,47 +37,21 @@ $body-font-color:  black;
 
 $width-percentage: 90%;
 
-$mobile-portrait-max: 320px;
-//$mobile-portrait-margin: 25px;
+// Breakpoints
 
-$mobile-landscape-min: 321px;
-$mobile-landscape-max: 480px;
-//$mobile-landscape-margin: 100px;
+$xs-thresh-max: 599px;
 
-$tablet-portrait-min: 481px;
-$tablet-portrait-max: 768px;
-//$tablet-portrait-margin: 175px;
+$sm-thresh-min: 600px;
+$sm-thresh-max: 959px;
 
-$tablet-landscape-min: 769px;
-$tablet-landscape-max: 1024px;
-//$tablet-landscape-margin: 200px;
+$md-thresh-min: 960px;
+$md-thresh-max: 1279px;
 
-$desktop-width-min: 1025px;
-//$desktop-margin: 100px;
+$lg-thresh-min: 1280px;
+$lg-thresh-max: 1919px;
 
+$xl-thresh-min: 1920px;
 
-
-// Old Screen width thresholds
-
-//$xs-thresh-max: 599px;
-//$xs-content-width: 100%;
-//$xs-margin: 100px;
-//
-//$sm-thresh-min: 600px;
-//$sm-thresh-max: 959px;
-//$sm-margin: 150px;
-//
-//$md-thresh-min: 960px;
-//$md-thresh-max: 1279px;
-//$md-margin: 100px;
-//
-//$lg-thresh-min: 1280px;
-//$lg-thresh-max: 1919px;
-//$lg-margin: 200px;
-//
-//$xl-thresh-min: 1920px;
-//$xl-margin: 200px;
-//
 
 
 

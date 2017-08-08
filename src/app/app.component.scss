@@ -173,8 +173,7 @@ app-search-bar {
   width: 100%;
 }
 
-//@media (max-width: $sm-thresh-max) {
-@media (max-width: $tablet-portrait-max) {
+@media (max-width: $sm-thresh-max) {
 
     .primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
       height: $mat-toolbar-height-desktop * 2 !important;
@@ -222,43 +221,4 @@ router-outlet + * {
   width: $width-percentage;
 
 }
-
-@media (max-width: $mobile-portrait-max){
-  router-outlet + * {
-    //background-color: red;
-    //max-width: calc(#{$mobile-portrait-max} - 2 * #{$mobile-portrait-margin});
-    //max-width: 90%;
-    margin-top: 2em;
-    margin-bottom: 2em;
-  }
-}
-
-@media (min-width: $mobile-landscape-min) and (max-width: $mobile-landscape-max){
-  router-outlet + * {
-    //background-color: blue;
-    //max-width: calc(#{$mobile-landscape-max} - 2 * #{$mobile-landscape-margin});
-  }
-}
-
-@media (min-width: $tablet-portrait-min) and (max-width: $tablet-portrait-max){
-  router-outlet + * {
-    //background-color: yellow;
-    //max-width: calc(#{$tablet-portrait-max} - 2 * #{$tablet-portrait-margin});
-  }
-}
-
-@media (min-width: $tablet-landscape-min) and (max-width: $tablet-landscape-max){
-  router-outlet + * {
-    //background-color: green;
-    //max-width: calc(#{$tablet-landscape-max} - 2 * #{$tablet-landscape-margin});
-  }
-}
-
-@media (min-width: $desktop-width-min){
-  router-outlet + * {
-    //background-color: purple;
-    //max-width: calc(#{$desktop-width-min} - 2 * #{$desktop-margin});
-  }
-}
-
 
