@@ -5,6 +5,7 @@ import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { FlexLayoutModule } from "@angular/flex-layout";
 import {
   MdButtonModule,
   MdCardModule,
@@ -38,6 +39,8 @@ import {NavigationService} from "./navigation.service";
 import {ResultsListComponent} from './results-list/results-list.component';
 import {SearchResultsComponent} from "./search-results/search-results.component";
 import {ProgressBarService} from "./app.progress-bar.service";
+import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import {ProgressBarService} from "./app.progress-bar.service";
     FeedbackComponent,
     SearchResultsComponent,
     BrowseComponent,
-    ResultsListComponent
+    ResultsListComponent,
+    FeedbackFormComponent
   ],
   imports: [
     Ng2BreadcrumbModule,
@@ -70,7 +74,8 @@ import {ProgressBarService} from "./app.progress-bar.service";
     MdToolbarModule,
     MdListModule,
     MdProgressBarModule,
-    routing
+    routing,
+    FlexLayoutModule
   ],
   providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, NavigationService,
     ProgressBarService],

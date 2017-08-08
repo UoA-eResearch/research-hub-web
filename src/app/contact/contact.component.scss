@@ -1,26 +1,20 @@
+@import "../../variables";
+@import '../../styles';
 
-div.main {
-  padding-left: 4em;
-  padding-top: 3em;
+
+.contact-info-text{
+  font-family: $body-font-family;
+  font-size: $body-font-size;
+  color: $body-font-color;
 }
 
-md-list-item.contact-info-item {
-  height: 100px;
-  padding-top: 2em;
-
+.contact-info-icon{
+  font-size: 2em;
+  color: $color-icon;
 }
 
-md-icon.contact-info-icon {
-  font-size: 50px;
-  position: relative;
-  text-align: center;
-  top:-0.25em;
+.contact-info-icon-xs{
+  font-size: 1em;
 }
-
-md-list-item .contact-info-text {
-  //margin-left: 50px;
-  padding-left: 4em;
-}
-
 
 

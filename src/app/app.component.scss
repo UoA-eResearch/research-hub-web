@@ -38,7 +38,7 @@
  */
 
 .sidenav-container md-list-item md-icon {
-  color: $color-text;
+  color: $color-icon;
 }
 
 /*
@@ -52,6 +52,7 @@
 .sidenav-container md-sidenav {
   min-width: $sidenav-width;
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  background-color: $color-background;
 }
 
 .sidenav-container md-sidenav md-list {
@@ -67,6 +68,7 @@
 .sidenav-content {
   flex: 1;
   min-height: calc(100vh - 100px);
+  background-color: $color-background;
 }
 
 .primary-header {
@@ -156,40 +158,42 @@ app-search-bar {
   width: 100%;
 }
 
-@media (max-width: $sm-thresh-max) {
+//@media (max-width: $sm-thresh-max) {
+@media (max-width: $tablet-portrait-max) {
 
-  .primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
-    height: $mat-toolbar-height-desktop * 2 !important;
-  }
+    .primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
+      height: $mat-toolbar-height-desktop * 2 !important;
+    }
 
-  footer {
-    flex-direction: column;
-    height: 200px;
-    min-height: 100px;
-  }
+    footer {
+      flex-direction: column;
+      height: 200px;
+      min-height: 100px;
+    }
 
-  footer .logo {
-    flex: 1.6;
+    footer .logo {
+      flex: 1.6;
 
-    display: flex; /* Also makes this a flexbox which we can centre items in */
-    align-items: center;
-  }
+      display: flex; /* Also makes this a flexbox which we can centre items in */
+      align-items: center;
+    }
 
-  footer .copyright {
-    text-align: center;
-    flex: 1;
-  }
+    footer .copyright {
+      text-align: center;
+      flex: 1;
+    }
 
-  .sidenav-content {
-    min-height: calc(100vh - 200px);
-  }
+    .sidenav-content {
+      min-height: calc(100vh - 200px);
+    }
 
-  .primary-header h1 {
-    padding: 0;
-    font-size: 20px;
-    display: inline-block;
-  }
+    .primary-header h1 {
+      padding: 0;
+      font-size: 20px;
+      display: inline-block;
+    }
 }
+
 
 /*
  * Centering of page content
@@ -198,31 +202,46 @@ app-search-bar {
 router-outlet + * {
   display: block;
   margin: 5em auto 5em auto;
+  width: $width-percentage;
+
 }
 
-@media (max-width: $xs-thresh-max) {
+@media (max-width: $mobile-portrait-max){
   router-outlet + * {
-    margin: 2em 1em 2em 1em;
-    width: 100%;
+    //background-color: red;
+    //max-width: calc(#{$mobile-portrait-max} - 2 * #{$mobile-portrait-margin});
+    //max-width: 90%;
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 }
 
-@media (min-width: $sm-thresh-min) and (max-width: $sm-thresh-max) {
+@media (min-width: $mobile-landscape-min) and (max-width: $mobile-landscape-max){
   router-outlet + * {
-    width: 80%;
+    //background-color: blue;
+    //max-width: calc(#{$mobile-landscape-max} - 2 * #{$mobile-landscape-margin});
   }
 }
 
-@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
+@media (min-width: $tablet-portrait-min) and (max-width: $tablet-portrait-max){
   router-outlet + * {
-    width: calc(80% - #{$sidenav-width});
+    //background-color: yellow;
+    //max-width: calc(#{$tablet-portrait-max} - 2 * #{$tablet-portrait-margin});
   }
 }
 
-@media (min-width: $xl-thresh-min) {
+@media (min-width: $tablet-landscape-min) and (max-width: $tablet-landscape-max){
   router-outlet + * {
-    width: calc(80% - #{$sidenav-width});
-    max-width: $xl-thresh-min;
+    //background-color: green;
+    //max-width: calc(#{$tablet-landscape-max} - 2 * #{$tablet-landscape-margin});
   }
 }
+
+@media (min-width: $desktop-width-min){
+  router-outlet + * {
+    //background-color: purple;
+    //max-width: calc(#{$desktop-width-min} - 2 * #{$desktop-margin});
+  }
+}
+
 

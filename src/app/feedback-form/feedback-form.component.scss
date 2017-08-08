@@ -1,0 +1,28 @@
+@import "../../variables";
+
+button {
+  background-color: #000080;
+  color: white;
+}
+
+#form-image-container{
+  text-align: right;
+}
+
+#form-image-container img {
+  height:auto;
+  width:50px;
+}
+
+#button-container {
+  text-align: right;
+}
+
+.input-full-width{
+  width:100%;
+}
+
+.feedback-card{
+  //max-width:500px;
+}
+
