@@ -1,80 +1,83 @@
-
-@import "../../variables";
-
-div.main {
-
-}
-
-md-list-item.contact-info-item {
-  height: 100px;
-  padding-top: 2em;
-
-}
-
-md-icon.contact-info-icon {
-  font-size: 50px;
-  position: relative;
-  text-align: center;
-  top:-0.25em;
-}
-
-md-list-item .contact-info-text {
-  font-family: $font-family;
-  line-height: $line-height;
-  padding-left: 4em;
-  color: $color-text;
-}
-
-@media (max-width: 500px){
-  div.main {
-    //padding-left: -50px;
-  }
-
-  md-list-item.contact-info-item {
-    height: 60px;
-    padding-top: 2em;
-    margin-left: -2em;
-  }
-
-  md-icon.contact-info-icon {
-    font-size: 30px;
-    top:-0.15em;
-    text-align: left;
-  }
-
-  md-list-item .contact-info-text {
-    padding-left: 2em;
-    font-size:90%;
-  }
-}
-
-
-// 4k
-@media (min-width: 2560px){
-  div.main {
-    //padding-left: -50px;
-  }
-
-  md-list-item.contact-info-item {
-    height: 100px;
-    padding-top: 3em;
-
-  }
-
-  md-icon.contact-info-icon {
-    font-size: 60px;
-    top:-0.3em;
-    text-align: left;
-  }
-
-  md-list-item .contact-info-text {
-    padding-left: 4em;
-    font-size:120%;
-  }
-}
-
-
-
-
-
-
+//
+//
+//
+//
+//@import "../../variables";
+//
+//div.main {
+//
+//}
+//
+//md-list-item.contact-info-item {
+//  height: 100px;
+//  padding-top: 2em;
+//
+//}
+//
+//md-icon.contact-info-icon {
+//  font-size: 50px;
+//  position: relative;
+//  text-align: center;
+//  top:-0.25em;
+//}
+//
+//md-list-item .contact-info-text {
+//  font-family: $font-family;
+//  line-height: $line-height;
+//  padding-left: 4em;
+//  color: $color-text;
+//}
+//
+//@media (max-width: 500px){
+//  div.main {
+//    //padding-left: -50px;
+//  }
+//
+//  md-list-item.contact-info-item {
+//    height: 60px;
+//    padding-top: 2em;
+//    margin-left: -2em;
+//  }
+//
+//  md-icon.contact-info-icon {
+//    font-size: 30px;
+//    top:-0.15em;
+//    text-align: left;
+//  }
+//
+//  md-list-item .contact-info-text {
+//    padding-left: 2em;
+//    font-size:90%;
+//  }
+//}
+//
+//
+//// 4k
+//@media (min-width: 2560px){
+//  div.main {
+//    //padding-left: -50px;
+//  }
+//
+//  md-list-item.contact-info-item {
+//    height: 100px;
+//    padding-top: 3em;
+//
+//  }
+//
+//  md-icon.contact-info-icon {
+//    font-size: 60px;
+//    top:-0.3em;
+//    text-align: left;
+//  }
+//
+//  md-list-item .contact-info-text {
+//    padding-left: 4em;
+//    font-size:120%;
+//  }
+//}
+//
+//
+//
+//
+//
+//

@@ -1,26 +1,95 @@
+<div fxLayout="column" fxLayoutGap="5%">
+  <md-list-item>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="5%">
+      <md-icon class="contact-info-icon">location_on</md-icon>
+      <div class="md-list-item-text contact-info-text" layout="column">
+        <span *ngFor="let line of physical_address">{{line}}<br/></span>
+      </div>
+    </div>
+  </md-list-item>
+  <md-list-item>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="5%">
+      <md-icon class="contact-info-icon">email</md-icon>
+      <div class="md-list-item-text contact-info-text" layout="column">
+        <span >{{email_address}}</span>
+      </div>
+    </div>
+  </md-list-item>
+  <md-list-item>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="5%">
+      <md-icon class="contact-info-icon">contact_phone</md-icon>
+      <div class="md-list-item-text contact-info-text" layout="column">
+        <span>{{contact_phone}}</span>
+      </div>
+    </div>
+  </md-list-item>
+  <md-list-item>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="5%">
+      <md-icon class="contact-info-icon">local_post_office</md-icon>
+      <div class="md-list-item-text contact-info-text" layout="column">
+        <span *ngFor="let line of postal_address">{{line}}<br/></span>
+      </div>
+    </div>
+  </md-list-item>
+</div>
+
+
+<!--<div fxLayout="column">-->
+    <!--<md-list-item>-->
+      <!--<div fxLayout="row wrap">-->
+        <!--<md-icon class="contact-info-icon">location_on</md-icon>-->
+        <!--<div class="md-list-item-text contact-info-text" layout="column">-->
+          <!--<span *ngFor="let line of physical_address">{{line}}<br/></span>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</md-list-item>-->
+    <!--<md-list-item>-->
+      <!--<div fxLayout="row wrap">-->
+        <!--<md-icon class="contact-info-icon">email</md-icon>-->
+        <!--<div class="md-list-item-text contact-info-text" layout="column">-->
+          <!--<span >{{email_address}}</span>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</md-list-item>-->
+    <!--<md-list-item>-->
+      <!--<div fxLayout="row wrap">-->
+        <!--<md-icon class="contact-info-icon">contact_phone</md-icon>-->
+        <!--<div class="md-list-item-text contact-info-text" layout="column">-->
+          <!--<span>{{contact_phone}}</span>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</md-list-item>-->
+    <!--<md-list-item>-->
+      <!--<div fxLayout="row wrap">-->
+        <!--<md-icon class="contact-info-icon">local_post_office</md-icon>-->
+        <!--<div class="md-list-item-text contact-info-text" layout="column">-->
+          <!--<span *ngFor="let line of postal_address">{{line}}<br/></span>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</md-list-item>-->
+<!--</div>-->
+
+
+<!--
 <md-list>
-  <!-- Physical address -->
   <md-list-item class="contact-info-item">
       <md-icon class="contact-info-icon">location_on</md-icon>
       <div class="md-list-item-text contact-info-text" layout="column">
         <span *ngFor="let line of physical_address">{{line}}<br/></span>
       </div>
   </md-list-item>
-  <!-- Email address -->
   <md-list-item class="contact-info-item">
     <md-icon class="contact-info-icon">email</md-icon>
     <div class="md-list-item-text contact-info-text" layout="column">
       <span >{{email_address}}</span>
     </div>
   </md-list-item>
-  <!-- Contact phone -->
   <md-list-item class="contact-info-item">
     <md-icon class="contact-info-icon">contact_phone</md-icon>
     <div class="md-list-item-text contact-info-text" layout="column">
       <span>{{contact_phone}}</span>
     </div>
   </md-list-item>
-  <!-- Postal address -->
   <md-list-item class="contact-info-item">
     <md-icon class="contact-info-icon">local_post_office</md-icon>
     <div class="md-list-item-text contact-info-text" layout="column">
@@ -28,3 +97,4 @@
     </div>
   </md-list-item>
 </md-list>
+-->
