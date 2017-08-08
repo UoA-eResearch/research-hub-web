@@ -10,9 +10,22 @@ $sidenav-width: 250px;
 
  */
 
-$font-family: Roboto, "Helvetica Neue", sans-serif;
-$color-text: #757575;
-$line-height: 1.2;
+$heading-font-family: 'Oswald', sans-serif;
+$heading-1-font-size: 32;
+$heading-1-font-color: #B13462;
+
+$heading-2-font-size: 24;
+$heading-2-font-color: #004059;
+
+$body-font-family: 'Lato', sans-serif;
+$body-font-size:  18;
+$body-font-color:  black;
+
+
+// done in themes.scss
+//$background-color: #EFECE3;
+//$color-text: #757575;
+
 
 /*
 

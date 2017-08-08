@@ -38,7 +38,7 @@
  */
 
 .sidenav-container md-list-item md-icon {
-  color: $color-text;
+  color: $color-icon;
 }
 
 /*
@@ -52,6 +52,7 @@
 .sidenav-container md-sidenav {
   min-width: $sidenav-width;
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  background-color: $color-background;
 }
 
 .sidenav-container md-sidenav md-list {
@@ -67,6 +68,7 @@
 .sidenav-content {
   flex: 1;
   min-height: calc(100vh - 100px);
+  background-color: $color-background;
 }
 
 .primary-header {
@@ -241,56 +243,5 @@ router-outlet + * {
     //max-width: calc(#{$desktop-width-min} - 2 * #{$desktop-margin});
   }
 }
-
-
-
-
-
-
-//// extra small
-//@media (max-width: $xs-thresh-max) {
-//  router-outlet + * {
-//    //margin: 2em 1em 2em 1em;
-//    //width: 100%;
-//    max-width: calc(#{$xs-thresh-max} - 2 * #{$xs-margin});
-//    //background-color: red;
-//  }
-//}
-//
-//// small
-//@media (min-width: $sm-thresh-min) and (max-width: $sm-thresh-max) {
-//  router-outlet + * {
-//    //width: #{$width-percentage};
-//    max-width: calc(#{$sm-thresh-max} - 2 * #{$sm-margin});
-//    //background-color: darkseagreen;
-//  }
-//}
-//
-//// medium
-////@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
-//@media (min-width: $md-thresh-min) and (max-width: $md-thresh-max) {
-//  router-outlet + * {
-//    max-width: calc(#{$md-thresh-max} - #{$sidenav-width} - 2 * #{$md-margin});
-//    //background-color: cornflowerblue;
-//  }
-//}
-//
-//// large
-////@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
-//@media (min-width: $lg-thresh-min) and (max-width: $lg-thresh-max) {
-//  router-outlet + * {
-//    max-width: calc(#{$lg-thresh-max} - #{$sidenav-width} - 2 * #{$lg-margin});
-//    //background-color: lightgoldenrodyellow;
-//  }
-//}
-//
-//// extra large
-//@media (min-width: $xl-thresh-min) {
-//  router-outlet + * {
-////    width: calc(#{$width-percentage} - #{$sidenav-width});
-//    max-width: calc(#{$xl-thresh-min} - #{$sidenav-width} - 2 * #{$xl-margin});
-//    //background-color: tomato;
-//  }
-//}
 
 
