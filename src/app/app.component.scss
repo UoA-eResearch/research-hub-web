@@ -41,6 +41,12 @@
   color: $color-icon;
 }
 
+.sidenav-container md-list-item a {
+  color: $body-font-color;
+  font-family: $body-font-family;
+}
+
+
 /*
  * SideNav
  */
