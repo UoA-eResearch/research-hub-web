@@ -1,7 +1,8 @@
 @import "../../variables";
+@import "../../themes";
 
 md-grid-tile {
-  background: lightblue;
+  background: map-get($hub-pink, 500);
 }
 
 //@import "../../variables";
@@ -13,15 +14,27 @@ md-grid-tile {
 }
 
 
+h1 {
+  font-family: $heading-font-family;
+  font-size: $heading-1-font-size;
+  color: $heading-1-font-color;
+}
+
+
 h2 {
   font-family: $heading-font-family;
   font-size: $heading-2-font-size;
   color: $heading-2-font-color;
 }
 
+
 p {
   font-family: $body-font-family;
   font-size: $body-font-size;
   color: $body-font-color;
+}
+
+#common-search{
+  //background: map-get($hub-teal, 500);
 }
 
