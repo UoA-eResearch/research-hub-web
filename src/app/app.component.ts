@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from "@angular/core";
 import * as moment from "moment";
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
-import {NavigationService} from "./navigation.service";
+import {MenuService} from "./menu.service";
 import {SearchBarService} from "./search-bar/search-bar.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
@@ -36,12 +36,12 @@ export class AppComponent implements OnInit, OnDestroy {
   searchText = '';
 
 
-  constructor(private breadcrumbService: BreadcrumbService, private navigationService: NavigationService,
+  constructor(private breadcrumbService: BreadcrumbService, private navigationService: MenuService,
               private searchBarService: SearchBarService, private router: Router, private progressBarService: ProgressBarService,
               private observableMedia: ObservableMedia) {
 
-    // Populate categories for search-bar bar
-    this.categories = navigationService.getCategory('/').categories;
+    // Populate menuItems for search-bar bar
+    this.categories = navigationService.getMenuItem('/').menuItems;
 
     // Create friendly names for menu items in breadcrumbs
     for (const item of this.menuItems) {

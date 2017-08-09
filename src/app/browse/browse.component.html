@@ -1,5 +1,5 @@
 <md-nav-list>
-  <md-list-item *ngFor="let item of categories" [routerLink]="item.id">
+  <md-list-item *ngFor="let item of menuItems" [routerLink]="item.id">
     <md-icon md-list-icon>{{item.icon}}</md-icon>
     <a md-line>{{item.name}}</a>
   </md-list-item>

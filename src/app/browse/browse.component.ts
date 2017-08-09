@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {CategoryType, NavigationService} from "../navigation.service";
+import {MenuItem, MenuItemType, MenuService} from "../menu.service";
 import {ActivatedRoute} from "@angular/router";
 import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.service";
 import {Person} from "../model/Person";
@@ -13,20 +13,20 @@ import {ProgressBarService} from "../app.progress-bar.service";
 })
 export class BrowseComponent implements OnInit {
 
-  private categories = [];
+  private menuItems = [];
   private results = [];
 
-  constructor(private navigation: NavigationService, private route: ActivatedRoute, private apiService: ApiService,
+  constructor(private menuService: MenuService, private route: ActivatedRoute, private apiService: ApiService,
               private progressBarService: ProgressBarService) {
 
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const categoryId = NavigationService.getCategoryId([params['categoryId'], params['subcategoryId']]);
-      const category = this.navigation.getCategory(categoryId);
+      const categoryId = MenuService.getMenuItemId([params['menuItemId'], params['subcategoryId']]);
+      const menuItem = this.menuService.getMenuItem(categoryId);
 
-      if (!category.isLeaf()) {
+      if (!menuItem.isLeaf()) {
         this.progressBarService.setHidden();
 
         // Remove 'all' category when root category is requested
@@ -36,42 +36,47 @@ export class BrowseComponent implements OnInit {
         }
 
         this.results = [];
-        this.categories = category.categories.slice(start);
+        this.menuItems = menuItem.menuItems.slice(start);
       } else {
-        this.categories = [];
+        this.menuItems = [];
         this.progressBarService.setVisible();
 
-        if (category.type === CategoryType.Person) {
-          this.apiService.getPeople(new SearchParams()).subscribe(
-            page => {
-              this.progressBarService.setHidden();
-              this.results = Person.fromObjects(page.content);
-
-              console.log('Page: ', page.content);
-              console.log('people: ', this.results);
-            }
-          );
-        } else {
-          const searchParams = new ContentItemsSearchParams();
-
-          if (category.type === CategoryType.Category) {
-            searchParams.setContentTypes([category.categoryId]);
-          } else if (category.type === CategoryType.Subcategory) {
-            searchParams.setContentTypes([category.parent.categoryId]);
-            searchParams.setContentSubtypes([category.categoryId]);
-          }
-
-          this.apiService.getContentItems(searchParams).subscribe(
-            page => {
-              this.progressBarService.setHidden();
-              this.results = Content.fromObjects(page.content);
-
-              console.log('Page: ', page.content);
-              console.log('content', this.results);
-            }
-          );
+        switch (menuItem.type) {
+          case MenuItemType.Content:
+            this.loadContent(menuItem);
+            break;
+          case MenuItemType.Guide:
+            break;
+          case MenuItemType.Person:
+            this.loadPeople(menuItem);
+            break;
+          case MenuItemType.Policy:
+            break;
+          default:
+            break;
         }
       }
     });
+  }
+
+  private loadPeople(menuItem: MenuItem) {
+    this.apiService.getPeople(new SearchParams()).subscribe(
+      page => {
+        this.progressBarService.setHidden();
+        this.results = Person.fromObjects(page.content);
+      }
+    );
+  }
+
+  private loadContent(menuItem: MenuItem) {
+    const searchParams = new ContentItemsSearchParams();
+    searchParams.setContentTypes([menuItem.menuItemId]);
+
+    this.apiService.getContentItems(searchParams).subscribe(
+      page => {
+        this.progressBarService.setHidden();
+        this.results = Content.fromObjects(page.content);
+      }
+    );
   }
 }

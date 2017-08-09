@@ -35,7 +35,7 @@ import {SearchBarService} from "./search-bar/search-bar.service";
 import {ApiService} from "./app.api.service";
 import {FeedbackComponent} from "./feedback/feedback.component";
 import {BrowseComponent} from "./browse/browse.component";
-import {NavigationService} from "./navigation.service";
+import {MenuService} from "./menu.service";
 import {ResultsListComponent} from './results-list/results-list.component';
 import {SearchResultsComponent} from "./search-results/search-results.component";
 import {ProgressBarService} from "./app.progress-bar.service";
@@ -84,7 +84,7 @@ import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
     MdProgressBarModule,
     routing
   ],
-  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, NavigationService,
+  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService,
     ProgressBarService],
   bootstrap: [AppComponent]
 })
