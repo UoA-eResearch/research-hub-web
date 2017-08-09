@@ -42,6 +42,7 @@ import {ProgressBarService} from "./app.progress-bar.service";
 import { ContentDetailsComponent } from './content-details/content-details.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { MarkdownComponent } from './markdown/markdown.component';
+import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { MarkdownComponent } from './markdown/markdown.component';
     ResultsListComponent,
     ContentDetailsComponent,
     PersonDetailsComponent,
-    MarkdownComponent
+    MarkdownComponent,
+    FeedbackFormComponent
   ],
   imports: [
     FlexLayoutModule,

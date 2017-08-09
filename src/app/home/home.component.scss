@@ -1,3 +1,27 @@
-p {
-  color: black;
+@import "../../variables";
+
+md-grid-tile {
+  background: lightblue;
 }
+
+//@import "../../variables";
+.feature-card button {
+  //font-size:
+  min-width:0px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+
+h2 {
+  font-family: $heading-font-family;
+  font-size: $heading-2-font-size;
+  color: $heading-2-font-color;
+}
+
+p {
+  font-family: $body-font-family;
+  font-size: $body-font-size;
+  color: $body-font-color;
+}
+

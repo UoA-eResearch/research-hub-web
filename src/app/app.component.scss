@@ -39,12 +39,23 @@
  */
 
 .sidenav-container md-list-item md-icon {
-  color: $color-text;
+  color: $color-icon;
 }
+
+.sidenav-container md-list-item a {
+  color: $body-font-color;
+  font-family: $body-font-family;
+}
+
 
 /*
  * SideNav
  */
+
+md-toolbar span {
+  font-family: $heading-font-family;
+
+}
 
 .sidenav-container {
   min-height: calc(100vh);
@@ -53,6 +64,7 @@
 .sidenav-container md-sidenav {
   min-width: $sidenav-width;
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  background-color: $color-background;
 }
 
 .sidenav-container md-sidenav md-list {
@@ -68,6 +80,7 @@
 .sidenav-content {
   flex: 1;
   min-height: calc(100vh - 100px);
+  background-color: $color-background;
 }
 
 .primary-header {
@@ -83,6 +96,7 @@
 }
 
 .primary-header h1 {
+  font-family: $heading-font-family;
   font-weight: 300;
   margin: 0;
   padding: 0;
@@ -96,6 +110,7 @@
  */
 
 footer {
+  font-family: $heading-font-family;
   background-color: $color-primary;
   height: 100px;
   flex: none;
