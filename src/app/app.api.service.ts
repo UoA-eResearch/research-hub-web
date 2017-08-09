@@ -87,6 +87,7 @@ export class ApiService {
   private static PERSON_URL = 'person';
   private static CATEGORY_URL = 'category';
   private static CONTENT_URL = 'content';
+  private static SIMILAR_CONTENT_URL = 'similarContent';
   private static ORG_UNIT_URL = 'orgUnit';
   private host = environment.apiUrl;
 
@@ -112,6 +113,15 @@ export class ApiService {
     return this.http
       .get(this.host + ApiService.CONTENT_URL, {search: search, headers: headers})
       .map((response) => Page.fromObject(response.json()));
+  }
+
+  getSimilarContentItems(id: number) {
+    const headers = new Headers();
+    headers.set('Accept', 'application/json');
+
+    return this.http
+      .get(this.host + ApiService.SIMILAR_CONTENT_URL + '/' + id, {headers: headers})
+      .map((response) => Content.fromObjects(response.json()));
   }
 
   getContentItem(id) {
