@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ResultsListItem} from "../model/ResultsListItemInterface";
+import {GetResultsListItem} from "../model/ResultsListItemInterface";
 
 
 @Component({
@@ -9,7 +9,7 @@ import {ResultsListItem} from "../model/ResultsListItemInterface";
 })
 export class ResultsListComponent {
 
-  private resultsValue = new Array<ResultsListItem>();
+  private resultsValue = new Array<GetResultsListItem>();
   private titleValue = '';
   @Output() resultsChange = new EventEmitter();
 

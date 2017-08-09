@@ -3,7 +3,6 @@ import {CategoryType, NavigationService} from "../navigation.service";
 import {ActivatedRoute} from "@angular/router";
 import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.service";
 import {Person} from "../model/Person";
-import {getResultsListItems} from "../model/ResultsListItemInterface";
 import {Content} from "../model/Content";
 import {ProgressBarService} from "../app.progress-bar.service";
 
@@ -46,7 +45,7 @@ export class BrowseComponent implements OnInit {
           this.apiService.getPeople(new SearchParams()).subscribe(
             page => {
               this.progressBarService.setHidden();
-              this.results = getResultsListItems(Person.fromObjects(page.content));
+              this.results = Person.fromObjects(page.content);
 
               console.log('Page: ', page.content);
               console.log('people: ', this.results);
@@ -65,7 +64,7 @@ export class BrowseComponent implements OnInit {
           this.apiService.getContentItems(searchParams).subscribe(
             page => {
               this.progressBarService.setHidden();
-              this.results = getResultsListItems(Content.fromObjects(page.content));
+              this.results = Content.fromObjects(page.content);
 
               console.log('Page: ', page.content);
               console.log('content', this.results);

@@ -3,7 +3,6 @@ import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {SearchBarParams, SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from "rxjs/Subscription";
 import {Category, CategoryType, NavigationService} from "../navigation.service";
-import {getResultsListItems, ResultsListItem} from "../model/ResultsListItemInterface";
 import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.service";
 import {Person} from "../model/Person";
 import {Content} from "../model/Content";
@@ -18,8 +17,8 @@ import {ProgressBarService} from "../app.progress-bar.service";
 export class SearchResultsComponent implements OnInit, OnDestroy {
 
   private searchChangeSub: Subscription;
-  private contentResults: Array<ResultsListItem>;
-  private peopleResults: Array<ResultsListItem>;
+  private contentResults: Array<Content>;
+  private peopleResults: Array<Person>;
 
   constructor(private breadcrumbService: BreadcrumbService, private searchBarService: SearchBarService,
               private navigation: NavigationService, private apiService: ApiService, private progressBarService: ProgressBarService) {
@@ -37,9 +36,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       this.getContentItems(searchBarParams.searchText, null);
     } else if (category.type === CategoryType.Person) {
       this.getPeople(searchBarParams);
-      this.contentResults = new Array<ResultsListItem>();
+      this.contentResults = new Array<Content>();
     } else if (category.type === CategoryType.Category) {
-      this.peopleResults = new Array<ResultsListItem>();
+      this.peopleResults = new Array<Person>();
       this.getContentItems(searchBarParams.searchText, category);
     }
   }
@@ -51,7 +50,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.apiService.getPeople(searchParams).subscribe(
       page => {
         this.progressBarService.setHidden();
-        this.peopleResults = getResultsListItems(Person.fromObjects(page.content));
+        this.peopleResults = Person.fromObjects(page.content);
       }
     );
   }
@@ -67,7 +66,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.apiService.getContentItems(contentItemsSearchParams).subscribe(
       page => {
         this.progressBarService.setHidden();
-        this.contentResults = getResultsListItems(Content.fromObjects(page.content));
+        this.contentResults = Content.fromObjects(page.content);
       }
     );
   }
