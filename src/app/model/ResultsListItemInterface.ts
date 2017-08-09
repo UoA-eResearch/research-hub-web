@@ -1,20 +1,21 @@
 
-export interface ResultsListItem {
-  avatarUrl: string;
-  title: string;
-  subtitle: string;
-}
+// export interface ResultsListItem {
+//   routePath: string;
+//   id: number;
+//   avatarUrl: string;
+//   title: string;
+//   subtitle: string;
+// }
+
+// export interface GetResultsListItem {
+//   getResultsListItem (): ResultsListItem;
+// }
 
 export interface GetResultsListItem {
-  getResultsListItem (): ResultsListItem;
+  getTitle (): string;
+  getSubtitle (): string;
+  getAvatarUrl (): string;
+  getRoutePath (): string;
 }
 
-export const getResultsListItems = (items: Array<GetResultsListItem>) => {
-  const results = new Array<ResultsListItem>();
 
-  for (const item of items) {
-    results.push(item.getResultsListItem());
-  }
-
-  return results;
-};
