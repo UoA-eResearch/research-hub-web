@@ -2,13 +2,13 @@
 @import '../../styles';
 
 .content-header {
-  padding: 0.2em $gt-xs-offset $gt-xs-offset $gt-xs-offset;
-  background-color: $color-primary;
+  padding: $gt-xs-offset;
+  background-color: $color-content-header;
 }
 
 .content-header-xs {
   @extend .content-header;
-  padding: 0 $xs-offset 1.2em $xs-offset;
+  padding: $xs-offset $xs-offset 1.2em $xs-offset;
 }
 
 .content-header > div:nth-child(1) > h2 {
