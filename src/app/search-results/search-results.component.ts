@@ -60,7 +60,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     contentItemsSearchParams.setSearchText(searchText);
 
     if (category != null) {
-      contentItemsSearchParams.setContentTypes([category.menuItemId]);
+      contentItemsSearchParams.setContentTypes([category.contentTypeId]);
     }
 
     this.apiService.getContentItems(contentItemsSearchParams).subscribe(

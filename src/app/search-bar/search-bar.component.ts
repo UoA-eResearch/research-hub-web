@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from "@angular/core";
 import {SearchBarService} from "./search-bar.service";
+import {Subscription} from "rxjs/Subscription";
 
 
 @Component({
@@ -7,7 +8,7 @@ import {SearchBarService} from "./search-bar.service";
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss']
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit, OnDestroy {
 
   private categoriesValue = [];
   private searchTextValue = '';
@@ -16,7 +17,19 @@ export class SearchBarComponent {
   @Output() categoryChange = new EventEmitter();
   @Output() categoriesChange = new EventEmitter();
 
-  constructor(private searchService: SearchBarService) {
+  private searchCategoryChangeSub: Subscription;
+
+  constructor(private searchBarService: SearchBarService) {
+  }
+
+  ngOnInit() {
+    this.searchCategoryChangeSub = this.searchBarService.searchCategoryChange.subscribe(searchCategory => {
+      this.categoryValue = searchCategory;
+    });
+  }
+
+  ngOnDestroy() {
+    this.searchCategoryChangeSub.unsubscribe();
   }
 
   @Input()
@@ -42,13 +55,13 @@ export class SearchBarComponent {
   set searchText(val) {
     this.searchTextValue = val;
     this.searchTextChange.emit(val);
-    this.searchService.setSearchText(val);
+    this.searchBarService.setSearchText(val);
   }
 
   set category(val) {
     this.categoryValue = val;
     this.categoryChange.emit(val);
-    this.searchService.setCategory(val);
+    this.searchBarService.setCategory(val);
   }
 
   clearSearchText() {

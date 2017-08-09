@@ -12,6 +12,7 @@ export class SearchBarParams {
 export class SearchBarService {
 
   searchChange: Subject<any> = new Subject<any>();
+  searchCategoryChange: Subject<any> = new Subject<any>();
   searchTextChange: Subject<any> = new Subject<any>();
   searchText: string;
   category: string;
@@ -20,6 +21,7 @@ export class SearchBarService {
 
   setCategory(category) {
     this.category = category;
+    this.searchCategoryChange.next(category);
     this.searchChange.next(this.getSearchParams());
   }
 

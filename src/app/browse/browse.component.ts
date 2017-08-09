@@ -5,6 +5,7 @@ import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.ser
 import {Person} from "../model/Person";
 import {Content} from "../model/Content";
 import {ProgressBarService} from "../app.progress-bar.service";
+import {SearchBarService} from "../search-bar/search-bar.service";
 
 @Component({
   selector: 'app-browse',
@@ -17,13 +18,13 @@ export class BrowseComponent implements OnInit {
   private results = [];
 
   constructor(private menuService: MenuService, private route: ActivatedRoute, private apiService: ApiService,
-              private progressBarService: ProgressBarService) {
+              private progressBarService: ProgressBarService, private searchBarService: SearchBarService) {
 
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const categoryId = MenuService.getMenuItemId([params['menuItemId'], params['subcategoryId']]);
+      const categoryId = MenuService.getMenuItemId([params['contentTypeId'], params['subcategoryId']]);
       const menuItem = this.menuService.getMenuItem(categoryId);
 
       if (!menuItem.isLeaf()) {
@@ -33,6 +34,7 @@ export class BrowseComponent implements OnInit {
         let start = 0;
         if (categoryId === '/') {
           start = 1;
+          this.searchBarService.setCategory('all');
         }
 
         this.results = [];
@@ -40,6 +42,7 @@ export class BrowseComponent implements OnInit {
       } else {
         this.menuItems = [];
         this.progressBarService.setVisible();
+        this.searchBarService.setCategory(menuItem.id); // When navigating within menu item, set search category to that item
 
         switch (menuItem.type) {
           case MenuItemType.Content:
@@ -70,7 +73,7 @@ export class BrowseComponent implements OnInit {
 
   private loadContent(menuItem: MenuItem) {
     const searchParams = new ContentItemsSearchParams();
-    searchParams.setContentTypes([menuItem.menuItemId]);
+    searchParams.setContentTypes([menuItem.contentTypeId]);
 
     this.apiService.getContentItems(searchParams).subscribe(
       page => {

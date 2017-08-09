@@ -17,7 +17,7 @@ export class MenuItem {
   public parent: MenuItem;
 
   constructor(public id: string, public name: string, public icon: string, public type: MenuItemType,
-              public menuItemId: number, public menuItems: [MenuItem]) {
+              public contentTypeId: number, public menuItems: [MenuItem]) {
 
     // Set this menuItem as the parent
     if (menuItems != null) {
