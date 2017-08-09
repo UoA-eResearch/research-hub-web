@@ -5,6 +5,7 @@ import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MdButtonModule,
   MdCardModule,
@@ -17,7 +18,7 @@ import {
   MdSelectModule,
   MdSidenavModule,
   MdToolbarModule,
-  MdProgressBarModule
+  MdProgressBarModule, MdChipsModule
 } from "@angular/material";
 import {BreadcrumbService, Ng2BreadcrumbModule} from "ng2-breadcrumb/ng2-breadcrumb";
 
@@ -38,6 +39,10 @@ import {NavigationService} from "./navigation.service";
 import {ResultsListComponent} from './results-list/results-list.component';
 import {SearchResultsComponent} from "./search-results/search-results.component";
 import {ProgressBarService} from "./app.progress-bar.service";
+import { ContentDetailsComponent } from './content-details/content-details.component';
+import { PersonDetailsComponent } from './person-details/person-details.component';
+import { MarkdownComponent } from './markdown/markdown.component';
+
 
 @NgModule({
   declarations: [
@@ -49,9 +54,13 @@ import {ProgressBarService} from "./app.progress-bar.service";
     FeedbackComponent,
     SearchResultsComponent,
     BrowseComponent,
-    ResultsListComponent
+    ResultsListComponent,
+    ContentDetailsComponent,
+    PersonDetailsComponent,
+    MarkdownComponent
   ],
   imports: [
+    FlexLayoutModule,
     Ng2BreadcrumbModule,
     ReactiveFormsModule,
     MdPaginatorModule,
@@ -63,6 +72,7 @@ import {ProgressBarService} from "./app.progress-bar.service";
     HttpModule,
     BrowserAnimationsModule,
     MdButtonModule,
+    MdChipsModule,
     MdCheckboxModule,
     MdCardModule,
     MdInputModule,
