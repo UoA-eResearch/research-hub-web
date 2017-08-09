@@ -14,7 +14,8 @@
  */
 
 .menu-button {
-  margin-left: 10px !important;
+  margin-left: -10px !important;
+  margin-right: 0.5em !important;
   display: inline-block;
   color: white !important;
   top: -3px !important;
@@ -71,14 +72,23 @@
 
 .primary-header {
   background: $color-primary;
+  padding-left: $gt-xs-offset;
+  padding-right: $gt-xs-offset;
+}
+
+.primary-header-xs {
+  @extend .primary-header;
+  padding-left: $xs-offset;
+  padding-right: $xs-offset;
 }
 
 .primary-header h1 {
-  font-size: 30px;
   font-weight: 300;
   margin: 0;
-  padding: 50px;
+  padding: 0;
+  font-size: 20px;
   color: white;
+  display: inline-block;
 }
 
 /*
@@ -126,7 +136,7 @@ footer .copyright a {
  */
 
 breadcrumb ul {
-  padding-left: 0.5em;
+  padding-left: 0;
 }
 
 breadcrumb ul > li {
@@ -148,7 +158,9 @@ breadcrumb li:not(:first-child):before {
  */
 
 .primary-toolbar {
-  padding-left: 1em;
+  //padding-left: 1em;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 app-search-bar {
@@ -156,11 +168,11 @@ app-search-bar {
   width: 100%;
 }
 
-@media (max-width: $sm-thresh-max) {
+@media (max-width: $xs-thresh-max) {
 
-  .primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
-    height: $mat-toolbar-height-desktop * 2 !important;
-  }
+  //.primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
+  //  height: $mat-toolbar-height-desktop * 2 !important;
+  //}
 
   footer {
     flex-direction: column;
@@ -184,45 +196,43 @@ app-search-bar {
     min-height: calc(100vh - 200px);
   }
 
-  .primary-header h1 {
-    padding: 0;
-    font-size: 20px;
-    display: inline-block;
-  }
+  //.primary-header h1 {
+  //  padding: 0;
+  //}
 }
 
 /*
  * Centering of page content
  */
 
-router-outlet + * {
-  display: block;
-  margin: 5em auto 5em auto;
-}
-
-@media (max-width: $xs-thresh-max) {
-  router-outlet + * {
-    margin: 2em 1em 2em 1em;
-    width: 100%;
-  }
-}
-
-@media (min-width: $sm-thresh-min) and (max-width: $sm-thresh-max) {
-  router-outlet + * {
-    width: 80%;
-  }
-}
-
-@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
-  router-outlet + * {
-    width: calc(80% - #{$sidenav-width});
-  }
-}
-
-@media (min-width: $xl-thresh-min) {
-  router-outlet + * {
-    width: calc(80% - #{$sidenav-width});
-    max-width: $xl-thresh-min;
-  }
-}
-
+//router-outlet + * {
+//  display: block;
+//  margin: 5em auto 5em auto;
+//}
+//
+//@media (max-width: $xs-thresh-max) {
+//  router-outlet + * {
+//    margin: 2em 1em 2em 1em;
+//    width: 100%;
+//  }
+//}
+//
+//@media (min-width: $sm-thresh-min) and (max-width: $sm-thresh-max) {
+//  router-outlet + * {
+//    width: 80%;
+//  }
+//}
+//
+//@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
+//  router-outlet + * {
+//    width: calc(80% - #{$sidenav-width});
+//  }
+//}
+//
+//@media (min-width: $xl-thresh-min) {
+//  router-outlet + * {
+//    width: calc(80% - #{$sidenav-width});
+//    max-width: $xl-thresh-min;
+//  }
+//}
+//

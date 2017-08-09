@@ -17,19 +17,19 @@
 
   <div class="sidenav-content-wrapper">
     <div class="sidenav-content">
-      <div class="primary-header">
+      <div class="primary-header" ngClass.xs="primary-header-xs">
         <md-toolbar class="primary-toolbar" color="primary">
           <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
         </md-toolbar>
 
         <div>
-          <button md-icon-button class="menu-button" (click)="sidenav.toggle()" *ngIf="isScreenSmall">
+          <button md-icon-button class="menu-button" (click)="sidenav.toggle()" fxHide.gt-sm>
             <md-icon>menu</md-icon>
           </button>
           <h1><breadcrumb [useBootstrap]="false"></breadcrumb></h1>
         </div>
       </div>
-      <md-progress-bar [hidden]="!progressBarService.visible" mode="indeterminate" color="accent"></md-progress-bar>
+      <!--<md-progress-bar *ngIf="progressBarService.visible" mode="indeterminate" color="accent"></md-progress-bar>-->
       <router-outlet></router-outlet>
     </div>
     <footer>
