@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ProgressBarService {
 
-  protected visible = true;
+  protected visible = false;
 
   constructor() { }
 
