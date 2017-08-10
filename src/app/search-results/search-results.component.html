@@ -1,2 +1,53 @@
-<app-results-list [title]="'Content'" [results]="contentResults"></app-results-list>
-<app-results-list [title]="'People'" [results]="peopleResults"></app-results-list>
+<div class="search-results" ngClass.xs="search-results-xs">
+
+  <div style="margin-left: 10px;">
+    <p>Refine your search results for <i>'{{searchBarService.searchText}}'</i> in</p>
+    <md-chip-list>
+      <ng-container *ngFor="let item of searchResultsSummary;">
+        <md-chip *ngIf="item.page && item.page.totalElements"  color="accent" selected="true" style="margin: 0.25em;" (click)="item.scrollToResults()">
+          {{item.page.totalElements}} {{item.name}}
+        </md-chip>
+      </ng-container>
+    </md-chip-list>
+  </div>
+
+  <div #supportResults>
+    <app-results-list *ngIf="supportPage && supportPage.totalElements" [title]="menuService.nameSupport"
+                      [results]="supportPage.content"></app-results-list>
+  </div>
+
+  <div #instrumentsResults>
+    <app-results-list *ngIf="instrumentsEquipmentPage  && instrumentsEquipmentPage.totalElements" [title]="menuService.nameInstrumentsEquipment"
+                      [results]="instrumentsEquipmentPage.content"></app-results-list>
+  </div>
+
+  <div #trainingResults>
+    <app-results-list *ngIf="trainingPage  && trainingPage.totalElements" [title]="menuService.nameTraining"
+                      [results]="trainingPage.content"></app-results-list>
+  </div>
+
+  <div #softwareResults>
+    <app-results-list *ngIf="softwarePage  && softwarePage.totalElements" [title]="menuService.nameSoftware"
+                      [results]="softwarePage.content"></app-results-list>
+  </div>
+
+  <div #facilitiesResults>
+    <app-results-list *ngIf="facilitiesSpacesPage  && facilitiesSpacesPage.totalElements" [title]="menuService.nameFacilitiesSpaces"
+                      [results]="facilitiesSpacesPage.content"></app-results-list>
+  </div>
+
+  <div #peopleResults>
+    <app-results-list *ngIf="peoplePage  && peoplePage.totalElements" [title]="menuService.namePeople"
+                      [results]="peoplePage.content"></app-results-list>
+  </div>
+
+  <div #knowledgeArticleResults>
+    <app-results-list *ngIf="knowledgeArticlePage  && knowledgeArticlePage.totalElements" [title]="menuService.nameKnowledgeArticle"
+                      [results]="knowledgeArticlePage.content"></app-results-list>
+  </div>
+
+  <div #policiesResults>
+    <app-results-list *ngIf="policiesPage  && policiesPage.totalElements" [title]="menuService.namePolicies"
+                      [results]="policiesPage.content"></app-results-list>
+  </div>
+</div>
