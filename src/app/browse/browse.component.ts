@@ -51,9 +51,10 @@ export class BrowseComponent implements OnInit {
           case MenuItemType.Guide:
             break;
           case MenuItemType.Person:
-            this.loadPeople(menuItem);
+            this.loadPeople();
             break;
           case MenuItemType.Policy:
+            this.loadPolicies();
             break;
           default:
             break;
@@ -62,7 +63,16 @@ export class BrowseComponent implements OnInit {
     });
   }
 
-  private loadPeople(menuItem: MenuItem) {
+  private loadPolicies() {
+
+    this.apiService.getPolicies(new SearchParams()).subscribe(
+      page => {
+        this.results = page.content;
+      }
+    );
+  }
+
+  private loadPeople() {
     this.apiService.getPeople(new SearchParams()).subscribe(
       page => {
         this.progressBarService.setHidden();
