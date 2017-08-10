@@ -1,31 +1,24 @@
-<!--
-<md-nav-list>
-  <md-list-item *ngFor="let item of categories" [routerLink]="item.id">
-    <md-icon md-list-icon>{{item.icon}}</md-icon>
-    <a md-line>{{item.name}}</a>
-  </md-list-item>
-</md-nav-list>
-<app-results-list [results]="results"></app-results-list>
--->
+<!--      -->
 <div>
-<md-grid-list cols="4" >
-  <md-grid-tile
-    *ngFor="let c of categories"
-    [colspan]="1"
-    [rowspan]="1"
-  >
-
-    <md-card class="browse-card" style="background-color:#b13462">
-      <div fxLayout="column" fxLayoutAlign="center center">
-        <md-card-header>
-          <md-card-title>
-            <span>{{c.name}}</span>
-          </md-card-title>
-        </md-card-header>
-        <md-icon>{{c.icon}}</md-icon>
-      </div>
-    </md-card>
-
-  </md-grid-tile>
-</md-grid-list>
+  <md-grid-list cols="4">
+    <md-grid-tile
+      *ngFor="let item of menuItems"
+      [colspan]="1"
+      [rowspan]="1"
+    >
+    <a routerLink="/browse/{{item.id}}" routerLinkActive="disabled">
+      <md-card class="browse-card" style="background-color:#b13462">
+        <div fxLayout="column" fxLayoutAlign="end center" style="height:100%;">
+          <md-card-header fxFlex="grow" style="text-align: center;">
+            <md-card-title>
+              <span>{{item.name}}</span>
+            </md-card-title>
+          </md-card-header>
+          <md-icon>{{item.icon}}</md-icon>
+        </div>
+      </md-card>
+    </a>
+    </md-grid-tile>
+  </md-grid-list>
+  <app-results-list [results]="results"></app-results-list>
 </div>

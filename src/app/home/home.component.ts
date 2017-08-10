@@ -1,6 +1,7 @@
 import {Component, OnInit, HostListener} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,6 @@ export class HomeComponent implements OnInit {
   activeMediaQuery = '';
 
   numCols: number;
-  categoryItems: string[] = ['cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7'];
 
   constructor(media: ObservableMedia) {
     this.watcher = media.subscribe((change: MediaChange) => {

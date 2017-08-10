@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from "@angular/core";
 import * as moment from "moment";
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
-import {SideNavComponent} from "./sidenav/sidenav-component";
-import {NavigationService} from "./navigation.service";
+import {MenuService} from "./menu.service";
 import {SearchBarService} from "./search-bar/search-bar.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {ProgressBarService} from "./app.progress-bar.service";
+import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 
 
 @Component({
@@ -15,7 +15,11 @@ import {ProgressBarService} from "./app.progress-bar.service";
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent extends SideNavComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
+
+  private isSideNavOpened = true;
+  private sideNavMode = 'side';
+  private mediaChangeSub: Subscription;
 
   private searchTextChangeSub: Subscription;
 
@@ -31,12 +35,13 @@ export class AppComponent extends SideNavComponent implements OnInit, OnDestroy 
   category = 'all';
   searchText = '';
 
-  constructor(private breadcrumbService: BreadcrumbService, private navigationService: NavigationService,
-              private searchBarService: SearchBarService, private router: Router, private progressBarService: ProgressBarService) {
-    super();
 
-    // Populate categories for search-bar bar
-    this.categories = navigationService.getCategory('/').categories;
+  constructor(private breadcrumbService: BreadcrumbService, private navigationService: MenuService,
+              private searchBarService: SearchBarService, private router: Router, private progressBarService: ProgressBarService,
+              private observableMedia: ObservableMedia) {
+
+    // Populate menuItems for search-bar bar
+    this.categories = navigationService.getMenuItem('/').menuItems;
 
     // Create friendly names for menu items in breadcrumbs
     for (const item of this.menuItems) {
@@ -45,12 +50,20 @@ export class AppComponent extends SideNavComponent implements OnInit, OnDestroy 
   }
 
   ngOnInit() {
-    this.updateSideNav();
+    // Update side nav
+    this.mediaChangeSub = this.observableMedia.subscribe((change: MediaChange) => {
+      if (['xs', 'sm'].includes(change.mqAlias)) {
+        this.sideNavMode = 'over';
+        this.isSideNavOpened = false;
+      } else {
+        this.sideNavMode = 'side';
+        this.isSideNavOpened = true;
+      }
+    });
 
+    // Navigate to the search page if the user types text in
     this.searchTextChangeSub = this.searchBarService.searchTextChange.distinctUntilChanged().subscribe(searchText => {
       console.log('searchTextChange', searchText, this.router.url);
-
-      // Navigate to the search page if the user types text in
       if (this.router.url !== '/search' && searchText != null && searchText.trim() !== '') {
         this.router.navigate(['/search']);
       }
@@ -58,6 +71,7 @@ export class AppComponent extends SideNavComponent implements OnInit, OnDestroy 
   }
 
   ngOnDestroy() {
+    this.mediaChangeSub.unsubscribe();
     this.searchTextChangeSub.unsubscribe();
   }
 

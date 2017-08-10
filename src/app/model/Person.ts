@@ -1,4 +1,6 @@
-import {ResultsListItem, GetResultsListItem} from "./ResultsListItemInterface";
+import {
+  GetResultsListItem
+} from "./ResultsListItemInterface";
 
 
 export class Person implements GetResultsListItem {
@@ -15,8 +17,20 @@ export class Person implements GetResultsListItem {
   static fromObjects(objects: [Object]): Array<Person> {
     const people = new Array<Person>();
 
-    for (const object of objects) {
-      people.push(Person.fromObject(object));
+    if (objects !== undefined) {
+      for (const object of objects) {
+        people.push(Person.fromObject(object));
+      }
+
+      people.sort((a: Person, b: Person) => {
+        if (a.getTitle() < b.getTitle()) {
+          return -1;
+        } else if (a.getTitle() > b.getTitle()) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
     }
 
     return people;
@@ -38,7 +52,19 @@ export class Person implements GetResultsListItem {
     return person;
   }
 
-  getResultsListItem(): ResultsListItem {
-    return {title: this.firstName + ' ' + this.lastName, subtitle: this.jobTitle, avatarUrl: ''} as ResultsListItem;
+  getTitle(): string {
+    return this.firstName + ' ' + this.lastName;
+  }
+
+  getSubtitle(): string {
+    return this.jobTitle;
+  }
+
+  getAvatarUrl(): string {
+    return '';
+  }
+
+  getRoutePath(): string {
+    return '/personDetails';
   }
 }

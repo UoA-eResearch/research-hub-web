@@ -7,14 +7,18 @@ import {ContactComponent} from "./contact/contact.component";
 import {FeedbackComponent} from "./feedback/feedback.component";
 import {BrowseComponent} from "./browse/browse.component";
 import {SearchResultsComponent} from "./search-results/search-results.component";
+import {ContentDetailsComponent} from "./content-details/content-details.component";
+import {PersonDetailsComponent} from "./person-details/person-details.component";
 
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'search', component: SearchResultsComponent},
   {path: 'browse', component: BrowseComponent},
-  {path: 'browse/:categoryId', component: BrowseComponent},
-  {path: 'browse/:categoryId/:subcategoryId', component: BrowseComponent},
+  {path: 'browse/:contentTypeId', component: BrowseComponent},
+  {path: 'browse/:contentTypeId/:subcategoryId', component: BrowseComponent},
+  {path: 'contentDetails/:id', component: ContentDetailsComponent},
+  {path: 'personDetails/:id', component: PersonDetailsComponent},
   {path: 'feedback', component: FeedbackComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},

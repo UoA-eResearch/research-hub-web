@@ -8,6 +8,10 @@
   background-color: white;
 }
 
+.browse-card a {
+  text-decoration: none;
+}
+
 .browse-card span {
   font-family: $heading-font-family;
   font-size: 1.2em;
@@ -15,5 +19,10 @@
 
 .browse-card md-icon {
   font-size: 48px;
-  padding-right: 24px;
+  padding-right: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+md-grid-tile a {
+  text-decoration: none;
 }

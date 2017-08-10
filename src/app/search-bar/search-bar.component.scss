@@ -49,12 +49,12 @@ $search-flex: 4;
   align-items: center;
 }
 
-@media (max-width: $sm-thresh-max) {
+@media (max-width: $xs-thresh-max) {
   .search-bar {
     flex: none;
     display: flex;
     flex-direction: column;
-    height: $mat-toolbar-height-desktop * 2 !important;
+    //height: $mat-toolbar-height-desktop * 2 !important;
   }
 
   .search-bar .select md-select {

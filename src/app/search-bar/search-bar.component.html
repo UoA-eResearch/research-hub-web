@@ -1,5 +1,5 @@
 <div class="search-bar">
-  <div class="select">
+  <div class="select" fxHide.lt-sm>
     <md-select floatPlaceholder="never" placeholder="Categories" [(ngModel)]="category">
       <md-option *ngFor="let category of categoriesValue" [value]="category.id">
         {{category.name}}

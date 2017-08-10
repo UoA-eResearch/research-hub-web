@@ -14,7 +14,8 @@
  */
 
 .menu-button {
-  margin-left: 10px !important;
+  margin-left: -10px !important;
+  margin-right: 0.5em !important;
   display: inline-block;
   color: white !important;
   top: -3px !important;
@@ -84,17 +85,24 @@ md-toolbar span {
 
 .primary-header {
   background: $color-primary;
+  padding-left: $gt-xs-offset;
+  padding-right: $gt-xs-offset;
+}
 
+.primary-header-xs {
+  @extend .primary-header;
+  padding-left: $xs-offset;
+  padding-right: $xs-offset;
 }
 
 .primary-header h1 {
   font-family: $heading-font-family;
-  font-size: 30px;
   font-weight: 300;
   margin: 0;
-  padding: 50px;
+  padding: 0;
+  font-size: 20px;
   color: white;
-
+  display: inline-block;
 }
 
 /*
@@ -103,7 +111,7 @@ md-toolbar span {
 
 footer {
   font-family: $heading-font-family;
-  background-color: $color-primary;
+  background-color: $color-footer;
   height: 100px;
   flex: none;
   padding-left: 2em;
@@ -143,17 +151,17 @@ footer .copyright a {
  */
 
 breadcrumb ul {
-  padding-left: 0.5em;
+  padding-left: 0;
 }
 
-ul > li {
+breadcrumb ul > li {
   display: inline-block;
   zoom:1;
   *display:inline;   /* a fix needed for IE7- */
   cursor: pointer;
 }
 
-li:not(:first-child):before {
+breadcrumb li:not(:first-child):before {
   padding-left: 0.5em;
   padding-right: 0.4em;
   content: ">";
@@ -165,7 +173,9 @@ li:not(:first-child):before {
  */
 
 .primary-toolbar {
-  padding-left: 1em;
+  //padding-left: 1em;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 app-search-bar {
@@ -173,52 +183,73 @@ app-search-bar {
   width: 100%;
 }
 
-@media (max-width: $sm-thresh-max) {
+@media (max-width: $xs-thresh-max) {
 
-    .primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
-      height: $mat-toolbar-height-desktop * 2 !important;
-    }
+  //.primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
+  //  height: $mat-toolbar-height-desktop * 2 !important;
+  //}
 
-    footer {
-      flex-direction: column;
-      height: 200px;
-      min-height: 100px;
-    }
+  footer {
+    flex-direction: column;
+    height: 200px;
+    min-height: 100px;
+  }
 
-    footer .logo {
-      flex: 1.6;
+  footer .logo {
+    flex: 1.6;
 
-      display: flex; /* Also makes this a flexbox which we can centre items in */
-      align-items: center;
-    }
+    display: flex; /* Also makes this a flexbox which we can centre items in */
+    align-items: center;
+  }
 
-    footer .copyright {
-      text-align: center;
-      flex: 1;
-    }
+  footer .copyright {
+    text-align: center;
+    flex: 1;
+  }
 
-    .sidenav-content {
-      min-height: calc(100vh - 200px);
-    }
+  .sidenav-content {
+    min-height: calc(100vh - 200px);
+  }
 
-    .primary-header h1 {
-      padding: 0;
-      font-size: 20px;
-      display: inline-block;
-
-
-    }
+  //.primary-header h1 {
+  //  padding: 0;
+  //}
 }
-
 
 /*
  * Centering of page content
  */
 
-router-outlet + * {
-  display: block;
-  margin: 2em auto 2em auto;
-  width: $width-percentage;
 
-}
-
+//router-outlet + * {
+//  display: block;
+//  margin: 2em auto 2em auto;
+//  width: $width-percentage;
+//}
+//
+//@media (max-width: $xs-thresh-max) {
+//  router-outlet + * {
+//    margin: 2em 1em 2em 1em;
+//    width: 100%;
+//  }
+//}
+//
+//@media (min-width: $sm-thresh-min) and (max-width: $sm-thresh-max) {
+//  router-outlet + * {
+//    width: 80%;
+//  }
+//}
+//
+//@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
+//  router-outlet + * {
+//    width: calc(80% - #{$sidenav-width});
+//  }
+//}
+//
+//@media (min-width: $xl-thresh-min) {
+//  router-outlet + * {
+//    width: calc(80% - #{$sidenav-width});
+//    max-width: $xl-thresh-min;
+//  }
+//}
+//
