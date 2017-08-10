@@ -1,7 +1,23 @@
 <div id="main" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5%">
   <div id="main-left"  fxFlex="grow">
     <h2>Browse</h2>
-      <app-browse [numCols]="numCols"></app-browse>
+      <!--<app-browse [numCols]="numCols"></app-browse>-->
+    <md-grid-list cols="{{numCols}}" gutterSize="1em">
+      <md-grid-tile *ngFor="let item of menuItems; let i = index;" [colspan]="1" [rowspan]="1">
+        <a routerLink="/browse/{{item.id}}" routerLinkActive="disabled">
+          <md-card class="browse-card" [ngStyle]="getTileColor(i)">
+            <div fxLayout="column" fxLayoutAlign="end center" style="height:100%;">
+              <md-card-header fxFlex="grow" style="text-align: center;">
+                <md-card-title>
+                  <span>{{item.name}}</span>
+                </md-card-title>
+              </md-card-header>
+              <md-icon>{{item.icon}}</md-icon>
+            </div>
+          </md-card>
+        </a>
+      </md-grid-tile>
+    </md-grid-list>
   </div>
   <div id="main-right"  fxFlex="grow" fxLayout="column">
      <div id="featured">

@@ -48,7 +48,7 @@ export class BrowseComponent implements OnInit {
         // Remove 'all' category when root category is requested
         let start = 0;
         if (categoryId === '/') {
-          start = 1;
+          //start = 1; // designs now required all category to show ...
           this.searchBarService.setCategory('all');
         }
 

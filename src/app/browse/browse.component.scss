@@ -2,10 +2,27 @@
 @import "../../variables";
 @import "../../themes";
 
+#main {
+
+  max-width: $md-thresh-min;
+}
+
+.browse-card-sm{
+
+}
+
+.browse-card-md{
+
+}
+
+.browse-card-lg{
+
+}
+
 .browse-card {
   width: 128px;
   height: 128px;
-  background-color: white;
+  //background-color: white;
 }
 
 .browse-card a {

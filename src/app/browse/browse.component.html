@@ -1,10 +1,6 @@
-<div>
-  <md-grid-list cols="{{numCols}}">
-    <md-grid-tile
-      *ngFor="let item of menuItems"
-      [colspan]="1"
-      [rowspan]="1"
-    >
+<div id="main">
+  <md-grid-list cols="{{numCols}}" gutterSize="1em">
+    <md-grid-tile *ngFor="let item of menuItems; let i = index" [colspan]="1" [rowspan]="1">
     <a routerLink="/browse/{{item.id}}" routerLinkActive="disabled">
       <md-card class="browse-card" style="background-color:#b13462">
         <div fxLayout="column" fxLayoutAlign="end center" style="height:100%;">
