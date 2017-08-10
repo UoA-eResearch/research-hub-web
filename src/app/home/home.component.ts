@@ -1,7 +1,6 @@
-import {Component, OnInit, HostListener} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -30,6 +29,9 @@ export class HomeComponent implements OnInit {
         this.numCols = 2;
         break;
       case 'sm':
+        this.numCols = 3;
+        break;
+      case 'md':
         this.numCols = 3;
         break;
       default:

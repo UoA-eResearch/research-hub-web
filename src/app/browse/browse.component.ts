@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Input} from "@angular/core";
 import {MenuItem, MenuItemType, MenuService} from "../menu.service";
 import {ActivatedRoute} from "@angular/router";
 import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.service";
@@ -6,6 +6,8 @@ import {Person} from "../model/Person";
 import {Content} from "../model/Content";
 import {ProgressBarService} from "../app.progress-bar.service";
 import {SearchBarService} from "../search-bar/search-bar.service";
+import {Subscription} from 'rxjs/Subscription';
+import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 
 @Component({
   selector: 'app-browse',
@@ -17,9 +19,23 @@ export class BrowseComponent implements OnInit {
   private menuItems = [];
   private results = [];
 
+  watcher: Subscription;
+  activeMediaQuery = '';
+
+  @Input()
+  numCols = 4;
+
   constructor(private menuService: MenuService, private route: ActivatedRoute, private apiService: ApiService,
-              private progressBarService: ProgressBarService, private searchBarService: SearchBarService) {
+              private progressBarService: ProgressBarService, private searchBarService: SearchBarService, media: ObservableMedia) {
+
+    this.watcher = media.subscribe((change: MediaChange) => {
+      this.activeMediaQuery = change ? `'${change.mqAlias}' = (${change.mediaQuery})` : '';
+      console.log(change.mqAlias);
+      this.SetNumCategoryColumns(change.mqAlias);
+
+    });
   }
+
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -59,6 +75,7 @@ export class BrowseComponent implements OnInit {
         }
       }
     });
+
   }
 
   private loadPeople(menuItem: MenuItem) {
@@ -81,4 +98,21 @@ export class BrowseComponent implements OnInit {
       }
     );
   }
+
+  SetNumCategoryColumns(mqAlias: string) {
+    switch(mqAlias) {
+      case 'xs':
+        this.numCols = 2;
+        break;
+      case 'sm':
+        this.numCols = 3;
+        break;
+      default:
+        this.numCols = 4;
+        break;
+    }
+    //console.log(mqAlias + ": "+this.numCols);
+  }
+
+
 }
