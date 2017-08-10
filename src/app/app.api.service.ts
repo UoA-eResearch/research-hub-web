@@ -5,6 +5,7 @@ import {Page} from "./model/Page";
 import {Person} from "./model/Person";
 import {Content} from "./model/Content";
 import {environment} from 'app/../environments/environment';
+import {Policy} from "./model/Policy";
 
 
 export class SearchParams {
@@ -84,6 +85,7 @@ export class ContentItemsSearchParams extends SearchParams {
 @Injectable()
 export class ApiService {
 
+  private static POLICY_URL = 'policy';
   private static PERSON_URL = 'person';
   private static CATEGORY_URL = 'category';
   private static CONTENT_URL = 'content';
@@ -141,6 +143,16 @@ export class ApiService {
     return this.http
       .get(this.host + ApiService.PERSON_URL, {search: search, headers: headers})
       .map((response) => Page.fromObject<Person>(response.json(), Person.fromObjects));
+  }
+
+  getPolicies(searchParams: SearchParams) {
+    const search = searchParams.getUrlSearchParams();
+    const headers = new Headers();
+    headers.set('Accept', 'application/json');
+
+    return this.http
+      .get(this.host + ApiService.POLICY_URL, {search: search, headers: headers})
+      .map((response) => Page.fromObject<Policy>(response.json(), Policy.fromObjects));
   }
 
   getPerson(id) {

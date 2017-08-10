@@ -75,6 +75,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       case MenuItemType.All:
         this.getContent(searchBarParams, menuItem);
         this.getPeople(searchBarParams);
+        this.getPolicies(searchBarParams);
         break;
       case MenuItemType.Content:
         this.getContent(searchBarParams, menuItem);
@@ -85,6 +86,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.getPeople(searchBarParams);
         break;
       case MenuItemType.Policy:
+        this.getPolicies(searchBarParams);
         break;
       default:
         break;
@@ -156,6 +158,19 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     searchParams.setSize(this.maxNumberOfItems);
     searchParams.setContentTypes([contentTypeId]);
     this.apiService.getContentItems(searchParams).subscribe(func);
+  }
+
+  getPolicies(searchBarParams: SearchBarParams) {
+    const searchParams = new SearchParams();
+    searchParams.setSearchText(searchBarParams.searchText);
+    searchParams.setSize(this.maxNumberOfItems);
+
+    this.apiService.getPolicies(searchParams).subscribe(
+      page => {
+        this.policiesPage = page;
+        this.updateSearchResultsSummary();
+      }
+    );
   }
 
   getPeople(searchBarParams: SearchBarParams) {
