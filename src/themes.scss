@@ -175,7 +175,6 @@ $hub-offwhite: (
 $hub-app-primary: mat-palette($hub-teal);
 $hub-app-accent: mat-palette($hub-orange);
 $hub-app-background: mat-palette($hub-offwhite);
-//$hub-app-foreground: mat-palette($mat-blue); //?
 $hub-app-warn: mat-palette($hub-pink);
 $hub-app-theme: mat-light-theme($hub-app-primary, $hub-app-accent, $hub-app-warn);
 @include angular-material-theme($hub-app-theme);
@@ -183,11 +182,18 @@ $hub-app-theme: mat-light-theme($hub-app-primary, $hub-app-accent, $hub-app-warn
 // Create variables to use throughout the rest of the site
 $color-primary: map-get($hub-app-primary, 500);
 $color-accent: map-get($hub-app-accent, A200);
+
+//$color-background: map-get($hub-app-background, 500);
+//$color-icon: map-get($hub-app-primary, 500);
 $color-background: #fafafa;
-//$color-background: #fafafa;
 $color-icon: #757575;
+
 $color-content-header: map-get($hub-navy, 500);
 $color-footer: map-get($hub-navy, 500);
+
+// base colors for tiles etc
+$color-tile-navy: map-get($hub-navy, 500);
+
 
 // Custom themes for specific components
 .search-bar-theme {

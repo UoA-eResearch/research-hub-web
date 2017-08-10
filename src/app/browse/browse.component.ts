@@ -19,7 +19,6 @@ export class BrowseComponent implements OnInit {
 
   constructor(private menuService: MenuService, private route: ActivatedRoute, private apiService: ApiService,
               private progressBarService: ProgressBarService, private searchBarService: SearchBarService) {
-
   }
 
   ngOnInit() {
