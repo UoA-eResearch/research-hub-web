@@ -1,3 +1,11 @@
-p {
-  color: black;
+@import "../../variables";
+@import '../../styles';
+
+.search-results {
+  margin: $gt-xs-offset;
+}
+
+.search-results-xs {
+  @extend .search-results;
+  margin: $xs-offset;
 }

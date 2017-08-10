@@ -66,7 +66,7 @@ export class BrowseComponent implements OnInit {
     this.apiService.getPeople(new SearchParams()).subscribe(
       page => {
         this.progressBarService.setHidden();
-        this.results = Person.fromObjects(page.content);
+        this.results = page.content;
       }
     );
   }
@@ -78,7 +78,7 @@ export class BrowseComponent implements OnInit {
     this.apiService.getContentItems(searchParams).subscribe(
       page => {
         this.progressBarService.setHidden();
-        this.results = Content.fromObjects(page.content);
+        this.results = page.content;
       }
     );
   }

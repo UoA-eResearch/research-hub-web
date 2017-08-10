@@ -112,7 +112,7 @@ export class ApiService {
 
     return this.http
       .get(this.host + ApiService.CONTENT_URL, {search: search, headers: headers})
-      .map((response) => Page.fromObject(response.json()));
+      .map((response) => Page.fromObject<Content>(response.json(), Content.fromObjects));
   }
 
   getSimilarContentItems(id: number) {
@@ -140,7 +140,7 @@ export class ApiService {
 
     return this.http
       .get(this.host + ApiService.PERSON_URL, {search: search, headers: headers})
-      .map((response) => Page.fromObject(response.json()));
+      .map((response) => Page.fromObject<Person>(response.json(), Person.fromObjects));
   }
 
   getPerson(id) {

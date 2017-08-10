@@ -8,7 +8,6 @@ export enum MenuItemType {
   Content,
   Person,
   Guide,
-  KnowledgeArticle,
   Policy
 }
 
@@ -36,6 +35,23 @@ export class MenuItem {
 @Injectable()
 export class MenuService {
 
+  public contentTypeIdSupport = 1;
+  public contentTypeIdInstrumentsEquipment = 2;
+  public contentTypeIdTraining = 3;
+  public contentTypeIdSoftware = 4;
+  public contentTypeIdFacilitiesSpaces = 5;
+  public contentTypeIdKnowledgeArticle = 6;
+  public nameAll = 'All Categories';
+  public nameSupport = 'Services & Support';
+  public nameInstrumentsEquipment = 'Instruments & Equipment';
+  public nameTraining = 'Skills Development';
+  public nameSoftware = 'Software';
+  public nameFacilitiesSpaces = 'Facilities & Spaces';
+  public nameGuides = 'Guides';
+  public namePeople = 'People';
+  public nameKnowledgeArticle = 'Knowledge Articles & Know-How';
+  public namePolicies = 'Policies';
+
   private root: MenuItem;
   private menuItemsDict = {};
 
@@ -53,16 +69,16 @@ export class MenuService {
   constructor(private breadcrumbService: BreadcrumbService) {
     this.root =
       new MenuItem('', '', '', MenuItemType.Root, null, [
-        new MenuItem('all', 'All Categories', '', MenuItemType.All, null, null),
-        new MenuItem('support', 'Services & Support', 'help', MenuItemType.Content, 1, null),
-        new MenuItem('instrumentsEquipment', 'Instruments & Equipment', 'camera_roll', MenuItemType.Content, 2, null),
-        new MenuItem('training', 'Skills Development', 'directions_bike', MenuItemType.Content, 3, null),
-        new MenuItem('software', 'Software', 'shop', MenuItemType.Content, 4, null),
-        new MenuItem('facilitiesSpaces', 'Facilities & Spaces', 'home', MenuItemType.Content, 5, null),
-        new MenuItem('guides', 'Guides', 'language', MenuItemType.Guide, null, null),
-        new MenuItem('people', 'People', 'face', MenuItemType.Person, null, null),
-        new MenuItem('knowledgeArticle', 'Knowledge Articles & Know-How', 'book', MenuItemType.Content, 6, null),
-        new MenuItem('policies', 'Policies', 'account_balance', MenuItemType.Policy, null, null),
+        new MenuItem('all', this.nameAll, '', MenuItemType.All, null, null),
+        new MenuItem('support', this.nameSupport, 'help', MenuItemType.Content, this.contentTypeIdSupport, null),
+        new MenuItem('instrumentsEquipment', this.nameInstrumentsEquipment, 'camera_roll', MenuItemType.Content, this.contentTypeIdInstrumentsEquipment, null),
+        new MenuItem('training', this.nameTraining, 'directions_bike', MenuItemType.Content, this.contentTypeIdTraining, null),
+        new MenuItem('software', this.nameSoftware, 'shop', MenuItemType.Content, this.contentTypeIdSoftware, null),
+        new MenuItem('facilitiesSpaces', this.nameFacilitiesSpaces, 'home', MenuItemType.Content, this.contentTypeIdFacilitiesSpaces, null),
+        new MenuItem('guides', this.nameGuides, 'language', MenuItemType.Guide, null, null),
+        new MenuItem('people', this.namePeople, 'face', MenuItemType.Person, null, null),
+        new MenuItem('knowledgeArticle', this.nameKnowledgeArticle, 'book', MenuItemType.Content, this.contentTypeIdKnowledgeArticle, null),
+        new MenuItem('policies', this.namePolicies, 'account_balance', MenuItemType.Policy, null, null),
       ]);
 
     this.createMenuItemsDict('', this.root.menuItems);

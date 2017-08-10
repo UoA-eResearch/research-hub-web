@@ -1,7 +1,7 @@
 
 
-export class Page {
-  content: [any];
+export class Page<T> {
+  content: Array<T>;
   last: boolean;
   totalPages: number;
   totalElements: number;
@@ -11,10 +11,10 @@ export class Page {
   size: number;
   number: number;
 
-  static fromObject(src: Object) {
-    const obj = new Page();
+  static fromObject<T>(src: Object, contentConverterFunction) {
+    const obj = new Page<T>();
 
-    obj.content = src['content'];
+    obj.content = contentConverterFunction(src['content']);
     obj.last = src['last'];
     obj.totalPages = src['totalPages'];
     obj.totalElements = src['totalElements'];
