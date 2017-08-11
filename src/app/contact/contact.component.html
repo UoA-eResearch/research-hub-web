@@ -1,26 +1,26 @@
-<div fxLayout="column" fxLayoutGap="5%">
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="5%">
-    <md-icon class="contact-info-icon">location_on</md-icon>
+<div id="main" fxLayout="column" fxLayoutGap="1.5em">
+  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="{{layoutGap}}" fxLayoutGap.xs="{{layoutGapXs}}">
+    <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">location_on</md-icon>
     <div class="contact-info-text" layout="column">
-      <span *ngFor="let line of physical_address">{{line}}<br/></span>
+      <span *ngFor="let line of physicalAddress">{{line}}<br/></span>
     </div>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="5%">
-    <md-icon class="contact-info-icon">email</md-icon>
+  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="{{layoutGap}}"  fxLayoutGap.xs="{{layoutGapXs}}">
+    <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">email</md-icon>
     <div class="contact-info-text" layout="column">
-      <span >{{email_address}}</span>
+      <span >{{emailAddress}}</span>
     </div>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="5%">
-    <md-icon class="contact-info-icon">contact_phone</md-icon>
+  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="{{layoutGap}}"  fxLayoutGap.xs="{{layoutGapXs}}">
+    <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">contact_phone</md-icon>
     <div class="contact-info-text" layout="column">
-      <span>{{contact_phone}}</span>
+      <span>{{contactPhone}}</span>
     </div>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="5%">
+  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="{{layoutGap}}" fxLayoutGap.xs="{{layoutGapXs}}">
     <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">local_post_office</md-icon>
     <div class="contact-info-text md-" layout="column">
-      <span *ngFor="let line of postal_address">{{line}}<br/></span>
+      <span *ngFor="let line of postalAddress">{{line}}<br/></span>
     </div>
   </div>
 </div>

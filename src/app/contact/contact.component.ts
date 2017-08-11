@@ -18,10 +18,14 @@ const CONTACT_PHONE = '+64 9 373 7599 ext 822231';
 })
 export class ContactComponent implements OnInit {
 
-  physical_address: string[] = PHYSICAL_ADDRESS;
-  postal_address: string [] = POSTAL_ADDRESS;
-  email_address: string = EMAIL_ADDRESS;
-  contact_phone: string = CONTACT_PHONE;
+  layoutGap = '1.0em';
+  layoutGapXs = '0.5em';
+
+
+  physicalAddress: string[] = PHYSICAL_ADDRESS;
+  postalAddress: string [] = POSTAL_ADDRESS;
+  emailAddress: string = EMAIL_ADDRESS;
+  contactPhone: string = CONTACT_PHONE;
 
   constructor() {}
 

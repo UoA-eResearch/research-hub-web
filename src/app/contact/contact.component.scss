@@ -2,6 +2,13 @@
 @import '../../styles';
 
 
+
+#main {
+
+  max-width: $lg-thresh-min;
+  margin: 2em 1em 1em 1em;
+}
+
 .contact-info-text{
   font-family: $body-font-family;
   font-size: $body-font-size;
@@ -14,7 +21,7 @@
 }
 
 .contact-info-icon-xs{
-  font-size: 1em;
+  font-size: 1.5em;
 }
 
 
