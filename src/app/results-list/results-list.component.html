@@ -1,10 +1,24 @@
 <md-nav-list>
   <h3 md-subheader *ngIf="titleValue !== ''">{{titleValue}}</h3>
-  <md-list-item *ngFor="let result of resultsValue" [routerLink]="[result.getRoutePath(), result.id]">
-    <img md-list-avatar src="">
-    <h3 md-line> {{result.getTitle()}} </h3>
-    <p md-line>
-      <span> {{result.getSubtitle()}} </span>
-    </p>
-  </md-list-item>
+  <ng-container *ngFor="let result of resultsValue">
+    <ng-container *ngIf="result.getRouterLink() !== undefined">
+      <md-list-item [routerLink]="result.getRouterLink()">
+        <img md-list-avatar src="">
+        <h3 md-line> {{result.getTitle()}} </h3>
+        <p md-line>
+          <span> {{result.getSubtitle()}} </span>
+        </p>
+      </md-list-item>
+    </ng-container>
+
+    <ng-container *ngIf="result.getRouterLink() === undefined">
+      <a md-list-item *ngFor="let result of resultsValue" href="{{result.getHref()}}" target="_blank">
+        <img md-list-avatar src="">
+        <h3 md-line> {{result.getTitle()}} </h3>
+        <p md-line>
+          <span> {{result.getSubtitle()}} </span>
+        </p>
+      </a>
+    </ng-container>
+  </ng-container>
 </md-nav-list>

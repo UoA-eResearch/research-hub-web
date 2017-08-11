@@ -9,6 +9,7 @@ import {GetResultsListItem} from "../model/ResultsListItemInterface";
 })
 export class ResultsListComponent {
 
+  private anchorBased = true;
   private resultsValue = new Array<GetResultsListItem>();
   private titleValue = '';
   @Output() resultsChange = new EventEmitter();

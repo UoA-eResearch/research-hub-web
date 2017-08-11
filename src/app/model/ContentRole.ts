@@ -51,7 +51,11 @@ export class ContentRole implements GetResultsListItem {
     return '';
   }
 
-  getRoutePath(): string {
-    return '/contentDetails';
+  getRouterLink(): [any] {
+    return ['/contentDetails', this.content.id];
+  }
+
+  getHref(): string {
+    return undefined;
   }
 }

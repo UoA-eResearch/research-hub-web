@@ -50,7 +50,11 @@ export class OrgUnit implements GetResultsListItem {
     return '';
   }
 
-  getRoutePath(): string {
-    return '/orgUnitDetails';
+  getRouterLink(): [any] {
+    return ['/orgUnitDetails', this.id];
+  }
+
+  getHref(): string {
+    return undefined;
   }
 }

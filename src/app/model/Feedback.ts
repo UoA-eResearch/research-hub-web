@@ -1,6 +1,6 @@
 export class Feedback {
 
-  constructor(name: string, email: string, message: string){
+  constructor(name: string, email: string, message: string) {
 
   }
 }

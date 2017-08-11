@@ -27,7 +27,7 @@
       <div>
         <h3>For Support Contact</h3>
         <md-chip-list [selectable]="true">
-          <md-chip class="contact-chip" *ngFor="let item of content.people" [routerLink]="[item.getRoutePath(), item.id]">
+          <md-chip class="contact-chip" *ngFor="let item of content.people" [routerLink]="item.getRouterLink()">
             {{item.getTitle()}}
           </md-chip>
         </md-chip-list>
@@ -37,7 +37,7 @@
         <div class="divider"></div>
         <h3>Organisational Units</h3>
         <md-chip-list>
-          <md-chip class="org-unit-chip" *ngFor="let item of content.orgUnits" [routerLink]="[item.getRoutePath(), item.id]">
+          <md-chip class="org-unit-chip" *ngFor="let item of content.orgUnits" [routerLink]="item.getRouterLink()">
             {{item.getTitle()}}
           </md-chip>
         </md-chip-list>
@@ -55,7 +55,7 @@
         <div class="divider"></div>
         <h3>You might also be interested in</h3>
         <md-nav-list>
-          <md-list-item *ngFor="let item of similarContentItems" [routerLink]="[item.getRoutePath(), item.id]">
+          <md-list-item *ngFor="let item of similarContentItems" [routerLink]="item.getRouterLink()">
             <img md-list-avatar src="">
             <h3 md-line> {{item.getTitle()}} </h3>
           </md-list-item>

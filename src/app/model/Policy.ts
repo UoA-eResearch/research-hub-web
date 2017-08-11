@@ -54,7 +54,11 @@ export class Policy implements GetResultsListItem {
     return '';
   }
 
-  getRoutePath(): string {
-    return '/policyDetails';
+  getRouterLink(): [any] {
+    return undefined;
+  }
+
+  getHref(): string {
+    return this.url;
   }
 }

@@ -75,7 +75,11 @@ export class Content implements GetResultsListItem {
     return '';
   }
 
-  getRoutePath(): string {
-    return '/contentDetails';
+  getRouterLink(): [any] {
+    return ['/contentDetails', this.id];
+  }
+
+  getHref(): string {
+    return undefined;
   }
 }

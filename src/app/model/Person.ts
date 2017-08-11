@@ -70,7 +70,11 @@ export class Person implements GetResultsListItem {
     return '';
   }
 
-  getRoutePath(): string {
-    return '/personDetails';
+  getRouterLink(): [any] {
+    return ['/personDetails', this.id];
+  }
+
+  getHref(): string {
+    return undefined;
   }
 }
