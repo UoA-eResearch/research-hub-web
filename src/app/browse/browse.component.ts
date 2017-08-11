@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Input} from "@angular/core";
 import {MenuItem, MenuItemType, MenuService} from "../menu.service";
 import {ActivatedRoute} from "@angular/router";
 import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.service";
@@ -6,6 +6,8 @@ import {Person} from "../model/Person";
 import {Content} from "../model/Content";
 import {ProgressBarService} from "../app.progress-bar.service";
 import {SearchBarService} from "../search-bar/search-bar.service";
+import {Subscription} from 'rxjs/Subscription';
+import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 
 @Component({
   selector: 'app-browse',
@@ -17,9 +19,29 @@ export class BrowseComponent implements OnInit {
   private menuItems = [];
   private results = [];
 
+  watcher: Subscription;
+  activeMediaQuery = '';
+  mediaSize = '';
+
+  @Input()
+  numCols = 4;
+
+  teal = '#0294a5';
+  navy = '#004059';
+  orange = '#ff8300';
+  tileColors = [this.teal, this.navy, this.orange];
+
   constructor(private menuService: MenuService, private route: ActivatedRoute, private apiService: ApiService,
-              private progressBarService: ProgressBarService, private searchBarService: SearchBarService) {
+              private progressBarService: ProgressBarService, private searchBarService: SearchBarService, media: ObservableMedia) {
+
+    this.watcher = media.subscribe((change: MediaChange) => {
+      this.activeMediaQuery = change ? `'${change.mqAlias}' = (${change.mediaQuery})` : '';
+      console.log(change.mqAlias);
+      this.SetNumCategoryColumns(change.mqAlias);
+
+    });
   }
+
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -32,7 +54,7 @@ export class BrowseComponent implements OnInit {
         // Remove 'all' category when root category is requested
         let start = 0;
         if (categoryId === '/') {
-          start = 1;
+          //start = 1; // designs now required all category to show ...
           this.searchBarService.setCategory('all');
         }
 
@@ -60,6 +82,7 @@ export class BrowseComponent implements OnInit {
         }
       }
     });
+
   }
 
   private loadPolicies() {
@@ -91,4 +114,35 @@ export class BrowseComponent implements OnInit {
       }
     );
   }
+
+  SetNumCategoryColumns(mqAlias: string) {
+    this.mediaSize = mqAlias;
+    switch(mqAlias) {
+      case 'xs':
+        this.numCols = 2;
+        break;
+      case 'sm':
+        this.numCols = 3;
+        break;
+      case 'md':
+        this.numCols = 4;
+        break;
+      case 'lg':
+        this.numCols = 5;
+        break;
+      case 'xl':
+        this.numCols = 5;
+        break;
+      default:
+        this.numCols = 5;
+        break;
+    }
+    //console.log(mqAlias + ": "+this.numCols);
+  }
+
+  getTileColor(id: number): any {
+    return { 'background-color': this.tileColors[id % 3] };
+  }
+
+
 }
