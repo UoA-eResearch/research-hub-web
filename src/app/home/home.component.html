@@ -1,21 +1,29 @@
 <div id="main" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5%">
   <div id="main-left"  fxFlex="grow">
-    <h2>Browse</h2>
-      <!--<app-browse [numCols]="numCols"></app-browse>-->
+    <h2>Browse ({{mediaSize}})</h2>
     <md-grid-list cols="{{numCols}}" gutterSize="1em">
-      <md-grid-tile *ngFor="let item of menuItems; let i = index;" [colspan]="1" [rowspan]="1">
-        <a routerLink="/browse/{{item.id}}" routerLinkActive="disabled">
+      <md-grid-tile *ngFor="let item of menuItems; let i = index;" [colspan]="1" [rowspan]="1" [ngStyle]="getTileColor(i)" class="browse-tile">
+
+        <a fxFlex="grow" routerLink="/browse/{{item.id}}">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em" style="text-align: center;">
+            <span>{{item.name}}</span>
+            <md-icon>{{item.icon}}</md-icon>
+          </div>
+        </a>
+
+          <!--
           <md-card class="browse-card" [ngStyle]="getTileColor(i)">
             <div fxLayout="column" fxLayoutAlign="end center" style="height:100%;">
               <md-card-header fxFlex="grow" style="text-align: center;">
                 <md-card-title>
-                  <span>{{item.name}}</span>
+                  <span style="color:white;">{{item.name}}</span>
                 </md-card-title>
               </md-card-header>
               <md-icon>{{item.icon}}</md-icon>
             </div>
           </md-card>
-        </a>
+          -->
+
       </md-grid-tile>
     </md-grid-list>
   </div>

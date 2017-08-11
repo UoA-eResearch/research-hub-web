@@ -1,11 +1,13 @@
 @import "../../variables";
 @import "../../themes";
 
-md-grid-tile {
-  background: map-get($hub-pink, 500);
+
+#main {
+
+  max-width: $lg-thresh-min;
+  margin: 1em 1em 1em 1em;
 }
 
-//@import "../../variables";
 .feature-card button {
   //font-size:
   min-width:0px;
@@ -42,26 +44,54 @@ a {
   text-decoration: none;
 }
 
-.browse-card {
-  width: 128px;
-  height: 128px;
-  //background-color: white;
+/*
+Default tile size
+ */
+
+.browse-tile a div{
+  padding: 1em 1em 1em 1em;
 }
 
-.browse-card a {
+.browse-tile a div md-icon {
   text-decoration: none;
+  color:white;
 }
 
-.browse-card span {
+.browse-tile a div span {
   font-family: $heading-font-family;
   font-size: 1.2em;
+  color:white;
 }
 
-.browse-card md-icon {
+.browse-tile a div md-icon {
   font-size: 48px;
   padding-right: 0.5em;
   padding-bottom: 0.5em;
 }
+
+
+
+
+//.browse-card {
+//  //width: 256px;
+//  //height: 256px;
+//
+//}
+
+//.browse-card a {
+//  text-decoration: none;
+//}
+//
+//.browse-card span {
+//  font-family: $heading-font-family;
+//  font-size: 1.2em;
+//}
+//
+//.browse-card md-icon {
+//  font-size: 48px;
+//  padding-right: 0.5em;
+//  padding-bottom: 0.5em;
+//}
 
 md-grid-tile a {
   text-decoration: none;

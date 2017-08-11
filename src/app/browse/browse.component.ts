@@ -21,9 +21,15 @@ export class BrowseComponent implements OnInit {
 
   watcher: Subscription;
   activeMediaQuery = '';
+  mediaSize = '';
 
   @Input()
   numCols = 4;
+
+  teal = '#0294a5';
+  navy = '#004059';
+  orange = '#ff8300';
+  tileColors = [this.teal, this.navy, this.orange];
 
   constructor(private menuService: MenuService, private route: ActivatedRoute, private apiService: ApiService,
               private progressBarService: ProgressBarService, private searchBarService: SearchBarService, media: ObservableMedia) {
@@ -110,6 +116,7 @@ export class BrowseComponent implements OnInit {
   }
 
   SetNumCategoryColumns(mqAlias: string) {
+    this.mediaSize = mqAlias;
     switch(mqAlias) {
       case 'xs':
         this.numCols = 2;
@@ -117,11 +124,24 @@ export class BrowseComponent implements OnInit {
       case 'sm':
         this.numCols = 3;
         break;
-      default:
+      case 'md':
         this.numCols = 4;
+        break;
+      case 'lg':
+        this.numCols = 5;
+        break;
+      case 'xl':
+        this.numCols = 5;
+        break;
+      default:
+        this.numCols = 5;
         break;
     }
     //console.log(mqAlias + ": "+this.numCols);
+  }
+
+  getTileColor(id: number): any {
+    return { 'background-color': this.tileColors[id % 3] };
   }
 
 
