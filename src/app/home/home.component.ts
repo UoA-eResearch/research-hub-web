@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
   constructor(private menuService: MenuService, media: ObservableMedia) {
     this.watcher = media.subscribe((change: MediaChange) => {
       this.activeMediaQuery = change ? `'${change.mqAlias}' = (${change.mediaQuery})` : '';
-      console.log(change.mqAlias);
       this.SetNumCategoryColumns(change.mqAlias);
 
     });

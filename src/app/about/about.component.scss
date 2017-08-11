@@ -1,6 +1,12 @@
 
 @import "../../variables";
 
+#main {
+
+  max-width: $lg-thresh-min;
+  margin: 1em 1em 1em 1em;
+}
+
 .summary-text{
   font-weight: bold;
 }
