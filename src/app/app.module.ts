@@ -43,6 +43,7 @@ import { ContentDetailsComponent } from './content-details/content-details.compo
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { MarkdownComponent } from './markdown/markdown.component';
 import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
+import { OrgUnitDetailsComponent } from './org-unit-details/org-unit-details.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
     ContentDetailsComponent,
     PersonDetailsComponent,
     MarkdownComponent,
-    FeedbackFormComponent
+    FeedbackFormComponent,
+    OrgUnitDetailsComponent
   ],
   imports: [
     FlexLayoutModule,

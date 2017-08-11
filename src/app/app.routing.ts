@@ -9,6 +9,7 @@ import {BrowseComponent} from "./browse/browse.component";
 import {SearchResultsComponent} from "./search-results/search-results.component";
 import {ContentDetailsComponent} from "./content-details/content-details.component";
 import {PersonDetailsComponent} from "./person-details/person-details.component";
+import {OrgUnitDetailsComponent} from "./org-unit-details/org-unit-details.component";
 
 
 const appRoutes: Routes = [
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
   {path: 'browse/:contentTypeId', component: BrowseComponent},
   {path: 'contentDetails/:id', component: ContentDetailsComponent},
   {path: 'personDetails/:id', component: PersonDetailsComponent},
+  {path: 'orgUnitDetails/:id', component: OrgUnitDetailsComponent},
   {path: 'feedback', component: FeedbackComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},

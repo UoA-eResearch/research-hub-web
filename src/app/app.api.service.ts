@@ -6,6 +6,7 @@ import {Person} from "./model/Person";
 import {Content} from "./model/Content";
 import {environment} from 'app/../environments/environment';
 import {Policy} from "./model/Policy";
+import {OrgUnit} from "./model/OrgUnit";
 
 
 export class SearchParams {
@@ -171,7 +172,7 @@ export class ApiService {
 
     return this.http
       .get(this.host + ApiService.ORG_UNIT_URL, {search: search, headers: headers})
-      .map((response) => response.json());
+      .map((response) => OrgUnit.fromObjects(response.json()));
   }
 
   getOrgUnit(id) {
@@ -180,6 +181,6 @@ export class ApiService {
 
     return this.http
       .get(this.host + ApiService.ORG_UNIT_URL + '/' + id, {headers: headers})
-      .map((response) => response.json());
+      .map((response) => OrgUnit.fromObject(response.json()));
   }
 }

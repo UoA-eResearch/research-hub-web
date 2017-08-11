@@ -1,10 +1,14 @@
 import {GetResultsListItem} from "./ResultsListItemInterface";
+import {Person} from "./Person";
+import {Content} from "./Content";
 
 
 export class OrgUnit implements GetResultsListItem {
   id: number;
   name: string;
   url: string;
+  people: Array<Person>;
+  contentItems: Array<Content>;
 
   static fromObjects(objects: [Object]): Array<OrgUnit> {
     const orgUnits = new Array<OrgUnit>();
@@ -34,6 +38,8 @@ export class OrgUnit implements GetResultsListItem {
     orgUnit.id = object['id'];
     orgUnit.name = object['name'];
     orgUnit.url = object['url'];
+    orgUnit.people = Person.fromObjects(object['people']);
+    orgUnit.contentItems = Content.fromObjects(object['contentItems']);
 
     return orgUnit;
   }
