@@ -1,6 +1,8 @@
 import {
   GetResultsListItem
 } from "./ResultsListItemInterface";
+import {OrgUnit} from "./OrgUnit";
+import {ContentRole} from "./ContentRole";
 
 
 export class Person implements GetResultsListItem {
@@ -13,6 +15,8 @@ export class Person implements GetResultsListItem {
   jobTitle: string;
   directoryUrl: string;
   image: string;
+  orgUnits: Array<OrgUnit>;
+  contentRoles: Array<ContentRole>;
 
   static fromObjects(objects: [Object]): Array<Person> {
     const people = new Array<Person>();
@@ -48,6 +52,8 @@ export class Person implements GetResultsListItem {
     person.jobTitle = object['jobTitle'];
     person.directoryUrl = object['directoryUrl'];
     person.image = object['image'];
+    person.orgUnits = OrgUnit.fromObjects(object['orgUnits']);
+    person.contentRoles = ContentRole.fromObjects(object['contentRoles']);
 
     return person;
   }

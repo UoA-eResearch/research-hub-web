@@ -16,7 +16,6 @@ const appRoutes: Routes = [
   {path: 'search', component: SearchResultsComponent},
   {path: 'browse', component: BrowseComponent},
   {path: 'browse/:contentTypeId', component: BrowseComponent},
-  {path: 'browse/:contentTypeId/:subcategoryId', component: BrowseComponent},
   {path: 'contentDetails/:id', component: ContentDetailsComponent},
   {path: 'personDetails/:id', component: PersonDetailsComponent},
   {path: 'feedback', component: FeedbackComponent},

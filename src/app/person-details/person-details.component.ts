@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from "../app.api.service";
+import {ActivatedRoute} from "@angular/router";
+import {Person} from "../model/Person";
 
 
 @Component({
@@ -8,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonDetailsComponent implements OnInit {
 
-  constructor() { }
+  person: Person;
 
-  ngOnInit() {
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {
+
   }
 
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+
+      this.apiService.getPerson(id).subscribe(
+        person => {
+          console.log('person', person);
+          this.person = person;
+        }
+      );
+    });
+  }
 }
