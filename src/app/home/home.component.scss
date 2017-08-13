@@ -1,6 +1,14 @@
 @import "../../variables";
 @import "../../themes";
 
+.cover-image {
+  height: 300px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 
 #main {
 

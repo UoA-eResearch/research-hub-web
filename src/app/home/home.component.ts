@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {MenuItem, MenuItemType, MenuService} from "../menu.service";
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,18 +22,19 @@ export class HomeComponent implements OnInit {
   navy = '#004059';
   orange = '#ff8300';
   tileColors = [this.teal, this.navy, this.orange];
+  coverImageNum: number;
 
   constructor(private menuService: MenuService, media: ObservableMedia) {
     this.watcher = media.subscribe((change: MediaChange) => {
       this.activeMediaQuery = change ? `'${change.mqAlias}' = (${change.mediaQuery})` : '';
-      this.SetNumCategoryColumns(change.mqAlias);
+      this.setNumCategoryColumns(change.mqAlias);
 
     });
   }
 
-  SetNumCategoryColumns(mqAlias: string) {
+  setNumCategoryColumns(mqAlias: string) {
     this.mediaSize = mqAlias;
-    switch(mqAlias) {
+    switch (mqAlias) {
       case 'xs':
         this.numCols = 2;
         break;
@@ -52,17 +54,16 @@ export class HomeComponent implements OnInit {
         this.numCols = 4;
         break;
     }
-    //console.log(mqAlias + ": "+this.numCols);
   }
 
   ngOnInit() {
+    this.coverImageNum = Math.floor((Math.random() * 3) + 1); // Generate a random number between 1 and 3 and use it to get a random cover image
     this.numCols = 4;
     const menuItem = this.menuService.getMenuItem('/');
     this.menuItems = menuItem.menuItems;
   }
 
   getTileColor(id: number): any {
-    return { 'background-color': this.tileColors[id % 3] };
+    return {'background-color': this.tileColors[id % 3]};
   }
-
 }
