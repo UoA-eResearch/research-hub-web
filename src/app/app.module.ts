@@ -44,6 +44,9 @@ import { PersonDetailsComponent } from './person-details/person-details.componen
 import { MarkdownComponent } from './markdown/markdown.component';
 import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
 import { OrgUnitDetailsComponent } from './org-unit-details/org-unit-details.component';
+import { FeaturedComponent } from './featured/featured.component';
+import { ResearchActivityComponent } from './research-activity/research-activity.component';
+import { BrowseResultsComponent } from './browse-results/browse-results.component';
 
 
 @NgModule({
@@ -61,7 +64,10 @@ import { OrgUnitDetailsComponent } from './org-unit-details/org-unit-details.com
     PersonDetailsComponent,
     MarkdownComponent,
     FeedbackFormComponent,
-    OrgUnitDetailsComponent
+    OrgUnitDetailsComponent,
+    FeaturedComponent,
+    ResearchActivityComponent,
+    BrowseResultsComponent
   ],
   imports: [
     FlexLayoutModule,

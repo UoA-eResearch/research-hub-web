@@ -10,13 +10,14 @@ import {SearchResultsComponent} from "./search-results/search-results.component"
 import {ContentDetailsComponent} from "./content-details/content-details.component";
 import {PersonDetailsComponent} from "./person-details/person-details.component";
 import {OrgUnitDetailsComponent} from "./org-unit-details/org-unit-details.component";
+import {BrowseResultsComponent} from "./browse-results/browse-results.component";
 
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'search', component: SearchResultsComponent},
   {path: 'browse', component: BrowseComponent},
-  {path: 'browse/:contentTypeId', component: BrowseComponent},
+  {path: 'browse/:contentTypeId', component: BrowseResultsComponent},
   {path: 'contentDetails/:id', component: ContentDetailsComponent},
   {path: 'personDetails/:id', component: PersonDetailsComponent},
   {path: 'orgUnitDetails/:id', component: OrgUnitDetailsComponent},

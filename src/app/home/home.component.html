@@ -1,3 +1,4 @@
+
 <div class="header" class.xs="header-xs" fxLayout="row" [ngStyle]="{'background-image': 'url(assets/cover-'+coverImageNum+'.jpg)'}">
   <div class="welcome" class.xs="welcome-xs" fxFlex="475px" fxFlex.xs="100">
     <h1>Welcome to the Research Hub</h1>
@@ -7,46 +8,13 @@
 
 <div class="cover-image" class.xs="cover-image-xs" fxHide.gt-xs [ngStyle]="{'background-image': 'url(assets/cover-'+coverImageNum+'.jpg)'}"></div>
 
-<div id="main" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5%">
-  <div id="main-left"  fxFlex="grow">
-    <h2>Browse ({{mediaSize}})</h2>
-    <md-grid-list cols="{{numCols}}" gutterSize="1em">
-      <md-grid-tile *ngFor="let item of menuItems; let i = index;" [colspan]="1" [rowspan]="1" [ngStyle]="getTileColor(i)" class="browse-tile">
-        <a fxFlex="grow" routerLink="/browse/{{item.id}}">
-          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em" style="text-align: center;">
-            <span>{{item.name}}</span>
-            <md-icon>{{item.icon}}</md-icon>
-          </div>
-        </a>
-      </md-grid-tile>
-    </md-grid-list>
+<div class="content" class.xs="content-xs" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5%">
+  <div fxFlex="grow">
+    <h2>Browse categories</h2>
+    <app-browse></app-browse>
   </div>
-  <div id="main-right"  fxFlex="grow" fxLayout="column">
-     <div id="featured">
-      <h2>Have you seen?</h2>
-      <div id="featured-content" fxLayout="row" fxLayoutGap="5%">
-        <div id="featured-content-left" fxFlex.xs="grow">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius magna nisl quis</p>
-        </div>
-        <div id="featured-content-right" fxFlex="nogrow">
-          <md-card class="feature-card" class.xs="feature-card-xs">
-            <img md-card-image src="https://static.planetminecraft.com/files/avatar/1939407_1.gif">
-            <md-card-content>
-              Figshare
-            </md-card-content>
-            <md-card-actions>
-              <button md-button>Details</button>
-              <button md-button>Launch</button>
-            </md-card-actions>
-          </md-card>
-        </div>
-      </div>
-     </div>
-    <div id="common-search">
-      <a routerLink="/feedback" routerLinkActive="disabled">
-      <h2>Give Us Your Feedback</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius magna nisl quis orci</p>
-      </a>
-    </div>
+  <div fxFlex="grow" fxLayout="column">
+    <app-featured></app-featured>
+    <app-research-activity></app-research-activity>
   </div>
 </div>
