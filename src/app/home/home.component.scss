@@ -1,14 +1,37 @@
 @import "../../variables";
 @import "../../themes";
 
-.cover-image {
-  height: 300px;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+.header {
+  @extend .div-background-image;
 }
 
+.header-xs {
+  @extend .header;
+  padding: 0;
+}
+
+.welcome {
+  padding: $gt-xs-offset;
+  margin-bottom: $gt-xs-offset * 3;
+  background-color: $color-background;
+}
+
+.welcome-xs {
+  @extend .welcome;
+  padding: $xs-offset;
+  margin-bottom: 0;
+}
+
+
+.cover-image {
+  @extend .div-background-image;
+  height: 300px;
+}
+
+.cover-image-xs {
+  @extend .div-background-image;
+  height: 200px;
+}
 
 #main {
 
@@ -18,13 +41,14 @@
 
 .feature-card button {
   //font-size:
-  min-width:0px;
+  min-width:0;
   padding-left: 8px;
   padding-right: 8px;
 }
 
 
 h1 {
+  margin-top: 0;
   font-family: $heading-font-family;
   font-size: $heading-1-font-size;
   color: $heading-1-font-color;
