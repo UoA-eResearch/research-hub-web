@@ -1,24 +1,9 @@
-<div *ngIf="content">
-  <div>
-    <div class="content-header" fxLayout="row" class.xs="content-header-xs">
-      <div fxFlex="77" fxFlex.xs="100">
-        <h2>{{content.name}}</h2>
-        <h3>{{content.getMainOrgUnit().name}}</h3>
-      </div>
-      <div fxFlex="33" fxFlex.xs="0" fxLayoutAlign="end" >
-        <div fxLayout="column" fxFlexAlign="end" fxHide.xs>
-          <button class="go-button-gt-xs" md-raised-button color="accent">Go</button>
-        </div>
-      </div>
-    </div>
-    <div class="content-cover-image" fxHide.gt-xs fxLayout="row" fxLayoutAlign="end" style="background-image: url('assets/shiba.jpg');" >
-      <div fxLayout="column" fxFlexAlign="end">
-        <button md-raised-button color="accent">Go</button>
-      </div>
-    </div>
-  </div>
+<ng-container *ngIf="content">
+  <app-header [title]="content.name"
+              [description]="content.getMainOrgUnit().name"
+              [imageUrl]="'assets/cover-1.jpg'"></app-header>
 
-  <div class="content" class.xs="content-xs" fxLayout="row" fxLayout.xs="column">
+  <div class="component" class.xs="component-xs" fxLayout="row" fxLayout.xs="column">
     <div class="content-overview" class.xs="content-overview-xs" fxFlex="40" fxFlex.lg-xs="100" fxFlexOrder.xs="2" fxLayout="column">
       <div fxHide.lt-sm>
         <img fxFlex="100" src="assets/shiba.jpg">
@@ -80,4 +65,4 @@
       </div>
     </div>
   </div>
-</div>
+</ng-container>

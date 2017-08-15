@@ -32,15 +32,15 @@
   padding: 1em;
 }
 
-.content {
-  max-width: $lg-thresh-min;
-  margin: 2em;
-}
-
-.content-xs {
-  @extend .content;
-  margin: 0.5em 1.5em 1em 1.5em;
-}
+//.content {
+//  max-width: $lg-thresh-min;
+//  margin: 2em;
+//}
+//
+//.content-xs {
+//  @extend .content;
+//  margin: 0.5em 1.5em 1em 1.5em;
+//}
 
 .content-overview {
   padding-right: 2em;
@@ -56,9 +56,9 @@
   @extend .content-overview;
 }
 
-.content-details {
-  margin-top: -16px;
-}
+//.content-details {
+//  margin-top: -16px;
+//}
 
 .contact-chip {
   margin: 0.25em !important;
