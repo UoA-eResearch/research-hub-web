@@ -14,6 +14,8 @@ import {ObservableMedia} from "@angular/flex-layout";
 export class BrowseResultsComponent implements OnInit {
 
   private results = [];
+  title = '';
+  description = '';
 
   constructor(private menuService: MenuService, private route: ActivatedRoute, private apiService: ApiService,
               private progressBarService: ProgressBarService, private searchBarService: SearchBarService, private media: ObservableMedia) {
@@ -26,6 +28,8 @@ export class BrowseResultsComponent implements OnInit {
 
       if (menuItem.isLeaf()) {
         this.searchBarService.setCategory(menuItem.id); // When navigating within menu item, set search category to that item
+        this.title = menuItem.name;
+        this.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius maximus, sem quam accumsan magna, eu congue magna nisl quis orci.";
 
         switch (menuItem.type) {
           case MenuItemType.Content:
