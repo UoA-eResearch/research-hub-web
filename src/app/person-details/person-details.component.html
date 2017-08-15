@@ -1,45 +1,30 @@
 <div *ngIf="person">
-  <div class="content-header" fxLayout="row" class.xs="content-header-xs">
-    <div fxFlex="77" fxFlex.xs="100">
-      <h2>{{person.firstName}} {{person.lastName}}</h2>
-      <h3>{{person.jobTitle}}</h3>
-    </div>
-    <div fxFlex="33" fxFlex.xs="0" fxLayoutAlign="end">
-      <div fxLayout="column" fxFlexAlign="end" fxHide.xs>
-        <a class="go-button-gt-xs" md-raised-button color="accent" href="{{person.directoryUrl}}" target="_blank">Go</a>
-      </div>
-    </div>
-  </div>
-  <div class="content-cover-image" fxHide.gt-xs fxLayout="row" fxLayoutAlign="end"
-       style="background-image: url('assets/shiba.jpg');">
-    <div fxLayout="column" fxFlexAlign="end">
-      <a md-raised-button color="accent" href="{{person.directoryUrl}}" target="_blank">Go</a>
-    </div>
-  </div>
+  <app-header [title]="person.getTitle()"
+              [description]="person.jobTitle"
+              [imageUrl]="'assets/cover-1.jpg'"></app-header>
 
   <div class="content" class.xs="content-xs" fxLayout="row" fxLayout.xs="column">
     <div class="content-overview" class.xs="content-overview-xs" fxFlex="40" fxFlex.lg-xs="100" fxLayout="column">
       <div fxHide.lt-sm>
         <img fxFlex="100" src="assets/shiba.jpg">
       </div>
-
-      <div>
-        <h3>Contact Details</h3>
-        <md-chip-list>
-          <md-chip style="margin: 0.25em;" color="accent" selected="true">
-            {{person.email}}
-          </md-chip>
-          <md-chip style="margin: 0.25em;" color="accent" selected="true">
-            +649 415 7899
-          </md-chip>
-        </md-chip-list>
-      </div>
     </div>
 
-    <div fxHide.gt-sm class="divider"></div>
+    <div class="content-details" class.xs="content-details-xs" fxFlex="auto" fxFlex.lg-xs="100" fxLayout="column" fxLayoutGap="1em">
+      <div fxHide.gt-xs>
+        <img fxFlex="100" src="assets/shiba.jpg">
+      </div>
 
-    <div class="content-details" class.xs="content-details-xs" fxFlex="auto" fxFlex.lg-xs="100" fxLayout="column">
-      <div *ngIf="person.orgUnits.length">
+      <md-card>
+        <h3>Email</h3>
+        <p>{{person.email}}</p>
+        <h3>Phone</h3>
+        <p>+64 9 415 7899</p>
+        <h3>Location</h3>
+        <p>+64 9 415 7899</p>
+      </md-card>
+
+      <md-card *ngIf="person.orgUnits.length">
         <h3>Organisational Units</h3>
         <md-nav-list>
           <md-list-item *ngFor="let item of person.orgUnits" [routerLink]="item.getRouterLink()">
@@ -47,10 +32,9 @@
             <h3 md-line> {{item.getTitle()}} </h3>
           </md-list-item>
         </md-nav-list>
-      </div>
+      </md-card>
 
-      <div *ngIf="person.contentRoles.length">
-        <div class="divider"></div>
+      <md-card *ngIf="person.contentRoles.length">
         <h3>Roles</h3>
         <md-nav-list>
           <md-list-item *ngFor="let item of person.contentRoles" [routerLink]="item.getRouterLink()">
@@ -59,7 +43,7 @@
             <p md-line>{{item.getSubtitle()}}</p>
           </md-list-item>
         </md-nav-list>
-      </div>
+      </md-card>
     </div>
   </div>
 </div>

@@ -1,20 +1,7 @@
 <div *ngIf="orgUnit">
-  <div class="content-header" fxLayout="row" class.xs="content-header-xs">
-    <div fxFlex="77" fxFlex.xs="100">
-      <h2>{{orgUnit.name}}</h2>
-    </div>
-    <div fxFlex="33" fxFlex.xs="0" fxLayoutAlign="end">
-      <div fxLayout="column" fxFlexAlign="end" fxHide.xs>
-        <a class="go-button-gt-xs" md-raised-button color="accent" href="{{orgUnit.url}}" target="_blank">Go</a>
-      </div>
-    </div>
-  </div>
-  <div class="content-cover-image" fxHide.gt-xs fxLayout="row" fxLayoutAlign="end"
-       style="background-image: url('assets/shiba.jpg');">
-    <div fxLayout="column" fxFlexAlign="end">
-      <a md-raised-button color="accent" href="{{orgUnit.url}}" target="_blank">Go</a>
-    </div>
-  </div>
+  <app-header [title]="orgUnit.name"
+              [description]="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius maximus, sem quam accumsan magna, eu congue magna nisl quis orci'"
+              [imageUrl]="'assets/cover-1.jpg'"></app-header>
 
   <div class="content" class.xs="content-xs" fxLayout="row" fxLayout.xs="column">
     <div class="content-overview" class.xs="content-overview-xs" fxFlex="40" fxFlex.lg-xs="100" fxLayout="column">
@@ -23,8 +10,12 @@
       </div>
     </div>
 
-    <div class="content-details" class.xs="content-details-xs" fxFlex="auto" fxFlex.lg-xs="100" fxLayout="column">
-      <div *ngIf="orgUnit.people.length">
+    <div class="content-details" class.xs="content-details-xs" fxFlex="auto" fxFlex.lg-xs="100" fxLayout="column" fxLayoutGap="1em">
+      <div fxHide.gt-xs>
+        <img fxFlex="100" src="assets/shiba.jpg">
+      </div>
+
+      <md-card *ngIf="orgUnit.people.length">
         <h3>People</h3>
         <md-nav-list>
           <md-list-item *ngFor="let item of orgUnit.people" [routerLink]="item.getRouterLink()">
@@ -32,10 +23,9 @@
             <h3 md-line> {{item.getTitle()}} </h3>
           </md-list-item>
         </md-nav-list>
-      </div>
+      </md-card>
 
-      <div *ngIf="orgUnit.contentItems.length">
-        <div class="divider"></div>
+      <md-card *ngIf="orgUnit.contentItems.length">
         <h3>Content</h3>
         <md-nav-list>
           <md-list-item *ngFor="let item of orgUnit.contentItems" [routerLink]="item.getRouterLink()">
@@ -43,7 +33,7 @@
             <h3 md-line> {{item.getTitle()}} </h3>
           </md-list-item>
         </md-nav-list>
-      </div>
+      </md-card>
     </div>
   </div>
 </div>
