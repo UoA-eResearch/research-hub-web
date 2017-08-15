@@ -1,0 +1,37 @@
+@import "../../variables";
+@import "../../themes";
+
+/*
+ * Image based header styles
+ */
+
+.header {
+  @extend .div-background-image;
+}
+
+.header-xs {
+  @extend .header;
+  padding: 0;
+}
+
+.info {
+  padding: $gt-xs-offset;
+  margin-bottom: $gt-xs-offset * 3;
+  background-color: $color-background;
+}
+
+.info-xs {
+  @extend .info;
+  padding: $xs-offset;
+  margin-bottom: 0;
+}
+
+.cover-image {
+  @extend .div-background-image;
+  height: 300px;
+}
+
+.cover-image-xs {
+  @extend .div-background-image;
+  height: 200px;
+}

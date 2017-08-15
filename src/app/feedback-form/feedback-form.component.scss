@@ -1,31 +1,25 @@
 @import "../../variables";
 @import "../../themes";
 
-.mat-button {
-  font-family: $body-font-family;
-  color: white;
-  background: $color-primary;
+.avatar-image {
+  background-size: cover;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
-#form-image-container{
+.button-container {
   text-align: right;
 }
 
-#form-image-container img {
-  height:auto;
-  width:50px;
-}
-
-#button-container {
-  text-align: right;
-}
-
-.input-full-width{
+.input-full-width {
   width:100%;
 }
 
-.feedback-card{
-  //max-width:500px;
+.feedback-card {
   font-family: $body-font-family;
 }
 
+.feedback-card-xs {
+  @extend .feedback-card;
+
+}

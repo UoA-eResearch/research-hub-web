@@ -61,3 +61,21 @@ $gt-xs-offset: 2em;
   background-position: center;
   width: 100%;
 }
+
+.max-p-width {
+  max-width: $sm-thresh-max;
+}
+
+.component {
+  margin: $gt-xs-offset;
+  max-width: $xl-thresh-min;
+}
+
+.component-xs {
+  @extend .component;
+  margin: $xs-offset;
+}
+
+.component-embedded {
+  margin: 0;
+}

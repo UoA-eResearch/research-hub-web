@@ -1,78 +1,26 @@
-<div fxLayout="column">
-  <div fxLayout="column">
-    <div fxLayout="row" fxLayoutAlign="space-between start">
-      <h2>Thankyou!</h2>
-      <img src="https://static.planetminecraft.com/files/avatar/1939407_1.gif" fxHide.gt-xs=TRUE>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="space-between start"  fxLayoutGap="5%">
-      <div>
-        <p>We appreciate your visit of the beta-version of Takarangi, our platform for research support. We are currently
-          working on developing this tool further and would be grateful for your feedback.
-          This will give us pointers for user-led refinement and further development of interface and content of the tool.
-        </p>
-        <p>You can also register your interest in helping our User Experience Specialist running through a usability
-          study.
-        </p>
-        <p>
-          Thank you,<br/>
-          The Development Team
-        </p>
-      </div>
-      <img src="https://static.planetminecraft.com/files/avatar/1939407_1.gif" fxHide.lt-sm=TRUE>
-    </div>
+<app-header [title]="'Feedback'"
+            [description]="'We appreciate your visit to the beta-version of the Research Hub, our platform for research support.'"
+            [imageUrl]="'assets/cover-1.jpg'"></app-header>
+
+<div class="component" ngClass.xs="component-xs">
+  <div style="max-width: 850px;">
+    <h2>Thank You!</h2>
+    <p>We are developing the Research Hub further and would be grateful for your feedback.
+      This will give us pointers for user-led refinement and further development of the interface content displayed
+      in the Research Hub.
+    </p>
+    <p>
+      You can also register your interest in helping our User Experience Specialist running through a usability
+      study.
+    </p>
+    <p>
+      Thank you,<br/>
+      The Development Team
+    </p>
   </div>
-  <div fxLayout="row wrap" fxLayoutGap="5%">
-    <div fxLayout="column" fxFlex="grow" class="response">
-      <h2>Feedback</h2>
-      <app-feedback-form></app-feedback-form>
-    </div>
-    <div fxLayout="column" fxFlex="grow" class="response">
-      <h2>Register for Usability Study</h2>
-      <app-feedback-form></app-feedback-form>
-    </div>
+
+  <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="1em">
+    <app-feedback-form ngClass.gt-md="card-gt-md" [title]="'Feedback'" [imageUrl]="'https://static.planetminecraft.com/files/avatar/1939407_1.gif'"></app-feedback-form>
+    <app-feedback-form ngClass.gt-md="card-gt-md" [title]="'Join a User Study'" [imageUrl]="'https://static.planetminecraft.com/files/avatar/1939407_1.gif'"></app-feedback-form>
   </div>
 </div>
-
-
-<!--
-<div id="main">
-
-  <div id="intro">
-    <div id="intro-title" class="title">
-      <h2>Thankyou!</h2>
-    </div>
-    <div id="intro-text">
-      <p>We appreciate your visit of the beta-version of Takarangi, our platform for research support. We are currently
-        working on developing this tool further and would be grateful for your feedback.
-        This will give us pointers for user-led refinement and further development of interface and content of the tool.
-      </p>
-      <p>You can also register your interest in helping our User Experience Specialist running through a usability
-        study.
-      </p>
-      <p>
-        Thank you,<br/>
-        The Development Team
-      </p>
-    </div>
-    <div id="intro-image">
-      <img src="https://static.planetminecraft.com/files/avatar/1939407_1.gif">
-    </div>
-  </div>
-
-  <div id="feedback-and-register">
-    <div id="feedback" class="input-section">
-      <div id="feedback-title" class="title">
-        <h2>Feedback</h2>
-        <app-feedback-form></app-feedback-form>
-      </div>
-    </div>
-    <div id="register" class="input-section">
-      <div id="register-title" class="title">
-        <h2>Register Interest in Usability Study</h2>
-        <app-feedback-form></app-feedback-form>
-      </div>
-    </div>
-  </div>
-</div>
-
--->

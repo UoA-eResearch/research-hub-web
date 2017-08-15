@@ -1,26 +1,33 @@
-<div id="main" fxLayout="column" fxLayoutGap="1.5em">
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="{{layoutGap}}" fxLayoutGap.xs="{{layoutGapXs}}">
-    <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">location_on</md-icon>
-    <div class="contact-info-text" layout="column">
-      <span *ngFor="let line of physicalAddress">{{line}}<br/></span>
+<app-header [title]="'Contact Us'"
+            [description]="description"
+            [imageUrl]="'assets/cover-1.jpg'"></app-header>
+
+<div class="component" ngClass.xs="component-xs">
+  <h2>Our details</h2>
+  <div fxLayout="column" fxLayoutGap="1.5em">
+    <div fxLayout="row wrap" fxLayoutAlign="start center" [fxLayoutGap]="layoutGap" [fxLayoutGap.xs]="layoutGapXs">
+      <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">location_on</md-icon>
+      <div class="contact-info-text" layout="column">
+        <span *ngFor="let line of physicalAddress">{{line}}<br/></span>
+      </div>
     </div>
-  </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="{{layoutGap}}"  fxLayoutGap.xs="{{layoutGapXs}}">
-    <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">email</md-icon>
-    <div class="contact-info-text" layout="column">
-      <span >{{emailAddress}}</span>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" [fxLayoutGap]="layoutGap" [fxLayoutGap.xs]="layoutGapXs">
+      <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">email</md-icon>
+      <div class="contact-info-text" layout="column">
+        <span>{{emailAddress}}</span>
+      </div>
     </div>
-  </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="{{layoutGap}}"  fxLayoutGap.xs="{{layoutGapXs}}">
-    <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">contact_phone</md-icon>
-    <div class="contact-info-text" layout="column">
-      <span>{{contactPhone}}</span>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" [fxLayoutGap]="layoutGap" [fxLayoutGap.xs]="layoutGapXs">
+      <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">contact_phone</md-icon>
+      <div class="contact-info-text" layout="column">
+        <span>{{contactPhone}}</span>
+      </div>
     </div>
-  </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="{{layoutGap}}" fxLayoutGap.xs="{{layoutGapXs}}">
-    <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">local_post_office</md-icon>
-    <div class="contact-info-text md-" layout="column">
-      <span *ngFor="let line of postalAddress">{{line}}<br/></span>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" [fxLayoutGap]="layoutGap" [fxLayoutGap.xs]="layoutGapXs">
+      <md-icon class="contact-info-icon" class.xs="contact-info-icon-xs">local_post_office</md-icon>
+      <div class="contact-info-text md-" layout="column">
+        <span *ngFor="let line of postalAddress">{{line}}<br/></span>
+      </div>
     </div>
   </div>
 </div>

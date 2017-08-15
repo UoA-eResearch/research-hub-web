@@ -47,6 +47,7 @@ import { OrgUnitDetailsComponent } from './org-unit-details/org-unit-details.com
 import { FeaturedComponent } from './featured/featured.component';
 import { ResearchActivityComponent } from './research-activity/research-activity.component';
 import { BrowseResultsComponent } from './browse-results/browse-results.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { BrowseResultsComponent } from './browse-results/browse-results.componen
     OrgUnitDetailsComponent,
     FeaturedComponent,
     ResearchActivityComponent,
-    BrowseResultsComponent
+    BrowseResultsComponent,
+    HeaderComponent
   ],
   imports: [
     FlexLayoutModule,

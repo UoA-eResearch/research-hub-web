@@ -1,0 +1,8 @@
+<div class="header" class.xs="header-xs" fxLayout="row" [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}">
+  <div class="info" class.xs="info-xs" fxFlex="475px" fxFlex.xs="100">
+    <h1>{{title}}</h1>
+    <p>{{description}}</p>
+  </div>
+</div>
+
+<div class="cover-image" class.xs="cover-image-xs" fxHide.gt-xs [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"></div>

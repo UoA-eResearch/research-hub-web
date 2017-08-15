@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 import { Feedback } from '../model/Feedback';
@@ -11,13 +11,19 @@ import { ApiService } from '../app.api.service';
 })
 export class FeedbackFormComponent implements OnInit {
 
+  @Input()
+  title = '';
+
+  @Input()
+  imageUrl = '';
+
   feedbackForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private api: ApiService) {
+  constructor(private fb: FormBuilder) {
     this.createForm();
   }
 
-  createForm(){
+  createForm() {
     this.feedbackForm = this.fb.group({
       name: '',
       email: '',
@@ -26,7 +32,6 @@ export class FeedbackFormComponent implements OnInit {
   }
 
   onSubmit(){
-
     const formModel = this.feedbackForm.value;
 
     const fb: Feedback = {
@@ -34,8 +39,6 @@ export class FeedbackFormComponent implements OnInit {
       email: formModel.email as string,
       message: formModel.message as string
     } as Feedback;
-
-    //console.log(fb);
   }
 
   ngOnInit() {

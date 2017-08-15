@@ -1,17 +1,10 @@
-
-<div class="header" class.xs="header-xs" fxLayout="row" [ngStyle]="{'background-image': 'url(assets/cover-'+coverImageNum+'.jpg)'}">
-  <div class="welcome" class.xs="welcome-xs" fxFlex="475px" fxFlex.xs="100">
-    <h1>Welcome to the Research Hub</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius maximus, sem quam accumsan magna, eu congue magna nisl quis orci</p>
-  </div>
-</div>
-
-<div class="cover-image" class.xs="cover-image-xs" fxHide.gt-xs [ngStyle]="{'background-image': 'url(assets/cover-'+coverImageNum+'.jpg)'}"></div>
+<app-header [title]="'Welcome to the Research Hub'"
+            [description]="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius maximus, sem quam accumsan magna, eu congue magna nisl quis orci'"
+            [imageUrl]="coverImageUrl"></app-header>
 
 <div class="content" class.xs="content-xs" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5%">
   <div fxFlex="grow">
-    <h2>Browse categories</h2>
-    <app-browse></app-browse>
+    <app-browse [embedded]="true" [maxCols]="4"></app-browse>
   </div>
   <div fxFlex="grow" fxLayout="column">
     <app-featured fxFlexOrder.xs="2"></app-featured>

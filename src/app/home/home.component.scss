@@ -2,46 +2,11 @@
 @import "../../themes";
 
 /*
- * Image based header styles
- */
-
-.header {
-  @extend .div-background-image;
-}
-
-.header-xs {
-  @extend .header;
-  padding: 0;
-}
-
-.welcome {
-  padding: $gt-xs-offset;
-  margin-bottom: $gt-xs-offset * 3;
-  background-color: $color-background;
-}
-
-.welcome-xs {
-  @extend .welcome;
-  padding: $xs-offset;
-  margin-bottom: 0;
-}
-
-.cover-image {
-  @extend .div-background-image;
-  height: 300px;
-}
-
-.cover-image-xs {
-  @extend .div-background-image;
-  height: 200px;
-}
-
-/*
  * Styling for content
  */
 
 .content {
-  max-width: $lg-thresh-min;
+  max-width: $xl-thresh-min;
   margin: $gt-xs-offset / 2 $gt-xs-offset $gt-xs-offset $gt-xs-offset;
 }
 

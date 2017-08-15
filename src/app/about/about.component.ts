@@ -8,6 +8,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
+  description = "The Centre for eResearch comprises a team of highly qualified research and technical staff dedicated " +
+    "to the delivery of advanced computational solutions to help power the University's research mission.";
+
   constructor() {
 
   }

@@ -18,6 +18,12 @@ export class BrowseComponent implements OnInit, OnDestroy {
   mediaSub: Subscription;
 
   @Input()
+  embedded = false;
+
+  @Input()
+  maxCols = 5;
+
+  @Input()
   numCols = 4;
   teal = '#0294a5';
   navy = '#004059';
@@ -57,26 +63,34 @@ export class BrowseComponent implements OnInit, OnDestroy {
   }
 
   setNumCategoryColumns(mqAlias: string) {
+    let numCols = 0;
     switch (mqAlias) {
+
       case 'xs':
-        this.numCols = 2;
+        numCols = 2;
         break;
       case 'sm':
-        this.numCols = 2;
+        numCols = 3;
         break;
       case 'md':
-        this.numCols = 2;
+        numCols = 3;
         break;
       case 'lg':
-        this.numCols = 3;
+        numCols = 4;
         break;
       case 'xl':
-        this.numCols = 4;
+        numCols = 5;
         break;
       default:
-        this.numCols = 4;
+        numCols = 4;
         break;
     }
+
+    if (this.embedded && mqAlias !== 'xs') {
+      numCols -= 1;
+    }
+
+    this.numCols = Math.min(this.maxCols, numCols);
   }
 
   getTileColor(id: number): any {
