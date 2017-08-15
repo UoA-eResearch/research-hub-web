@@ -50,7 +50,7 @@
         <app-markdown [data]="content.description"></app-markdown>
       </md-card>
 
-      <div fxHide.gt-md>
+      <div fxHide.gt-md [ngStyle.lt-sm]="{'margin-right': '0'}" [ngStyle.lt-lg]="{'margin-right': '40%'}">
         <img fxFlex="100" width="100%;" src="assets/shiba.jpg">
       </div>
 
