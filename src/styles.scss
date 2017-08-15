@@ -25,10 +25,25 @@ h2 {
   color: $heading-2-font-color;
 }
 
+h3 {
+  font-family: $heading-font-family;
+  font-size: $heading-3-font-size;
+  color: $heading-2-font-color;
+}
+
 
 p {
   font-family: $body-font-family;
   font-size: $body-font-size;
-  color: $body-font-color;
+  //color: $body-font-color;
+  //color: white;
   margin-top: 0;
+}
+
+.description {
+  background-color: $color-pink;
+}
+
+.description > app-markdown * p {
+  color: white !important;
 }
