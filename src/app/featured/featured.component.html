@@ -1,17 +1,17 @@
 <h2>Have you seen?</h2>
-<div fxLayout="row" fxLayoutGap="5%" fxLayout.xs="column">
-  <div fxFlex.xs="grow">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius magna nisl quis</p>
+<div *ngIf="content" fxLayout="row" fxLayoutGap="5%" fxLayout.lt-lg="column">
+  <div fxFlex="auto">
+    <p>{{content.summary}}</p>
   </div>
-  <div class.xs="featured-content-xs" fxFlex="nogrow">
+  <div fxFlex="250px" fxFlex.lt-lg="100">
     <md-card>
-      <img md-card-image src="https://static.planetminecraft.com/files/avatar/1939407_1.gif">
+      <img md-card-image [src]="apiService.getAssetUrl(content.image)">
       <md-card-content>
-        Figshare
+        {{content.name}}
       </md-card-content>
       <md-card-actions>
-        <button md-button>Details</button>
-        <button md-button>Launch</button>
+        <button md-button [routerLink]="content.getRouterLink()">Details</button>
+        <a md-button [href]="content.callToAction" target="_blank">Launch</a>
       </md-card-actions>
     </md-card>
   </div>
