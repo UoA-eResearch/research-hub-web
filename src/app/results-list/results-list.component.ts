@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {GetResultsListItem} from "../model/ResultsListItemInterface";
+import {ApiService} from "../app.api.service";
 
 
 @Component({
@@ -14,7 +15,7 @@ export class ResultsListComponent {
   private titleValue = '';
   @Output() resultsChange = new EventEmitter();
 
-  constructor() {
+  constructor(private apiService: ApiService) {
   }
 
   @Input()

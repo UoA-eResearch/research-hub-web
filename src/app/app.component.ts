@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {ProgressBarService} from "./app.progress-bar.service";
 import {MediaChange, ObservableMedia} from "@angular/flex-layout";
+import {ApiService} from "./app.api.service";
 
 
 @Component({
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private breadcrumbService: BreadcrumbService, private navigationService: MenuService,
               private searchBarService: SearchBarService, private router: Router, private progressBarService: ProgressBarService,
-              private observableMedia: ObservableMedia) {
+              private observableMedia: ObservableMedia, private apiService: ApiService) {
 
     // Populate menuItems for search-bar bar
     this.categories = navigationService.getMenuItem('/').menuItems;

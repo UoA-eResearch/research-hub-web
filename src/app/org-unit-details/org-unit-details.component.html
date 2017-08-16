@@ -1,35 +1,25 @@
 <div *ngIf="orgUnit">
   <app-header [title]="orgUnit.name"
               [description]="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius maximus, sem quam accumsan magna, eu congue magna nisl quis orci'"
-              [imageUrl]="'assets/cover-1.jpg'"></app-header>
+              [imageUrl]="apiService.getAssetUrl('page-elements/UniAkl_9369_1680x220_BW.jpg')"></app-header>
 
-  <div class="content" class.xs="content-xs" fxLayout="row" fxLayout.xs="column">
-    <div class="content-overview" class.xs="content-overview-xs" fxFlex="40" fxFlex.lg-xs="100" fxLayout="column">
-      <div fxHide.lt-sm>
-        <img fxFlex="100" src="assets/shiba.jpg">
-      </div>
-    </div>
-
-    <div class="content-details" class.xs="content-details-xs" fxFlex="auto" fxFlex.lg-xs="100" fxLayout="column" fxLayoutGap="1em">
-      <div fxHide.gt-xs>
-        <img fxFlex="100" src="assets/shiba.jpg">
-      </div>
-
-      <md-card *ngIf="orgUnit.people.length">
+  <div class="content" class.xs="content-xs" fxLayout="column">
+    <div class="content-details" class.xs="content-details-xs" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em">
+      <md-card fxFlex="50" fxFlex.lt-md="100" *ngIf="orgUnit.people.length">
         <h3>People</h3>
         <md-nav-list>
           <md-list-item *ngFor="let item of orgUnit.people" [routerLink]="item.getRouterLink()">
-            <img md-list-avatar src="">
+            <img md-list-avatar [src]="apiService.getAssetUrl(item.image)">
             <h3 md-line> {{item.getTitle()}} </h3>
           </md-list-item>
         </md-nav-list>
       </md-card>
 
-      <md-card *ngIf="orgUnit.contentItems.length">
+      <md-card fxFlex="50" fxFlex.lt-md="100" *ngIf="orgUnit.contentItems.length">
         <h3>Content</h3>
         <md-nav-list>
           <md-list-item *ngFor="let item of orgUnit.contentItems" [routerLink]="item.getRouterLink()">
-            <img md-list-avatar src="">
+            <img md-list-avatar [src]="apiService.getAssetUrl(item.image)">
             <h3 md-line> {{item.getTitle()}} </h3>
           </md-list-item>
         </md-nav-list>

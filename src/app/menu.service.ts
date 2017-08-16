@@ -16,7 +16,7 @@ export class MenuItem {
   public parent: MenuItem;
 
   constructor(public id: string, public name: string, public icon: string, public type: MenuItemType,
-              public contentTypeId: number, public menuItems: [MenuItem]) {
+              public contentTypeId: number, public menuItems: [MenuItem], public image: string) {
 
     // Set this menuItem as the parent
     if (menuItems != null) {
@@ -69,17 +69,17 @@ export class MenuService {
   constructor(private breadcrumbService: BreadcrumbService) {
     this.root =
       new MenuItem('', '', '', MenuItemType.Root, null, [
-        new MenuItem('all', this.nameAll, '', MenuItemType.All, null, null),
-        new MenuItem('support', this.nameSupport, 'help', MenuItemType.Content, this.contentTypeIdSupport, null),
-        new MenuItem('instrumentsEquipment', this.nameInstrumentsEquipment, 'camera_roll', MenuItemType.Content, this.contentTypeIdInstrumentsEquipment, null),
-        new MenuItem('training', this.nameTraining, 'directions_bike', MenuItemType.Content, this.contentTypeIdTraining, null),
-        new MenuItem('software', this.nameSoftware, 'shop', MenuItemType.Content, this.contentTypeIdSoftware, null),
-        new MenuItem('facilitiesSpaces', this.nameFacilitiesSpaces, 'home', MenuItemType.Content, this.contentTypeIdFacilitiesSpaces, null),
-        new MenuItem('guides', this.nameGuides, 'language', MenuItemType.Guide, null, null),
-        new MenuItem('people', this.namePeople, 'face', MenuItemType.Person, null, null),
-        new MenuItem('knowledgeArticle', this.nameKnowledgeArticle, 'book', MenuItemType.Content, this.contentTypeIdKnowledgeArticle, null),
-        new MenuItem('policies', this.namePolicies, 'account_balance', MenuItemType.Policy, null, null),
-      ]);
+        new MenuItem('all', this.nameAll, '', MenuItemType.All, null, null, null),
+        new MenuItem('support', this.nameSupport, 'help', MenuItemType.Content, this.contentTypeIdSupport, null, 'page-elements/483_Pacific_28Sep10_1680x220_BW.jpg'),
+        new MenuItem('instrumentsEquipment', this.nameInstrumentsEquipment, 'camera_roll', MenuItemType.Content, this.contentTypeIdInstrumentsEquipment, null, 'page-elements/20160126-Engineering-Profile-004_1680x220_BW.jpg'),
+        new MenuItem('training', this.nameTraining, 'directions_bike', MenuItemType.Content, this.contentTypeIdTraining, null, 'page-elements/Violin_1680x220_BW.jpg'),
+        new MenuItem('software', this.nameSoftware, 'shop', MenuItemType.Content, this.contentTypeIdSoftware, null, 'page-elements/20130930_UoA_Details_031_1680x220_BW.jpg'),
+        new MenuItem('facilitiesSpaces', this.nameFacilitiesSpaces, 'home', MenuItemType.Content, this.contentTypeIdFacilitiesSpaces, null, 'page-elements/Business_1680x220_BW.jpg'),
+        new MenuItem('guides', this.nameGuides, 'language', MenuItemType.Guide, null, null, 'page-elements/1483_UoA_13Oct09_1680x220_BW.jpg'),
+        new MenuItem('people', this.namePeople, 'face', MenuItemType.Person, null, null, 'page-elements/DSC_0192_1680x220_BW.jpg'),
+        new MenuItem('knowledgeArticle', this.nameKnowledgeArticle, 'book', MenuItemType.Content, this.contentTypeIdKnowledgeArticle, null, 'page-elements/58_Arts_20March2010_1680x220_BW.jpg'),
+        new MenuItem('policies', this.namePolicies, 'account_balance', MenuItemType.Policy, null, null, 'page-elements/UniAkl_9369_1680x220_BW.jpg'),
+      ], null);
 
     this.createMenuItemsDict('', this.root.menuItems);
     this.createFriendlyNames('/browse', this.root.menuItems);

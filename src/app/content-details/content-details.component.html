@@ -1,12 +1,12 @@
 <ng-container *ngIf="content">
   <app-header [title]="content.name"
               [description]="content.getMainOrgUnit().name"
-              [imageUrl]="'assets/cover-1.jpg'"></app-header>
+              [imageUrl]="apiService.getAssetUrl('page-elements/483_Pacific_28Sep10_1680x220_BW.jpg')"></app-header>
 
   <div class="component" class.xs="component-xs" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="1em">
     <div fxFlex="40" fxFlex.gt-lg="635px" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="2" [ngStyle.lt-lg]="{'margin-top': '1em'}">
       <div fxHide.lt-lg>
-        <img fxFlex="100" width="100%;" src="assets/shiba.jpg">
+        <img fxFlex="100" width="100%;" [src]="apiService.getAssetUrl(content.image)">
       </div>
 
       <md-card>
@@ -38,7 +38,7 @@
         <h3>You might also be interested in</h3>
         <md-nav-list>
           <md-list-item *ngFor="let item of similarContentItems" [routerLink]="item.getRouterLink()">
-            <img md-list-avatar src="">
+            <img md-list-avatar [src]="apiService.getAssetUrl(item.image)">
             <h3 md-line> {{item.getTitle()}} </h3>
           </md-list-item>
         </md-nav-list>
@@ -50,8 +50,8 @@
         <app-markdown [data]="content.description"></app-markdown>
       </md-card>
 
-      <div fxHide.gt-md [ngStyle.lt-sm]="{'margin-right': '0'}" [ngStyle.lt-lg]="{'margin-right': '40%'}">
-        <img fxFlex="100" width="100%;" src="assets/shiba.jpg">
+      <div fxHide.gt-md>
+        <img fxFlex="100" width="100%;" [src]="apiService.getAssetUrl(content.image)">
       </div>
 
       <md-card>

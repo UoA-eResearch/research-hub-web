@@ -3,7 +3,7 @@
   <ng-container *ngFor="let result of resultsValue">
     <ng-container *ngIf="result.getRouterLink() !== undefined">
       <md-list-item [routerLink]="result.getRouterLink()">
-        <img md-list-avatar src="">
+        <img md-list-avatar [src]="apiService.getAssetUrl(result.image)">
         <h3 md-line> {{result.getTitle()}} </h3>
         <p md-line>
           <span> {{result.getSubtitle()}} </span>
@@ -13,7 +13,7 @@
 
     <ng-container *ngIf="result.getHref() !== undefined">
       <a md-list-item href="{{result.getHref()}}" target="_blank">
-        <img md-list-avatar src="">
+        <img *ngIf="result.image" md-list-avatar [src]="apiService.getAssetUrl(result.image)">
         <h3 md-line> {{result.getTitle()}} </h3>
         <p md-line>
           <span> {{result.getSubtitle()}} </span>
