@@ -46,7 +46,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private peoplePage: Page<Person>;
   private knowledgeArticlePage: Page<Content>;
   private policiesPage: Page<Policy>;
-  private maxNumberOfItems = 10;
+  private maxNumberOfItems = 50;
   private searchResultsSummary: Array<SearchResultsSummary>;
 
   constructor(private breadcrumbService: BreadcrumbService, protected searchBarService: SearchBarService,
