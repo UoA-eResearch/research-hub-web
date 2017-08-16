@@ -92,11 +92,17 @@ export class ApiService {
   private static CONTENT_URL = 'content';
   private static SIMILAR_CONTENT_URL = 'similarContent';
   private static ORG_UNIT_URL = 'orgUnit';
+  private static ASSET_URL = 'assets/';
   private host = environment.apiUrl;
 
 
   constructor(private http: Http) {
 
+  }
+
+  getAssetUrl(fileName: string) {
+    const uriComponent = this.host + ApiService.ASSET_URL + fileName;
+    return encodeURI(uriComponent.trim());
   }
 
   getCategory(categoryName) {
