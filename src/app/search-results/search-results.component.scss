@@ -3,9 +3,11 @@
 
 .search-results {
   margin: $gt-xs-offset;
+  //margin-to
 }
 
 .search-results-xs {
   @extend .search-results;
-  margin: $xs-offset;
+  margin: 0;
+  margin-top: 1em;
 }
