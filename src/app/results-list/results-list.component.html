@@ -11,8 +11,8 @@
       </md-list-item>
     </ng-container>
 
-    <ng-container *ngIf="result.getRouterLink() === undefined">
-      <a md-list-item *ngFor="let result of resultsValue" href="{{result.getHref()}}" target="_blank">
+    <ng-container *ngIf="result.getHref() !== undefined">
+      <a md-list-item href="{{result.getHref()}}" target="_blank">
         <img md-list-avatar src="">
         <h3 md-line> {{result.getTitle()}} </h3>
         <p md-line>
