@@ -41,6 +41,11 @@
                       [results]="peoplePage.content"></app-results-list>
   </div>
 
+  <div #guidesResults>
+    <app-results-list *ngIf="guidesPage && guidesPage.totalElements" [title]="menuService.nameGuides"
+                      [results]="guidesPage.content"></app-results-list>
+  </div>
+
   <div #knowledgeArticleResults>
     <app-results-list *ngIf="knowledgeArticlePage && knowledgeArticlePage.totalElements" [title]="menuService.nameKnowledgeArticle"
                       [results]="knowledgeArticlePage.content"></app-results-list>

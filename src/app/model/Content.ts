@@ -2,6 +2,7 @@ import {GetResultsListItem} from "./ResultsListItemInterface";
 import {Person} from "./Person";
 import {OrgUnit} from "./OrgUnit";
 import {Policy} from "./Policy";
+import {GuideCategory} from "./GuideCategory";
 
 
 export class Content implements GetResultsListItem {
@@ -16,6 +17,7 @@ export class Content implements GetResultsListItem {
   orgUnits: Array<OrgUnit>;
   people: Array<Person>;
   policies: Array<Policy>;
+  guideCategories: Array<GuideCategory>;
 
   static fromObjects(objects: [Object]): Array<Content> {
     const contentItems = new Array<Content>();
@@ -53,6 +55,9 @@ export class Content implements GetResultsListItem {
     content.orgUnits = OrgUnit.fromObjects(object['orgUnits']);
     content.people = Person.fromObjects(object['people']);
     content.policies = Policy.fromObjects(object['policies']);
+    content.guideCategories = GuideCategory.fromObjects(object['guideCategories']);
+
+    console.log('content', content);
 
     return content;
   }
@@ -78,7 +83,11 @@ export class Content implements GetResultsListItem {
   }
 
   getRouterLink(): [any] {
-    return ['/contentDetails', this.id];
+    if (this.guideCategories.length > 0) {
+      return ['/guideDetails', this.id];
+    } else {
+      return ['/contentDetails', this.id];
+    }
   }
 
   getHref(): string {

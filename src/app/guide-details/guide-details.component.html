@@ -1,0 +1,27 @@
+<ng-container *ngIf="content">
+  <app-header [title]="content.name"
+              [imageUrl]="apiService.getAssetUrl('page-elements/483_Pacific_28Sep10_1680x220_BW.jpg')"></app-header>
+
+  <div fxLayout="column" fxLayoutGap="2em" style="margin: 2em;max-width: 1000px;">
+    <md-card class="description">
+      <app-markdown [data]="content.description"></app-markdown>
+    </md-card>
+
+    <div>
+      <md-grid-list [cols]="numCols" gutterSize="1em">
+        <md-grid-tile class="browse-tile" style="background-color: #0294a5;" *ngFor="let item of content.guideCategories; let i = index;" [colspan]="1" [rowspan]="1" [routerLink]="['/guideCategory', item.id]">
+          <a fxFlex="grow">
+            <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
+              <span>{{item.name}}</span>
+              <md-icon>{{item.icon}}</md-icon>
+            </div>
+          </a>
+        </md-grid-tile>
+      </md-grid-list>
+    </div>
+
+    <md-card>
+      <app-markdown [data]="content.additionalInfo"></app-markdown>
+    </md-card>
+  </div>
+</ng-container>

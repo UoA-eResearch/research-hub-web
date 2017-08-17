@@ -46,6 +46,7 @@ export class ContentDetailsComponent implements OnInit {
 
       this.apiService.getContentItem(contentId).subscribe(
         content => {
+          console.log('content', content);
           this.content = content;
           this.progressBarService.setHidden();
         }

@@ -11,6 +11,8 @@ import {ContentDetailsComponent} from "./content-details/content-details.compone
 import {PersonDetailsComponent} from "./person-details/person-details.component";
 import {OrgUnitDetailsComponent} from "./org-unit-details/org-unit-details.component";
 import {BrowseResultsComponent} from "./browse-results/browse-results.component";
+import {GuideDetailsComponent} from "./guide-details/guide-details.component";
+import {GuideCategoryComponent} from "./guide-category/guide-category.component";
 
 
 const appRoutes: Routes = [
@@ -21,6 +23,8 @@ const appRoutes: Routes = [
   {path: 'contentDetails/:id', component: ContentDetailsComponent},
   {path: 'personDetails/:id', component: PersonDetailsComponent},
   {path: 'orgUnitDetails/:id', component: OrgUnitDetailsComponent},
+  {path: 'guideDetails/:id', component: GuideDetailsComponent},
+  {path: 'guideCategory/:id', component: GuideCategoryComponent},
   {path: 'feedback', component: FeedbackComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},

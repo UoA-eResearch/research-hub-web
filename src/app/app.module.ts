@@ -48,6 +48,8 @@ import { FeaturedComponent } from './featured/featured.component';
 import { ResearchActivityComponent } from './research-activity/research-activity.component';
 import { BrowseResultsComponent } from './browse-results/browse-results.component';
 import { HeaderComponent } from './header/header.component';
+import { GuideDetailsComponent } from './guide-details/guide-details.component';
+import { GuideCategoryComponent } from './guide-category/guide-category.component';
 
 
 @NgModule({
@@ -69,7 +71,9 @@ import { HeaderComponent } from './header/header.component';
     FeaturedComponent,
     ResearchActivityComponent,
     BrowseResultsComponent,
-    HeaderComponent
+    HeaderComponent,
+    GuideDetailsComponent,
+    GuideCategoryComponent
   ],
   imports: [
     FlexLayoutModule,

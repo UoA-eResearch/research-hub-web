@@ -28,6 +28,7 @@ class SearchResultsSummary {
   styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
+  @ViewChild('guidesResults') guidesResults: ElementRef;
   @ViewChild('supportResults') supportResults: ElementRef;
   @ViewChild('instrumentsResults') instrumentsResults: ElementRef;
   @ViewChild('trainingResults') trainingResults: ElementRef;
@@ -38,6 +39,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   @ViewChild('policiesResults') policiesResults: ElementRef;
 
   private searchChangeSub: Subscription;
+  private guidesPage: Page<Content>;
   private supportPage: Page<Content>;
   private instrumentsEquipmentPage: Page<Content>;
   private trainingPage: Page<Content>;
@@ -94,6 +96,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   getContent(searchBarParams: SearchBarParams, menuItem: MenuItem) {
+    if (menuItem.type === MenuItemType.All || menuItem.contentTypeId === this.menuService.contentTypeIdGuide) {
+      this.getContentItems(searchBarParams.searchText, this.menuService.contentTypeIdGuide, page => {
+        this.guidesPage = page;
+        this.updateSearchResultsSummary();
+      });
+    }
+
     if (menuItem.type === MenuItemType.All || menuItem.contentTypeId === this.menuService.contentTypeIdSupport) {
       this.getContentItems(searchBarParams.searchText, this.menuService.contentTypeIdSupport, page => {
         this.supportPage = page;
@@ -141,6 +150,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   updateSearchResultsSummary() {
     this.searchResultsSummary = [
+      new SearchResultsSummary(this.menuService.nameGuides, this.guidesPage, this.guidesResults),
       new SearchResultsSummary(this.menuService.nameSupport, this.supportPage, this.supportResults),
       new SearchResultsSummary(this.menuService.nameInstrumentsEquipment, this.instrumentsEquipmentPage, this.instrumentsResults),
       new SearchResultsSummary(this.menuService.nameTraining, this.trainingPage, this.trainingResults),

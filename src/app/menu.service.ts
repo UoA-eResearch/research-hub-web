@@ -41,6 +41,7 @@ export class MenuService {
   public contentTypeIdSoftware = 4;
   public contentTypeIdFacilitiesSpaces = 5;
   public contentTypeIdKnowledgeArticle = 6;
+  public contentTypeIdGuide = 7;
   public nameAll = 'All Categories';
   public nameSupport = 'Services & Support';
   public nameInstrumentsEquipment = 'Instruments & Equipment';
@@ -75,7 +76,7 @@ export class MenuService {
         new MenuItem('training', this.nameTraining, 'directions_bike', MenuItemType.Content, this.contentTypeIdTraining, null, 'page-elements/Violin_1680x220_BW.jpg'),
         new MenuItem('software', this.nameSoftware, 'shop', MenuItemType.Content, this.contentTypeIdSoftware, null, 'page-elements/20130930_UoA_Details_031_1680x220_BW.jpg'),
         new MenuItem('facilitiesSpaces', this.nameFacilitiesSpaces, 'home', MenuItemType.Content, this.contentTypeIdFacilitiesSpaces, null, 'page-elements/Business_1680x220_BW.jpg'),
-        new MenuItem('guides', this.nameGuides, 'language', MenuItemType.Guide, null, null, 'page-elements/1483_UoA_13Oct09_1680x220_BW.jpg'),
+        new MenuItem('guides', this.nameGuides, 'language', MenuItemType.Content, this.contentTypeIdGuide, null, 'page-elements/1483_UoA_13Oct09_1680x220_BW.jpg'),
         new MenuItem('people', this.namePeople, 'face', MenuItemType.Person, null, null, 'page-elements/DSC_0192_1680x220_BW.jpg'),
         new MenuItem('knowledgeArticle', this.nameKnowledgeArticle, 'book', MenuItemType.Content, this.contentTypeIdKnowledgeArticle, null, 'page-elements/58_Arts_20March2010_1680x220_BW.jpg'),
         new MenuItem('policies', this.namePolicies, 'account_balance', MenuItemType.Policy, null, null, 'page-elements/UniAkl_9369_1680x220_BW.jpg'),

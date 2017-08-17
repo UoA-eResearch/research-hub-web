@@ -1,0 +1,27 @@
+@import "../../variables";
+//@import "../../themes";
+
+
+.browse-tile {
+  cursor: pointer;
+}
+
+.browse-tile a div{
+  padding: 1em 1em 1em 1em;
+}
+
+.browse-tile a div md-icon {
+  text-decoration: none;
+  color:white;
+}
+
+.browse-tile a div span {
+  font-family: $heading-font-family;
+  font-size: 100%;
+  color:white;
+  text-align: center;
+}
+
+md-grid-tile a {
+  text-decoration: none;
+}

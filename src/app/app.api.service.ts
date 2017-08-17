@@ -7,6 +7,7 @@ import {Content} from "./model/Content";
 import {environment} from 'app/../environments/environment';
 import {Policy} from "./model/Policy";
 import {OrgUnit} from "./model/OrgUnit";
+import {GuideCategory} from "./model/GuideCategory";
 
 
 export class SearchParams {
@@ -89,6 +90,7 @@ export class ApiService {
   private static POLICY_URL = 'policy';
   private static PERSON_URL = 'person';
   private static CATEGORY_URL = 'category';
+  private static GUIDE_CATEGORY_URL = 'guideCategory';
   private static CONTENT_URL = 'content';
   private static SIMILAR_CONTENT_URL = 'similarContent';
   private static ORG_UNIT_URL = 'orgUnit';
@@ -141,6 +143,16 @@ export class ApiService {
       .get(this.host + ApiService.CONTENT_URL + '/' + id, {headers: headers})
       .map((response) => Content.fromObject(response.json()));
   }
+
+  getGuideCategory(id) {
+    const headers = new Headers();
+    headers.set('Accept', 'application/json');
+
+    return this.http
+      .get(this.host + ApiService.GUIDE_CATEGORY_URL + '/' + id, {headers: headers})
+      .map((response) => GuideCategory.fromObject(response.json()));
+  }
+
 
   getPeople(searchParams: SearchParams) {
     const search = searchParams.getUrlSearchParams();
