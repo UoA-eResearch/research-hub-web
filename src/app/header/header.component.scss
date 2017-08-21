@@ -35,3 +35,9 @@
   @extend .div-background-image;
   height: 200px;
 }
+
+::ng-deep #header-description a  {
+  color: $color-bold-link-text;
+  text-decoration: none;
+  font-weight: bold;
+}
