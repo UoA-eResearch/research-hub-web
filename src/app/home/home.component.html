@@ -7,7 +7,32 @@
     <app-browse [embedded]="true" [maxCols]="4"></app-browse>
   </div>
   <div fxFlex="grow" fxLayout="column">
-    <app-featured fxFlexOrder.xs="2"></app-featured>
-    <app-research-activity fxFlexOrder.xs="1"></app-research-activity>
+    <!--<app-featured fxFlexOrder.xs="2"></app-featured>-->
+    <app-featured></app-featured>
+    <!--<app-research-activity fxFlexOrder.xs="1"></app-research-activity>-->
+
+
+    <div>
+      <!-- TEMP FEEDBACK INFO-->
+      <h2>Feedback</h2>
+      <p>We are developing the Research Hub further and would be grateful for your feedback.
+        This will give us pointers for user-led refinement and further development of the interface content displayed
+        in the Research Hub.
+      </p>
+      <p>
+        You can also register your interest in helping our User Experience Specialist running through a usability
+        study.
+      </p>
+      <p>
+        Thank you,<br/>
+        The Development Team
+      </p>
+      <div fxLayout="row" fxLayoutGap="1em">
+        <a md-raised-button color="primary" href="https://docs.google.com/forms/d/1snpoqG3sbBPAps4QKK4TpbYxR3CSDOKVpKdc8lAKMjY">Feedback</a>
+        <a md-raised-button color="accent" href="https://docs.google.com/forms/d/1FqBQXq5cp9Xk_bXqvqOmib9vl47TnXwco1vC9wXBav0">Join User Study</a>
+      </div>
+    </div>
+
   </div>
+
 </div>
