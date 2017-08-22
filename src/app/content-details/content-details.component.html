@@ -1,9 +1,5 @@
 <ng-container *ngIf="content">
-  <app-header [title]="content.name"
-
-              [imageUrl]="apiService.getAssetUrl('page-elements/483_Pacific_28Sep10_1680x220_BW.jpg')"></app-header>
-
-  <!--[description]="content.getMainOrgUnit().name"-->
+  <app-header [title]="content.name" [description]="content.getMainOrgUnit().name"></app-header>
 
   <div class="component" class.xs="component-xs" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="1em">
     <div fxFlex="40" fxFlex.gt-lg="635px" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="2" [ngStyle.lt-lg]="{'margin-top': '1em'}">
