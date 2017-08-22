@@ -198,7 +198,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.onSearchChange(this.searchBarService.getSearchParams()); // Get search parameters on initial page landing
-    this.searchChangeSub = this.searchBarService.searchChange.distinctUntilChanged().subscribe(searchParams => {
+    this.searchChangeSub = this.searchBarService.searchChange.debounceTime(300).distinctUntilChanged().subscribe(searchParams => {
       this.onSearchChange(searchParams);
     });
   }
