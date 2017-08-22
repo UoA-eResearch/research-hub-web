@@ -1,18 +1,20 @@
-<h2>Featured: {{content.name}}</h2>
-<div *ngIf="content" fxLayout="row" fxLayoutGap="5%" fxLayout.lt-lg="column">
-  <div fxFlex="auto">
-    <p>{{content.summary}}</p>
+<ng-container *ngIf="content">
+  <h2>Featured: {{content.name}}</h2>
+  <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-lg="column">
+    <div fxFlex="auto">
+      <p>{{content.summary}}</p>
+    </div>
+    <div fxFlex="250px" fxFlex.lt-lg="100">
+      <md-card>
+        <img md-card-image [src]="apiService.getAssetUrl(content.image)">
+        <md-card-content>
+          {{content.name}}
+        </md-card-content>
+        <md-card-actions>
+          <button md-button [routerLink]="content.getRouterLink()">Details</button>
+          <a md-button [href]="content.callToAction" target="_blank">Launch</a>
+        </md-card-actions>
+      </md-card>
+    </div>
   </div>
-  <div fxFlex="250px" fxFlex.lt-lg="100">
-    <md-card>
-      <img md-card-image [src]="apiService.getAssetUrl(content.image)">
-      <md-card-content>
-        {{content.name}}
-      </md-card-content>
-      <md-card-actions>
-        <button md-button [routerLink]="content.getRouterLink()">Details</button>
-        <a md-button [href]="content.callToAction" target="_blank">Launch</a>
-      </md-card-actions>
-    </md-card>
-  </div>
-</div>
+</ng-container>
