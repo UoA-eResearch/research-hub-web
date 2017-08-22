@@ -190,10 +190,9 @@ $color-background: #fafafa;
 $color-icon: #757575;
 
 $color-content-header: map-get($hub-navy, 500);
-$color-footer: map-get($hub-navy, 500);
 
 // base colors for tiles etc
-$color-tile-navy: map-get($hub-navy, 500);
+$color-tile-navy: map-get($hub-app-primary, 500);
 
 $color-pink: map-get($hub-pink, 500);
 
