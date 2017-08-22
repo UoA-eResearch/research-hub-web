@@ -9,8 +9,8 @@ import {ApiService} from "../app.api.service";
 })
 export class AboutComponent implements OnInit {
 
-  description = "The Centre for eResearch comprises a team of highly qualified research and technical staff dedicated " +
-    "to the delivery of advanced computational solutions to help power the University's research mission.";
+  description = "<p>The Centre for eResearch comprises a team of highly qualified research and technical staff dedicated " +
+    "to the delivery of advanced computational solutions to help power the University's research mission.</p>";
   theDirectorUrl = '';
 
   constructor(private apiService: ApiService) {
