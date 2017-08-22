@@ -1,7 +1,8 @@
 <div *ngIf="!imageUrl" class="header" class.xs="header-xs" fxLayout="row" [ngClass]="{'colored-background': !imageUrl}">
   <div class="info" class.xs="info-xs" fxFlex="475px" fxFlex.xs="100">
     <h1 *ngIf="title">{{title}}</h1>
-    <p *ngIf="description">{{description}}</p>
+    <!--<p *ngIf="description">{{description}}</p>-->
+    <div id='header-description' [innerHTML]="description"></div>
   </div>
 </div>
 

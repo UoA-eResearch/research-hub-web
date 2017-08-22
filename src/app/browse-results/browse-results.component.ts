@@ -30,7 +30,8 @@ export class BrowseResultsComponent implements OnInit {
       if (menuItem.isLeaf()) {
         this.searchBarService.setCategory(menuItem.id); // When navigating within menu item, set search category to that item
         this.title = menuItem.name;
-        this.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius maximus, sem quam accumsan magna, eu congue magna nisl quis orci.";
+        // this.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius maximus, sem quam accumsan magna, eu congue magna nisl quis orci.";
+        this.description = menuItem.description;
         this.imageUrl = this.apiService.getAssetUrl(menuItem.image);
 
         switch (menuItem.type) {
