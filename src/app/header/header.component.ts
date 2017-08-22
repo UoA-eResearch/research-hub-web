@@ -16,6 +16,9 @@ export class HeaderComponent implements OnInit {
   @Input()
   imageUrl: string;
 
+  @Input()
+  goHref: string;
+
   constructor() { }
 
   ngOnInit() {

@@ -45,3 +45,7 @@
   text-decoration: none;
   font-weight: bold;
 }
+
+::ng-deep .header-description p  {
+  margin-bottom: 0;
+}
