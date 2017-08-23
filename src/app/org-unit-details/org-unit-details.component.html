@@ -15,7 +15,7 @@
       </md-card>
 
       <md-card fxFlex="50" fxFlex.lt-md="100" *ngIf="orgUnit.contentItems.length">
-        <h3>Content</h3>
+        <h3>Resources</h3>
         <md-nav-list>
           <md-list-item *ngFor="let item of orgUnit.contentItems" [routerLink]="item.getRouterLink()">
             <img md-list-avatar [src]="apiService.getAssetUrl(item.image)">
