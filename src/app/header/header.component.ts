@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-header',
@@ -19,9 +20,12 @@ export class HeaderComponent implements OnInit {
   @Input()
   goHref: string;
 
-  constructor() { }
+  constructor(private titleService: Title) {
+
+  }
 
   ngOnInit() {
+    this.titleService.setTitle('Research Hub: ' + this.title);
   }
 
 }
