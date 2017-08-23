@@ -1,5 +1,4 @@
-@import "../../variables";
-//@import "../../themes";
+@import "../../styles";
 
 
 .browse-tile {
@@ -11,13 +10,13 @@
 }
 
 .browse-tile a div md-icon {
-  text-decoration: none;
-  color:white;
+  //text-decoration: none;
+  //color:white;
 }
 
 .browse-tile a div span {
-  font-family: $heading-font-family;
-  font-size: 100%;
+  //font-family: $heading-font-family;
+  //font-size: 100%;
   color:white;
   text-align: center;
 }

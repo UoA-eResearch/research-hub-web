@@ -1,5 +1,5 @@
-@import "../variables";
 @import '../styles';
+
 
 /*
  * When using Angular 2 [hidden] parameter, hides element and keeps space
@@ -42,18 +42,16 @@
   color: $color-icon;
 }
 
-.sidenav-container md-list-item a {
-  color: $body-font-color;
-  font-family: $body-font-family;
+.sidenav-container md-list-item .mat-line {
+  font-size: mat-font-size($app-sidenav-list-typography, body-1) !important;
 }
-
 
 /*
  * SideNav
  */
 
 md-toolbar span {
-  font-family: $heading-font-family;
+  //font-family: $heading-font-family;
 
 }
 
@@ -71,6 +69,8 @@ md-toolbar span {
   padding-left: 1em;
   padding-top: 1em;
 }
+
+
 
 .sidenav-content-wrapper {
   display: flex;
@@ -96,8 +96,8 @@ md-toolbar span {
 }
 
 .primary-header h1 {
-  font-family: $heading-font-family;
-  font-weight: 300;
+  //font-family: $heading-font-family;
+  //font-weight: 300;
   margin: 0;
   padding: 0;
   font-size: 20px;
@@ -110,7 +110,7 @@ md-toolbar span {
  */
 
 footer {
-  font-family: $heading-font-family;
+  //font-family: $heading-font-family;
   background-color: $color-primary;
   height: 100px;
   flex: none;

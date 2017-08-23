@@ -1,5 +1,4 @@
-@import "../../variables";
-@import "../../themes";
+@import "../../styles";
 
 
 /*
@@ -21,9 +20,11 @@ Default tile size
 }
 
 .browse-tile a div span {
-  font-family: $heading-font-family;
-  font-size: 100%;
-  color:white;
+  //font-family: $browse-tile-font-family;
+  //font-size: $browse-tile-font-size;
+  font-size: mat-font-size($app-browse-grid-typography, body-2);
+  font-weight: bold;
+  color:$browse-tile-font-color;
   text-align: center;
 }
 

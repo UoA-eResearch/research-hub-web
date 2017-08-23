@@ -1,0 +1,57 @@
+@import '~@angular/material/theming';
+
+// https://material.angular.io/guide/typography
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$app-base-typography: mat-typography-config(
+  $font-family: '"Noto Sans", sans-serif',
+  $display-4:     mat-typography-level(112px, 112px, 300),
+  $display-3:     mat-typography-level(56px, 56px, 400),
+  $display-2:     mat-typography-level(45px, 48px, 400),
+  $display-1:     mat-typography-level(34px, 40px, 400),
+  $headline:      mat-typography-level(24px, 32px, 400), // <h1>
+  $title:         mat-typography-level(20px, 32px, 500), // <h2>
+  $subheading-2:  mat-typography-level(16px, 28px, 400), // <h3>
+  $subheading-1:  mat-typography-level(15px, 24px, 400), // <h4>
+  $body-2:        mat-typography-level(14px, 24px, 500), // bolder body text
+  $body-1:        mat-typography-level(14px, 20px, 400), // base body text <p> ?
+  $caption:       mat-typography-level(12px, 20px, 400), // smaller body and hint text
+  $button:        mat-typography-level(14px, 14px, 500),
+    // Line-height must be unit-less fraction of the font-size.
+  $input:         mat-typography-level(16px, 1.125, 400)
+);
+
+$app-browse-grid-typography: mat-typography-config(
+  $body-2:        mat-typography-level(16px, 24px, 500)
+);
+
+$app-sidenav-list-typography: mat-typography-config(
+  $body-1:        mat-typography-level(16px, 20px, 400)
+);
+
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($app-base-typography);
+
+
+//$heading-font-family: 'Noto Sans', sans-serif;
+//$heading-1-font-size: 24pt;
+$heading-1-font-color: map-get($hub-pink, 500);
+
+//$heading-2-font-size: 24pt;
+$heading-2-font-color: map-get($hub-pink, 500);
+
+//$heading-3-font-size: 20pt;
+$heading-3-font-color: map-get($hub-pink, 500);
+
+//$body-font-family: 'Lato', sans-serif;
+//$body-font-family: 'Noto Sans', sans-serif;
+//$body-font-size:  12pt;
+$body-font-color:  black;
+
+//$browse-tile-font-family: 'Noto Sans', sans-serif;
+//$browse-tile-font-size: 14pt;
+$browse-tile-font-color: white;
+
+
+

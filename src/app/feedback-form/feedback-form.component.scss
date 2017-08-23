@@ -1,5 +1,4 @@
-@import "../../variables";
-@import "../../themes";
+@import "../../styles";
 
 .avatar-image {
   background-size: cover;
@@ -16,10 +15,10 @@
 }
 
 .feedback-card {
-  font-family: $body-font-family;
+  //font-family: $body-font-family;
 }
 
 .feedback-card-xs {
-  @extend .feedback-card;
+  //@extend .feedback-card;
 
 }
