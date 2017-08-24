@@ -40,19 +40,29 @@
 
 .sidenav-container md-list-item md-icon {
   color: $color-icon;
+  font-size: mat-font-size($app-sidenav-list-typography, body-2) !important;
+  font-weight: mat-font-weight($app-sidenav-list-typography, body-2) !important;
 }
 
 .sidenav-container md-list-item .mat-line {
   font-size: mat-font-size($app-sidenav-list-typography, body-1) !important;
+  font-weight: mat-font-weight($app-sidenav-list-typography, body-1) !important;
 }
 
 /*
  * SideNav
  */
 
-md-toolbar span {
-  //font-family: $heading-font-family;
+.sidenav-container md-sidenav md-toolbar button md-icon {
+  font-size: mat-font-size($app-sidenav-toolbar-typography, button) !important;
+  font-weight: mat-font-weight($app-sidenav-toolbar-typography, button) !important;
+  color:white;
+}
 
+.sidenav-container md-sidenav md-toolbar span {
+  font-size: mat-font-size($app-sidenav-toolbar-typography, body-1) !important;
+  font-weight: mat-font-weight($app-sidenav-toolbar-typography, body-1) !important;
+  color:white;
 }
 
 .sidenav-container {
@@ -96,14 +106,19 @@ md-toolbar span {
 }
 
 .primary-header h1 {
-  //font-family: $heading-font-family;
-  //font-weight: 300;
   margin: 0;
   padding: 0;
-  font-size: 20px;
   color: white;
   display: inline-block;
+  @include mat-typography-level-to-styles($app-primary-header-typography, headline);
 }
+
+.primary-header .mat-select-value-text{
+  font-size: mat-font-size($app-search-bar-select-typography, title) !important;
+  font-weight: mat-font-weight($app-search-bar-select-typography, title) !important;
+}
+
+
 
 /*
  * Footer

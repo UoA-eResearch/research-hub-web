@@ -16,16 +16,17 @@ Default tile size
 
 .browse-tile a div md-icon {
   text-decoration: none;
-  color:white;
+  color:$browse-tile-font-color;
+  font-size: mat-font-size($app-browse-grid-typography, body-2);
+  font-weight: mat-font-weight($app-browse-grid-typography, body-2);
+  width:100%;
+  text-align: center;
 }
 
 .browse-tile a div span {
-  //font-family: $browse-tile-font-family;
-  //font-size: $browse-tile-font-size;
-  font-size: mat-font-size($app-browse-grid-typography, body-2);
-  font-weight: bold;
   color:$browse-tile-font-color;
   text-align: center;
+  @include mat-typography-level-to-styles($app-browse-grid-typography, body-1);
 }
 
 md-grid-tile a {

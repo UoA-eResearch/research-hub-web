@@ -22,17 +22,44 @@ $app-base-typography: mat-typography-config(
   $input:         mat-typography-level(16px, 1.125, 400)
 );
 
+
 $app-browse-grid-typography: mat-typography-config(
-  $body-2:        mat-typography-level(16px, 24px, 500)
+  $body-1:        mat-typography-level(16px, 20px, 400), // text
+  $body-2:        mat-typography-level(24px, 24px, 500) // icon
 );
 
 $app-sidenav-list-typography: mat-typography-config(
-  $body-1:        mat-typography-level(16px, 20px, 400)
+  $body-1:        mat-typography-level(16px, 20px, 400), // text
+  $body-2:        mat-typography-level(24px, 24px, 500) // icon
 );
+
+$app-sidenav-toolbar-typography: mat-typography-config(
+  $body-1:      mat-typography-level(20px, 20px, 400), // text
+  $button:        mat-typography-level(24px, 20px, 400) // icon
+);
+
+$app-search-bar-select-typography: mat-typography-config(
+  $title:         mat-typography-level(12px, 20px, 500), // current selected text
+  $body-1:      mat-typography-level(12px, 20px, 400) // option text
+);
+
+$app-search-bar-typography: mat-typography-config(
+  $body-1:        mat-typography-level(24px, 24px, 500), // icon
+  $input:         mat-typography-level(12px, 1.125, 400) // input
+);
+
+$app-primary-header-typography: mat-typography-config(
+  $headline:      mat-typography-level(16px, 32px, 400)
+);
+
+$app-featured-md-card-typography: mat-typography-config(
+  $body-1:      mat-typography-level(12px, 20px, 400), // text
+  $button:        mat-typography-level(12px, 20px, 400) // icon
+);
+
 
 // Override typography for all Angular Material, including mat-base-typography and all components.
 @include angular-material-typography($app-base-typography);
-
 
 //$heading-font-family: 'Noto Sans', sans-serif;
 //$heading-1-font-size: 24pt;
