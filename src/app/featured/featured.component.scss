@@ -23,4 +23,5 @@ md-card md-card-actions button{
 md-card md-card-actions a{
   font-size: mat-font-size($app-featured-md-card-typography, button);
   font-weight: mat-font-weight($app-featured-md-card-typography, button);
+  color:$body-font-color;
 }

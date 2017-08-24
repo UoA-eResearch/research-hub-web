@@ -32,7 +32,7 @@ h2 {
 h3 {
   //font-family: $heading-font-family;
   //font-size: $heading-3-font-size;
-  color: $heading-2-font-color;
+  color: $heading-3-font-color;
 }
 
 
@@ -42,6 +42,16 @@ p {
   //color: $body-font-color;
   //color: white;
   margin-top: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $body-link-color;
+}
+
+md-chip.mat-chip {
+  font-size: mat-font-size($app-chips-typography, button) !important;
+  font-weight: mat-font-weight($app-chips-typography, button) !important;
 }
 
 .description {
