@@ -27,7 +27,6 @@ export class MarkdownComponent {
   @Input('data')
 
   set data(val) {
-    console.log('data', val);
 
     let text = val;
     if (val === null || val === undefined) {

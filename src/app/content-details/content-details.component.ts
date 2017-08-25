@@ -5,7 +5,8 @@ import {ApiService} from "../app.api.service";
 import {ProgressBarService} from "../app.progress-bar.service";
 import {Content} from "../model/Content";
 import marked from 'marked';
-
+import { Location } from '@angular/common';
+import {Person} from "../model/Person";
 
 
 @Component({
@@ -17,9 +18,10 @@ export class ContentDetailsComponent implements OnInit {
 
   content: Content;
   similarContentItems: Array<Content>;
+  userSupport: Array<Person>;
 
   constructor(private breadcrumbService: BreadcrumbService, private route: ActivatedRoute, private apiService: ApiService,
-              private progressBarService: ProgressBarService) {
+              private progressBarService: ProgressBarService,  private location: Location) {
 
     // Configure marked
     marked.setOptions({
@@ -46,7 +48,7 @@ export class ContentDetailsComponent implements OnInit {
 
       this.apiService.getContentItem(contentId).subscribe(
         content => {
-          console.log('content', content);
+          this.breadcrumbService.addFriendlyNameForRoute(this.location.path(), content.name); // Add friendly name for particular content item
           this.content = content;
           this.progressBarService.setHidden();
         }
@@ -58,7 +60,10 @@ export class ContentDetailsComponent implements OnInit {
           this.progressBarService.setHidden();
         }
       );
+
+      this.apiService.getContentItemUserSupport(contentId).subscribe(userSupport => {
+        this.userSupport = userSupport;
+      });
     });
   }
-
 }

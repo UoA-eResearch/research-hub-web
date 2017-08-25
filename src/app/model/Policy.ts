@@ -32,14 +32,16 @@ export class Policy implements GetResultsListItem {
   static fromObject(object: Object): Policy {
     const item = new Policy();
 
-    console.log('content', object);
-
     item.id = object['id'];
     item.name = object['name'];
     item.description = object['description'];
     item.url = object['url'];
 
     return item;
+  }
+
+  getId(): number {
+    return this.id;
   }
 
   getTitle(): string {
@@ -54,7 +56,7 @@ export class Policy implements GetResultsListItem {
     return '';
   }
 
-  getRouterLink(): [any] {
+  getDefaultRouterLink(): [any] {
     return undefined;
   }
 

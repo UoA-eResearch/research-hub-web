@@ -2,15 +2,8 @@
   <app-header [title]="person.getTitle()"
               [description]="person.jobTitle"></app-header>
 
-  <div class="content" class.xs="content-xs" fxLayout="row" fxLayout.xs="column">
-    <div class="content-overview" class.xs="content-overview-xs" fxFlex="40" fxFlex.lg-xs="100" fxLayout="column">
-      <div fxHide.lt-sm>
-        <img fxFlex="100" [src]="apiService.getAssetUrl(person.image)">
-      </div>
-    </div>
-
-    <div class="content-details" class.xs="content-details-xs" fxFlex="auto" fxFlex.lg-xs="100" fxLayout="column" fxLayoutGap="1em">
-      <div fxHide.gt-xs>
+  <div class="content" class.xs="content-xs" fxLayout="column" fxLayoutGap="1em">
+      <div>
         <img fxFlex="100" [src]="apiService.getAssetUrl(person.image)">
       </div>
 
@@ -24,22 +17,21 @@
       <md-card *ngIf="person.orgUnits.length">
         <h3>Organisational Units</h3>
         <md-nav-list>
-          <md-list-item *ngFor="let item of person.orgUnits" [routerLink]="item.getRouterLink()">
+          <md-list-item *ngFor="let item of person.orgUnits" [routerLink]="item.getDefaultRouterLink()">
             <h3 md-line> {{item.getTitle()}} </h3>
           </md-list-item>
         </md-nav-list>
       </md-card>
 
-      <md-card *ngIf="person.contentRoles.length">
-        <h3>Roles</h3>
+      <md-card *ngIf="supportedContent && supportedContent.length">
+        <h3>Supported Resources</h3>
         <md-nav-list>
-          <md-list-item *ngFor="let item of person.contentRoles" [routerLink]="item.getRouterLink()">
-            <img md-list-avatar [src]="apiService.getAssetUrl(item.content.image)">
+          <md-list-item *ngFor="let item of supportedContent" [routerLink]="item.getDefaultRouterLink()">
+            <img md-list-avatar [src]="apiService.getAssetUrl(item.image)">
             <h3 md-line> {{item.getTitle()}} </h3>
             <p md-line>{{item.getSubtitle()}}</p>
           </md-list-item>
         </md-nav-list>
       </md-card>
-    </div>
   </div>
 </div>

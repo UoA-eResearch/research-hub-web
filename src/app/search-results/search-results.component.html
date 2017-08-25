@@ -13,42 +13,42 @@
 
   <div #supportResults>
     <app-results-list *ngIf="supportPage && supportPage.totalElements" [title]="menuService.nameSupport"
-                      [results]="supportPage.content"></app-results-list>
+                      [results]="supportPage.content" [intermediatePath]="'support'"></app-results-list>
   </div>
 
   <div #instrumentsResults>
     <app-results-list *ngIf="instrumentsEquipmentPage && instrumentsEquipmentPage.totalElements" [title]="menuService.nameInstrumentsEquipment"
-                      [results]="instrumentsEquipmentPage.content"></app-results-list>
+                      [results]="instrumentsEquipmentPage.content" [intermediatePath]="'instrumentsEquipment'"></app-results-list>
   </div>
 
   <div #trainingResults>
     <app-results-list *ngIf="trainingPage && trainingPage.totalElements" [title]="menuService.nameTraining"
-                      [results]="trainingPage.content"></app-results-list>
+                      [results]="trainingPage.content" [intermediatePath]="'training'"></app-results-list>
   </div>
 
   <div #softwareResults>
     <app-results-list *ngIf="softwarePage && softwarePage.totalElements" [title]="menuService.nameSoftware"
-                      [results]="softwarePage.content"></app-results-list>
+                      [results]="softwarePage.content" [intermediatePath]="'software'"></app-results-list>
   </div>
 
   <div #facilitiesResults>
     <app-results-list *ngIf="facilitiesSpacesPage && facilitiesSpacesPage.totalElements" [title]="menuService.nameFacilitiesSpaces"
-                      [results]="facilitiesSpacesPage.content"></app-results-list>
+                      [results]="facilitiesSpacesPage.content" [intermediatePath]="'facilitiesSpaces'"></app-results-list>
   </div>
 
   <div #peopleResults>
     <app-results-list *ngIf="peoplePage && peoplePage.totalElements" [title]="menuService.namePeople"
-                      [results]="peoplePage.content"></app-results-list>
+                      [results]="peoplePage.content" [intermediatePath]="'people'"></app-results-list>
   </div>
 
   <div #guidesResults>
     <app-results-list *ngIf="guidesPage && guidesPage.totalElements" [title]="menuService.nameGuides"
-                      [results]="guidesPage.content"></app-results-list>
+                      [results]="guidesPage.content" [intermediatePath]="'guides'"></app-results-list>
   </div>
 
   <div #knowledgeArticleResults>
     <app-results-list *ngIf="knowledgeArticlePage && knowledgeArticlePage.totalElements" [title]="menuService.nameKnowledgeArticle"
-                      [results]="knowledgeArticlePage.content"></app-results-list>
+                      [results]="knowledgeArticlePage.content" [intermediatePath]="'knowledgeArticle'"></app-results-list>
   </div>
 
   <div #policiesResults>

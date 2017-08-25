@@ -57,10 +57,10 @@ export class Content implements GetResultsListItem {
     content.policies = Policy.fromObjects(object['policies']);
     content.guideCategories = GuideCategory.fromObjects(object['guideCategories']);
 
-    console.log('content', content);
-
     return content;
   }
+
+
 
   getMainOrgUnit(): OrgUnit {
     if (this.orgUnits.length > 0) {
@@ -68,6 +68,10 @@ export class Content implements GetResultsListItem {
     }
 
     return undefined;
+  }
+
+  getId(): number {
+    return this.id;
   }
 
   getTitle(): string {
@@ -82,11 +86,11 @@ export class Content implements GetResultsListItem {
     return '';
   }
 
-  getRouterLink(): [any] {
+  getDefaultRouterLink(): [any] {
     if (this.guideCategories.length > 0) {
-      return ['/guideDetails', this.id];
+      return ['/guides', this.id];
     } else {
-      return ['/contentDetails', this.id];
+      return ['/resources', this.id];
     }
   }
 

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
+import { Location } from '@angular/common';
 
 
 export enum MenuItemType {
@@ -67,7 +68,7 @@ export class MenuService {
     return '/' + notNulls.join('/');
   }
 
-  constructor(private breadcrumbService: BreadcrumbService) {
+  constructor(private breadcrumbService: BreadcrumbService, private location: Location) {
     this.root =
       new MenuItem('', '', '', MenuItemType.Root, null, [
         new MenuItem('all', this.nameAll, '', MenuItemType.All, null, null, null, ""),
@@ -84,6 +85,11 @@ export class MenuService {
 
     this.createMenuItemsDict('', this.root.menuItems);
     this.createFriendlyNames('/browse', this.root.menuItems);
+    this.createFriendlyNames('/search', this.root.menuItems);
+    this.breadcrumbService.addFriendlyNameForRoute('/orgUnits', 'Organisational Units');
+    this.breadcrumbService.addFriendlyNameForRoute('/people', 'People');
+    this.breadcrumbService.addFriendlyNameForRoute('/resources', 'Resources');
+    this.breadcrumbService.addFriendlyNameForRoute('/guides', 'Guides');
   }
 
   private createMenuItemsDict(parentId: string, menuItems: [MenuItem]) {
@@ -106,6 +112,12 @@ export class MenuService {
         this.createFriendlyNames(childRoute, menuItem.menuItems);
       }
     }
+  }
+
+  public getCurrentPath() {
+    const currentPath = this.location.path().split('/').slice(1);
+    currentPath[0] = '/' + currentPath[0];
+    return currentPath;
   }
 
   public getMenuItem(menuItemId: string) {

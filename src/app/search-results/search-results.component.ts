@@ -57,7 +57,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   onSearchChange(searchBarParams: SearchBarParams) {
-    console.log('SearchResultsComponent: searchChange', searchBarParams);
     this.progressBarService.setVisible();
     const categoryId = MenuService.getMenuItemId([searchBarParams.category]);
     const menuItem = this.menuService.getMenuItem(categoryId);
@@ -70,8 +69,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.peoplePage = undefined;
     this.knowledgeArticlePage = undefined;
     this.policiesPage = undefined;
-
-    console.log('supportResults', this.supportResults.nativeElement);
 
     switch (menuItem.type) {
       case MenuItemType.All:

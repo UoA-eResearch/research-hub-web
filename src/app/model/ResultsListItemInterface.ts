@@ -1,9 +1,10 @@
 
 export interface GetResultsListItem {
+  getId(): number;
   getTitle (): string;
   getSubtitle (): string;
   getAvatarUrl (): string;
-  getRouterLink (): [any];
+  getDefaultRouterLink(): [any];
   getHref(): string;
 }
 

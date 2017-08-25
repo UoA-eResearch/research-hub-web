@@ -64,7 +64,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Navigate to the search page if the user types text in
     this.searchTextChangeSub = this.searchBarService.searchTextChange.distinctUntilChanged().subscribe(searchText => {
-      console.log('searchTextChange', searchText, this.router.url);
       if (this.router.url !== '/search' && searchText != null && searchText.trim() !== '') {
         this.router.navigate(['/search']);
       }

@@ -10,10 +10,10 @@
         <img fxFlex="100" width="100%;" [src]="apiService.getAssetUrl(content.image)">
       </div>
 
-      <md-card>
+      <md-card *ngIf="userSupport && userSupport.length">
         <h3>For Support Contact</h3>
         <md-chip-list [selectable]="true">
-          <md-chip class="contact-chip" *ngFor="let item of content.people" [routerLink]="item.getRouterLink()">
+          <md-chip class="contact-chip" *ngFor="let item of userSupport" [routerLink]="item.getDefaultRouterLink()">
             {{item.getTitle()}}
           </md-chip>
         </md-chip-list>
@@ -22,7 +22,7 @@
       <md-card>
         <h3>Organisational Units</h3>
         <md-chip-list>
-          <md-chip class="org-unit-chip" *ngFor="let item of content.orgUnits" [routerLink]="item.getRouterLink()">
+          <md-chip class="org-unit-chip" *ngFor="let item of content.orgUnits" [routerLink]="item.getDefaultRouterLink()">
             {{item.getTitle()}}
           </md-chip>
         </md-chip-list>
@@ -38,7 +38,7 @@
       <md-card *ngIf="similarContentItems && similarContentItems.length">
         <h3>You might also be interested in</h3>
         <md-nav-list>
-          <md-list-item *ngFor="let item of similarContentItems" [routerLink]="item.getRouterLink()">
+          <md-list-item *ngFor="let item of similarContentItems" [routerLink]="item.getDefaultRouterLink()">
             <img md-list-avatar [src]="apiService.getAssetUrl(item.image)">
             <h3 md-line> {{item.getTitle()}} </h3>
           </md-list-item>

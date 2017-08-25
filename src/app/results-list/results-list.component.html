@@ -1,8 +1,8 @@
 <md-nav-list>
   <h3 md-subheader *ngIf="titleValue !== ''">{{titleValue}}</h3>
   <ng-container *ngFor="let result of resultsValue">
-    <ng-container *ngIf="result.getRouterLink() !== undefined">
-      <md-list-item [routerLink]="result.getRouterLink()">
+    <ng-container *ngIf="result.getHref() === undefined">
+      <md-list-item [routerLink]="getRoute(result)">
         <img md-list-avatar [src]="apiService.getAssetUrl(result.image)">
         <h3 md-line> {{result.getTitle()}} </h3>
         <p md-line>

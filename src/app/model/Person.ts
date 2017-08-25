@@ -2,7 +2,7 @@ import {
   GetResultsListItem
 } from "./ResultsListItemInterface";
 import {OrgUnit} from "./OrgUnit";
-import {ContentRole} from "./ContentRole";
+import {MenuService} from "../menu.service";
 
 
 export class Person implements GetResultsListItem {
@@ -16,7 +16,7 @@ export class Person implements GetResultsListItem {
   directoryUrl: string;
   image: string;
   orgUnits: Array<OrgUnit>;
-  contentRoles: Array<ContentRole>;
+  // contentRoles: Array<ContentRole>;
 
   static fromObjects(objects: [Object]): Array<Person> {
     const people = new Array<Person>();
@@ -53,9 +53,13 @@ export class Person implements GetResultsListItem {
     person.directoryUrl = object['directoryUrl'];
     person.image = object['image'];
     person.orgUnits = OrgUnit.fromObjects(object['orgUnits']);
-    person.contentRoles = ContentRole.fromObjects(object['contentRoles']);
+    // person.contentRoles = ContentRole.fromObjects(object['contentRoles']);
 
     return person;
+  }
+
+  getId(): number {
+    return this.id;
   }
 
   getTitle(): string {
@@ -70,8 +74,8 @@ export class Person implements GetResultsListItem {
     return '';
   }
 
-  getRouterLink(): [any] {
-    return ['/personDetails', this.id];
+  getDefaultRouterLink(): [any] {
+    return ['/people', this.id];
   }
 
   getHref(): string {

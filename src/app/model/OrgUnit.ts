@@ -44,6 +44,14 @@ export class OrgUnit implements GetResultsListItem {
     return orgUnit;
   }
 
+  getId(): number {
+    return this.id;
+  }
+
+  getDefaultRouterLink(): [any] {
+    return ['/orgUnits', this.id];
+  }
+
   getTitle(): string {
     return this.name;
   }
@@ -54,10 +62,6 @@ export class OrgUnit implements GetResultsListItem {
 
   getAvatarUrl(): string {
     return '';
-  }
-
-  getRouterLink(): [any] {
-    return ['/orgUnitDetails', this.id];
   }
 
   getHref(): string {

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ApiService} from "../app.api.service";
 import {OrgUnit} from "../model/OrgUnit";
+import { Location } from '@angular/common';
+import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
+import {Person} from "../model/Person";
+
 
 @Component({
   selector: 'app-org-unit-details',
@@ -11,8 +15,9 @@ import {OrgUnit} from "../model/OrgUnit";
 export class OrgUnitDetailsComponent implements OnInit {
 
   private orgUnit: OrgUnit;
+  userSupport: Array<Person>;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private breadcrumbService: BreadcrumbService, private location: Location) {
 
   }
 
@@ -22,10 +27,14 @@ export class OrgUnitDetailsComponent implements OnInit {
 
       this.apiService.getOrgUnit(id).subscribe(
         orgUnit => {
-          console.log('orgUnit', orgUnit);
+          this.breadcrumbService.addFriendlyNameForRoute(this.location.path(), orgUnit.name);
           this.orgUnit = orgUnit;
         }
       );
+
+      this.apiService.getOrgUnitUserSupport(id).subscribe(userSupport => {
+        this.userSupport = userSupport;
+      });
     });
   }
 

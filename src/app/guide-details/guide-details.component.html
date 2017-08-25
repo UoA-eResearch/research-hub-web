@@ -9,7 +9,7 @@
 
     <div>
       <md-grid-list [cols]="numCols" gutterSize="1em">
-        <md-grid-tile class="browse-tile" style="background-color: #0294a5;" *ngFor="let item of content.guideCategories; let i = index;" [colspan]="1" [rowspan]="1" [routerLink]="['/guideCategory', item.id]">
+        <md-grid-tile class="browse-tile" style="background-color: #0294a5;" *ngFor="let item of content.guideCategories; let i = index;" [colspan]="1" [rowspan]="1" [routerLink]="getGuideCategoryRouterLink(item.id)">
           <a fxFlex="grow">
             <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
               <span>{{item.name}}</span>

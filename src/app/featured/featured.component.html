@@ -11,7 +11,7 @@
           {{content.name}}
         </md-card-content>
         <md-card-actions>
-          <button md-button [routerLink]="content.getRouterLink()">Details</button>
+          <button md-button [routerLink]="content.getDefaultRouterLink()">Details</button>
           <a md-button [href]="content.callToAction" target="_blank">Launch</a>
         </md-card-actions>
       </md-card>
