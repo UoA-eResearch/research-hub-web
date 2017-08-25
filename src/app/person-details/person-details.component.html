@@ -3,9 +3,9 @@
               [description]="person.jobTitle"></app-header>
 
   <div class="content" class.xs="content-xs" fxLayout="column" fxLayoutGap="1em">
-      <div>
-        <img fxFlex="100" [src]="apiService.getAssetUrl(person.image)">
-      </div>
+      <md-card>
+        <div class="div-background-image person-image" [ngStyle]="{'background-image': 'url(' + apiService.getAssetUrl(person.image) + ')'}"></div>
+      </md-card>
 
       <md-card>
         <h3>Email</h3>
