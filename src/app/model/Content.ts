@@ -82,8 +82,8 @@ export class Content implements GetResultsListItem {
     return this.summary;
   }
 
-  getAvatarUrl(): string {
-    return '';
+  getImage(): string {
+    return this.image;
   }
 
   getDefaultRouterLink(): [any] {

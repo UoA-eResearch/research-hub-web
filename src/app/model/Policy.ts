@@ -52,8 +52,8 @@ export class Policy implements GetResultsListItem {
     return this.description;
   }
 
-  getAvatarUrl(): string {
-    return '';
+  getImage(): string {
+    return undefined;
   }
 
   getDefaultRouterLink(): [any] {

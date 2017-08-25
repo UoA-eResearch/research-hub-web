@@ -70,8 +70,8 @@ export class Person implements GetResultsListItem {
     return this.jobTitle;
   }
 
-  getAvatarUrl(): string {
-    return '';
+  getImage(): string {
+    return this.image;
   }
 
   getDefaultRouterLink(): [any] {
