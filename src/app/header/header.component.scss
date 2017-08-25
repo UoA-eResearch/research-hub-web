@@ -13,10 +13,22 @@
   padding: 0;
 }
 
+.info-no-bg {
+  padding: $gt-xs-offset;
+  background-color: white;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
+}
+
+.info-no-bg-xs {
+  @extend .info-no-bg;
+  margin-bottom: 0;
+}
+
 .info {
   padding: $gt-xs-offset;
   margin-bottom: $gt-xs-offset * 3;
-  background-color: $color-background;
+  background-color: white;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
 }
 
 .info-xs {
@@ -36,7 +48,7 @@
 }
 
 .colored-background {
-  background-color: #28a4b3;
+  //background-color: #28a4b3;
 }
 
 ::ng-deep .header-description a  {
