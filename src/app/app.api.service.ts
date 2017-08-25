@@ -117,7 +117,7 @@ export class ApiService {
 
   getContentItems(searchParams: ContentItemsSearchParams) {
     const search = searchParams.getUrlSearchParams();
-    console.log('getContentItems', search);
+
     const headers = new Headers();
     headers.set('Accept', 'application/json');
 
@@ -142,6 +142,15 @@ export class ApiService {
     return this.http
       .get(this.host + ApiService.CONTENT_URL + '/' + id, {headers: headers})
       .map((response) => Content.fromObject(response.json()));
+  }
+
+  getContentItemUserSupport(id) {
+    const headers = new Headers();
+    headers.set('Accept', 'application/json');
+
+    return this.http
+      .get(this.host + ApiService.CONTENT_URL + '/' + id + '/userSupport', {headers: headers})
+      .map((response) => Person.fromObjects(response.json()));
   }
 
   getGuideCategory(id) {
@@ -183,6 +192,15 @@ export class ApiService {
       .map((response) => Person.fromObject(response.json()));
   }
 
+  getPersonUserSupportContent(id) {
+    const headers = new Headers();
+    headers.set('Accept', 'application/json');
+
+    return this.http
+      .get(this.host + ApiService.PERSON_URL + '/' + id + '/userSupportContent', {headers: headers})
+      .map((response) => Content.fromObjects(response.json()));
+  }
+
   getOrgUnits(searchParams: SearchParams) {
     const search = searchParams.getUrlSearchParams();
     const headers = new Headers();
@@ -200,5 +218,14 @@ export class ApiService {
     return this.http
       .get(this.host + ApiService.ORG_UNIT_URL + '/' + id, {headers: headers})
       .map((response) => OrgUnit.fromObject(response.json()));
+  }
+
+  getOrgUnitUserSupport(id) {
+    const headers = new Headers();
+    headers.set('Accept', 'application/json');
+
+    return this.http
+      .get(this.host + ApiService.ORG_UNIT_URL + '/' + id + '/userSupport', {headers: headers})
+      .map((response) => Person.fromObjects(response.json()));
   }
 }
