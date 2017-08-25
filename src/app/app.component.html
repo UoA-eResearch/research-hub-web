@@ -1,48 +1,49 @@
+<section class="mat-typography">
+  <md-sidenav-container class="sidenav-container">
+    <md-sidenav #sidenav [mode]="sideNavMode" [opened]="isSideNavOpened">
+      <md-toolbar color="primary">
+        <!--<button md-icon-button>-->
+          <!--<md-icon>device_hub</md-icon>-->
+        <!--</button>-->
+        <span>Research Hub</span>
+      </md-toolbar>
+      <md-nav-list>
+        <md-list-item *ngFor="let item of menuItems" [routerLink]="item.href">
+          <md-icon md-list-icon>{{item.icon}}</md-icon>
+          <a md-line >{{item.name}}</a>
+        </md-list-item>
+      </md-nav-list>
+    </md-sidenav>
 
-<md-sidenav-container class="sidenav-container">
-  <md-sidenav #sidenav [mode]="sideNavMode" [opened]="isSideNavOpened">
-    <md-toolbar color="primary">
-      <button md-icon-button>
-        <md-icon>device_hub</md-icon>
-      </button>
-      <span>Research Hub</span>
-    </md-toolbar>
-    <md-nav-list>
-      <md-list-item *ngFor="let item of menuItems" [routerLink]="item.href">
-        <md-icon md-list-icon>{{item.icon}}</md-icon>
-        <a md-line>{{item.name}}</a>
-      </md-list-item>
-    </md-nav-list>
-  </md-sidenav>
+    <div class="sidenav-content-wrapper">
+      <div class="sidenav-content">
+        <div class="primary-header" ngClass.xs="primary-header-xs">
+          <md-toolbar class="primary-toolbar" color="primary">
+            <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
+          </md-toolbar>
 
-  <div class="sidenav-content-wrapper">
-    <div class="sidenav-content">
-      <div class="primary-header" ngClass.xs="primary-header-xs">
-        <md-toolbar class="primary-toolbar" color="primary">
-          <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
-        </md-toolbar>
-
-        <div>
-          <button md-icon-button class="menu-button" (click)="sidenav.toggle()" fxHide.gt-sm>
-            <md-icon>menu</md-icon>
-          </button>
-          <h1><breadcrumb [useBootstrap]="false"></breadcrumb></h1>
+          <div>
+            <button md-icon-button class="menu-button" (click)="sidenav.toggle()" fxHide.gt-sm>
+              <md-icon>menu</md-icon>
+            </button>
+            <h1><breadcrumb [useBootstrap]="false"></breadcrumb></h1>
+          </div>
         </div>
+        <!--<md-progress-bar *ngIf="progressBarService.visible" mode="indeterminate" color="accent"></md-progress-bar>-->
+        <router-outlet></router-outlet>
       </div>
-      <!--<md-progress-bar *ngIf="progressBarService.visible" mode="indeterminate" color="accent"></md-progress-bar>-->
-      <router-outlet></router-outlet>
+      <footer>
+        <div class="logo">
+          <a href="https://auckland.ac.nz" target="_blank">
+            <img [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
+          </a>
+        </div>
+        <div class="copyright">
+          <a href="http://eresearch.auckland.ac.nz" target="_blank">
+            Copyright © {{getYear()}}. Centre for eResearch. University of Auckland
+          </a>
+        </div>
+      </footer>
     </div>
-    <footer>
-      <div class="logo">
-        <a href="https://auckland.ac.nz" target="_blank">
-          <img [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
-        </a>
-      </div>
-      <div class="copyright">
-        <a href="http://eresearch.auckland.ac.nz" target="_blank">
-          Copyright © {{getYear()}}. Centre for eResearch. University of Auckland
-        </a>
-      </div>
-    </footer>
-  </div>
-</md-sidenav-container>
+  </md-sidenav-container>
+</section>

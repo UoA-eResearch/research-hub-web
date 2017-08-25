@@ -1,4 +1,3 @@
-@import "../../variables";
 @import '../../styles';
 
 .content-header {
@@ -31,6 +30,12 @@
   background-position: center;
   padding: 1em;
 }
+
+
+//h3.mat-line {
+//  font-size: mat-font-size($app-result-list-typography, subheading-2) !important;
+//  font-weight: mat-font-weight($app-result-list-typography, subheading-2) !important;;
+//}
 
 //p {
 //  color:red;

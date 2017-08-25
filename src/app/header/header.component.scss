@@ -1,5 +1,4 @@
-@import "../../variables";
-@import "../../themes";
+@import "../../styles";
 
 /*
  * Image based header styles
@@ -41,9 +40,9 @@
 }
 
 ::ng-deep .header-description a  {
-  color: $color-bold-link-text;
+  //color: $color-bold-link-text;
   text-decoration: none;
-  font-weight: bold;
+  //font-weight: bold;
 }
 
 ::ng-deep .header-description p  {

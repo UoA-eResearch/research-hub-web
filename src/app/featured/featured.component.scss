@@ -1,5 +1,4 @@
-@import "../../variables";
-@import "../../themes";
+@import "../../styles";
 
 
 //.featured-content-xs {
@@ -9,4 +8,20 @@
 .card-lt-lg {
   //margin-left: 1em;
   //margin-right: 1em;
+}
+
+md-card md-card-content.mat-card-content{
+  font-size: mat-font-size($app-featured-md-card-typography, body-1);
+  font-weight: mat-font-weight($app-featured-md-card-typography, body-1);
+}
+
+md-card md-card-actions button{
+  font-size: mat-font-size($app-featured-md-card-typography, button);
+  font-weight: mat-font-weight($app-featured-md-card-typography, button);
+}
+
+md-card md-card-actions a{
+  font-size: mat-font-size($app-featured-md-card-typography, button);
+  font-weight: mat-font-weight($app-featured-md-card-typography, button);
+  color:$body-font-color;
 }

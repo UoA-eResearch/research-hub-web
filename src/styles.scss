@@ -1,5 +1,8 @@
 @import 'themes';
 @import 'variables';
+@import 'typography';
+
+
 
 
 html, body {
@@ -9,35 +12,46 @@ html, body {
 
 /*
  * Text styles
+ https://material.angular.io/guide/typography
  */
 
 h1 {
   margin-top: 0;
-  font-family: $heading-font-family;
-  font-size: $heading-1-font-size;
+  //font-family: $heading-font-family;
+  //font-size: $heading-1-font-size;
   color: $heading-1-font-color;
 }
 
 
 h2 {
-  font-family: $heading-font-family;
-  font-size: $heading-2-font-size;
+  //font-family: $heading-font-family;
+  //font-size: $heading-2-font-size;
   color: $heading-2-font-color;
 }
 
 h3 {
-  font-family: $heading-font-family;
-  font-size: $heading-3-font-size;
-  color: $heading-2-font-color;
+  //font-family: $heading-font-family;
+  //font-size: $heading-3-font-size;
+  color: $heading-3-font-color;
 }
 
 
 p {
-  font-family: $body-font-family;
-  font-size: $body-font-size;
+  //font-family: $body-font-family;
+  //font-size: $body-font-size;
   //color: $body-font-color;
   //color: white;
   margin-top: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $body-link-color;
+}
+
+md-chip.mat-chip {
+  font-size: mat-font-size($app-chips-typography, button) !important;
+  font-weight: mat-font-weight($app-chips-typography, button) !important;
 }
 
 .description {

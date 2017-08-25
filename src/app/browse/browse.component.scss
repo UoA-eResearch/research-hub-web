@@ -1,32 +1,56 @@
-@import "../../variables";
-@import "../../themes";
+@import "../../styles";
 
 
-/*
-Default tile size
- */
+.component{
+  max-width:1060px;
+}
 
 .browse-tile {
   cursor: pointer;
   background-color: $color-pink;
-}
-
-.browse-tile a div{
-  padding: 1em 1em 1em 1em;
-}
-
-.browse-tile a div md-icon {
   text-decoration: none;
-  color:white;
 }
 
-.browse-tile a div span {
-  font-family: $heading-font-family;
-  font-size: 100%;
-  color:white;
+.tile-content{
+
+}
+
+.tile-text {
+  color:$browse-tile-font-color;
   text-align: center;
+  position:absolute;
+  bottom:50%;
+  width:80%;
+
+  @include mat-typography-level-to-styles($app-browse-grid-typography, body-1);
 }
 
-md-grid-tile a {
-  text-decoration: none;
+.tile-icon {
+
+  color:$browse-tile-font-color;
+  font-size: mat-font-size($app-browse-grid-typography, body-2);
+  font-weight: mat-font-weight($app-browse-grid-typography, body-2);
+  width:100%;
+  text-align: center;
+  position:absolute;
+  bottom:25%;
+  margin: 0 auto;
+
 }
+
+
+
+
+
+//.tile-text-xs {
+//  @extend  .tile-text;
+//  //@include mat-typography-level-to-styles($app-browse-grid-typography, body-1);
+//  //font-size:100%;
+//}
+
+//@media (min-width: 600px) and (max-width: 780px) {
+//  .tile-text {
+//    //color:black;
+//    //font-size:95%;
+//  }
+//}
