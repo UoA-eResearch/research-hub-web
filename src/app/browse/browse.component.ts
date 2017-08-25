@@ -85,6 +85,7 @@ export class BrowseComponent implements OnInit, OnDestroy {
         numCols = 4;
         break;
     }
+    //console.log(mqAlias);
 
     if (this.embedded && mqAlias !== 'xs') {
       numCols -= 1;
