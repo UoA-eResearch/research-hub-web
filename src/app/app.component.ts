@@ -26,9 +26,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   menuItems = [
     {name: 'Home', icon: 'home', href: '/home'},
-    {name: 'Search & Browse', icon: 'search', href: '/browse'},
-    {name: 'Provide Feedback', icon: 'thumbs_up_down', href: '/feedback'},
-    {name: 'About CeR', icon: 'info', href: '/about'},
+    {name: 'Search & Browse', icon: 'magnify', href: '/browse'},
+    {name: 'Provide Feedback', icon: 'thumbs-up-down', href: '/feedback'},
+    {name: 'About CeR', icon: 'information', href: '/about'},
     {name: 'Contact Us', icon: 'phone', href: '/contact'}
   ];
 

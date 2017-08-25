@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-  description = "<p>Please get in contact blah blah blah</p>";
+  description = "<p></p>";
 
   layoutGap = '1.0em';
   layoutGapXs = '0.5em';
