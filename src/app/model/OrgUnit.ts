@@ -60,8 +60,8 @@ export class OrgUnit implements GetResultsListItem {
     return '';
   }
 
-  getAvatarUrl(): string {
-    return '';
+  getImage(): string {
+    return undefined;
   }
 
   getHref(): string {

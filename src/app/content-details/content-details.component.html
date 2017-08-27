@@ -55,11 +55,11 @@
         <img fxFlex="100" width="100%;" [src]="apiService.getAssetUrl(content.image)">
       </div>
 
-      <md-card>
+      <md-card *ngIf="content.actionableInfo">
         <app-markdown [data]="content.actionableInfo"></app-markdown>
       </md-card>
 
-      <md-card>
+      <md-card *ngIf="content.additionalInfo">
         <app-markdown [data]="content.additionalInfo"></app-markdown>
       </md-card>
     </div>
