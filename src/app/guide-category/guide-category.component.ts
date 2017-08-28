@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ApiService} from "../app.api.service";
 import { Location } from '@angular/common';
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
+import {AnalyticsService} from "../app.analytics.service";
 
 
 @Component({
@@ -16,7 +17,7 @@ export class GuideCategoryComponent implements OnInit {
   guideCategory: GuideCategory;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private location: Location,
-              private breadcrumbService: BreadcrumbService) {
+              private breadcrumbService: BreadcrumbService, private analyticsService: AnalyticsService) {
 
   }
 
@@ -26,7 +27,11 @@ export class GuideCategoryComponent implements OnInit {
 
       this.apiService.getGuideCategory(id).subscribe(
         guideCategory => {
-          this.breadcrumbService.addFriendlyNameForRoute(this.location.path(), guideCategory.name);
+          const url = this.location.path();
+          const name = guideCategory.name;
+
+          this.analyticsService.trackGuideCategory(name, url);
+          this.breadcrumbService.addFriendlyNameForRoute(url, name);
           this.guideCategory = guideCategory;
         }
       );

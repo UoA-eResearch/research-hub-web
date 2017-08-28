@@ -7,6 +7,7 @@ import {Subscription} from "rxjs/Subscription";
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import { Location } from '@angular/common';
 import {MenuService} from "../menu.service";
+import {AnalyticsService} from "../app.analytics.service";
 
 
 @Component({
@@ -21,7 +22,8 @@ export class GuideDetailsComponent implements OnInit, OnDestroy {
   mediaSub: Subscription;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private media: ObservableMedia,
-              private breadcrumbService: BreadcrumbService, private location: Location, private menuService: MenuService) {
+              private breadcrumbService: BreadcrumbService, private location: Location, private menuService: MenuService,
+              private analyticsService: AnalyticsService) {
 
   }
 
@@ -31,11 +33,15 @@ export class GuideDetailsComponent implements OnInit, OnDestroy {
     });
 
     this.route.params.subscribe(params => {
-      const contentId = params['id'];
+      const id = params['id'];
 
-      this.apiService.getContentItem(contentId).subscribe(
+      this.apiService.getContentItem(id).subscribe(
         content => {
-          this.breadcrumbService.addFriendlyNameForRoute(this.location.path(), content.name);
+          const url = this.location.path();
+          const name = content.name;
+
+          this.analyticsService.trackGuide(name, url);
+          this.breadcrumbService.addFriendlyNameForRoute(url, name);
           this.content = content;
         }
       );

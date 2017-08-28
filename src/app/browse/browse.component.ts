@@ -6,6 +6,10 @@ import {ProgressBarService} from "../app.progress-bar.service";
 import {SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+import {AnalyticsService} from "../app.analytics.service";
+import { Location } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-browse',
@@ -31,11 +35,16 @@ export class BrowseComponent implements OnInit, OnDestroy {
   tileColors = [this.teal, this.navy, this.orange];
 
   constructor(private menuService: MenuService, private route: ActivatedRoute, private progressBarService: ProgressBarService,
-              private searchBarService: SearchBarService, private media: ObservableMedia) {
+              private searchBarService: SearchBarService, private media: ObservableMedia, private analyticsService: AnalyticsService,
+              private location: Location) {
   }
 
 
   ngOnInit() {
+    if (!this.embedded) {
+      this.analyticsService.trackPageView(this.location.path(), 'Browse Categories');
+    }
+
     this.mediaSub = this.media.subscribe((change: MediaChange) => {
       this.setNumCategoryColumns(change.mqAlias);
     });

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../app.api.service";
+import {AnalyticsService} from "../app.analytics.service";
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -13,11 +15,12 @@ export class AboutComponent implements OnInit {
     "to the delivery of advanced computational solutions to help power the University's research mission.</p>";
   theDirectorUrl = '';
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private analyticsService: AnalyticsService, private location: Location) {
 
   }
 
   ngOnInit() {
+    this.analyticsService.trackPageView(this.location.path(), 'About');
     this.theDirectorUrl = this.apiService.getAssetUrl('page-elements/mark.jpg');
   }
 

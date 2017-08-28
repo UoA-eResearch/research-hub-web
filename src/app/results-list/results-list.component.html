@@ -12,8 +12,8 @@
     </ng-container>
 
     <ng-container *ngIf="result.getHref() !== undefined">
-      <a md-list-item href="{{result.getHref()}}" target="_blank">
-        <img *ngIf="result.image" md-list-avatar [src]="apiService.getAssetUrl(result.image)">
+      <a md-list-item [href]="result.getHref()" target="_blank" (click)="trackOutboundLink(result)">
+        <img *ngIf="result.getImage()" md-list-avatar [src]="apiService.getAssetUrl(result.getImage())">
         <h3 md-line> {{result.getTitle()}} </h3>
         <p md-line>
           <span> {{result.getSubtitle()}} </span>

@@ -36,12 +36,12 @@
       </div>
       <footer>
         <div class="logo">
-          <a href="https://auckland.ac.nz" target="_blank">
+          <a [href]="aucklandUniUrl" target="_blank" (click)="analyticsService.trackOutboundLink(aucklandUniUrl)">
             <img [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
           </a>
         </div>
         <div class="copyright">
-          <a href="http://eresearch.auckland.ac.nz" target="_blank">
+          <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)">
             Copyright © {{getYear()}}. Centre for eResearch. University of Auckland
           </a>
         </div>

@@ -4,7 +4,7 @@
     <div fxLayout="row" fxLayoutGap="2em">
       <div fxFlexAlign="center" *ngIf="description" class="header-description" [innerHTML]="description"></div>
       <div *ngIf="goHref" fxFlexAlign="center">
-        <a md-raised-button color="accent" [href]="goHref" target="_blank">Go</a>
+        <a md-raised-button color="accent" [href]="goHref" target="_blank" (click)="trackGo()">Go</a>
       </div>
     </div>
   </div>

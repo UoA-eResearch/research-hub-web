@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {AnalyticsService} from "../app.analytics.service";
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -19,10 +21,11 @@ export class ContactComponent implements OnInit {
   emailAddress = 'eresearch-support@auckland.ac.nz';
   contactPhone = '+64 9 373 7599 ext 822231';
 
-  constructor() {
+  constructor(private analyticsService: AnalyticsService, private location: Location) {
   }
 
   ngOnInit() {
+    this.analyticsService.trackPageView(this.location.path(), 'Contact Us');
   }
 
 

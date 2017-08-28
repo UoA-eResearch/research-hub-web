@@ -1,7 +1,8 @@
 <ng-container *ngIf="content">
   <app-header [title]="content.name"
               [description]="'<p>' + content.getMainOrgUnit().name + '</p>'"
-              [goHref]="content.callToAction">
+              [goHref]="content.callToAction"
+              [goEventCategory]="analyticsService.eventCategoryContent">
   </app-header>
 
   <div class="component" class.xs="component-xs" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="1em">
