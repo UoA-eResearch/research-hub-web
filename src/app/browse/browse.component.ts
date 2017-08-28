@@ -5,7 +5,7 @@ import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.ser
 import {ProgressBarService} from "../app.progress-bar.service";
 import {SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from 'rxjs/Subscription';
-import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+import {MediaChange, ObservableMedia, DEFAULT_BREAKPOINTS} from '@angular/flex-layout';
 
 @Component({
   selector: 'app-browse',
@@ -36,7 +36,13 @@ export class BrowseComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+
+    this.getMQAlias();
+
+    this.setNumCategoryColumns(this.getMQAlias());
+
     this.mediaSub = this.media.subscribe((change: MediaChange) => {
+      console.log(change.mqAlias);
       this.setNumCategoryColumns(change.mqAlias);
     });
 
@@ -62,8 +68,32 @@ export class BrowseComponent implements OnInit, OnDestroy {
     this.mediaSub.unsubscribe();
   }
 
-  getMQAlias() {
+  getMQAlias(): string {
 
+    //console.log(DEFAULT_BREAKPOINTS);
+
+    const width = window.innerWidth;
+
+    // fxFlex breakpoints
+    const xs = 600;
+    const sm = 960;
+    const md = 1280;
+    const lg = 1920;
+    const xl = 5000;
+
+    if ( width < xs){
+
+    } else if (width >= xs && width < sm){
+      return 'xs';
+    } else if (width >= sm && width < md){
+      return 'sm';
+    } else if (width >= md && width < lg){
+      return 'md';
+    } else if (width >= lg && width < xl){
+      return 'lg';
+    } else {
+      return 'xl';
+    }
   }
 
   setNumCategoryColumns(mqAlias: string) {
