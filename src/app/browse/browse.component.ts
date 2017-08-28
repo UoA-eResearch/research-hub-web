@@ -62,6 +62,10 @@ export class BrowseComponent implements OnInit, OnDestroy {
     this.mediaSub.unsubscribe();
   }
 
+  getMQAlias() {
+
+  }
+
   setNumCategoryColumns(mqAlias: string) {
     let numCols = 0;
     switch (mqAlias) {

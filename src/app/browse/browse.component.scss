@@ -2,7 +2,7 @@
 
 
 .component{
-  max-width:1060px;
+  max-width:$max-content-width;
 }
 
 .browse-tile {
@@ -36,7 +36,6 @@
   width:100%;
   position:absolute;
   bottom:25%;
-  //transform: translate(0%, 0em);
 
 }
 
