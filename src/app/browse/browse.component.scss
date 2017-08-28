@@ -34,7 +34,9 @@
   font-size: mat-font-size($app-browse-grid-typography, body-2);
   font-weight: mat-font-weight($app-browse-grid-typography, body-2);
   width:100%;
-  transform: translate(0%, 0.5em);
+  position:absolute;
+  bottom:25%;
+  //transform: translate(0%, 0em);
 
 }
 
