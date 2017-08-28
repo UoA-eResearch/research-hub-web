@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AnalyticsService} from "../app.analytics.service";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-feedback',
@@ -7,10 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedbackComponent implements OnInit {
 
-  constructor() {
+  constructor(private analyticsService: AnalyticsService, private location: Location) {
   }
 
   ngOnInit() {
+    this.analyticsService.trackPageView(this.location.path(), 'Feedback');
   }
 
 }

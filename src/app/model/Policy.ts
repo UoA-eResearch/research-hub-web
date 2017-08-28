@@ -6,6 +6,7 @@ export class Policy implements GetResultsListItem {
   name: string;
   description: string;
   url: string;
+  type = 'policy';
 
   static fromObjects(objects: [Object]): Array<Policy> {
     const items = new Array<Policy>();

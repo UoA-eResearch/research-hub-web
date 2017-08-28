@@ -1,6 +1,8 @@
 <div *ngIf="person">
   <app-header [title]="person.getTitle()"
-              [description]="person.jobTitle"></app-header>
+              [description]="person.jobTitle"
+              [goHref]="person.directoryUrl"
+              [goEventCategory]="analyticsService.eventCategoryPerson"></app-header>
 
   <div class="content" class.xs="content-xs" fxLayout="column" fxLayoutGap="1em">
       <md-card>

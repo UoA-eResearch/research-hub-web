@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import {AnalyticsService} from "../app.analytics.service";
 
 @Component({
   selector: 'app-header',
@@ -20,8 +21,16 @@ export class HeaderComponent implements OnInit {
   @Input()
   goHref: string;
 
-  constructor(private titleService: Title) {
+  @Input()
+  goEventCategory: string;
 
+  constructor(private titleService: Title, private analyticsService: AnalyticsService) {
+
+  }
+
+  trackGo() {
+    console.log('track go: ', this.goEventCategory, this.title, this.goHref);
+    this.analyticsService.trackGo(this.goEventCategory, this.title, this.goHref);
   }
 
   ngOnInit() {

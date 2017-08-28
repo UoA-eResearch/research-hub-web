@@ -2,8 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GetResultsListItem} from "../model/ResultsListItemInterface";
 import {ApiService} from "../app.api.service";
 import {ActivatedRoute} from "@angular/router";
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
 import {MenuService} from "../menu.service";
+import {AnalyticsService} from "../app.analytics.service";
 
 
 @Component({
@@ -21,7 +22,8 @@ export class ResultsListComponent implements OnInit {
   @Input()
   intermediatePath: string;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private location: Location, private menuService: MenuService) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private location: Location,
+              private menuService: MenuService, private analyticsService: AnalyticsService) {
 
   }
 
@@ -42,8 +44,14 @@ export class ResultsListComponent implements OnInit {
 
   }
 
-  // @Input()
-  // rootPath = '';
+  trackOutboundLink(result: GetResultsListItem) {
+    if (result['type'] !== undefined && result['type'] === 'policy') {
+      console.log('track policy!');
+      this.analyticsService.trackPolicy(result.getTitle(), result.getHref());
+    } else {
+      this.analyticsService.trackOutboundLink(result.getHref());
+    }
+  }
 
   @Input()
   get results() {

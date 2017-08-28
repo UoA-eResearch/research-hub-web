@@ -7,6 +7,7 @@ import {Content} from "../model/Content";
 import marked from 'marked';
 import { Location } from '@angular/common';
 import {Person} from "../model/Person";
+import {AnalyticsService} from "../app.analytics.service";
 
 
 @Component({
@@ -21,7 +22,7 @@ export class ContentDetailsComponent implements OnInit {
   userSupport: Array<Person>;
 
   constructor(private breadcrumbService: BreadcrumbService, private route: ActivatedRoute, private apiService: ApiService,
-              private progressBarService: ProgressBarService,  private location: Location) {
+              private progressBarService: ProgressBarService,  private location: Location, private analyticsService: AnalyticsService) {
 
     // Configure marked
     marked.setOptions({
@@ -36,32 +37,32 @@ export class ContentDetailsComponent implements OnInit {
     });
   }
 
-  onCallToActionClick() {
-    window.location.href = this.content.callToAction;
-  }
-
   ngOnInit() {
     this.progressBarService.setVisible();
 
     this.route.params.subscribe(params => {
-      const contentId = params['id'];
+      const id = params['id'];
 
-      this.apiService.getContentItem(contentId).subscribe(
+      this.apiService.getContentItem(id).subscribe(
         content => {
-          this.breadcrumbService.addFriendlyNameForRoute(this.location.path(), content.name); // Add friendly name for particular content item
+          const url = this.location.path();
+          const name = content.name;
+
+          this.analyticsService.trackContent(name, url);
+          this.breadcrumbService.addFriendlyNameForRoute(url, name); // Add friendly name for particular content item
           this.content = content;
           this.progressBarService.setHidden();
         }
       );
 
-      this.apiService.getSimilarContentItems(contentId).subscribe(
+      this.apiService.getSimilarContentItems(id).subscribe(
         contentItems => {
           this.similarContentItems = contentItems;
           this.progressBarService.setHidden();
         }
       );
 
-      this.apiService.getContentItemUserSupport(contentId).subscribe(userSupport => {
+      this.apiService.getContentItemUserSupport(id).subscribe(userSupport => {
         this.userSupport = userSupport;
       });
     });

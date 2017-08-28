@@ -5,6 +5,7 @@ import {Person} from "../model/Person";
 import { Location } from '@angular/common';
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {Content} from "../model/Content";
+import {AnalyticsService} from "../app.analytics.service";
 
 
 @Component({
@@ -17,7 +18,8 @@ export class PersonDetailsComponent implements OnInit {
   person: Person;
   supportedContent: Array<Content>;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private breadcrumbService: BreadcrumbService, private location: Location) {
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private breadcrumbService: BreadcrumbService,
+              private location: Location, private analyticsService: AnalyticsService) {
 
   }
 
@@ -27,7 +29,11 @@ export class PersonDetailsComponent implements OnInit {
 
       this.apiService.getPerson(id).subscribe(
         person => {
-          this.breadcrumbService.addFriendlyNameForRoute(this.location.path(), person.getTitle());
+          const url = this.location.path();
+          const title = person.getTitle();
+
+          this.analyticsService.trackPerson(title, url);
+          this.breadcrumbService.addFriendlyNameForRoute(url, title);
           this.person = person;
         }
       );

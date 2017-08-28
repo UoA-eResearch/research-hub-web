@@ -10,6 +10,8 @@ import {ProgressBarService} from "../app.progress-bar.service";
 import {Page} from "../model/Page";
 import {Policy} from "../model/Policy";
 import {isUndefined} from "util";
+import {AnalyticsService} from "../app.analytics.service";
+import {Title} from "@angular/platform-browser";
 
 
 class SearchResultsSummary {
@@ -52,11 +54,16 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private searchResultsSummary: Array<SearchResultsSummary>;
 
   constructor(private breadcrumbService: BreadcrumbService, protected searchBarService: SearchBarService,
-              protected menuService: MenuService, private apiService: ApiService, private progressBarService: ProgressBarService) {
+              protected menuService: MenuService, private apiService: ApiService,
+              private progressBarService: ProgressBarService, private analyticsService: AnalyticsService,
+              private titleService: Title) {
     this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search Results');
   }
 
   onSearchChange(searchBarParams: SearchBarParams) {
+    console.log('SEARCH CHANGE!!!!!!');
+    this.analyticsService.trackSearch(searchBarParams.category, searchBarParams.searchText);
+
     this.progressBarService.setVisible();
     const categoryId = MenuService.getMenuItemId([searchBarParams.category]);
     const menuItem = this.menuService.getMenuItem(categoryId);
@@ -194,6 +201,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Research Hub: Search Results');
+
     this.onSearchChange(this.searchBarService.getSearchParams()); // Get search parameters on initial page landing
     this.searchChangeSub = this.searchBarService.searchChange.debounceTime(300).distinctUntilChanged().subscribe(searchParams => {
       this.onSearchChange(searchParams);
