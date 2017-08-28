@@ -11,17 +11,20 @@
   text-decoration: none;
 }
 
-.tile-content{
+/* Put your CSS code in the left column, instead of example, to put or remove unnecessary prefixes. */
 
+
+.tile-content{
+  text-align: center;
+  min-width:100%;
+  min-height: 100%;
 }
+
 
 .tile-text {
   color:$browse-tile-font-color;
-  text-align: center;
-  position:absolute;
-  bottom:50%;
   width:80%;
-
+  transform: translate(0%, -50%);
   @include mat-typography-level-to-styles($app-browse-grid-typography, body-1);
 }
 
@@ -31,10 +34,7 @@
   font-size: mat-font-size($app-browse-grid-typography, body-2);
   font-weight: mat-font-weight($app-browse-grid-typography, body-2);
   width:100%;
-  text-align: center;
-  position:absolute;
-  bottom:25%;
-  margin: 0 auto;
+  transform: translate(0%, 0.5em);
 
 }
 

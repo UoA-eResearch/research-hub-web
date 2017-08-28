@@ -1,19 +1,17 @@
 <app-header *ngIf="!embedded"
-            [title]="'Browse Categories'"
-            [description]="'<p>Browse resources and services by category</p>'">
+            [title]="'Browse categories'"
+            [description]="'<p>Browse resources and services by category.</p>'">
 </app-header>
 
 <div class="component" [ngClass]="{'component-embedded': embedded}" [ngClass.xs]="{'component-embedded': embedded, 'component-xs': !embedded}">
   <h2 *ngIf="embedded">Browse Categories</h2>
   <md-grid-list [cols]="numCols" gutterSize="1em">
     <md-grid-tile class="browse-tile" *ngFor="let item of menuItems; let i = index;" [colspan]="1" [rowspan]="1" [routerLink]="['/browse', item.id]">
-      <a>
-        <div fxLayout="column" fxLayoutAlign="center center" class="tile-content">
-          <span class="tile-text">{{item.name}}</span>
-          <!--<md-icon class="tile-icon">{{item.icon}}</md-icon>-->
-          <md-icon class="tile-icon mdi mdi-{{item.icon}}"></md-icon>
-        </div>
-      </a>
+      <div fxLayout="column" fxLayoutAlign="center center" class="tile-content">
+        <span class="tile-text">{{item.name}}</span>
+        <!--<md-icon class="tile-icon">{{item.icon}}</md-icon>-->
+        <md-icon class="mdi mdi-{{item.icon}} tile-icon "></md-icon>
+      </div>
     </md-grid-tile>
   </md-grid-list>
 </div>
