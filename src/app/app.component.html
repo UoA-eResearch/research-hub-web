@@ -35,16 +35,23 @@
         <router-outlet></router-outlet>
       </div>
       <footer>
-        <div class="footer-content" fxLayout="row-wrap" fxLayoutAlign="space-between center" fxLayoutGap="2em">
-          <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)">
-            Copyright © {{getYear()}}. Centre for eResearch
-          </a>
-          <a fxHide.lt-sm routerLink="/contact">Contact</a>
-          <a fxHide.lt-sm routerLink="/feedback">Provide Feedback</a>
-          <a fxHide.lt-sm [href]="disclaimerUrl" target="_blank" (click)="analyticsService.trackOutboundLink(disclaimerUrl)">Disclaimer</a>
-          <a class="logo" [href]="aucklandUniUrl" target="_blank" (click)="analyticsService.trackOutboundLink(aucklandUniUrl)">
-            <img [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
-          </a>
+        <div class="footer-content" fxLayout="row" fxLayoutAlign="space-between center">
+
+          <div class="footer-text-section" fxFlex="60%" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2em">
+            <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)">
+              Copyright © {{getYear()}}. Centre for eResearch
+            </a>
+            <a fxHide.lt-lg routerLink="/contact">Contact</a>
+            <a fxHide.lt-lg routerLink="/feedback">Provide Feedback</a>
+            <a fxHide.lt-lg [href]="disclaimerUrl" target="_blank" (click)="analyticsService.trackOutboundLink(disclaimerUrl)">Disclaimer</a>
+          </div>
+
+          <div>
+            <a class="logo" [href]="aucklandUniUrl" target="_blank" (click)="analyticsService.trackOutboundLink(aucklandUniUrl)">
+              <img [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
+            </a>
+          </div>
+
         </div>
       </footer>
     </div>
