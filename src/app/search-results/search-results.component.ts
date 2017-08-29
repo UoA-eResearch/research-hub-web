@@ -9,7 +9,6 @@ import {Content} from "../model/Content";
 import {ProgressBarService} from "../app.progress-bar.service";
 import {Page} from "../model/Page";
 import {Policy} from "../model/Policy";
-import {isUndefined} from "util";
 import {AnalyticsService} from "../app.analytics.service";
 import {Title} from "@angular/platform-browser";
 
@@ -52,6 +51,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private policiesPage: Page<Policy>;
   private maxNumberOfItems = 50;
   private searchResultsSummary: Array<SearchResultsSummary>;
+
+  private showRefineSearch = true;
+  private showEmptyState = false;
 
   constructor(private breadcrumbService: BreadcrumbService, protected searchBarService: SearchBarService,
               protected menuService: MenuService, private apiService: ApiService,

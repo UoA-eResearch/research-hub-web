@@ -1,7 +1,6 @@
 <div class="search-results" ngClass.xs="search-results-xs">
-
-  <div style="margin-left: 1em; margin-right: 1em;margin-bottom: 0.5em;">
-    <p>Refine your search results for <i>'{{searchBarService.searchText}}'</i> in</p>
+  <div *ngIf="showRefineSearch" class="search-results-info">
+    <p>Refine your search for <span class="search-results-text">'{{searchBarService.searchText}}'</span> in</p>
     <md-chip-list>
       <ng-container *ngFor="let item of searchResultsSummary;">
         <md-chip *ngIf="item.page && item.page.totalElements"  color="accent" selected="true" style="margin: 0.25em;" (click)="item.scrollToResults()">
@@ -9,6 +8,15 @@
         </md-chip>
       </ng-container>
     </md-chip-list>
+  </div>
+
+  <div *ngIf="showEmptyState" class="search-results-info">
+    <p>Sorry - your search for <span class="search-results-text">'{{searchBarService.searchText}}'</span> did not match anything on the Research Hub.</p>
+    <p>Suggestions:</p>
+    <ul>
+      <li>Let us know what you were looking for via our <a [routerLink]="['/feedback']">Feedback page</a></li>
+      <li>You can try the <a href="https://www.staff.auckland.ac.nz/en.html" target="_blank">Staff Service Centre</a> in the Staff Intranet</li>
+    </ul>
   </div>
 
   <div #supportResults>
