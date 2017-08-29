@@ -126,43 +126,66 @@
  */
 
 footer {
-  //font-family: $heading-font-family;
   background-color: $color-primary;
-  height: 100px;
-  flex: none;
-  padding-left: 2em;
-  padding-right: 2em;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  height: 7em;
 }
 
-footer .logo {
-  flex: 2;
-  justify-content: flex-start;
+footer .footer-content{
+  padding: 2em 2em 2em 2em;
 }
 
-footer .copyright {
-  text-align: right;
-
-  order: 1;
-  flex: 4;
-  justify-content: flex-end;
-}
-
-footer .logo img {
-  display: block;
-  height: 70px;
-}
-
-footer .copyright a {
+footer a {
+  text-align: center;
   text-decoration: none;
   color: white;
   font-size: mat-font-size($app-base-typography, button) !important; // 14px
   font-weight: mat-font-weight($app-base-typography, caption) !important;
 }
+
+footer .logo img {
+  //display: block;
+  height: 5em;
+}
+
+
+
+//footer {
+//  //font-family: $heading-font-family;
+//  background-color: $color-primary;
+//  height: 100px;
+//  flex: none;
+//  padding-left: 2em;
+//  padding-right: 2em;
+//
+//  display: flex;
+//  flex-direction: row;
+//  align-items: center;
+//  justify-content: center;
+//}
+//
+//footer .logo {
+//  flex: 2;
+//  justify-content: flex-start;
+//}
+//
+//footer .copyright {
+//  text-align: right;
+//  order: 1;
+//  flex: 4;
+//  justify-content: flex-end;
+//}
+//
+//footer .logo img {
+//  display: block;
+//  height: 70px;
+//}
+//
+//footer .copyright a {
+//  text-decoration: none;
+//  color: white;
+//  font-size: mat-font-size($app-base-typography, button) !important; // 14px
+//  font-weight: mat-font-weight($app-base-typography, caption) !important;
+//}
 
 /*
  * Breadcrumb styling
@@ -201,38 +224,38 @@ app-search-bar {
   width: 100%;
 }
 
-@media (max-width: $xs-thresh-max) {
-
-  //.primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
-  //  height: $mat-toolbar-height-desktop * 2 !important;
-  //}
-
-  footer {
-    flex-direction: column;
-    height: 200px;
-    min-height: 100px;
-  }
-
-  footer .logo {
-    flex: 1.6;
-
-    display: flex; /* Also makes this a flexbox which we can centre items in */
-    align-items: center;
-  }
-
-  footer .copyright {
-    text-align: center;
-    flex: 1;
-  }
-
-  .sidenav-content {
-    min-height: calc(100vh - 200px);
-  }
-
-  //.primary-header h1 {
-  //  padding: 0;
-  //}
-}
+//@media (max-width: $xs-thresh-max) {
+//
+//  //.primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
+//  //  height: $mat-toolbar-height-desktop * 2 !important;
+//  //}
+//
+//  footer {
+//    flex-direction: column;
+//    height: 200px;
+//    min-height: 100px;
+//  }
+//
+//  footer .logo {
+//    flex: 1.6;
+//
+//    display: flex; /* Also makes this a flexbox which we can centre items in */
+//    align-items: center;
+//  }
+//
+//  footer .copyright {
+//    text-align: center;
+//    flex: 1;
+//  }
+//
+//  .sidenav-content {
+//    min-height: calc(100vh - 200px);
+//  }
+//
+//  //.primary-header h1 {
+//  //  padding: 0;
+//  //}
+//}
 
 /*
  * Centering of page content

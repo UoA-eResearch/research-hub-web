@@ -21,6 +21,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   aucklandUniUrl = 'https://auckland.ac.nz';
   eResearchUrl = 'http://eresearch.auckland.ac.nz';
+  disclaimerUrl = this.aucklandUniUrl + '/en/admin/footer-links/disclaimer.html';
+
   private isSideNavOpened = true;
   private sideNavMode = 'side';
   private mediaChangeSub: Subscription;

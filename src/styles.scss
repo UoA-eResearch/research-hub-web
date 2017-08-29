@@ -31,8 +31,6 @@ h2 {
 
 h3 {
   //font-family: $heading-font-family;
-  //font-size: $heading-3-font-size;
-  color: $heading-3-font-color;
 }
 
 
@@ -47,11 +45,6 @@ p {
 a {
   text-decoration: none;
   color: $body-link-color;
-}
-
-md-chip.mat-chip {
-  font-size: mat-font-size($app-chips-typography, button) !important;
-  font-weight: mat-font-weight($app-chips-typography, button) !important;
 }
 
 .description {
