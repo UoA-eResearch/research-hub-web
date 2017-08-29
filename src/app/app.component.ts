@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
     {name: 'Search & Browse', icon: 'magnify', href: '/browse'},
     {name: 'Provide Feedback', icon: 'thumbs-up-down', href: '/feedback'},
     {name: 'About CeR', icon: 'information', href: '/about'},
-    {name: 'Contact Us', icon: 'phone', href: '/contact'}
+    {name: 'Contact Us', icon: 'phone-classic', href: '/contact'}
   ];
 
   categories = [];
