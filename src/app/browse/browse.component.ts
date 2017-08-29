@@ -49,7 +49,6 @@ export class BrowseComponent implements OnInit, OnDestroy {
     this.setNumCategoryColumns(this.getMQAlias());
 
     this.mediaSub = this.media.subscribe((change: MediaChange) => {
-      console.log(change.mqAlias);
       this.setNumCategoryColumns(change.mqAlias);
     });
 
@@ -76,9 +75,6 @@ export class BrowseComponent implements OnInit, OnDestroy {
   }
 
   getMQAlias(): string {
-
-    //console.log(DEFAULT_BREAKPOINTS);
-
     const width = window.innerWidth;
 
     // fxFlex breakpoints
@@ -126,7 +122,6 @@ export class BrowseComponent implements OnInit, OnDestroy {
         numCols = 4;
         break;
     }
-    //console.log(mqAlias);
 
     if (this.embedded && mqAlias !== 'xs') {
       numCols -= 1;

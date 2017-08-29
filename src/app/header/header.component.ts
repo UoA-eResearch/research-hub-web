@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit {
   }
 
   trackGo() {
-    console.log('track go: ', this.goEventCategory, this.title, this.goHref);
     this.analyticsService.trackGo(this.goEventCategory, this.title, this.goHref);
   }
 

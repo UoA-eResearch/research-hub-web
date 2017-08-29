@@ -61,7 +61,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   onSearchChange(searchBarParams: SearchBarParams) {
-    console.log('SEARCH CHANGE!!!!!!');
     this.analyticsService.trackSearch(searchBarParams.category, searchBarParams.searchText);
 
     this.progressBarService.setVisible();

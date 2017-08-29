@@ -46,7 +46,6 @@ export class ResultsListComponent implements OnInit {
 
   trackOutboundLink(result: GetResultsListItem) {
     if (result['type'] !== undefined && result['type'] === 'policy') {
-      console.log('track policy!');
       this.analyticsService.trackPolicy(result.getTitle(), result.getHref());
     } else {
       this.analyticsService.trackOutboundLink(result.getHref());
