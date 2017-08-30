@@ -133,7 +133,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         break;
     }
 
-    Observable.forkJoin(
+    const observable = Observable.forkJoin(
       observables
     ).subscribe(outputs => {
 
@@ -160,6 +160,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       this.showEmptyState = totalElements === 0;
       this.updateSearchResultsSummary();
       this.showProgressBar = false;
+      observable.unsubscribe();
     });
   }
 
