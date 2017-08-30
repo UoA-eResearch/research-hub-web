@@ -1,5 +1,5 @@
 <div class="search-results" ngClass.xs="search-results-xs">
-  <div *ngIf="showRefineSearch" class="search-results-info">
+  <div *ngIf="!showEmptyState" class="search-results-info">
     <p>Refine your search for <span class="search-results-text">'{{searchBarService.searchText}}'</span> in</p>
     <md-chip-list>
       <ng-container *ngFor="let item of searchResultsSummary;">

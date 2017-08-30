@@ -2,7 +2,7 @@ import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {SearchBarParams, SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from "rxjs/Subscription";
-import {MenuItem, MenuItemType, MenuService} from "../menu.service";
+import {ContentTypeIds, MenuItem, MenuItemType, MenuService} from "../menu.service";
 import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.service";
 import {Person} from "../model/Person";
 import {Content} from "../model/Content";
@@ -11,6 +11,7 @@ import {Page} from "../model/Page";
 import {Policy} from "../model/Policy";
 import {AnalyticsService} from "../app.analytics.service";
 import {Title} from "@angular/platform-browser";
+import {Observable} from "rxjs/Observable";
 
 
 class SearchResultsSummary {
@@ -51,8 +52,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private policiesPage: Page<Policy>;
   private maxNumberOfItems = 50;
   private searchResultsSummary: Array<SearchResultsSummary>;
-
-  private showRefineSearch = true;
+  private pages: [any];
   private showEmptyState = false;
 
   constructor(private breadcrumbService: BreadcrumbService, protected searchBarService: SearchBarService,
@@ -62,95 +62,96 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search Results');
   }
 
+  ngOnInit() {
+    this.titleService.setTitle('Research Hub: Search Results');
+
+    this.supportPage = new Page<Content>();
+    this.instrumentsEquipmentPage = new Page<Content>();
+    this.trainingPage = new Page<Content>();
+    this.softwarePage = new Page<Content>();
+    this.facilitiesSpacesPage = new Page<Content>();
+    this.knowledgeArticlePage = new Page<Content>();
+    this.guidesPage = new Page<Content>();
+    this.peoplePage = new Page<Person>();
+    this.policiesPage = new Page<Policy>();
+
+    this.pages = [this.supportPage, this.instrumentsEquipmentPage, this.trainingPage, this.softwarePage,
+      this.facilitiesSpacesPage, this.knowledgeArticlePage, this.guidesPage, this.peoplePage, this.policiesPage];
+
+    this.onSearchChange(this.searchBarService.getSearchParams()); // Get search parameters on initial page landing
+    this.searchChangeSub = this.searchBarService.searchChange.debounceTime(300).distinctUntilChanged().subscribe(searchParams => {
+      this.onSearchChange(searchParams);
+    });
+  }
+
+  ngOnDestroy() {
+    this.searchChangeSub.unsubscribe();
+  }
+
   onSearchChange(searchBarParams: SearchBarParams) {
     this.analyticsService.trackSearch(searchBarParams.category, searchBarParams.searchText);
 
-    this.progressBarService.setVisible();
+    // this.progressBarService.setVisible();
     const categoryId = MenuService.getMenuItemId([searchBarParams.category]);
     const menuItem = this.menuService.getMenuItem(categoryId);
 
-    this.supportPage = undefined;
-    this.instrumentsEquipmentPage = undefined;
-    this.trainingPage = undefined;
-    this.softwarePage = undefined;
-    this.facilitiesSpacesPage = undefined;
-    this.peoplePage = undefined;
-    this.knowledgeArticlePage = undefined;
-    this.policiesPage = undefined;
+    const observables = [];
+    let pagesToUpdate = [];
 
     switch (menuItem.type) {
       case MenuItemType.All:
-        this.getContent(searchBarParams, menuItem);
-        this.getPeople(searchBarParams);
-        this.getPolicies(searchBarParams);
+        for (const contentTypeId of Object.keys(ContentTypeIds)) {
+          if (Number(contentTypeId)) {
+            observables.push(this.getContentObservable(searchBarParams.searchText, contentTypeId));
+          }
+        }
+        observables.push(this.getPeopleObservable(searchBarParams));
+        observables.push(this.getPoliciesObservable(searchBarParams));
+        pagesToUpdate = this.pages;
         break;
       case MenuItemType.Content:
-        this.getContent(searchBarParams, menuItem);
-        break;
-      case MenuItemType.Guide:
+        observables.push(this.getContentObservable(searchBarParams.searchText, menuItem.contentTypeId));
+        pagesToUpdate = [this.pages[menuItem.contentTypeId - 1]];
         break;
       case MenuItemType.Person:
-        this.getPeople(searchBarParams);
+        observables.push(this.getPeopleObservable(searchBarParams));
+        pagesToUpdate = [this.peoplePage];
         break;
       case MenuItemType.Policy:
-        this.getPolicies(searchBarParams);
+        observables.push(this.getPoliciesObservable(searchBarParams));
+        pagesToUpdate = [this.policiesPage];
         break;
       default:
         break;
     }
-  }
 
-  getContent(searchBarParams: SearchBarParams, menuItem: MenuItem) {
-    if (menuItem.type === MenuItemType.All || menuItem.contentTypeId === this.menuService.contentTypeIdGuide) {
-      this.getContentItems(searchBarParams.searchText, this.menuService.contentTypeIdGuide, page => {
-        this.guidesPage = page;
-        this.updateSearchResultsSummary();
-      });
-    }
+    Observable.forkJoin(
+      observables
+    ).subscribe(outputs => {
 
-    if (menuItem.type === MenuItemType.All || menuItem.contentTypeId === this.menuService.contentTypeIdSupport) {
-      this.getContentItems(searchBarParams.searchText, this.menuService.contentTypeIdSupport, page => {
-        this.supportPage = page;
-        this.updateSearchResultsSummary();
-      });
-    }
+      let totalElements = 0;
 
-    if (menuItem.type === MenuItemType.All || menuItem.contentTypeId === this.menuService.contentTypeIdInstrumentsEquipment) {
-      this.getContentItems(searchBarParams.searchText, this.menuService.contentTypeIdInstrumentsEquipment, page => {
-        this.instrumentsEquipmentPage = page;
-        this.updateSearchResultsSummary();
-      });
-    }
+      // Populate pages
+      for (let i = 0; i < pagesToUpdate.length; i++) {
+        const output = outputs[i];
+        const page = pagesToUpdate[i];
+        Object.assign(page, output);
 
-    if (menuItem.type === MenuItemType.All || menuItem.contentTypeId === this.menuService.contentTypeIdTraining) {
-      this.getContentItems(searchBarParams.searchText, this.menuService.contentTypeIdTraining, page => {
-        this.trainingPage = page;
-        this.updateSearchResultsSummary();
-      });
-    }
+        totalElements += page.content.length;
+      }
 
-    if (menuItem.type === MenuItemType.All || menuItem.contentTypeId === this.menuService.contentTypeIdSoftware) {
-      this.getContentItems(searchBarParams.searchText, this.menuService.contentTypeIdSoftware, page => {
-        this.softwarePage = page;
-        this.updateSearchResultsSummary();
-      });
-    }
+      // Clear data for pages that should not be shown
+      for (let i = 0; i < this.pages.length; i++) {
+        const pageToClear = this.pages[i];
 
-    if (menuItem.type === MenuItemType.All || menuItem.contentTypeId === this.menuService.contentTypeIdFacilitiesSpaces) {
-      this.getContentItems(searchBarParams.searchText, this.menuService.contentTypeIdFacilitiesSpaces, page => {
-        this.facilitiesSpacesPage = page;
-        this.updateSearchResultsSummary();
-      });
-    }
+        if (pagesToUpdate.indexOf(pageToClear) < 0) {
+          pageToClear.clear();
+        }
+      }
 
-    if (menuItem.type === MenuItemType.All || menuItem.contentTypeId === this.menuService.contentTypeIdKnowledgeArticle) {
-      this.getContentItems(searchBarParams.searchText, this.menuService.contentTypeIdKnowledgeArticle, page => {
-        this.knowledgeArticlePage = page;
-        this.updateSearchResultsSummary();
-      });
-    }
-
-
+      this.showEmptyState = totalElements === 0;
+      this.updateSearchResultsSummary();
+    });
   }
 
   updateSearchResultsSummary() {
@@ -167,50 +168,25 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     ];
   }
 
-  getContentItems(searchText: string, contentTypeId: number, func) {
+  getContentObservable(searchText: string, contentTypeId) {
     const searchParams = new ContentItemsSearchParams();
     searchParams.setSearchText(searchText);
     searchParams.setSize(this.maxNumberOfItems);
     searchParams.setContentTypes([contentTypeId]);
-    this.apiService.getContentItems(searchParams).subscribe(func);
+    return this.apiService.getContentItems(searchParams);
   }
 
-  getPolicies(searchBarParams: SearchBarParams) {
+  getPoliciesObservable(searchBarParams: SearchBarParams) {
     const searchParams = new SearchParams();
     searchParams.setSearchText(searchBarParams.searchText);
     searchParams.setSize(this.maxNumberOfItems);
-
-    this.apiService.getPolicies(searchParams).subscribe(
-      page => {
-        this.policiesPage = page;
-        this.updateSearchResultsSummary();
-      }
-    );
+    return this.apiService.getPolicies(searchParams);
   }
 
-  getPeople(searchBarParams: SearchBarParams) {
+  getPeopleObservable(searchBarParams: SearchBarParams) {
     const searchParams = new SearchParams();
     searchParams.setSearchText(searchBarParams.searchText);
     searchParams.setSize(this.maxNumberOfItems);
-
-    this.apiService.getPeople(searchParams).subscribe(
-      page => {
-        this.peoplePage = page;
-        this.updateSearchResultsSummary();
-      }
-    );
-  }
-
-  ngOnInit() {
-    this.titleService.setTitle('Research Hub: Search Results');
-
-    this.onSearchChange(this.searchBarService.getSearchParams()); // Get search parameters on initial page landing
-    this.searchChangeSub = this.searchBarService.searchChange.debounceTime(300).distinctUntilChanged().subscribe(searchParams => {
-      this.onSearchChange(searchParams);
-    });
-  }
-
-  ngOnDestroy() {
-    this.searchChangeSub.unsubscribe();
+    return this.apiService.getPeople(searchParams);
   }
 }

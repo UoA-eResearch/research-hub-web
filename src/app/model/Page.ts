@@ -26,4 +26,15 @@ export class Page<T> {
 
     return obj;
   }
+
+  clear() {
+    this.content.length = 0;
+    this.last = false;
+    this.totalPages = 0;
+    this.totalElements = 0;
+    this.first = true;
+    this.numberOfElements = 0;
+    this.size = 0;
+    this.number = 0;
+  }
 }
