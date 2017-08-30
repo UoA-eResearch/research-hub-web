@@ -18,7 +18,7 @@ import {
   MdSelectModule,
   MdSidenavModule,
   MdToolbarModule,
-  MdProgressBarModule, MdChipsModule
+  MdProgressBarModule, MdChipsModule, MdFormField, MdFormFieldModule
 } from "@angular/material";
 import {BreadcrumbService, Ng2BreadcrumbModule} from "ng2-breadcrumb/ng2-breadcrumb";
 
@@ -96,6 +96,7 @@ import { GuideCategoryComponent } from './guide-category/guide-category.componen
     MdToolbarModule,
     MdListModule,
     MdProgressBarModule,
+    MdFormFieldModule,
     routing
   ],
   providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService,

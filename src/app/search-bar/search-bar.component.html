@@ -1,19 +1,17 @@
-<div class="search-bar">
-  <div class="select" fxHide.lt-sm>
-    <md-select floatPlaceholder="never" placeholder="Categories" [(ngModel)]="category">
-      <md-option *ngFor="let category of categoriesValue" [value]="category.id">
-        {{category.name}}
-      </md-option>
-    </md-select>
-  </div>
+<div class="search-bar" fxLayout="row" fxLayoutGap="1em">
+  <md-select fxFlex="200px" fxHide.lt-sm floatPlaceholder="never" placeholder="Categories" [(ngModel)]="category">
+    <md-option *ngFor="let category of categoriesValue" [value]="category.id">
+      {{category.name}}
+    </md-option>
+  </md-select>
 
-  <div class="search-box">
-    <md-input-container floatPlaceholder="never" style="margin-top: 12px;">
-      <span mdPrefix><md-icon>search</md-icon></span>
-      <input mdInput placeholder="Search" [(ngModel)]="searchText">
-      <button mdSuffix (click)="clearSearchText()" md-icon-button>
-        <md-icon>close</md-icon>
-      </button>
-    </md-input-container>
-  </div>
+  <md-form-field class="search-box" fxFlex floatPlaceholder="never">
+    <button mdPrefix md-icon-button>
+      <md-icon>search</md-icon>
+    </button>
+    <input mdInput placeholder="Search" [(ngModel)]="searchText">
+    <button mdSuffix (click)="clearSearchText()" md-icon-button>
+      <md-icon>close</md-icon>
+    </button>
+  </md-form-field>
 </div>

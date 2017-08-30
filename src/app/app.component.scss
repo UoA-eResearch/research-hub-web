@@ -27,6 +27,8 @@
  * and contains same sized text
  */
 
+
+
 .mat-select-trigger {
   font-size: 20px !important;
 }
@@ -114,11 +116,10 @@
   @include mat-typography-level-to-styles($app-primary-header-typography, headline);
 }
 
-.primary-header .mat-select-value-text{
-  font-size: mat-font-size($app-search-bar-select-typography, title) !important;
-  font-weight: mat-font-weight($app-search-bar-select-typography, title) !important;
-}
-
+//.primary-header .mat-select-value-text{
+//  font-size: mat-font-size($app-search-bar-select-typography, title) !important;
+//  font-weight: mat-font-weight($app-search-bar-select-typography, title) !important;
+//}
 
 
 /*
@@ -147,45 +148,6 @@ footer .logo img {
   height: 5em;
 }
 
-
-
-//footer {
-//  //font-family: $heading-font-family;
-//  background-color: $color-primary;
-//  height: 100px;
-//  flex: none;
-//  padding-left: 2em;
-//  padding-right: 2em;
-//
-//  display: flex;
-//  flex-direction: row;
-//  align-items: center;
-//  justify-content: center;
-//}
-//
-//footer .logo {
-//  flex: 2;
-//  justify-content: flex-start;
-//}
-//
-//footer .copyright {
-//  text-align: right;
-//  order: 1;
-//  flex: 4;
-//  justify-content: flex-end;
-//}
-//
-//footer .logo img {
-//  display: block;
-//  height: 70px;
-//}
-//
-//footer .copyright a {
-//  text-decoration: none;
-//  color: white;
-//  font-size: mat-font-size($app-base-typography, button) !important; // 14px
-//  font-weight: mat-font-weight($app-base-typography, caption) !important;
-//}
 
 /*
  * Breadcrumb styling
@@ -232,73 +194,3 @@ app-search-bar {
   width: 100%;
 }
 
-//@media (max-width: $xs-thresh-max) {
-//
-//  //.primary-toolbar, app-search-bar, .primary-toolbar .mat-toolbar-layout, .primary-toolbar .mat-toolbar-row   {
-//  //  height: $mat-toolbar-height-desktop * 2 !important;
-//  //}
-//
-//  footer {
-//    flex-direction: column;
-//    height: 200px;
-//    min-height: 100px;
-//  }
-//
-//  footer .logo {
-//    flex: 1.6;
-//
-//    display: flex; /* Also makes this a flexbox which we can centre items in */
-//    align-items: center;
-//  }
-//
-//  footer .copyright {
-//    text-align: center;
-//    flex: 1;
-//  }
-//
-//  .sidenav-content {
-//    min-height: calc(100vh - 200px);
-//  }
-//
-//  //.primary-header h1 {
-//  //  padding: 0;
-//  //}
-//}
-
-/*
- * Centering of page content
- */
-
-
-//router-outlet + * {
-//  display: block;
-//  margin: 2em auto 2em auto;
-//  width: $width-percentage;
-//}
-//
-//@media (max-width: $xs-thresh-max) {
-//  router-outlet + * {
-//    margin: 2em 1em 2em 1em;
-//    width: 100%;
-//  }
-//}
-//
-//@media (min-width: $sm-thresh-min) and (max-width: $sm-thresh-max) {
-//  router-outlet + * {
-//    width: 80%;
-//  }
-//}
-//
-//@media (min-width: $md-thresh-min) and (max-width: $lg-thresh-max) {
-//  router-outlet + * {
-//    width: calc(80% - #{$sidenav-width});
-//  }
-//}
-//
-//@media (min-width: $xl-thresh-min) {
-//  router-outlet + * {
-//    width: calc(80% - #{$sidenav-width});
-//    max-width: $xl-thresh-min;
-//  }
-//}
-//

@@ -8,80 +8,16 @@ $md-select-flex: 1;
 $search-flex: 4;
 
 .search-bar {
-  flex: none;
-  display: flex;
-  flex-direction: row;
-  height: inherit;
+  height: 100%;
 }
 
-.search-bar .select {
-  margin-right: 1em;
-  flex: $md-select-flex;
-  display: flex;
-  align-items: center;
-  max-width: $md-select-width;
-
+.search-box {
+  margin-top: 15px;
 }
-
-.search-bar .select md-select {
-  flex: $md-select-flex;
-  max-width: $md-select-width;
-}
-
 
 .mat-option {
   font-size: mat-font-size($app-search-bar-select-typography, body-1) !important;
   font-weight: mat-font-weight($app-search-bar-select-typography, body-1) !important;
 }
 
-.search-box md-input-container {
-  flex: $search-flex;
-  top: 5px;
-  font-size: mat-font-size($app-search-bar-typography, input) !important;
-  font-weight: mat-font-weight($app-search-bar-typography, input) !important;
-}
 
-.search-box md-icon {
-  //font-size: 1.2em;
-  font-size: mat-font-size($app-search-bar-typography, body-1) !important;
-  font-weight: mat-font-weight($app-search-bar-typography, body-1) !important;
-}
-
-.search-box button {
-  top: 0.25em;
-}
-
-.search-box md-input-container span:first-child {
-  margin-right: 0.4em;
-}
-
-.search-bar .search-box {
-  flex: $search-flex;
-  display: flex;
-  align-items: center;
-}
-
-@media (max-width: $xs-thresh-max) {
-  .search-bar {
-    flex: none;
-    display: flex;
-    flex-direction: column;
-    //height: $mat-toolbar-height-desktop * 2 !important;
-  }
-
-  .search-bar .select md-select {
-    max-width: 100%;
-    width: 100%;
-    flex: 1;
-  }
-
-  .search-bar .select {
-    max-width: 100%;
-    flex: 1;
-    margin-right: 0;
-  }
-
-  .search-bar .search-box {
-    flex: 1;
-  }
-}

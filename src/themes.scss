@@ -200,6 +200,11 @@ $color-pink: map-get($hub-pink, 500);
 // Custom themes for specific components
 .search-bar-theme {
 
+  div.mat-input-infix.mat-form-field-infix {
+    border-top: 0 !important;
+    font-size: 0.8em !important;
+  }
+
   $search-bar-primary: mat-palette($hub-navy, 50);
   $search-bar-accent: mat-palette($hub-pink, A200, A100, A400);
   $search-bar-theme: mat-dark-theme($search-bar-primary, $search-bar-accent);
