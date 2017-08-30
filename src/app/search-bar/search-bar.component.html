@@ -8,11 +8,11 @@
   </div>
 
   <div class="search-box">
-    <md-input-container floatPlaceholder="never">
-      <span mdPrefix><md-icon class="mdi mdi-magnify"></md-icon></span>
+    <md-input-container floatPlaceholder="never" style="margin-top: 12px;">
+      <span mdPrefix><md-icon>search</md-icon></span>
       <input mdInput placeholder="Search" [(ngModel)]="searchText">
       <button mdSuffix (click)="clearSearchText()" md-icon-button>
-        <md-icon class="mdi mdi-close"></md-icon>
+        <md-icon>close</md-icon>
       </button>
     </md-input-container>
   </div>
