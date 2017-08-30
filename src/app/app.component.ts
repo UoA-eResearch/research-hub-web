@@ -10,6 +10,7 @@ import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 import {ApiService} from "./app.api.service";
 import {AnalyticsService} from "./app.analytics.service";
 import { isPlatformBrowser } from '@angular/common';
+import {BrowseComponent} from "./browse/browse.component";
 
 
 @Component({
@@ -57,16 +58,23 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  updateSideNav(mqAlias) {
+    if (['xs', 'sm'].includes(mqAlias)) {
+      this.sideNavMode = 'over';
+      this.isSideNavOpened = false;
+    } else {
+      this.sideNavMode = 'side';
+      this.isSideNavOpened = true;
+    }
+  }
+
   ngOnInit() {
     // Update side nav
+
+    this.updateSideNav(BrowseComponent.getMQAlias());
+
     this.mediaChangeSub = this.observableMedia.subscribe((change: MediaChange) => {
-      if (['xs', 'sm'].includes(change.mqAlias)) {
-        this.sideNavMode = 'over';
-        this.isSideNavOpened = false;
-      } else {
-        this.sideNavMode = 'side';
-        this.isSideNavOpened = true;
-      }
+      this.updateSideNav(change.mqAlias);
     });
 
     // Navigate to the search page if the user types text in

@@ -2,14 +2,10 @@
   <md-sidenav-container class="sidenav-container">
     <md-sidenav #sidenav [mode]="sideNavMode" [opened]="isSideNavOpened">
       <md-toolbar color="primary">
-        <!--<button md-icon-button>-->
-          <!--<md-icon>device_hub</md-icon>-->
-        <!--</button>-->
         <span>Research Hub</span>
       </md-toolbar>
       <md-nav-list>
         <md-list-item *ngFor="let item of menuItems" [routerLink]="item.href">
-          <!--<md-icon md-list-icon>{{item.icon}}</md-icon>-->
           <md-icon md-list-icon class="mdi mdi-{{item.icon}}"></md-icon>
           <a md-line >{{item.name}}</a>
         </md-list-item>
