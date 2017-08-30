@@ -49,17 +49,37 @@ a {
 
  */
 
+@mixin headings {
+  h1, h2, h3, h4, h5, h5 {
+    @content;
+  }
+}
+
+@mixin links {
+ a {
+   @content;
+ }
+}
+
 .description {
   background-color: $color-pink;
 }
 
-.description app-markdown {
+.description app-markdown{
+
   color: $body-dark-bg-font-color;
+
+  @include headings {
+    color: $body-dark-bg-font-color;
+  }
+
+  @include links {
+    color: $link-dark-bg-color-1;
+  }
+
 }
 
-.description app-markdown a {
-  color: $link-dark-bg-color;
-}
+
 
 app-markdown h3 {
   color:$heading-2-font-color;

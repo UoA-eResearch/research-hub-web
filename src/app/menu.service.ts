@@ -95,6 +95,8 @@ export class MenuService {
     this.createMenuItemsDict('', this.root.menuItems);
     this.createFriendlyNames('/browse', this.root.menuItems);
     this.createFriendlyNames('/search', this.root.menuItems);
+    this.breadcrumbService.addFriendlyNameForRoute('/browse', 'Browse');
+    this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search');
     this.breadcrumbService.addFriendlyNameForRoute('/orgUnits', 'Organisational Units');
     this.breadcrumbService.addFriendlyNameForRoute('/people', 'People');
     this.breadcrumbService.addFriendlyNameForRoute('/resources', 'Resources');

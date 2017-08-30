@@ -192,11 +192,11 @@ footer .logo img {
  */
 
 breadcrumb span {
-  color: $heading-3-font-color;
+  color: $breadcrumb-current-color;
 }
 
 breadcrumb a {
-  color: $body-dark-bg-font-color;
+  color: $breadcrumb-previous-color;
 }
 
 breadcrumb ul {
