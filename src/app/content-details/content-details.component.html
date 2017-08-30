@@ -1,6 +1,6 @@
 <ng-container *ngIf="content">
   <app-header [title]="content.name"
-              [description]="'<p>' + content.getMainOrgUnit().name + '</p>'"
+              [description]="'<p>' + content.getMainOrgUnitName() + '</p>'"
               [goHref]="content.callToAction"
               [goEventCategory]="analyticsService.eventCategoryContent">
   </app-header>

@@ -62,12 +62,17 @@ export class Content implements GetResultsListItem {
 
 
 
-  getMainOrgUnit(): OrgUnit {
+  getMainOrgUnitName(): string {
+    let name = '';
+
     if (this.orgUnits.length > 0) {
-      return this.orgUnits[0];
+      const orgUnit = this.orgUnits[0];
+      if (orgUnit.name !== undefined) {
+        name = orgUnit.name;
+      }
     }
 
-    return undefined;
+    return name;
   }
 
   getId(): number {
