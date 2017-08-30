@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   constructor(private breadcrumbService: BreadcrumbService, private navigationService: MenuService,
-              private searchBarService: SearchBarService, private router: Router, private progressBarService: ProgressBarService,
+              private searchBarService: SearchBarService, private router: Router,
               private observableMedia: ObservableMedia, private apiService: ApiService, private analyticsService: AnalyticsService) {
 
     // Populate menuItems for search-bar bar

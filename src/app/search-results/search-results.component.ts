@@ -41,6 +41,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   @ViewChild('policiesResults') policiesResults: ElementRef;
 
   private searchChangeSub: Subscription;
+  private searchChangeImmediateSub: Subscription;
   private guidesPage: Page<Content>;
   private supportPage: Page<Content>;
   private instrumentsEquipmentPage: Page<Content>;
@@ -54,6 +55,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private searchResultsSummary: Array<SearchResultsSummary>;
   private pages: [any];
   private showEmptyState = false;
+  private showProgressBar = true;
 
   constructor(private breadcrumbService: BreadcrumbService, protected searchBarService: SearchBarService,
               protected menuService: MenuService, private apiService: ApiService,
@@ -78,20 +80,26 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.pages = [this.supportPage, this.instrumentsEquipmentPage, this.trainingPage, this.softwarePage,
       this.facilitiesSpacesPage, this.knowledgeArticlePage, this.guidesPage, this.peoplePage, this.policiesPage];
 
+    this.showProgressBar = true;
     this.onSearchChange(this.searchBarService.getSearchParams()); // Get search parameters on initial page landing
-    this.searchChangeSub = this.searchBarService.searchChange.debounceTime(300).distinctUntilChanged().subscribe(searchParams => {
+
+    this.searchChangeImmediateSub = this.searchBarService.searchChange.distinctUntilChanged().subscribe(searchParams => {
+      this.showProgressBar = true;
+    });
+
+    this.searchChangeSub = this.searchBarService.searchChange.debounceTime(200).distinctUntilChanged().subscribe(searchParams => {
       this.onSearchChange(searchParams);
     });
   }
 
   ngOnDestroy() {
     this.searchChangeSub.unsubscribe();
+    this.searchChangeImmediateSub.unsubscribe();
   }
 
   onSearchChange(searchBarParams: SearchBarParams) {
     this.analyticsService.trackSearch(searchBarParams.category, searchBarParams.searchText);
 
-    // this.progressBarService.setVisible();
     const categoryId = MenuService.getMenuItemId([searchBarParams.category]);
     const menuItem = this.menuService.getMenuItem(categoryId);
 
@@ -151,6 +159,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
       this.showEmptyState = totalElements === 0;
       this.updateSearchResultsSummary();
+      this.showProgressBar = false;
     });
   }
 
