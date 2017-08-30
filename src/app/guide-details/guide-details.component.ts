@@ -8,6 +8,7 @@ import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import { Location } from '@angular/common';
 import {MenuService} from "../menu.service";
 import {AnalyticsService} from "../app.analytics.service";
+import {BrowseComponent} from "../browse/browse.component";
 
 
 @Component({
@@ -28,6 +29,8 @@ export class GuideDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.setNumCategoryColumns(BrowseComponent.getMQAlias());
+
     this.mediaSub = this.media.subscribe((change: MediaChange) => {
       this.setNumCategoryColumns(change.mqAlias);
     });

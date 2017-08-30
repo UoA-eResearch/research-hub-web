@@ -44,12 +44,11 @@ export class BrowseComponent implements OnInit, OnDestroy {
       this.analyticsService.trackPageView(this.location.path(), 'Browse Categories');
     }
 
-    this.getMQAlias();
+    BrowseComponent.getMQAlias();
 
-    this.setNumCategoryColumns(this.getMQAlias());
+    this.setNumCategoryColumns(BrowseComponent.getMQAlias());
 
     this.mediaSub = this.media.subscribe((change: MediaChange) => {
-      console.log(change.mqAlias);
       this.setNumCategoryColumns(change.mqAlias);
     });
 
@@ -75,10 +74,7 @@ export class BrowseComponent implements OnInit, OnDestroy {
     this.mediaSub.unsubscribe();
   }
 
-  getMQAlias(): string {
-
-    //console.log(DEFAULT_BREAKPOINTS);
-
+  public static getMQAlias(): string {
     const width = window.innerWidth;
 
     // fxFlex breakpoints
@@ -88,15 +84,15 @@ export class BrowseComponent implements OnInit, OnDestroy {
     const lg = 1920;
     const xl = 5000;
 
-    if ( width < xs){
-
-    } else if (width >= xs && width < sm){
+    if ( width < xs) {
       return 'xs';
-    } else if (width >= sm && width < md){
+    } else if (width >= xs && width < sm) {
+      return 'xs';
+    } else if (width >= sm && width < md) {
       return 'sm';
-    } else if (width >= md && width < lg){
+    } else if (width >= md && width < lg) {
       return 'md';
-    } else if (width >= lg && width < xl){
+    } else if (width >= lg && width < xl) {
       return 'lg';
     } else {
       return 'xl';
@@ -126,7 +122,6 @@ export class BrowseComponent implements OnInit, OnDestroy {
         numCols = 4;
         break;
     }
-    //console.log(mqAlias);
 
     if (this.embedded && mqAlias !== 'xs') {
       numCols -= 1;

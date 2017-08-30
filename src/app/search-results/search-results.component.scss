@@ -12,6 +12,19 @@
   margin-top: 1em;
 }
 
+.search-results-info {
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 0.5em;
+}
+
+.search-results-text {
+  color: $color-pink;
+  font-weight: 500;
+  font-size: 1.2em !important;
+  font-style: italic;
+}
+
 //md-chip.mat-chip {
 //  font-size: mat-font-size($app-chips-typography, button) !important;
 //  font-weight: mat-font-weight($app-chips-typography, button) !important;

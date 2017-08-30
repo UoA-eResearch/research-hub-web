@@ -10,3 +10,11 @@ h2.mat-subheader{
   font-size: mat-font-size($app-base-typography, title) !important;
   font-weight: mat-font-weight($app-base-typography, title) !important;
 }
+
+h3.mat-subheader{
+  color:$subheading-font-color !important;
+  font-size: mat-font-size($app-base-typography, subheading-1) !important;
+  font-weight: mat-font-weight($app-base-typography, subheading-1) !important;
+  margin-top: 0.2em !important;
+  margin-bottom: 0 !important;
+}

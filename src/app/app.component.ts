@@ -3,12 +3,13 @@ import * as moment from "moment";
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {MenuService} from "./menu.service";
 import {SearchBarService} from "./search-bar/search-bar.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {ProgressBarService} from "./app.progress-bar.service";
 import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 import {ApiService} from "./app.api.service";
 import {AnalyticsService} from "./app.analytics.service";
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private mediaChangeSub: Subscription;
 
   private searchTextChangeSub: Subscription;
+  private routerSub: Subscription;
 
   menuItems = [
     {name: 'Home', icon: 'home', href: '/home'},
@@ -73,11 +75,20 @@ export class AppComponent implements OnInit, OnDestroy {
         this.router.navigate(['/search']);
       }
     });
+
+    if (isPlatformBrowser) {
+      this.routerSub = this.router.events
+        .filter(event => event instanceof NavigationEnd)
+        .subscribe(event => {
+          window.scrollTo(0, 0);
+        });
+    }
   }
 
   ngOnDestroy() {
     this.mediaChangeSub.unsubscribe();
     this.searchTextChangeSub.unsubscribe();
+    this.routerSub.unsubscribe();
   }
 
   getYear() {
