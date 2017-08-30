@@ -12,7 +12,7 @@ $app-base-typography: mat-typography-config(
   $headline:      mat-typography-level(28px, 32px, 400), // <h1>
   $title:         mat-typography-level(28px, 32px, 500), // <h2>
   $subheading-2:  mat-typography-level(20px, 28px, 400), // <h3>
-  $subheading-1:  mat-typography-level(15px, 24px, 400), // <h4>
+  $subheading-1:  mat-typography-level(16px, 24px, 400), // <h4>
   $body-2:        mat-typography-level(16px, 24px, 500), // bolder body text
   $body-1:        mat-typography-level(16px, 20px, 400), // base body text <p> ?
   $caption:       mat-typography-level(12px, 20px, 400), // smaller body and hint text
@@ -88,11 +88,12 @@ $app-browse-grid-typography: mat-typography-config(
 );
 
 
-$app-result-list-typography: mat-typography-config(
-  $body-1:      mat-typography-level(16px, 20px, 400), // text
-  $subheading-2: mat-typography-level(20px, 20px, 400), // h3 e.g. Managing Research Data
-  $subheading-1: mat-typography-level(28px, 20px, 400) // we use this for the section subheadings e.g. Guides, Policies
-);
+// NO LONGER NEEDED
+//$app-result-list-typography: mat-typography-config(
+//  $body-1:      mat-typography-level(16px, 20px, 400), // text
+//  $subheading-2: mat-typography-level(20px, 20px, 400), // h3 e.g. Managing Research Data
+//  $subheading-1: mat-typography-level(28px, 20px, 400) // we use this for the section subheadings e.g. Guides, Policies
+//);
 
 $app-chips-typography: mat-typography-config(
   $button:      mat-typography-level(16px, 20px, 400) // text
@@ -108,13 +109,20 @@ Colors
 $heading-1-font-color: map-get($hub-pink, 500);
 $heading-2-font-color: map-get($hub-pink, 500);
 $heading-3-font-color: map-get($hub-navy, 500);
+$heading-4-font-color: map-get($hub-navy, 500);
 
 $subheading-font-color: map-get($hub-pink, 500); // used in results list
 
-$body-font-color:  black;
-$body-link-color: map-get($hub-navy, 500);
+$body-light-bg-font-color:  black;
+$link-light-bg-color: map-get($hub-teal, 500);
 
-$browse-tile-font-color: white;
+$body-dark-bg-font-color:  white;
+$link-dark-bg-color: map-get($hub-orange, 500);
+
+$browse-tile-font-color: $body-dark-bg-font-color;
+
+$markdown-heading-color: $heading-2-font-color;
+$markdown-subheading-color: $heading-3-font-color;
 
 
 

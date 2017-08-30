@@ -6,6 +6,7 @@ import {Content} from "./Content";
 export class OrgUnit implements GetResultsListItem {
   id: number;
   name: string;
+  description:string;
   url: string;
   people: Array<Person>;
   contentItems: Array<Content>;
@@ -38,6 +39,7 @@ export class OrgUnit implements GetResultsListItem {
     orgUnit.id = object['id'];
     orgUnit.name = object['name'];
     orgUnit.url = object['url'];
+    orgUnit.description = '';
     orgUnit.people = Person.fromObjects(object['people']);
     orgUnit.contentItems = Content.fromObjects(object['contentItems']);
 

@@ -1,5 +1,5 @@
 <md-nav-list>
-  <h3 md-subheader *ngIf="titleValue !== ''">{{titleValue}}</h3>
+  <h2 md-subheader *ngIf="titleValue !== ''">{{titleValue}}</h2>
   <ng-container *ngFor="let result of resultsValue">
     <ng-container *ngIf="result.getHref() === undefined">
       <md-list-item [routerLink]="getRoute(result)">

@@ -8,6 +8,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  color:$body-light-bg-font-color;
 }
 
 /*
@@ -17,40 +18,71 @@ html, body {
 
 h1 {
   margin-top: 0;
-  //font-family: $heading-font-family;
-  //font-size: $heading-1-font-size;
   color: $heading-1-font-color;
 }
 
 
 h2 {
-  //font-family: $heading-font-family;
-  //font-size: $heading-2-font-size;
   color: $heading-2-font-color;
 }
 
 h3 {
-  //font-family: $heading-font-family;
+  color: $heading-3-font-color;
 }
 
+h4 {
+  color: $heading-4-font-color;
+}
 
 p {
-  //font-family: $body-font-family;
-  //font-size: $body-font-size;
-  //color: $body-font-color;
-  //color: white;
   margin-top: 0;
 }
 
 a {
   text-decoration: none;
-  color: $body-link-color;
+  color: $link-light-bg-color;
 }
+
+/* app-markdown related styles
+
+  (they don't take effect in the component scss)
+
+ */
 
 .description {
   background-color: $color-pink;
 }
 
-.description > app-markdown * p {
-  color: white !important;
+.description app-markdown {
+  color: $body-dark-bg-font-color;
+}
+
+.description app-markdown a {
+  color: $link-dark-bg-color;
+}
+
+app-markdown h3 {
+  color:$heading-2-font-color;
+  font-size: mat-font-size($app-base-typography, title) !important;
+  font-weight: mat-font-weight($app-base-typography, title) !important;
+}
+
+app-markdown h4 {
+  color:$heading-3-font-color;
+  font-size: mat-font-size($app-base-typography, subheading-2) !important;
+  font-weight: mat-font-weight($app-base-typography, subheading-2) !important;
+}
+
+// White on berry description background
+  //.description > app-markdown * p {
+  //color: white !important;
+//}
+
+/*
+Gloabl md-chip style
+ */
+
+md-chip.mat-chip {
+  font-size: mat-font-size($app-chips-typography, button) !important;
+  font-weight: mat-font-weight($app-chips-typography, button) !important;
 }

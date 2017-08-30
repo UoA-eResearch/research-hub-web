@@ -10,6 +10,7 @@
       </md-card>
 
       <md-card>
+        <h2>Contact</h2>
         <h3>Email</h3>
         <p>{{person.email}}</p>
         <h3>Phone</h3>
@@ -17,7 +18,7 @@
       </md-card>
 
       <md-card *ngIf="person.orgUnits.length">
-        <h3>Organisational Units</h3>
+        <h2>Organisational units</h2>
         <md-nav-list>
           <md-list-item *ngFor="let item of person.orgUnits" [routerLink]="item.getDefaultRouterLink()">
             <h3 md-line> {{item.getTitle()}} </h3>
@@ -26,7 +27,7 @@
       </md-card>
 
       <md-card *ngIf="supportedContent && supportedContent.length">
-        <h3>Supported Resources</h3>
+        <h2>Supported resources</h2>
         <md-nav-list>
           <md-list-item *ngFor="let item of supportedContent" [routerLink]="item.getDefaultRouterLink()">
             <img md-list-avatar [src]="apiService.getAssetUrl(item.image)">

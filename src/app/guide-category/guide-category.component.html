@@ -8,7 +8,7 @@
     </md-card>
 
     <md-card *ngIf="guideCategory.contentItems && guideCategory.contentItems.length">
-      <h3>Content items</h3>
+      <h2>Content items</h2>
       <md-nav-list>
         <md-list-item *ngFor="let item of guideCategory.contentItems" [routerLink]="item.getDefaultRouterLink()">
           <img md-list-avatar [src]="apiService.getAssetUrl(item.image)">
