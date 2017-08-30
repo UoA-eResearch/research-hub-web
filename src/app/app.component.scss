@@ -14,9 +14,6 @@
  */
 
 .menu-button {
-  //margin-left: -10px !important;
-  //margin-right: 0.5em !important;
-  //display: inline-block;
   color: white !important;
   top: 4px !important;
   left: -4px !important;
@@ -26,8 +23,6 @@
  * Fixes so that select lines up with md-input-container elements
  * and contains same sized text
  */
-
-
 
 .mat-select-trigger {
   font-size: 20px !important;
@@ -83,8 +78,6 @@
   padding-top: 1em;
 }
 
-
-
 .sidenav-content-wrapper {
   display: flex;
   flex-direction: column;
@@ -92,8 +85,18 @@
 
 .sidenav-content {
   flex: 1;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - #{$footer-height});
   background-color: $color-background;
+}
+
+.sidenav-content-xs {
+  @extend .sidenav-content;
+  min-height: calc(100vh - #{$footer-xs-height});
+}
+
+.footer-a-xs {
+  margin-top: 2.5em;
+  margin-right: 0 !important;
 }
 
 .primary-header {
@@ -116,23 +119,20 @@
   @include mat-typography-level-to-styles($app-primary-header-typography, headline);
 }
 
-//.primary-header .mat-select-value-text{
-//  font-size: mat-font-size($app-search-bar-select-typography, title) !important;
-//  font-weight: mat-font-weight($app-search-bar-select-typography, title) !important;
-//}
-
-
 /*
  * Footer
  */
 
 footer {
   background-color: $color-primary;
-  height: 7em;
+  height: $footer-height;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
-footer .footer-content{
-  padding: 2em 2em 2em 2em;
+.footer-xs {
+  @extend footer;
+  height: $footer-xs-height;
 }
 
 footer a {
@@ -144,7 +144,7 @@ footer a {
 }
 
 footer .logo img {
-  //display: block;
+  display: block;
   height: 5em;
 }
 

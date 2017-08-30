@@ -17,7 +17,7 @@
     </md-sidenav>
 
     <div class="sidenav-content-wrapper">
-      <div class="sidenav-content">
+      <div class="sidenav-content" class.xs="sidenav-content-xs">
         <div class="primary-header" ngClass.xs="primary-header-xs">
           <md-toolbar class="primary-toolbar" color="primary">
             <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
@@ -31,11 +31,9 @@
         <!--<md-progress-bar *ngIf="progressBarService.visible" mode="indeterminate" color="accent"></md-progress-bar>-->
         <router-outlet></router-outlet>
       </div>
-      <footer>
-        <div class="footer-content" fxLayout="row" fxLayoutAlign="space-between center">
-
-          <div fxFlex="60%" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2em">
-            <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)">
+      <footer class.xs="footer-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+          <div fxFlex="60%" fxFlex.xs="45" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2em" fxLayoutAlign.xs="end">
+            <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)" class.xs="footer-a-xs">
               Copyright © {{getYear()}}. Centre for eResearch
             </a>
             <a fxHide.lt-lg routerLink="/contact">Contact</a>
@@ -43,13 +41,11 @@
             <a fxHide.lt-lg [href]="disclaimerUrl" target="_blank" (click)="analyticsService.trackOutboundLink(disclaimerUrl)">Disclaimer</a>
           </div>
 
-          <div>
+          <div fxFlex="40%" fxFlex.xs="55" fxLayoutAlign="end" fxLayoutAlign.xs="start">
             <a class="logo" [href]="aucklandUniUrl" target="_blank" (click)="analyticsService.trackOutboundLink(aucklandUniUrl)">
               <img [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
             </a>
           </div>
-
-        </div>
       </footer>
     </div>
   </md-sidenav-container>
