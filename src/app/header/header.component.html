@@ -1,9 +1,9 @@
 <div *ngIf="!imageUrl" class="header" class.xs="header-xs" fxLayout="row" [ngClass]="{'colored-background': !imageUrl}">
   <div class="info-no-bg" class.xs="info-no-bg-xs" fxFlex="475px" fxFlex.xs="100">
     <h1 *ngIf="title">{{title}}</h1>
-    <div fxLayout="row" fxLayoutGap="2em">
-      <div fxFlexAlign="center" *ngIf="description" class="header-description" [innerHTML]="description"></div>
-      <div *ngIf="goHref" fxFlexAlign="center">
+    <div fxLayout="column" fxLayoutGap="2em" fxFlexAlign="end">
+      <div fxFlexAlign="start" *ngIf="description" class="header-description" [innerHTML]="description"></div>
+      <div *ngIf="goHref" fxFlexAlign="end">
         <a md-raised-button color="accent" [href]="goHref" target="_blank" (click)="trackGo()">Go</a>
       </div>
     </div>
