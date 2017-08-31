@@ -28,7 +28,10 @@ export class Page<T> {
   }
 
   clear() {
-    this.content.length = 0;
+    if (this.content !== undefined) {
+      this.content.length = 0;
+    }
+
     this.last = false;
     this.totalPages = 0;
     this.totalElements = 0;
