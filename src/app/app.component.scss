@@ -97,6 +97,7 @@
 .footer-a-xs {
   margin-top: 2.5em;
   margin-right: 0 !important;
+  margin-bottom: 0.5em;
 }
 
 .primary-header {
@@ -133,6 +134,8 @@ footer {
 .footer-xs {
   @extend footer;
   height: $footer-xs-height;
+  padding-left: $gt-xs-offset;
+  padding-right: $gt-xs-offset;
 }
 
 footer a {
