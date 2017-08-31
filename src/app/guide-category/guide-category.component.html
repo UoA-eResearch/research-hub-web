@@ -17,7 +17,7 @@
       </md-nav-list>
     </md-card>
 
-    <md-card>
+    <md-card *ngIf="guideCategory.additionalInfo">
       <app-markdown [data]="guideCategory.additionalInfo"></app-markdown>
     </md-card>
   </div>
