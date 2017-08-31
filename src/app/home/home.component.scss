@@ -12,3 +12,9 @@
 .content-xs {
   margin: $xs-offset / 2 $xs-offset $xs-offset $xs-offset;
 }
+
+.browse-gt-xs {
+  flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+}
+

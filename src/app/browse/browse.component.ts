@@ -44,8 +44,6 @@ export class BrowseComponent implements OnInit, OnDestroy {
       this.analyticsService.trackPageView(this.location.path(), 'Browse Categories');
     }
 
-    BrowseComponent.getMQAlias();
-
     this.setNumCategoryColumns(BrowseComponent.getMQAlias());
 
     this.mediaSub = this.media.subscribe((change: MediaChange) => {
@@ -77,16 +75,14 @@ export class BrowseComponent implements OnInit, OnDestroy {
   public static getMQAlias(): string {
     const width = window.innerWidth;
 
-    // fxFlex breakpoints
-    const xs = 600;
-    const sm = 960;
-    const md = 1280;
-    const lg = 1920;
-    const xl = 5000;
+    // fxFlex breakpoint min widths
+    // https://github.com/angular/flex-layout/wiki/Responsive-API
+    const sm = 600;
+    const md = 960;
+    const lg = 1280;
+    const xl = 1920;
 
-    if ( width < xs) {
-      return 'xs';
-    } else if (width >= xs && width < sm) {
+    if ( width < sm) {
       return 'xs';
     } else if (width >= sm && width < md) {
       return 'sm';
@@ -94,12 +90,13 @@ export class BrowseComponent implements OnInit, OnDestroy {
       return 'md';
     } else if (width >= lg && width < xl) {
       return 'lg';
-    } else {
+    } else if (width >= xl) {
       return 'xl';
     }
   }
 
   setNumCategoryColumns(mqAlias: string) {
+    // console.log(mqAlias);
     let numCols = 0;
     switch (mqAlias) {
 
