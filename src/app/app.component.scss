@@ -134,8 +134,8 @@ footer {
 .footer-xs {
   @extend footer;
   height: $footer-xs-height;
-  padding-left: $gt-xs-offset;
-  padding-right: $gt-xs-offset;
+  padding-left: $xs-offset;
+  padding-right: $xs-offset;
 }
 
 footer a {
