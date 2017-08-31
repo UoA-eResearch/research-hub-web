@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-
+import {environment} from 'app/../environments/environment';
 declare const ga: any;
-declare const trackingCode: 'UA-77710107-3';
 
 
 @Injectable()
@@ -17,6 +16,15 @@ export class AnalyticsService {
   eventActionView = 'view';
   eventActionClick = 'click';
   eventActionGo = 'go';
+
+  constructor () {
+    this.initialize();
+  }
+
+  // This method needs to be called first to initalise Google Analytics
+  private initialize() {
+    ga('create', environment.analyticsCode, 'auto');
+  }
 
   trackContent(name: string, url: string) {
     this.trackEvent(this.eventCategoryContent, this.eventActionView, name);
