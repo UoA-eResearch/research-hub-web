@@ -1,14 +1,12 @@
 @import "../../styles";
 
 
-//.featured-content-xs {
-//  padding: 0 $xs-offset $xs-offset $xs-offset;
-//}
+.card-gt-xs {
+  flex: 1 0 250px;
+  -webkit-flex: 1 0 250px;
 
-.card-lt-lg {
-  //margin-left: 1em;
-  //margin-right: 1em;
 }
+
 
 md-card md-card-content.mat-card-content{
   font-size: mat-font-size($app-featured-md-card-typography, body-1);
