@@ -30,7 +30,7 @@
 
       <md-card *ngIf="content.policies.length">
         <h2>Policies</h2>
-        <a class="policy-url" *ngFor="let item of content.policies" href="{{item.url}}" target="_blank">
+        <a class="policy-url" *ngFor="let item of content.policies" [href]="item.url" target="_blank" (click)="analyticsService.trackPolicy(item.getTitle(), item.url);">
           {{item.getTitle()}}
         </a>
       </md-card>
