@@ -8,6 +8,7 @@ import marked from 'marked';
 import { Location } from '@angular/common';
 import {Person} from "../model/Person";
 import {AnalyticsService} from "../app.analytics.service";
+import {ContentTypeIds} from "../menu.service";
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ContentDetailsComponent implements OnInit {
   content: Content;
   similarContentItems: Array<Content>;
   userSupport: Array<Person>;
+  isKnowledgeArticle = false;
 
   constructor(private breadcrumbService: BreadcrumbService, private route: ActivatedRoute, private apiService: ApiService,
               private progressBarService: ProgressBarService,  private location: Location, private analyticsService: AnalyticsService) {
@@ -51,6 +53,13 @@ export class ContentDetailsComponent implements OnInit {
           this.analyticsService.trackContent(name, url);
           this.breadcrumbService.addFriendlyNameForRoute(url, name); // Add friendly name for particular content item
           this.content = content;
+
+          if (this.content.contentTypes !== undefined) {
+            this.isKnowledgeArticle = this.content.contentTypes.filter(contentType => {
+              return contentType.id === ContentTypeIds.KnowledgeArticle;
+            }).length > 0;
+          }
+
           this.progressBarService.setHidden();
         }
       );

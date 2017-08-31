@@ -18,6 +18,7 @@ export class Content implements GetResultsListItem {
   people: Array<Person>;
   policies: Array<Policy>;
   guideCategories: Array<GuideCategory>;
+  contentTypes: Array<any>;
 
   static fromObjects(objects: [Object]): Array<Content> {
     const contentItems = new Array<Content>();
@@ -56,11 +57,10 @@ export class Content implements GetResultsListItem {
     content.people = Person.fromObjects(object['people']);
     content.policies = Policy.fromObjects(object['policies']);
     content.guideCategories = GuideCategory.fromObjects(object['guideCategories']);
+    content.contentTypes = object['contentTypes'];
 
     return content;
   }
-
-
 
   getMainOrgUnitName(): string {
     let name = '';

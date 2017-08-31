@@ -48,7 +48,7 @@
     </div>
 
     <div fxFlex="60" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="1">
-      <md-card class="description"> <!-- class='description' only when not a knowledge article-->
+      <md-card [ngClass]="{'description': !isKnowledgeArticle}" class="description">
         <app-markdown [data]="content.description"></app-markdown>
       </md-card>
 
