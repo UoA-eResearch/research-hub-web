@@ -1,5 +1,19 @@
 @import '../../styles';
 
+.flex-hack {
+  flex: 1 1 auto !important;
+  //-webkit-flex: 1 1 0 !important;
+}
+
+.component {
+  @extend .flex-hack;
+}
+
+.component-xs {
+  @extend .component;
+}
+
+
 .content-header {
   padding: $gt-xs-offset;
   background-color: $color-content-header;
