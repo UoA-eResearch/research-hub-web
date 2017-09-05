@@ -1,0 +1,13 @@
+<form>
+  <md-form-field>
+    <input mdInput [placeholder]="placeholder" [mdAutocomplete]="auto" [formControl]="selectedItemCtrl">
+    <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayWith">
+      <md-option *ngFor="let item of filteredItems | async" [value]="item">
+        <img *ngIf="item.getImage() !== undefined" aria-hidden [src]="apiService.getAssetUrl(item.getImage())" height="25" />
+        <span>{{ item.getTitle() }}</span>
+      </md-option>
+    </md-autocomplete>
+  </md-form-field>
+</form>
+
+<!--style="vertical-align:middle;"-->
