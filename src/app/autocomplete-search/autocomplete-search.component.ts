@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {FormControl} from "@angular/forms";
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {GetResultsListItem} from "../model/ResultsListItemInterface";
 import {ApiService} from "../app.api.service";
 import {Subscription} from "rxjs/Subscription";
@@ -8,9 +8,16 @@ import {Subscription} from "rxjs/Subscription";
 @Component({
   selector: 'app-autocomplete-search',
   templateUrl: './autocomplete-search.component.html',
-  styleUrls: ['./autocomplete-search.component.scss']
+  styleUrls: ['./autocomplete-search.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => AutocompleteSearchComponent),
+      multi: true
+    }
+  ]
 })
-export class AutocompleteSearchComponent implements OnInit, OnDestroy {
+export class AutocompleteSearchComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   selectedItemCtrl: FormControl;
   selectedItemSub: Subscription;
@@ -19,14 +26,17 @@ export class AutocompleteSearchComponent implements OnInit, OnDestroy {
   @Input() placeholder = '';
   @Input() items: GetResultsListItem[] = [];
 
-  selected: GetResultsListItem;
-  @Output() onSelected = new EventEmitter<GetResultsListItem>();
+  selectedItem: any;
+  propagateChange = (_: any) => {};
 
   constructor(private apiService: ApiService) {
 
   }
 
   ngOnInit() {
+    console.log('placeholder', this.placeholder);
+    // console.log('formControlName', this.formControlName);
+
     this.selectedItemCtrl = new FormControl();
     this.selectedItemSub = this.selectedItemCtrl.valueChanges.subscribe(selectedItem => this.onSelectedItemChanged(selectedItem));
 
@@ -49,11 +59,27 @@ export class AutocompleteSearchComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  onSelectedItemChanged(selectedItem: any) {
-    if (typeof selectedItem === 'object') {
-      this.onSelected.emit(selectedItem);
-      this.selected = selectedItem;
+  writeValue(obj: any): void {
+    if (obj !== undefined) {
+      this.selectedItem = obj;
     }
+  }
+
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+  }
+
+  onSelectedItemChanged(selectedItem: any) {
+      if (typeof selectedItem === 'object') {
+        this.selectedItem = selectedItem;
+        this.propagateChange(selectedItem);
+      }
   }
 
   ngOnDestroy() {
