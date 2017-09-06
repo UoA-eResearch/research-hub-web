@@ -65,3 +65,11 @@ $discover-background: #cd3234;
 .ra-mat-toggle-theme {
   @include research-activity-mat-button-toggle-theme($hub-app-theme);
 }
+
+.activity-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: calc(100% - 24px);
+  display: inline-block;
+  overflow: hidden;
+}

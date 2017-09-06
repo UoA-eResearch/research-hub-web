@@ -1,12 +1,20 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, forwardRef, OnInit} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 
 @Component({
   selector: 'app-research-activity-toggle',
   templateUrl: './research-activity-toggle.component.html',
-  styleUrls: ['./research-activity-toggle.component.scss']
+  styleUrls: ['./research-activity-toggle.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ResearchActivityToggleComponent),
+      multi: true
+    }
+  ]
 })
-export class ResearchActivityToggleComponent implements OnInit {
+export class ResearchActivityToggleComponent implements OnInit, ControlValueAccessor {
 
   researchActivities = [
     {id: 1, name: 'Plan & Design', icon: 'map', className: 'plan', selected: false},
@@ -16,8 +24,8 @@ export class ResearchActivityToggleComponent implements OnInit {
     {id: 5, name: 'Discover & Reuse', icon: 'search', className: 'discover', selected: false}
   ];
 
-  selectedValue = [];
-  @Output() selectedChange = new EventEmitter();
+  selectedResearchActivities: any;
+  propagateChange = (_: any) => {};
 
   constructor() { }
 
@@ -25,24 +33,31 @@ export class ResearchActivityToggleComponent implements OnInit {
   }
 
   updateModel() {
-    const selectedValues = [];
+    const selectedResearchActivities = [];
 
     for (const activity of this.researchActivities) {
       if (activity.selected) {
-        selectedValues.push(activity.id);
+        selectedResearchActivities.push(activity.id);
       }
     }
 
-    console.log(selectedValues);
-
-    this.selectedValue = selectedValues;
-    this.selectedChange.emit(selectedValues);
-
-    // this.selected(selectedValues);
+    this.selectedResearchActivities = selectedResearchActivities;
+    this.propagateChange(selectedResearchActivities);
   }
 
-  // set selected(val) {
-  //
-  // }
+  writeValue(obj: any): void {
+    if (obj !== undefined) {
+      this.selectedResearchActivities = obj;
+    }
+  }
 
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+  }
 }
