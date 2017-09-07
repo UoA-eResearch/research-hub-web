@@ -1,7 +1,11 @@
 @import "../../styles";
 
+.mat-chip {
+  color:$body-dark-bg-font-color !important;
+}
+
 .md-chip-gt-md{
-  max-width:210px;
+  ///max-width:210px;
 }
 
 #img-wheel{
