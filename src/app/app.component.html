@@ -2,7 +2,7 @@
   <md-sidenav-container class="sidenav-container">
     <md-sidenav #sidenav [mode]="sideNavMode" [opened]="isSideNavOpened">
       <md-toolbar color="primary">
-        <span>Research Hub</span>
+        <a routerLink="/home"><span>Research Hub</span></a>
       </md-toolbar>
       <md-nav-list>
         <md-list-item *ngFor="let item of menuItems" [routerLink]="item.href">
