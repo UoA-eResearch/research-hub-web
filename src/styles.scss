@@ -62,20 +62,20 @@ a {
 }
 
 .description {
-  background-color: $color-pink;
+  background-color: $content-summary-bg;
 }
 
 .description app-markdown{
 
-  color: $body-dark-bg-font-color;
+  color: $body-light-bg-font-color;
 
-  @include headings {
-    color: $body-dark-bg-font-color;
-  }
+  //@include headings {
+  //  color: $body-dark-bg-font-color;
+  //}
 
-  @include links {
-    color: $link-dark-bg-color-1;
-  }
+  //@include links {
+  //  color: $link-dark-bg-color-1;
+  //}
 
 }
 
