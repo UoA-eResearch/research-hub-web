@@ -18,7 +18,7 @@ import {
   MdSelectModule,
   MdSidenavModule,
   MdToolbarModule,
-  MdProgressBarModule, MdChipsModule, MdFormField, MdFormFieldModule
+  MdProgressBarModule, MdChipsModule, MdFormField, MdFormFieldModule, MdButtonToggleModule, MdAutocompleteModule
 } from "@angular/material";
 import {BreadcrumbService, Ng2BreadcrumbModule} from "ng2-breadcrumb/ng2-breadcrumb";
 
@@ -50,6 +50,8 @@ import { BrowseResultsComponent } from './browse-results/browse-results.componen
 import { HeaderComponent } from './header/header.component';
 import { GuideDetailsComponent } from './guide-details/guide-details.component';
 import { GuideCategoryComponent } from './guide-category/guide-category.component';
+import { ResearchActivityToggleComponent } from './research-activity-toggle/research-activity-toggle.component';
+import { AutocompleteSearchComponent } from './autocomplete-search/autocomplete-search.component';
 
 
 @NgModule({
@@ -73,7 +75,9 @@ import { GuideCategoryComponent } from './guide-category/guide-category.componen
     BrowseResultsComponent,
     HeaderComponent,
     GuideDetailsComponent,
-    GuideCategoryComponent
+    GuideCategoryComponent,
+    ResearchActivityToggleComponent,
+    AutocompleteSearchComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -87,6 +91,7 @@ import { GuideCategoryComponent } from './guide-category/guide-category.componen
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
+    MdButtonToggleModule,
     MdButtonModule,
     MdChipsModule,
     MdCheckboxModule,
@@ -97,6 +102,7 @@ import { GuideCategoryComponent } from './guide-category/guide-category.componen
     MdListModule,
     MdProgressBarModule,
     MdFormFieldModule,
+    MdAutocompleteModule,
     routing
   ],
   providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService,
