@@ -5,7 +5,8 @@
  */
 
 .content {
-  max-width: $xl-thresh-min;
+  //max-width: $xl-thresh-min;
+  max-width:$lg-thresh-min;
   margin: $gt-xs-offset / 2 $gt-xs-offset $gt-xs-offset $gt-xs-offset;
 }
 
@@ -13,7 +14,7 @@
   margin: $xs-offset / 2 $xs-offset $xs-offset $xs-offset;
 }
 
-.browse-gt-xs {
+.browse-gt-xs { //todo wrong name for this and flex commands should be taken from content-details.flex-hack
   flex: 1 1 0;
   -webkit-flex: 1 1 0;
 }
