@@ -73,6 +73,11 @@
   background-color: $color-background;
 }
 
+.sidenav-container .mat-drawer-content {
+  //margin-left: $sidenav-width !important;
+  //margin-left: auto !important;
+}
+
 .sidenav-container md-sidenav md-list {
   padding-left: 1em;
   padding-top: 1em;

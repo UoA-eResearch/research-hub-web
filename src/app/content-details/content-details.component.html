@@ -4,10 +4,10 @@
               [goEventCategory]="analyticsService.eventCategoryContent">
   </app-header>
   <div class="component" class.xs="component-xs" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="1em">
-    <div fxFlex="40" fxFlex.gt-lg="635px" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="2" [ngStyle.lt-lg]="{'margin-top': '1em'}">
+    <div class="flex-hack" fxFlex="40" fxFlex.gt-lg="635px" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="2" [ngStyle.lt-lg]="{'margin-top': '1em'}">
       <div fxHide.lt-lg>
         <!--<img fxFlex="100" width="100%;" [src]="apiService.getAssetUrl(content.image)">-->
-        <img fxFlexFill [src]="apiService.getAssetUrl(content.image)">
+        <img style="width:100%; height:auto;" [src]="apiService.getAssetUrl(content.image)">
       </div>
 
       <md-card *ngIf="userSupport && userSupport.length">
@@ -46,7 +46,7 @@
       </md-card>
     </div>
 
-    <div fxFlex="60" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="1">
+    <div class="flex-hack" fxFlex="60" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="1">
       <md-card [ngClass]="{'description': !isKnowledgeArticle}" class="description">
         <app-markdown [data]="content.description"></app-markdown>
       </md-card>
