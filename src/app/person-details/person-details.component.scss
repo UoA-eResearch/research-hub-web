@@ -79,14 +79,14 @@
   margin-right: 2em;
   margin-bottom: 1em;
   float: left;
-  max-width: 400px !important;
-  height: 400px !important;
+  max-width: 250px !important;
+  height: 250px !important;
 }
 
 .person-image-xs {
   @extend .person-image;
   width: 100%;
-  height: 400px;
+  height: 250px;
   margin: 0;
   margin-bottom: 1em;
   background-position: center top;
