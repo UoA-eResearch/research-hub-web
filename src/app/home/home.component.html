@@ -3,12 +3,10 @@
             [imageUrl]="coverImageUrl"></app-header>
 
 <div class="content" class.xs="content-xs" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5%">
-  <!--<div fxFlex="grow">-->
-  <div style="flex: 1 1 0; -webkit-flex: 1 1 0;"> <!-- style="flex: 1 1 100%; -webkit-flex: 1 1 100%;" causes problems on iOS-->
+  <div fxFlex="66.67">
     <app-browse [embedded]="true" [maxCols]="3"></app-browse>
   </div>
-  <!--<div fxFlex="grow" fxLayout="column" fxLayoutGap="5%">-->
-  <div class.gt-xs="browse-gt-xs" fxLayout="column" fxLayoutGap="5%" >
+  <div fxFlex="33.33" fxLayout="column" fxLayoutGap="5%">
     <app-featured></app-featured>
     <app-research-activity></app-research-activity>
   </div>
