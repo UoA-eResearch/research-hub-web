@@ -218,3 +218,13 @@ app-search-bar {
   width: 100%;
 }
 
+.beta-bar{
+  cursor:pointer;
+  background-color: $color-orange;
+  color:$body-dark-bg-font-color;
+  text-align: center;
+}
+
+.beta-bar a {
+  color:$body-dark-bg-font-color;
+}
