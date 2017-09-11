@@ -5,7 +5,7 @@
  */
 
 .content {
-  max-width: $xl-thresh-min;
+  max-width:$xl-thresh-min;
   margin: $gt-xs-offset / 2 $gt-xs-offset $gt-xs-offset $gt-xs-offset;
 }
 
@@ -13,8 +13,8 @@
   margin: $xs-offset / 2 $xs-offset $xs-offset $xs-offset;
 }
 
-.browse-gt-xs {
-  flex: 1 1 0;
-  -webkit-flex: 1 1 0;
+.flex-hack {
+  flex: 1 1 auto !important;
 }
+
 

@@ -1,2 +1,20 @@
-<h2>Browse by research activity</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum, nibh nec varius magna nisl quis orci</p>
+<div fxFlex="fill" fxLayout="column">
+
+  <h2>Go to research activity filters</h2>
+
+  <div class="flex-hack" fxFlex="grow" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="center center" fxLayoutAlign.lt-lg="">
+    <div fxFlex.lt-lg="100%">
+      <md-chip-list class="mat-chip-list-stacked">
+        <md-chip *ngFor="let activity of researchActivities" [style.backgroundColor]="activity.color" [routerLink]="['/search']">
+          {{activity.name}}
+        </md-chip>
+      </md-chip-list>
+    </div>
+
+    <div fxHide.lt-lg fxFlex.gt-xs="50%" fxFlex.xs="100%">
+      <img id="img-wheel" src="/assets/images/research-activity-diagram.svg"  style="margin-left:20%;">
+    </div>
+  </div>
+
+</div>
+

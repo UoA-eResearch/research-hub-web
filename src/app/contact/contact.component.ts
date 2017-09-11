@@ -19,7 +19,7 @@ export class ContactComponent implements OnInit {
   postalAddress = ['Centre for eResearch', 'The University of Auckland', 'Private Bag 92019', 'Auckland 1142',
     'New Zealand'];
   emailAddress = 'eresearch-support@auckland.ac.nz';
-  contactPhone = '+64 9 373 7599 ext 822231';
+  contactPhone = '+64 9 373 7599 ext 82231';
 
   constructor(private analyticsService: AnalyticsService, private location: Location) {
   }

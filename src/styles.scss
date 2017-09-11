@@ -62,20 +62,20 @@ a {
 }
 
 .description {
-  background-color: $color-pink;
+  background-color: $content-summary-bg;
 }
 
 .description app-markdown{
 
-  color: $body-dark-bg-font-color;
+  color: $body-light-bg-font-color;
 
-  @include headings {
-    color: $body-dark-bg-font-color;
-  }
+  //@include headings {
+  //  color: $body-dark-bg-font-color;
+  //}
 
-  @include links {
-    color: $link-dark-bg-color-1;
-  }
+  //@include links {
+  //  color: $link-dark-bg-color-1;
+  //}
 
 }
 
@@ -93,10 +93,6 @@ app-markdown h4 {
   font-weight: mat-font-weight($app-base-typography, subheading-2) !important;
 }
 
-// White on berry description background
-  //.description > app-markdown * p {
-  //color: white !important;
-//}
 
 /*
 Gloabl md-chip style

@@ -1,8 +1,8 @@
 <section class="mat-typography">
   <md-sidenav-container class="sidenav-container">
     <md-sidenav #sidenav [mode]="sideNavMode" [opened]="isSideNavOpened">
-      <md-toolbar color="primary">
-        <span>Research Hub</span>
+      <md-toolbar color="primary" class="toolbar" class.xs="toolbar-xs">
+        <a routerLink="/home"><span>Research Hub</span></a>
       </md-toolbar>
       <md-nav-list>
         <md-list-item *ngFor="let item of menuItems" [routerLink]="item.href">
@@ -15,17 +15,25 @@
     <div class="sidenav-content-wrapper">
       <div class="sidenav-content" class.xs="sidenav-content-xs">
         <div class="primary-header" ngClass.xs="primary-header-xs">
-          <md-toolbar class="primary-toolbar" color="primary">
-            <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
-          </md-toolbar>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+
+            <button md-icon-button class="mdi mdi-menu mdi-24px menu-button" class.xs="mdi mdi-menu mdi-24px menu-button-xs" (click)="sidenav.toggle()" fxHide.gt-sm></button>
+
+            <md-toolbar class="primary-toolbar"  color="primary">
+              <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
+            </md-toolbar>
+          </div>
 
           <div>
-            <button md-icon-button class="mdi mdi-menu mdi-24px menu-button" (click)="sidenav.toggle()" fxHide.gt-sm></button>
             <h1><breadcrumb [useBootstrap]="false"></breadcrumb></h1>
           </div>
+
         </div>
         <!--<md-progress-bar *ngIf="progressBarService.visible" mode="indeterminate" color="accent"></md-progress-bar>-->
+        <div class="beta-bar"><a routerLink="/feedback">Beta-version feedback</a></div>
         <router-outlet></router-outlet>
+
       </div>
       <footer class.xs="footer-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
           <div fxFlex="60%" fxFlex.xs="45" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2em" fxLayoutAlign.xs="end">

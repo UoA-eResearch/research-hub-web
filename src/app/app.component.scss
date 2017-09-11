@@ -15,8 +15,14 @@
 
 .menu-button {
   color: white !important;
-  top: 4px !important;
-  left: -4px !important;
+  top:4px;
+  right:8px;
+}
+
+.menu-button-xs {
+  @extend .menu-button;
+  top:10px;
+  right:8px;
 }
 
 /*
@@ -51,6 +57,14 @@
  * SideNav
  */
 
+.sidenav-container md-sidenav md-toolbar.toolbar{
+  min-height: $primary-header-height;
+}
+
+.sidenav-container md-sidenav md-toolbar.toolbar-xs{
+  min-height: $primary-header-xs-height;
+}
+
 .sidenav-container md-sidenav md-toolbar button md-icon {
   font-size: mat-font-size($app-sidenav-toolbar-typography, button) !important;
   font-weight: mat-font-weight($app-sidenav-toolbar-typography, button) !important;
@@ -74,8 +88,8 @@
 }
 
 .sidenav-container .mat-drawer-content {
-  //margin-left: $sidenav-width !important;
-  //margin-left: auto !important;
+  margin-left: $sidenav-width !important;
+
 }
 
 .sidenav-container md-sidenav md-list {
@@ -106,6 +120,7 @@
 }
 
 .primary-header {
+  min-height:$primary-header-height;
   background: $color-primary;
   padding-left: $gt-xs-offset;
   padding-right: $gt-xs-offset;
@@ -113,6 +128,7 @@
 
 .primary-header-xs {
   @extend .primary-header;
+  min-height: $primary-header-xs-height;
   padding-left: $xs-offset;
   padding-right: $xs-offset;
 }
@@ -200,5 +216,33 @@ breadcrumb li:not(:first-child):before {
 app-search-bar {
   height: inherit;
   width: 100%;
+}
+
+.beta-bar{
+  cursor:pointer;
+  background-color: $color-orange;
+  color:$body-dark-bg-font-color;
+  text-align: center;
+}
+
+.beta-bar a {
+  color:$body-dark-bg-font-color;
+}
+
+// HACK
+// https://github.com/angular/material2/issues/6958
+
+.sidenav-container .mat-drawer-content {
+  margin-left: $sidenav-width !important;
+
+}
+
+@media (max-width: $md-thresh-min) {
+
+    .sidenav-container .mat-drawer-content {
+      margin-left: 0 !important;
+      //flex-grow: 1;
+    }
+
 }
 
