@@ -7,32 +7,38 @@ $analyze-background: #329a37;
 $publish-background: #f49717;
 $discover-background: #cd3234;
 
+$plan-accent:  #cfc3dc;
+$create-accent: #c1e0ef;
+$analyze-accent: #c2e0c3;
+$publish-accent: #fbe0bb;
+$discover-accent: #f0c2c2;
+
 @mixin research-activity-mat-button-toggle-theme($theme) {
   $foreground: map-get($theme, foreground);
   $default-opacity: 0.1;
 
   .mat-button-toggle.plan {
-    background-color: rgba($plan-background, $default-opacity);
+    background-color: $plan-accent;
     color: mat-color($foreground, hint-text);
   }
 
   .mat-button-toggle.create {
-    background-color: rgba($create-background, $default-opacity);
+    background-color: $create-accent;
     color: mat-color($foreground, hint-text);
   }
 
   .mat-button-toggle.analyze {
-    background-color: rgba($analyze-background, $default-opacity);
+    background-color: $analyze-accent;
     color: mat-color($foreground, hint-text);
   }
 
   .mat-button-toggle.publish {
-    background-color: rgba($publish-background, $default-opacity);
+    background-color: $publish-accent;
     color: mat-color($foreground, hint-text);
   }
 
   .mat-button-toggle.discover {
-    background-color: rgba($discover-background, $default-opacity);
+    background-color: $discover-accent;
     color: mat-color($foreground, hint-text);
   }
 
