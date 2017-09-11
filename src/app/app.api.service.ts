@@ -10,10 +10,31 @@ import {OrgUnit} from "./model/OrgUnit";
 import {GuideCategory} from "./model/GuideCategory";
 
 
+export enum OrderBy {
+  Relevance = 1,
+  Alphabetical
+}
+
+
 export class SearchParams {
   private page = 0;
   private size = 50;
   private searchText: string;
+  private orderBy: OrderBy = OrderBy.Relevance;
+
+  public static getIdArrayUrlParams(params: URLSearchParams, names: string[], idArrays: number[][]) {
+
+    for (let i = 0; i < names.length; i++) {
+      const name = names[i];
+      const variable = idArrays[i];
+
+      if (variable != null && variable.length > 0) {
+        params.set(name, variable.join(','));
+      }
+    }
+
+    return params;
+  }
 
   public setPage(page: number) {
     this.page = page;
@@ -25,6 +46,10 @@ export class SearchParams {
 
   public setSearchText(searchText: string) {
     this.searchText = searchText;
+  }
+
+  public setOrderBy(orderBy: OrderBy) {
+    this.orderBy = orderBy;
   }
 
   public getUrlSearchParams() {
@@ -47,6 +72,34 @@ export class SearchParams {
       params.set('searchText', this.searchText.trim());
     }
 
+    // TODO: replace when upgrade to typescript 2.4 which supports string enums
+    if (this.orderBy === OrderBy.Relevance) {
+      params.set('orderBy', 'relevance');
+    } else if (this.orderBy === OrderBy.Alphabetical) {
+      params.set('orderBy', 'alphabetical');
+    }
+
+    return params;
+  }
+}
+
+
+
+export class PeopleSearchParams extends SearchParams {
+
+  private orgUnits: number[];
+
+  public setOrgUnits(orgUnits: number[]) {
+    this.orgUnits = orgUnits;
+  }
+
+  public getUrlSearchParams() {
+    const params = super.getUrlSearchParams();
+
+    const names = ['orgUnits'];
+    const variables = [this.orgUnits];
+    SearchParams.getIdArrayUrlParams(params, names, variables);
+
     return params;
   }
 }
@@ -54,30 +107,32 @@ export class SearchParams {
 export class ContentItemsSearchParams extends SearchParams {
 
   private contentTypes: number[];
-  private contentSubtypes: number[];
+  private researchPhases: number[];
+  private people: number[];
+  private orgUnits: number[];
 
   public setContentTypes(contentTypes: number[]) {
     this.contentTypes = contentTypes;
   }
 
-  public setContentSubtypes(contentSubtypes: number[]) {
-    this.contentSubtypes = contentSubtypes;
+  public setResearchPhases(researchPhases: number[]) {
+    this.researchPhases = researchPhases;
+  }
+
+  public setPeople(people: number[]) {
+    this.people = people;
+  }
+
+  public setOrgUnits(orgUnits: number[]) {
+    this.orgUnits = orgUnits;
   }
 
   public getUrlSearchParams() {
     const params = super.getUrlSearchParams();
 
-    const names = ['contentTypes', 'contentSubtypes'];
-    const variables = [this.contentTypes, this.contentSubtypes];
-
-    for (let i = 0; i < names.length; i++) {
-      const name = names[i];
-      const variable = variables[i];
-
-      if (variable != null && variable.length > 0) {
-        params.set(name, variable.join(','));
-      }
-    }
+    const names = ['contentTypes', 'researchPhases', 'people', 'orgUnits'];
+    const variables = [this.contentTypes, this.researchPhases, this.people, this.orgUnits];
+    SearchParams.getIdArrayUrlParams(params, names, variables);
 
     return params;
   }
@@ -163,7 +218,7 @@ export class ApiService {
   }
 
 
-  getPeople(searchParams: SearchParams) {
+  getPeople(searchParams: PeopleSearchParams) {
     const search = searchParams.getUrlSearchParams();
     const headers = new Headers();
     headers.set('Accept', 'application/json');
@@ -208,7 +263,7 @@ export class ApiService {
 
     return this.http
       .get(this.host + ApiService.ORG_UNIT_URL, {search: search, headers: headers})
-      .map((response) => OrgUnit.fromObjects(response.json()));
+      .map((response) => Page.fromObject<OrgUnit>(response.json(), OrgUnit.fromObjects));
   }
 
   getOrgUnit(id) {

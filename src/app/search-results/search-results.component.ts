@@ -3,7 +3,7 @@ import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {SearchBarParams, SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from "rxjs/Subscription";
 import {ContentTypeIds, MenuItem, MenuItemType, MenuService} from "../menu.service";
-import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.service";
+import {ApiService, ContentItemsSearchParams, PeopleSearchParams, SearchParams} from "../app.api.service";
 import {Person} from "../model/Person";
 import {Content} from "../model/Content";
 import {ProgressBarService} from "../app.progress-bar.service";
@@ -12,6 +12,8 @@ import {Policy} from "../model/Policy";
 import {AnalyticsService} from "../app.analytics.service";
 import {Title} from "@angular/platform-browser";
 import {Observable} from "rxjs/Observable";
+import {FormControl, FormGroup} from "@angular/forms";
+import {OrgUnit} from "../model/OrgUnit";
 
 
 class SearchResultsSummary {
@@ -53,9 +55,18 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private policiesPage: Page<Policy>;
   private maxNumberOfItems = 50;
   private searchResultsSummary: Array<SearchResultsSummary>;
-  private pages: [any];
+  private contentPages: any[];
+  private allPages: any[] = [];
   private showEmptyState = false;
   private showProgressBar = true;
+  private people: Person[] = [];
+  private orgUnits: OrgUnit[] = [];
+
+  private filtersForm: FormGroup;
+  private personFormControl: FormControl = new FormControl();
+  private orgUnitFormControl: FormControl = new FormControl();
+  private researchActivitiesFormControl: FormControl = new FormControl();
+
 
   constructor(private breadcrumbService: BreadcrumbService, protected searchBarService: SearchBarService,
               protected menuService: MenuService, private apiService: ApiService,
@@ -67,6 +78,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.titleService.setTitle('Research Hub: Search Results');
 
+    // Setup pages
     this.supportPage = new Page<Content>();
     this.instrumentsEquipmentPage = new Page<Content>();
     this.trainingPage = new Page<Content>();
@@ -76,31 +88,55 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.guidesPage = new Page<Content>();
     this.peoplePage = new Page<Person>();
     this.policiesPage = new Page<Policy>();
+    this.contentPages = [this.supportPage, this.instrumentsEquipmentPage, this.trainingPage, this.softwarePage,
+      this.facilitiesSpacesPage, this.knowledgeArticlePage, this.guidesPage];
+    this.allPages.push(...this.contentPages);
+    this.allPages.push(this.peoplePage);
+    this.allPages.push(this.policiesPage);
 
-    this.pages = [this.supportPage, this.instrumentsEquipmentPage, this.trainingPage, this.softwarePage,
-      this.facilitiesSpacesPage, this.knowledgeArticlePage, this.guidesPage, this.peoplePage, this.policiesPage];
-
-    this.showProgressBar = true;
-    this.onSearchChange(this.searchBarService.getSearchParams()); // Get search parameters on initial page landing
-
-    this.searchChangeImmediateSub = this.searchBarService.searchChange.distinctUntilChanged().subscribe(searchParams => {
-      this.showProgressBar = true;
+    // Setup filters
+    this.filtersForm = new FormGroup({
+      person: this.personFormControl,
+      orgUnit: this.orgUnitFormControl,
+      researchActivities: this.researchActivitiesFormControl
     });
 
-    this.searchChangeSub = this.searchBarService.searchChange.debounceTime(200).distinctUntilChanged().subscribe(searchParams => {
-      this.onSearchChange(searchParams);
+    this.apiService.getPeople(new PeopleSearchParams()).subscribe(data => {
+      this.people = data.content;
     });
+
+    this.apiService.getOrgUnits(new SearchParams()).subscribe(data => {
+      this.orgUnits = data.content;
+    });
+
+    // Subscribe to search changes
+    this.searchChangeSub = Observable
+      .combineLatest(
+        this.searchBarService.searchChange.debounceTime(250).distinctUntilChanged(),
+        this.personFormControl.valueChanges,
+        this.orgUnitFormControl.valueChanges,
+        this.researchActivitiesFormControl.valueChanges
+      ).subscribe(latestValues => {
+        this.showProgressBar = true;
+        const [searchBarParams, person, orgUnit, researchActivities] = latestValues;
+        this.onSearchChange(searchBarParams.category, searchBarParams.searchText, person, orgUnit, researchActivities);
+      });
+
+    // These need to be set initially so that the combineLatest observable will fire
+    this.searchBarService.setSearchText('');
+    this.personFormControl.setValue('');
+    this.orgUnitFormControl.setValue('');
+    this.researchActivitiesFormControl.setValue('');
   }
 
   ngOnDestroy() {
     this.searchChangeSub.unsubscribe();
-    this.searchChangeImmediateSub.unsubscribe();
   }
 
-  onSearchChange(searchBarParams: SearchBarParams) {
-    this.analyticsService.trackSearch(searchBarParams.category, searchBarParams.searchText);
+  onSearchChange(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
+    this.analyticsService.trackSearch(category, searchText);
 
-    const categoryId = MenuService.getMenuItemId([searchBarParams.category]);
+    const categoryId = MenuService.getMenuItemId([category]);
     const menuItem = this.menuService.getMenuItem(categoryId);
 
     const observables = [];
@@ -108,25 +144,43 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     switch (menuItem.type) {
       case MenuItemType.All:
+        pagesToUpdate.push(...this.contentPages);
+
         for (const contentTypeId of Object.keys(ContentTypeIds)) {
           if (Number(contentTypeId)) {
-            observables.push(this.getContentObservable(searchBarParams.searchText, contentTypeId));
+            observables.push(this.getContentObservable(
+              searchText,
+              Number(contentTypeId),
+              personId,
+              orgUnitId,
+              researchActivityIds));
           }
         }
-        observables.push(this.getPeopleObservable(searchBarParams));
-        observables.push(this.getPoliciesObservable(searchBarParams));
-        pagesToUpdate = this.pages;
+
+        const searchForPeople = !personId && (!researchActivityIds || researchActivityIds.length === 0);
+
+        if (searchForPeople) {
+          observables.push(this.getPeopleObservable(searchText, orgUnitId));
+          pagesToUpdate.push(this.peoplePage);
+        }
+
+        if (!orgUnitId && searchForPeople) {
+          observables.push(this.getPoliciesObservable(searchText));
+          pagesToUpdate.push(this.policiesPage);
+        }
+
         break;
       case MenuItemType.Content:
-        observables.push(this.getContentObservable(searchBarParams.searchText, menuItem.contentTypeId));
-        pagesToUpdate = [this.pages[menuItem.contentTypeId - 1]];
+        observables.push(this.getContentObservable(searchText, menuItem.contentTypeId, personId,
+          orgUnitId, researchActivityIds));
+        pagesToUpdate = [this.contentPages[menuItem.contentTypeId - 1]];
         break;
       case MenuItemType.Person:
-        observables.push(this.getPeopleObservable(searchBarParams));
+        observables.push(this.getPeopleObservable(searchText, orgUnitId));
         pagesToUpdate = [this.peoplePage];
         break;
       case MenuItemType.Policy:
-        observables.push(this.getPoliciesObservable(searchBarParams));
+        observables.push(this.getPoliciesObservable(searchText));
         pagesToUpdate = [this.policiesPage];
         break;
       default:
@@ -149,8 +203,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       }
 
       // Clear data for pages that should not be shown
-      for (let i = 0; i < this.pages.length; i++) {
-        const pageToClear = this.pages[i];
+      for (let i = 0; i < this.allPages.length; i++) {
+        const pageToClear = this.allPages[i];
 
         if (pagesToUpdate.indexOf(pageToClear) < 0) {
           pageToClear.clear();
@@ -178,25 +232,43 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     ];
   }
 
-  getContentObservable(searchText: string, contentTypeId) {
+  getContentObservable(searchText: string, contentTypeId: number, personId: number, orgUnitId: number, researchActivityIds: number[]) {
     const searchParams = new ContentItemsSearchParams();
     searchParams.setSearchText(searchText);
     searchParams.setSize(this.maxNumberOfItems);
     searchParams.setContentTypes([contentTypeId]);
+
+    if (personId) {
+      searchParams.setPeople([personId]);
+    }
+
+    if (orgUnitId) {
+      searchParams.setOrgUnits([orgUnitId]);
+    }
+
+    if (researchActivityIds && researchActivityIds.length > 0) {
+      searchParams.setResearchPhases(researchActivityIds);
+    }
+
     return this.apiService.getContentItems(searchParams);
   }
 
-  getPoliciesObservable(searchBarParams: SearchBarParams) {
+  getPoliciesObservable(searchText: string) {
     const searchParams = new SearchParams();
-    searchParams.setSearchText(searchBarParams.searchText);
+    searchParams.setSearchText(searchText);
     searchParams.setSize(this.maxNumberOfItems);
     return this.apiService.getPolicies(searchParams);
   }
 
-  getPeopleObservable(searchBarParams: SearchBarParams) {
-    const searchParams = new SearchParams();
-    searchParams.setSearchText(searchBarParams.searchText);
+  getPeopleObservable(searchText: string, orgUnitId: number) {
+    const searchParams = new PeopleSearchParams();
+    searchParams.setSearchText(searchText);
     searchParams.setSize(this.maxNumberOfItems);
+
+    if (orgUnitId) {
+      searchParams.setOrgUnits([orgUnitId]);
+    }
+
     return this.apiService.getPeople(searchParams);
   }
 }

@@ -34,9 +34,6 @@ export class AutocompleteSearchComponent implements OnInit, OnDestroy, ControlVa
   }
 
   ngOnInit() {
-    console.log('placeholder', this.placeholder);
-    // console.log('formControlName', this.formControlName);
-
     this.selectedItemCtrl = new FormControl();
     this.selectedItemSub = this.selectedItemCtrl.valueChanges.subscribe(selectedItem => this.onSelectedItemChanged(selectedItem));
 
@@ -76,10 +73,16 @@ export class AutocompleteSearchComponent implements OnInit, OnDestroy, ControlVa
   }
 
   onSelectedItemChanged(selectedItem: any) {
-      if (typeof selectedItem === 'object') {
-        this.selectedItem = selectedItem;
-        this.propagateChange(selectedItem);
-      }
+    let newSelectedItem = '';
+
+    if (selectedItem && typeof selectedItem === 'object') {
+      newSelectedItem = selectedItem.getId();
+    }
+
+    if (this.selectedItem !== newSelectedItem) {
+      this.selectedItem = newSelectedItem;
+      this.propagateChange(this.selectedItem);
+    }
   }
 
   ngOnDestroy() {

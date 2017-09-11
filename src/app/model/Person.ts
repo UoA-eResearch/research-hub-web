@@ -25,16 +25,6 @@ export class Person implements GetResultsListItem {
       for (const object of objects) {
         people.push(Person.fromObject(object));
       }
-
-      people.sort((a: Person, b: Person) => {
-        if (a.getTitle() < b.getTitle()) {
-          return -1;
-        } else if (a.getTitle() > b.getTitle()) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
     }
 
     return people;

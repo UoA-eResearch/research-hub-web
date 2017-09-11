@@ -6,7 +6,7 @@ import {Content} from "./Content";
 export class OrgUnit implements GetResultsListItem {
   id: number;
   name: string;
-  description:string;
+  description: string;
   url: string;
   people: Array<Person>;
   contentItems: Array<Content>;
@@ -18,16 +18,6 @@ export class OrgUnit implements GetResultsListItem {
       for (const object of objects) {
         orgUnits.push(OrgUnit.fromObject(object));
       }
-
-      orgUnits.sort((a: OrgUnit, b: OrgUnit) => {
-        if (a.name < b.name) {
-          return -1;
-        } else if (a.name > b.name) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
     }
 
     return orgUnits;
