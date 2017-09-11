@@ -13,33 +13,34 @@ $analyze-accent: #c2e0c3;
 $publish-accent: #fbe0bb;
 $discover-accent: #f0c2c2;
 
+$accent-text: #646464;
+
 @mixin research-activity-mat-button-toggle-theme($theme) {
   $foreground: map-get($theme, foreground);
-  $default-opacity: 0.1;
 
   .mat-button-toggle.plan {
     background-color: $plan-accent;
-    color: mat-color($foreground, hint-text);
+    color: $accent-text;
   }
 
   .mat-button-toggle.create {
     background-color: $create-accent;
-    color: mat-color($foreground, hint-text);
+    color: $accent-text;
   }
 
   .mat-button-toggle.analyze {
     background-color: $analyze-accent;
-    color: mat-color($foreground, hint-text);
+    color: $accent-text;
   }
 
   .mat-button-toggle.publish {
     background-color: $publish-accent;
-    color: mat-color($foreground, hint-text);
+    color: $accent-text;
   }
 
   .mat-button-toggle.discover {
     background-color: $discover-accent;
-    color: mat-color($foreground, hint-text);
+    color: $accent-text;
   }
 
   .mat-button-toggle-checked.plan {
