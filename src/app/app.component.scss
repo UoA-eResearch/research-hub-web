@@ -88,8 +88,8 @@
 }
 
 .sidenav-container .mat-drawer-content {
-  //margin-left: $sidenav-width !important;
-  //margin-left: auto !important;
+  margin-left: $sidenav-width !important;
+
 }
 
 .sidenav-container md-sidenav md-list {
@@ -228,3 +228,21 @@ app-search-bar {
 .beta-bar a {
   color:$body-dark-bg-font-color;
 }
+
+// HACK
+// https://github.com/angular/material2/issues/6958
+
+.sidenav-container .mat-drawer-content {
+  margin-left: $sidenav-width !important;
+
+}
+
+@media (max-width: $md-thresh-min) {
+
+    .sidenav-container .mat-drawer-content {
+      margin-left: 0 !important;
+      //flex-grow: 1;
+    }
+
+}
+
