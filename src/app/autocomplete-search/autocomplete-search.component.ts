@@ -59,12 +59,9 @@ export class AutocompleteSearchComponent implements OnInit, OnDestroy, ControlVa
   }
 
   set value(val) {
-    const num = Number(val);
-    if (num) {
-      this._value = num;
-      this.onChange(num);
-      this.onTouched();
-    }
+    this._value = Number(val) || '';
+    this.onChange(this._value);
+    this.onTouched();
   }
 
   ngOnInit() {
