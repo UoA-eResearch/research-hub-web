@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 
@@ -16,7 +16,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 })
 export class ResearchActivityToggleComponent implements OnInit, ControlValueAccessor {
 
-  researchActivities = [
+  private researchActivities = [
     {id: 1, name: 'Plan & Design', icon: 'map', className: 'plan', selected: false},
     {id: 2, name: 'Create, Collect & Capture', icon: 'create', className: 'create', selected: false},
     {id: 3, name: 'Analyze & Interpret', icon: 'show_chart', className: 'analyze', selected: false},
@@ -24,15 +24,47 @@ export class ResearchActivityToggleComponent implements OnInit, ControlValueAcce
     {id: 5, name: 'Discover & Reuse', icon: 'search', className: 'discover', selected: false}
   ];
 
-  selectedResearchActivities: any;
-  propagateChange = (_: any) => {};
+  @Input() _value: number[] = [];
+  onChange: any = () => { };
+  onTouched: any = () => { };
+
+  get value() {
+    return this._value;
+  }
+
+  set value(val) {
+    this._value = val;
+    this.onChange(val);
+    this.onTouched();
+    this.updateState();
+  }
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  updateModel() {
+  registerOnChange(fn) {
+    this.onChange = fn;
+  }
+
+  writeValue(value) {
+    if (value) {
+      this.value = value;
+    }
+  }
+
+  registerOnTouched(fn) {
+    this.onTouched = fn;
+  }
+
+  updateState() {
+    for (const activity of this.researchActivities) {
+      activity.selected = this._value.indexOf(activity.id) >= 0;
+    }
+  }
+
+  updateValue() {
     const selectedResearchActivities = [];
 
     for (const activity of this.researchActivities) {
@@ -41,23 +73,6 @@ export class ResearchActivityToggleComponent implements OnInit, ControlValueAcce
       }
     }
 
-    this.selectedResearchActivities = selectedResearchActivities;
-    this.propagateChange(selectedResearchActivities);
-  }
-
-  writeValue(obj: any): void {
-    if (obj !== undefined) {
-      this.selectedResearchActivities = obj;
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.propagateChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-  }
-
-  setDisabledState(isDisabled: boolean): void {
+    this.value = selectedResearchActivities;
   }
 }

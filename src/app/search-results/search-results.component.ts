@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {SearchBarParams, SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from "rxjs/Subscription";
@@ -14,6 +14,10 @@ import {Title} from "@angular/platform-browser";
 import {Observable} from "rxjs/Observable";
 import {FormControl, FormGroup} from "@angular/forms";
 import {OrgUnit} from "../model/OrgUnit";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Location} from '@angular/common';
+import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from "@angular/material";
+import {FilterDialogComponent} from "../filter-dialog/filter-dialog.component";
 
 
 class SearchResultsSummary {
@@ -43,7 +47,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   @ViewChild('policiesResults') policiesResults: ElementRef;
 
   private searchChangeSub: Subscription;
-  private searchChangeImmediateSub: Subscription;
+  private routeParamsSub: Subscription;
+  private searchCatSub: Subscription;
   private guidesPage: Page<Content>;
   private supportPage: Page<Content>;
   private instrumentsEquipmentPage: Page<Content>;
@@ -66,12 +71,42 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private personFormControl: FormControl = new FormControl();
   private orgUnitFormControl: FormControl = new FormControl();
   private researchActivitiesFormControl: FormControl = new FormControl();
+  private loadedRoute = false;
 
+  private showFilters = true;
+  private showPersonFilter = true;
+  private showOrgUnitFilter = true;
+  private showResearchActivityFilter = true;
+  private rightColSize = 67;
+
+  private static parseParamArray(str: string) {
+    let nums = [];
+
+    if (str) {
+      if (str.includes(',')) {
+        nums = str.split(',');
+      } else {
+        nums = [str];
+      }
+
+      nums = nums.reduce((result, value) => {
+        const num = Number(value);
+
+        if (num) {
+          result.push(num);
+        }
+
+        return result;
+      }, []);
+    }
+
+    return nums;
+  }
 
   constructor(private breadcrumbService: BreadcrumbService, protected searchBarService: SearchBarService,
               protected menuService: MenuService, private apiService: ApiService,
-              private progressBarService: ProgressBarService, private analyticsService: AnalyticsService,
-              private titleService: Title) {
+              private analyticsService: AnalyticsService, private titleService: Title, private route: ActivatedRoute,
+              private location: Location, public dialog: MdDialog) {
     this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search Results');
   }
 
@@ -122,19 +157,93 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.onSearchChange(searchBarParams.category, searchBarParams.searchText, person, orgUnit, researchActivities);
       });
 
-    // These need to be set initially so that the combineLatest observable will fire
-    this.searchBarService.setSearchText('');
-    this.personFormControl.setValue('');
-    this.orgUnitFormControl.setValue('');
-    this.researchActivitiesFormControl.setValue('');
+    this.routeParamsSub = this.route
+      .queryParams
+      .subscribe(params => {
+        if (!this.loadedRoute) {
+          // These need to be set initially so that the combineLatest observable will fire
+          const category = params['category'] || this.searchBarService.category;
+          const searchText = typeof params['searchText'] === 'string' ? params['searchText'] : this.searchBarService.searchText;
+          const person = params['person'] || '';
+          const orgUnit = params['orgUnit'] || '';
+          const researchActivities = SearchResultsComponent.parseParamArray(params['researchActivities']);
+
+          this.updateFilterVisibility(category);
+          this.searchBarService.setSearchText(searchText);
+          this.searchBarService.setCategory(category);
+          this.personFormControl.setValue(person);
+          this.orgUnitFormControl.setValue(orgUnit);
+          this.researchActivitiesFormControl.setValue(researchActivities);
+
+          this.loadedRoute = true;
+        }
+      });
+
+    this.searchCatSub = this.searchBarService.searchCategoryChange.subscribe((category) => {
+      this.updateFilterVisibility(category);
+    });
+  }
+
+  updateFilterVisibility(category: string) {
+    if (category === 'people') {
+      this.showPersonFilter = false;
+      this.showOrgUnitFilter = true;
+      this.showResearchActivityFilter = false;
+      this.rightColSize = 67;
+    } else if (category === 'policies') {
+      this.showPersonFilter = false;
+      this.showOrgUnitFilter = false;
+      this.showResearchActivityFilter = false;
+      this.rightColSize = 100;
+    } else {
+      this.showPersonFilter = true;
+      this.showOrgUnitFilter = true;
+      this.showResearchActivityFilter = true;
+      this.rightColSize = 67;
+    }
+  }
+
+  updateUrl(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
+    let url = '/search';
+    const params = [];
+
+    if (category) {
+      params.push('category=' + category);
+    }
+
+    if (searchText) {
+      params.push('searchText=' + searchText);
+    }
+
+    if (personId && this.showPersonFilter) {
+      params.push('person=' + personId);
+    }
+
+    if (orgUnitId && this.showOrgUnitFilter) {
+      params.push('orgUnit=' + orgUnitId);
+    }
+
+    if (researchActivityIds && researchActivityIds.length > 0 && this.showResearchActivityFilter) {
+      params.push('researchActivities=' + researchActivityIds.join(','));
+    }
+
+    const paramsStr = params.join('&');
+    if (paramsStr) {
+      url += '?' + paramsStr;
+    }
+
+    this.location.replaceState(encodeURI(url)); // Update url without reloading page
   }
 
   ngOnDestroy() {
     this.searchChangeSub.unsubscribe();
+    this.routeParamsSub.unsubscribe();
+    this.searchCatSub.unsubscribe();
   }
 
   onSearchChange(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
     this.analyticsService.trackSearch(category, searchText);
+    this.updateUrl(category, searchText, personId, orgUnitId, researchActivityIds); // Update url displayed to user
 
     const categoryId = MenuService.getMenuItemId([category]);
     const menuItem = this.menuService.getMenuItem(categoryId);
@@ -270,5 +379,18 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     }
 
     return this.apiService.getPeople(searchParams);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(FilterDialogComponent, {
+      width: '100%',
+      height: '100%',
+      data: { name: 'hello', animal: 'hello' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 }

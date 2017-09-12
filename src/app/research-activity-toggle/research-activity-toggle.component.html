@@ -1,7 +1,7 @@
 <md-button-toggle-group class="ra-mat-toggle-theme" vertical="true" multiple style="width: 100%;">
   <md-button-toggle *ngFor="let activity of researchActivities"
                     [value]="activity"
-                    (change)="activity.selected = !activity.selected; updateModel();"
+                    (change)="activity.selected = !activity.selected; updateValue();"
                     [checked]="activity.selected"
                     [ngClass]="activity.className">
     <md-icon>{{activity.icon}}</md-icon>

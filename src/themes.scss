@@ -218,6 +218,11 @@ $guide-tile-bg-color: #0294a5;
   @include angular-material-theme($search-bar-theme);
 
 }
+
+md-dialog-container {
+  max-width: 100% !important;
+}
+
 //
 //.hub-md-sidenav {
 //  $sidenav-primary: mat-palette($hub-navy, 500);

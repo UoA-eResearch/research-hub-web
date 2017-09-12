@@ -1,20 +1,21 @@
 <md-progress-bar mode="indeterminate" color="accent" [hidden]="!showProgressBar"></md-progress-bar>
 
 <div class="search-results" ngClass.xs="search-results-xs" fxLayout="row" fxLayoutGap="1em">
-  <div fxFlex="33">
+  <div fxFlex="33" *ngIf="showPersonFilter || showOrgUnitFilter || showResearchActivityFilter" fxHide.lt-md>
+    <h1>Refine</h1>
     <md-card>
-      <h1>Filter results</h1>
-
       <form [formGroup]="filtersForm">
-        <app-autocomplete-search [placeholder]="'Person'" [items]="people" formControlName="person"></app-autocomplete-search>
-        <app-autocomplete-search [placeholder]="'Org Unit'" [items]="orgUnits" formControlName="orgUnit" style="display: block; margin-bottom: 1em;"></app-autocomplete-search>
-        <app-research-activity-toggle formControlName="researchActivities"></app-research-activity-toggle>
+        <app-autocomplete-search *ngIf="showPersonFilter" [placeholder]="'Person'" [items]="people" formControlName="person"></app-autocomplete-search>
+        <app-autocomplete-search *ngIf="showOrgUnitFilter" [placeholder]="'Org Unit'" [items]="orgUnits" formControlName="orgUnit" style="display: block; margin-bottom: 1em;"></app-autocomplete-search>
+        <app-research-activity-toggle *ngIf="showResearchActivityFilter" formControlName="researchActivities"></app-research-activity-toggle>
       </form>
     </md-card>
   </div>
-  <div fxFlex="67">
+  <div fxFlex.lt-md="100" [fxFlex.gt-sm]="rightColSize">
     <div *ngIf="!showEmptyState" class="search-results-info">
-      <p>Refine your search for <span class="search-results-text">'{{searchBarService.searchText}}'</span> in</p>
+      <h1>Results</h1>
+      <button fxHide.gt-sm md-raised-button color="primary" style="margin-bottom: 1em;" (click)="openDialog()">Refine</button>
+      <p>See search results for <span class="search-results-text">'{{searchBarService.searchText}}'</span> in</p>
       <md-chip-list>
         <ng-container *ngFor="let item of searchResultsSummary;">
           <md-chip *ngIf="item.page && item.page.totalElements"  color="accent" selected="true" style="margin: 0.25em;" (click)="item.scrollToResults()">
@@ -22,6 +23,25 @@
           </md-chip>
         </ng-container>
       </md-chip-list>
+
+      <!--<md-expansion-panel fxHide.gt-sm>-->
+        <!--<md-expansion-panel-header>-->
+          <!--<md-panel-title>-->
+            <!--Refine-->
+          <!--</md-panel-title>-->
+          <!--<md-panel-description>-->
+            <!--Type your name and age-->
+          <!--</md-panel-description>-->
+        <!--</md-expansion-panel-header>-->
+
+        <!--<form [formGroup]="filtersForm">-->
+          <!--<app-autocomplete-search *ngIf="showPersonFilter" [placeholder]="'Person'" [items]="people" formControlName="person"></app-autocomplete-search>-->
+          <!--<app-autocomplete-search *ngIf="showOrgUnitFilter" [placeholder]="'Org Unit'" [items]="orgUnits" formControlName="orgUnit" style="display: block; margin-bottom: 1em;"></app-autocomplete-search>-->
+          <!--<app-research-activity-toggle *ngIf="showResearchActivityFilter" formControlName="researchActivities"></app-research-activity-toggle>-->
+        <!--</form>-->
+      <!--</md-expansion-panel>-->
+
+
     </div>
 
     <div *ngIf="showEmptyState" class="search-results-info">

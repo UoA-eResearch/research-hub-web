@@ -18,7 +18,8 @@ import {
   MdSelectModule,
   MdSidenavModule,
   MdToolbarModule,
-  MdProgressBarModule, MdChipsModule, MdFormField, MdFormFieldModule, MdButtonToggleModule, MdAutocompleteModule
+  MdProgressBarModule, MdChipsModule, MdFormField, MdFormFieldModule, MdButtonToggleModule, MdAutocompleteModule,
+  MdExpansionModule, MdDialogModule
 } from "@angular/material";
 import {BreadcrumbService, Ng2BreadcrumbModule} from "ng2-breadcrumb/ng2-breadcrumb";
 
@@ -52,6 +53,7 @@ import { GuideDetailsComponent } from './guide-details/guide-details.component';
 import { GuideCategoryComponent } from './guide-category/guide-category.component';
 import { ResearchActivityToggleComponent } from './research-activity-toggle/research-activity-toggle.component';
 import { AutocompleteSearchComponent } from './autocomplete-search/autocomplete-search.component';
+import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 
 
 @NgModule({
@@ -77,7 +79,8 @@ import { AutocompleteSearchComponent } from './autocomplete-search/autocomplete-
     GuideDetailsComponent,
     GuideCategoryComponent,
     ResearchActivityToggleComponent,
-    AutocompleteSearchComponent
+    AutocompleteSearchComponent,
+    FilterDialogComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -103,7 +106,12 @@ import { AutocompleteSearchComponent } from './autocomplete-search/autocomplete-
     MdProgressBarModule,
     MdFormFieldModule,
     MdAutocompleteModule,
+    MdExpansionModule,
+    MdDialogModule,
     routing
+  ],
+  entryComponents: [
+    FilterDialogComponent
   ],
   providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService,
     ProgressBarService],
