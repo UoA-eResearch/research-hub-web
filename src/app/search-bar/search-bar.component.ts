@@ -18,6 +18,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Output() categoriesChange = new EventEmitter();
 
   private searchCategoryChangeSub: Subscription;
+  private searchTextChangeSub: Subscription;
 
   constructor(private searchBarService: SearchBarService) {
   }
@@ -26,10 +27,15 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     this.searchCategoryChangeSub = this.searchBarService.searchCategoryChange.subscribe(searchCategory => {
       this.categoryValue = searchCategory;
     });
+
+    this.searchTextChangeSub = this.searchBarService.searchTextChange.subscribe(searchText => {
+      this.searchTextValue = searchText;
+    });
   }
 
   ngOnDestroy() {
     this.searchCategoryChangeSub.unsubscribe();
+    this.searchTextChangeSub.unsubscribe();
   }
 
   @Input()
