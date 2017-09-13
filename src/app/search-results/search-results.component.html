@@ -1,67 +1,65 @@
 <md-progress-bar mode="indeterminate" color="accent" [hidden]="!showProgressBar"></md-progress-bar>
 
-<div class="search-results" ngClass.xs="search-results-xs">
-  <div *ngIf="!showEmptyState" class="search-results-info">
-    <p>Refine your search for <span class="search-results-text">'{{searchBarService.searchText}}'</span> in</p>
-    <md-chip-list>
-      <ng-container *ngFor="let item of searchResultsSummary;">
-        <md-chip *ngIf="item.page && item.page.totalElements"  color="accent" selected="true" style="margin: 0.25em;" (click)="item.scrollToResults()">
-          {{item.page.totalElements}} {{item.name}}
-        </md-chip>
-      </ng-container>
-    </md-chip-list>
+<div class="search-results" ngClass.xs="search-results-xs" fxLayout="row" fxLayoutGap="1em">
+  <div fxFlex="300px" fxHide.lt-md>
+    <h1>Refine by</h1>
+    <md-card class="filter-theme">
+      <form [formGroup]="filtersForm">
+        <md-select placeholder="Category" formControlName="category" style="width: 100%;margin-bottom: 20px;">
+          <md-option *ngFor="let category of categories" [value]="category.id">
+            {{category.name}}
+          </md-option>
+        </md-select>
+        <app-autocomplete-search *ngIf="showPersonFilter" [placeholder]="'Person'" [items]="people" formControlName="person"></app-autocomplete-search>
+        <app-autocomplete-search *ngIf="showOrgUnitFilter" [placeholder]="'Organisation unit'" [items]="orgUnits" formControlName="orgUnit" style="display: block;"></app-autocomplete-search>
+        <app-research-activity-toggle *ngIf="showResearchActivityFilter" formControlName="researchActivities"></app-research-activity-toggle>
+      </form>
+    </md-card>
   </div>
+  <div fxFlex.lt-md="100" style="width: calc(100% - 300px);">
+    <div *ngIf="!showEmptyState" class="search-results-info">
+      <h1 fxHide.lt-md>Results</h1>
+      <p [innerHTML]="resultsSummary"></p>
+      <!--<button fxHide.gt-sm md-icon-button color="accent" (click)="openDialog()">-->
+        <!--<md-icon class="md-24" aria-label="Example icon-button with a heart icon">filter_list</md-icon>-->
+      <!--</button>-->
 
-  <div *ngIf="showEmptyState" class="search-results-info">
-    <p>Sorry - your search for <span class="search-results-text">'{{searchBarService.searchText}}'</span> did not match anything on the Research Hub.</p>
-    <p>Suggestions:</p>
-    <ul>
-      <li>Let us know what you were looking for via our <a [routerLink]="['/feedback']">Feedback page</a></li>
-      <li>You can try the <a href="https://www.staff.auckland.ac.nz/en.html" target="_blank">Staff Service Centre</a> in the Staff Intranet</li>
-    </ul>
-  </div>
+      <!--<button md-raised-button color="primary" ><md-icon>filter_list</md-icon>Refine</button>-->
+    </div>
 
-  <div #supportResults>
+    <div *ngIf="showEmptyState" class="search-results-info">
+      <p [innerHTML]="noResultsSummary"></p>
+      <p>Suggestions:</p>
+      <ul>
+        <li>Let us know what you were looking for via our <a [routerLink]="['/feedback']">Feedback page</a></li>
+        <li>You can try the <a href="https://www.staff.auckland.ac.nz/en.html" target="_blank">Staff Service Centre</a> in the Staff Intranet</li>
+      </ul>
+    </div>
+
     <app-results-list *ngIf="supportPage && supportPage.totalElements" [title]="menuService.nameSupport"
                       [results]="supportPage.content" [intermediatePath]="'support'"></app-results-list>
-  </div>
 
-  <div #instrumentsResults>
     <app-results-list *ngIf="instrumentsEquipmentPage && instrumentsEquipmentPage.totalElements" [title]="menuService.nameInstrumentsEquipment"
                       [results]="instrumentsEquipmentPage.content" [intermediatePath]="'instrumentsEquipment'"></app-results-list>
-  </div>
 
-  <div #trainingResults>
     <app-results-list *ngIf="trainingPage && trainingPage.totalElements" [title]="menuService.nameTraining"
                       [results]="trainingPage.content" [intermediatePath]="'training'"></app-results-list>
-  </div>
 
-  <div #softwareResults>
     <app-results-list *ngIf="softwarePage && softwarePage.totalElements" [title]="menuService.nameSoftware"
                       [results]="softwarePage.content" [intermediatePath]="'software'"></app-results-list>
-  </div>
 
-  <div #facilitiesResults>
     <app-results-list *ngIf="facilitiesSpacesPage && facilitiesSpacesPage.totalElements" [title]="menuService.nameFacilitiesSpaces"
                       [results]="facilitiesSpacesPage.content" [intermediatePath]="'facilitiesSpaces'"></app-results-list>
-  </div>
 
-  <div #peopleResults>
     <app-results-list *ngIf="peoplePage && peoplePage.totalElements" [title]="menuService.namePeople"
                       [results]="peoplePage.content" [intermediatePath]="'people'"></app-results-list>
-  </div>
 
-  <div #guidesResults>
     <app-results-list *ngIf="guidesPage && guidesPage.totalElements" [title]="menuService.nameGuides"
                       [results]="guidesPage.content" [intermediatePath]="'guides'"></app-results-list>
-  </div>
 
-  <div #knowledgeArticleResults>
     <app-results-list *ngIf="knowledgeArticlePage && knowledgeArticlePage.totalElements" [title]="menuService.nameKnowledgeArticle"
                       [results]="knowledgeArticlePage.content" [intermediatePath]="'knowledgeArticle'"></app-results-list>
-  </div>
 
-  <div #policiesResults>
     <app-results-list *ngIf="policiesPage && policiesPage.totalElements" [title]="menuService.namePolicies"
                       [results]="policiesPage.content"></app-results-list>
   </div>

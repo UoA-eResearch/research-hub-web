@@ -27,15 +27,15 @@ export class Content implements GetResultsListItem {
       for (const object of objects) {
         contentItems.push(Content.fromObject(object));
 
-        contentItems.sort((a: Content, b: Content) => {
-          if (a.name < b.name) {
-            return -1;
-          } else if (a.name > b.name) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
+        // contentItems.sort((a: Content, b: Content) => {
+        //   if (a.name < b.name) {
+        //     return -1;
+        //   } else if (a.name > b.name) {
+        //     return 1;
+        //   } else {
+        //     return 0;
+        //   }
+        // });
       }
     }
 

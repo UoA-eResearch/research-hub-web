@@ -10,6 +10,7 @@
   @extend .search-results;
   margin: 0;
   margin-top: 1em;
+  margin-bottom: 2em;
 }
 
 .search-results-info {
@@ -19,11 +20,30 @@
 }
 
 .search-results-text {
-  color: $color-pink;
+  color: $color-pink !important;
   font-weight: 500;
   font-size: 1.2em !important;
   font-style: italic;
 }
+
+//.mat-select-placeholder {
+//  font-size: mat-font-size($app-select-typography, body-1) !important;
+//  font-weight: mat-font-weight($app-select-typography, body-1) !important;
+//}
+
+.mat-select-trigger {
+  font-size: 22.4px !important;
+}
+
+
+
+//mat-select-placeholder
+
+//.mat-option {
+//  font-size: mat-font-size($app-select-typography, body-1) !important;
+//  font-weight: mat-font-weight($app-select-typography, body-1) !important;
+//}
+
 
 //md-chip.mat-chip {
 //  font-size: mat-font-size($app-chips-typography, button) !important;

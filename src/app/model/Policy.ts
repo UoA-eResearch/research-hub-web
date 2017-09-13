@@ -14,16 +14,6 @@ export class Policy implements GetResultsListItem {
     if (objects !== undefined) {
       for (const object of objects) {
         items.push(Policy.fromObject(object));
-
-        items.sort((a: Policy, b: Policy) => {
-          if (a.name < b.name) {
-            return -1;
-          } else if (a.name > b.name) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
       }
     }
 

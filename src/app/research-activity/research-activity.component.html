@@ -1,11 +1,10 @@
 <div fxFlex="fill" fxLayout="column">
-
   <h2>Go to research activity filters</h2>
 
   <div class="flex-hack" fxFlex="grow" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="center center" fxLayoutAlign.lt-lg="">
     <div fxFlex.lt-lg="100%">
       <md-chip-list class="mat-chip-list-stacked">
-        <md-chip *ngFor="let activity of researchActivities" [style.backgroundColor]="activity.color" [routerLink]="['/search']">
+        <md-chip *ngFor="let activity of researchActivities" [style.backgroundColor]="activity.color" [routerLink]="['/search']" [queryParams]="{ researchActivities: [activity.id], searchText: '', category: 'all'}">
           {{activity.name}}
         </md-chip>
       </md-chip-list>
@@ -15,6 +14,4 @@
       <img id="img-wheel" src="/assets/images/research-activity-diagram.svg"  style="margin-left:20%;">
     </div>
   </div>
-
 </div>
-

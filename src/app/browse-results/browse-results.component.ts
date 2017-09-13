@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem, MenuItemType, MenuService} from "../menu.service";
 import {ActivatedRoute} from "@angular/router";
-import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.service";
+import {ApiService, ContentItemsSearchParams, PeopleSearchParams, SearchParams} from "../app.api.service";
 import {ProgressBarService} from "../app.progress-bar.service";
 import {SearchBarService} from "../search-bar/search-bar.service";
 import {AnalyticsService} from "../app.analytics.service";
@@ -66,7 +66,7 @@ export class BrowseResultsComponent implements OnInit {
   }
 
   private loadPeople() {
-    this.apiService.getPeople(new SearchParams()).subscribe(
+    this.apiService.getPeople(new PeopleSearchParams()).subscribe(
       page => {
         this.progressBarService.setHidden();
         this.results = page.content;

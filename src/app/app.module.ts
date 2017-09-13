@@ -18,14 +18,14 @@ import {
   MdSelectModule,
   MdSidenavModule,
   MdToolbarModule,
-  MdDialogModule,
-  MdProgressBarModule, MdChipsModule, MdFormField, MdFormFieldModule, MdButtonToggleModule, MdAutocompleteModule
+  MdProgressBarModule, MdChipsModule, MdFormField, MdFormFieldModule, MdButtonToggleModule, MdAutocompleteModule,
+  MdExpansionModule, MdDialogModule
+
 } from "@angular/material";
 import {BreadcrumbService, Ng2BreadcrumbModule} from "ng2-breadcrumb/ng2-breadcrumb";
 
 
 import {appRoutingProviders, routing} from "./app.routing";
-
 import {AppComponent} from "./app.component";
 import {AboutComponent} from "./about/about.component";
 import {ContactComponent} from "./contact/contact.component";
@@ -55,6 +55,8 @@ import { ResearchActivityToggleComponent } from './research-activity-toggle/rese
 import { AutocompleteSearchComponent } from './autocomplete-search/autocomplete-search.component';
 import { ImageViewComponent } from './image-view/image-view.component';
 import { ImageViewDialogComponent } from './image-view-dialog/image-view-dialog.component';
+import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
+
 
 
 @NgModule({
@@ -82,7 +84,8 @@ import { ImageViewDialogComponent } from './image-view-dialog/image-view-dialog.
     ResearchActivityToggleComponent,
     AutocompleteSearchComponent,
     ImageViewComponent,
-    ImageViewDialogComponent
+    ImageViewDialogComponent,
+    FilterDialogComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -111,7 +114,7 @@ import { ImageViewDialogComponent } from './image-view-dialog/image-view-dialog.
     MdDialogModule,
     routing
   ],
-  entryComponents: [ImageViewDialogComponent],
+  entryComponents: [ImageViewDialogComponent, FilterDialogComponent],
   providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService,
     ProgressBarService],
   bootstrap: [AppComponent]

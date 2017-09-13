@@ -1,5 +1,5 @@
 <form>
-  <md-form-field>
+  <md-form-field class="input-full-width">
     <input mdInput [placeholder]="placeholder" [mdAutocomplete]="auto" [formControl]="selectedItemCtrl">
     <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayWith">
       <md-option *ngFor="let item of filteredItems | async" [value]="item">

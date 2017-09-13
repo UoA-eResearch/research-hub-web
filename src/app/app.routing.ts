@@ -17,7 +17,7 @@ import {GuideCategoryComponent} from "./guide-category/guide-category.component"
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'search', component: SearchResultsComponent},
+  {path: 'search', component: SearchResultsComponent}, ///:category/:searchText/:people/:orgUnits/:researchActivities
   {path: 'feedback', component: FeedbackComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},

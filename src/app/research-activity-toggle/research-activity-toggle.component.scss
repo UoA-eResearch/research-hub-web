@@ -7,33 +7,40 @@ $analyze-background: #329a37;
 $publish-background: #f49717;
 $discover-background: #cd3234;
 
+$plan-accent:  #cfc3dc;
+$create-accent: #c1e0ef;
+$analyze-accent: #c2e0c3;
+$publish-accent: #fbe0bb;
+$discover-accent: #f0c2c2;
+
+$accent-text: #646464;
+
 @mixin research-activity-mat-button-toggle-theme($theme) {
   $foreground: map-get($theme, foreground);
-  $default-opacity: 0.1;
 
   .mat-button-toggle.plan {
-    background-color: rgba($plan-background, $default-opacity);
-    color: mat-color($foreground, hint-text);
+    background-color: $plan-accent;
+    color: $accent-text;
   }
 
   .mat-button-toggle.create {
-    background-color: rgba($create-background, $default-opacity);
-    color: mat-color($foreground, hint-text);
+    background-color: $create-accent;
+    color: $accent-text;
   }
 
   .mat-button-toggle.analyze {
-    background-color: rgba($analyze-background, $default-opacity);
-    color: mat-color($foreground, hint-text);
+    background-color: $analyze-accent;
+    color: $accent-text;
   }
 
   .mat-button-toggle.publish {
-    background-color: rgba($publish-background, $default-opacity);
-    color: mat-color($foreground, hint-text);
+    background-color: $publish-accent;
+    color: $accent-text;
   }
 
   .mat-button-toggle.discover {
-    background-color: rgba($discover-background, $default-opacity);
-    color: mat-color($foreground, hint-text);
+    background-color: $discover-accent;
+    color: $accent-text;
   }
 
   .mat-button-toggle-checked.plan {

@@ -13,6 +13,15 @@
   margin: $xs-offset / 2 $xs-offset $xs-offset $xs-offset;
 }
 
+.home-content {
+  max-width: $xl-thresh-min;
+  margin: 3em 4em 4em 4em;
+}
+
+.home-content-xs {
+  margin: $xs-offset * 1.5 $xs-offset $gt-xs-offset $xs-offset;
+}
+
 .flex-hack {
   flex: 1 1 auto !important;
 }

@@ -22,32 +22,60 @@ export class AutocompleteSearchComponent implements OnInit, OnDestroy, ControlVa
   selectedItemCtrl: FormControl;
   selectedItemSub: Subscription;
   filteredItems: Observable<any[]>;
+  private itemId: number;
 
   @Input() placeholder = '';
-  @Input() items: GetResultsListItem[] = [];
+  @Input() _items: GetResultsListItem[] = [];
 
-  selectedItem: any;
-  propagateChange = (_: any) => {};
+  @Input() _value: any = [];
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
   constructor(private apiService: ApiService) {
 
   }
 
-  ngOnInit() {
-    console.log('placeholder', this.placeholder);
-    // console.log('formControlName', this.formControlName);
+  get items() {
+    return this._items;
+  }
 
+  @Input()
+  set items(items: GetResultsListItem[]) {
+    this._items = items;
+
+    if (this._value) {
+      const selectedItem = items.find((item) => {
+        return item.getId() === this._value;
+      });
+
+      if (selectedItem) {
+        this.selectedItemCtrl.setValue(selectedItem);
+      }
+    }
+  }
+
+  get value() {
+    return this._value;
+  }
+
+  set value(val) {
+    this._value = Number(val) || '';
+    this.onChange(this._value);
+    this.onTouched();
+  }
+
+  ngOnInit() {
     this.selectedItemCtrl = new FormControl();
     this.selectedItemSub = this.selectedItemCtrl.valueChanges.subscribe(selectedItem => this.onSelectedItemChanged(selectedItem));
 
     this.filteredItems = this.selectedItemCtrl.valueChanges
       .startWith(null)
       .map(item => item && typeof item === 'object' ? item.getTitle() : item)
-      .map(name => name ? this.filter(name) : this.items.slice());
+      .map(name => name ? this.filterByName(name) : this._items.slice());
   }
 
-  filter(name: string): GetResultsListItem[] {
-    return this.items.filter(item =>
+  filterByName(name: string): GetResultsListItem[] {
+    return this._items.filter(item =>
       item.getTitle().toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 
@@ -59,27 +87,30 @@ export class AutocompleteSearchComponent implements OnInit, OnDestroy, ControlVa
     return '';
   }
 
-  writeValue(obj: any): void {
-    if (obj !== undefined) {
-      this.selectedItem = obj;
+  registerOnChange(fn) {
+    this.onChange = fn;
+  }
+
+  writeValue(value) {
+    if (value) {
+      this.value = value;
     }
   }
 
-  registerOnChange(fn: any): void {
-    this.propagateChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-  }
-
-  setDisabledState(isDisabled: boolean): void {
+  registerOnTouched(fn) {
+    this.onTouched = fn;
   }
 
   onSelectedItemChanged(selectedItem: any) {
-      if (typeof selectedItem === 'object') {
-        this.selectedItem = selectedItem;
-        this.propagateChange(selectedItem);
-      }
+    let newSelectedItem = '';
+
+    if (selectedItem && typeof selectedItem === 'object') {
+      newSelectedItem = selectedItem.getId();
+    }
+
+    if (this.value !== newSelectedItem) {
+      this.value = newSelectedItem;
+    }
   }
 
   ngOnDestroy() {

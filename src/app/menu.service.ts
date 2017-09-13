@@ -17,7 +17,7 @@ export class MenuItem {
   public parent: MenuItem;
 
   constructor(public id: string, public name: string, public icon: string, public type: MenuItemType,
-              public contentTypeId: number, public menuItems: [MenuItem], public image: string, public description:string) {
+              public contentTypeId: number, public menuItems: [MenuItem], public image: string, public description: string) {
 
     // Set this menuItem as the parent
     if (menuItems != null) {
@@ -96,6 +96,7 @@ export class MenuService {
     this.createFriendlyNames('/browse', this.root.menuItems);
     this.createFriendlyNames('/search', this.root.menuItems);
     this.breadcrumbService.addFriendlyNameForRoute('/browse', 'Browse');
+    this.breadcrumbService.addFriendlyNameForRouteRegex('/search[?]', 'Search Results');
     this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search');
     this.breadcrumbService.addFriendlyNameForRoute('/orgUnits', 'Organisational Units');
     this.breadcrumbService.addFriendlyNameForRoute('/people', 'People');
@@ -126,7 +127,9 @@ export class MenuService {
   }
 
   public getCurrentPath() {
-    const currentPath = this.location.path().split('/').slice(1);
+    const urlAndParams = this.location.path().split('?');
+    // console.log('urlAndParams', urlAndParams);
+    const currentPath = urlAndParams[0].split('/').slice(1);
     currentPath[0] = '/' + currentPath[0];
     return currentPath;
   }

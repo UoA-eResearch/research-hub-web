@@ -1,10 +1,12 @@
+<span style="color: rgba(0,0,0,0.54);padding-bottom: 0.3em;font-size: 12px;display: block;">Research activity</span>
 <md-button-toggle-group class="ra-mat-toggle-theme" vertical="true" multiple style="width: 100%;">
   <md-button-toggle *ngFor="let activity of researchActivities"
                     [value]="activity"
-                    (change)="activity.selected = !activity.selected; updateModel();"
+                    (change)="activity.selected = !activity.selected; updateValue();"
                     [checked]="activity.selected"
                     [ngClass]="activity.className">
     <md-icon>{{activity.icon}}</md-icon>
     <span class="activity-name">{{activity.name}}</span>
   </md-button-toggle>
+
 </md-button-toggle-group>
