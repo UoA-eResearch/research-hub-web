@@ -5,7 +5,7 @@
     <h1>Refine by</h1>
     <md-card class="filter-theme">
       <form [formGroup]="filtersForm">
-        <md-select placeholder="Categories" formControlName="category" style="width: 100%;margin-bottom: 20px;">
+        <md-select placeholder="Category" formControlName="category" style="width: 100%;margin-bottom: 20px;">
           <md-option *ngFor="let category of categories" [value]="category.id">
             {{category.name}}
           </md-option>
