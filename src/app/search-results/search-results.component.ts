@@ -130,14 +130,20 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     // Subscribe to search changes
     this.searchChangeSub = Observable
       .combineLatest(
-        this.searchBarService.searchChange.debounceTime(250).distinctUntilChanged(),
+        this.searchBarService.searchTextChange.debounceTime(250).distinctUntilChanged(),
+        this.categoryFormControl.valueChanges,
         this.personFormControl.valueChanges,
         this.orgUnitFormControl.valueChanges,
         this.researchActivitiesFormControl.valueChanges
       ).subscribe(latestValues => {
         this.showProgressBar = true;
-        const [searchBarParams, person, orgUnit, researchActivities] = latestValues;
-        this.onSearchChange(searchBarParams.category, searchBarParams.searchText, person, orgUnit, researchActivities);
+        const [searchText, category, person, orgUnit, researchActivities] = latestValues;
+
+        if (category !== this.searchBarService.category) {
+          this.searchBarService.setCategory(category);
+        }
+
+        this.onSearchChange(category, searchText, person, orgUnit, researchActivities);
       });
 
     this.routeParamsSub = this.route
@@ -154,6 +160,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
           this.updateFilterVisibility(category);
           this.searchBarService.setSearchText(searchText);
           this.searchBarService.setCategory(category);
+          this.categoryFormControl.setValue(category);
           this.personFormControl.setValue(person);
           this.orgUnitFormControl.setValue(orgUnit);
           this.researchActivitiesFormControl.setValue(researchActivities);
@@ -163,6 +170,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       });
 
     this.searchCatSub = this.searchBarService.searchCategoryChange.subscribe((category) => {
+      if (category !== this.categoryFormControl.value) {
+        this.categoryFormControl.setValue(category);
+      }
+
       this.updateFilterVisibility(category);
     });
   }
