@@ -1,7 +1,7 @@
 <md-progress-bar mode="indeterminate" color="accent" [hidden]="!showProgressBar"></md-progress-bar>
 
 <div class="search-results" ngClass.xs="search-results-xs" fxLayout="row" fxLayoutGap="1em">
-  <div fxFlex="300px" *ngIf="showPersonFilter || showOrgUnitFilter || showResearchActivityFilter" fxHide.lt-md>
+  <div fxFlex="300px" fxHide.lt-md>
     <h1>Refine by</h1>
     <md-card class="filter-theme">
       <form [formGroup]="filtersForm">
