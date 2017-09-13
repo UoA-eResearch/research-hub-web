@@ -1,12 +1,11 @@
-import {Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
-import {SearchBarParams, SearchBarService} from "../search-bar/search-bar.service";
+import {SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from "rxjs/Subscription";
-import {ContentTypeIds, MenuItem, MenuItemType, MenuService} from "../menu.service";
+import {ContentTypeIds, MenuItemType, MenuService} from "../menu.service";
 import {ApiService, ContentItemsSearchParams, PeopleSearchParams, SearchParams} from "../app.api.service";
 import {Person} from "../model/Person";
 import {Content} from "../model/Content";
-import {ProgressBarService} from "../app.progress-bar.service";
 import {Page} from "../model/Page";
 import {Policy} from "../model/Policy";
 import {AnalyticsService} from "../app.analytics.service";
@@ -16,19 +15,9 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {OrgUnit} from "../model/OrgUnit";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from '@angular/common';
-import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from "@angular/material";
 import {FilterDialogComponent} from "../filter-dialog/filter-dialog.component";
+import {MdDialog} from "@angular/material";
 
-
-class SearchResultsSummary {
-  constructor(public name: string, public page: Page<any>, public elementRef: ElementRef) {
-
-  }
-
-  scrollToResults() {
-    this.elementRef.nativeElement.scrollIntoView();
-  }
-}
 
 @Component({
   selector: 'app-search-results',
@@ -36,16 +25,6 @@ class SearchResultsSummary {
   styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
-  @ViewChild('guidesResults') guidesResults: ElementRef;
-  @ViewChild('supportResults') supportResults: ElementRef;
-  @ViewChild('instrumentsResults') instrumentsResults: ElementRef;
-  @ViewChild('trainingResults') trainingResults: ElementRef;
-  @ViewChild('softwareResults') softwareResults: ElementRef;
-  @ViewChild('facilitiesResults') facilitiesResults: ElementRef;
-  @ViewChild('peopleResults') peopleResults: ElementRef;
-  @ViewChild('knowledgeArticleResults') knowledgeArticleResults: ElementRef;
-  @ViewChild('policiesResults') policiesResults: ElementRef;
-
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
   private searchCatSub: Subscription;
@@ -59,21 +38,21 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private knowledgeArticlePage: Page<Content>;
   private policiesPage: Page<Policy>;
   private maxNumberOfItems = 50;
-  private searchResultsSummary: Array<SearchResultsSummary>;
   private contentPages: any[];
   private allPages: any[] = [];
   private showEmptyState = false;
   private showProgressBar = true;
   private people: Person[] = [];
   private orgUnits: OrgUnit[] = [];
+  private categories = [];
 
   private filtersForm: FormGroup;
+  private categoryFormControl: FormControl = new FormControl();
   private personFormControl: FormControl = new FormControl();
   private orgUnitFormControl: FormControl = new FormControl();
   private researchActivitiesFormControl: FormControl = new FormControl();
   private loadedRoute = false;
 
-  private showFilters = true;
   private showPersonFilter = true;
   private showOrgUnitFilter = true;
   private showResearchActivityFilter = true;
@@ -130,7 +109,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.allPages.push(this.policiesPage);
 
     // Setup filters
+    // Populate menuItems for search-bar bar
+    this.categories = this.menuService.getMenuItem('/').menuItems;
+
     this.filtersForm = new FormGroup({
+      category: this.categoryFormControl,
       person: this.personFormControl,
       orgUnit: this.orgUnitFormControl,
       researchActivities: this.researchActivitiesFormControl
@@ -321,24 +304,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       }
 
       this.showEmptyState = totalElements === 0;
-      this.updateSearchResultsSummary();
       this.showProgressBar = false;
       observable.unsubscribe();
     });
-  }
-
-  updateSearchResultsSummary() {
-    this.searchResultsSummary = [
-      new SearchResultsSummary(this.menuService.nameGuides, this.guidesPage, this.guidesResults),
-      new SearchResultsSummary(this.menuService.nameSupport, this.supportPage, this.supportResults),
-      new SearchResultsSummary(this.menuService.nameInstrumentsEquipment, this.instrumentsEquipmentPage, this.instrumentsResults),
-      new SearchResultsSummary(this.menuService.nameTraining, this.trainingPage, this.trainingResults),
-      new SearchResultsSummary(this.menuService.nameSoftware, this.softwarePage, this.softwareResults),
-      new SearchResultsSummary(this.menuService.nameFacilitiesSpaces, this.facilitiesSpacesPage, this.facilitiesResults),
-      new SearchResultsSummary(this.menuService.namePeople, this.peoplePage, this.peopleResults),
-      new SearchResultsSummary(this.menuService.nameKnowledgeArticle, this.knowledgeArticlePage, this.knowledgeArticleResults),
-      new SearchResultsSummary(this.menuService.namePolicies, this.policiesPage, this.policiesResults)
-    ];
   }
 
   getContentObservable(searchText: string, contentTypeId: number, personId: number, orgUnitId: number, researchActivityIds: number[]) {

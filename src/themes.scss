@@ -212,11 +212,37 @@ $guide-tile-bg-color: #0294a5;
     font-size: 0.8em !important;
   }
 
+  /*
+   * Fixes so that select lines up with md-input-container elements
+   * and contains same sized text
+   */
+
+  .mat-select-value-text {
+    line-height: 32px !important;
+  }
+
+  .mat-select-trigger {
+    font-size: 22.4px !important;
+  }
+
+  .mat-select-underline {
+    bottom: -10px !important;
+  }
+
   $search-bar-primary: mat-palette($hub-navy, 50);
   $search-bar-accent: mat-palette($hub-pink, A200, A100, A400);
   $search-bar-theme: mat-dark-theme($search-bar-primary, $search-bar-accent);
   @include angular-material-theme($search-bar-theme);
 
+}
+//
+.filter-theme {
+
+  .mat-select-trigger {
+    font-size: 16px !important;
+  }
+
+  @include angular-material-theme($hub-app-theme);
 }
 
 md-dialog-container {

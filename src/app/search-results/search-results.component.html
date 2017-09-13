@@ -1,17 +1,22 @@
 <md-progress-bar mode="indeterminate" color="accent" [hidden]="!showProgressBar"></md-progress-bar>
 
 <div class="search-results" ngClass.xs="search-results-xs" fxLayout="row" fxLayoutGap="1em">
-  <div fxFlex="33" *ngIf="showPersonFilter || showOrgUnitFilter || showResearchActivityFilter" fxHide.lt-md>
+  <div fxFlex="300px" *ngIf="showPersonFilter || showOrgUnitFilter || showResearchActivityFilter" fxHide.lt-md>
     <h1>Refine by</h1>
-    <md-card>
+    <md-card class="filter-theme">
       <form [formGroup]="filtersForm">
+        <md-select placeholder="Categories" formControlName="category" style="width: 100%;margin-bottom: 20px;">
+          <md-option *ngFor="let category of categories" [value]="category.id">
+            {{category.name}}
+          </md-option>
+        </md-select>
         <app-autocomplete-search *ngIf="showPersonFilter" [placeholder]="'Person'" [items]="people" formControlName="person"></app-autocomplete-search>
         <app-autocomplete-search *ngIf="showOrgUnitFilter" [placeholder]="'Organisation unit'" [items]="orgUnits" formControlName="orgUnit" style="display: block;"></app-autocomplete-search>
         <app-research-activity-toggle *ngIf="showResearchActivityFilter" formControlName="researchActivities"></app-research-activity-toggle>
       </form>
     </md-card>
   </div>
-  <div fxFlex.lt-md="100" [fxFlex.gt-sm]="rightColSize">
+  <div fxFlex.lt-md="100" style="width: calc(100% - 300px);">
     <div *ngIf="!showEmptyState" class="search-results-info">
       <h1>Results</h1>
       <button fxHide.gt-sm md-raised-button color="primary" style="margin-bottom: 1em;" (click)="openDialog()">Refine</button>
@@ -34,50 +39,31 @@
       </ul>
     </div>
 
-    <div #supportResults>
-      <app-results-list *ngIf="supportPage && supportPage.totalElements" [title]="menuService.nameSupport"
-                        [results]="supportPage.content" [intermediatePath]="'support'"></app-results-list>
-    </div>
+    <app-results-list *ngIf="supportPage && supportPage.totalElements" [title]="menuService.nameSupport"
+                      [results]="supportPage.content" [intermediatePath]="'support'"></app-results-list>
 
-    <div #instrumentsResults>
-      <app-results-list *ngIf="instrumentsEquipmentPage && instrumentsEquipmentPage.totalElements" [title]="menuService.nameInstrumentsEquipment"
-                        [results]="instrumentsEquipmentPage.content" [intermediatePath]="'instrumentsEquipment'"></app-results-list>
-    </div>
+    <app-results-list *ngIf="instrumentsEquipmentPage && instrumentsEquipmentPage.totalElements" [title]="menuService.nameInstrumentsEquipment"
+                      [results]="instrumentsEquipmentPage.content" [intermediatePath]="'instrumentsEquipment'"></app-results-list>
 
-    <div #trainingResults>
-      <app-results-list *ngIf="trainingPage && trainingPage.totalElements" [title]="menuService.nameTraining"
-                        [results]="trainingPage.content" [intermediatePath]="'training'"></app-results-list>
-    </div>
+    <app-results-list *ngIf="trainingPage && trainingPage.totalElements" [title]="menuService.nameTraining"
+                      [results]="trainingPage.content" [intermediatePath]="'training'"></app-results-list>
 
-    <div #softwareResults>
-      <app-results-list *ngIf="softwarePage && softwarePage.totalElements" [title]="menuService.nameSoftware"
-                        [results]="softwarePage.content" [intermediatePath]="'software'"></app-results-list>
-    </div>
+    <app-results-list *ngIf="softwarePage && softwarePage.totalElements" [title]="menuService.nameSoftware"
+                      [results]="softwarePage.content" [intermediatePath]="'software'"></app-results-list>
 
-    <div #facilitiesResults>
-      <app-results-list *ngIf="facilitiesSpacesPage && facilitiesSpacesPage.totalElements" [title]="menuService.nameFacilitiesSpaces"
-                        [results]="facilitiesSpacesPage.content" [intermediatePath]="'facilitiesSpaces'"></app-results-list>
-    </div>
+    <app-results-list *ngIf="facilitiesSpacesPage && facilitiesSpacesPage.totalElements" [title]="menuService.nameFacilitiesSpaces"
+                      [results]="facilitiesSpacesPage.content" [intermediatePath]="'facilitiesSpaces'"></app-results-list>
 
-    <div #peopleResults>
-      <app-results-list *ngIf="peoplePage && peoplePage.totalElements" [title]="menuService.namePeople"
-                        [results]="peoplePage.content" [intermediatePath]="'people'"></app-results-list>
-    </div>
+    <app-results-list *ngIf="peoplePage && peoplePage.totalElements" [title]="menuService.namePeople"
+                      [results]="peoplePage.content" [intermediatePath]="'people'"></app-results-list>
 
-    <div #guidesResults>
-      <app-results-list *ngIf="guidesPage && guidesPage.totalElements" [title]="menuService.nameGuides"
-                        [results]="guidesPage.content" [intermediatePath]="'guides'"></app-results-list>
-    </div>
+    <app-results-list *ngIf="guidesPage && guidesPage.totalElements" [title]="menuService.nameGuides"
+                      [results]="guidesPage.content" [intermediatePath]="'guides'"></app-results-list>
 
-    <div #knowledgeArticleResults>
-      <app-results-list *ngIf="knowledgeArticlePage && knowledgeArticlePage.totalElements" [title]="menuService.nameKnowledgeArticle"
-                        [results]="knowledgeArticlePage.content" [intermediatePath]="'knowledgeArticle'"></app-results-list>
-    </div>
+    <app-results-list *ngIf="knowledgeArticlePage && knowledgeArticlePage.totalElements" [title]="menuService.nameKnowledgeArticle"
+                      [results]="knowledgeArticlePage.content" [intermediatePath]="'knowledgeArticle'"></app-results-list>
 
-    <div #policiesResults>
-      <app-results-list *ngIf="policiesPage && policiesPage.totalElements" [title]="menuService.namePolicies"
-                        [results]="policiesPage.content"></app-results-list>
-    </div>
+    <app-results-list *ngIf="policiesPage && policiesPage.totalElements" [title]="menuService.namePolicies"
+                      [results]="policiesPage.content"></app-results-list>
   </div>
-
 </div>
