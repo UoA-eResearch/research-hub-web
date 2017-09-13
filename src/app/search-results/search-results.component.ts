@@ -17,6 +17,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from '@angular/common';
 import {FilterDialogComponent} from "../filter-dialog/filter-dialog.component";
 import {MdDialog} from "@angular/material";
+import {ResearchActivityComponent} from "../research-activity/research-activity.component";
 
 
 @Component({
@@ -57,6 +58,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private showOrgUnitFilter = true;
   private showResearchActivityFilter = true;
   private rightColSize = 67;
+
+  private noResultsSummary = '';
+  private resultsSummary = '';
 
   private static parseParamArray(str: string) {
     let nums = [];
@@ -119,14 +123,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       researchActivities: this.researchActivitiesFormControl
     });
 
-    this.apiService.getPeople(new PeopleSearchParams()).subscribe(data => {
-      this.people = data.content;
-    });
-
-    this.apiService.getOrgUnits(new SearchParams()).subscribe(data => {
-      this.orgUnits = data.content;
-    });
-
     // Subscribe to search changes
     this.searchChangeSub = Observable
       .combineLatest(
@@ -146,10 +142,20 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.onSearchChange(category, searchText, person, orgUnit, researchActivities);
       });
 
-    this.routeParamsSub = this.route
-      .queryParams
-      .subscribe(params => {
+    this.routeParamsSub = Observable
+      .combineLatest(
+        this.route.queryParams,
+        this.apiService.getPeople(new PeopleSearchParams()),
+        this.apiService.getOrgUnits(new SearchParams())
+      )
+      .subscribe(latestValues => {
+
         if (!this.loadedRoute) {
+          const [params, peoplePage, orgUnitsPage] = latestValues;
+
+          this.people = peoplePage.content;
+          this.orgUnits = orgUnitsPage.content;
+
           // These need to be set initially so that the combineLatest observable will fire
           const category = params['category'] || this.searchBarService.category;
           const searchText = typeof params['searchText'] === 'string' ? params['searchText'] : this.searchBarService.searchText;
@@ -197,6 +203,54 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     }
   }
 
+  updateResultsSummary(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
+    // let summary = 'Refined by ';
+    let statements = [];
+
+    if (category) {
+      statements.push('in <span class="search-results-text">' + this.menuService.getMenuItem('/' + category).name + '</span>');
+    }
+
+    if (personId && this.showPersonFilter) {
+      const person = this.people.find((p) => {
+        return p.id === personId;
+      });
+      statements.push('supported by <span class="search-results-text">' + person.getTitle() + '</span>');
+    }
+
+    if (orgUnitId && this.showOrgUnitFilter) {
+      const orgUnit = this.orgUnits.find((o) => {
+        return o.id === orgUnitId;
+      });
+      statements.push('owned by the <span class="search-results-text">' + orgUnit.getTitle() + '</span>');
+    }
+
+    if (researchActivityIds && researchActivityIds.length > 0 && this.showResearchActivityFilter) {
+      const activities = [];
+
+      for (const researchActivityId of researchActivityIds) {
+        activities.push('<span class="search-results-text">' + ResearchActivityComponent.researchActivities[researchActivityId - 1].name + '</span>');
+      }
+
+      let researchPhaseText = 'applicable to the ' + activities.join(', ') + ' research phase';
+
+      if (researchActivityIds.length > 1) {
+        researchPhaseText += 's';
+      }
+
+      statements.push(researchPhaseText);
+    }
+
+    let searchTextSummary = '';
+    if (searchText) {
+      searchTextSummary = 'for <span class="search-results-text">"' + searchText + '"</span> ';
+    }
+
+    const summary = searchTextSummary + statements.join(', ');
+    this.noResultsSummary = 'Sorry - your search ' + summary + ' did not match anything on the Research Hub.';
+    this.resultsSummary = 'Showing search results ' + summary + '.';
+  }
+
   updateUrl(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
     let url = '/search';
     const params = [];
@@ -237,6 +291,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   onSearchChange(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
     this.analyticsService.trackSearch(category, searchText);
+    this.updateResultsSummary(category, searchText, personId, orgUnitId, researchActivityIds);
     this.updateUrl(category, searchText, personId, orgUnitId, researchActivityIds); // Update url displayed to user
 
     const categoryId = MenuService.getMenuItemId([category]);
@@ -364,7 +419,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(FilterDialogComponent, {
       width: '100%',
       height: '100%',
-      data: { name: 'hello', animal: 'hello' }
+      data: {name: 'hello', animal: 'hello'}
     });
 
     dialogRef.afterClosed().subscribe(result => {

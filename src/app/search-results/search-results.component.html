@@ -18,20 +18,17 @@
   </div>
   <div fxFlex.lt-md="100" style="width: calc(100% - 300px);">
     <div *ngIf="!showEmptyState" class="search-results-info">
-      <h1>Results</h1>
-      <button fxHide.gt-sm md-raised-button color="primary" style="margin-bottom: 1em;" (click)="openDialog()">Refine</button>
-      <p>See search results <ng-container *ngIf="searchBarService.searchText">for <span class="search-results-text">'{{searchBarService.searchText}}'</span></ng-container> in:</p>
-      <md-chip-list>
-        <ng-container *ngFor="let item of searchResultsSummary;">
-          <md-chip *ngIf="item.page && item.page.totalElements"  color="accent" selected="true" style="margin: 0.25em;" (click)="item.scrollToResults()">
-            {{item.page.totalElements}} {{item.name}}
-          </md-chip>
-        </ng-container>
-      </md-chip-list>
+      <h1 fxHide.lt-md>Results</h1>
+      <p [innerHTML]="resultsSummary"></p>
+      <!--<button fxHide.gt-sm md-icon-button color="accent" (click)="openDialog()">-->
+        <!--<md-icon class="md-24" aria-label="Example icon-button with a heart icon">filter_list</md-icon>-->
+      <!--</button>-->
+
+      <!--<button md-raised-button color="primary" ><md-icon>filter_list</md-icon>Refine</button>-->
     </div>
 
     <div *ngIf="showEmptyState" class="search-results-info">
-      <p>Sorry - your search for <span class="search-results-text">'{{searchBarService.searchText}}'</span> did not match anything on the Research Hub.</p>
+      <p [innerHTML]="noResultsSummary"></p>
       <p>Suggestions:</p>
       <ul>
         <li>Let us know what you were looking for via our <a [routerLink]="['/feedback']">Feedback page</a></li>
