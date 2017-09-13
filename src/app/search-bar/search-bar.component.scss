@@ -15,6 +15,10 @@ $search-flex: 4;
   margin-top: 15px;
 }
 
+.search-box-xs {
+  margin-top: 5px;
+}
+
 .mat-option {
   font-size: mat-font-size($app-search-bar-select-typography, body-1) !important;
   font-weight: mat-font-weight($app-search-bar-select-typography, body-1) !important;
