@@ -18,6 +18,7 @@ import {Location} from '@angular/common';
 import {FilterDialogComponent} from "../filter-dialog/filter-dialog.component";
 import {MdDialog} from "@angular/material";
 import {ResearchActivityComponent} from "../research-activity/research-activity.component";
+import {ToolbarService} from "../toolbar.service";
 
 
 @Component({
@@ -26,6 +27,7 @@ import {ResearchActivityComponent} from "../research-activity/research-activity.
   styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
+  private buttonClickSub: Subscription;
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
   private searchCatSub: Subscription;
@@ -89,7 +91,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   constructor(private breadcrumbService: BreadcrumbService, protected searchBarService: SearchBarService,
               protected menuService: MenuService, private apiService: ApiService,
               private analyticsService: AnalyticsService, private titleService: Title, private route: ActivatedRoute,
-              private location: Location, public dialog: MdDialog) {
+              private location: Location, public dialog: MdDialog, private toolbarService: ToolbarService) {
     this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search Results');
   }
 
@@ -182,6 +184,12 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       }
 
       this.updateFilterVisibility(category);
+    });
+
+    this.buttonClickSub = this.toolbarService.buttonClickChange.subscribe((buttonName) => {
+      if (buttonName === 'filter') {
+        this.openDialog();
+      }
     });
   }
 
@@ -288,6 +296,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.searchChangeSub.unsubscribe();
     this.routeParamsSub.unsubscribe();
     this.searchCatSub.unsubscribe();
+    this.buttonClickSub.unsubscribe();
   }
 
   onSearchChange(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {

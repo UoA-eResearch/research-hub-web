@@ -25,11 +25,14 @@
             </md-toolbar>
           </div>
 
-          <div>
+          <div fxLayout="row" fxLayoutAlign="center center">
             <h1><breadcrumb [useBootstrap]="false"></breadcrumb></h1>
+            <span class="example-spacer"></span>
+            <button md-icon-button (click)="openSearchFilter()" fxHide.gt-sm>
+              <md-icon class="md-24" style="color: white;">filter_list</md-icon>
+            </button>
           </div>
         </div>
-        <!--<div class="beta-bar"><a routerLink="/feedback">Beta-version feedback</a></div>-->
         <router-outlet></router-outlet>
       </div>
       <footer class.xs="footer-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">

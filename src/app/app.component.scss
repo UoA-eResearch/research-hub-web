@@ -243,6 +243,10 @@ app-search-bar {
   box-sizing: unset;
 }
 
+.example-spacer {
+  flex: 1 1 auto;
+}
+
 // HACK
 // https://github.com/angular/material2/issues/6958
 

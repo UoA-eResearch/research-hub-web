@@ -11,6 +11,7 @@ import {ApiService} from "./app.api.service";
 import {AnalyticsService} from "./app.analytics.service";
 import { isPlatformBrowser } from '@angular/common';
 import {BrowseComponent} from "./browse/browse.component";
+import {ToolbarService} from "./toolbar.service";
 
 
 @Component({
@@ -47,7 +48,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private breadcrumbService: BreadcrumbService, private navigationService: MenuService,
               private searchBarService: SearchBarService, private router: Router,
-              private observableMedia: ObservableMedia, private apiService: ApiService, private analyticsService: AnalyticsService) {
+              private observableMedia: ObservableMedia, private apiService: ApiService, private analyticsService: AnalyticsService,
+              private toolbarService: ToolbarService) {
 
     // Populate menuItems for search-bar bar
     this.categories = navigationService.getMenuItem('/').menuItems;
@@ -56,6 +58,10 @@ export class AppComponent implements OnInit, OnDestroy {
     for (const item of this.menuItems) {
       breadcrumbService.addFriendlyNameForRoute(item['href'], item['name']);
     }
+  }
+
+  openSearchFilter() {
+    this.toolbarService.setButtonClicked('filter');
   }
 
   updateSideNav(mqAlias) {

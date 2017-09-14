@@ -20,15 +20,15 @@
     <div *ngIf="!showEmptyState" class="search-results-info">
       <h1 fxHide.lt-md>Results</h1>
       <p [innerHTML]="resultsSummary"></p>
-      <button md-icon-button color="accent" (click)="openDialog()">
-        <md-icon class="md-24" aria-label="Example icon-button with a heart icon">filter_list</md-icon>
-      </button>
+      <p fxHide.gt-sm>Click <a (click)="openDialog()">here</a> to change your filters.</p>
     </div>
 
     <div *ngIf="showEmptyState" class="search-results-info">
       <p [innerHTML]="noResultsSummary"></p>
       <p>Suggestions:</p>
       <ul>
+        <li fxHide.gt-sm>Widen your <a (click)="openDialog()">filters</a></li>
+        <li fxHide.lt-md>Widen your filters</li>
         <li>Let us know what you were looking for via our <a [routerLink]="['/feedback']">Feedback page</a></li>
         <li>You can try the <a href="https://www.staff.auckland.ac.nz/en.html" target="_blank">Staff Service Centre</a> in the Staff Intranet</li>
       </ul>

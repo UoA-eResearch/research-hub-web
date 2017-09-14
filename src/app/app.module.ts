@@ -39,7 +39,6 @@ import {BrowseComponent} from "./browse/browse.component";
 import {MenuService} from "./menu.service";
 import {ResultsListComponent} from './results-list/results-list.component';
 import {SearchResultsComponent} from "./search-results/search-results.component";
-import {ProgressBarService} from "./app.progress-bar.service";
 import { ContentDetailsComponent } from './content-details/content-details.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { MarkdownComponent } from './markdown/markdown.component';
@@ -54,6 +53,7 @@ import { GuideCategoryComponent } from './guide-category/guide-category.componen
 import { ResearchActivityToggleComponent } from './research-activity-toggle/research-activity-toggle.component';
 import { AutocompleteSearchComponent } from './autocomplete-search/autocomplete-search.component';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
+import {ToolbarService} from "./toolbar.service";
 
 
 @NgModule({
@@ -113,8 +113,7 @@ import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
   entryComponents: [
     FilterDialogComponent
   ],
-  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService,
-    ProgressBarService],
+  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService, ToolbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
