@@ -295,7 +295,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     // Set title for content results
     if (menuItem.id === 'all') {
-      this.contentTitle = 'Resources';
+      this.contentTitle = 'All resources';
     } else {
       this.contentTitle = menuItem.name;
     }
