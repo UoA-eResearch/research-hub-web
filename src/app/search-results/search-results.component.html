@@ -34,29 +34,11 @@
       </ul>
     </div>
 
-    <app-results-list *ngIf="supportPage && supportPage.totalElements" [title]="menuService.nameSupport"
-                      [results]="supportPage.content" [intermediatePath]="'support'"></app-results-list>
-
-    <app-results-list *ngIf="instrumentsEquipmentPage && instrumentsEquipmentPage.totalElements" [title]="menuService.nameInstrumentsEquipment"
-                      [results]="instrumentsEquipmentPage.content" [intermediatePath]="'instrumentsEquipment'"></app-results-list>
-
-    <app-results-list *ngIf="trainingPage && trainingPage.totalElements" [title]="menuService.nameTraining"
-                      [results]="trainingPage.content" [intermediatePath]="'training'"></app-results-list>
-
-    <app-results-list *ngIf="softwarePage && softwarePage.totalElements" [title]="menuService.nameSoftware"
-                      [results]="softwarePage.content" [intermediatePath]="'software'"></app-results-list>
-
-    <app-results-list *ngIf="facilitiesSpacesPage && facilitiesSpacesPage.totalElements" [title]="menuService.nameFacilitiesSpaces"
-                      [results]="facilitiesSpacesPage.content" [intermediatePath]="'facilitiesSpaces'"></app-results-list>
+    <app-results-list *ngIf="contentPage && contentPage.totalElements"
+                      [results]="contentPage.content" [intermediatePath]="'resources'"></app-results-list>
 
     <app-results-list *ngIf="peoplePage && peoplePage.totalElements" [title]="menuService.namePeople"
                       [results]="peoplePage.content" [intermediatePath]="'people'"></app-results-list>
-
-    <app-results-list *ngIf="guidesPage && guidesPage.totalElements" [title]="menuService.nameGuides"
-                      [results]="guidesPage.content" [intermediatePath]="'guides'"></app-results-list>
-
-    <app-results-list *ngIf="knowledgeArticlePage && knowledgeArticlePage.totalElements" [title]="menuService.nameKnowledgeArticle"
-                      [results]="knowledgeArticlePage.content" [intermediatePath]="'knowledgeArticle'"></app-results-list>
 
     <app-results-list *ngIf="policiesPage && policiesPage.totalElements" [title]="menuService.namePolicies"
                       [results]="policiesPage.content"></app-results-list>

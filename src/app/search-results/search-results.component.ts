@@ -29,15 +29,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
   private searchCatSub: Subscription;
-  private guidesPage: Page<Content>;
-  private supportPage: Page<Content>;
-  private instrumentsEquipmentPage: Page<Content>;
-  private trainingPage: Page<Content>;
-  private softwarePage: Page<Content>;
-  private facilitiesSpacesPage: Page<Content>;
+
+  private contentPage: Page<Content>;
   private peoplePage: Page<Person>;
-  private knowledgeArticlePage: Page<Content>;
   private policiesPage: Page<Policy>;
+
   private maxNumberOfItems = 50;
   private contentPages: any[];
   private allPages: any[] = [];
@@ -97,17 +93,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.titleService.setTitle('Research Hub: Search Results');
 
     // Setup pages
-    this.supportPage = new Page<Content>();
-    this.instrumentsEquipmentPage = new Page<Content>();
-    this.trainingPage = new Page<Content>();
-    this.softwarePage = new Page<Content>();
-    this.facilitiesSpacesPage = new Page<Content>();
-    this.knowledgeArticlePage = new Page<Content>();
-    this.guidesPage = new Page<Content>();
+    this.contentPage = new Page<Content>();
     this.peoplePage = new Page<Person>();
     this.policiesPage = new Page<Policy>();
-    this.contentPages = [this.supportPage, this.instrumentsEquipmentPage, this.trainingPage, this.softwarePage,
-      this.facilitiesSpacesPage, this.knowledgeArticlePage, this.guidesPage];
+    this.contentPages = [this.contentPage];
     this.allPages.push(...this.contentPages);
     this.allPages.push(this.peoplePage);
     this.allPages.push(this.policiesPage);
@@ -305,16 +294,12 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       case MenuItemType.All:
         pagesToUpdate.push(...this.contentPages);
 
-        for (const contentTypeId of Object.keys(ContentTypeIds)) {
-          if (Number(contentTypeId)) {
-            observables.push(this.getContentObservable(
-              searchText,
-              Number(contentTypeId),
-              personId,
-              orgUnitId,
-              researchActivityIds));
-          }
-        }
+        observables.push(this.getContentObservable(
+          searchText,
+          [],
+          personId,
+          orgUnitId,
+          researchActivityIds));
 
         const searchForPeople = !personId && (!researchActivityIds || researchActivityIds.length === 0);
 
@@ -330,7 +315,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
         break;
       case MenuItemType.Content:
-        observables.push(this.getContentObservable(searchText, menuItem.contentTypeId, personId,
+        observables.push(this.getContentObservable(searchText, [menuItem.contentTypeId], personId,
           orgUnitId, researchActivityIds));
         pagesToUpdate = [this.contentPages[menuItem.contentTypeId - 1]];
         break;
@@ -376,11 +361,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  getContentObservable(searchText: string, contentTypeId: number, personId: number, orgUnitId: number, researchActivityIds: number[]) {
+  getContentObservable(searchText: string, contentTypes: number[], personId: number, orgUnitId: number, researchActivityIds: number[]) {
     const searchParams = new ContentItemsSearchParams();
     searchParams.setSearchText(searchText);
     searchParams.setSize(this.maxNumberOfItems);
-    searchParams.setContentTypes([contentTypeId]);
+    searchParams.setContentTypes(contentTypes);
 
     if (personId) {
       searchParams.setPeople([personId]);
