@@ -48,10 +48,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private categories = [];
 
   private filtersForm: FormGroup;
-  private categoryFormControl: FormControl = new FormControl();
-  private personFormControl: FormControl = new FormControl();
-  private orgUnitFormControl: FormControl = new FormControl();
-  private researchActivitiesFormControl: FormControl = new FormControl();
+  private categoryFormControl: FormControl = new FormControl('any');
+  private personFormControl: FormControl = new FormControl('');
+  private orgUnitFormControl: FormControl = new FormControl('');
+  private researchActivitiesFormControl: FormControl = new FormControl([]);
   private loadedRoute = false;
 
   private showPersonFilter = true;
@@ -131,7 +131,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.personFormControl.valueChanges,
         this.orgUnitFormControl.valueChanges,
         this.researchActivitiesFormControl.valueChanges
-      ).subscribe(latestValues => {
+      )
+      .debounceTime(100)
+      .subscribe(latestValues => {
         this.showProgressBar = true;
         const [searchText, category, person, orgUnit, researchActivities] = latestValues;
 
@@ -149,7 +151,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.apiService.getOrgUnits(new SearchParams())
       )
       .subscribe(latestValues => {
-
         if (!this.loadedRoute) {
           const [params, peoplePage, orgUnitsPage] = latestValues;
 
@@ -419,12 +420,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(FilterDialogComponent, {
       width: '100%',
       height: '100%',
-      data: {name: 'hello', animal: 'hello'}
+      data: {people: this.people, orgUnits: this.orgUnits, categories: this.categories, filtersFormValue: this.filtersForm.getRawValue()}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
+      this.filtersForm.patchValue(result);
     });
   }
 }

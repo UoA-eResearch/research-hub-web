@@ -20,11 +20,9 @@
     <div *ngIf="!showEmptyState" class="search-results-info">
       <h1 fxHide.lt-md>Results</h1>
       <p [innerHTML]="resultsSummary"></p>
-      <!--<button fxHide.gt-sm md-icon-button color="accent" (click)="openDialog()">-->
-        <!--<md-icon class="md-24" aria-label="Example icon-button with a heart icon">filter_list</md-icon>-->
-      <!--</button>-->
-
-      <!--<button md-raised-button color="primary" ><md-icon>filter_list</md-icon>Refine</button>-->
+      <button md-icon-button color="accent" (click)="openDialog()">
+        <md-icon class="md-24" aria-label="Example icon-button with a heart icon">filter_list</md-icon>
+      </button>
     </div>
 
     <div *ngIf="showEmptyState" class="search-results-info">

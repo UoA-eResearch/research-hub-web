@@ -17,7 +17,7 @@ import {Subscription} from "rxjs/Subscription";
     }
   ]
 })
-export class AutocompleteSearchComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class AutocompleteSearchComponent implements OnDestroy, ControlValueAccessor {
 
   selectedItemCtrl: FormControl;
   selectedItemSub: Subscription;
@@ -27,44 +27,11 @@ export class AutocompleteSearchComponent implements OnInit, OnDestroy, ControlVa
   @Input() placeholder = '';
   @Input() _items: GetResultsListItem[] = [];
 
-  @Input() _value: any = [];
+  @Input() _value: any = '';
   onChange: any = () => { };
   onTouched: any = () => { };
 
   constructor(private apiService: ApiService) {
-
-  }
-
-  get items() {
-    return this._items;
-  }
-
-  @Input()
-  set items(items: GetResultsListItem[]) {
-    this._items = items;
-
-    if (this._value) {
-      const selectedItem = items.find((item) => {
-        return item.getId() === this._value;
-      });
-
-      if (selectedItem) {
-        this.selectedItemCtrl.setValue(selectedItem);
-      }
-    }
-  }
-
-  get value() {
-    return this._value;
-  }
-
-  set value(val) {
-    this._value = Number(val) || '';
-    this.onChange(this._value);
-    this.onTouched();
-  }
-
-  ngOnInit() {
     this.selectedItemCtrl = new FormControl();
     this.selectedItemSub = this.selectedItemCtrl.valueChanges.subscribe(selectedItem => this.onSelectedItemChanged(selectedItem));
 
@@ -74,13 +41,42 @@ export class AutocompleteSearchComponent implements OnInit, OnDestroy, ControlVa
       .map(name => name ? this.filterByName(name) : this._items.slice());
   }
 
+  get items() {
+    return this._items;
+  }
+
+  @Input()
+  set items(items: GetResultsListItem[]) {
+    this._items = items;
+    this.updateSelectedItem();
+  }
+
+  private updateSelectedItem() {
+    const selectedItem = this._items.find((item) => {
+      return item.getId() === this._value;
+    });
+
+    this.selectedItemCtrl.setValue(selectedItem || '');
+  }
+
+  get value() {
+    return this._value;
+  }
+
+  set value(val) {
+    this._value = Number(val) || '';
+    this.updateSelectedItem();
+    this.onChange(this._value);
+    this.onTouched();
+  }
+
   filterByName(name: string): GetResultsListItem[] {
     return this._items.filter(item =>
       item.getTitle().toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 
   displayWith(item: GetResultsListItem): string {
-    if (item !== null) {
+    if (item && typeof item === 'object') {
       return item.getTitle();
     }
 
@@ -92,9 +88,7 @@ export class AutocompleteSearchComponent implements OnInit, OnDestroy, ControlVa
   }
 
   writeValue(value) {
-    if (value) {
-      this.value = value;
-    }
+    this.value = value;
   }
 
   registerOnTouched(fn) {
