@@ -1,4 +1,5 @@
 @import '../styles';
+@import '~github-fork-ribbon-css/gh-fork-ribbon';
 
 
 /*
@@ -227,6 +228,19 @@ app-search-bar {
 
 .beta-bar a {
   color:$body-dark-bg-font-color;
+}
+
+/*
+ * Github fork ribbon styling
+ */
+
+.github-fork-ribbon.left-bottom:before
+{
+  background-color: $color-orange;
+}
+
+.github-fork-ribbon.left-bottom {
+  box-sizing: unset;
 }
 
 // HACK

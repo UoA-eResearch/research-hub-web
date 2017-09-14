@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^4.3.6",
     "@angular/router": "^4.3.6",
     "core-js": "^2.4.1",
+    "github-fork-ribbon-css": "^0.2.1",
     "hammerjs": "^2.0.8",
     "marked": "^0.3.6",
     "mdi": "^2.0.46",
