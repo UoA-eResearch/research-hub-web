@@ -23,6 +23,8 @@ export class Content implements GetResultsListItem {
   static fromObjects(objects: [Object]): Array<Content> {
     const contentItems = new Array<Content>();
 
+    console.log('fromObjects', objects);
+
     if (objects !== undefined) {
       for (const object of objects) {
         contentItems.push(Content.fromObject(object));
@@ -92,7 +94,11 @@ export class Content implements GetResultsListItem {
   }
 
   getDefaultRouterLink(): [any] {
-    if (this.guideCategories.length > 0) {
+    const guideContentType = this.contentTypes.find((item) => {
+      return item.id === 7;
+    });
+
+    if (guideContentType) {
       return ['/guides', this.id];
     } else {
       return ['/resources', this.id];
