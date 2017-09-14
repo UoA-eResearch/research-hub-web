@@ -25,7 +25,6 @@ import {BreadcrumbService, Ng2BreadcrumbModule} from "ng2-breadcrumb/ng2-breadcr
 
 
 import {appRoutingProviders, routing} from "./app.routing";
-
 import {AppComponent} from "./app.component";
 import {AboutComponent} from "./about/about.component";
 import {ContactComponent} from "./contact/contact.component";
@@ -52,6 +51,8 @@ import { GuideDetailsComponent } from './guide-details/guide-details.component';
 import { GuideCategoryComponent } from './guide-category/guide-category.component';
 import { ResearchActivityToggleComponent } from './research-activity-toggle/research-activity-toggle.component';
 import { AutocompleteSearchComponent } from './autocomplete-search/autocomplete-search.component';
+import { ImageViewComponent } from './image-view/image-view.component';
+import { ImageViewDialogComponent } from './image-view-dialog/image-view-dialog.component';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 import {ToolbarService} from "./toolbar.service";
 
@@ -80,6 +81,8 @@ import {ToolbarService} from "./toolbar.service";
     GuideCategoryComponent,
     ResearchActivityToggleComponent,
     AutocompleteSearchComponent,
+    ImageViewComponent,
+    ImageViewDialogComponent,
     FilterDialogComponent
   ],
   imports: [
@@ -106,14 +109,12 @@ import {ToolbarService} from "./toolbar.service";
     MdProgressBarModule,
     MdFormFieldModule,
     MdAutocompleteModule,
-    MdExpansionModule,
     MdDialogModule,
     routing
   ],
-  entryComponents: [
-    FilterDialogComponent
-  ],
-  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService, ToolbarService],
+  entryComponents: [ImageViewDialogComponent, FilterDialogComponent],
+  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService,
+    ToolbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

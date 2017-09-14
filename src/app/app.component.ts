@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
     {name: 'Home', icon: 'home', href: '/home'},
     {name: 'Search & Browse', icon: 'magnify', href: '/browse'},
     {name: 'Provide Feedback', icon: 'thumbs-up-down', href: '/feedback'},
-    {name: 'About CeR', icon: 'information', href: '/about'},
+    {name: 'About Us', icon: 'information', href: '/about'},
     {name: 'Contact Us', icon: 'phone-classic', href: '/contact'}
   ];
 

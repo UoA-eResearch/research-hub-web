@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 export class ContactComponent implements OnInit {
   description = "<p></p>";
 
-  layoutGap = '1.0em';
+  layoutGap = '1.5em';
   layoutGapXs = '0.5em';
 
   physicalAddress = ['Centre for eResearch', 'Building 302, Level 5, Room 585', '23 Symonds Street', 'Auckland Central',

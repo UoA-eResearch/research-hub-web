@@ -1,56 +1,56 @@
-<!--<app-header [title]="'Contact us'"-->
-            <!--[description]="description"></app-header>-->
 <app-header [title]="'Contact us'"
             [description]="description"></app-header>
-
 <div class="component" ngClass.xs="component-xs" fxLayout="column" fxLayoutGap="2em">
   <h2>Our details</h2>
-  <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="3em">
-
-    <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="2em">
-      <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="center start">
-        <md-icon class="contact-info-icon mdi mdi-map-marker" [ngClass.xs]="['mdi', 'mdi-map-marker']"></md-icon>
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start" fxLayoutGap="4em" fxLayoutGap.lt-sm="2em">
+    <div fxLayout="column" fxLayoutGap="3em">
+      <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="{{layoutGap}}">
+        <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="start start">
+          <md-icon class="contact-info-icon mdi mdi-map-marker" [ngClass.xs]="['mdi', 'mdi-map-marker']"></md-icon>
+        </div>
+        <div fxLayout="column" fxLayoutGap="2em" fxLayoutAlign="start start">
+          <div>
+            <span *ngFor="let line of physicalAddress">{{line}}<br/></span>
+          </div>
+          <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.5503663205586!2d174.7663845157219!3d-36.85324317993754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d47e385a59abf%3A0x1bfa5dcc43edfefc!2s23+Symonds+St%2C+Auckland%2C+1010!5e0!3m2!1sen!2snz!4v1505104084141" width="290" height="290" frameborder="0" style="border:0" allowfullscreen></iframe>
+          </div>
+          <div>
+            <app-image-view [src]="'/assets/images/cer-level5-20170905.svg'"></app-image-view>
+          </div>
+        </div>
       </div>
-      <!--<div fxLayout="row wrap" fxLayoutGap="2em" fxLayoutAlign="start center">-->
-        <div fxFlex="1 0 auto">
-          <span *ngFor="let line of physicalAddress">{{line}}<br/></span>
+    </div>
+    <div fxLayout="column" fxLayoutGap="3em">
+      <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="{{layoutGap}}">
+        <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="center start">
+          <md-icon class="contact-info-icon mdi mdi-phone-classic" [ngClass.xs]="['mdi', 'mdi-phone-classic']"></md-icon>
+        </div>
+        <div class="contact-text" fxLayout="column" fxLayoutAlign="center start">
+          <span>{{contactPhone}}</span>
+        </div>
+      </div>
+
+      <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="{{layoutGap}}">
+        <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="center start">
+          <md-icon class="contact-info-icon mdi mdi-mail-ru" [ngClass.xs]="['mdi', 'mdi-mail-ru']"></md-icon>
         </div>
         <div>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.5503663205586!2d174.7663845157219!3d-36.85324317993754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d47e385a59abf%3A0x1bfa5dcc43edfefc!2s23+Symonds+St%2C+Auckland%2C+1010!5e0!3m2!1sen!2snz!4v1505104084141" width="290" height="290" frameborder="0" style="border:0" allowfullscreen></iframe>
+          <span>{{emailAddress}}</span>
         </div>
-        <div>
-          <img id="floor-map" src="/assets/images/cer-level5-20170905.svg" style="width:290px; height:auto;">
+      </div>
+
+      <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="{{layoutGap}}">
+        <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="center start">
+          <md-icon class="contact-info-icon mdi mdi-email" [ngClass.xs]="['mdi', 'mdi-email']"></md-icon>
         </div>
-      <!--</div>-->
-
-    </div>
-
-    <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="2em">
-      <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="center start">
-        <md-icon class="contact-info-icon mdi mdi-mail-ru" [ngClass.xs]="['mdi', 'mdi-mail-ru']"></md-icon>
-      </div>
-      <div>
-        <span>{{emailAddress}}</span>
+        <div class="contact-text" fxLayout="column" fxLayoutAlign="center start">
+          <span *ngFor="let line of postalAddress">{{line}}<br/></span>
+        </div>
       </div>
     </div>
-
-    <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="2em">
-      <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="center start">
-        <md-icon class="contact-info-icon mdi mdi-email" [ngClass.xs]="['mdi', 'mdi-email']"></md-icon>
-      </div>
-      <div class="contact-text" fxLayout="column" fxLayoutAlign="center start">
-        <span *ngFor="let line of postalAddress">{{line}}<br/></span>
-      </div>
-    </div>
-
-    <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="2em">
-      <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="center start">
-        <md-icon class="contact-info-icon mdi mdi-phone-classic" [ngClass.xs]="['mdi', 'mdi-phone-classic']"></md-icon>
-      </div>
-      <div class="contact-text" fxLayout="column" fxLayoutAlign="center start">
-        <span>{{contactPhone}}</span>
-      </div>
-    </div>
-
   </div>
+
 </div>
+
+
