@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from "rxjs/Subscription";
-import {ContentTypeIds, MenuItemType, MenuService} from "../menu.service";
+import {MenuItemType, MenuService} from "../menu.service";
 import {ApiService, ContentItemsSearchParams, PeopleSearchParams, SearchParams} from "../app.api.service";
 import {Person} from "../model/Person";
 import {Content} from "../model/Content";
@@ -31,18 +31,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
   private searchCatSub: Subscription;
-  private guidesPage: Page<Content>;
-  private supportPage: Page<Content>;
-  private instrumentsEquipmentPage: Page<Content>;
-  private trainingPage: Page<Content>;
-  private softwarePage: Page<Content>;
-  private facilitiesSpacesPage: Page<Content>;
+
+  private contentPage: Page<Content>;
   private peoplePage: Page<Person>;
-  private knowledgeArticlePage: Page<Content>;
   private policiesPage: Page<Policy>;
+
   private maxNumberOfItems = 50;
-  private contentPages: any[];
-  private allPages: any[] = [];
+  private allPages: any[];
   private showEmptyState = false;
   private showProgressBar = true;
   private people: Person[] = [];
@@ -61,6 +56,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private showResearchActivityFilter = true;
   private rightColSize = 67;
 
+  private contentTitle = '';
   private noResultsSummary = '';
   private resultsSummary = '';
 
@@ -99,20 +95,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.titleService.setTitle('Research Hub: Search Results');
 
     // Setup pages
-    this.supportPage = new Page<Content>();
-    this.instrumentsEquipmentPage = new Page<Content>();
-    this.trainingPage = new Page<Content>();
-    this.softwarePage = new Page<Content>();
-    this.facilitiesSpacesPage = new Page<Content>();
-    this.knowledgeArticlePage = new Page<Content>();
-    this.guidesPage = new Page<Content>();
+    this.contentPage = new Page<Content>();
     this.peoplePage = new Page<Person>();
     this.policiesPage = new Page<Policy>();
-    this.contentPages = [this.supportPage, this.instrumentsEquipmentPage, this.trainingPage, this.softwarePage,
-      this.facilitiesSpacesPage, this.knowledgeArticlePage, this.guidesPage];
-    this.allPages.push(...this.contentPages);
-    this.allPages.push(this.peoplePage);
-    this.allPages.push(this.policiesPage);
+    this.allPages = [this.contentPage, this.peoplePage, this.policiesPage];
 
     // Setup filters
     // Populate menuItems for search-bar bar
@@ -307,23 +293,25 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     const categoryId = MenuService.getMenuItemId([category]);
     const menuItem = this.menuService.getMenuItem(categoryId);
 
+    // Set title for content results
+    if (menuItem.id === 'all') {
+      this.contentTitle = 'Resources';
+    } else {
+      this.contentTitle = menuItem.name;
+    }
+
     const observables = [];
-    let pagesToUpdate = [];
+    const pagesToUpdate = [];
 
     switch (menuItem.type) {
       case MenuItemType.All:
-        pagesToUpdate.push(...this.contentPages);
-
-        for (const contentTypeId of Object.keys(ContentTypeIds)) {
-          if (Number(contentTypeId)) {
-            observables.push(this.getContentObservable(
-              searchText,
-              Number(contentTypeId),
-              personId,
-              orgUnitId,
-              researchActivityIds));
-          }
-        }
+        pagesToUpdate.push(this.contentPage);
+        observables.push(this.getContentObservable(
+          searchText,
+          [],
+          personId,
+          orgUnitId,
+          researchActivityIds));
 
         const searchForPeople = !personId && (!researchActivityIds || researchActivityIds.length === 0);
 
@@ -339,17 +327,17 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
         break;
       case MenuItemType.Content:
-        observables.push(this.getContentObservable(searchText, menuItem.contentTypeId, personId,
+        observables.push(this.getContentObservable(searchText, [menuItem.contentTypeId], personId,
           orgUnitId, researchActivityIds));
-        pagesToUpdate = [this.contentPages[menuItem.contentTypeId - 1]];
+        pagesToUpdate.push(this.contentPage);
         break;
       case MenuItemType.Person:
         observables.push(this.getPeopleObservable(searchText, orgUnitId));
-        pagesToUpdate = [this.peoplePage];
+        pagesToUpdate.push(this.peoplePage);
         break;
       case MenuItemType.Policy:
         observables.push(this.getPoliciesObservable(searchText));
-        pagesToUpdate = [this.policiesPage];
+        pagesToUpdate.push(this.policiesPage);
         break;
       default:
         break;
@@ -385,11 +373,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  getContentObservable(searchText: string, contentTypeId: number, personId: number, orgUnitId: number, researchActivityIds: number[]) {
+  getContentObservable(searchText: string, contentTypeIds: number[], personId: number, orgUnitId: number, researchActivityIds: number[]) {
     const searchParams = new ContentItemsSearchParams();
     searchParams.setSearchText(searchText);
     searchParams.setSize(this.maxNumberOfItems);
-    searchParams.setContentTypes([contentTypeId]);
+    searchParams.setContentTypes(contentTypeIds);
 
     if (personId) {
       searchParams.setPeople([personId]);
