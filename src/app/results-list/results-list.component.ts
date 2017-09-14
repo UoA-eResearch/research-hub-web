@@ -20,7 +20,7 @@ export class ResultsListComponent implements OnInit {
   @Output() resultsChange = new EventEmitter();
 
   @Input()
-  intermediatePath: string;
+  useTypeInPath = false;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private location: Location,
               private menuService: MenuService, private analyticsService: AnalyticsService) {
@@ -28,15 +28,13 @@ export class ResultsListComponent implements OnInit {
   }
 
   getRoute(result: GetResultsListItem) {
-
     const route = this.menuService.getCurrentPath();
 
-    if (this.intermediatePath !== undefined) {
-      route.push(this.intermediatePath);
+    if (this.useTypeInPath) {
+      route.push(result.getType());
     }
 
-    route.push('' + result.getId());
-
+    route.push(result.getId().toString());
     return route;
   }
 

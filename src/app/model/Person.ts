@@ -52,6 +52,10 @@ export class Person implements GetResultsListItem {
     return this.id;
   }
 
+  getType(): string {
+    return 'person';
+  }
+
   getTitle(): string {
     return this.firstName + ' ' + this.lastName;
   }
@@ -65,7 +69,7 @@ export class Person implements GetResultsListItem {
   }
 
   getDefaultRouterLink(): [any] {
-    return ['/people', this.id];
+    return ['/person', this.id];
   }
 
   getHref(): string {

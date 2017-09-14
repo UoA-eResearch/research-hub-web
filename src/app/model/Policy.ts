@@ -35,6 +35,10 @@ export class Policy implements GetResultsListItem {
     return this.id;
   }
 
+  getType(): string {
+    return 'policy';
+  }
+
   getTitle(): string {
     return this.name;
   }

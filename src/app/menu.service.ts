@@ -86,22 +86,23 @@ export class MenuService {
         new MenuItem('training', this.nameTraining, 'bike', MenuItemType.Content, ContentTypeIds.Training, null, 'page-elements/Violin_1680x220_BW.jpg', "<p>Workshops, seminars, or training opportunities where you can upskill in a broad range of areas to learn new techniques or improve your research and expertise.</p>"),
         new MenuItem('software', this.nameSoftware, 'laptop-windows', MenuItemType.Content, ContentTypeIds.Software, null, 'page-elements/20130930_UoA_Details_031_1680x220_BW.jpg', "<p>Applications and software services that can help you communicate, collaborate, create, or analyse.</p>"),
         new MenuItem('facilitiesSpaces', this.nameFacilitiesSpaces, 'castle', MenuItemType.Content, ContentTypeIds.FacilitiesSpaces, null, 'page-elements/Business_1680x220_BW.jpg', "<p>Places, locations, or specialised infrastructure you can make use of for your research.</p>"),
-        new MenuItem('guides', this.nameGuides, 'book-open-variant', MenuItemType.Content, ContentTypeIds.Guide, null, 'page-elements/1483_UoA_13Oct09_1680x220_BW.jpg', "<p>Find the key resources and support for specialised topics, including best practice and related tools or workflows for a given task or subject area.</p>"),
-        new MenuItem('people', this.namePeople, 'face', MenuItemType.Person, null, null, 'page-elements/DSC_0192_1680x220_BW.jpg', "<p>He tāngata. He tāngata. He tāngata. Find people with the skills and knowledge related to support offerings who can help you make things happen.</p>"),
+        new MenuItem('guide', this.nameGuides, 'book-open-variant', MenuItemType.Content, ContentTypeIds.Guide, null, 'page-elements/1483_UoA_13Oct09_1680x220_BW.jpg', "<p>Find the key resources and support for specialised topics, including best practice and related tools or workflows for a given task or subject area.</p>"),
+        new MenuItem('person', this.namePeople, 'face', MenuItemType.Person, null, null, 'page-elements/DSC_0192_1680x220_BW.jpg', "<p>He tāngata. He tāngata. He tāngata. Find people with the skills and knowledge related to support offerings who can help you make things happen.</p>"),
         new MenuItem('knowledgeArticle', this.nameKnowledgeArticle, 'file-document', MenuItemType.Content, ContentTypeIds.KnowledgeArticle, null, 'page-elements/58_Arts_20March2010_1680x220_BW.jpg', "<p>Short articles and useful information on a broad range of topics that can help your research and creative endeavours at the University of Auckland.</p>"),
         new MenuItem('policies', this.namePolicies, 'bank', MenuItemType.Policy, null, null, 'page-elements/UniAkl_9369_1680x220_BW.jpg', "<p>This area provides quick links to selected policies, standards, or guidelines that may apply to research activities or the use of some services. Please note the list is not comprehensive, but provided as a convenience. <a href='https://www.auckland.ac.nz/en/about/the-university/how-university-works/policy-and-administration.html'>The Policy Hub</a> is the authoritative source for all University policy and related documents.</p>"),
       ], null, "");
 
     this.createMenuItemsDict('', this.root.menuItems);
     this.createFriendlyNames('/browse', this.root.menuItems);
-    this.createFriendlyNames('/search', this.root.menuItems);
+    // this.createFriendlyNames('/search', this.root.menuItems);
     this.breadcrumbService.addFriendlyNameForRoute('/browse', 'Browse');
     this.breadcrumbService.addFriendlyNameForRouteRegex('/search[?]', 'Search Results');
     this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search');
-    this.breadcrumbService.addFriendlyNameForRoute('/orgUnits', 'Organisational Units');
-    this.breadcrumbService.addFriendlyNameForRoute('/people', 'People');
-    this.breadcrumbService.addFriendlyNameForRoute('/resources', 'Resources');
-    this.breadcrumbService.addFriendlyNameForRoute('/guides', 'Guides');
+    this.breadcrumbService.addFriendlyNameForRoute('/search/content', 'Resources');
+    this.breadcrumbService.addFriendlyNameForRoute('/orgUnit', 'Organisational Units');
+    this.breadcrumbService.addFriendlyNameForRoute('/person', 'People');
+    this.breadcrumbService.addFriendlyNameForRoute('/content', 'Resources');
+    this.breadcrumbService.addFriendlyNameForRoute('/guide', 'Guides');
   }
 
   private createMenuItemsDict(parentId: string, menuItems: [MenuItem]) {

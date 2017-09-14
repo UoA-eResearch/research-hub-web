@@ -23,21 +23,9 @@ export class Content implements GetResultsListItem {
   static fromObjects(objects: [Object]): Array<Content> {
     const contentItems = new Array<Content>();
 
-    console.log('fromObjects', objects);
-
     if (objects !== undefined) {
       for (const object of objects) {
         contentItems.push(Content.fromObject(object));
-
-        // contentItems.sort((a: Content, b: Content) => {
-        //   if (a.name < b.name) {
-        //     return -1;
-        //   } else if (a.name > b.name) {
-        //     return 1;
-        //   } else {
-        //     return 0;
-        //   }
-        // });
       }
     }
 
@@ -81,6 +69,20 @@ export class Content implements GetResultsListItem {
     return this.id;
   }
 
+  getType(): string {
+    if (this.contentTypes) {
+      const guideContentType = this.contentTypes.find((item) => {
+        return item.id === 7;
+      });
+
+      if (guideContentType) {
+        return 'guide';
+      }
+    }
+
+    return 'content';
+  }
+
   getTitle(): string {
     return this.name;
   }
@@ -94,15 +96,7 @@ export class Content implements GetResultsListItem {
   }
 
   getDefaultRouterLink(): [any] {
-    const guideContentType = this.contentTypes.find((item) => {
-      return item.id === 7;
-    });
-
-    if (guideContentType) {
-      return ['/guides', this.id];
-    } else {
-      return ['/resources', this.id];
-    }
+    return ['/' + this.getType(), this.id];
   }
 
   getHref(): string {

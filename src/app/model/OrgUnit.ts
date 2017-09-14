@@ -40,8 +40,12 @@ export class OrgUnit implements GetResultsListItem {
     return this.id;
   }
 
+  getType(): string {
+    return 'orgUnit';
+  }
+
   getDefaultRouterLink(): [any] {
-    return ['/orgUnits', this.id];
+    return ['/orgUnit', this.id];
   }
 
   getTitle(): string {
