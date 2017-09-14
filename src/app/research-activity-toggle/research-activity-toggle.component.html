@@ -5,7 +5,8 @@
                     (change)="activity.selected = !activity.selected; updateValue();"
                     [checked]="activity.selected"
                     [ngClass]="activity.className">
-    <md-icon>{{activity.icon}}</md-icon>
+    <!--<md-icon>{{activity.icon}}</md-icon>-->
+    <md-icon [ngClass]="['mdi', activity.icon]"></md-icon>
     <span class="activity-name">{{activity.name}}</span>
   </md-button-toggle>
 

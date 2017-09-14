@@ -18,6 +18,10 @@ $accent-text: #646464;
 @mixin research-activity-mat-button-toggle-theme($theme) {
   $foreground: map-get($theme, foreground);
 
+  .mat-icon {
+    height: auto !important;
+  }
+
   .mat-button-toggle.plan {
     background-color: $plan-accent;
     color: $accent-text;

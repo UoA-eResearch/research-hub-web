@@ -17,11 +17,11 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 export class ResearchActivityToggleComponent implements OnInit, ControlValueAccessor {
 
   private researchActivities = [
-    {id: 1, name: 'Plan & Design', icon: 'map', className: 'plan', selected: false},
-    {id: 2, name: 'Create, Collect & Capture', icon: 'create', className: 'create', selected: false},
-    {id: 3, name: 'Analyze & Interpret', icon: 'show_chart', className: 'analyze', selected: false},
-    {id: 4, name: 'Publish & Report', icon: 'share', className: 'publish', selected: false},
-    {id: 5, name: 'Discover & Reuse', icon: 'search', className: 'discover', selected: false}
+    {id: 1, name: 'Plan & Design', icon: 'mdi-timetable', className: 'plan', selected: false},
+    {id: 2, name: 'Create, Collect & Capture', icon: 'mdi-google-circles-extended', className: 'create', selected: false},
+    {id: 3, name: 'Analyze & Interpret', icon: 'mdi-chart-areaspline', className: 'analyze', selected: false},
+    {id: 4, name: 'Publish & Report', icon: 'mdi-cube-send', className: 'publish', selected: false},
+    {id: 5, name: 'Discover & Reuse', icon: 'mdi-sync', className: 'discover', selected: false}
   ];
 
   @Input() _value: number[] = [];
