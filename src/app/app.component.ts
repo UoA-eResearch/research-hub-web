@@ -5,7 +5,6 @@ import {MenuService} from "./menu.service";
 import {SearchBarService} from "./search-bar/search-bar.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
-import {ProgressBarService} from "./app.progress-bar.service";
 import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 import {ApiService} from "./app.api.service";
 import {AnalyticsService} from "./app.analytics.service";

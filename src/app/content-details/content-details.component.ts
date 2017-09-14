@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {ActivatedRoute} from "@angular/router";
 import {ApiService} from "../app.api.service";
-import {ProgressBarService} from "../app.progress-bar.service";
 import {Content} from "../model/Content";
 import marked from 'marked';
 import { Location } from '@angular/common';
@@ -24,7 +23,7 @@ export class ContentDetailsComponent implements OnInit {
   isKnowledgeArticle = false;
 
   constructor(private breadcrumbService: BreadcrumbService, private route: ActivatedRoute, private apiService: ApiService,
-              private progressBarService: ProgressBarService,  private location: Location, private analyticsService: AnalyticsService) {
+              private location: Location, private analyticsService: AnalyticsService) {
 
     // Configure marked
     marked.setOptions({
@@ -40,8 +39,6 @@ export class ContentDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.progressBarService.setVisible();
-
     this.route.params.subscribe(params => {
       const id = params['id'];
 
@@ -59,15 +56,12 @@ export class ContentDetailsComponent implements OnInit {
               return contentType.id === ContentTypeIds.KnowledgeArticle;
             }).length > 0;
           }
-
-          this.progressBarService.setHidden();
         }
       );
 
       this.apiService.getSimilarContentItems(id).subscribe(
         contentItems => {
           this.similarContentItems = contentItems;
-          this.progressBarService.setHidden();
         }
       );
 

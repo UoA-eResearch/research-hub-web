@@ -2,7 +2,6 @@ import {Component, OnInit, Input, OnDestroy} from "@angular/core";
 import {MenuItem, MenuItemType, MenuService} from "../menu.service";
 import {ActivatedRoute} from "@angular/router";
 import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.service";
-import {ProgressBarService} from "../app.progress-bar.service";
 import {SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
@@ -32,7 +31,7 @@ export class BrowseComponent implements OnInit, OnDestroy {
   orange = '#ff8300';
   tileColors = [this.teal, this.navy, this.orange];
 
-  constructor(private menuService: MenuService, private route: ActivatedRoute, private progressBarService: ProgressBarService,
+  constructor(private menuService: MenuService, private route: ActivatedRoute,
               private searchBarService: SearchBarService, private media: ObservableMedia, private analyticsService: AnalyticsService,
               private location: Location) {
   }
@@ -55,8 +54,6 @@ export class BrowseComponent implements OnInit, OnDestroy {
       const menuItem = this.menuService.getMenuItem(categoryId);
 
       if (!menuItem.isLeaf()) {
-        this.progressBarService.setHidden();
-
         // Remove 'all' category when root category is requested
         let start = 0;
         if (categoryId === '/') {
