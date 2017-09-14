@@ -43,6 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
   categories = [];
   category = 'all';
   searchText = '';
+  showFilterButton = false;
 
 
   constructor(private breadcrumbService: BreadcrumbService, private navigationService: MenuService,
@@ -58,6 +59,8 @@ export class AppComponent implements OnInit, OnDestroy {
       breadcrumbService.addFriendlyNameForRoute(item['href'], item['name']);
     }
   }
+
+
 
   openSearchFilter() {
     this.toolbarService.setButtonClicked('filter');
@@ -75,7 +78,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Update side nav
-
     this.updateSideNav(BrowseComponent.getMQAlias());
 
     this.mediaChangeSub = this.observableMedia.subscribe((change: MediaChange) => {
@@ -93,6 +95,8 @@ export class AppComponent implements OnInit, OnDestroy {
       this.routerSub = this.router.events
         .filter(event => event instanceof NavigationEnd)
         .subscribe(event => {
+          const url = event['url'];
+          this.showFilterButton = url.startsWith('/search?') || url === '/search';
           window.scrollTo(0, 0);
         });
     }
