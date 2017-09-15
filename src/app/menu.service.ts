@@ -129,7 +129,6 @@ export class MenuService {
 
   public getCurrentPath() {
     const urlAndParams = this.location.path().split('?');
-    // console.log('urlAndParams', urlAndParams);
     const currentPath = urlAndParams[0].split('/').slice(1);
     currentPath[0] = '/' + currentPath[0];
     return currentPath;
