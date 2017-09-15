@@ -1,8 +1,9 @@
 <md-toolbar color="primary">
+  <button md-icon-button (click)="done()"><md-icon>arrow_back</md-icon></button>
   <span style="font-size: 20px;">Refine</span>
   <span class="example-spacer"></span>
   <button md-icon-button (click)="clear()"><md-icon>clear_all</md-icon></button>
-  <button md-icon-button (click)="done()"><md-icon>done</md-icon></button>
+
 </md-toolbar>
 <div class="component filter-theme" ngClass.xs="component-xs filter-theme">
   <form [formGroup]="filtersForm">
