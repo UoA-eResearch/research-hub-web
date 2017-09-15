@@ -45,10 +45,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private categories = [];
 
   private filtersForm: FormGroup;
-  private categoryFormControl: FormControl = new FormControl('any');
-  private personFormControl: FormControl = new FormControl('');
-  private orgUnitFormControl: FormControl = new FormControl('');
-  private researchActivitiesFormControl: FormControl = new FormControl([]);
+  private categoryFormControl: FormControl = new FormControl();
+  private personFormControl: FormControl = new FormControl();
+  private orgUnitFormControl: FormControl = new FormControl();
+  private researchActivitiesFormControl: FormControl = new FormControl();
   private loadedRoute = false;
 
   private showPersonFilter = true;
@@ -148,17 +148,20 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
           // These need to be set initially so that the combineLatest observable will fire
           const category = params['category'] || this.searchBarService.category;
           const searchText = typeof params['searchText'] === 'string' ? params['searchText'] : this.searchBarService.searchText;
-          const person = params['person'] || '';
-          const orgUnit = params['orgUnit'] || '';
+          const person = Number(params['person']) || '';
+          const orgUnit = Number(params['orgUnit']) || '';
           const researchActivities = SearchResultsComponent.parseParamArray(params['researchActivities']);
 
           this.updateFilterVisibility(category);
           this.searchBarService.setSearchText(searchText);
           this.searchBarService.setCategory(category);
-          this.categoryFormControl.setValue(category);
-          this.personFormControl.setValue(person);
-          this.orgUnitFormControl.setValue(orgUnit);
-          this.researchActivitiesFormControl.setValue(researchActivities);
+
+          this.filtersForm.patchValue({
+            category: category,
+            person: person,
+            orgUnit: orgUnit,
+            researchActivities: researchActivities
+          });
 
           this.loadedRoute = true;
         }

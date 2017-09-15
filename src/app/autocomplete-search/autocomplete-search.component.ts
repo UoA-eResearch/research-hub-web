@@ -48,7 +48,10 @@ export class AutocompleteSearchComponent implements OnDestroy, ControlValueAcces
   @Input()
   set items(items: GetResultsListItem[]) {
     this._items = items;
-    this.updateSelectedItem();
+
+    if (this._value || this._value === '') {
+      this.updateSelectedItem();
+    }
   }
 
   private updateSelectedItem() {
@@ -65,7 +68,11 @@ export class AutocompleteSearchComponent implements OnDestroy, ControlValueAcces
 
   set value(val) {
     this._value = Number(val) || '';
-    this.updateSelectedItem();
+
+    if (this._items && this._items.length) {
+      this.updateSelectedItem();
+    }
+
     this.onChange(this._value);
     this.onTouched();
   }
