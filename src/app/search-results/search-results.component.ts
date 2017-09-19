@@ -246,7 +246,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     const summary = searchTextSummary + statements.join(', ');
     this.noResultsSummary = 'Sorry - your search ' + summary + ' did not match anything on the Research Hub.';
-    this.resultsSummary = 'Showing search results ' + summary + '.';
+    this.resultsSummary = 'Showing results ' + summary + '.';
   }
 
   updateUrl(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
