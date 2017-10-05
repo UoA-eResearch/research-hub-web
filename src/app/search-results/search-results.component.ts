@@ -36,7 +36,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private peoplePage: Page<Person>;
   private policiesPage: Page<Policy>;
 
-  private maxNumberOfItems = 50;
+  private maxNumberOfItems = 1000;
   private allPages: any[];
   private showEmptyState = false;
   private showProgressBar = true;

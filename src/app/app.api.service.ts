@@ -18,7 +18,7 @@ export enum OrderBy {
 
 export class SearchParams {
   private page = 0;
-  private size = 50;
+  private size = 1000;
   private searchText: string;
   private orderBy: OrderBy = OrderBy.Relevance;
 
@@ -61,8 +61,8 @@ export class SearchParams {
       page = 0;
     }
 
-    if (size == null || size > 50) {
-      size = 50;
+    if (size == null || size < 1) {
+      size = 1;
     }
 
     params.set('page', page.toString());
