@@ -1,7 +1,8 @@
 <form>
   <mat-form-field class="input-full-width">
-    <input mdInput [placeholder]="placeholder" [mdAutocomplete]="auto" [formControl]="selectedItemCtrl">
-    <mat-autocomplete #auto="mdAutocomplete" [displayWith]="displayWith">
+    <!--<input matInput [placeholder]="placeholder" [matAutocomplete]="auto" [formControl]="selectedItemCtrl">-->
+    <input matInput [placeholder]="placeholder" [formControl]="selectedItemCtrl">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith">
       <mat-option *ngFor="let item of filteredItems | async" [value]="item">
         <img *ngIf="item.getImage() !== undefined" aria-hidden [src]="apiService.getAssetUrl(item.getImage())" height="25" />
         <span>{{ item.getTitle() }}</span>
