@@ -1,17 +1,17 @@
-<md-toolbar color="primary">
-  <button md-icon-button (click)="done()"><md-icon>arrow_back</md-icon></button>
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="done()"><mat-icon>arrow_back</mat-icon></button>
   <span style="font-size: 20px;">Refine</span>
   <span class="example-spacer"></span>
-  <button md-icon-button (click)="clear()"><md-icon>clear_all</md-icon></button>
+  <button mat-icon-button (click)="clear()"><mat-icon>clear_all</mat-icon></button>
 
-</md-toolbar>
+</mat-toolbar>
 <div class="component filter-theme" ngClass.xs="component-xs filter-theme">
   <form [formGroup]="filtersForm">
-    <md-select placeholder="Category" formControlName="category" style="width: 100%;margin-bottom: 20px;">
-      <md-option *ngFor="let category of categories" [value]="category.id">
+    <mat-select placeholder="Category" formControlName="category" style="width: 100%;margin-bottom: 20px;">
+      <mat-option *ngFor="let category of categories" [value]="category.id">
         {{category.name}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
     <app-autocomplete-search *ngIf="showPersonFilter" [placeholder]="'Person'" [items]="people" formControlName="person"></app-autocomplete-search>
     <app-autocomplete-search *ngIf="showOrgUnitFilter" [placeholder]="'Organisation unit'" [items]="orgUnits" formControlName="orgUnit" style="display: block;"></app-autocomplete-search>
     <app-research-activity-toggle *ngIf="showResearchActivityFilter" formControlName="researchActivities"></app-research-activity-toggle>

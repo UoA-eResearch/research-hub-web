@@ -1,24 +1,24 @@
-<md-card class="feedback-card">
-  <md-card-header>
-    <div class="avatar-image" md-card-avatar [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"></div>
+<mat-card class="feedback-card">
+  <mat-card-header>
+    <div class="avatar-image" mat-card-avatar [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"></div>
     <h2>{{title}}</h2>
-  </md-card-header>
+  </mat-card-header>
 
   <form [formGroup]="feedbackForm" novalidate>
-    <md-input-container class="input-full-width">
+    <mat-input-container class="input-full-width">
       <input mdInput placeholder="Name" formControlName="name" class="input-full-width">
-    </md-input-container>
+    </mat-input-container>
 
-    <md-input-container class="input-full-width">
+    <mat-input-container class="input-full-width">
       <input mdInput placeholder="Email" formControlName="email" >
-    </md-input-container>
+    </mat-input-container>
 
-    <md-input-container class="input-full-width">
+    <mat-input-container class="input-full-width">
       <textarea mdInput placeholder="Comments" formControlName="message"></textarea>
-    </md-input-container>
+    </mat-input-container>
   </form>
 
   <div class="button-container">
-    <button md-raised-button color="primary" (click)="onSubmit()">Submit</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
   </div>
-</md-card>
+</mat-card>
