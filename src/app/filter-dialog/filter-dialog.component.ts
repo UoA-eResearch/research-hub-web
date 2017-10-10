@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MD_DIALOG_DATA, MdDialogRef} from "@angular/material";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {Person} from "../model/Person";
 import {OrgUnit} from "../model/OrgUnit";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -25,7 +25,7 @@ export class FilterDialogComponent {
   private showOrgUnitFilter = true;
   private showResearchActivityFilter = true;
 
-  constructor(public dialogRef: MdDialogRef<FilterDialogComponent>, @Inject(MD_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<FilterDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.people = data['people'];
     this.orgUnits = data['orgUnits'];
     this.categories = data['categories'];
