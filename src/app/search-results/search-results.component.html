@@ -1,20 +1,20 @@
-<mat-progress-bar mode="indeterminate" color="accent" [hidden]="!showProgressBar"></mat-progress-bar>
+<md-progress-bar mode="indeterminate" color="accent" [hidden]="!showProgressBar"></md-progress-bar>
 
 <div class="search-results" ngClass.xs="search-results-xs" fxLayout="row" fxLayoutGap="1em">
   <div fxFlex="300px" fxHide.lt-md>
     <h1>Refine by</h1>
-    <mat-card class="filter-theme">
+    <md-card class="filter-theme">
       <form [formGroup]="filtersForm">
-        <mat-select placeholder="Category" formControlName="category" style="width: 100%;margin-bottom: 20px;">
-          <mat-option *ngFor="let category of categories" [value]="category.id">
+        <md-select placeholder="Category" formControlName="category" style="width: 100%;margin-bottom: 20px;">
+          <md-option *ngFor="let category of categories" [value]="category.id">
             {{category.name}}
-          </mat-option>
-        </mat-select>
+          </md-option>
+        </md-select>
         <app-autocomplete-search *ngIf="showPersonFilter" [placeholder]="'Person'" [items]="people" formControlName="person"></app-autocomplete-search>
         <app-autocomplete-search *ngIf="showOrgUnitFilter" [placeholder]="'Organisation unit'" [items]="orgUnits" formControlName="orgUnit" style="display: block;"></app-autocomplete-search>
         <app-research-activity-toggle *ngIf="showResearchActivityFilter" formControlName="researchActivities"></app-research-activity-toggle>
       </form>
-    </mat-card>
+    </md-card>
   </div>
   <div fxFlex.lt-md="100" style="width: calc(100% - 300px);">
     <div *ngIf="!showEmptyState" class="search-results-info">

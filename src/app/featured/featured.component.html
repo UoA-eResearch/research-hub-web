@@ -9,16 +9,16 @@
     <!--<div fxFlex="250px" fxFlex.lt-lg="100">-->
     <div class.gt-xs="card-gt-xs">
     <!--<div>-->
-      <mat-card >
-        <img mat-card-image [src]="apiService.getAssetUrl(content.image)">
-        <mat-card-content>
+      <md-card >
+        <img md-card-image [src]="apiService.getAssetUrl(content.image)">
+        <md-card-content>
           {{content.name}}
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button [routerLink]="content.getDefaultRouterLink()">Details</button>
-          <a mat-button [href]="content.callToAction" target="_blank">Launch</a>
-        </mat-card-actions>
-      </mat-card>
+        </md-card-content>
+        <md-card-actions>
+          <button md-button [routerLink]="content.getDefaultRouterLink()">Details</button>
+          <a md-button [href]="content.callToAction" target="_blank">Launch</a>
+        </md-card-actions>
+      </md-card>
     </div>
   </div>
 </ng-container>

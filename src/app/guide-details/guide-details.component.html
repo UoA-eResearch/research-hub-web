@@ -3,21 +3,21 @@
               [imageUrl]="apiService.getAssetUrl('page-elements/483_Pacific_28Sep10_1680x220_BW.jpg')"></app-header>
 
   <div class="component" class.xs="component-xs" fxLayout="column" fxLayoutGap="1em">
-    <mat-card class="description">
+    <md-card class="description">
       <app-markdown [data]="content.description"></app-markdown>
-    </mat-card>
+    </md-card>
 
-    <mat-grid-list [cols]="numCols" gutterSize="1em">
-      <mat-grid-tile class="browse-tile" *ngFor="let item of content.guideCategories; let i = index;" [colspan]="1" [rowspan]="1" [routerLink]="getGuideCategoryRouterLink(item.id)">
+    <md-grid-list [cols]="numCols" gutterSize="1em">
+      <md-grid-tile class="browse-tile" *ngFor="let item of content.guideCategories; let i = index;" [colspan]="1" [rowspan]="1" [routerLink]="getGuideCategoryRouterLink(item.id)">
         <div fxLayout="column" fxLayoutAlign="center center" class="tile-content">
           <span class="tile-text">{{item.name}}</span>
-          <mat-icon class="mdi mdi-{{item.icon}} tile-icon "></mat-icon>
+          <md-icon class="mdi mdi-{{item.icon}} tile-icon "></md-icon>
         </div>
-      </mat-grid-tile>
-    </mat-grid-list>
+      </md-grid-tile>
+    </md-grid-list>
 
-    <mat-card>
+    <md-card>
       <app-markdown [data]="content.additionalInfo"></app-markdown>
-    </mat-card>
+    </md-card>
   </div>
 </ng-container>

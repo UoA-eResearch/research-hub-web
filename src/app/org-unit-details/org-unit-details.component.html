@@ -6,25 +6,25 @@
 
   <div class="content" class.xs="content-xs" fxLayout="column">
     <div class="content-details" class.xs="content-details-xs" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em">
-      <mat-card fxFlex="50" fxFlex.lt-md="100" *ngIf="userSupport && userSupport.length">
+      <md-card fxFlex="50" fxFlex.lt-md="100" *ngIf="userSupport && userSupport.length">
         <h2>People</h2>
-        <mat-nav-list>
-          <mat-list-item *ngFor="let item of userSupport" [routerLink]="item.getDefaultRouterLink()">
-            <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
-            <h3 mat-line> {{item.getTitle()}} </h3>
-          </mat-list-item>
-        </mat-nav-list>
-      </mat-card>
+        <md-nav-list>
+          <md-list-item *ngFor="let item of userSupport" [routerLink]="item.getDefaultRouterLink()">
+            <img md-list-avatar [src]="apiService.getAssetUrl(item.image)">
+            <h3 md-line> {{item.getTitle()}} </h3>
+          </md-list-item>
+        </md-nav-list>
+      </md-card>
 
-      <mat-card fxFlex="50" fxFlex.lt-md="100" *ngIf="orgUnit.contentItems.length">
+      <md-card fxFlex="50" fxFlex.lt-md="100" *ngIf="orgUnit.contentItems.length">
         <h2>Resources</h2>
-        <mat-nav-list>
-          <mat-list-item *ngFor="let item of orgUnit.contentItems" [routerLink]="item.getDefaultRouterLink()">
-            <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
-            <h3 mat-line> {{item.getTitle()}} </h3>
-          </mat-list-item>
-        </mat-nav-list>
-      </mat-card>
+        <md-nav-list>
+          <md-list-item *ngFor="let item of orgUnit.contentItems" [routerLink]="item.getDefaultRouterLink()">
+            <img md-list-avatar [src]="apiService.getAssetUrl(item.image)">
+            <h3 md-line> {{item.getTitle()}} </h3>
+          </md-list-item>
+        </md-nav-list>
+      </md-card>
     </div>
   </div>
 </div>

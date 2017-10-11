@@ -1,24 +1,24 @@
-<mat-nav-list>
-  <h2 mat-subheader *ngIf="titleValue !== ''">{{titleValue}}</h2>
+<md-nav-list>
+  <h2 md-subheader *ngIf="titleValue !== ''">{{titleValue}}</h2>
   <ng-container *ngFor="let result of resultsValue">
     <ng-container *ngIf="result.getHref() === undefined">
-      <mat-list-item [routerLink]="getRoute(result)">
-        <img mat-list-avatar [src]="apiService.getAssetUrl(result.getImage())">
-        <h3 mat-line> {{result.getTitle()}} </h3>
-        <p mat-line>
+      <md-list-item [routerLink]="getRoute(result)">
+        <img md-list-avatar [src]="apiService.getAssetUrl(result.getImage())">
+        <h3 md-line> {{result.getTitle()}} </h3>
+        <p md-line>
           <span> {{result.getSubtitle()}} </span>
         </p>
-      </mat-list-item>
+      </md-list-item>
     </ng-container>
 
     <ng-container *ngIf="result.getHref() !== undefined">
-      <a mat-list-item [href]="result.getHref()" target="_blank" (click)="trackOutboundLink(result)">
-        <img *ngIf="result.getImage()" mat-list-avatar [src]="apiService.getAssetUrl(result.getImage())">
-        <h3 mat-line> {{result.getTitle()}} </h3>
-        <p mat-line>
+      <a md-list-item [href]="result.getHref()" target="_blank" (click)="trackOutboundLink(result)">
+        <img *ngIf="result.getImage()" md-list-avatar [src]="apiService.getAssetUrl(result.getImage())">
+        <h3 md-line> {{result.getTitle()}} </h3>
+        <p md-line>
           <span> {{result.getSubtitle()}} </span>
         </p>
       </a>
     </ng-container>
   </ng-container>
-</mat-nav-list>
+</md-nav-list>

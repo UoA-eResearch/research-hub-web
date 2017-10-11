@@ -4,7 +4,7 @@
     <div fxLayout="column" fxLayoutGap="1em" fxFlexAlign="end">
       <div fxFlexAlign="start" *ngIf="description" class="header-description" [innerHTML]="description"></div>
       <div *ngIf="goHref">
-        <a mat-raised-button color="accent" [href]="goHref" target="_blank" (click)="trackGo()">Go</a>
+        <a md-raised-button color="accent" [href]="goHref" target="_blank" (click)="trackGo()">Go</a>
       </div>
     </div>
   </div>

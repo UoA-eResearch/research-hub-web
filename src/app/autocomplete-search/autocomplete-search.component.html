@@ -1,11 +1,11 @@
 <form>
-  <mat-form-field class="input-full-width">
+  <md-form-field class="input-full-width">
     <input mdInput [placeholder]="placeholder" [mdAutocomplete]="auto" [formControl]="selectedItemCtrl">
-    <mat-autocomplete #auto="mdAutocomplete" [displayWith]="displayWith">
-      <mat-option *ngFor="let item of filteredItems | async" [value]="item">
+    <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayWith">
+      <md-option *ngFor="let item of filteredItems | async" [value]="item">
         <img *ngIf="item.getImage() !== undefined" aria-hidden [src]="apiService.getAssetUrl(item.getImage())" height="25" />
         <span>{{ item.getTitle() }}</span>
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+      </md-option>
+    </md-autocomplete>
+  </md-form-field>
 </form>

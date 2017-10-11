@@ -1,13 +1,13 @@
 <span style="color: rgba(0,0,0,0.54);padding-bottom: 0.3em;font-size: 12px;display: block;">Research activity</span>
-<mat-button-toggle-group class="ra-mat-toggle-theme" vertical="true" multiple style="width: 100%;">
-  <mat-button-toggle *ngFor="let activity of researchActivities"
+<md-button-toggle-group class="ra-mat-toggle-theme" vertical="true" multiple style="width: 100%;">
+  <md-button-toggle *ngFor="let activity of researchActivities"
                     [value]="activity"
                     (change)="activity.selected = !activity.selected; updateValue();"
                     [checked]="activity.selected"
                     [ngClass]="activity.className">
-    <!--<mat-icon>{{activity.icon}}</mat-icon>-->
-    <mat-icon [ngClass]="['mdi', activity.icon]"></mat-icon>
+    <!--<md-icon>{{activity.icon}}</md-icon>-->
+    <md-icon [ngClass]="['mdi', activity.icon]"></md-icon>
     <span class="activity-name">{{activity.name}}</span>
-  </mat-button-toggle>
+  </md-button-toggle>
 
-</mat-button-toggle-group>
+</md-button-toggle-group>

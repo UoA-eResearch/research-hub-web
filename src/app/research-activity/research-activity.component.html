@@ -3,11 +3,11 @@
 
   <div class="flex-hack" fxFlex="grow" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="center center" fxLayoutAlign.lt-lg="">
     <div fxFlex.lt-lg="100%">
-      <mat-chip-list class="mat-chip-list-stacked">
-        <mat-chip *ngFor="let activity of researchActivities" [style.backgroundColor]="activity.color" [routerLink]="['/search']" [queryParams]="{ researchActivities: [activity.id], searchText: '', category: 'all'}">
+      <md-chip-list class="mat-chip-list-stacked">
+        <md-chip *ngFor="let activity of researchActivities" [style.backgroundColor]="activity.color" [routerLink]="['/search']" [queryParams]="{ researchActivities: [activity.id], searchText: '', category: 'all'}">
           {{activity.name}}
-        </mat-chip>
-      </mat-chip-list>
+        </md-chip>
+      </md-chip-list>
     </div>
 
     <div fxHide.lt-lg fxFlex.gt-xs="50%" fxFlex.xs="100%">
