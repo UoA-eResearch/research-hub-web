@@ -132,10 +132,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.onSearchChange(category, searchText, person, orgUnit, researchActivities);
       });
 
+    const peopleSearchParams = new PeopleSearchParams();
+    peopleSearchParams.setRoleTypes([3]);
+
     this.routeParamsSub = Observable
       .combineLatest(
         this.route.queryParams,
-        this.apiService.getPeople(new PeopleSearchParams()),
+        this.apiService.getPeople(peopleSearchParams),
         this.apiService.getOrgUnits(new SearchParams())
       )
       .subscribe(latestValues => {
@@ -407,6 +410,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   getPeopleObservable(searchText: string, orgUnitId: number) {
     const searchParams = new PeopleSearchParams();
     searchParams.setSearchText(searchText);
+    searchParams.setRoleTypes([3]);
     searchParams.setSize(this.maxNumberOfItems);
 
     if (orgUnitId) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from "../app.api.service";
+import {ApiService, ContentItemsSearchParams} from "../app.api.service";
 import {ActivatedRoute} from "@angular/router";
 import {Person} from "../model/Person";
 import { Location } from '@angular/common';
@@ -38,8 +38,11 @@ export class PersonDetailsComponent implements OnInit {
         }
       );
 
-      this.apiService.getPersonUserSupportContent(id).subscribe(supportedContent => {
-        this.supportedContent = supportedContent;
+      const searchParams = new ContentItemsSearchParams();
+      searchParams.setPeople([id]);
+      searchParams.setRoleTypes([3]);
+      this.apiService.getContentItems(searchParams).subscribe(contentItems => {
+        this.supportedContent = contentItems.content;
       });
     });
   }

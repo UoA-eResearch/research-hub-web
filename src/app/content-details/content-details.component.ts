@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {ActivatedRoute} from "@angular/router";
-import {ApiService} from "../app.api.service";
+import {ApiService, PeopleSearchParams} from "../app.api.service";
 import {Content} from "../model/Content";
 import marked from 'marked';
 import { Location } from '@angular/common';
@@ -65,8 +65,12 @@ export class ContentDetailsComponent implements OnInit {
         }
       );
 
-      this.apiService.getContentItemUserSupport(id).subscribe(userSupport => {
-        this.userSupport = userSupport;
+      const searchParams = new PeopleSearchParams();
+      searchParams.setContentItems([id]);
+      searchParams.setRoleTypes([3]);
+
+      this.apiService.getPeople(searchParams).subscribe(userSupport => {
+        this.userSupport = userSupport.content;
       });
     });
   }

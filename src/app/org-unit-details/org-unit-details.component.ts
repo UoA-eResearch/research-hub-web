@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ApiService} from "../app.api.service";
+import {ApiService, PeopleSearchParams} from "../app.api.service";
 import {OrgUnit} from "../model/OrgUnit";
 import { Location } from '@angular/common';
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
@@ -38,10 +38,12 @@ export class OrgUnitDetailsComponent implements OnInit {
         }
       );
 
-      this.apiService.getOrgUnitUserSupport(id).subscribe(userSupport => {
-        this.userSupport = userSupport;
+      const searchParams = new PeopleSearchParams();
+      searchParams.setOrgUnits([id]);
+      searchParams.setRoleTypes([3]);
+      this.apiService.getPeople(searchParams).subscribe(people => {
+        this.userSupport = people.content;
       });
     });
   }
-
 }

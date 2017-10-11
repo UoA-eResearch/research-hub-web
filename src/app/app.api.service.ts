@@ -88,16 +88,26 @@ export class SearchParams {
 export class PeopleSearchParams extends SearchParams {
 
   private orgUnits: number[];
+  private contentItems: number[];
+  private roleTypes: number[];
 
   public setOrgUnits(orgUnits: number[]) {
     this.orgUnits = orgUnits;
   }
 
+  public setContentItems(contentItems: number[]) {
+    this.contentItems = contentItems;
+  }
+
+  public setRoleTypes(roleTypes: number[]) {
+    this.roleTypes = roleTypes;
+  }
+
   public getUrlSearchParams() {
     const params = super.getUrlSearchParams();
 
-    const names = ['orgUnits'];
-    const variables = [this.orgUnits];
+    const names = ['orgUnits', 'contentItems', 'roleTypes'];
+    const variables = [this.orgUnits, this.contentItems, this.roleTypes];
     SearchParams.getIdArrayUrlParams(params, names, variables);
 
     return params;
@@ -109,6 +119,7 @@ export class ContentItemsSearchParams extends SearchParams {
   private contentTypes: number[];
   private researchPhases: number[];
   private people: number[];
+  private roleTypes: number[];
   private orgUnits: number[];
 
   public setContentTypes(contentTypes: number[]) {
@@ -123,6 +134,10 @@ export class ContentItemsSearchParams extends SearchParams {
     this.people = people;
   }
 
+  public setRoleTypes(roleTypes: number[]) {
+    this.roleTypes = roleTypes;
+  }
+
   public setOrgUnits(orgUnits: number[]) {
     this.orgUnits = orgUnits;
   }
@@ -130,8 +145,8 @@ export class ContentItemsSearchParams extends SearchParams {
   public getUrlSearchParams() {
     const params = super.getUrlSearchParams();
 
-    const names = ['contentTypes', 'researchPhases', 'people', 'orgUnits'];
-    const variables = [this.contentTypes, this.researchPhases, this.people, this.orgUnits];
+    const names = ['contentTypes', 'researchPhases', 'people', 'roleTypes', 'orgUnits'];
+    const variables = [this.contentTypes, this.researchPhases, this.people, this.roleTypes, this.orgUnits];
     SearchParams.getIdArrayUrlParams(params, names, variables);
 
     return params;
@@ -147,7 +162,7 @@ export class ApiService {
   private static CATEGORY_URL = 'category';
   private static GUIDE_CATEGORY_URL = 'guideCategory';
   private static CONTENT_URL = 'content';
-  private static SIMILAR_CONTENT_URL = 'similarContent';
+  private static SIMILAR_CONTENT_URL = 'similar';
   private static ORG_UNIT_URL = 'orgUnit';
   private static ASSET_URL = 'assets/';
   private host = environment.apiUrl;
@@ -186,7 +201,7 @@ export class ApiService {
     headers.set('Accept', 'application/json');
 
     return this.http
-      .get(this.host + ApiService.SIMILAR_CONTENT_URL + '/' + id, {headers: headers})
+      .get(this.host + ApiService.CONTENT_URL + '/' + id + '/' + ApiService.SIMILAR_CONTENT_URL, {headers: headers})
       .map((response) => Content.fromObjects(response.json()));
   }
 
@@ -199,21 +214,12 @@ export class ApiService {
       .map((response) => Content.fromObject(response.json()));
   }
 
-  getContentItemUserSupport(id) {
+  getGuideCategory(contentId, guideCategoryId) {
     const headers = new Headers();
     headers.set('Accept', 'application/json');
 
     return this.http
-      .get(this.host + ApiService.CONTENT_URL + '/' + id + '/userSupport', {headers: headers})
-      .map((response) => Person.fromObjects(response.json()));
-  }
-
-  getGuideCategory(id) {
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
-    return this.http
-      .get(this.host + ApiService.GUIDE_CATEGORY_URL + '/' + id, {headers: headers})
+      .get(this.host + ApiService.CONTENT_URL + '/' + contentId + '/' + ApiService.GUIDE_CATEGORY_URL + '/' + guideCategoryId, {headers: headers})
       .map((response) => GuideCategory.fromObject(response.json()));
   }
 
@@ -247,15 +253,6 @@ export class ApiService {
       .map((response) => Person.fromObject(response.json()));
   }
 
-  getPersonUserSupportContent(id) {
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
-    return this.http
-      .get(this.host + ApiService.PERSON_URL + '/' + id + '/userSupportContent', {headers: headers})
-      .map((response) => Content.fromObjects(response.json()));
-  }
-
   getOrgUnits(searchParams: SearchParams) {
     const search = searchParams.getUrlSearchParams();
     const headers = new Headers();
@@ -273,14 +270,5 @@ export class ApiService {
     return this.http
       .get(this.host + ApiService.ORG_UNIT_URL + '/' + id, {headers: headers})
       .map((response) => OrgUnit.fromObject(response.json()));
-  }
-
-  getOrgUnitUserSupport(id) {
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
-    return this.http
-      .get(this.host + ApiService.ORG_UNIT_URL + '/' + id + '/userSupport', {headers: headers})
-      .map((response) => Person.fromObjects(response.json()));
   }
 }

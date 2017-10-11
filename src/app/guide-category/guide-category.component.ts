@@ -25,7 +25,7 @@ export class GuideCategoryComponent implements OnInit {
     this.route.params.subscribe(params => {
       const id = params['guideCategoryId'];
 
-      this.apiService.getGuideCategory(id).subscribe(
+      this.apiService.getGuideCategory(1, id).subscribe(
         guideCategory => {
           const url = this.location.path();
           const name = guideCategory.name;
