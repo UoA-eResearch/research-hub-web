@@ -1,6 +1,5 @@
 import "hammerjs";
 import "rxjs/Rx";
-import {MomentModule} from "angular2-moment"
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -87,7 +86,6 @@ import {ToolbarService} from "./toolbar.service";
     FilterDialogComponent
   ],
   imports: [
-    MomentModule,
     FlexLayoutModule,
     Ng2BreadcrumbModule,
     ReactiveFormsModule,

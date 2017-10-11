@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from "@angular/core";
-import {MomentModule} from "angular2-moment"
+import * as moment from "moment";
 import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {MenuService} from "./menu.service";
 import {SearchBarService} from "./search-bar/search-bar.service";
@@ -8,7 +8,7 @@ import {Subscription} from "rxjs/Subscription";
 import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 import {ApiService} from "./app.api.service";
 import {AnalyticsService} from "./app.analytics.service";
-import {isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {BrowseComponent} from "./browse/browse.component";
 import {ToolbarService} from "./toolbar.service";
 
@@ -109,8 +109,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   getYear() {
-
-    const date = new Date();
-    return date.getFullYear();
+    return moment().year();
   }
 }
