@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MdDialog} from '@angular/material';
 import {ImageViewDialogComponent} from "../image-view-dialog/image-view-dialog.component";
 
 @Component({
@@ -18,7 +18,7 @@ export class ImageViewComponent implements OnInit {
   @Input()
   height: string;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MdDialog) { }
 
   ngOnInit() {
   }
