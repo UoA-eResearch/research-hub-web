@@ -1,6 +1,10 @@
 FROM          nginx
 MAINTAINER    James Diprose "j.diprose@auckland.ac.nz"
 
+# Build args required to work behind proxy
+ARG           http_proxy
+ARG           https_proxy
+
 # Install curl (used to install nodejs) and build-essential (for compiling native nodejs libraries)
 RUN           apt-get update -qq
 RUN           apt-get install -qqy curl build-essential
