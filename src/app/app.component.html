@@ -17,11 +17,15 @@
         <div class="primary-header" ngClass.xs="primary-header-xs">
 
           <div fxLayout="row" fxLayoutAlign="center center">
-
             <button md-icon-button class="mdi mdi-menu mdi-24px menu-button" class.xs="mdi mdi-menu mdi-24px menu-button-xs" (click)="sidenav.toggle()" fxHide.gt-sm></button>
 
             <md-toolbar class="primary-toolbar"  color="primary">
               <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
+              <a *ngIf="showLoginBtn" color="accent" md-raised-button (click)="authService.login()">Login</a>
+
+              <button *ngIf="!showLoginBtn" md-fab class="avatar-btn">
+                <img mat-card-avatar [src]="authService.user.getAvatarUrl()" />
+              </button>
             </md-toolbar>
           </div>
 

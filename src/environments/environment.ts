@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  shibbolethSessionUrl: 'http://localhost:8080/Shibboleth.sso/Session.json',
   apiUrl: 'http://localhost:8080/',
   analyticsCode: 'UA-77710107-3'
 };

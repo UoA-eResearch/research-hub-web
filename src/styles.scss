@@ -114,3 +114,13 @@ md-chip.mat-chip {
   font-size: mat-font-size($app-chips-typography, button) !important;
   font-weight: mat-font-weight($app-chips-typography, button) !important;
 }
+
+.avatar-btn > span.mat-button-wrapper {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.avatar-btn > span.mat-button-wrapper > img {
+  width: 56px;
+  height: 56px;
+}

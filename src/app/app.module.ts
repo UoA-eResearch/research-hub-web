@@ -55,6 +55,8 @@ import { ImageViewComponent } from './image-view/image-view.component';
 import { ImageViewDialogComponent } from './image-view-dialog/image-view-dialog.component';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 import {ToolbarService} from "./toolbar.service";
+import {AppAuthService} from "./app.auth.service";
+import {ChangeDetectorRef} from '@angular/core';
 
 
 @NgModule({
@@ -113,7 +115,7 @@ import {ToolbarService} from "./toolbar.service";
     routing
   ],
   entryComponents: [ImageViewDialogComponent, FilterDialogComponent],
-  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService,
+  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService, AppAuthService,
     ToolbarService],
   bootstrap: [AppComponent]
 })

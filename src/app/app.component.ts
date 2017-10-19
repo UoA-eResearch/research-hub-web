@@ -11,6 +11,8 @@ import {AnalyticsService} from "./app.analytics.service";
 import { isPlatformBrowser } from '@angular/common';
 import {BrowseComponent} from "./browse/browse.component";
 import {ToolbarService} from "./toolbar.service";
+import {AppAuthService} from "./app.auth.service";
+import {ChangeDetectorRef} from '@angular/core';
 
 
 @Component({
@@ -44,12 +46,12 @@ export class AppComponent implements OnInit, OnDestroy {
   category = 'all';
   searchText = '';
   showFilterButton = false;
-
+  showLoginBtn = true;
 
   constructor(private breadcrumbService: BreadcrumbService, private navigationService: MenuService,
               private searchBarService: SearchBarService, private router: Router,
               private observableMedia: ObservableMedia, private apiService: ApiService, private analyticsService: AnalyticsService,
-              private toolbarService: ToolbarService) {
+              private toolbarService: ToolbarService, private authService: AppAuthService, private ref: ChangeDetectorRef) {
 
     // Populate menuItems for search-bar bar
     this.categories = navigationService.getMenuItem('/').menuItems;
@@ -58,6 +60,12 @@ export class AppComponent implements OnInit, OnDestroy {
     for (const item of this.menuItems) {
       breadcrumbService.addFriendlyNameForRoute(item['href'], item['name']);
     }
+
+    authService.loginChange.subscribe((loggedIn) => {
+      console.log('is logged in: ', loggedIn);
+      this.showLoginBtn = !loggedIn;
+      this.ref.detectChanges();
+    });
   }
 
 
