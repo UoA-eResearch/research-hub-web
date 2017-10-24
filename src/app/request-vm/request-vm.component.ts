@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {DateAdapter, NativeDateAdapter} from "@angular/material";
+import {ActivatedRoute} from "@angular/router";
+import {ApiService} from "../app.api.service";
+import {Content} from "../model/Content";
 
 @Component({
   selector: 'app-request-vm',
@@ -14,6 +17,8 @@ export class RequestVmComponent implements OnInit {
   public dateToday = new Date();
   public dateCtrl = new FormControl(undefined, Validators.required);
   public timeCtrl = new FormControl(undefined, Validators.required);
+  public researchVmContentId = 1;
+  public content: Content;
 
   private static getTimes() {
     const times = [];
@@ -34,7 +39,8 @@ export class RequestVmComponent implements OnInit {
     return times;
   }
 
-  constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>) {
+  constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
+              private apiService: ApiService) {
     dateAdapter.setLocale('en-GB');
   }
 
@@ -46,6 +52,11 @@ export class RequestVmComponent implements OnInit {
       time: this.timeCtrl,
       comments: ['']
     });
+
+    this.apiService.getContentItem(this.researchVmContentId).subscribe(
+      content => {
+        this.content = content;
+      });
   }
 
   submit() {
