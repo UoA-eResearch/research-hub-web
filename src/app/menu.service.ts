@@ -103,6 +103,7 @@ export class MenuService {
     this.breadcrumbService.addFriendlyNameForRoute('/person', 'People');
     this.breadcrumbService.addFriendlyNameForRoute('/content', 'Resources');
     this.breadcrumbService.addFriendlyNameForRoute('/guide', 'Guides');
+    this.breadcrumbService.addFriendlyNameForRoute('/requestVm', 'Request a Virtual Machine');
   }
 
   private createMenuItemsDict(parentId: string, menuItems: [MenuItem]) {
