@@ -50,8 +50,11 @@ export class RequestVmComponent implements OnInit {
 
   submit() {
     const isValid = this.requestVmForm.valid;
+    this.dateCtrl.markAsTouched();
+    this.timeCtrl.markAsDirty();
+    this.timeCtrl.markAsTouched();
 
-    console.log('Is Valid: ', isValid, this.requestVmForm.controls['date']);
+    console.log('Is Valid: ', isValid, this.requestVmForm);
 
     if (isValid) {
 
