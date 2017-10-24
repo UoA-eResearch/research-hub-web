@@ -19,7 +19,7 @@ import {
   MdSidenavModule,
   MdToolbarModule,
   MdProgressBarModule, MdChipsModule, MdFormField, MdFormFieldModule, MdButtonToggleModule, MdAutocompleteModule,
-  MdExpansionModule, MdDialogModule
+  MdExpansionModule, MdDialogModule, MdDatepickerModule, MdNativeDateModule
 } from "@angular/material";
 import {BreadcrumbService, Ng2BreadcrumbModule} from "ng2-breadcrumb/ng2-breadcrumb";
 
@@ -57,6 +57,8 @@ import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 import {ToolbarService} from "./toolbar.service";
 import {AppAuthService} from "./app.auth.service";
 import {ChangeDetectorRef} from '@angular/core';
+import { RequestVmComponent } from './request-vm/request-vm.component';
+import {DateTimePickerModule} from "ng-pick-datetime";
 
 
 @NgModule({
@@ -85,7 +87,8 @@ import {ChangeDetectorRef} from '@angular/core';
     AutocompleteSearchComponent,
     ImageViewComponent,
     ImageViewDialogComponent,
-    FilterDialogComponent
+    FilterDialogComponent,
+    RequestVmComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -112,6 +115,9 @@ import {ChangeDetectorRef} from '@angular/core';
     MdFormFieldModule,
     MdAutocompleteModule,
     MdDialogModule,
+    MdDatepickerModule,
+    MdNativeDateModule,
+    DateTimePickerModule,
     routing
   ],
   entryComponents: [ImageViewDialogComponent, FilterDialogComponent],

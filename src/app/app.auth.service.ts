@@ -39,9 +39,9 @@ export class AppAuthService {
       console.log('popup closed');
       this.loginChange.next(true);
       // this.loggedIn = true;
-      // this.getSession().subscribe((data) => {
-      //   this.updateSession(data);
-      // });
+      this.getSession().subscribe((data) => {
+        this.updateSession(data);
+      });
     };
   }
 

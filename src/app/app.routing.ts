@@ -13,6 +13,7 @@ import {OrgUnitDetailsComponent} from "./org-unit-details/org-unit-details.compo
 import {BrowseResultsComponent} from "./browse-results/browse-results.component";
 import {GuideDetailsComponent} from "./guide-details/guide-details.component";
 import {GuideCategoryComponent} from "./guide-category/guide-category.component";
+import {RequestVmComponent} from "./request-vm/request-vm.component";
 
 
 const appRoutes: Routes = [
@@ -49,6 +50,8 @@ const appRoutes: Routes = [
   {path: 'search/guide/:id', component: GuideDetailsComponent},
   {path: 'search/guide/:id/:guideCategoryId', component: GuideCategoryComponent},
   {path: 'search/content/:id', component: ContentDetailsComponent},
+
+  {path: 'requestVm', component: RequestVmComponent},
 
   {path: 'search/person', redirectTo: '/search', pathMatch: 'full'},
   {path: 'search/guide', redirectTo: '/search', pathMatch: 'full'},
