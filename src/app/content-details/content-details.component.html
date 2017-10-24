@@ -10,58 +10,58 @@
         <img style="width:100%; height:auto;" [src]="apiService.getAssetUrl(content.image)">
       </div>
 
-      <md-card *ngIf="userSupport && userSupport.length">
+      <mat-card *ngIf="userSupport && userSupport.length">
         <h2>For support contact</h2>
-        <md-chip-list [selectable]="true">
-          <md-chip class="contact-chip" *ngFor="let item of userSupport" [routerLink]="item.getDefaultRouterLink()">
+        <mat-chip-list [selectable]="true">
+          <mat-chip class="contact-chip" *ngFor="let item of userSupport" [routerLink]="item.getDefaultRouterLink()">
             {{item.getTitle()}}
-          </md-chip>
-        </md-chip-list>
-      </md-card>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-card>
 
-      <md-card>
+      <mat-card>
         <h2>Organisational units</h2>
-        <md-chip-list>
-          <md-chip class="org-unit-chip" *ngFor="let item of content.orgUnits" [routerLink]="item.getDefaultRouterLink()">
+        <mat-chip-list>
+          <mat-chip class="org-unit-chip" *ngFor="let item of content.orgUnits" [routerLink]="item.getDefaultRouterLink()">
             {{item.getTitle()}}
-          </md-chip>
-        </md-chip-list>
-      </md-card>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-card>
 
-      <md-card *ngIf="content.policies.length">
+      <mat-card *ngIf="content.policies.length">
         <h2>Policies</h2>
         <a class="policy-url" *ngFor="let item of content.policies" [href]="item.url" target="_blank" (click)="analyticsService.trackPolicy(item.getTitle(), item.url);">
           {{item.getTitle()}}
         </a>
-      </md-card>
+      </mat-card>
 
-      <md-card *ngIf="similarContentItems && similarContentItems.length">
+      <mat-card *ngIf="similarContentItems && similarContentItems.length">
         <h2>You might also be interested in</h2>
-        <md-nav-list>
-          <md-list-item *ngFor="let item of similarContentItems" [routerLink]="item.getDefaultRouterLink()">
-            <img md-list-avatar [src]="apiService.getAssetUrl(item.image)">
-            <h3 md-line> {{item.getTitle()}} </h3>
-          </md-list-item>
-        </md-nav-list>
-      </md-card>
+        <mat-nav-list>
+          <mat-list-item *ngFor="let item of similarContentItems" [routerLink]="item.getDefaultRouterLink()">
+            <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
+            <h3 mat-line> {{item.getTitle()}} </h3>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-card>
     </div>
 
     <div class="flex-hack" fxFlex="60" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="1">
-      <md-card [ngClass]="{'description': !isKnowledgeArticle}" class="description">
+      <mat-card [ngClass]="{'description': !isKnowledgeArticle}" class="description">
         <app-markdown [data]="content.description"></app-markdown>
-      </md-card>
+      </mat-card>
 
       <div fxHide.gt-md>
         <img fxFlexFill [src]="apiService.getAssetUrl(content.image)">
       </div>
 
-      <md-card *ngIf="content.actionableInfo">
+      <mat-card *ngIf="content.actionableInfo">
         <app-markdown [data]="content.actionableInfo"></app-markdown>
-      </md-card>
+      </mat-card>
 
-      <md-card *ngIf="content.additionalInfo">
+      <mat-card *ngIf="content.additionalInfo">
         <app-markdown [data]="content.additionalInfo"></app-markdown>
-      </md-card>
+      </mat-card>
     </div>
   </div>
 </ng-container>

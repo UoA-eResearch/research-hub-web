@@ -1,39 +1,39 @@
-<md-card>
-  <md-card-header>
+<mat-card>
+  <mat-card-header>
     <h1>Request VM Consultation</h1>
-  </md-card-header>
+  </mat-card-header>
 
   <p>In order to request a virtual machine please book a consultation with us to discuss required details. A consultation typically takes 30 minutes. No preparation on your side is necessary. If you have any questions please put them into the comments field.</p>
 
   <form [formGroup]="requestVmForm" novalidate>
     <h3>When would you like the consultation to take place?</h3>
 
-    <md-form-field style="padding-right: 20px;">
-      <input mdInput [mdDatepicker]="picker" [min]="dateToday" formControlName="date" placeholder="Date">
-      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-      <md-datepicker #picker></md-datepicker>
-      <md-error *ngIf="dateCtrl.invalid">Please choose a date</md-error>
-    </md-form-field>
+    <mat-form-field style="padding-right: 20px;">
+      <input matInput [matDatepicker]="picker" [min]="dateToday" formControlName="date" placeholder="Date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="dateCtrl.invalid">Please choose a date</mat-error>
+    </mat-form-field>
 
-    <!--<md-form-field>-->
-      <md-select placeholder="Time" formControlName="time">
-        <md-option *ngFor="let time of times" [value]="time">
+    <!--<mat-form-field>-->
+      <mat-select placeholder="Time" formControlName="time">
+        <mat-option *ngFor="let time of times" [value]="time">
           {{time}}
-        </md-option>
-      </md-select>
-      <!--<md-error *ngIf="timeCtrl.invalid">Please choose a time</md-error>-->
-    <!--</md-form-field>-->
+        </mat-option>
+      </mat-select>
+      <!--<mat-error *ngIf="timeCtrl.invalid">Please choose a time</mat-error>-->
+    <!--</mat-form-field>-->
 
     <h3>Location</h3>
     <p>Please meet us at 23 Symonds Street, Building 302, Floor 5, Room 585 or make alternative arrangements with us through the comments field.</p>
 
     <h3>Do you have any comments?</h3>
-    <md-form-field class="input-full-width">
-      <textarea mdInput placeholder="Comments" formControlName="comments"></textarea>
-    </md-form-field>
+    <mat-form-field class="input-full-width">
+      <textarea matInput placeholder="Comments" formControlName="comments"></textarea>
+    </mat-form-field>
   </form>
 
   <div class="button-container">
-    <button md-raised-button color="accent" (click)="submit()">Submit</button>
+    <button mat-raised-button color="accent" (click)="submit()">Submit</button>
   </div>
-</md-card>
+</mat-card>

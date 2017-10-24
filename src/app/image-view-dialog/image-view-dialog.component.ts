@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-image-view-dialog',
@@ -9,8 +9,8 @@ import {MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
 export class ImageViewDialogComponent implements OnInit {
 
   constructor(
-    public dialogRef: MdDialogRef<ImageViewDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<ImageViewDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();

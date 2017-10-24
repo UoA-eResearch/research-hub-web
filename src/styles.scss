@@ -107,10 +107,10 @@ app-markdown h4 {
 
 
 /*
-Gloabl md-chip style
+Gloabl mat-chip style
  */
 
-md-chip.mat-chip {
+mat-chip.mat-chip {
   font-size: mat-font-size($app-chips-typography, button) !important;
   font-weight: mat-font-weight($app-chips-typography, button) !important;
 }

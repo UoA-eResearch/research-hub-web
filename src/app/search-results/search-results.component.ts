@@ -16,7 +16,7 @@ import {OrgUnit} from "../model/OrgUnit";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from '@angular/common';
 import {FilterDialogComponent} from "../filter-dialog/filter-dialog.component";
-import {MdDialog} from "@angular/material";
+import {MatDialog} from "@angular/material";
 import {ResearchActivityComponent} from "../research-activity/research-activity.component";
 import {ToolbarService} from "../toolbar.service";
 
@@ -87,7 +87,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   constructor(private breadcrumbService: BreadcrumbService, protected searchBarService: SearchBarService,
               protected menuService: MenuService, private apiService: ApiService,
               private analyticsService: AnalyticsService, private titleService: Title, private route: ActivatedRoute,
-              private location: Location, public dialog: MdDialog, private toolbarService: ToolbarService) {
+              private location: Location, public dialog: MatDialog, private toolbarService: ToolbarService) {
     this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search Results');
   }
 

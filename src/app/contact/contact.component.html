@@ -6,7 +6,7 @@
     <div fxLayout="column" fxLayoutGap="3em">
       <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="{{layoutGap}}">
         <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="start start">
-          <md-icon class="contact-info-icon mdi mdi-map-marker" [ngClass.xs]="['mdi', 'mdi-map-marker']"></md-icon>
+          <mat-icon class="contact-info-icon mdi mdi-map-marker" [ngClass.xs]="['mdi', 'mdi-map-marker']"></mat-icon>
         </div>
         <div fxLayout="column" fxLayoutGap="2em" fxLayoutAlign="start start">
           <div>
@@ -24,7 +24,7 @@
     <div fxLayout="column" fxLayoutGap="3em">
       <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="{{layoutGap}}">
         <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="center start">
-          <md-icon class="contact-info-icon mdi mdi-phone-classic" [ngClass.xs]="['mdi', 'mdi-phone-classic']"></md-icon>
+          <mat-icon class="contact-info-icon mdi mdi-phone-classic" [ngClass.xs]="['mdi', 'mdi-phone-classic']"></mat-icon>
         </div>
         <div class="contact-text" fxLayout="column" fxLayoutAlign="center start">
           <span>{{contactPhone}}</span>
@@ -33,7 +33,7 @@
 
       <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="{{layoutGap}}">
         <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="center start">
-          <md-icon class="contact-info-icon mdi mdi-mail-ru" [ngClass.xs]="['mdi', 'mdi-mail-ru']"></md-icon>
+          <mat-icon class="contact-info-icon mdi mdi-mail-ru" [ngClass.xs]="['mdi', 'mdi-mail-ru']"></mat-icon>
         </div>
         <div>
           <span>{{emailAddress}}</span>
@@ -42,7 +42,7 @@
 
       <div class="contact-element" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="{{layoutGap}}">
         <div class="contact-icon-container" fxLayout="column" fxLayoutAlign="center start">
-          <md-icon class="contact-info-icon mdi mdi-email" [ngClass.xs]="['mdi', 'mdi-email']"></md-icon>
+          <mat-icon class="contact-info-icon mdi mdi-email" [ngClass.xs]="['mdi', 'mdi-email']"></mat-icon>
         </div>
         <div class="contact-text" fxLayout="column" fxLayoutAlign="center start">
           <span *ngFor="let line of postalAddress">{{line}}<br/></span>

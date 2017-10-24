@@ -1,39 +1,39 @@
 <section class="mat-typography">
-  <md-sidenav-container class="sidenav-container">
-    <md-sidenav #sidenav [mode]="sideNavMode" [opened]="isSideNavOpened">
-      <md-toolbar color="primary" class="toolbar" class.xs="toolbar-xs">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav [mode]="sideNavMode" [opened]="isSideNavOpened">
+      <mat-toolbar color="primary" class="toolbar" class.xs="toolbar-xs">
         <a routerLink="/home"><span>Research Hub</span></a>
-      </md-toolbar>
-      <md-nav-list>
-        <md-list-item *ngFor="let item of menuItems" [routerLink]="item.href">
-          <md-icon md-list-icon class="mdi mdi-{{item.icon}}"></md-icon>
-          <a md-line >{{item.name}}</a>
-        </md-list-item>
-      </md-nav-list>
-    </md-sidenav>
+      </mat-toolbar>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let item of menuItems" [routerLink]="item.href">
+          <mat-icon mat-list-icon class="mdi mdi-{{item.icon}}"></mat-icon>
+          <a mat-line >{{item.name}}</a>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
 
     <div class="sidenav-content-wrapper">
       <div class="sidenav-content" class.xs="sidenav-content-xs">
         <div class="primary-header" ngClass.xs="primary-header-xs">
 
           <div fxLayout="row" fxLayoutAlign="center center">
-            <button md-icon-button class="mdi mdi-menu mdi-24px menu-button" class.xs="mdi mdi-menu mdi-24px menu-button-xs" (click)="sidenav.toggle()" fxHide.gt-sm></button>
+            <button mat-icon-button class="mdi mdi-menu mdi-24px menu-button" class.xs="mdi mdi-menu mdi-24px menu-button-xs" (click)="sidenav.toggle()" fxHide.gt-sm></button>
 
-            <md-toolbar class="primary-toolbar"  color="primary">
+            <mat-toolbar class="primary-toolbar"  color="primary">
               <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
-              <a *ngIf="showLoginBtn" color="accent" md-raised-button (click)="authService.login()">Login</a>
+              <a *ngIf="showLoginBtn" color="accent" mat-raised-button (click)="authService.login()">Login</a>
 
-              <button *ngIf="!showLoginBtn" md-fab class="avatar-btn">
+              <button *ngIf="!showLoginBtn" mat-fab class="avatar-btn">
                 <img mat-card-avatar [src]="authService.user.getAvatarUrl()" />
               </button>
-            </md-toolbar>
+            </mat-toolbar>
           </div>
 
           <div fxLayout="row" fxLayoutAlign="center center">
             <h1><breadcrumb [useBootstrap]="false"></breadcrumb></h1>
             <span class="example-spacer"></span>
-            <button md-icon-button (click)="openSearchFilter()" fxHide.gt-sm *ngIf="showFilterButton">
-              <md-icon class="md-24" style="color: white;">filter_list</md-icon>
+            <button mat-icon-button (click)="openSearchFilter()" fxHide.gt-sm *ngIf="showFilterButton">
+              <mat-icon class="mat-24" style="color: white;">filter_list</mat-icon>
             </button>
           </div>
         </div>
@@ -56,6 +56,6 @@
           </div>
       </footer>
     </div>
-  </md-sidenav-container>
+  </mat-sidenav-container>
 </section>
 <a fxHide.lt-md class="github-fork-ribbon left-bottom fixed" routerLink="/feedback" title="Beta">Beta</a>

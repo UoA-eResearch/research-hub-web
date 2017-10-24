@@ -8,19 +8,19 @@
 }
 
 
-md-card md-card-content.mat-card-content{
-  font-size: mat-font-size($app-featured-md-card-typography, body-1);
-  font-weight: mat-font-weight($app-featured-md-card-typography, body-1);
+mat-card mat-card-content.mat-card-content{
+  font-size: mat-font-size($app-featured-mat-card-typography, body-1);
+  font-weight: mat-font-weight($app-featured-mat-card-typography, body-1);
   color: $heading-2-font-color;
 }
 
-md-card md-card-actions button{
-  font-size: mat-font-size($app-featured-md-card-typography, button);
-  font-weight: mat-font-weight($app-featured-md-card-typography, button);
+mat-card mat-card-actions button{
+  font-size: mat-font-size($app-featured-mat-card-typography, button);
+  font-weight: mat-font-weight($app-featured-mat-card-typography, button);
 }
 
-md-card md-card-actions a{
-  font-size: mat-font-size($app-featured-md-card-typography, button);
-  font-weight: mat-font-weight($app-featured-md-card-typography, button);
+mat-card mat-card-actions a{
+  font-size: mat-font-size($app-featured-mat-card-typography, button);
+  font-weight: mat-font-weight($app-featured-mat-card-typography, button);
   color: $body-light-bg-font-color;
 }

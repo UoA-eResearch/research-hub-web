@@ -32,13 +32,13 @@
  * Navigation list
  */
 
-.sidenav-container md-list-item md-icon {
+.sidenav-container mat-list-item mat-icon {
   color: $color-icon;
   font-size: mat-font-size($app-sidenav-list-typography, body-2) !important;
   font-weight: mat-font-weight($app-sidenav-list-typography, body-2) !important;
 }
 
-.sidenav-container md-list-item .mat-line {
+.sidenav-container mat-list-item .mat-line {
   font-size: mat-font-size($app-sidenav-list-typography, body-1) !important;
   font-weight: mat-font-weight($app-sidenav-list-typography, body-1) !important;
 }
@@ -47,21 +47,21 @@
  * SideNav
  */
 
-.sidenav-container md-sidenav md-toolbar.toolbar{
+.sidenav-container mat-sidenav mat-toolbar.toolbar{
   min-height: $primary-header-height;
 }
 
-.sidenav-container md-sidenav md-toolbar.toolbar-xs{
+.sidenav-container mat-sidenav mat-toolbar.toolbar-xs{
   min-height: $primary-header-xs-height;
 }
 
-.sidenav-container md-sidenav md-toolbar button md-icon {
+.sidenav-container mat-sidenav mat-toolbar button mat-icon {
   font-size: mat-font-size($app-sidenav-toolbar-typography, button) !important;
   font-weight: mat-font-weight($app-sidenav-toolbar-typography, button) !important;
   color:white;
 }
 
-.sidenav-container md-sidenav md-toolbar span {
+.sidenav-container mat-sidenav mat-toolbar span {
   font-size: mat-font-size($app-sidenav-toolbar-typography, body-1) !important;
   font-weight: mat-font-weight($app-sidenav-toolbar-typography, body-1) !important;
   color:white;
@@ -71,7 +71,7 @@
   min-height: calc(100vh);
 }
 
-.sidenav-container md-sidenav {
+.sidenav-container mat-sidenav {
   min-width: $sidenav-width;
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
   background-color: $color-background;
@@ -82,7 +82,7 @@
 
 }
 
-.sidenav-container md-sidenav md-list {
+.sidenav-container mat-sidenav mat-list {
   padding-left: 1em;
   padding-top: 1em;
 }

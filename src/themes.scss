@@ -213,7 +213,7 @@ $guide-tile-bg-color: #0294a5;
   }
 
   /*
-   * Fixes so that select lines up with md-input-container elements
+   * Fixes so that select lines up with mat-input-container elements
    * and contains same sized text
    */
 
@@ -245,13 +245,13 @@ $guide-tile-bg-color: #0294a5;
   @include angular-material-theme($hub-app-theme);
 }
 
-md-dialog-container {
+mat-dialog-container {
   max-width: 100% !important;
   padding: 0 !important;
 }
 
 //
-//.hub-md-sidenav {
+//.hub-mat-sidenav {
 //  $sidenav-primary: mat-palette($hub-navy, 500);
 //  $sidenav-accent: mat-palette($hub-pink, A200, A100, A400);
 //  $sidenav-theme: mat-light-theme($sidenav-primary, $sidenav-accent);
