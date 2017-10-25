@@ -38,7 +38,12 @@ export class AuthService {
   private updateSession(session: any) {
     this.loggedIn = Object.getOwnPropertyNames(session).length !== 0; // Checks if session object empty or not
     // If empty then not logged in
-    this.user = User.fromSession(session);
+    if (this.loggedIn) {
+      this.user = User.fromSession(session);
+    } else {
+      this.user = undefined;
+    }
+
     this.session = session;
     this.loginChange.next(this.loggedIn);
   }
