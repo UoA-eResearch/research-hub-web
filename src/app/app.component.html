@@ -21,7 +21,7 @@
 
             <mat-toolbar class="primary-toolbar"  color="primary">
               <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
-              <a *ngIf="showLoginBtn" color="accent" mat-raised-button (click)="authService.login()">Login</a>
+              <button *ngIf="showLoginBtn" mat-button (click)="authService.login()">Sign In</button>
 
               <button *ngIf="!showLoginBtn" mat-button [matMenuTriggerFor]="userMenu">
                 {{authService.user.displayName}}
