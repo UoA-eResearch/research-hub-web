@@ -14,6 +14,7 @@ import {BrowseResultsComponent} from "./browse-results/browse-results.component"
 import {GuideDetailsComponent} from "./guide-details/guide-details.component";
 import {GuideCategoryComponent} from "./guide-category/guide-category.component";
 import {RequestVmComponent} from "./request-vm/request-vm.component";
+import {CanActivateViaAuthGuard} from "./app.can-activate-via-auth-guard";
 
 
 const appRoutes: Routes = [
@@ -51,7 +52,7 @@ const appRoutes: Routes = [
   {path: 'search/guide/:id/:guideCategoryId', component: GuideCategoryComponent},
   {path: 'search/content/:id', component: ContentDetailsComponent},
 
-  {path: 'requestVm', component: RequestVmComponent},
+  {path: 'requestVm', component: RequestVmComponent, canActivate: [CanActivateViaAuthGuard]},
 
   {path: 'search/person', redirectTo: '/search', pathMatch: 'full'},
   {path: 'search/guide', redirectTo: '/search', pathMatch: 'full'},

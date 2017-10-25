@@ -44,6 +44,22 @@
 }
 
 /*
+ * User Menu
+ */
+
+.user-menu-list {
+  margin-bottom: 8px;
+}
+
+.user-menu-list mat-list-item mat-icon {
+  color: $color-icon;
+}
+
+.user-menu-list mat-list-item p {
+  font-size: 0.7em !important;
+}
+
+/*
  * SideNav
  */
 

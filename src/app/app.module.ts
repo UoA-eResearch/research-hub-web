@@ -19,7 +19,7 @@ import {
   MatSidenavModule,
   MatToolbarModule,
   MatProgressBarModule, MatChipsModule, MatFormField, MatFormFieldModule, MatButtonToggleModule, MatAutocompleteModule,
-  MatExpansionModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule
+  MatExpansionModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule
 } from "@angular/material";
 import {BreadcrumbService, Ng2BreadcrumbModule} from "ng2-breadcrumb/ng2-breadcrumb";
 
@@ -55,10 +55,10 @@ import { ImageViewComponent } from './image-view/image-view.component';
 import { ImageViewDialogComponent } from './image-view-dialog/image-view-dialog.component';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 import {ToolbarService} from "./toolbar.service";
-import {AppAuthService} from "./app.auth.service";
+import {AuthService} from "./app.auth.service";
 import {ChangeDetectorRef} from '@angular/core';
 import { RequestVmComponent } from './request-vm/request-vm.component';
-import {DateTimePickerModule} from "ng-pick-datetime";
+import {CanActivateViaAuthGuard} from "./app.can-activate-via-auth-guard";
 
 
 @NgModule({
@@ -117,12 +117,12 @@ import {DateTimePickerModule} from "ng-pick-datetime";
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    DateTimePickerModule,
+    MatMenuModule,
     routing
   ],
   entryComponents: [ImageViewDialogComponent, FilterDialogComponent],
-  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService, AppAuthService,
-    ToolbarService],
+  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService, AuthService,
+    ToolbarService, CanActivateViaAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

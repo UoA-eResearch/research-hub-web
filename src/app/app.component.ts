@@ -11,7 +11,7 @@ import {AnalyticsService} from "./app.analytics.service";
 import { isPlatformBrowser } from '@angular/common';
 import {BrowseComponent} from "./browse/browse.component";
 import {ToolbarService} from "./toolbar.service";
-import {AppAuthService} from "./app.auth.service";
+import {AuthService} from "./app.auth.service";
 import {ChangeDetectorRef} from '@angular/core';
 
 
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private breadcrumbService: BreadcrumbService, private navigationService: MenuService,
               private searchBarService: SearchBarService, private router: Router,
               private observableMedia: ObservableMedia, private apiService: ApiService, private analyticsService: AnalyticsService,
-              private toolbarService: ToolbarService, private authService: AppAuthService, private ref: ChangeDetectorRef) {
+              private toolbarService: ToolbarService, public authService: AuthService, private ref: ChangeDetectorRef) {
 
     // Populate menuItems for search-bar bar
     this.categories = navigationService.getMenuItem('/').menuItems;
@@ -62,7 +62,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     authService.loginChange.subscribe((loggedIn) => {
-      console.log('is logged in: ', loggedIn);
       this.showLoginBtn = !loggedIn;
       this.ref.detectChanges();
     });

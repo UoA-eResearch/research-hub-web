@@ -23,9 +23,31 @@
               <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
               <a *ngIf="showLoginBtn" color="accent" mat-raised-button (click)="authService.login()">Login</a>
 
-              <button *ngIf="!showLoginBtn" mat-fab class="avatar-btn">
-                <img mat-card-avatar [src]="authService.user.getAvatarUrl()" />
+              <button *ngIf="!showLoginBtn" mat-button [matMenuTriggerFor]="userMenu">
+                {{authService.user.displayName}}
+                <mat-icon matPrefix>expand_more</mat-icon>
               </button>
+
+              <mat-menu #userMenu="matMenu" >
+                <div *ngIf="!showLoginBtn" style="margin-right: 8px; margin-left: 8px;">
+                  <img src="/assets/images/uoa-logo-blue.svg">
+
+                  <mat-list class="user-menu-list">
+                    <mat-list-item>
+                      <mat-icon mat-list-icon>person</mat-icon>
+                      <p mat-line>{{authService.user.displayName}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                      <mat-icon mat-list-icon>note</mat-icon>
+                      <p mat-line>{{authService.user.mail}}</p>
+                    </mat-list-item>
+                  </mat-list>
+
+                  <div fxLayout="row" fxLayoutAlign="end">
+                    <a mat-button href="https://www.auckland.ac.nz/en/about-us/about-the-university/identity-and-access-management/single-sign-on.html">Sign Out</a>
+                  </div>
+                </div>
+              </mat-menu>
             </mat-toolbar>
           </div>
 
