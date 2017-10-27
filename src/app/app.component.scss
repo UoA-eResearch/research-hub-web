@@ -59,9 +59,37 @@
   font-size: 0.7em !important;
 }
 
+
+
 /*
  * SideNav
  */
+
+.sidenav-home {
+  padding: 0 !important;
+}
+
+.sidenav-home mat-nav-list {
+  width: 100% !important;
+}
+
+mat-expansion-panel {
+  box-shadow: none !important;
+}
+
+mat-expansion-panel-header .mat-expanded {
+  height: 48px !important;
+}
+
+.mat-expansion-panel-body {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.mat-expansion-panel-body .mat-list-item-content {
+  padding-left: 64px !important;
+  //padding-right: 32px !important;
+}
 
 .sidenav-container mat-sidenav mat-toolbar.toolbar{
   min-height: $primary-header-height;
@@ -78,7 +106,7 @@
 }
 
 .sidenav-container mat-sidenav mat-toolbar span {
-  font-size: mat-font-size($app-sidenav-toolbar-typography, body-1) !important;
+  //font-size: mat-font-size($app-sidenav-toolbar-typography, body-1) !important;
   font-weight: mat-font-weight($app-sidenav-toolbar-typography, body-1) !important;
   color:white;
 }
@@ -88,15 +116,15 @@
 }
 
 .sidenav-container mat-sidenav {
-  min-width: $sidenav-width;
+  //min-width: $sidenav-width;
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
   background-color: $color-background;
 }
 
-.sidenav-container .mat-drawer-content {
-  margin-left: $sidenav-width !important;
-
-}
+//.sidenav-container .mat-drawer-content {
+//  //margin-left: $sidenav-width !important;
+//
+//}
 
 .sidenav-container mat-sidenav mat-list {
   padding-left: 1em;
@@ -265,18 +293,18 @@ app-search-bar {
 
 // HACK
 // https://github.com/angular/material2/issues/6958
-
-.sidenav-container .mat-drawer-content {
-  margin-left: $sidenav-width !important;
-
-}
-
-@media (max-width: $md-thresh-min) {
-
-    .sidenav-container .mat-drawer-content {
-      margin-left: 0 !important;
-      //flex-grow: 1;
-    }
-
-}
+//
+//.sidenav-container .mat-drawer-content {
+//  margin-left: $sidenav-width !important;
+//
+//}
+//
+//@media (max-width: $md-thresh-min) {
+//
+//    .sidenav-container .mat-drawer-content {
+//      margin-left: 0 !important;
+//      //flex-grow: 1;
+//    }
+//
+//}
 

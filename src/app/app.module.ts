@@ -118,6 +118,7 @@ import {CanActivateViaAuthGuard} from "./app.can-activate-via-auth-guard";
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
+    MatExpansionModule,
     routing
   ],
   entryComponents: [ImageViewDialogComponent, FilterDialogComponent],

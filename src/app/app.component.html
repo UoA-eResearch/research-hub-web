@@ -1,64 +1,111 @@
 <section class="mat-typography">
   <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #sidenav [mode]="sideNavMode" [opened]="isSideNavOpened">
-      <mat-toolbar color="primary" class="toolbar" class.xs="toolbar-xs">
-        <a routerLink="/home"><span>Research Hub</span></a>
+    <mat-sidenav #sidenav mode="over" opened="false">
+      <mat-toolbar color="primary" class="sidenav-home">
+        <mat-nav-list>
+          <mat-list-item routerLink="/home">
+            <mat-icon mat-list-icon style="color:white;">home</mat-icon>
+            <a mat-line style="color: white;">Research Hub</a>
+          </mat-list-item>
+        </mat-nav-list>
       </mat-toolbar>
+
       <mat-nav-list>
-        <mat-list-item *ngFor="let item of menuItems" [routerLink]="item.href">
-          <mat-icon mat-list-icon class="mdi mdi-{{item.icon}}"></mat-icon>
-          <a mat-line >{{item.name}}</a>
+        <mat-list-item routerLink="/search">
+          <mat-icon mat-list-icon>search</mat-icon>
+          <a mat-line>Advanced Search</a>
+        </mat-list-item>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header style="background-color: #FAFAFA;padding-left: 0;height: 48px !important;">
+            <mat-list-item style="width: 100%;height: 100%;">
+              <mat-icon mat-list-icon>view_list</mat-icon>
+              <a mat-line>Browse</a>
+            </mat-list-item>
+          </mat-expansion-panel-header>
+
+          <mat-list-item *ngFor="let item of categories" [routerLink]="['/search']" [queryParams]="{ researchActivities: [], searchText: '', category: item.id}">
+            <a mat-line>{{item.name}}</a>
+          </mat-list-item>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header style="background-color: #FAFAFA;padding-left: 0;">
+            <mat-list-item style="width: 100%;height: 100%;">
+              <mat-icon mat-list-icon>school</mat-icon>
+              <a mat-line>Research Activities</a>
+            </mat-list-item>
+          </mat-expansion-panel-header>
+
+          <mat-list-item *ngFor="let item of researchActivities" [routerLink]="['/search']" [queryParams]="{ researchActivities: [item.id], searchText: '', category: 'all'}">
+            <a mat-line>{{item.name}}</a>
+          </mat-list-item>
+        </mat-expansion-panel>
+
+        <mat-list-item routerLink="/feedback">
+          <mat-icon mat-list-icon>thumbs_up_down</mat-icon>
+          <a mat-line>Provide Feedback</a>
+        </mat-list-item>
+
+        <mat-list-item routerLink="/contact">
+          <mat-icon mat-list-icon>phone</mat-icon>
+          <a mat-line>Contact Us</a>
+        </mat-list-item>
+
+        <mat-list-item routerLink="/search">
+          <mat-icon mat-list-icon>info</mat-icon>
+          <a mat-line>About Us</a>
         </mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
 
     <div class="sidenav-content-wrapper">
       <div class="sidenav-content" class.xs="sidenav-content-xs">
-        <div class="primary-header" ngClass.xs="primary-header-xs">
+        <mat-toolbar class="primary-toolbar"  color="primary">
+          <button style="margin-left: 0.5em;" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+          <button mat-button routerLink="/home" style="font-size: 20px;">Research Hub</button>
+          <span style="flex: 1 1 auto;"></span>
+          <div style="margin-right: 0.5em;">
+            <button *ngIf="showLoginBtn" mat-button (click)="authService.login()">Sign In</button>
 
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <button mat-icon-button class="mdi mdi-menu mdi-24px menu-button" class.xs="mdi mdi-menu mdi-24px menu-button-xs" (click)="sidenav.toggle()" fxHide.gt-sm></button>
-
-            <mat-toolbar class="primary-toolbar"  color="primary">
-              <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
-              <button *ngIf="showLoginBtn" mat-button (click)="authService.login()">Sign In</button>
-
-              <button *ngIf="!showLoginBtn" mat-button [matMenuTriggerFor]="userMenu">
-                {{authService.user.displayName}}
-                <mat-icon matPrefix>expand_more</mat-icon>
-              </button>
-
-              <mat-menu #userMenu="matMenu" >
-                <div *ngIf="!showLoginBtn" style="margin-right: 8px; margin-left: 8px;">
-                  <img src="/assets/images/uoa-logo-blue.svg">
-
-                  <mat-list class="user-menu-list">
-                    <mat-list-item>
-                      <mat-icon mat-list-icon>person</mat-icon>
-                      <p mat-line>{{authService.user.displayName}}</p>
-                    </mat-list-item>
-                    <mat-list-item>
-                      <mat-icon mat-list-icon>note</mat-icon>
-                      <p mat-line>{{authService.user.mail}}</p>
-                    </mat-list-item>
-                  </mat-list>
-
-                  <div fxLayout="row" fxLayoutAlign="end">
-                    <a mat-button href="https://www.auckland.ac.nz/en/about-us/about-the-university/identity-and-access-management/single-sign-on.html">Sign Out</a>
-                  </div>
-                </div>
-              </mat-menu>
-            </mat-toolbar>
-          </div>
-
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <h1><breadcrumb [useBootstrap]="false"></breadcrumb></h1>
-            <span class="example-spacer"></span>
-            <button mat-icon-button (click)="openSearchFilter()" fxHide.gt-sm *ngIf="showFilterButton">
-              <mat-icon class="mat-24" style="color: white;">filter_list</mat-icon>
+            <button *ngIf="!showLoginBtn" mat-button [matMenuTriggerFor]="userMenu">
+              <span fxHide.lt-sm>{{authService.user.displayName}}</span>
+              <span fxHide.gt-xs>Me</span>
+              <mat-icon matPrefix>expand_more</mat-icon>
             </button>
+
+            <mat-menu #userMenu="matMenu" >
+              <div *ngIf="!showLoginBtn" style="margin-right: 8px; margin-left: 8px;">
+                <img src="/assets/images/uoa-logo-blue.svg">
+
+                <mat-list class="user-menu-list">
+                  <mat-list-item>
+                    <mat-icon mat-list-icon>person</mat-icon>
+                    <p mat-line>{{authService.user.displayName}}</p>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <mat-icon mat-list-icon>note</mat-icon>
+                    <p mat-line>{{authService.user.mail}}</p>
+                  </mat-list-item>
+                </mat-list>
+
+                <div fxLayout="row" fxLayoutAlign="end">
+                  <a mat-button href="https://www.auckland.ac.nz/en/about-us/about-the-university/identity-and-access-management/single-sign-on/details.html">Sign Out</a>
+                </div>
+              </div>
+            </mat-menu>
           </div>
-        </div>
+        </mat-toolbar>
+          <!--</div>-->
+
+          <!--<div fxLayout="row" fxLayoutAlign="center center">-->
+            <!--<h1><breadcrumb [useBootstrap]="false"></breadcrumb></h1>-->
+            <!--<span class="example-spacer"></span>-->
+            <!--<button mat-icon-button (click)="openSearchFilter()" fxHide.gt-sm *ngIf="showFilterButton">-->
+              <!--<mat-icon class="mat-24" style="color: white;">filter_list</mat-icon>-->
+            <!--</button>-->
+          <!--</div>-->
+        <!--</div>-->
         <router-outlet></router-outlet>
       </div>
       <footer class.xs="footer-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
