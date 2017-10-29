@@ -11,7 +11,7 @@
       </mat-toolbar>
 
       <mat-nav-list>
-        <mat-list-item routerLink="/search">
+        <mat-list-item routerLink="/search" (click)="sidenav.close()">
           <mat-icon mat-list-icon>search</mat-icon>
           <a mat-line>Advanced Search</a>
         </mat-list-item>
@@ -24,7 +24,7 @@
             </mat-list-item>
           </mat-expansion-panel-header>
 
-          <mat-list-item *ngFor="let item of categories" [routerLink]="['/search']" [queryParams]="{ researchActivities: [], searchText: '', category: item.id}">
+          <mat-list-item *ngFor="let item of categories" (click)="sidenav.close()" [routerLink]="['/search']" [queryParams]="{ researchActivities: [], searchText: '', category: item.id}">
             <a mat-line>{{item.name}}</a>
           </mat-list-item>
         </mat-expansion-panel>
@@ -37,22 +37,27 @@
             </mat-list-item>
           </mat-expansion-panel-header>
 
-          <mat-list-item *ngFor="let item of researchActivities" [routerLink]="['/search']" [queryParams]="{ researchActivities: [item.id], searchText: '', category: 'all'}">
+          <mat-list-item *ngFor="let item of researchActivities" (click)="sidenav.close()" [routerLink]="['/search']" [queryParams]="{ researchActivities: [item.id], searchText: '', category: 'all'}">
             <a mat-line>{{item.name}}</a>
           </mat-list-item>
         </mat-expansion-panel>
 
-        <mat-list-item routerLink="/feedback">
+        <mat-list-item routerLink="/feedback" (click)="sidenav.close()">
+          <mat-icon mat-list-icon>people</mat-icon>
+          <a mat-line>Join User Study</a>
+        </mat-list-item>
+
+        <mat-list-item routerLink="/feedback" (click)="sidenav.close()">
           <mat-icon mat-list-icon>thumbs_up_down</mat-icon>
           <a mat-line>Provide Feedback</a>
         </mat-list-item>
 
-        <mat-list-item routerLink="/contact">
+        <mat-list-item routerLink="/contact" (click)="sidenav.close()">
           <mat-icon mat-list-icon>phone</mat-icon>
           <a mat-line>Contact Us</a>
         </mat-list-item>
 
-        <mat-list-item routerLink="/search">
+        <mat-list-item routerLink="/search" (click)="sidenav.close()">
           <mat-icon mat-list-icon>info</mat-icon>
           <a mat-line>About Us</a>
         </mat-list-item>
@@ -65,6 +70,11 @@
           <button style="margin-left: 0.5em;" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
           <button mat-button routerLink="/home" style="font-size: 20px;">Research Hub</button>
           <span style="flex: 1 1 auto;"></span>
+
+          <button mat-icon-button (click)="openSearchFilter()" fxHide.gt-sm *ngIf="showFilterButton">
+            <mat-icon class="mat-24" style="color: white;">filter_list</mat-icon>
+          </button>
+
           <div style="margin-right: 0.5em;">
             <button *ngIf="showLoginBtn" mat-button (click)="authService.login()">Sign In</button>
 
@@ -96,16 +106,6 @@
             </mat-menu>
           </div>
         </mat-toolbar>
-          <!--</div>-->
-
-          <!--<div fxLayout="row" fxLayoutAlign="center center">-->
-            <!--<h1><breadcrumb [useBootstrap]="false"></breadcrumb></h1>-->
-            <!--<span class="example-spacer"></span>-->
-            <!--<button mat-icon-button (click)="openSearchFilter()" fxHide.gt-sm *ngIf="showFilterButton">-->
-              <!--<mat-icon class="mat-24" style="color: white;">filter_list</mat-icon>-->
-            <!--</button>-->
-          <!--</div>-->
-        <!--</div>-->
         <router-outlet></router-outlet>
       </div>
       <footer class.xs="footer-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
