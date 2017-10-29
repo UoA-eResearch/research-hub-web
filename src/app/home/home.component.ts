@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../app.api.service";
 import {AnalyticsService} from "../app.analytics.service";
 import { Location } from '@angular/common';
+import {MenuService} from "../menu.service";
 
 
 @Component({
@@ -19,8 +20,10 @@ export class HomeComponent implements OnInit {
     '483_Pacific_28Sep10_1680x220_BW.jpg',
     '20130930_UoA_Details_225_1680x220_BW.jpg'];
 
-  constructor(private apiService: ApiService, private analyticsService: AnalyticsService, private location: Location) {
+  categories = [];
 
+  constructor(private navigationService: MenuService, private apiService: ApiService, private analyticsService: AnalyticsService, private location: Location) {
+    this.categories = navigationService.getMenuItem('/').menuItems;
   }
 
   ngOnInit() {
