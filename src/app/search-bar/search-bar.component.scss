@@ -7,20 +7,13 @@ $mat-select-width: 200px;
 $mat-select-flex: 1;
 $search-flex: 4;
 
-.search-bar {
-  height: 100%;
+.search-bar-outer {
+  background-color: $browse-tile-bg-color;
+  padding: 2em;
 }
 
-.search-box {
-  margin-top: 15px;
+.search-bar-inner {
+  background-color: white;
+  padding-left: 1em;
+  padding-right: 1em;
 }
-
-.search-box-xs {
-  margin-top: 5px;
-}
-
-//.mat-option {
-//  font-size: mat-font-size($app-search-bar-select-typography, body-1) !important;
-//  font-weight: mat-font-weight($app-search-bar-select-typography, body-1) !important;
-//}
-//

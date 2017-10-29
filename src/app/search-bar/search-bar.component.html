@@ -1,17 +1,21 @@
-<div class="search-bar" fxLayout="row" fxLayoutGap="1em">
-  <mat-select fxFlex="200px" fxHide.lt-sm floatPlaceholder="never" placeholder="Categories" [(ngModel)]="category">
-    <mat-option *ngFor="let category of categoriesValue" [value]="category.id">
-      {{category.name}}
-    </mat-option>
-  </mat-select>
+<div class="search-bar-outer">
+  <div class="search-bar-inner" fxFlex="100" fxLayout="row" fxLayoutGap="1em">
+    <mat-form-field fxFlex floatPlaceholder="never">
+      <button matPrefix mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+      <input matInput placeholder="Search" [(ngModel)]="searchText">
+      <button matSuffix (click)="clearSearchText()" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
 
-  <mat-form-field class="search-box" ngClass.xs="search-box-xs" fxFlex floatPlaceholder="never">
-    <button matPrefix mat-icon-button>
-      <mat-icon>search</mat-icon>
-    </button>
-    <input matInput placeholder="Search" [(ngModel)]="searchText">
-    <button matSuffix (click)="clearSearchText()" mat-icon-button>
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+    <mat-form-field fxFlex="200px" fxHide.lt-sm floatPlaceholder="never" placeholder="Categories">
+      <mat-select [(ngModel)]="category">
+        <mat-option *ngFor="let category of categoriesValue" [value]="category.id">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </div>
