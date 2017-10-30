@@ -80,7 +80,7 @@
 
             <button *ngIf="!showLoginBtn" mat-button [matMenuTriggerFor]="userMenu">
               <span fxHide.lt-sm>{{authService.user.displayName}}</span>
-              <span fxHide.gt-xs>Me</span>
+              <span fxHide.gt-xs>{{authService.user.initials}}</span>
               <mat-icon matPrefix>expand_more</mat-icon>
             </button>
 
