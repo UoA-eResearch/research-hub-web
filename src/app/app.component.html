@@ -67,20 +67,43 @@
     <div class="sidenav-content-wrapper">
       <div class="sidenav-content" class.xs="sidenav-content-xs">
         <mat-toolbar class="primary-toolbar"  color="primary">
-          <button style="margin-left: 0.5em;" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-          <button mat-button routerLink="/home" style="font-size: 20px;">Research Hub</button>
-          <span style="flex: 1 1 auto;"></span>
+            <button style="margin-left: 0.5em;" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+            <button mat-button routerLink="/home" style="font-size: 20px;">Research Hub</button>
+            <span style="flex: 1 1 auto;"></span>
 
-          <button mat-icon-button (click)="openSearchFilter()" fxHide.gt-sm *ngIf="showFilterButton">
-            <mat-icon class="mat-24" style="color: white;">filter_list</mat-icon>
-          </button>
+            <button mat-icon-button (click)="openSearchFilter()" fxHide.gt-sm *ngIf="showFilterButton">
+              <mat-icon class="mat-24" style="color: white;">filter_list</mat-icon>
+            </button>
 
-          <div style="margin-right: 0.5em;">
+            <button fxHide.xs mat-button routerLink="/search">
+              Search
+            </button>
+
+            <button fxHide.gt-xs mat-icon-button routerLink="/search">
+              <mat-icon class="mat-24" style="color: white;">search</mat-icon>
+            </button>
+
+            <button fxHide.xs mat-button [matMenuTriggerFor]="browseMenu">
+              Browse
+            </button>
+
+            <mat-menu #browseMenu="matMenu">
+              <button mat-menu-item *ngFor="let item of categories" [routerLink]="['/search']" [queryParams]="{ researchActivities: [], searchText: '', category: item.id}">{{item.name}}</button>
+            </mat-menu>
+
+            <button fxHide.xs mat-button [matMenuTriggerFor]="researchActivityMenu">
+              Research Activity
+            </button>
+
+            <mat-menu #researchActivityMenu="matMenu">
+              <button mat-menu-item *ngFor="let item of researchActivities" [routerLink]="['/search']" [queryParams]="{ researchActivities: [item.id], searchText: '', category: 'all'}">{{item.name}}</button>
+            </mat-menu>
+
             <button *ngIf="showLoginBtn" mat-button (click)="authService.login()">Sign In</button>
 
             <button *ngIf="!showLoginBtn" mat-button [matMenuTriggerFor]="userMenu">
-              <span fxHide.lt-sm>{{authService.user.displayName}}</span>
-              <span fxHide.gt-xs>{{authService.user.initials}}</span>
+              <span fxHide.lt-md>{{authService.user.displayName}}</span>
+              <span fxHide.gt-sm>{{authService.user.initials}}</span>
               <mat-icon matPrefix>expand_more</mat-icon>
             </button>
 
@@ -104,11 +127,11 @@
                 </div>
               </div>
             </mat-menu>
-          </div>
         </mat-toolbar>
         <router-outlet></router-outlet>
       </div>
-      <footer class.xs="footer-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+      <footer>
+        <div class="footer-content" class.xs="footer-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
           <div fxFlex="60%" fxFlex.xs="45" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2em" fxLayoutAlign.xs="end">
             <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)" class.xs="footer-a-xs">
               Copyright © {{getYear()}}. Centre for eResearch
@@ -123,6 +146,7 @@
               <img [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
             </a>
           </div>
+        </div>
       </footer>
     </div>
   </mat-sidenav-container>

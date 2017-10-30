@@ -124,3 +124,48 @@ mat-chip.mat-chip {
   width: 56px;
   height: 56px;
 }
+
+
+.flex-hack {
+  flex: 1 1 auto !important;
+}
+
+.site-content {
+  @extend .flex-hack;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $max-page-width;
+  //padding: 3em;
+}
+
+.site-content-padded {
+  @extend .site-content;
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+
+
+mat-toolbar-row {
+  @extend .site-content;
+  max-width: calc(#{$max-page-width} + 25px);
+  //padding-top:  0;
+  //padding-bottom: 0;
+  //padding-left: 0;
+  //padding-right: 0;
+}
+
+//.header-content-small {
+//  @extend .site-content;
+//  padding-left: 0;
+//  padding-right: 0;
+//  padding-top:  0;
+//
+//}
+
+//
+//mat-toolbar-row-gt-sm {
+//  @extend mat-toolbar-row;
+//  margin-left: auto;
+//  margin-right: auto;
+//  max-width: $max-page-width;
+//}

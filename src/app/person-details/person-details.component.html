@@ -4,7 +4,7 @@
               [goHref]="person.directoryUrl"
               [goEventCategory]="analyticsService.eventCategoryPerson"></app-header>
 
-  <div class="content" class.xs="content-xs" fxLayout="column" fxLayoutGap="1em">
+  <div class="site-content-padded" fxLayout="column" fxLayoutGap="1em">
       <mat-card>
         <div class="div-background-image person-image" [ngStyle]="{'background-image': 'url(' + apiService.getAssetUrl(person.image) + ')'}"></div>
       </mat-card>

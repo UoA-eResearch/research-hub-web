@@ -193,15 +193,18 @@ mat-expansion-panel-header .mat-expanded {
 footer {
   background-color: $color-primary;
   height: $footer-height;
-  padding-left: 2em;
-  padding-right: 2em;
 }
 
-.footer-xs {
-  @extend footer;
+.footer-content {
+  @extend .site-content;
+  height: $footer-height;
+}
+
+.footer-content-xs {
+  @extend .footer-content;
   height: $footer-xs-height;
-  padding-left: $xs-offset;
-  padding-right: $xs-offset;
+  //padding-left: $xs-offset;
+  //padding-right: $xs-offset;
 }
 
 footer a {

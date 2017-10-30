@@ -43,7 +43,6 @@ import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
 import { OrgUnitDetailsComponent } from './org-unit-details/org-unit-details.component';
 import { FeaturedComponent } from './featured/featured.component';
 import { ResearchActivityComponent } from './research-activity/research-activity.component';
-import { BrowseResultsComponent } from './browse-results/browse-results.component';
 import { HeaderComponent } from './header/header.component';
 import { GuideDetailsComponent } from './guide-details/guide-details.component';
 import { GuideCategoryComponent } from './guide-category/guide-category.component';
@@ -76,7 +75,6 @@ import {CanActivateViaAuthGuard} from "./app.can-activate-via-auth-guard";
     OrgUnitDetailsComponent,
     FeaturedComponent,
     ResearchActivityComponent,
-    BrowseResultsComponent,
     HeaderComponent,
     GuideDetailsComponent,
     GuideCategoryComponent,

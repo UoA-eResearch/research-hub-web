@@ -2,7 +2,7 @@
   <app-header [title]="guideCategory.name"
               [imageUrl]="apiService.getAssetUrl('page-elements/483_Pacific_28Sep10_1680x220_BW.jpg')"></app-header>
 
-  <div fxLayout="column" fxLayoutGap="2em" style="margin: 2em;max-width: 1000px;">
+  <div class="site-content-padded" fxLayout="column" fxLayoutGap="2em">
     <mat-card class="description">
       <app-markdown [data]="guideCategory.description"></app-markdown>
     </mat-card>

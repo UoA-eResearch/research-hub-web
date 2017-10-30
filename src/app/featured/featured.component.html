@@ -1,14 +1,10 @@
 <ng-container *ngIf="content">
-  <!--<h2>Have you seen {{content.name}} ?</h2>-->
-  <h2>Have you seen {{content.name}}?</h2>
-  <!--<h3>{{content.name}}</h3>-->
+  <h2>Have you seen?</h2>
   <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-lg="column">
-    <div fxFlex="auto">
-      <p>{{content.summary}}</p>
-    </div>
-    <!--<div fxFlex="250px" fxFlex.lt-lg="100">-->
+    <!--<div fxFlex="auto">-->
+      <!--<p>{{content.summary}}</p>-->
+    <!--</div>-->
     <div class.gt-xs="card-gt-xs">
-    <!--<div>-->
       <mat-card >
         <img mat-card-image [src]="apiService.getAssetUrl(content.image)">
         <mat-card-content>

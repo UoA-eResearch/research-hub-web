@@ -2,15 +2,15 @@
             [description]="'<p>The Research Hub connects you with people, resources, and services from across the University to enhance and accelerate your research.</p>'"
             [imageUrl]="coverImageUrl"></app-header>
 
-<div class="home-content" class.xs="home-content-xs" >
-  <div fxLayout="column" fxLayoutGap="5%">
+<div class="site-content-padded">
+  <div fxLayout="column" fxLayoutGap="7%">
     <app-search-bar [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
     <app-research-activity></app-research-activity>
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="5%">
-      <div fxFlex="50" >
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7%">
+      <div fxFlex="65">
         <app-browse [embedded]="true" [maxCols]="3"></app-browse>
       </div>
-      <div fxFlex="50" fxLayout="column" fxLayoutGap="5%">
+      <div fxFlex="35" fxLayout="column" fxLayoutGap="5%">
         <app-featured></app-featured>
       </div>
     </div>

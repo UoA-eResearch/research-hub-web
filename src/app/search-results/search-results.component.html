@@ -1,46 +1,54 @@
+<app-header [title]="'Search'"
+            [imageUrl]="apiService.getAssetUrl('page-elements/483_Pacific_28Sep10_1680x220_BW.jpg')"></app-header>
+
 <mat-progress-bar mode="indeterminate" color="accent" [hidden]="!showProgressBar"></mat-progress-bar>
 
-<div class="search-results" ngClass.xs="search-results-xs" fxLayout="row" fxLayoutGap="1em">
-  <div fxFlex="300px" fxHide.lt-md>
-    <h1>Refine by</h1>
-    <mat-card class="filter-theme">
-      <form [formGroup]="filtersForm">
-        <mat-select placeholder="Category" formControlName="category" style="width: 100%;margin-bottom: 20px;">
-          <mat-option *ngFor="let category of categories" [value]="category.id">
-            {{category.name}}
-          </mat-option>
-        </mat-select>
-        <app-autocomplete-search *ngIf="showPersonFilter" [placeholder]="'Person'" [items]="people" formControlName="person"></app-autocomplete-search>
-        <app-autocomplete-search *ngIf="showOrgUnitFilter" [placeholder]="'Organisation unit'" [items]="orgUnits" formControlName="orgUnit" style="display: block;"></app-autocomplete-search>
-        <app-research-activity-toggle *ngIf="showResearchActivityFilter" formControlName="researchActivities"></app-research-activity-toggle>
-      </form>
-    </mat-card>
-  </div>
-  <div fxFlex.lt-md="100" style="width: calc(100% - 300px);">
-    <div *ngIf="!showEmptyState" class="search-results-info">
-      <h1 fxHide.lt-md>Results</h1>
-      <p [innerHTML]="resultsSummary"></p>
-      <p fxHide.gt-sm>Click <a (click)="openDialog()">here</a> to change your filters.</p>
+<div class="site-content-padded" fxLayout="column" fxLayoutGap="3em">
+  <app-search-bar [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
+
+  <div fxLayout="row" fxLayoutGap="3em">
+    <div fxFlex="300px" fxHide.lt-md>
+      <h1>Refine by</h1>
+      <mat-card class="filter-theme">
+        <form [formGroup]="filtersForm">
+          <mat-select placeholder="Category" formControlName="category" style="width: 100%;margin-bottom: 20px;">
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{category.name}}
+            </mat-option>
+          </mat-select>
+          <app-autocomplete-search *ngIf="showPersonFilter" [placeholder]="'Person'" [items]="people" formControlName="person"></app-autocomplete-search>
+          <app-autocomplete-search *ngIf="showOrgUnitFilter" [placeholder]="'Organisation unit'" [items]="orgUnits" formControlName="orgUnit" style="display: block;"></app-autocomplete-search>
+          <app-research-activity-toggle *ngIf="showResearchActivityFilter" formControlName="researchActivities"></app-research-activity-toggle>
+        </form>
+      </mat-card>
     </div>
+    <div fxFlex.lt-md="100" style="width: calc(100% - 300px);">
+      <div *ngIf="!showEmptyState" class="search-results-info">
+        <h1 fxHide.lt-md>Results</h1>
+        <p [innerHTML]="resultsSummary"></p>
+        <p fxHide.gt-sm>Click <a (click)="openDialog()">here</a> to change your filters.</p>
+      </div>
 
-    <div *ngIf="showEmptyState" class="search-results-info">
-      <p [innerHTML]="noResultsSummary"></p>
-      <p>Suggestions:</p>
-      <ul>
-        <li fxHide.gt-sm>Widen your <a (click)="openDialog()">filters</a></li>
-        <li fxHide.lt-md>Widen your filters</li>
-        <li>Let us know what you were looking for via our <a [routerLink]="['/feedback']">Feedback page</a></li>
-        <li>You can try the <a href="https://www.staff.auckland.ac.nz/en.html" target="_blank">Staff Service Centre</a> in the Staff Intranet</li>
-      </ul>
+      <div *ngIf="showEmptyState" class="search-results-info">
+        <p [innerHTML]="noResultsSummary"></p>
+        <p>Suggestions:</p>
+        <ul>
+          <li fxHide.gt-sm>Widen your <a (click)="openDialog()">filters</a></li>
+          <li fxHide.lt-md>Widen your filters</li>
+          <li>Let us know what you were looking for via our <a [routerLink]="['/feedback']">Feedback page</a></li>
+          <li>You can try the <a href="https://www.staff.auckland.ac.nz/en.html" target="_blank">Staff Service Centre</a> in the Staff Intranet</li>
+        </ul>
+      </div>
+
+      <app-results-list *ngIf="contentPage && contentPage.totalElements" [title]="contentTitle"
+                        [results]="contentPage.content"></app-results-list>
+
+      <app-results-list *ngIf="peoplePage && peoplePage.totalElements" [title]="menuService.namePeople"
+                        [results]="peoplePage.content"></app-results-list>
+
+      <app-results-list *ngIf="policiesPage && policiesPage.totalElements" [title]="menuService.namePolicies"
+                        [results]="policiesPage.content"></app-results-list>
     </div>
-
-    <app-results-list *ngIf="contentPage && contentPage.totalElements" [title]="contentTitle"
-                      [results]="contentPage.content"></app-results-list>
-
-    <app-results-list *ngIf="peoplePage && peoplePage.totalElements" [title]="menuService.namePeople"
-                      [results]="peoplePage.content"></app-results-list>
-
-    <app-results-list *ngIf="policiesPage && policiesPage.totalElements" [title]="menuService.namePolicies"
-                      [results]="policiesPage.content"></app-results-list>
   </div>
 </div>
+

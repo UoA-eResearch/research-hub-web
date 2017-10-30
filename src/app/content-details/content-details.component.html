@@ -3,10 +3,9 @@
               [goHref]="content.callToAction"
               [goEventCategory]="analyticsService.eventCategoryContent">
   </app-header>
-  <div class="component" class.xs="component-xs" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="1em">
-    <div class="flex-hack" fxFlex="40" fxFlex.gt-lg="635px" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="2" [ngStyle.lt-lg]="{'margin-top': '1em'}">
+  <div class="site-content-padded" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="1em">
+    <div class="flex-hack" fxFlex="40" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="2" [ngStyle.lt-lg]="{'margin-top': '1em'}">
       <div fxHide.lt-lg>
-        <!--<img fxFlex="100" width="100%;" [src]="apiService.getAssetUrl(content.image)">-->
         <img style="width:100%; height:auto;" [src]="apiService.getAssetUrl(content.image)">
       </div>
 
