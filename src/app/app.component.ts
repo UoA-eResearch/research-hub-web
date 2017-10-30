@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from "@angular/core";
 import * as moment from "moment";
-import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {MenuService} from "./menu.service";
 import {SearchBarService} from "./search-bar/search-bar.service";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 import {ApiService} from "./app.api.service";
@@ -53,18 +52,13 @@ export class AppComponent implements OnInit, OnDestroy {
   showLoginBtn = true;
   private menuItems = [];
 
-  constructor(private breadcrumbService: BreadcrumbService, private navigationService: MenuService,
+  constructor(private navigationService: MenuService,
               private searchBarService: SearchBarService, private router: Router,
               private observableMedia: ObservableMedia, private apiService: ApiService, private analyticsService: AnalyticsService,
               private toolbarService: ToolbarService, public authService: AuthService, private ref: ChangeDetectorRef) {
 
     // Populate menuItems for search-bar bar
     this.categories = navigationService.getMenuItem('/').menuItems;
-
-    // Create friendly names for menu items in breadcrumbs
-    for (const item of this.menuItems) {
-      breadcrumbService.addFriendlyNameForRoute(item['href'], item['name']);
-    }
 
     authService.loginChange.subscribe((loggedIn) => {
       this.showLoginBtn = !loggedIn;

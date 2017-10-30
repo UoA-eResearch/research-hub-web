@@ -1,7 +1,8 @@
-
 import {Content} from "./Content";
+import {getItemRouterLink, GetResultsListItem} from "./ResultsListItemInterface";
 
-export class GuideCategory {
+
+export class GuideCategory implements GetResultsListItem {
   id: number;
   name: string;
   displayOrder: number;
@@ -46,5 +47,33 @@ export class GuideCategory {
     item.contentItems = Content.fromObjects(object['contentItems']);
 
     return item;
+  }
+
+  getId(): number {
+    return this.id;
+  }
+
+  getType(): string {
+    return 'guideCategory';
+  }
+
+  getTitle(): string {
+    return this.name;
+  }
+
+  getSubtitle(): string {
+    return '';
+  }
+
+  getImage(): string {
+    return this.icon;
+  }
+
+  getHref(): string {
+    return undefined;
+  }
+
+  getRouterLink(): any[] {
+    return getItemRouterLink(this as GetResultsListItem);
   }
 }

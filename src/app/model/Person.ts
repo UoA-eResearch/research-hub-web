@@ -1,8 +1,8 @@
 import {
+  getItemRouterLink,
   GetResultsListItem
-} from "./ResultsListItemInterface";
-import {OrgUnit} from "./OrgUnit";
-import {MenuService} from "../menu.service";
+} from './ResultsListItemInterface';
+import {OrgUnit} from './OrgUnit';
 
 
 export class Person implements GetResultsListItem {
@@ -68,8 +68,8 @@ export class Person implements GetResultsListItem {
     return this.image;
   }
 
-  getDefaultRouterLink(): [any] {
-    return ['/person', this.id];
+  getRouterLink(): any[] {
+    return getItemRouterLink(this as GetResultsListItem);
   }
 
   getHref(): string {

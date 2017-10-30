@@ -14,28 +14,13 @@ import {AnalyticsService} from "../app.analytics.service";
 })
 export class ResultsListComponent implements OnInit {
 
-  private anchorBased = true;
   private resultsValue = new Array<GetResultsListItem>();
   private titleValue = '';
   @Output() resultsChange = new EventEmitter();
 
-  @Input()
-  useTypeInPath = false;
-
   constructor(private apiService: ApiService, private route: ActivatedRoute, private location: Location,
               private menuService: MenuService, private analyticsService: AnalyticsService) {
 
-  }
-
-  getRoute(result: GetResultsListItem) {
-    const route = this.menuService.getCurrentPath();
-
-    if (this.useTypeInPath) {
-      route.push(result.getType());
-    }
-
-    route.push(result.getId().toString());
-    return route;
   }
 
   ngOnInit() {

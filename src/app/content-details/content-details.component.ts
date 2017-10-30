@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {ActivatedRoute} from "@angular/router";
 import {ApiService, PeopleSearchParams} from "../app.api.service";
 import {Content} from "../model/Content";
@@ -22,7 +21,7 @@ export class ContentDetailsComponent implements OnInit {
   userSupport: Array<Person>;
   isKnowledgeArticle = false;
 
-  constructor(private breadcrumbService: BreadcrumbService, private route: ActivatedRoute, private apiService: ApiService,
+  constructor(private route: ActivatedRoute, private apiService: ApiService,
               private location: Location, private analyticsService: AnalyticsService) {
 
     // Configure marked
@@ -40,7 +39,7 @@ export class ContentDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const id = params['id'];
+      const id = params['contentId'];
 
       this.apiService.getContentItem(id).subscribe(
         content => {
@@ -48,7 +47,6 @@ export class ContentDetailsComponent implements OnInit {
           const name = content.name;
 
           this.analyticsService.trackContent(name, url);
-          this.breadcrumbService.addFriendlyNameForRoute(url, name); // Add friendly name for particular content item
           this.content = content;
 
           if (this.content.contentTypes !== undefined) {

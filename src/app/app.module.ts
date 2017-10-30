@@ -18,11 +18,9 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatToolbarModule,
-  MatProgressBarModule, MatChipsModule, MatFormField, MatFormFieldModule, MatButtonToggleModule, MatAutocompleteModule,
+  MatProgressBarModule, MatChipsModule, MatFormFieldModule, MatButtonToggleModule, MatAutocompleteModule,
   MatExpansionModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule
 } from "@angular/material";
-import {BreadcrumbService, Ng2BreadcrumbModule} from "ng2-breadcrumb/ng2-breadcrumb";
-
 
 import {appRoutingProviders, routing} from "./app.routing";
 import {AppComponent} from "./app.component";
@@ -56,7 +54,6 @@ import { ImageViewDialogComponent } from './image-view-dialog/image-view-dialog.
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 import {ToolbarService} from "./toolbar.service";
 import {AuthService} from "./app.auth.service";
-import {ChangeDetectorRef} from '@angular/core';
 import { RequestVmComponent } from './request-vm/request-vm.component';
 import {CanActivateViaAuthGuard} from "./app.can-activate-via-auth-guard";
 
@@ -92,7 +89,6 @@ import {CanActivateViaAuthGuard} from "./app.can-activate-via-auth-guard";
   ],
   imports: [
     FlexLayoutModule,
-    Ng2BreadcrumbModule,
     ReactiveFormsModule,
     MatPaginatorModule,
     MatSelectModule,
@@ -122,7 +118,7 @@ import {CanActivateViaAuthGuard} from "./app.can-activate-via-auth-guard";
     routing
   ],
   entryComponents: [ImageViewDialogComponent, FilterDialogComponent],
-  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, BreadcrumbService, MenuService, AuthService,
+  providers: [appRoutingProviders, AnalyticsService, SearchBarService, ApiService, MenuService, AuthService,
     ToolbarService, CanActivateViaAuthGuard],
   bootstrap: [AppComponent]
 })

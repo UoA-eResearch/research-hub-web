@@ -1,4 +1,4 @@
-import {GetResultsListItem} from "./ResultsListItemInterface";
+import {getItemRouterLink, GetResultsListItem} from "./ResultsListItemInterface";
 import {Person} from "./Person";
 import {OrgUnit} from "./OrgUnit";
 import {Policy} from "./Policy";
@@ -95,8 +95,8 @@ export class Content implements GetResultsListItem {
     return this.image;
   }
 
-  getDefaultRouterLink(): [any] {
-    return ['/' + this.getType(), this.id];
+  getRouterLink(): any[] {
+    return getItemRouterLink(this as GetResultsListItem);
   }
 
   getHref(): string {

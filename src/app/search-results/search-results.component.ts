@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from "rxjs/Subscription";
 import {MenuItemType, MenuService} from "../menu.service";
@@ -84,11 +83,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     return nums;
   }
 
-  constructor(private breadcrumbService: BreadcrumbService, protected searchBarService: SearchBarService,
+  constructor(protected searchBarService: SearchBarService,
               protected menuService: MenuService, private apiService: ApiService,
               private analyticsService: AnalyticsService, private titleService: Title, private route: ActivatedRoute,
               private location: Location, public dialog: MatDialog, private toolbarService: ToolbarService) {
-    this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search Results');
   }
 
   ngOnInit() {

@@ -3,7 +3,6 @@ import {ApiService, ContentItemsSearchParams} from "../app.api.service";
 import {ActivatedRoute} from "@angular/router";
 import {Person} from "../model/Person";
 import { Location } from '@angular/common';
-import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {Content} from "../model/Content";
 import {AnalyticsService} from "../app.analytics.service";
 
@@ -18,14 +17,14 @@ export class PersonDetailsComponent implements OnInit {
   person: Person;
   supportedContent: Array<Content>;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private breadcrumbService: BreadcrumbService,
+  constructor(private route: ActivatedRoute, private apiService: ApiService,
               private location: Location, private analyticsService: AnalyticsService) {
 
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const id = params['id'];
+      const id = params['personId'];
 
       this.apiService.getPerson(id).subscribe(
         person => {
@@ -33,7 +32,6 @@ export class PersonDetailsComponent implements OnInit {
           const title = person.getTitle();
 
           this.analyticsService.trackPerson(title, url);
-          this.breadcrumbService.addFriendlyNameForRoute(url, title);
           this.person = person;
         }
       );

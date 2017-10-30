@@ -51,7 +51,7 @@ export class Policy implements GetResultsListItem {
     return undefined;
   }
 
-  getDefaultRouterLink(): [any] {
+  getRouterLink(): any[] {
     return undefined;
   }
 

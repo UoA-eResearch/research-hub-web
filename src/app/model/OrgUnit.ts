@@ -1,4 +1,4 @@
-import {GetResultsListItem} from "./ResultsListItemInterface";
+import {getItemRouterLink, GetResultsListItem} from "./ResultsListItemInterface";
 import {Person} from "./Person";
 import {Content} from "./Content";
 
@@ -44,8 +44,8 @@ export class OrgUnit implements GetResultsListItem {
     return 'orgUnit';
   }
 
-  getDefaultRouterLink(): [any] {
-    return ['/orgUnit', this.id];
+  getRouterLink(): any[] {
+    return getItemRouterLink(this as GetResultsListItem);
   }
 
   getTitle(): string {

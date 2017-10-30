@@ -214,15 +214,14 @@ export class ApiService {
       .map((response) => Content.fromObject(response.json()));
   }
 
-  getGuideCategory(contentId, guideCategoryId) {
+  getGuideCategory(guideCategoryId) {
     const headers = new Headers();
     headers.set('Accept', 'application/json');
 
     return this.http
-      .get(this.host + ApiService.CONTENT_URL + '/' + contentId + '/' + ApiService.GUIDE_CATEGORY_URL + '/' + guideCategoryId, {headers: headers})
+      .get(this.host + ApiService.GUIDE_CATEGORY_URL + '/' + guideCategoryId, {headers: headers})
       .map((response) => GuideCategory.fromObject(response.json()));
   }
-
 
   getPeople(searchParams: PeopleSearchParams) {
     const search = searchParams.getUrlSearchParams();

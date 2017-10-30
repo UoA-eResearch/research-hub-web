@@ -3,7 +3,6 @@ import {ActivatedRoute} from "@angular/router";
 import {ApiService, PeopleSearchParams} from "../app.api.service";
 import {OrgUnit} from "../model/OrgUnit";
 import { Location } from '@angular/common';
-import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import {Person} from "../model/Person";
 import {AnalyticsService} from "../app.analytics.service";
 
@@ -18,14 +17,14 @@ export class OrgUnitDetailsComponent implements OnInit {
   private orgUnit: OrgUnit;
   userSupport: Array<Person>;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private breadcrumbService: BreadcrumbService,
+  constructor(private route: ActivatedRoute, private apiService: ApiService,
               private location: Location, private analyticsService: AnalyticsService) {
 
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const id = params['id'];
+      const id = params['orgUnitId'];
 
       this.apiService.getOrgUnit(id).subscribe(
         orgUnit => {
@@ -33,7 +32,6 @@ export class OrgUnitDetailsComponent implements OnInit {
           const name = orgUnit.name;
 
           this.analyticsService.trackOrgUnit(name, url);
-          this.breadcrumbService.addFriendlyNameForRoute(url, name);
           this.orgUnit = orgUnit;
         }
       );

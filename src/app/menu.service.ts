@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
 import { Location } from '@angular/common';
 
 
@@ -66,7 +65,7 @@ export class MenuService {
   private root: MenuItem;
   private menuItemsDict = {};
 
-  public static getMenuItemId(params: [string]) {
+  public static getMenuItemId(params: string[]) {
     const notNulls = [];
 
     for (const id of params) {
@@ -77,7 +76,7 @@ export class MenuService {
     return '/' + notNulls.join('/');
   }
 
-  constructor(private breadcrumbService: BreadcrumbService, private location: Location) {
+  constructor(private location: Location) {
     this.root =
       new MenuItem('', '', '', MenuItemType.Root, null, [
         new MenuItem('all', this.nameAll, '', MenuItemType.All, null, null, null, ""),
@@ -93,17 +92,6 @@ export class MenuService {
       ], null, "");
 
     this.createMenuItemsDict('', this.root.menuItems);
-    this.createFriendlyNames('/browse', this.root.menuItems);
-    this.createFriendlyNames('/search', this.root.menuItems);
-    this.breadcrumbService.addFriendlyNameForRoute('/browse', 'Browse');
-    this.breadcrumbService.addFriendlyNameForRouteRegex('/search[?]', 'Search Results');
-    this.breadcrumbService.addFriendlyNameForRoute('/search', 'Search');
-    this.breadcrumbService.addFriendlyNameForRoute('/search/content', 'Resources');
-    this.breadcrumbService.addFriendlyNameForRoute('/orgUnit', 'Organisational Units');
-    this.breadcrumbService.addFriendlyNameForRoute('/person', 'People');
-    this.breadcrumbService.addFriendlyNameForRoute('/content', 'Resources');
-    this.breadcrumbService.addFriendlyNameForRoute('/guide', 'Guides');
-    this.breadcrumbService.addFriendlyNameForRoute('/requestVm', 'Request a Virtual Machine');
   }
 
   private createMenuItemsDict(parentId: string, menuItems: [MenuItem]) {
@@ -113,17 +101,6 @@ export class MenuService {
 
       if (!menuItem.isLeaf()) {
         this.createMenuItemsDict(childId, menuItem.menuItems);
-      }
-    }
-  }
-
-  private createFriendlyNames(parentRoute: string, menuItems: [MenuItem]) {
-    for (const menuItem of menuItems) {
-      const childRoute = parentRoute + '/' + menuItem.id;
-      this.breadcrumbService.addFriendlyNameForRoute(childRoute, menuItem.name);
-
-      if (!menuItem.isLeaf()) {
-        this.createFriendlyNames(childRoute, menuItem.menuItems);
       }
     }
   }
