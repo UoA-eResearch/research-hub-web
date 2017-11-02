@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, ViewEncapsulation} from "@angular/core";
 import * as moment from "moment";
 import {MenuService} from "./menu.service";
 import {SearchBarService} from "./search-bar/search-bar.service";
-import {NavigationEnd, Router} from "@angular/router";
+import {ActivatedRouteSnapshot, NavigationEnd, Router, RoutesRecognized} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 import {ApiService} from "./app.api.service";
@@ -13,6 +13,7 @@ import {ToolbarService} from "./toolbar.service";
 import {AuthService} from "./app.auth.service";
 import {ChangeDetectorRef} from '@angular/core';
 import {ResearchActivityComponent} from "./research-activity/research-activity.component";
+import preventExtensions = Reflect.preventExtensions;
 
 
 @Component({
@@ -46,15 +47,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   categories = [];
-  category = 'all';
-  searchText = '';
   showFilterButton = false;
   showLoginBtn = true;
   private menuItems = [];
 
   constructor(private navigationService: MenuService,
               private searchBarService: SearchBarService, private router: Router,
-              private observableMedia: ObservableMedia, private apiService: ApiService, private analyticsService: AnalyticsService,
+              private observableMedia: ObservableMedia, public apiService: ApiService, public analyticsService: AnalyticsService,
               private toolbarService: ToolbarService, public authService: AuthService, private ref: ChangeDetectorRef) {
 
     // Populate menuItems for search-bar bar
@@ -93,6 +92,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // Navigate to the search page if the user types text in
     this.searchTextChangeSub = this.searchBarService.searchTextChange.distinctUntilChanged().subscribe(searchText => {
       if (this.router.url !== '/search' && searchText != null && searchText.trim() !== '') {
+        console.log('search nav change: ', searchText);
         this.router.navigate(['/search']);
       }
     });

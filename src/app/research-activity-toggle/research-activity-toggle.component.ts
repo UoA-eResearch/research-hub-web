@@ -16,7 +16,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 })
 export class ResearchActivityToggleComponent implements OnInit, ControlValueAccessor {
 
-  private researchActivities = [
+  public researchActivities = [
     {id: 1, name: 'Plan & Design', icon: 'mdi-timetable', className: 'plan', selected: false},
     {id: 2, name: 'Create, Collect & Capture', icon: 'mdi-google-circles-extended', className: 'create', selected: false},
     {id: 3, name: 'Analyze & Interpret', icon: 'mdi-chart-areaspline', className: 'analyze', selected: false},

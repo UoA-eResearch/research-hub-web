@@ -8,6 +8,7 @@ import {environment} from 'app/../environments/environment';
 import {Policy} from "./model/Policy";
 import {OrgUnit} from "./model/OrgUnit";
 import {GuideCategory} from "./model/GuideCategory";
+import * as moment from "moment";
 
 
 export enum OrderBy {
@@ -165,11 +166,23 @@ export class ApiService {
   private static SIMILAR_CONTENT_URL = 'similar';
   private static ORG_UNIT_URL = 'orgUnit';
   private static ASSET_URL = 'assets/';
+  private static VM_CONSULTATION = 'vmConsultation/create';
   private host = environment.apiUrl;
 
 
   constructor(private http: Http) {
 
+  }
+
+  requestVm(date: Date, time: string, comments: string) {
+    const body = {
+      researcherUpi: 'jdip004',
+      date: moment(date).format('YYYY-MM-DD'),
+      time: time,
+      comments: comments
+    };
+
+    return this.http.post(this.host + ApiService.VM_CONSULTATION, body).map((response) => response.json());
   }
 
   getAssetUrl(fileName: string) {

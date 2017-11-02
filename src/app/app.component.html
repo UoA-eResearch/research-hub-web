@@ -107,7 +107,7 @@
               <mat-icon matPrefix>expand_more</mat-icon>
             </button>
 
-            <mat-menu #userMenu="matMenu" >
+            <mat-menu #userMenu="matMenu">
               <div *ngIf="!showLoginBtn" style="margin-right: 8px; margin-left: 8px;">
                 <img src="/assets/images/uoa-logo-blue.svg">
 
@@ -127,7 +127,12 @@
                 </div>
               </div>
             </mat-menu>
+
+          <mat-toolbar-row style="height: 32px;">
+            <span style="color: white;font-size: 14px;margin-left: 16px;position: absolute;margin-top: -10px;">Home > Search > Research Virtual Machines</span>
+          </mat-toolbar-row>
         </mat-toolbar>
+
         <router-outlet></router-outlet>
       </div>
       <footer>

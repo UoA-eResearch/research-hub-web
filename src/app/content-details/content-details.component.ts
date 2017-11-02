@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService, PeopleSearchParams} from "../app.api.service";
 import {Content} from "../model/Content";
 import marked from 'marked';
@@ -22,7 +22,7 @@ export class ContentDetailsComponent implements OnInit {
   isKnowledgeArticle = false;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService,
-              private location: Location, private analyticsService: AnalyticsService) {
+              private location: Location, private analyticsService: AnalyticsService, private router: Router) {
 
     // Configure marked
     marked.setOptions({
@@ -35,6 +35,12 @@ export class ContentDetailsComponent implements OnInit {
       smartLists: true,
       smartypants: false
     });
+  }
+
+  launchService(content) {
+    if (content.actionType['id'] === 1) {
+      this.router.navigate(['/' + content.action]);
+    }
   }
 
   ngOnInit() {

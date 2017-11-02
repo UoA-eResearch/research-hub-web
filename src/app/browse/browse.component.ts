@@ -15,8 +15,8 @@ import { Location } from '@angular/common';
 })
 export class BrowseComponent implements OnInit, OnDestroy {
 
-  private menuItems = [];
-  mediaSub: Subscription;
+  public menuItems = [];
+  private mediaSub: Subscription;
 
   @Input()
   embedded = false;

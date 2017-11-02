@@ -30,8 +30,8 @@ const appRoutes: Routes = [
 
   {path: 'requestVm', component: RequestVmComponent, canActivate: [CanActivateViaAuthGuard]},
 
-  // {path: '', redirectTo: '/home', pathMatch: 'full'},
-  // {path: '**', redirectTo: '/home', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '**', redirectTo: '/home', pathMatch: 'full'},
 ];
 
 export const appRoutingProviders: any[] = [];

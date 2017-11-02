@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 })
 export class FeedbackComponent implements OnInit {
 
-  constructor(private analyticsService: AnalyticsService, private location: Location) {
+  constructor(public analyticsService: AnalyticsService, public location: Location) {
   }
 
   ngOnInit() {

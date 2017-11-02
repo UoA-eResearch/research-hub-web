@@ -4,7 +4,7 @@
 <mat-progress-bar mode="indeterminate" color="accent" [hidden]="!showProgressBar"></mat-progress-bar>
 
 <div class="site-content-padded" fxLayout="column" fxLayoutGap="3em">
-  <app-search-bar [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
+  <app-search-bar [categories]="categories" [category]="category" [searchText]="searchText" [focusOnInit]="true"></app-search-bar>
 
   <div fxLayout="row" fxLayoutGap="3em">
     <div fxFlex="300px" fxHide.lt-md>

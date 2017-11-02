@@ -14,8 +14,8 @@ import {AnalyticsService} from "../app.analytics.service";
 })
 export class ResultsListComponent implements OnInit {
 
-  private resultsValue = new Array<GetResultsListItem>();
-  private titleValue = '';
+  public resultsValue = new Array<GetResultsListItem>();
+  public titleValue = '';
   @Output() resultsChange = new EventEmitter();
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private location: Location,

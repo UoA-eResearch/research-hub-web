@@ -15,15 +15,15 @@ export class FilterDialogComponent {
   private searchCatSub: Subscription;
   private people: Person[];
   private orgUnits: OrgUnit[];
-  private categories: any[];
-  private filtersForm: FormGroup;
+  public categories: any[];
+  public filtersForm: FormGroup;
   private categoryFormControl: FormControl = new FormControl();
   private personFormControl: FormControl = new FormControl();
   private orgUnitFormControl: FormControl = new FormControl();
   private researchActivitiesFormControl: FormControl = new FormControl();
-  private showPersonFilter = true;
-  private showOrgUnitFilter = true;
-  private showResearchActivityFilter = true;
+  public showPersonFilter = true;
+  public showOrgUnitFilter = true;
+  public showResearchActivityFilter = true;
 
   constructor(public dialogRef: MatDialogRef<FilterDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.people = data['people'];

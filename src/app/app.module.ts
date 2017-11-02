@@ -19,7 +19,7 @@ import {
   MatSidenavModule,
   MatToolbarModule,
   MatProgressBarModule, MatChipsModule, MatFormFieldModule, MatButtonToggleModule, MatAutocompleteModule,
-  MatExpansionModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule
+  MatExpansionModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule, MatProgressSpinnerModule
 } from "@angular/material";
 
 import {appRoutingProviders, routing} from "./app.routing";
@@ -106,6 +106,7 @@ import {CanActivateViaAuthGuard} from "./app.can-activate-via-auth-guard";
     MatToolbarModule,
     MatListModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     MatFormFieldModule,
     MatAutocompleteModule,
     MatDialogModule,

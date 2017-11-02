@@ -1,13 +1,13 @@
 <div *ngIf="!imageUrl" class="header" class.xs="header-xs" fxLayout="row" [ngClass]="{'colored-background': !imageUrl}">
   <div class="site-content">
-    <div class="info-no-bg" class.xs="info-no-bg-xs" fxFlex="475px" fxFlex.xs="100">
-      <h4>Home > Search > Animal Ethics</h4>
+    <div class="info-no-bg" class.xs="info-no-bg-xs" fxFlex="500px" fxFlex.xs="100">
+      <h4>Home > Search > Research Virtual Machines</h4>
       <h1 *ngIf="title">{{title}}</h1>
       <div fxLayout="column" fxLayoutGap="1em" fxFlexAlign="end">
         <div fxFlexAlign="start" *ngIf="description" class="header-description" [innerHTML]="description"></div>
-        <!--<div *ngIf="goHref">-->
-          <!--<a mat-raised-button color="accent" [href]="goHref" target="_blank" (click)="trackGo()">Go</a>-->
-        <!--</div>-->
+        <div *ngIf="goHref">
+          <a mat-raised-button color="accent" routerLink="/requestVm">Go</a>
+        </div>
       </div>
     </div>
   </div>

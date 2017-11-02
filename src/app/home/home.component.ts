@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
     '20130930_UoA_Details_225_1680x220_BW.jpg'];
 
   categories = [];
+  category = 'all';
+  searchText = '';
 
   constructor(private navigationService: MenuService, private apiService: ApiService, private analyticsService: AnalyticsService, private location: Location) {
     this.categories = navigationService.getMenuItem('/').menuItems;

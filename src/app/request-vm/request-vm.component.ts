@@ -19,6 +19,7 @@ export class RequestVmComponent implements OnInit {
   public timeCtrl = new FormControl(undefined, Validators.required);
   public researchVmContentId = 1;
   public content: Content;
+  public submitting = false;
 
   private static getTimes() {
     const times = [];
@@ -68,8 +69,14 @@ export class RequestVmComponent implements OnInit {
     console.log('Is Valid: ', isValid, this.requestVmForm);
 
     if (isValid) {
-
+      this.submitting = true;
+      const values = this.requestVmForm.getRawValue();
+      this.apiService.requestVm(values.date, values.time, values.comments).subscribe((response) => {
+        console.log('requestVM response', response);
+      });
     }
   }
 
 }
+
+// ng build --prod --aot --build-optimizer

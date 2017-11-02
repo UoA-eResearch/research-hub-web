@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer} from '@angular/core';
 import {SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from "rxjs/Subscription";
 import {MenuItemType, MenuService} from "../menu.service";
@@ -31,33 +31,36 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private routeParamsSub: Subscription;
   private searchCatSub: Subscription;
 
-  private contentPage: Page<Content>;
-  private peoplePage: Page<Person>;
-  private policiesPage: Page<Policy>;
+  public contentPage: Page<Content>;
+  public peoplePage: Page<Person>;
+  public policiesPage: Page<Policy>;
 
   private maxNumberOfItems = 1000;
   private allPages: any[];
-  private showEmptyState = false;
-  private showProgressBar = true;
+  public showEmptyState = false;
+  public showProgressBar = true;
   private people: Person[] = [];
   private orgUnits: OrgUnit[] = [];
-  private categories = [];
+  public categories = [];
 
-  private filtersForm: FormGroup;
+  public filtersForm: FormGroup;
   private categoryFormControl: FormControl = new FormControl();
   private personFormControl: FormControl = new FormControl();
   private orgUnitFormControl: FormControl = new FormControl();
   private researchActivitiesFormControl: FormControl = new FormControl();
   private loadedRoute = false;
 
-  private showPersonFilter = true;
-  private showOrgUnitFilter = true;
-  private showResearchActivityFilter = true;
+  public showPersonFilter = true;
+  public showOrgUnitFilter = true;
+  public showResearchActivityFilter = true;
   private rightColSize = 67;
 
   private contentTitle = '';
   private noResultsSummary = '';
   private resultsSummary = '';
+
+  category = undefined;
+  searchText = undefined;
 
   private static parseParamArray(str: string) {
     let nums = [];
@@ -83,8 +86,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     return nums;
   }
 
-  constructor(protected searchBarService: SearchBarService,
-              protected menuService: MenuService, private apiService: ApiService,
+  constructor(private searchBarService: SearchBarService,
+              private menuService: MenuService, public apiService: ApiService,
               private analyticsService: AnalyticsService, private titleService: Title, private route: ActivatedRoute,
               private location: Location, public dialog: MatDialog, private toolbarService: ToolbarService) {
   }

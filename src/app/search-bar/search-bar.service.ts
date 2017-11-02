@@ -20,15 +20,20 @@ export class SearchBarService {
   constructor() { }
 
   setCategory(category) {
-    this.category = category;
-    this.searchCategoryChange.next(category);
-    this.searchChange.next(this.getSearchParams());
+    if (category !== undefined) {
+      this.category = category;
+      this.searchCategoryChange.next(category);
+      this.searchChange.next(this.getSearchParams());
+    }
   }
 
   setSearchText(searchText) {
-    this.searchText = searchText;
-    this.searchTextChange.next(searchText);
-    this.searchChange.next(this.getSearchParams());
+    if (searchText !== undefined) {
+      console.log('search text changed: ', searchText);
+      this.searchText = searchText;
+      this.searchTextChange.next(searchText);
+      this.searchChange.next(this.getSearchParams());
+    }
   }
 
   getCategory() {

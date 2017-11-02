@@ -14,7 +14,7 @@ import {AnalyticsService} from "../app.analytics.service";
 })
 export class OrgUnitDetailsComponent implements OnInit {
 
-  private orgUnit: OrgUnit;
+  public orgUnit: OrgUnit;
   userSupport: Array<Person>;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService,

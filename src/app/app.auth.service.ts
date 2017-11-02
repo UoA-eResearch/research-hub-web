@@ -48,7 +48,7 @@ export class AuthService {
     this.loginChange.next(this.loggedIn);
   }
 
-  private getSession() {
+  public getSession() {
     const headers = new Headers();
     headers.set('Accept', 'application/json');
     return this.http

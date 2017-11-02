@@ -12,7 +12,8 @@ export class Content implements GetResultsListItem {
   description: string;
   actionableInfo: string;
   additionalInfo: string;
-  callToAction: string;
+  action: string;
+  actionType: string;
   image: string;
   orgUnits: Array<OrgUnit>;
   people: Array<Person>;
@@ -41,7 +42,8 @@ export class Content implements GetResultsListItem {
     content.description = object['description'];
     content.actionableInfo = object['actionableInfo'];
     content.additionalInfo = object['additionalInfo'];
-    content.callToAction = object['callToAction'];
+    content.action = object['action'];
+    content.actionType = object['actionType'];
     content.image = object['image'];
     content.orgUnits = OrgUnit.fromObjects(object['orgUnits']);
     content.people = Person.fromObjects(object['people']);
