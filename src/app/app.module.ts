@@ -1,41 +1,49 @@
-import "hammerjs";
-import "rxjs/Rx";
-import {BrowserModule} from "@angular/platform-browser";
-import {NgModule} from "@angular/core";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpModule} from "@angular/http";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import 'hammerjs';
+import 'rxjs/Rx';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatPaginatorModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatToolbarModule,
-  MatProgressBarModule, MatChipsModule, MatFormFieldModule, MatButtonToggleModule, MatAutocompleteModule,
-  MatExpansionModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule, MatProgressSpinnerModule
-} from "@angular/material";
 
-import {appRoutingProviders, routing} from "./app.routing";
-import {AppComponent} from "./app.component";
-import {AboutComponent} from "./about/about.component";
-import {ContactComponent} from "./contact/contact.component";
-import {HomeComponent} from "./home/home.component";
-import {SearchBarComponent} from "./search-bar/search-bar.component";
-import {AnalyticsService} from "./app.analytics.service";
-import {SearchBarService} from "./search-bar/search-bar.service";
-import {ApiService} from "./app.api.service";
-import {FeedbackComponent} from "./feedback/feedback.component";
-import {BrowseComponent} from "./browse/browse.component";
-import {MenuService} from "./menu.service";
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import {appRoutingProviders, routing} from './app.routing';
+import {AppComponent} from './app.component';
+import {AboutComponent} from './about/about.component';
+import {ContactComponent} from './contact/contact.component';
+import {HomeComponent} from './home/home.component';
+import {SearchBarComponent} from './search-bar/search-bar.component';
+import {AnalyticsService} from './app.analytics.service';
+import {SearchBarService} from './search-bar/search-bar.service';
+import {ApiService} from './app.api.service';
+import {FeedbackComponent} from './feedback/feedback.component';
+import {BrowseComponent} from './browse/browse.component';
+import {MenuService} from './menu.service';
 import {ResultsListComponent} from './results-list/results-list.component';
-import {SearchResultsComponent} from "./search-results/search-results.component";
+import {SearchResultsComponent} from './search-results/search-results.component';
 import { ContentDetailsComponent } from './content-details/content-details.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { MarkdownComponent } from './markdown/markdown.component';
@@ -51,10 +59,10 @@ import { AutocompleteSearchComponent } from './autocomplete-search/autocomplete-
 import { ImageViewComponent } from './image-view/image-view.component';
 import { ImageViewDialogComponent } from './image-view-dialog/image-view-dialog.component';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
-import {ToolbarService} from "./toolbar.service";
-import {AuthService} from "./app.auth.service";
+import {ToolbarService} from './toolbar.service';
+import {AuthService} from './app.auth.service';
 import { RequestVmComponent } from './request-vm/request-vm.component';
-import {CanActivateViaAuthGuard} from "./app.can-activate-via-auth-guard";
+import {CanActivateViaAuthGuard} from './app.can-activate-via-auth-guard';
 
 
 @NgModule({

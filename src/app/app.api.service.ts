@@ -8,7 +8,7 @@ import {environment} from 'app/../environments/environment';
 import {Policy} from "./model/Policy";
 import {OrgUnit} from "./model/OrgUnit";
 import {GuideCategory} from "./model/GuideCategory";
-import * as moment from "moment";
+import * as format from 'date-fns/format';
 
 
 export enum OrderBy {
@@ -177,7 +177,7 @@ export class ApiService {
   requestVm(date: Date, time: string, comments: string) {
     const body = {
       researcherUpi: 'jdip004',
-      date: moment(date).format('YYYY-MM-DD'),
+      date: format(date, 'YYYY-MM-DD'),
       time: time,
       comments: comments
     };

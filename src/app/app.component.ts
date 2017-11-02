@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from "@angular/core";
-import * as moment from "moment";
 import {MenuService} from "./menu.service";
 import {SearchBarService} from "./search-bar/search-bar.service";
 import {ActivatedRouteSnapshot, NavigationEnd, Router, RoutesRecognized} from "@angular/router";
@@ -13,6 +12,7 @@ import {ToolbarService} from "./toolbar.service";
 import {AuthService} from "./app.auth.service";
 import {ChangeDetectorRef} from '@angular/core';
 import {ResearchActivityComponent} from "./research-activity/research-activity.component";
+import * as format from 'date-fns/format';
 import preventExtensions = Reflect.preventExtensions;
 
 
@@ -115,6 +115,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   getYear() {
-    return moment().year();
+    return format(new Date(), 'YYYY');
   }
 }
