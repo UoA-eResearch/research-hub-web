@@ -4,6 +4,7 @@ import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/for
 import {GetResultsListItem} from "../model/ResultsListItemInterface";
 import {ApiService} from "../app.api.service";
 import {Subscription} from "rxjs/Subscription";
+import 'rxjs/add/operator/startWith';
 
 @Component({
   selector: 'app-autocomplete-search',

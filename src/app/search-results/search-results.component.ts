@@ -1,24 +1,28 @@
-import {Component, ElementRef, OnDestroy, OnInit, Renderer} from '@angular/core';
-import {SearchBarService} from "../search-bar/search-bar.service";
-import {Subscription} from "rxjs/Subscription";
-import {MenuItemType, MenuService} from "../menu.service";
-import {ApiService, ContentItemsSearchParams, PeopleSearchParams, SearchParams} from "../app.api.service";
-import {Person} from "../model/Person";
-import {Content} from "../model/Content";
-import {Page} from "../model/Page";
-import {Policy} from "../model/Policy";
-import {AnalyticsService} from "../app.analytics.service";
-import {Title} from "@angular/platform-browser";
-import {Observable} from "rxjs/Observable";
-import {FormControl, FormGroup} from "@angular/forms";
-import {OrgUnit} from "../model/OrgUnit";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Location} from '@angular/common';
-import {FilterDialogComponent} from "../filter-dialog/filter-dialog.component";
-import {MatDialog} from "@angular/material";
-import {ResearchActivityComponent} from "../research-activity/research-activity.component";
-import {ToolbarService} from "../toolbar.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {SearchBarService} from '../search-bar/search-bar.service';
+import {Subscription} from 'rxjs/Subscription';
+import {MenuItemType, MenuService} from '../menu.service';
+import {ApiService, ContentItemsSearchParams, PeopleSearchParams, SearchParams} from '../app.api.service';
+import {Person} from '../model/Person';
+import {Content} from '../model/Content';
+import {Page} from '../model/Page';
+import {Policy} from '../model/Policy';
+import {AnalyticsService} from '../app.analytics.service';
+import {Title} from '@angular/platform-browser';
 
+import {FormControl, FormGroup} from '@angular/forms';
+import {OrgUnit} from '../model/OrgUnit';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
+import {FilterDialogComponent} from '../filter-dialog/filter-dialog.component';
+import {MatDialog} from '@angular/material';
+import {ResearchActivityComponent} from '../research-activity/research-activity.component';
+import {ToolbarService} from '../toolbar.service';
+
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/observable/forkJoin';
 
 @Component({
   selector: 'app-search-results',
@@ -112,10 +116,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       researchActivities: this.researchActivitiesFormControl
     });
 
-    // Subscribe to search changes
+    // // Subscribe to search changes
     this.searchChangeSub = Observable
       .combineLatest(
-        this.searchBarService.searchTextChange.debounceTime(250).distinctUntilChanged(),
+        this.searchBarService.searchTextChange.debounceTime(250).distinctUntilChanged(), //debounceTime(250)
         this.categoryFormControl.valueChanges,
         this.personFormControl.valueChanges,
         this.orgUnitFormControl.valueChanges,
@@ -132,7 +136,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
         this.onSearchChange(category, searchText, person, orgUnit, researchActivities);
       });
-
+    //
     const peopleSearchParams = new PeopleSearchParams();
     peopleSearchParams.setRoleTypes([3]);
 
@@ -207,7 +211,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   updateResultsSummary(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
     // let summary = 'Refined by ';
-    let statements = [];
+    const statements = [];
 
     if (category) {
       statements.push('in <span class="search-results-text">' + this.menuService.getMenuItem('/' + category).name + '</span>');

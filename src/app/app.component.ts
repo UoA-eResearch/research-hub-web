@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from "@angular/core";
 import {MenuService} from "./menu.service";
 import {SearchBarService} from "./search-bar/search-bar.service";
-import {ActivatedRouteSnapshot, NavigationEnd, Router, RoutesRecognized} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 import {ApiService} from "./app.api.service";
@@ -13,8 +13,9 @@ import {AuthService} from "./app.auth.service";
 import {ChangeDetectorRef} from '@angular/core';
 import {ResearchActivityComponent} from "./research-activity/research-activity.component";
 import * as format from 'date-fns/format';
-import preventExtensions = Reflect.preventExtensions;
-
+// import preventExtensions = Reflect.preventExtensions;
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-root',

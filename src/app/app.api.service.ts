@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams, Headers} from '@angular/http';
-import {Subject} from "rxjs/Subject";
 import {Page} from "./model/Page";
 import {Person} from "./model/Person";
 import {Content} from "./model/Content";
@@ -9,6 +8,7 @@ import {Policy} from "./model/Policy";
 import {OrgUnit} from "./model/OrgUnit";
 import {GuideCategory} from "./model/GuideCategory";
 import * as format from 'date-fns/format';
+import 'rxjs/add/operator/map';
 
 
 export enum OrderBy {
