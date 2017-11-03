@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from "@angular/core";
 import {SearchBarService} from "./search-bar.service";
 import {Subscription} from "rxjs/Subscription";
-import {MatInput} from "@angular/material";
+import {MatInput} from "@angular/material/input";
 
 
 @Component({

@@ -7,7 +7,6 @@ import {Subscription} from "rxjs/Subscription";
 import { Location } from '@angular/common';
 import {AnalyticsService} from "../app.analytics.service";
 import {BrowseComponent} from "../browse/browse.component";
-import {GetResultsListItem} from "../model/ResultsListItemInterface";
 
 
 @Component({

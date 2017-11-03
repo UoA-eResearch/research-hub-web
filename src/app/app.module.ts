@@ -47,7 +47,6 @@ import {SearchResultsComponent} from './search-results/search-results.component'
 import { ContentDetailsComponent } from './content-details/content-details.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { MarkdownComponent } from './markdown/markdown.component';
-import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
 import { OrgUnitDetailsComponent } from './org-unit-details/org-unit-details.component';
 import { FeaturedComponent } from './featured/featured.component';
 import { ResearchActivityComponent } from './research-activity/research-activity.component';
@@ -79,7 +78,6 @@ import {CanActivateViaAuthGuard} from './app.can-activate-via-auth-guard';
     ContentDetailsComponent,
     PersonDetailsComponent,
     MarkdownComponent,
-    FeedbackFormComponent,
     OrgUnitDetailsComponent,
     FeaturedComponent,
     ResearchActivityComponent,

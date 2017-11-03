@@ -1,7 +1,6 @@
 import {Component, OnInit, Input, OnDestroy} from "@angular/core";
-import {MenuItem, MenuItemType, MenuService} from "../menu.service";
+import {MenuService} from "../menu.service";
 import {ActivatedRoute} from "@angular/router";
-import {ApiService, ContentItemsSearchParams, SearchParams} from "../app.api.service";
 import {SearchBarService} from "../search-bar/search-bar.service";
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';

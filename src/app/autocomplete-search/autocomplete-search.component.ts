@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, forwardRef, Input, OnDestroy} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {GetResultsListItem} from "../model/ResultsListItemInterface";

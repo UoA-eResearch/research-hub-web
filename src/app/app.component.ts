@@ -13,7 +13,6 @@ import {AuthService} from "./app.auth.service";
 import {ChangeDetectorRef} from '@angular/core';
 import {ResearchActivityComponent} from "./research-activity/research-activity.component";
 import * as format from 'date-fns/format';
-// import preventExtensions = Reflect.preventExtensions;
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/filter';
 
@@ -35,14 +34,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private searchTextChangeSub: Subscription;
   private routerSub: Subscription;
-
-  // menuItems = [
-  //   {name: 'Home', icon: 'home', href: '/home'},
-  //   {name: 'Search & Browse', icon: 'magnify', href: '/browse'},
-  //   {name: 'Provide Feedback', icon: 'thumbs-up-down', href: '/feedback'},
-  //   {name: 'About Us', icon: 'information', href: '/about'},
-  //   {name: 'Contact Us', icon: 'phone-classic', href: '/contact'}
-  // ];
 
   researchActivities = ResearchActivityComponent.researchActivities;
 

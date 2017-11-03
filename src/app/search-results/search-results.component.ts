@@ -15,7 +15,7 @@ import {OrgUnit} from '../model/OrgUnit';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {FilterDialogComponent} from '../filter-dialog/filter-dialog.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {ResearchActivityComponent} from '../research-activity/research-activity.component';
 import {ToolbarService} from '../toolbar.service';
 
