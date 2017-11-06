@@ -1,8 +1,8 @@
-import {getItemRouterLink, GetResultsListItem} from "./ResultsListItemInterface";
-import {Person} from "./Person";
-import {OrgUnit} from "./OrgUnit";
-import {Policy} from "./Policy";
-import {GuideCategory} from "./GuideCategory";
+import {getItemRouterLink, GetResultsListItem} from './ResultsListItemInterface';
+import {Person} from './Person';
+import {OrgUnit} from './OrgUnit';
+import {Policy} from './Policy';
+import {GuideCategory} from './GuideCategory';
 
 
 export class Content implements GetResultsListItem {

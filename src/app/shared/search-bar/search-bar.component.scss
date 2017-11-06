@@ -1,0 +1,19 @@
+//@import "../../variables";
+//@import '~@angular/material/theming';
+
+@import "../../../styles";
+
+$mat-select-width: 200px;
+$mat-select-flex: 1;
+$search-flex: 4;
+
+.search-bar-outer {
+  background-color: $browse-tile-bg-color;
+  padding: 2em;
+}
+
+.search-bar-inner {
+  background-color: white;
+  padding-left: 1em;
+  padding-right: 1em;
+}

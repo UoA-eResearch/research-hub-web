@@ -1,17 +1,17 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from "@angular/core";
-import {MenuService} from "./menu.service";
-import {SearchBarService} from "./search-bar/search-bar.service";
-import {NavigationEnd, Router} from "@angular/router";
-import {Subscription} from "rxjs/Subscription";
-import {MediaChange, ObservableMedia} from "@angular/flex-layout";
-import {ApiService} from "./app.api.service";
-import {AnalyticsService} from "./app.analytics.service";
-import { isPlatformBrowser } from '@angular/common';
-import {BrowseComponent} from "./browse/browse.component";
-import {ToolbarService} from "./toolbar.service";
-import {AuthService} from "./app.auth.service";
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {MenuService} from './app.menu.service';
+import {SearchBarService} from './shared/search-bar/search-bar.service';
+import {NavigationEnd, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+import {ApiService} from './app.api.service';
+import {AnalyticsService} from './app.analytics.service';
+import {isPlatformBrowser} from '@angular/common';
+import {ToolbarService} from './app.toolbar.service';
+import {AuthService} from './app.auth.service';
 import {ChangeDetectorRef} from '@angular/core';
-import {ResearchActivityComponent} from "./research-activity/research-activity.component";
+import {ResearchActivityComponent} from './components/home/research-activity/research-activity.component';
+import {LayoutService} from 'app/app.layout.service';
 import * as format from 'date-fns/format';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/filter';
@@ -46,7 +46,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private navigationService: MenuService,
               private searchBarService: SearchBarService, private router: Router,
               private observableMedia: ObservableMedia, public apiService: ApiService, public analyticsService: AnalyticsService,
-              private toolbarService: ToolbarService, public authService: AuthService, private ref: ChangeDetectorRef) {
+              private toolbarService: ToolbarService, public authService: AuthService, private ref: ChangeDetectorRef,
+              private layoutService: LayoutService) {
 
     // Populate menuItems for search-bar bar
     this.categories = navigationService.getMenuItem('/').menuItems;
@@ -56,8 +57,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.ref.detectChanges();
     });
   }
-
-
 
   openSearchFilter() {
     this.toolbarService.setButtonClicked('filter');
@@ -75,7 +74,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Update side nav
-    this.updateSideNav(BrowseComponent.getMQAlias());
+    this.updateSideNav(this.layoutService.getMQAlias());
 
     this.mediaChangeSub = this.observableMedia.subscribe((change: MediaChange) => {
       this.updateSideNav(change.mqAlias);

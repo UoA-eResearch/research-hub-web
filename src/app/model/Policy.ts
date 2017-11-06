@@ -1,4 +1,4 @@
-import {GetResultsListItem} from "./ResultsListItemInterface";
+import {GetResultsListItem} from './ResultsListItemInterface';
 
 
 export class Policy implements GetResultsListItem {

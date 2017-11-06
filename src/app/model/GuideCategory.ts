@@ -1,5 +1,5 @@
-import {Content} from "./Content";
-import {getItemRouterLink, GetResultsListItem} from "./ResultsListItemInterface";
+import {Content} from './Content';
+import {getItemRouterLink, GetResultsListItem} from './ResultsListItemInterface';
 
 
 export class GuideCategory implements GetResultsListItem {

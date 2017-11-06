@@ -1,6 +1,6 @@
-import {getItemRouterLink, GetResultsListItem} from "./ResultsListItemInterface";
-import {Person} from "./Person";
-import {Content} from "./Content";
+import {getItemRouterLink, GetResultsListItem} from './ResultsListItemInterface';
+import {Person} from './Person';
+import {Content} from './Content';
 
 
 export class OrgUnit implements GetResultsListItem {

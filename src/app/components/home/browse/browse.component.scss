@@ -1,0 +1,53 @@
+@import "../../../../styles";
+
+
+.component{
+  max-width:$max-content-width;
+}
+
+.browse-tile {
+  cursor: pointer;
+  background-color: $browse-tile-bg-color;
+  text-decoration: none;
+}
+
+.tile-content{
+  text-align: center;
+  min-width:100%;
+  min-height: 100%;
+}
+
+.tile-text {
+  color:$browse-tile-font-color;
+  width:80%;
+  transform: translate(0%, -50%);
+  @include mat-typography-level-to-styles($app-browse-grid-typography, body-1);
+}
+
+.tile-icon {
+
+  color:$browse-tile-font-color;
+  font-size: mat-font-size($app-browse-grid-typography, body-2);
+  font-weight: mat-font-weight($app-browse-grid-typography, body-2);
+  width:100%;
+  position:absolute;
+  bottom:20%;
+
+}
+
+
+
+
+
+//.tile-text-xs {
+//  @extend  .tile-text;
+//  //@include mat-typography-level-to-styles($app-browse-grid-typography, body-1);
+//  //font-size:100%;
+//}
+
+//@media (min-width: 600px) and (max-width: 780px) {
+//  .tile-text {
+//    //color:black;
+//    //font-size:95%;
+//  }
+//}

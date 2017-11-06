@@ -1,0 +1,86 @@
+@import "../../../../themes";
+
+
+$plan-background: #62388e;
+$create-background: #2f99cc;
+$analyze-background: #329a37;
+$publish-background: #f49717;
+$discover-background: #cd3234;
+
+$plan-accent:  #cfc3dc;
+$create-accent: #c1e0ef;
+$analyze-accent: #c2e0c3;
+$publish-accent: #fbe0bb;
+$discover-accent: #f0c2c2;
+
+$accent-text: #646464;
+
+@mixin research-activity-mat-button-toggle-theme($theme) {
+  $foreground: map-get($theme, foreground);
+
+  .mat-icon {
+    height: auto !important;
+  }
+
+  .mat-button-toggle.plan {
+    background-color: $plan-accent;
+    color: $accent-text;
+  }
+
+  .mat-button-toggle.create {
+    background-color: $create-accent;
+    color: $accent-text;
+  }
+
+  .mat-button-toggle.analyze {
+    background-color: $analyze-accent;
+    color: $accent-text;
+  }
+
+  .mat-button-toggle.publish {
+    background-color: $publish-accent;
+    color: $accent-text;
+  }
+
+  .mat-button-toggle.discover {
+    background-color: $discover-accent;
+    color: $accent-text;
+  }
+
+  .mat-button-toggle-checked.plan {
+    background-color: $plan-background;
+    color: white;
+  }
+
+  .mat-button-toggle-checked.create {
+    background-color: $create-background;
+    color: white;
+  }
+
+  .mat-button-toggle-checked.analyze {
+    background-color: $analyze-background;
+    color: white;
+  }
+
+  .mat-button-toggle-checked.publish {
+    background-color: $publish-background;
+    color: white;
+  }
+
+  .mat-button-toggle-checked.discover {
+    background-color: $discover-background;
+    color: white;
+  }
+}
+
+.ra-mat-toggle-theme {
+  @include research-activity-mat-button-toggle-theme($hub-app-theme);
+}
+
+.activity-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: calc(100% - 24px);
+  display: inline-block;
+  overflow: hidden;
+}

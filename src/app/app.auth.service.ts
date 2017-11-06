@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {environment} from 'app/../environments/environment';
 import {Http, Headers} from '@angular/http';
-import {Subject} from "rxjs/Subject";
-import {User} from "./model/User";
+import {Subject} from 'rxjs/Subject';
+import {User} from './model/User';
 
 
 @Injectable()
