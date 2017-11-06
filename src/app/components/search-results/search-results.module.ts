@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {routing} from './search-results.routing';
 
-import {SharedModule} from 'app/app.shared.module';
+import {SharedModule} from 'app/components/shared/app.shared.module';
 import {SearchResultsComponent} from './search-results.component';
 import {AutocompleteSearchComponent} from './autocomplete-search/autocomplete-search.component';
 import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';

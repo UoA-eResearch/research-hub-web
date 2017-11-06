@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {GuideCategory} from 'app/model/GuideCategory';
 import {ActivatedRoute} from '@angular/router';
-import {ApiService} from 'app/app.api.service';
+import {ApiService} from 'app/services/api.service';
 import { Location } from '@angular/common';
-import {AnalyticsService} from 'app/app.analytics.service';
+import {AnalyticsService} from 'app/services/analytics.service';
 
 
 @Component({

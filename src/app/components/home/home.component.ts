@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from 'app/app.api.service';
-import {AnalyticsService} from 'app/app.analytics.service';
+import {ApiService} from 'app/services/api.service';
+import {AnalyticsService} from 'app/services/analytics.service';
 import { Location } from '@angular/common';
-import {MenuService} from 'app/app.menu.service';
+import {MenuService} from 'app/services/menu.service';
 
 
 @Component({

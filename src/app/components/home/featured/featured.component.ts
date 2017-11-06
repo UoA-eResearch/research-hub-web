@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService, ContentItemsSearchParams} from 'app/app.api.service';
+import {ApiService, ContentItemsSearchParams} from 'app/services/api.service';
 import {Content} from 'app/model/Content';
 
 @Component({

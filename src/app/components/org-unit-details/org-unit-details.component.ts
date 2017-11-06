@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ApiService, PeopleSearchParams} from 'app/app.api.service';
+import {ApiService, PeopleSearchParams} from 'app/services/api.service';
 import {OrgUnit} from 'app/model/OrgUnit';
 import { Location } from '@angular/common';
 import {Person} from 'app/model/Person';
-import {AnalyticsService} from 'app/app.analytics.service';
+import {AnalyticsService} from 'app/services/analytics.service';
 
 
 @Component({

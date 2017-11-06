@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {routing} from './request-vm.routing';
 
-import {SharedModule} from 'app/app.shared.module';
+import {SharedModule} from 'app/components/shared/app.shared.module';
 import {RequestVmComponent} from './request-vm.component';
 
 

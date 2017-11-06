@@ -3,12 +3,12 @@ import {CommonModule} from '@angular/common';
 
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MaterialModule} from './app.material.module';
+import {MaterialModule} from '../../app.material.module';
 
-import {HeaderComponent} from './shared/header/header.component';
-import {MarkdownComponent} from './shared/markdown/markdown.component';
-import {SearchBarService} from './shared/search-bar/search-bar.service';
-import {SearchBarComponent} from './shared/search-bar/search-bar.component';
+import {HeaderComponent} from './header/header.component';
+import {MarkdownComponent} from './markdown/markdown.component';
+import {SearchBarService} from './search-bar/search-bar.service';
+import {SearchBarComponent} from './search-bar/search-bar.component';
 
 
 @NgModule({

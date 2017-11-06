@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams, Headers} from '@angular/http';
-import {Page} from './model/Page';
-import {Person} from './model/Person';
-import {Content} from './model/Content';
-import {environment} from 'app/../environments/environment';
-import {Policy} from './model/Policy';
-import {OrgUnit} from './model/OrgUnit';
-import {GuideCategory} from './model/GuideCategory';
+import {Page} from '../model/Page';
+import {Person} from '../model/Person';
+import {Content} from '../model/Content';
+import {environment} from 'environments/environment';
+import {Policy} from '../model/Policy';
+import {OrgUnit} from '../model/OrgUnit';
+import {GuideCategory} from '../model/GuideCategory';
 import * as format from 'date-fns/format';
 import 'rxjs/add/operator/map';
 

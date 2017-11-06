@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Content} from 'app/model/Content';
 import {ActivatedRoute} from '@angular/router';
-import {ApiService} from 'app/app.api.service';
+import {ApiService} from 'app/services/api.service';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {Subscription} from 'rxjs/Subscription';
 import {Location} from '@angular/common';
-import {AnalyticsService} from 'app/app.analytics.service';
-import {LayoutService} from 'app/app.layout.service';
+import {AnalyticsService} from 'app/services/analytics.service';
+import {LayoutService} from 'app/services/layout.service';
 
 
 @Component({

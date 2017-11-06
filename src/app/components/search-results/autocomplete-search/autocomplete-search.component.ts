@@ -2,7 +2,7 @@ import {Component, forwardRef, Input, OnDestroy} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {GetResultsListItem} from 'app/model/ResultsListItemInterface';
-import {ApiService} from 'app/app.api.service';
+import {ApiService} from 'app/services/api.service';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/startWith';
 

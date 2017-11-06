@@ -1,12 +1,12 @@
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
-import {MenuService} from 'app/app.menu.service';
+import {MenuService} from 'app/services/menu.service';
 import {ActivatedRoute} from '@angular/router';
-import {SearchBarService} from 'app/shared/search-bar/search-bar.service';
+import {SearchBarService} from 'app/components/shared/search-bar/search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
-import {AnalyticsService} from 'app/app.analytics.service';
+import {AnalyticsService} from 'app/services/analytics.service';
 import {Location} from '@angular/common';
-import {LayoutService} from 'app/app.layout.service';
+import {LayoutService} from 'app/services/layout.service';
 
 @Component({
   selector: 'app-browse',

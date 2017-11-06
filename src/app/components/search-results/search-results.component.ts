@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SearchBarService} from 'app/shared/search-bar/search-bar.service';
+import {SearchBarService} from 'app/components/shared/search-bar/search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
-import {MenuItemType, MenuService} from 'app/app.menu.service';
-import {ApiService, ContentItemsSearchParams, PeopleSearchParams, SearchParams} from 'app/app.api.service';
+import {MenuItemType, MenuService} from 'app/services/menu.service';
+import {ApiService, ContentItemsSearchParams, PeopleSearchParams, SearchParams} from 'app/services/api.service';
 import {Person} from 'app/model/Person';
 import {Content} from 'app/model/Content';
 import {Page} from 'app/model/Page';
 import {Policy} from 'app/model/Policy';
-import {AnalyticsService} from 'app/app.analytics.service';
+import {AnalyticsService} from 'app/services/analytics.service';
 import {Title} from '@angular/platform-browser';
 
 import {FormControl, FormGroup} from '@angular/forms';
@@ -17,7 +17,7 @@ import {Location} from '@angular/common';
 import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {ResearchActivityComponent} from '../home/research-activity/research-activity.component';
-import {ToolbarService} from 'app/app.toolbar.service';
+import {ToolbarService} from 'app/services/toolbar.service';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService, ContentItemsSearchParams} from 'app/app.api.service';
+import {ApiService, ContentItemsSearchParams} from 'app/services/api.service';
 import {ActivatedRoute} from '@angular/router';
 import {Person} from 'app/model/Person';
 import { Location } from '@angular/common';
 import {Content} from 'app/model/Content';
-import {AnalyticsService} from 'app/app.analytics.service';
+import {AnalyticsService} from 'app/services/analytics.service';
 
 
 @Component({

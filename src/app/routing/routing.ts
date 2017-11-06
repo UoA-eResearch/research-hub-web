@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {CanActivateViaAuthGuard} from './app.can-activate-via-auth-guard';
+import {CanActivateViaAuthGuard} from './routing.can-activate-via-auth-guard';
 
 
 export const appRoutes: Routes = [

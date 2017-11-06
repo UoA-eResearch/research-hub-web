@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {appRoutes} from './app.routing';
-import {CanActivateViaAuthGuard} from './app.can-activate-via-auth-guard';
+import {appRoutes} from './routing';
+import {CanActivateViaAuthGuard} from './routing.can-activate-via-auth-guard';
 
 
 @NgModule({

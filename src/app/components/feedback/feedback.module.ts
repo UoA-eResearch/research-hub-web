@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {routing} from './feedback.routing';
 
-import {SharedModule} from 'app/app.shared.module';
+import {SharedModule} from 'app/components/shared/app.shared.module';
 import {FeedbackComponent} from './feedback.component';
 
 

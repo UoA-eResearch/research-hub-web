@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GetResultsListItem} from 'app/model/ResultsListItemInterface';
-import {ApiService} from 'app/app.api.service';
+import {ApiService} from 'app/services/api.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
-import {MenuService} from 'app/app.menu.service';
-import {AnalyticsService} from 'app/app.analytics.service';
+import {MenuService} from 'app/services/menu.service';
+import {AnalyticsService} from 'app/services/analytics.service';
 
 
 @Component({

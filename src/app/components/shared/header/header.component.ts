@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {AnalyticsService} from 'app/app.analytics.service';
+import {AnalyticsService} from 'app/services/analytics.service';
 
 @Component({
   selector: 'app-header',

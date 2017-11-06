@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
-import {ApiService} from 'app/app.api.service';
+import {ApiService} from 'app/services/api.service';
 import {Content} from 'app/model/Content';
 
 @Component({
