@@ -84,13 +84,17 @@ export class AppComponent implements OnInit, OnDestroy {
       this.routerSub = this.router.events
         .filter(event => event instanceof NavigationEnd)
         .subscribe(event => {
-          const routeName = this.getRouteName(event['url']);
-          const pageInfo = this.optionsService.pageInfo[routeName];
-          this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
-          this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
+          // Need to use urlAfterRedirects rather than url to get correct routeName, even when route redirected automatically
+          const routeName = this.getRouteName(event['urlAfterRedirects']);
 
-          this.showFilterButton = routeName === 'search';
-          window.scrollTo(0, 0);
+          if (routeName) {
+            const pageInfo = this.optionsService.pageInfo[routeName];
+            this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
+            this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
+
+            this.showFilterButton = routeName === 'search';
+            window.scrollTo(0, 0);
+          }
         });
     }
   }
