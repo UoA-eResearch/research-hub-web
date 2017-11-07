@@ -1,0 +1,8 @@
+<span style="color: rgba(0,0,0,0.54);padding-bottom: 0.3em;font-size: 12px;display: block;">Research activity</span>
+<mat-chip-list selectable="false">
+  <div *ngFor="let activity of optionsService.researchActivityOptions" [ngClass]="['ra-chip-container', activity.className]">
+    <mat-chip (click)="onChipClick(activity.id)">
+      <mat-checkbox color="primary" [(ngModel)]="model[activity.id].selected">{{activity.name}}</mat-checkbox>
+    </mat-chip>
+  </div>
+</mat-chip-list>

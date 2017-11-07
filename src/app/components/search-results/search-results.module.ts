@@ -7,7 +7,7 @@ import {SearchResultsComponent} from './search-results.component';
 import {AutocompleteSearchComponent} from './autocomplete-search/autocomplete-search.component';
 import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';
 import {ResultsListComponent} from './results-list/results-list.component';
-import {ResearchActivityToggleComponent} from './research-activity-toggle/research-activity-toggle.component';
+import {ResearchActivityInputComponent} from './research-activity-input/research-activity-input.component';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import {ResearchActivityToggleComponent} from './research-activity-toggle/resear
   ],
   declarations: [
     SearchResultsComponent,
-    ResearchActivityToggleComponent,
+    ResearchActivityInputComponent,
     AutocompleteSearchComponent,
     FilterDialogComponent,
     ResultsListComponent

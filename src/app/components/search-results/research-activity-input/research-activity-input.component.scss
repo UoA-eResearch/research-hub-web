@@ -1,0 +1,46 @@
+@import "../../../../themes";
+
+$plan-background: #62388e;
+$create-background: #2f99cc;
+$analyze-background: #329a37;
+$publish-background: #f49717;
+$discover-background: #cd3234;
+
+$ra-chip-margin: 0.5em;
+
+.ra-chip-container {
+  margin-bottom: $ra-chip-margin;
+}
+
+.ra-chip-container:not(:last-child) {
+  margin-right: $ra-chip-margin;
+}
+
+.ra-chip {
+  color: white;
+}
+
+.plan > mat-chip {
+  @extend .ra-chip;
+  background-color: $plan-background;
+}
+
+.create > mat-chip {
+  @extend .ra-chip;
+  background-color: $create-background;
+}
+
+.analyze > mat-chip {
+  @extend .ra-chip;
+  background-color: $analyze-background;
+}
+
+.publish > mat-chip {
+  @extend .ra-chip;
+  background-color: $publish-background;
+}
+
+.discover > mat-chip {
+  @extend .ra-chip;
+  background-color: $discover-background;
+}
