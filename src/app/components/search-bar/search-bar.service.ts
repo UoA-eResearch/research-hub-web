@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 
 
@@ -11,13 +11,20 @@ export class SearchBarParams {
 @Injectable()
 export class SearchBarService {
 
+  searchBarVisibilityChange: Subject<any> = new Subject<any>();
   searchChange: Subject<any> = new Subject<any>();
   searchCategoryChange: Subject<any> = new Subject<any>();
   searchTextChange: Subject<any> = new Subject<any>();
+  isVisible: boolean;
   searchText: string;
   category: string;
 
   constructor() { }
+
+  setVisibility(isVisible: boolean) {
+    this.isVisible = isVisible;
+    this.searchBarVisibilityChange.next(isVisible);
+  }
 
   setCategory(category) {
     if (category !== undefined) {

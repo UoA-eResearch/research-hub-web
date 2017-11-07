@@ -8,11 +8,17 @@ import {AppComponent} from './app.component';
 import {RoutingModule} from './routing/routing.module';
 import {SharedModule} from './components/shared/app.shared.module';
 import {ServicesModule} from './services/services.module';
+import {HeaderComponent} from './components/header/header.component';
+import {HeaderService} from './components/header/header.service';
+import {SearchBarComponent} from './components/search-bar/search-bar.component';
+import {SearchBarService} from './components/search-bar/search-bar.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +28,7 @@ import {ServicesModule} from './services/services.module';
     RoutingModule
   ],
   entryComponents: [],
-  providers: [],
+  providers: [HeaderService, SearchBarService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

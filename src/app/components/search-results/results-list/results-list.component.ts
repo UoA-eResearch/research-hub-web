@@ -1,9 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GetResultsListItem} from 'app/model/ResultsListItemInterface';
-import {ApiService} from 'app/services/api.service';
-import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
-import {MenuService} from 'app/services/menu.service';
 import {AnalyticsService} from 'app/services/analytics.service';
 
 
@@ -18,8 +14,7 @@ export class ResultsListComponent implements OnInit {
   public titleValue = '';
   @Output() resultsChange = new EventEmitter();
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private location: Location,
-              private menuService: MenuService, private analyticsService: AnalyticsService) {
+  constructor(private analyticsService: AnalyticsService) {
 
   }
 

@@ -4,11 +4,7 @@ import {CommonModule} from '@angular/common';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../../app.material.module';
-
-import {HeaderComponent} from './header/header.component';
 import {MarkdownComponent} from './markdown/markdown.component';
-import {SearchBarService} from './search-bar/search-bar.service';
-import {SearchBarComponent} from './search-bar/search-bar.component';
 
 
 @NgModule({
@@ -20,21 +16,17 @@ import {SearchBarComponent} from './search-bar/search-bar.component';
     MaterialModule
   ],
   declarations: [
-    SearchBarComponent,
-    MarkdownComponent,
-    HeaderComponent,
+    MarkdownComponent
   ],
   exports: [
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    SearchBarComponent,
-    MarkdownComponent,
-    HeaderComponent
+    MarkdownComponent
   ],
   providers: [
-    SearchBarService
+
   ],
 })
 export class SharedModule {

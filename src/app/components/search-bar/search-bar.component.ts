@@ -11,16 +11,17 @@ import {MatInput} from '@angular/material/input';
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
 
+  public isVisible: boolean;
   public categoriesValue = [];
   private searchTextValue = '';
   private categoryValue = '';
-  private focusOnInitValue = false;
   @Output() searchTextChange = new EventEmitter();
   @Output() categoryChange = new EventEmitter();
   @Output() categoriesChange = new EventEmitter();
   @Output() focusOnInitChange = new EventEmitter();
   @ViewChild('searchTextInput', { read: MatInput }) searchTextInput: MatInput;
 
+  private searchBarVisibilityChangeSub: Subscription;
   private searchCategoryChangeSub: Subscription;
   private searchTextChangeSub: Subscription;
 
@@ -28,25 +29,16 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Focus on the search inp
-    if (this.focusOnInitValue) {
-      setTimeout(_ => {
-        console.log('Focus on init');
-        this.searchTextInput.focus();
-      });
-    }
-
-    // setTimeout(_ => {
-    //   console.log('Focus on init');
-    //   this.searchTextInput.focus();
-    // });
-
     this.searchCategoryChangeSub = this.searchBarService.searchCategoryChange.subscribe(searchCategory => {
       this.categoryValue = searchCategory;
     });
 
     this.searchTextChangeSub = this.searchBarService.searchTextChange.subscribe(searchText => {
       this.searchTextValue = searchText;
+    });
+
+    this.searchBarVisibilityChangeSub = this.searchBarService.searchBarVisibilityChange.subscribe(isVisible => {
+      this.isVisible = isVisible;
     });
   }
 
@@ -68,15 +60,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Input()
   get category() {
     return this.categoryValue;
-  }
-
-  @Input()
-  get focusOnInit() {
-    return this.focusOnInitValue;
-  }
-
-  set focusOnInit(val) {
-    this.focusOnInitValue = val;
   }
 
   set categories(val) {

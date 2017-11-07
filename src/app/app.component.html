@@ -3,7 +3,7 @@
     <mat-sidenav #sidenav mode="over" opened="false">
       <mat-toolbar color="primary" class="sidenav-home">
         <mat-nav-list>
-          <mat-list-item routerLink="/home">
+          <mat-list-item routerLink="/home" (click)="sidenav.close()">
             <mat-icon mat-list-icon style="color:white;">home</mat-icon>
             <a mat-line style="color: white;">Research Hub</a>
           </mat-list-item>
@@ -11,62 +11,36 @@
       </mat-toolbar>
 
       <mat-nav-list>
-        <mat-list-item routerLink="/search" (click)="sidenav.close()">
-          <mat-icon mat-list-icon>search</mat-icon>
-          <a mat-line>Advanced Search</a>
-        </mat-list-item>
-
-        <mat-expansion-panel>
-          <mat-expansion-panel-header style="background-color: #FAFAFA;padding-left: 0;height: 48px !important;">
-            <mat-list-item style="width: 100%;height: 100%;">
-              <mat-icon mat-list-icon>view_list</mat-icon>
-              <a mat-line>Browse</a>
+        <ng-container *ngFor="let menuOption of optionsService.menuOptions;">
+          <ng-container *ngIf="menuOption.sublist === undefined">
+            <mat-list-item [routerLink]="menuOption.routerLink" (click)="sidenav.close()">
+              <mat-icon mat-list-icon>{{menuOption.icon}}</mat-icon>
+              <a mat-line>{{menuOption.name}}</a>
             </mat-list-item>
-          </mat-expansion-panel-header>
+          </ng-container>
 
-          <mat-list-item *ngFor="let item of categories" (click)="sidenav.close()" [routerLink]="['/search']" [queryParams]="{ researchActivities: [], searchText: '', category: item.id}">
-            <a mat-line>{{item.name}}</a>
-          </mat-list-item>
-        </mat-expansion-panel>
+          <ng-container *ngIf="menuOption.sublist !== undefined">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header style="background-color: #FAFAFA;padding-left: 0;height: 48px !important;">
+                <mat-list-item style="width: 100%;height: 100%;">
+                  <mat-icon mat-list-icon>{{menuOption.icon}}</mat-icon>
+                  <a mat-line>{{menuOption.name}}</a>
+                </mat-list-item>
+              </mat-expansion-panel-header>
 
-        <mat-expansion-panel>
-          <mat-expansion-panel-header style="background-color: #FAFAFA;padding-left: 0;">
-            <mat-list-item style="width: 100%;height: 100%;">
-              <mat-icon mat-list-icon>school</mat-icon>
-              <a mat-line>Research Activities</a>
-            </mat-list-item>
-          </mat-expansion-panel-header>
-
-          <mat-list-item *ngFor="let item of researchActivities" (click)="sidenav.close()" [routerLink]="['/search']" [queryParams]="{ researchActivities: [item.id], searchText: '', category: 'all'}">
-            <a mat-line>{{item.name}}</a>
-          </mat-list-item>
-        </mat-expansion-panel>
-
-        <mat-list-item routerLink="/feedback" (click)="sidenav.close()">
-          <mat-icon mat-list-icon>people</mat-icon>
-          <a mat-line>Join User Study</a>
-        </mat-list-item>
-
-        <mat-list-item routerLink="/feedback" (click)="sidenav.close()">
-          <mat-icon mat-list-icon>thumbs_up_down</mat-icon>
-          <a mat-line>Provide Feedback</a>
-        </mat-list-item>
-
-        <mat-list-item routerLink="/contact" (click)="sidenav.close()">
-          <mat-icon mat-list-icon>phone</mat-icon>
-          <a mat-line>Contact Us</a>
-        </mat-list-item>
-
-        <mat-list-item routerLink="/about" (click)="sidenav.close()">
-          <mat-icon mat-list-icon>info</mat-icon>
-          <a mat-line>About Us</a>
-        </mat-list-item>
+              <mat-list-item *ngFor="let item of menuOption.sublist;" (click)="sidenav.close()" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">
+                <a mat-line>{{item.name}}</a>
+              </mat-list-item>
+            </mat-expansion-panel>
+          </ng-container>
+        </ng-container>
       </mat-nav-list>
     </mat-sidenav>
 
     <div class="sidenav-content-wrapper">
       <div class="sidenav-content" class.xs="sidenav-content-xs">
         <mat-toolbar class="primary-toolbar"  color="primary">
+            <mat-toolbar-row>
             <button style="margin-left: 0.5em;" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
             <button mat-button routerLink="/home" style="font-size: 20px;">Research Hub</button>
             <span style="flex: 1 1 auto;"></span>
@@ -88,7 +62,7 @@
             </button>
 
             <mat-menu #browseMenu="matMenu">
-              <button mat-menu-item *ngFor="let item of categories" [routerLink]="['/search']" [queryParams]="{ researchActivities: [], searchText: '', category: item.id}">{{item.name}}</button>
+              <button mat-menu-item *ngFor="let item of optionsService.categoryOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
             </mat-menu>
 
             <button fxHide.xs mat-button [matMenuTriggerFor]="researchActivityMenu">
@@ -96,7 +70,7 @@
             </button>
 
             <mat-menu #researchActivityMenu="matMenu">
-              <button mat-menu-item *ngFor="let item of researchActivities" [routerLink]="['/search']" [queryParams]="{ researchActivities: [item.id], searchText: '', category: 'all'}">{{item.name}}</button>
+              <button mat-menu-item *ngFor="let item of optionsService.researchActivityOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
             </mat-menu>
 
             <button *ngIf="showLoginBtn" mat-button (click)="authService.login()">Sign In</button>
@@ -127,13 +101,18 @@
                 </div>
               </div>
             </mat-menu>
+          </mat-toolbar-row>
 
           <mat-toolbar-row style="height: 32px;">
             <span style="color: white;font-size: 14px;margin-left: 16px;position: absolute;margin-top: -10px;">Home > Search > Research Virtual Machines</span>
           </mat-toolbar-row>
         </mat-toolbar>
 
-        <router-outlet></router-outlet>
+        <app-header></app-header>
+        <div class="site-content" style="margin-top: 3em; margin-bottom: 5em; padding-left: 3em; padding-right: 3em;">
+          <app-search-bar style="display: block; margin-bottom: 3em;" [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
+          <router-outlet></router-outlet>
+        </div>
       </div>
       <footer>
         <div class="footer-content" class.xs="footer-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">

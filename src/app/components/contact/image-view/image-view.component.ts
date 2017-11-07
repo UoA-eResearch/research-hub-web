@@ -24,7 +24,7 @@ export class ImageViewComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(ImageViewDialogComponent, {
+    const dialogRef = this.dialog.open(ImageViewDialogComponent, {
       width: this.width,
       height: this.height,
       data: {src: this.src }

@@ -4,7 +4,7 @@ import {HttpModule} from '@angular/http';
 
 import {AnalyticsService} from './analytics.service';
 import {ApiService} from './api.service';
-import {MenuService} from './menu.service';
+import {OptionsService} from './options.service';
 import {ToolbarService} from './toolbar.service';
 import {AuthService} from './auth.service';
 import {LayoutService} from './layout.service';
@@ -19,7 +19,7 @@ import {LayoutService} from './layout.service';
   providers: [
     AnalyticsService,
     ApiService,
-    MenuService,
+    OptionsService,
     AuthService,
     ToolbarService,
     LayoutService

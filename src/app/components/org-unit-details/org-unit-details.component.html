@@ -1,9 +1,4 @@
 <div *ngIf="orgUnit">
-  <app-header [title]="orgUnit.name"
-              [description]="orgUnit.description"
-              [goHref]="orgUnit.url"
-              [goEventCategory]="analyticsService.eventCategoryOrgUnit"></app-header>
-
   <div class="site-content-padded" fxLayout="column">
     <div class="content-details" class.xs="content-details-xs" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em">
       <mat-card fxFlex="50" fxFlex.lt-md="100" *ngIf="userSupport && userSupport.length">

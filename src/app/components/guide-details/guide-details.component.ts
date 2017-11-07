@@ -26,10 +26,10 @@ export class GuideDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.setNumCategoryColumns(this.layoutService.getMQAlias());
+    this.numCols = this.layoutService.getNumGridCols(this.layoutService.getMQAlias());
 
     this.mediaSub = this.media.subscribe((change: MediaChange) => {
-      this.setNumCategoryColumns(change.mqAlias);
+      this.numCols = this.layoutService.getNumGridCols(change.mqAlias);
     });
 
     this.route.params.subscribe(params => {
@@ -45,34 +45,6 @@ export class GuideDetailsComponent implements OnInit, OnDestroy {
         }
       );
     });
-  }
-
-  setNumCategoryColumns(mqAlias: string) {
-    // console.log(mqAlias);
-    let numCols = 0;
-    switch (mqAlias) {
-
-      case 'xs':
-        numCols = 2;
-        break;
-      case 'sm':
-        numCols = 3;
-        break;
-      case 'md':
-        numCols = 3;
-        break;
-      case 'lg':
-        numCols = 4;
-        break;
-      case 'xl':
-        numCols = 5;
-        break;
-      default:
-        numCols = 4;
-        break;
-    }
-
-    this.numCols = numCols;
   }
 
   ngOnDestroy() {

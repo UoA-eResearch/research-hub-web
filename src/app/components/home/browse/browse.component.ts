@@ -1,11 +1,7 @@
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
-import {MenuService} from 'app/services/menu.service';
-import {ActivatedRoute} from '@angular/router';
-import {SearchBarService} from 'app/components/shared/search-bar/search-bar.service';
+import {OptionsService} from 'app/services/options.service';
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
-import {AnalyticsService} from 'app/services/analytics.service';
-import {Location} from '@angular/common';
 import {LayoutService} from 'app/services/layout.service';
 
 @Component({
@@ -15,7 +11,6 @@ import {LayoutService} from 'app/services/layout.service';
 })
 export class BrowseComponent implements OnInit, OnDestroy {
 
-  public menuItems = [];
   private mediaSub: Subscription;
 
   @Input()
@@ -26,82 +21,25 @@ export class BrowseComponent implements OnInit, OnDestroy {
 
   @Input()
   numCols = 4;
-  teal = '#0294a5';
-  navy = '#004059';
-  orange = '#ff8300';
-  tileColors = [this.teal, this.navy, this.orange];
 
-  constructor(private menuService: MenuService, private route: ActivatedRoute,
-              private searchBarService: SearchBarService, private media: ObservableMedia, private analyticsService: AnalyticsService,
-              private location: Location, private layoutService: LayoutService) {
+  constructor(public optionsService: OptionsService, private media: ObservableMedia,
+              private layoutService: LayoutService) {
   }
 
-
   ngOnInit() {
-
-    if (!this.embedded) {
-      this.analyticsService.trackPageView(this.location.path(), 'Browse Categories');
-    }
-
-    this.setNumCategoryColumns(this.layoutService.getMQAlias());
+    this.updateCols(this.layoutService.getMQAlias());
 
     this.mediaSub = this.media.subscribe((change: MediaChange) => {
-      this.setNumCategoryColumns(change.mqAlias);
+      this.updateCols(change.mqAlias);
     });
+  }
 
-    this.route.params.subscribe(params => {
-      const categoryId = MenuService.getMenuItemId([params['contentTypeId'], params['subcategoryId']]);
-      const menuItem = this.menuService.getMenuItem(categoryId);
-
-      if (!menuItem.isLeaf()) {
-        // Remove 'all' category when root category is requested
-        let start = 0;
-        if (categoryId === '/') {
-          start = 1;
-          this.searchBarService.setCategory('all');
-        }
-        this.menuItems = menuItem.menuItems.slice(start);
-      }
-    });
+  updateCols(mqAlias: string) {
+    const cols = this.layoutService.getNumGridCols(mqAlias);
+    this.numCols = Math.min(this.maxCols, cols);
   }
 
   ngOnDestroy() {
     this.mediaSub.unsubscribe();
-  }
-
-  setNumCategoryColumns(mqAlias: string) {
-    // console.log(mqAlias);
-    let numCols = 0;
-    switch (mqAlias) {
-
-      case 'xs':
-        numCols = 2;
-        break;
-      case 'sm':
-        numCols = 3;
-        break;
-      case 'md':
-        numCols = 3;
-        break;
-      case 'lg':
-        numCols = 4;
-        break;
-      case 'xl':
-        numCols = 5;
-        break;
-      default:
-        numCols = 4;
-        break;
-    }
-
-    if (this.embedded && mqAlias !== 'xs') {
-      numCols -= 1;
-    }
-
-    this.numCols = Math.min(this.maxCols, numCols);
-  }
-
-  getTileColor(id: number): any {
-    return {'background-color': this.tileColors[id % 3]};
   }
 }

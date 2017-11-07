@@ -4,7 +4,8 @@ import {CanActivateViaAuthGuard} from './routing.can-activate-via-auth-guard';
 
 export const appRoutes: Routes = [
   {path: 'home',  loadChildren: 'app/components/home/home.module#HomeModule'},
-  {path: 'search', loadChildren: 'app/components/search-results/search-results.module#SearchResultsModule'}, ///:category/:searchText/:people/:orgUnits/:researchActivities
+  {path: 'search', loadChildren: 'app/components/search-results/search-results.module#SearchResultsModule'},
+  ///:category/:searchText/:people/:orgUnits/:researchActivities
   {path: 'feedback', loadChildren: 'app/components/feedback/feedback.module#FeedbackModule'},
   {path: 'about', loadChildren: 'app/components/about/about.module#AboutModule'},
   {path: 'contact', loadChildren: 'app/components/contact/contact.module#ContactModule'},

@@ -1,0 +1,10 @@
+<div *ngIf="isVisible" class="header" class.xs="header-xs" fxLayout="row" [ngStyle]="getBackgroundStyle(imageUrl)">
+  <div class="site-content">
+    <div class="info" class.xs="info-xs" fxFlex="475px" fxFlex.xs="100" [ngStyle.gt-xs]="getInfoStyle(imageUrl)">
+      <h1 *ngIf="title">{{title}}</h1>
+      <div *ngIf="description" class="header-description">
+        <p>{{description}}</p>
+      </div>
+    </div>
+  </div>
+</div>

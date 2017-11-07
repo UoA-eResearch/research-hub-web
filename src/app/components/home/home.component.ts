@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from 'app/services/api.service';
 import {AnalyticsService} from 'app/services/analytics.service';
 import { Location } from '@angular/common';
-import {MenuService} from 'app/services/menu.service';
+import {OptionsService, CategoryIds} from 'app/services/options.service';
+import {HeaderService} from "../header/header.service";
 
 
 @Component({
@@ -12,27 +13,14 @@ import {MenuService} from 'app/services/menu.service';
 })
 export class HomeComponent implements OnInit {
 
-  feedbackUrl = 'https://docs.google.com/forms/d/1snpoqG3sbBPAps4QKK4TpbYxR3CSDOKVpKdc8lAKMjY';
-  userstudyUrl = 'https://docs.google.com/forms/d/1FqBQXq5cp9Xk_bXqvqOmib9vl47TnXwco1vC9wXBav0';
 
-  coverImageUrl: string;
-  coverImages = ['20151005_Science Detail_001_1680x220_BW.jpg',
-    '483_Pacific_28Sep10_1680x220_BW.jpg',
-    '20130930_UoA_Details_225_1680x220_BW.jpg'];
 
-  categories = [];
-  category = 'all';
-  searchText = '';
-
-  constructor(private navigationService: MenuService, private apiService: ApiService, private analyticsService: AnalyticsService, private location: Location) {
-    this.categories = navigationService.getMenuItem('/').menuItems;
+  constructor(public optionsService: OptionsService,
+              private analyticsService: AnalyticsService, private location: Location) {
   }
 
   ngOnInit() {
     this.analyticsService.trackPageView(this.location.path(), 'Home');
-
-    const coverImageIndex = Math.floor(Math.random() * 3); // Generate a random number between 1 and 3 and
-    // use it to get a random cover image
-    this.coverImageUrl = this.apiService.getAssetUrl('page-elements/' + this.coverImages[coverImageIndex]);
+    // this.headerService.setBatchParams('Welcome to the Research Hub', 'The Research Hub connects you with people, resources, and services from across the University to enhance and accelerate your research.', coverImageUrl);
   }
 }

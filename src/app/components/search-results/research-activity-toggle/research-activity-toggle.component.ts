@@ -1,5 +1,6 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {OptionsService} from 'app/services/options.service';
 
 
 @Component({
@@ -16,14 +17,6 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 })
 export class ResearchActivityToggleComponent implements OnInit, ControlValueAccessor {
 
-  public researchActivities = [
-    {id: 1, name: 'Plan & Design', icon: 'mdi-timetable', className: 'plan', selected: false},
-    {id: 2, name: 'Create, Collect & Capture', icon: 'mdi-google-circles-extended', className: 'create', selected: false},
-    {id: 3, name: 'Analyze & Interpret', icon: 'mdi-chart-areaspline', className: 'analyze', selected: false},
-    {id: 4, name: 'Publish & Report', icon: 'mdi-cube-send', className: 'publish', selected: false},
-    {id: 5, name: 'Discover & Reuse', icon: 'mdi-sync', className: 'discover', selected: false}
-  ];
-
   @Input() _value: number[] = [];
   onChange: any = () => { };
   onTouched: any = () => { };
@@ -39,7 +32,7 @@ export class ResearchActivityToggleComponent implements OnInit, ControlValueAcce
     this.updateState();
   }
 
-  constructor() { }
+  constructor(public optionsService: OptionsService) { }
 
   ngOnInit() {
   }
@@ -59,19 +52,19 @@ export class ResearchActivityToggleComponent implements OnInit, ControlValueAcce
   }
 
   updateState() {
-    for (const activity of this.researchActivities) {
-      activity.selected = this._value.indexOf(activity.id) >= 0;
-    }
+    // for (const activity of this.researchActivities) {
+    //   activity.selected = this._value.indexOf(activity.id) >= 0;
+    // }
   }
 
   updateValue() {
     const selectedResearchActivities = [];
 
-    for (const activity of this.researchActivities) {
-      if (activity.selected) {
-        selectedResearchActivities.push(activity.id);
-      }
-    }
+    // for (const activity of this.researchActivities) {
+    //   if (activity.selected) {
+    //     selectedResearchActivities.push(activity.id);
+    //   }
+    // }
 
     this.value = selectedResearchActivities;
   }

@@ -6,7 +6,7 @@ import marked from 'marked';
 import { Location } from '@angular/common';
 import {Person} from 'app/model/Person';
 import {AnalyticsService} from 'app/services/analytics.service';
-import {ContentTypeIds} from 'app/services/menu.service';
+// import {ContentTypeIds} from 'app/services/options.service';
 
 
 @Component({
@@ -20,6 +20,8 @@ export class ContentDetailsComponent implements OnInit {
   similarContentItems: Array<Content>;
   userSupport: Array<Person>;
   isKnowledgeArticle = false;
+
+  // this.analyticsService.trackGo(this.goEventCategory, this.title, this.goHref);
 
   constructor(private route: ActivatedRoute, private apiService: ApiService,
               private location: Location, private analyticsService: AnalyticsService, private router: Router) {
@@ -55,11 +57,11 @@ export class ContentDetailsComponent implements OnInit {
           this.analyticsService.trackContent(name, url);
           this.content = content;
 
-          if (this.content.contentTypes !== undefined) {
-            this.isKnowledgeArticle = this.content.contentTypes.filter(contentType => {
-              return contentType.id === ContentTypeIds.KnowledgeArticle;
-            }).length > 0;
-          }
+          // if (this.content.contentTypes !== undefined) {
+          //   this.isKnowledgeArticle = this.content.contentTypes.filter(contentType => {
+          //     return contentType.id === ContentTypeIds.KnowledgeArticle;
+          //   }).length > 0;
+          // }
         }
       );
 

@@ -1,12 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SearchBarService} from 'app/components/shared/search-bar/search-bar.service';
+import {SearchBarService} from 'app/components/search-bar/search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
-import {MenuItemType, MenuService} from 'app/services/menu.service';
+import {OptionsService, CategoryIds} from 'app/services/options.service';
 import {ApiService, ContentItemsSearchParams, PeopleSearchParams, SearchParams} from 'app/services/api.service';
 import {Person} from 'app/model/Person';
-import {Content} from 'app/model/Content';
 import {Page} from 'app/model/Page';
-import {Policy} from 'app/model/Policy';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {Title} from '@angular/platform-browser';
 
@@ -16,7 +14,6 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {ResearchActivityComponent} from '../home/research-activity/research-activity.component';
 import {ToolbarService} from 'app/services/toolbar.service';
 
 import {Observable} from 'rxjs/Observable';
@@ -35,17 +32,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private routeParamsSub: Subscription;
   private searchCatSub: Subscription;
 
-  public contentPage: Page<Content>;
-  public peoplePage: Page<Person>;
-  public policiesPage: Page<Policy>;
-
   private maxNumberOfItems = 1000;
-  private allPages: any[];
-  public showEmptyState = false;
-  public showProgressBar = true;
-  private people: Person[] = [];
-  private orgUnits: OrgUnit[] = [];
-  public categories = [];
 
   public filtersForm: FormGroup;
   private categoryFormControl: FormControl = new FormControl();
@@ -54,17 +41,21 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private researchActivitiesFormControl: FormControl = new FormControl();
   private loadedRoute = false;
 
-  public showPersonFilter = true;
-  public showOrgUnitFilter = true;
-  public showResearchActivityFilter = true;
-  private rightColSize = 67;
-
-  private contentTitle = '';
   private noResultsSummary = '';
   private resultsSummary = '';
 
-  category = undefined;
-  searchText = undefined;
+  public resultsPage: Page<any>;
+
+  public showEmptyState = false;
+  public showProgressBar = true;
+  public showPersonFilter = true;
+  public showOrgUnitFilter = true;
+  public showResearchActivityFilter = true;
+
+  public people: Person[] = [];
+  public orgUnits: OrgUnit[] = [];
+  public category = undefined;
+  public searchText = undefined;
 
   private static parseParamArray(str: string) {
     let nums = [];
@@ -91,7 +82,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   constructor(private searchBarService: SearchBarService,
-              private menuService: MenuService, public apiService: ApiService,
+              public optionsService: OptionsService, public apiService: ApiService,
               private analyticsService: AnalyticsService, private titleService: Title, private route: ActivatedRoute,
               private location: Location, public dialog: MatDialog, private toolbarService: ToolbarService) {
   }
@@ -100,15 +91,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.titleService.setTitle('Research Hub: Search Results');
 
     // Setup pages
-    this.contentPage = new Page<Content>();
-    this.peoplePage = new Page<Person>();
-    this.policiesPage = new Page<Policy>();
-    this.allPages = [this.contentPage, this.peoplePage, this.policiesPage];
+    this.resultsPage = new Page<any>();
 
     // Setup filters
-    // Populate menuItems for search-bar bar
-    this.categories = this.menuService.getMenuItem('/').menuItems;
-
     this.filtersForm = new FormGroup({
       category: this.categoryFormControl,
       person: this.personFormControl,
@@ -119,7 +104,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     // // Subscribe to search changes
     this.searchChangeSub = Observable
       .combineLatest(
-        this.searchBarService.searchTextChange.debounceTime(250).distinctUntilChanged(), //debounceTime(250)
+        this.searchBarService.searchTextChange.debounceTime(250).distinctUntilChanged(),
         this.categoryFormControl.valueChanges,
         this.personFormControl.valueChanges,
         this.orgUnitFormControl.valueChanges,
@@ -190,31 +175,28 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateFilterVisibility(category: string) {
-    if (category === 'people') {
+  updateFilterVisibility(categoryId: number) {
+    if (categoryId === CategoryIds.Person) {
       this.showPersonFilter = false;
       this.showOrgUnitFilter = true;
       this.showResearchActivityFilter = false;
-      this.rightColSize = 67;
-    } else if (category === 'policies') {
+    } else if (categoryId === CategoryIds.Policies) {
       this.showPersonFilter = false;
       this.showOrgUnitFilter = false;
       this.showResearchActivityFilter = false;
-      this.rightColSize = 100;
     } else {
       this.showPersonFilter = true;
       this.showOrgUnitFilter = true;
       this.showResearchActivityFilter = true;
-      this.rightColSize = 67;
     }
   }
 
-  updateResultsSummary(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
+  updateResultsSummary(categoryId: number, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
     // let summary = 'Refined by ';
     const statements = [];
 
-    if (category) {
-      statements.push('in <span class="search-results-text">' + this.menuService.getMenuItem('/' + category).name + '</span>');
+    if (categoryId) {
+      statements.push('in <span class="search-results-text">' + this.optionsService.categoryOptions[categoryId - 1]['name'] + '</span>');
     }
 
     if (personId && this.showPersonFilter) {
@@ -235,7 +217,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       const activities = [];
 
       for (const researchActivityId of researchActivityIds) {
-        activities.push('<span class="search-results-text">' + ResearchActivityComponent.researchActivities[researchActivityId - 1].name + '</span>');
+        activities.push('<span class="search-results-text">' + this.optionsService.researchActivityOptions[researchActivityId - 1]['name'] + '</span>');
       }
 
       let researchPhaseText = 'applicable to the ' + activities.join(', ') + ' research phase';
@@ -257,12 +239,12 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.resultsSummary = 'Showing results ' + summary + '.';
   }
 
-  updateUrl(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
+  updateUrl(categoryId: number, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
     let url = '/search';
     const params = [];
 
-    if (category) {
-      params.push('category=' + category);
+    if (categoryId) {
+      params.push('category=' + categoryId);
     }
 
     if (searchText) {
@@ -296,99 +278,27 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.buttonClickSub.unsubscribe();
   }
 
-  onSearchChange(category: string, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
-    this.analyticsService.trackSearch(category, searchText);
-    this.updateResultsSummary(category, searchText, personId, orgUnitId, researchActivityIds);
-    this.updateUrl(category, searchText, personId, orgUnitId, researchActivityIds); // Update url displayed to user
-
-    const categoryId = MenuService.getMenuItemId([category]);
-    const menuItem = this.menuService.getMenuItem(categoryId);
-
-    // Set title for content results
-    if (menuItem.id === 'all') {
-      this.contentTitle = 'All resources';
-    } else {
-      this.contentTitle = menuItem.name;
-    }
-
-    const observables = [];
-    const pagesToUpdate = [];
-
-    switch (menuItem.type) {
-      case MenuItemType.All:
-        pagesToUpdate.push(this.contentPage);
-        observables.push(this.getContentObservable(
-          searchText,
-          [],
-          personId,
-          orgUnitId,
-          researchActivityIds));
-
-        const searchForPeople = !personId && (!researchActivityIds || researchActivityIds.length === 0);
-
-        if (searchForPeople) {
-          observables.push(this.getPeopleObservable(searchText, orgUnitId));
-          pagesToUpdate.push(this.peoplePage);
-        }
-
-        if (!orgUnitId && searchForPeople) {
-          observables.push(this.getPoliciesObservable(searchText));
-          pagesToUpdate.push(this.policiesPage);
-        }
-
-        break;
-      case MenuItemType.Content:
-        observables.push(this.getContentObservable(searchText, [menuItem.contentTypeId], personId,
-          orgUnitId, researchActivityIds));
-        pagesToUpdate.push(this.contentPage);
-        break;
-      case MenuItemType.Person:
-        observables.push(this.getPeopleObservable(searchText, orgUnitId));
-        pagesToUpdate.push(this.peoplePage);
-        break;
-      case MenuItemType.Policy:
-        observables.push(this.getPoliciesObservable(searchText));
-        pagesToUpdate.push(this.policiesPage);
-        break;
-      default:
-        break;
-    }
-
-    const observable = Observable.forkJoin(
-      observables
-    ).subscribe(outputs => {
-
-      let totalElements = 0;
-
-      // Populate pages
-      for (let i = 0; i < pagesToUpdate.length; i++) {
-        const output = outputs[i];
-        const page = pagesToUpdate[i];
-        Object.assign(page, output);
-
-        totalElements += page.content.length;
-      }
-
-      // Clear data for pages that should not be shown
-      for (let i = 0; i < this.allPages.length; i++) {
-        const pageToClear = this.allPages[i];
-
-        if (pagesToUpdate.indexOf(pageToClear) < 0) {
-          pageToClear.clear();
-        }
-      }
-
-      this.showEmptyState = totalElements === 0;
+  onSearchChange(categoryId: number, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
+    // TODO: get string category
+    const friendlyCategoryId = '';
+    this.analyticsService.trackSearch(friendlyCategoryId, searchText);
+    this.updateResultsSummary(categoryId, searchText, personId, orgUnitId, researchActivityIds);
+    this.updateUrl(categoryId, searchText, personId, orgUnitId, researchActivityIds); // Update url displayed to user
+    // const searchForPeople = !personId && (!researchActivityIds || researchActivityIds.length === 0);
+    const searchObservable = this.getSearchObservable(categoryId, searchText, personId, orgUnitId, researchActivityIds).subscribe(page => {
+      this.resultsPage = page;
+      this.showEmptyState = page.totalElements === 0;
       this.showProgressBar = false;
-      observable.unsubscribe();
+      searchObservable.unsubscribe();
     });
   }
 
-  getContentObservable(searchText: string, contentTypeIds: number[], personId: number, orgUnitId: number, researchActivityIds: number[]) {
+  getSearchObservable(categoryId: number, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
+    // TODO: update
     const searchParams = new ContentItemsSearchParams();
     searchParams.setSearchText(searchText);
     searchParams.setSize(this.maxNumberOfItems);
-    searchParams.setContentTypes(contentTypeIds);
+    // searchParams.setContentTypes(contentTypeIds);
 
     if (personId) {
       searchParams.setPeople([personId]);
@@ -405,31 +315,15 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     return this.apiService.getContentItems(searchParams);
   }
 
-  getPoliciesObservable(searchText: string) {
-    const searchParams = new SearchParams();
-    searchParams.setSearchText(searchText);
-    searchParams.setSize(this.maxNumberOfItems);
-    return this.apiService.getPolicies(searchParams);
-  }
-
-  getPeopleObservable(searchText: string, orgUnitId: number) {
-    const searchParams = new PeopleSearchParams();
-    searchParams.setSearchText(searchText);
-    searchParams.setRoleTypes([3]);
-    searchParams.setSize(this.maxNumberOfItems);
-
-    if (orgUnitId) {
-      searchParams.setOrgUnits([orgUnitId]);
-    }
-
-    return this.apiService.getPeople(searchParams);
-  }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(FilterDialogComponent, {
       width: '100%',
       height: '100%',
-      data: {people: this.people, orgUnits: this.orgUnits, categories: this.categories, filtersFormValue: this.filtersForm.getRawValue()}
+      data: {
+        people: this.people,
+        orgUnits: this.orgUnits,
+        categoryOptions: this.optionsService.categoryOptions,
+        filtersFormValue: this.filtersForm.getRawValue()}
     });
 
     dialogRef.afterClosed().subscribe(result => {

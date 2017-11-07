@@ -1,8 +1,5 @@
 <ng-container *ngIf="guideCategory">
-  <app-header [title]="guideCategory.name"
-              [imageUrl]="apiService.getAssetUrl('page-elements/483_Pacific_28Sep10_1680x220_BW.jpg')"></app-header>
-
-  <div class="site-content-padded" fxLayout="column" fxLayoutGap="2em">
+  <div fxLayout="column" fxLayoutGap="2em">
     <mat-card class="description">
       <app-markdown [data]="guideCategory.description"></app-markdown>
     </mat-card>

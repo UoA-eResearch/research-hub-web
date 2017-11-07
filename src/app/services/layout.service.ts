@@ -8,6 +8,32 @@ export class LayoutService {
 
   }
 
+  public getNumGridCols(mqAlias: string) {
+    let numCols = 0;
+    switch (mqAlias) {
+      case 'xs':
+        numCols = 2;
+        break;
+      case 'sm':
+        numCols = 3;
+        break;
+      case 'md':
+        numCols = 3;
+        break;
+      case 'lg':
+        numCols = 4;
+        break;
+      case 'xl':
+        numCols = 5;
+        break;
+      default:
+        numCols = 4;
+        break;
+    }
+
+    return numCols;
+  }
+
   public getMQAlias(): string {
     const width = window.innerWidth;
 

@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-  description = "<p></p>";
+  description = '<p></p>';
 
   layoutGap = '1.5em';
   layoutGapXs = '0.5em';
