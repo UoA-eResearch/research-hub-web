@@ -43,7 +43,7 @@ const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 })
 export class MatTagsComponent implements ControlValueAccessor, OnChanges {
 
-  private _value: Tag[] = [];
+  public _value: Tag[] = [];
 
   filteredSources: Tag[] = [];
 
