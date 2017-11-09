@@ -1,15 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchBarService} from 'app/components/search-bar/search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
-import {OptionsService, CategoryIds} from 'app/services/options.service';
-import {ApiService, ContentItemsSearchParams, PeopleSearchParams, SearchParams} from 'app/services/api.service';
-import {Person} from 'app/model/Person';
+import {CategoryIds, OptionsService} from 'app/services/options.service';
+import {
+  ApiService,
+  SearchResultsSearchParams
+} from 'app/services/api.service';
 import {Page} from 'app/model/Page';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {Title} from '@angular/platform-browser';
 
 import {FormControl, FormGroup} from '@angular/forms';
-import {OrgUnit} from 'app/model/OrgUnit';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';
@@ -20,6 +21,8 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/forkJoin';
+import {Tag} from './mat-tags/mat-tags.component';
+import {GetResultsListItem} from '../../model/ResultsListItemInterface';
 
 @Component({
   selector: 'app-search-results',
@@ -27,35 +30,26 @@ import 'rxjs/add/observable/forkJoin';
   styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
-  private buttonClickSub: Subscription;
-  private searchChangeSub: Subscription;
-  private routeParamsSub: Subscription;
-  private searchCatSub: Subscription;
-
-  private maxNumberOfItems = 1000;
 
   public filtersForm: FormGroup;
-  private categoryFormControl: FormControl = new FormControl();
-  private personFormControl: FormControl = new FormControl();
-  private orgUnitFormControl: FormControl = new FormControl();
-  private researchActivitiesFormControl: FormControl = new FormControl();
-  private loadedRoute = false;
-
-  private noResultsSummary = '';
-  private resultsSummary = '';
-
   public resultsPage: Page<any>;
 
-  public showEmptyState = false;
-  public showProgressBar = true;
-  public showPersonFilter = true;
-  public showOrgUnitFilter = true;
-  public showResearchActivityFilter = true;
+  private buttonClickSub: Subscription;
+  private categoryIdSub: Subscription;
+  private searchChangeSub: Subscription;
+  private routeParamsSub: Subscription;
 
-  public people: Person[] = [];
-  public orgUnits: OrgUnit[] = [];
-  public category = undefined;
-  public searchText = undefined;
+  public noResultsSummary = '';
+  public resultsSummary = '';
+  public showEmptyState = false;
+
+  public static getFilterVisibility(categoryId: number) {
+    return {
+      person: categoryId !== CategoryIds.Policies && categoryId !== CategoryIds.Person,
+      orgUnit: categoryId !== CategoryIds.Policies,
+      researchActivity: categoryId !== CategoryIds.Policies && categoryId !== CategoryIds.Person
+    };
+  }
 
   private static parseParamArray(str: string) {
     let nums = [];
@@ -81,6 +75,16 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     return nums;
   }
 
+  fromTags(tags: Tag[]) {
+    return tags.map(tag => tag.id);
+  }
+
+  toTags(ids: number[]) {
+    return ids.map(id => {
+      return {id: id};
+    });
+  }
+
   constructor(private searchBarService: SearchBarService,
               public optionsService: OptionsService, public apiService: ApiService,
               private analyticsService: AnalyticsService, private titleService: Title, private route: ActivatedRoute,
@@ -90,83 +94,64 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.titleService.setTitle('Research Hub: Search Results');
 
-    // Setup pages
+    // Results page
     this.resultsPage = new Page<any>();
 
-    // Setup filters
+    // Filters form
     this.filtersForm = new FormGroup({
-      category: this.categoryFormControl,
-      person: this.personFormControl,
-      orgUnit: this.orgUnitFormControl,
-      researchActivities: this.researchActivitiesFormControl
+      categoryId: new FormControl(),
+      personTags: new FormControl([]),
+      orgUnitTags: new FormControl([]),
+      researchActivityIds: new FormControl()
     });
 
-    // // Subscribe to search changes
+    // Category changes
+    this.categoryIdSub = this.searchBarService.searchCategoryChange.subscribe(category => {
+      if (category !== this.filtersForm.controls.categoryId.value) {
+        this.filtersForm.controls.categoryId.patchValue(category);
+      }
+    });
+
+    // Subscribe to search parameter changes
     this.searchChangeSub = Observable
       .combineLatest(
         this.searchBarService.searchTextChange.debounceTime(250).distinctUntilChanged(),
-        this.categoryFormControl.valueChanges,
-        this.personFormControl.valueChanges,
-        this.orgUnitFormControl.valueChanges,
-        this.researchActivitiesFormControl.valueChanges
+        this.filtersForm.valueChanges.distinctUntilChanged()
       )
       .debounceTime(100)
       .subscribe(latestValues => {
-        this.showProgressBar = true;
-        const [searchText, category, person, orgUnit, researchActivities] = latestValues;
+        // TODO: set progress bar to visible
+        const [searchText, filtersFormValues] = latestValues;
 
-        if (category !== this.searchBarService.category) {
-          this.searchBarService.setCategory(category);
+        if (filtersFormValues.categoryId !== this.searchBarService.category) {
+          this.searchBarService.setCategory(filtersFormValues.categoryId);
         }
 
-        this.onSearchChange(category, searchText, person, orgUnit, researchActivities);
-      });
-    //
-    const peopleSearchParams = new PeopleSearchParams();
-    peopleSearchParams.setRoleTypes([3]);
-
-    this.routeParamsSub = Observable
-      .combineLatest(
-        this.route.queryParams,
-        this.apiService.getPeople(peopleSearchParams),
-        this.apiService.getOrgUnits(new SearchParams())
-      )
-      .subscribe(latestValues => {
-        if (!this.loadedRoute) {
-          const [params, peoplePage, orgUnitsPage] = latestValues;
-
-          this.people = peoplePage.content;
-          this.orgUnits = orgUnitsPage.content;
-
-          // These need to be set initially so that the combineLatest observable will fire
-          const category = params['category'] || this.searchBarService.category;
-          const searchText = typeof params['searchText'] === 'string' ? params['searchText'] : this.searchBarService.searchText;
-          const person = Number(params['person']) || '';
-          const orgUnit = Number(params['orgUnit']) || '';
-          const researchActivities = SearchResultsComponent.parseParamArray(params['researchActivities']);
-
-          this.updateFilterVisibility(category);
-          this.searchBarService.setSearchText(searchText);
-          this.searchBarService.setCategory(category);
-
-          this.filtersForm.patchValue({
-            category: category,
-            person: person,
-            orgUnit: orgUnit,
-            researchActivities: researchActivities
-          });
-
-          this.loadedRoute = true;
-        }
+        this.onSearchChange(filtersFormValues.categoryId, searchText, filtersFormValues.personTags,
+          filtersFormValues.orgUnitTags, filtersFormValues.researchActivityIds);
       });
 
-    this.searchCatSub = this.searchBarService.searchCategoryChange.subscribe((category) => {
-      if (category !== this.categoryFormControl.value) {
-        this.categoryFormControl.setValue(category);
-      }
+    // Update filtersForm and searchBar based on route parameters
+    this.routeParamsSub =
+      this.route.queryParams
+      .subscribe(params => {
+        // These need to be set initially so that the combineLatest observable will fire
+        const categoryId = +(params['categoryId'] || this.searchBarService.category);
+        const searchText = typeof params['searchText'] === 'string' ? params['searchText'] : this.searchBarService.searchText;
+        const personIds = SearchResultsComponent.parseParamArray(params['personIds']);
+        const orgUnitIds = SearchResultsComponent.parseParamArray(params['orgUnitIds']);
+        const researchActivityIds = SearchResultsComponent.parseParamArray(params['researchActivityIds']);
 
-      this.updateFilterVisibility(category);
-    });
+        this.searchBarService.setSearchText(searchText);
+        this.searchBarService.setCategory(categoryId);
+
+        this.filtersForm.patchValue({
+          categoryId: categoryId,
+          personTags: this.toTags(personIds),
+          orgUnitTags: this.toTags(orgUnitIds),
+          researchActivityIds: researchActivityIds
+        });
+      });
 
     this.buttonClickSub = this.toolbarService.buttonClickChange.subscribe((buttonName) => {
       if (buttonName === 'filter') {
@@ -175,45 +160,92 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateFilterVisibility(categoryId: number) {
-    if (categoryId === CategoryIds.Person) {
-      this.showPersonFilter = false;
-      this.showOrgUnitFilter = true;
-      this.showResearchActivityFilter = false;
-    } else if (categoryId === CategoryIds.Policies) {
-      this.showPersonFilter = false;
-      this.showOrgUnitFilter = false;
-      this.showResearchActivityFilter = false;
-    } else {
-      this.showPersonFilter = true;
-      this.showOrgUnitFilter = true;
-      this.showResearchActivityFilter = true;
-    }
+  onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[]) {
+    console.log('Search for: ', categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
+
+    // TODO: get string category
+    // const friendlyCategoryId = '';
+    // this.analyticsService.trackSearch(friendlyCategoryId, searchText);
+
+    const personIds = this.fromTags(personTags);
+    const orgUnitIds = this.fromTags(orgUnitTags);
+    this.updateUrl(categoryId, searchText, personIds, orgUnitIds, researchActivityIds);
+
+    const params = new SearchResultsSearchParams();
+    params.setSearchText(searchText);
+    params.setPeople(personIds);
+    params.setOrgUnits(orgUnitIds);
+    params.setResearchPhases(researchActivityIds);
+
+    const resultsSub = this.apiService.getSearchResults(params).subscribe(page => {
+      this.resultsPage = page;
+      this.updateResultsSummary(page.totalElements, categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
+      resultsSub.unsubscribe();
+    });
   }
 
-  updateResultsSummary(categoryId: number, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
-    // let summary = 'Refined by ';
+  updateUrl(categoryId: number, searchText: string, personIds: number[], orgUnitIds: number[], researchActivityIds: number[]) {
+    let url = '/search';
+    const params = [];
+    const visibilities = SearchResultsComponent.getFilterVisibility(categoryId);
+
+    if (categoryId) {
+      params.push('categoryId=' + categoryId);
+    }
+
+    if (searchText) {
+      params.push('searchText=' + searchText);
+    }
+
+    if (personIds  && personIds.length && visibilities['person']) {
+      params.push('personIds=' + personIds.join(','));
+    }
+
+    if (orgUnitIds  && orgUnitIds.length && visibilities['orgUnit']) {
+      params.push('orgUnitIds=' + orgUnitIds.join(','));
+    }
+
+    if (researchActivityIds && researchActivityIds.length && visibilities['researchActivity']) {
+      params.push('researchActivityIds=' + researchActivityIds.join(','));
+    }
+
+    const paramsStr = params.join('&');
+    if (paramsStr) {
+      url += '?' + paramsStr;
+    }
+
+    this.location.replaceState(encodeURI(url)); // Update url without reloading page
+  }
+
+  updateResultsSummary(totalElements: number, categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[]) {
     const statements = [];
+    const visibilities = SearchResultsComponent.getFilterVisibility(categoryId);
 
     if (categoryId) {
       statements.push('in <span class="search-results-text">' + this.optionsService.categoryOptions[categoryId - 1]['name'] + '</span>');
     }
 
-    if (personId && this.showPersonFilter) {
-      const person = this.people.find((p) => {
-        return p.id === personId;
-      });
-      statements.push('supported by <span class="search-results-text">' + person.getTitle() + '</span>');
+    if (personTags && personTags.length && visibilities['person']) {
+      const people = [];
+
+      for (const tag of personTags) {
+        people.push('<span class="search-results-text">' + tag.text + '</span>');
+      }
+
+      statements.push('supported by ' + people.join(', '));
     }
 
-    if (orgUnitId && this.showOrgUnitFilter) {
-      const orgUnit = this.orgUnits.find((o) => {
-        return o.id === orgUnitId;
-      });
-      statements.push('owned by the <span class="search-results-text">' + orgUnit.getTitle() + '</span>');
+    if (orgUnitTags && orgUnitTags.length && visibilities['orgUnit']) {
+      const orgUnits = [];
+
+      for (const tag of orgUnitTags) {
+        orgUnits.push('<span class="search-results-text">' + tag.text + '</span>');
+      }
+
+      statements.push('provided by ' + orgUnits.join(', '));
     }
 
-    if (researchActivityIds && researchActivityIds.length > 0 && this.showResearchActivityFilter) {
+    if (researchActivityIds && researchActivityIds.length && visibilities['researchActivity']) {
       const activities = [];
 
       for (const researchActivityId of researchActivityIds) {
@@ -237,82 +269,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     const summary = searchTextSummary + statements.join(', ');
     this.noResultsSummary = 'Sorry - your search ' + summary + ' did not match anything on the Research Hub.';
     this.resultsSummary = 'Showing results ' + summary + '.';
-  }
-
-  updateUrl(categoryId: number, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
-    let url = '/search';
-    const params = [];
-
-    if (categoryId) {
-      params.push('category=' + categoryId);
-    }
-
-    if (searchText) {
-      params.push('searchText=' + searchText);
-    }
-
-    if (personId && this.showPersonFilter) {
-      params.push('person=' + personId);
-    }
-
-    if (orgUnitId && this.showOrgUnitFilter) {
-      params.push('orgUnit=' + orgUnitId);
-    }
-
-    if (researchActivityIds && researchActivityIds.length > 0 && this.showResearchActivityFilter) {
-      params.push('researchActivities=' + researchActivityIds.join(','));
-    }
-
-    const paramsStr = params.join('&');
-    if (paramsStr) {
-      url += '?' + paramsStr;
-    }
-
-    this.location.replaceState(encodeURI(url)); // Update url without reloading page
-  }
-
-  ngOnDestroy() {
-    this.searchChangeSub.unsubscribe();
-    this.routeParamsSub.unsubscribe();
-    this.searchCatSub.unsubscribe();
-    this.buttonClickSub.unsubscribe();
-  }
-
-  onSearchChange(categoryId: number, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
-    // TODO: get string category
-    const friendlyCategoryId = '';
-    this.analyticsService.trackSearch(friendlyCategoryId, searchText);
-    this.updateResultsSummary(categoryId, searchText, personId, orgUnitId, researchActivityIds);
-    this.updateUrl(categoryId, searchText, personId, orgUnitId, researchActivityIds); // Update url displayed to user
-    // const searchForPeople = !personId && (!researchActivityIds || researchActivityIds.length === 0);
-    const searchObservable = this.getSearchObservable(categoryId, searchText, personId, orgUnitId, researchActivityIds).subscribe(page => {
-      this.resultsPage = page;
-      this.showEmptyState = page.totalElements === 0;
-      this.showProgressBar = false;
-      searchObservable.unsubscribe();
-    });
-  }
-
-  getSearchObservable(categoryId: number, searchText: string, personId: number, orgUnitId: number, researchActivityIds: number[]) {
-    // TODO: update
-    const searchParams = new ContentItemsSearchParams();
-    searchParams.setSearchText(searchText);
-    searchParams.setSize(this.maxNumberOfItems);
-    // searchParams.setContentTypes(contentTypeIds);
-
-    if (personId) {
-      searchParams.setPeople([personId]);
-    }
-
-    if (orgUnitId) {
-      searchParams.setOrgUnits([orgUnitId]);
-    }
-
-    if (researchActivityIds && researchActivityIds.length > 0) {
-      searchParams.setResearchPhases(researchActivityIds);
-    }
-
-    return this.apiService.getContentItems(searchParams);
+    this.showEmptyState = totalElements === 0;
   }
 
   openDialog(): void {
@@ -320,14 +277,27 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       width: '100%',
       height: '100%',
       data: {
-        people: this.people,
-        orgUnits: this.orgUnits,
-        categoryOptions: this.optionsService.categoryOptions,
-        filtersFormValue: this.filtersForm.getRawValue()}
+        rawFormValues: this.filtersForm.getRawValue()
+      }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.filtersForm.patchValue(result);
+    dialogRef.afterClosed().subscribe(rawFormValues => {
+      this.filtersForm.patchValue(rawFormValues);
     });
+  }
+
+  trackOutboundLink(result: GetResultsListItem) {
+    if (result['type'] !== undefined && result['type'] === 'policy') {
+      this.analyticsService.trackPolicy(result.getTitle(), result.getHref());
+    } else {
+      this.analyticsService.trackOutboundLink(result.getHref());
+    }
+  }
+
+  ngOnDestroy() {
+    this.categoryIdSub.unsubscribe();
+    this.searchChangeSub.unsubscribe();
+    this.routeParamsSub.unsubscribe();
+    this.buttonClickSub.unsubscribe();
   }
 }

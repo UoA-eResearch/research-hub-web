@@ -4,10 +4,10 @@ import {routing} from './search-results.routing';
 
 import {SharedModule} from 'app/components/shared/app.shared.module';
 import {SearchResultsComponent} from './search-results.component';
-import {AutocompleteSearchComponent} from './autocomplete-search/autocomplete-search.component';
 import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';
-import {ResultsListComponent} from './results-list/results-list.component';
 import {ResearchActivityInputComponent} from './research-activity-input/research-activity-input.component';
+import {MatTagsComponent} from './mat-tags/mat-tags.component';
+import { SearchFiltersComponent } from './search-filters/search-filters.component';
 
 
 @NgModule({
@@ -19,9 +19,9 @@ import {ResearchActivityInputComponent} from './research-activity-input/research
   declarations: [
     SearchResultsComponent,
     ResearchActivityInputComponent,
-    AutocompleteSearchComponent,
     FilterDialogComponent,
-    ResultsListComponent
+    MatTagsComponent,
+    SearchFiltersComponent
   ],
   entryComponents: [
     FilterDialogComponent

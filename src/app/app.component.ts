@@ -13,6 +13,8 @@ import * as format from 'date-fns/format';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/filter';
 import {HeaderService} from "./components/header/header.service";
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
@@ -35,10 +37,10 @@ export class AppComponent implements OnInit, OnDestroy {
   public showFilterButton = false;
   public showLoginBtn = true;
 
-  constructor(public optionsService: OptionsService, private headerService: HeaderService,
+  constructor(private location: Location, public optionsService: OptionsService, private headerService: HeaderService,
               private searchBarService: SearchBarService, private router: Router,
               public apiService: ApiService, public analyticsService: AnalyticsService,
-              private toolbarService: ToolbarService, public authService: AuthService, private ref: ChangeDetectorRef) {
+              public authService: AuthService, private ref: ChangeDetectorRef) {
 
     authService.loginChange.subscribe((loggedIn) => {
       this.showLoginBtn = !loggedIn;
@@ -56,10 +58,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  openSearchFilter() {
-    this.toolbarService.setButtonClicked('filter');
-  }
-
   getRouteName(url: string) {
     const isQuery = url.includes('?');
     let routeName = url.replace('/', '');
@@ -74,8 +72,8 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Navigate to the search page if the user types text in
     this.searchTextChangeSub = this.searchBarService.searchTextChange.distinctUntilChanged().subscribe(searchText => {
-      if (this.router.url !== '/search' && searchText != null && searchText.trim() !== '') {
-        console.log('search nav change: ', searchText);
+      const routeName = this.getRouteName(this.location.path());
+      if (routeName !== 'search' && searchText != null) {
         this.router.navigate(['/search']);
       }
     });

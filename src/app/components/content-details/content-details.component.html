@@ -19,6 +19,7 @@
         <h2>For support contact</h2>
         <mat-chip-list [selectable]="true">
           <mat-chip class="contact-chip" *ngFor="let item of userSupport" [routerLink]="item.getRouterLink()">
+            <img class="chip-avatar" [src]="apiService.getAssetUrl(item.image)" height="25"/>
             {{item.getTitle()}}
           </mat-chip>
         </mat-chip-list>

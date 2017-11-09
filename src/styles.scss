@@ -90,7 +90,10 @@ a {
   font-style: italic;
 }
 
-
+.chip-avatar {
+  margin-right: 12px;
+  border-radius: 50%;
+}
 
 
 app-markdown h3 {
@@ -136,6 +139,18 @@ mat-chip.mat-chip {
   margin-right: auto;
   max-width: $max-page-width;
   //padding: 3em;
+
+
+}
+
+.site-padding {
+  @extend .site-content;
+  margin-top: 3em; margin-bottom: 5em; padding-left: 3em; padding-right: 3em;
+}
+
+.site-padding-xs {
+  @extend .site-content;
+  margin-top: $xs-offset; margin-bottom: $xs-offset; padding-left: $xs-offset; padding-right: $xs-offset;
 }
 
 .site-content-padded {

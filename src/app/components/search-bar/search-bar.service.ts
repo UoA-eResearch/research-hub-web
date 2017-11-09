@@ -36,7 +36,6 @@ export class SearchBarService {
 
   setSearchText(searchText) {
     if (searchText !== undefined) {
-      console.log('search text changed: ', searchText);
       this.searchText = searchText;
       this.searchTextChange.next(searchText);
       this.searchChange.next(this.getSearchParams());

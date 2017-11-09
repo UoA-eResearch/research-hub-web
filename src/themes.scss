@@ -246,8 +246,12 @@ $guide-tile-bg-color: #0294a5;
 }
 
 mat-dialog-container {
-  max-width: 100% !important;
   padding: 0 !important;
+}
+
+.cdk-overlay-pane {
+  max-width: 100% !important;
+  //padding: 0 !important;
 }
 
 //

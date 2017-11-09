@@ -59,35 +59,35 @@ export class OptionsService {
         id: ResearchActivityIds.PlanDesign,
         name: 'Plan & Design',
         icon: 'mdi-timetable',
-        color: '#60388B',
+        className: 'plan',
         type: OptionTypes.ResearchActivity
       },
       {
         id: ResearchActivityIds.CreateCollectCapture,
         name: 'Create, Collect & Capture',
         icon: 'mdi-google-circles-extended',
-        color: '#3097CB',
+        className: 'create',
         type: OptionTypes.ResearchActivity
       },
       {
         id: ResearchActivityIds.AnalyzeInterpret,
         name: 'Analyze & Interpret',
         icon: 'mdi-chart-areaspline',
-        color: '#359737',
+        className: 'analyze',
         type: OptionTypes.ResearchActivity
       },
       {
         id: ResearchActivityIds.PublishReport,
         name: 'Publish & Report',
         icon: 'mdi-cube-send',
-        color: '#F3961C',
+        className: 'publish',
         type: OptionTypes.ResearchActivity
       },
       {
         id: ResearchActivityIds.DiscoverReuse,
         name: 'Discover & Reuse',
         icon: 'mdi-sync',
-        color: '#CC3333',
+        className: 'discover',
         type: OptionTypes.ResearchActivity
       }
     ];

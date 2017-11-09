@@ -115,6 +115,36 @@ export class PeopleSearchParams extends SearchParams {
   }
 }
 
+export class SearchResultsSearchParams extends SearchParams {
+
+  private people: number[];
+  private orgUnits: number[];
+  private researchPhases: number[];
+
+  public setResearchPhases(researchPhases: number[]) {
+    this.researchPhases = researchPhases;
+  }
+
+  public setPeople(people: number[]) {
+    this.people = people;
+  }
+
+  public setOrgUnits(orgUnits: number[]) {
+    this.orgUnits = orgUnits;
+  }
+
+  public getUrlSearchParams() {
+    const params = super.getUrlSearchParams();
+
+    const names = ['researchPhases', 'people', 'orgUnits'];
+    const variables = [this.researchPhases, this.people, this.orgUnits];
+    SearchParams.getIdArrayUrlParams(params, names, variables);
+
+    return params;
+  }
+}
+
+
 export class ContentItemsSearchParams extends SearchParams {
 
   private contentTypes: number[];
@@ -167,6 +197,7 @@ export class ApiService {
   private static ORG_UNIT_URL = 'orgUnit';
   private static ASSET_URL = 'assets/';
   private static VM_CONSULTATION = 'vmConsultation/create';
+  private static SEARCH_RESULTS_URL = 'search';
   private host = environment.apiUrl;
 
 
@@ -196,6 +227,17 @@ export class ApiService {
     return this.http
       .get(this.host + ApiService.CATEGORY_URL + '/' + categoryName, {headers: headers})
       .map((response) => response.json());
+  }
+
+  getSearchResults(searchParams: SearchResultsSearchParams) {
+    const search = searchParams.getUrlSearchParams();
+
+    const headers = new Headers();
+    headers.set('Accept', 'application/json');
+
+    return this.http
+      .get(this.host + ApiService.SEARCH_RESULTS_URL, {search: search, headers: headers})
+      .map((response) => Page.fromObject<any>(response.json(), (obj) =>  obj));
   }
 
   getContentItems(searchParams: ContentItemsSearchParams) {

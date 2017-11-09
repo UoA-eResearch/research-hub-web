@@ -45,10 +45,6 @@
             <button mat-button routerLink="/home" style="font-size: 20px;">Research Hub</button>
             <span style="flex: 1 1 auto;"></span>
 
-            <button mat-icon-button (click)="openSearchFilter()" fxHide.gt-sm *ngIf="showFilterButton">
-              <mat-icon class="mat-24" style="color: white;">filter_list</mat-icon>
-            </button>
-
             <button fxHide.xs mat-button routerLink="/search">
               Search
             </button>
@@ -109,8 +105,8 @@
         </mat-toolbar>
 
         <app-header></app-header>
-        <div class="site-content" style="margin-top: 3em; margin-bottom: 5em; padding-left: 3em; padding-right: 3em;">
-          <app-search-bar style="display: block; margin-bottom: 3em;" [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
+        <div class="site-padding" ngClass.xs="site-padding-xs">
+          <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
           <router-outlet></router-outlet>
         </div>
       </div>
