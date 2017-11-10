@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {ApiService, ContentItemsSearchParams} from 'app/services/api.service';
+import {Component, OnInit} from '@angular/core';
+import {ApiService, ContentItemsParams} from 'app/services/api.service';
 import {ActivatedRoute} from '@angular/router';
 import {Person} from 'app/model/Person';
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
 import {Content} from 'app/model/Content';
 import {AnalyticsService} from 'app/services/analytics.service';
+import {ListItem} from "../../model/ListItem";
 
 
 @Component({
@@ -15,7 +16,7 @@ import {AnalyticsService} from 'app/services/analytics.service';
 export class PersonDetailsComponent implements OnInit {
 
   person: Person;
-  supportedContent: Array<Content>;
+  supportedContent: ListItem[];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService,
               private location: Location, private analyticsService: AnalyticsService) {
@@ -29,17 +30,17 @@ export class PersonDetailsComponent implements OnInit {
       this.apiService.getPerson(id).subscribe(
         person => {
           const url = this.location.path();
-          const title = person.getTitle();
+          const title = person.title;
 
           this.analyticsService.trackPerson(title, url);
           this.person = person;
         }
       );
 
-      const searchParams = new ContentItemsSearchParams();
-      searchParams.setPeople([id]);
-      searchParams.setRoleTypes([3]);
-      this.apiService.getContentItems(searchParams).subscribe(contentItems => {
+      const contentItemsParams = new ContentItemsParams();
+      contentItemsParams.setPeople([id]);
+      contentItemsParams.setRoleTypes([3]);
+      this.apiService.getContentItems(contentItemsParams).subscribe(contentItems => {
         this.supportedContent = contentItems.content;
       });
     });

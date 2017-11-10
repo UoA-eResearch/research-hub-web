@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {CategoryIds, OptionsService, OptionTypes} from './services/options.service';
+import {CategoryId, OptionsService, OptionType} from './services/options.service';
 import {SearchBarService} from './components/search-bar/search-bar.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private searchTextChangeSub: Subscription;
   private routerSub: Subscription;
 
-  public selectedCategory = CategoryIds.All;
+  public selectedCategory = CategoryId.All;
   public searchText = '';
   public showFilterButton = false;
   public showLoginBtn = true;
@@ -51,29 +51,23 @@ export class AppComponent implements OnInit, OnDestroy {
   getSearchQueryParams(item: any) {
     const type = item['type'];
 
-    if (type === OptionTypes.Category) {
+    if (type === OptionType.Category) {
       return { researchActivities: [], searchText: '', category: item.id};
     } else {
-      return { researchActivities: [item.id], searchText: '', category: CategoryIds.All};
+      return { researchActivities: [item.id], searchText: '', category: CategoryId.All};
     }
   }
 
   getRouteName(url: string) {
-    const isQuery = url.includes('?');
-    let routeName = url.replace('/', '');
-
-    if (isQuery) {
-      routeName = routeName.split('?')[0];
-    }
-
-    return routeName;
+    const routeName = url.replace('?', '/');
+    return routeName.split('/')[1];
   }
 
   ngOnInit() {
     // Navigate to the search page if the user types text in
     this.searchTextChangeSub = this.searchBarService.searchTextChange.distinctUntilChanged().subscribe(searchText => {
-      const routeName = this.getRouteName(this.location.path());
-      if (routeName !== 'search' && searchText != null) {
+      const url = this.location.path();
+      if (url && !url.startsWith('/search') && searchText != null && searchText !== '') {
         this.router.navigate(['/search']);
       }
     });
@@ -84,6 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
         .subscribe(event => {
           // Need to use urlAfterRedirects rather than url to get correct routeName, even when route redirected automatically
           const routeName = this.getRouteName(event['urlAfterRedirects']);
+          console.log('routeName: ', routeName);
 
           if (routeName) {
             const pageInfo = this.optionsService.pageInfo[routeName];

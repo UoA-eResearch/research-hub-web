@@ -261,3 +261,50 @@ mat-dialog-container {
 //  $sidenav-theme: mat-light-theme($sidenav-primary, $sidenav-accent);
 //  @include angular-material-theme($sidenav-theme);
 //}
+
+
+$plan-background: #62388e;
+$create-background: #2f99cc;
+$analyze-background: #329a37;
+$publish-background: #f49717;
+$discover-background: #cd3234;
+
+$ra-chip-margin: 0.5em;
+
+.ra-chip-container {
+  margin-bottom: $ra-chip-margin;
+}
+
+.ra-chip-container:not(:last-child) {
+  margin-right: $ra-chip-margin;
+}
+
+.ra-chip {
+  color: white !important;
+}
+
+.plan > mat-chip {
+  @extend .ra-chip;
+  background-color: $plan-background !important;
+}
+
+.create > mat-chip {
+  @extend .ra-chip;
+  background-color: $create-background !important;
+}
+
+.analyze > mat-chip {
+  @extend .ra-chip;
+  background-color: $analyze-background !important;
+}
+
+.publish > mat-chip {
+  @extend .ra-chip;
+  background-color: $publish-background !important;
+}
+
+.discover > mat-chip {
+  @extend .ra-chip;
+  background-color: $discover-background !important;
+}
+

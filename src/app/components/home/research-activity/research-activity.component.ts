@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {OptionsService} from 'app/services/options.service';
+import {CategoryId, OptionsService} from 'app/services/options.service';
 
 @Component({
   selector: 'app-research-activity',
@@ -10,6 +10,10 @@ export class ResearchActivityComponent implements OnInit {
 
   constructor(public optionsService: OptionsService) {
 
+  }
+
+  getQueryParams(activity) {
+    return {categoryId: CategoryId.All, researchActivityIds: [activity.id]};
   }
 
   ngOnInit() {

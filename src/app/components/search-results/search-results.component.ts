@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchBarService} from 'app/components/search-bar/search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
-import {CategoryIds, OptionsService} from 'app/services/options.service';
+import {CategoryId, OptionsService} from 'app/services/options.service';
 import {
-  ApiService,
-  SearchResultsSearchParams
+  ApiService, ContentItemsParams, Params, PeopleParams,
+  SearchResultsParams
 } from 'app/services/api.service';
 import {Page} from 'app/model/Page';
 import {AnalyticsService} from 'app/services/analytics.service';
@@ -22,7 +22,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/forkJoin';
 import {Tag} from './mat-tags/mat-tags.component';
-import {GetResultsListItem} from '../../model/ResultsListItemInterface';
+import {ListItem} from '../../model/ListItem';
 
 @Component({
   selector: 'app-search-results',
@@ -32,7 +32,7 @@ import {GetResultsListItem} from '../../model/ResultsListItemInterface';
 export class SearchResultsComponent implements OnInit, OnDestroy {
 
   public filtersForm: FormGroup;
-  public resultsPage: Page<any>;
+  public resultsPage: Page<ListItem>;
 
   private buttonClickSub: Subscription;
   private categoryIdSub: Subscription;
@@ -45,9 +45,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   public static getFilterVisibility(categoryId: number) {
     return {
-      person: categoryId !== CategoryIds.Policies && categoryId !== CategoryIds.Person,
-      orgUnit: categoryId !== CategoryIds.Policies,
-      researchActivity: categoryId !== CategoryIds.Policies && categoryId !== CategoryIds.Person
+      person: categoryId !== CategoryId.Policies && categoryId !== CategoryId.Person,
+      orgUnit: categoryId !== CategoryId.Policies,
+      researchActivity: categoryId !== CategoryId.Policies && categoryId !== CategoryId.Person
     };
   }
 
@@ -95,7 +95,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.titleService.setTitle('Research Hub: Search Results');
 
     // Results page
-    this.resultsPage = new Page<any>();
+    this.resultsPage = {} as Page<ListItem>;
 
     // Filters form
     this.filtersForm = new FormGroup({
@@ -171,11 +171,25 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     const orgUnitIds = this.fromTags(orgUnitTags);
     this.updateUrl(categoryId, searchText, personIds, orgUnitIds, researchActivityIds);
 
-    const params = new SearchResultsSearchParams();
+    const params = new SearchResultsParams();
     params.setSearchText(searchText);
     params.setPeople(personIds);
     params.setOrgUnits(orgUnitIds);
     params.setResearchPhases(researchActivityIds);
+    params.setRoleTypes([3]);
+    params.setObjectType('all');
+
+    if (categoryId !== CategoryId.All) {
+      if (categoryId === CategoryId.Policies) {
+        params.setObjectType('policy');
+      } else if (categoryId === CategoryId.Person) {
+        params.setObjectType('person');
+      } else {
+        const contentTypeIds = this.optionsService.contentTypeMap[categoryId];
+        params.setContentTypes(contentTypeIds);
+        params.setObjectType('content');
+      }
+    }
 
     const resultsSub = this.apiService.getSearchResults(params).subscribe(page => {
       this.resultsPage = page;
@@ -286,11 +300,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  trackOutboundLink(result: GetResultsListItem) {
+  trackOutboundLink(result: ListItem) {
     if (result['type'] !== undefined && result['type'] === 'policy') {
-      this.analyticsService.trackPolicy(result.getTitle(), result.getHref());
+      this.analyticsService.trackPolicy(result.title, result.url);
     } else {
-      this.analyticsService.trackOutboundLink(result.getHref());
+      this.analyticsService.trackOutboundLink(result.url);
     }
   }
 

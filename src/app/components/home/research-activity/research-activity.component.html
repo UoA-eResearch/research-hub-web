@@ -4,9 +4,11 @@
   <div class="flex-hack" fxFlex="grow" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="center center" fxLayoutAlign.lt-lg="">
     <div fxFlex.lt-lg="100%">
       <mat-chip-list class.lt-md="mat-chip-list-stacked">
-        <mat-chip *ngFor="let activity of optionsService.researchActivityOptions" [style.backgroundColor]="activity.color" [routerLink]="['/search']" [queryParams]="{ researchActivities: [activity.id], searchText: '', category: 'all'}">
-          {{activity.name}}
-        </mat-chip>
+        <div *ngFor="let activity of optionsService.researchActivityOptions" [ngClass]="['ra-chip-container', activity.className]">
+          <mat-chip [routerLink]="['/search']" [queryParams]="getQueryParams(activity)">
+            {{activity.name}}
+          </mat-chip>
+        </div>
       </mat-chip-list>
     </div>
   </div>

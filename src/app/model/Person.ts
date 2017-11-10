@@ -1,11 +1,6 @@
-import {
-  getItemRouterLink,
-  GetResultsListItem
-} from './ResultsListItemInterface';
 import {OrgUnit} from './OrgUnit';
 
-
-export class Person implements GetResultsListItem {
+export interface Person {
   id: number;
   title: string;
   firstName: string;
@@ -16,63 +11,4 @@ export class Person implements GetResultsListItem {
   directoryUrl: string;
   image: string;
   orgUnits: Array<OrgUnit>;
-  // contentRoles: Array<ContentRole>;
-
-  static fromObjects(objects: [Object]): Array<Person> {
-    const people = new Array<Person>();
-
-    if (objects !== undefined) {
-      for (const object of objects) {
-        people.push(Person.fromObject(object));
-      }
-    }
-
-    return people;
-  }
-
-  static fromObject(object: Object): Person {
-    const person = new Person();
-
-    person.id = object['id'];
-    person.title = object['title'];
-    person.firstName = object['firstName'];
-    person.lastName = object['lastName'];
-    person.email = object['email'];
-    person.username = object['username'];
-    person.jobTitle = object['jobTitle'];
-    person.directoryUrl = object['directoryUrl'];
-    person.image = object['image'];
-    person.orgUnits = OrgUnit.fromObjects(object['orgUnits']);
-    // person.contentRoles = ContentRole.fromObjects(object['contentRoles']);
-
-    return person;
-  }
-
-  getId(): number {
-    return this.id;
-  }
-
-  getType(): string {
-    return 'person';
-  }
-
-  getTitle(): string {
-    return this.firstName + ' ' + this.lastName;
-  }
-
-  getSubtitle(): string {
-    return this.jobTitle;
-  }
-
-  getImage(): string {
-    return this.image;
-  }
-
-  getRouterLink(): any[] {
-    return getItemRouterLink(this as GetResultsListItem);
-  }
-
-  getHref(): string {
-    return undefined;
-  }
 }

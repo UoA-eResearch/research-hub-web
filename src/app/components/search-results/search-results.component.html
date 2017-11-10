@@ -17,23 +17,23 @@
   </div>
 
   <mat-nav-list>
-    <ng-container *ngFor="let result of resultsPage.content">
-      <ng-container *ngIf="result.href === undefined">
-        <mat-list-item [routerLink]="result.routerLink">
-          <img mat-list-avatar [src]="apiService.getAssetUrl(result.image)">
-          <h3 mat-line> {{result.title}} </h3>
+    <ng-container *ngFor="let item of resultsPage.content">
+      <ng-container *ngIf="item.type !== 'policy'">
+        <mat-list-item [routerLink]="item | listItemRouterLink">
+          <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
+          <h3 mat-line> {{item.title}} </h3>
           <p mat-line>
-            <span> {{result.subtitle}} </span>
+            <span> {{item.subtitle}} </span>
           </p>
         </mat-list-item>
       </ng-container>
 
-      <ng-container *ngIf="result.href !== undefined">
-        <a mat-list-item [href]="result.href" target="_blank" (click)="trackOutboundLink(result)">
-          <img *ngIf="result.image" mat-list-avatar [src]="apiService.getAssetUrl(result.image)">
-          <h3 mat-line>{{result.title}} </h3>
+      <ng-container *ngIf="item.type === 'policy'">
+        <a mat-list-item [href]="item.url" target="_blank" (click)="trackOutboundLink(item)">
+          <img *ngIf="item.image" mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
+          <h3 mat-line>{{item.title}} </h3>
           <p mat-line>
-            <span> {{result.subtitle}} </span>
+            <span> {{item.subtitle}} </span>
           </p>
         </a>
       </ng-container>

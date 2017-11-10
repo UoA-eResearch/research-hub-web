@@ -1,7 +1,7 @@
 import {Component, Inject, Input} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup} from '@angular/forms';
-import {CategoryIds} from 'app/services/options.service';
+import {CategoryId} from 'app/services/options.service';
 
 @Component({
   selector: 'app-filter-dialog',
@@ -25,7 +25,7 @@ export class FilterDialogComponent {
   }
 
   clear() {
-    this.filtersForm.patchValue({categoryId: CategoryIds.All, personTags: [], orgUnitTags: [], researchActivityIds: []});
+    this.filtersForm.patchValue({categoryId: CategoryId.All, personTags: [], orgUnitTags: [], researchActivityIds: []});
   }
 
   done() {

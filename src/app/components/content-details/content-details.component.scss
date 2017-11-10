@@ -44,21 +44,6 @@
   padding: 1em;
 }
 
-
-//.description p {
-//  color: white !important;
-//}
-
-//.content {
-//  max-width: $lg-thresh-min;
-//  margin: 2em;
-//}
-//
-//.content-xs {
-//  @extend .content;
-//  margin: 0.5em 1.5em 1em 1.5em;
-//}
-
 .content-overview {
   padding-right: 2em;
 }
@@ -72,10 +57,6 @@
 .content-overview-xs {
   @extend .content-overview;
 }
-
-//.content-details {
-//  margin-top: -16px;
-//}
 
 .contact-chip {
   margin: 0.25em !important;
@@ -103,4 +84,35 @@
   @extend .divider;
   margin-top: 2em;
   margin-bottom: 0.8em;
+}
+
+.browse-tile {
+  cursor: pointer;
+  background-color: $guide-tile-bg-color;
+  text-decoration: none;
+}
+
+/* Put your CSS code in the left column, instead of example, to put or remove unnecessary prefixes. */
+
+.tile-content{
+  text-align: center;
+  min-width:100%;
+  min-height: 100%;
+}
+
+
+.tile-text {
+  color:$browse-tile-font-color;
+  width:80%;
+  transform: translate(0%, -50%);
+  @include mat-typography-level-to-styles($app-browse-grid-typography, body-1);
+}
+
+.tile-icon {
+  color:$browse-tile-font-color;
+  font-size: mat-font-size($app-browse-grid-typography, body-2);
+  font-weight: mat-font-weight($app-browse-grid-typography, body-2);
+  width:100%;
+  position:absolute;
+  bottom:20%;
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ApiService, PeopleSearchParams} from 'app/services/api.service';
+import {ApiService, PeopleParams} from 'app/services/api.service';
 import {OrgUnit} from 'app/model/OrgUnit';
 import { Location } from '@angular/common';
-import {Person} from 'app/model/Person';
 import {AnalyticsService} from 'app/services/analytics.service';
+import {ListItem} from '../../model/ListItem';
 
 
 @Component({
@@ -15,7 +15,7 @@ import {AnalyticsService} from 'app/services/analytics.service';
 export class OrgUnitDetailsComponent implements OnInit {
 
   public orgUnit: OrgUnit;
-  userSupport: Array<Person>;
+  userSupport: ListItem[];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService,
               private location: Location, private analyticsService: AnalyticsService) {
@@ -36,10 +36,10 @@ export class OrgUnitDetailsComponent implements OnInit {
         }
       );
 
-      const searchParams = new PeopleSearchParams();
-      searchParams.setOrgUnits([id]);
-      searchParams.setRoleTypes([3]);
-      this.apiService.getPeople(searchParams).subscribe(people => {
+      const peopleParams = new PeopleParams();
+      peopleParams.setOrgUnits([id]);
+      peopleParams.setRoleTypes([3]);
+      this.apiService.getPeople(peopleParams).subscribe(people => {
         this.userSupport = people.content;
       });
     });

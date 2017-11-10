@@ -53,7 +53,7 @@ export class RequestVmComponent implements OnInit {
       comments: ['']
     });
 
-    this.apiService.getContentItem(this.researchVmContentId).subscribe(
+    this.apiService.getContent(this.researchVmContentId).subscribe(
       content => {
         this.content = content;
       });

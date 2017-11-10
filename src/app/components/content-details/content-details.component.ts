@@ -1,12 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ApiService, PeopleSearchParams} from 'app/services/api.service';
+import {ApiService, PeopleParams} from 'app/services/api.service';
 import {Content} from 'app/model/Content';
 import marked from 'marked';
-import { Location } from '@angular/common';
-import {Person} from 'app/model/Person';
+import {Location} from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
-// import {ContentTypeIds} from 'app/services/options.service';
+import {ListItem} from '../../model/ListItem';
+import {ContentTypeId} from '../../services/options.service';
+import {Subscription} from 'rxjs/Subscription';
+import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+import {LayoutService} from '../../services/layout.service';
 
 
 @Component({
@@ -14,17 +17,19 @@ import {AnalyticsService} from 'app/services/analytics.service';
   templateUrl: './content-details.component.html',
   styleUrls: ['./content-details.component.scss']
 })
-export class ContentDetailsComponent implements OnInit {
+export class ContentDetailsComponent implements OnInit, OnDestroy {
 
   content: Content;
-  similarContentItems: Array<Content>;
-  userSupport: Array<Person>;
-  isKnowledgeArticle = false;
+  similarContentItems: Content[];
+  userSupport: ListItem[];
+  numCols = 1;
+  mediaSub: Subscription;
 
   // this.analyticsService.trackGo(this.goEventCategory, this.title, this.goHref);
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService,
-              private location: Location, private analyticsService: AnalyticsService, private router: Router) {
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private media: ObservableMedia,
+              private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService,
+              private router: Router) {
 
     // Configure marked
     marked.setOptions({
@@ -39,6 +44,20 @@ export class ContentDetailsComponent implements OnInit {
     });
   }
 
+  isGuide() {
+    return this.includesContentType(ContentTypeId.Guide);
+  }
+
+  isKnowledgeArticle() {
+    return this.includesContentType(ContentTypeId.KnowledgeArticle);
+  }
+
+  private includesContentType(contentTypeId: ContentTypeId): boolean {
+    return this.content.contentTypes.filter((item) => {
+      return item.id === contentTypeId;
+    }).length > 0;
+  }
+
   launchService(content) {
     if (content.actionType['id'] === 1) {
       this.router.navigate(['/' + content.action]);
@@ -49,35 +68,47 @@ export class ContentDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       const id = params['contentId'];
 
-      this.apiService.getContentItem(id).subscribe(
+      this.apiService.getContent(id).subscribe(
         content => {
           const url = this.location.path();
           const name = content.name;
-
-          this.analyticsService.trackContent(name, url);
           this.content = content;
 
-          // if (this.content.contentTypes !== undefined) {
-          //   this.isKnowledgeArticle = this.content.contentTypes.filter(contentType => {
-          //     return contentType.id === ContentTypeIds.KnowledgeArticle;
-          //   }).length > 0;
-          // }
+          console.log('content: ', content);
+
+          if (!this.isGuide()) {
+            this.analyticsService.trackContent(name, url);
+
+            this.apiService.getSimilarContentItems(id).subscribe(
+              contentItems => {
+                this.similarContentItems = contentItems;
+              }
+            );
+
+            const peopleParams = new PeopleParams();
+            peopleParams.setContentItems([id]);
+            peopleParams.setRoleTypes([3]);
+
+            this.apiService.getPeople(peopleParams).subscribe(userSupport => {
+              this.userSupport = userSupport.content;
+            });
+          } else {
+            this.analyticsService.trackGuide(name, url);
+
+            this.numCols = this.layoutService.getNumGridCols(this.layoutService.getMQAlias());
+
+            this.mediaSub = this.media.subscribe((change: MediaChange) => {
+              this.numCols = this.layoutService.getNumGridCols(change.mqAlias);
+            });
+          }
         }
       );
-
-      this.apiService.getSimilarContentItems(id).subscribe(
-        contentItems => {
-          this.similarContentItems = contentItems;
-        }
-      );
-
-      const searchParams = new PeopleSearchParams();
-      searchParams.setContentItems([id]);
-      searchParams.setRoleTypes([3]);
-
-      this.apiService.getPeople(searchParams).subscribe(userSupport => {
-        this.userSupport = userSupport.content;
-      });
     });
+  }
+
+  ngOnDestroy() {
+    if (this.mediaSub) {
+      this.mediaSub.unsubscribe();
+    }
   }
 }

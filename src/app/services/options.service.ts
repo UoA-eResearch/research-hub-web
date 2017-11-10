@@ -1,13 +1,23 @@
 import {Injectable} from '@angular/core';
 
 
-export enum OptionTypes {
+export enum OptionType {
   ResearchActivity = 1,
   Category,
   Menu
 }
 
-export enum ResearchActivityIds {
+export enum ContentTypeId {
+  Support = 1,
+  Equipment,
+  Training,
+  Software,
+  Facilities,
+  KnowledgeArticle,
+  Guide
+}
+
+export enum ResearchActivityId {
   PlanDesign = 1,
   CreateCollectCapture,
   AnalyzeInterpret,
@@ -15,7 +25,7 @@ export enum ResearchActivityIds {
   DiscoverReuse
 }
 
-export enum CategoryIds {
+export enum CategoryId {
   All = 1,
   Support,
   Equipment,
@@ -40,72 +50,81 @@ export class OptionsService {
   public researchActivityOptions: any[];
   public menuOptions: any[];
   public pageInfo: any;
+  public contentTypeMap: any;
 
   constructor() {
+    this.contentTypeMap = {};
+    this.contentTypeMap[CategoryId.Support] = [ContentTypeId.Support];
+    this.contentTypeMap[CategoryId.Equipment] = [ContentTypeId.Equipment];
+    this.contentTypeMap[CategoryId.Training] = [ContentTypeId.Training];
+    this.contentTypeMap[CategoryId.Software] = [ContentTypeId.Software];
+    this.contentTypeMap[CategoryId.Facilities] = [ContentTypeId.Facilities];
+    this.contentTypeMap[CategoryId.Guide] = [ContentTypeId.Guide, ContentTypeId.KnowledgeArticle];
+
     this.categoryOptions = [
-      {id: CategoryIds.All, name: 'All Categories', icon: '', type: OptionTypes.Category},
-      {id: CategoryIds.Support, name: 'Services & Support', icon: 'escalator', type: OptionTypes.Category},
-      {id: CategoryIds.Equipment, name: 'Equipment', icon: 'math-compass', type: OptionTypes.Category},
-      {id: CategoryIds.Training, name: 'Training', icon: 'bike', type: OptionTypes.Category},
-      {id: CategoryIds.Software, name: 'Software', icon: 'laptop-windows', type: OptionTypes.Category},
-      {id: CategoryIds.Facilities, name: 'Facilities', icon: 'castle', type: OptionTypes.Category},
-      {id: CategoryIds.Guide, name: 'Guides', icon: 'book-open-variant', type: OptionTypes.Category},
-      {id: CategoryIds.Person, name: 'People', icon: 'face', type: OptionTypes.Category},
-      {id: CategoryIds.Policies, name: 'Policies', icon: 'bank', type: OptionTypes.Category}
+      {id: CategoryId.All, name: 'All Categories', icon: '', type: OptionType.Category},
+      {id: CategoryId.Support, name: 'Services & Support', icon: 'escalator', type: OptionType.Category},
+      {id: CategoryId.Equipment, name: 'Equipment', icon: 'math-compass', type: OptionType.Category},
+      {id: CategoryId.Training, name: 'Training', icon: 'bike', type: OptionType.Category},
+      {id: CategoryId.Software, name: 'Software', icon: 'laptop-windows', type: OptionType.Category},
+      {id: CategoryId.Facilities, name: 'Facilities', icon: 'castle', type: OptionType.Category},
+      {id: CategoryId.Guide, name: 'Guides', icon: 'book-open-variant', type: OptionType.Category},
+      {id: CategoryId.Person, name: 'People', icon: 'face', type: OptionType.Category},
+      {id: CategoryId.Policies, name: 'Policies', icon: 'bank', type: OptionType.Category}
     ];
 
     this.researchActivityOptions = [
       {
-        id: ResearchActivityIds.PlanDesign,
+        id: ResearchActivityId.PlanDesign,
         name: 'Plan & Design',
         icon: 'mdi-timetable',
         className: 'plan',
-        type: OptionTypes.ResearchActivity
+        type: OptionType.ResearchActivity
       },
       {
-        id: ResearchActivityIds.CreateCollectCapture,
+        id: ResearchActivityId.CreateCollectCapture,
         name: 'Create, Collect & Capture',
         icon: 'mdi-google-circles-extended',
         className: 'create',
-        type: OptionTypes.ResearchActivity
+        type: OptionType.ResearchActivity
       },
       {
-        id: ResearchActivityIds.AnalyzeInterpret,
+        id: ResearchActivityId.AnalyzeInterpret,
         name: 'Analyze & Interpret',
         icon: 'mdi-chart-areaspline',
         className: 'analyze',
-        type: OptionTypes.ResearchActivity
+        type: OptionType.ResearchActivity
       },
       {
-        id: ResearchActivityIds.PublishReport,
+        id: ResearchActivityId.PublishReport,
         name: 'Publish & Report',
         icon: 'mdi-cube-send',
         className: 'publish',
-        type: OptionTypes.ResearchActivity
+        type: OptionType.ResearchActivity
       },
       {
-        id: ResearchActivityIds.DiscoverReuse,
+        id: ResearchActivityId.DiscoverReuse,
         name: 'Discover & Reuse',
         icon: 'mdi-sync',
         className: 'discover',
-        type: OptionTypes.ResearchActivity
+        type: OptionType.ResearchActivity
       }
     ];
 
     this.menuOptions = [
-      {name: 'Search', icon: 'search', routerLink: '/search', type: OptionTypes.Menu},
-      {name: 'Browse', icon: 'view_list', routerLink: '', sublist: this.categoryOptions, type: OptionTypes.Menu},
+      {name: 'Search', icon: 'search', routerLink: '/search', type: OptionType.Menu},
+      {name: 'Browse', icon: 'view_list', routerLink: '', sublist: this.categoryOptions, type: OptionType.Menu},
       {
         name: 'Research Activities',
         icon: 'school',
         routerLink: '',
         sublist: this.researchActivityOptions,
-        type: OptionTypes.Menu
+        type: OptionType.Menu
       },
-      {name: 'Join User Study', icon: 'people', routerLink: '/feedback', type: OptionTypes.Menu},
-      {name: 'Provide Feedback', icon: 'thumbs_up_down', routerLink: '/feedback', type: OptionTypes.Menu},
-      {name: 'Contact Us', icon: 'phone', routerLink: '/contact', type: OptionTypes.Menu},
-      {name: 'About Us', icon: 'info', routerLink: '/about', type: OptionTypes.Menu}
+      {name: 'Join User Study', icon: 'people', routerLink: '/feedback', type: OptionType.Menu},
+      {name: 'Provide Feedback', icon: 'thumbs_up_down', routerLink: '/feedback', type: OptionType.Menu},
+      {name: 'Contact Us', icon: 'phone', routerLink: '/contact', type: OptionType.Menu},
+      {name: 'About Us', icon: 'info', routerLink: '/about', type: OptionType.Menu}
     ];
 
     this.pageInfo = {

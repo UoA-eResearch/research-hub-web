@@ -14,7 +14,7 @@
         <h2>Organisational units</h2>
         <mat-nav-list>
           <mat-list-item *ngFor="let item of person.orgUnits" [routerLink]="item.getRouterLink()">
-            <h3 mat-line> {{item.getTitle()}} </h3>
+            <h3 mat-line> {{item.title}} </h3>
           </mat-list-item>
         </mat-nav-list>
       </mat-card>
@@ -24,7 +24,7 @@
         <mat-nav-list>
           <mat-list-item *ngFor="let item of supportedContent" [routerLink]="item.getRouterLink()">
             <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
-            <h3 mat-line> {{item.getTitle()}} </h3>
+            <h3 mat-line> {{item.title}} </h3>
             <p mat-line>{{item.getSubtitle()}}</p>
           </mat-list-item>
         </mat-nav-list>

@@ -2,11 +2,12 @@ import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/c
 import {FormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs/Subscription';
 import {Tag} from '../mat-tags/mat-tags.component';
-import {CategoryIds, OptionsService} from '../../../services/options.service';
-import {GetResultsListItem} from 'app/model/ResultsListItemInterface';
-import {ApiService, PeopleSearchParams, SearchParams} from 'app/services/api.service';
+import {OptionsService} from '../../../services/options.service';
+import {ApiService, PeopleParams, Params} from 'app/services/api.service';
 import {Observable} from 'rxjs/Observable';
-import {SearchResultsComponent} from "../search-results.component";
+import {SearchResultsComponent} from '../search-results.component';
+import {ListItem} from '../../../model/ListItem';
+import {OrgUnit} from '../../../model/OrgUnit';
 
 
 @Component({
@@ -38,18 +39,18 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
       this.updateFilterVisibility(categoryId);
     });
 
-    const peopleSearchParams = new PeopleSearchParams();
-    peopleSearchParams.setRoleTypes([3]);
+    const peopleParams = new PeopleParams();
+    peopleParams.setRoleTypes([3]);
 
     this.dataSub = Observable
       .forkJoin(
-        this.apiService.getPeople(peopleSearchParams),
-        this.apiService.getOrgUnits(new SearchParams())
+        this.apiService.getPeople(peopleParams),
+        this.apiService.getOrgUnits(new Params())
       ).subscribe(latestValues => {
-        const [peoplePage, orgUnitsPage] = latestValues;
+        const [peoplePage, orgUnitPage] = latestValues;
 
-        this.personTagSource = this.toTags(peoplePage.content);
-        this.orgUnitTagSource = this.toTags(orgUnitsPage.content);
+        this.personTagSource = this.listItemToTags(peoplePage.content);
+        this.orgUnitTagSource = this.orgUnitToTags(orgUnitPage.content);
       });
   }
 
@@ -57,9 +58,15 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
     this.dataSub.unsubscribe();
   }
 
-  toTags(items: GetResultsListItem[]) {
+  listItemToTags(items: ListItem[]) {
     return items.map(item => {
-      return {id: item.getId(), text: item.getTitle(), imageUrl: this.apiService.getAssetUrl(item.getImage())};
+      return {id: item.id, text: item.title, imageUrl: this.apiService.getAssetUrl(item.image)};
+    });
+  }
+
+  orgUnitToTags(items: OrgUnit[]) {
+    return items.map(item => {
+      return {id: item.id, text: item.name, imageUrl: undefined};
     });
   }
 

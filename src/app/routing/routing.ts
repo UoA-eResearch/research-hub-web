@@ -13,7 +13,6 @@ export const appRoutes: Routes = [
   {path: 'orgUnit/:orgUnitId', loadChildren: 'app/components/org-unit-details/org-unit-details.module#OrgUnitDetailsModule'},
   {path: 'person/:personId', loadChildren: 'app/components/person-details/person-details.module#PersonDetailsModule'},
   {path: 'content/:contentId',  loadChildren: 'app/components/content-details/content-details.module#ContentDetailsModule'},
-  {path: 'guide/:guideId', loadChildren: 'app/components/guide-details/guide-details.module#GuideDetailsModule'},
   {path: 'guideCategory/:guideCategoryId', loadChildren: 'app/components/guide-category/guide-category.module#GuideCategoryModule'},
 
   {path: 'requestVm', loadChildren: 'app/components/request-vm/request-vm.module#RequestVmModule', canActivate: [CanActivateViaAuthGuard]},

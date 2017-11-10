@@ -1,36 +1,36 @@
 import {Injectable} from '@angular/core';
-import {Http, URLSearchParams, Headers} from '@angular/http';
-import {Page} from '../model/Page';
-import {Person} from '../model/Person';
-import {Content} from '../model/Content';
+import {HttpClient} from '@angular/common/http';
 import {environment} from 'environments/environment';
-import {Policy} from '../model/Policy';
-import {OrgUnit} from '../model/OrgUnit';
-import {GuideCategory} from '../model/GuideCategory';
 import * as format from 'date-fns/format';
 import 'rxjs/add/operator/map';
+import {Content} from '../model/Content';
+import {GuideCategory} from '../model/GuideCategory';
+import {Person} from '../model/Person';
+import {OrgUnit} from '../model/OrgUnit';
+import {Page} from '../model/Page';
+import {ListItem} from '../model/ListItem';
 
 
 export enum OrderBy {
-  Relevance = 1,
-  Alphabetical
+  Relevance = 'relevance',
+  Alphabetical = 'alphabetical'
 }
 
 
-export class SearchParams {
+export class Params {
   private page = 0;
   private size = 1000;
   private searchText: string;
   private orderBy: OrderBy = OrderBy.Relevance;
 
-  public static getIdArrayUrlParams(params: URLSearchParams, names: string[], idArrays: number[][]) {
+  public static getIdArrayParams(params: any, names: string[], idArrays: number[][]): any {
 
     for (let i = 0; i < names.length; i++) {
       const name = names[i];
       const variable = idArrays[i];
 
       if (variable != null && variable.length > 0) {
-        params.set(name, variable.join(','));
+        params[name] = variable.join(',');
       }
     }
 
@@ -53,8 +53,8 @@ export class SearchParams {
     this.orderBy = orderBy;
   }
 
-  public getUrlSearchParams() {
-    const params = new URLSearchParams();
+  public getParams(): any {
+    const params = {};
 
     let page = this.page;
     let size = this.size;
@@ -66,27 +66,22 @@ export class SearchParams {
       size = 1;
     }
 
-    params.set('page', page.toString());
-    params.set('size', size.toString());
+    params['page'] = page.toString();
+    params['size'] = size.toString();
 
     if (this.searchText != null && this.searchText.trim() !== '') {
-      params.set('searchText', this.searchText.trim());
+      params['searchText'] = this.searchText.trim();
     }
 
-    // TODO: replace when upgrade to typescript 2.4 which supports string enums
-    if (this.orderBy === OrderBy.Relevance) {
-      params.set('orderBy', 'relevance');
-    } else if (this.orderBy === OrderBy.Alphabetical) {
-      params.set('orderBy', 'alphabetical');
-    }
+    params['orderBy'] = this.orderBy;
+
+    console.log('this.orderBy', this.orderBy); // TODO: remove
 
     return params;
   }
 }
 
-
-
-export class PeopleSearchParams extends SearchParams {
+export class PeopleParams extends Params {
 
   private orgUnits: number[];
   private contentItems: number[];
@@ -104,22 +99,43 @@ export class PeopleSearchParams extends SearchParams {
     this.roleTypes = roleTypes;
   }
 
-  public getUrlSearchParams() {
-    const params = super.getUrlSearchParams();
+  public getParams(): any {
+    const params = super.getParams();
 
     const names = ['orgUnits', 'contentItems', 'roleTypes'];
     const variables = [this.orgUnits, this.contentItems, this.roleTypes];
-    SearchParams.getIdArrayUrlParams(params, names, variables);
+    Params.getIdArrayParams(params, names, variables);
 
     return params;
   }
 }
 
-export class SearchResultsSearchParams extends SearchParams {
+export class SearchResultsParams extends Params {
 
+  private objectType: string;
   private people: number[];
   private orgUnits: number[];
   private researchPhases: number[];
+
+  private contentItems: number[];
+  private roleTypes: number[];
+  private contentTypes: number[];
+
+  public setObjectType(objectType: string) {
+    this.objectType = objectType;
+  }
+
+  public setContentTypes(contentTypes: number[]) {
+    this.contentTypes = contentTypes;
+  }
+
+  public setContentItems(contentItems: number[]) {
+    this.contentItems = contentItems;
+  }
+
+  public setRoleTypes(roleTypes: number[]) {
+    this.roleTypes = roleTypes;
+  }
 
   public setResearchPhases(researchPhases: number[]) {
     this.researchPhases = researchPhases;
@@ -133,19 +149,20 @@ export class SearchResultsSearchParams extends SearchParams {
     this.orgUnits = orgUnits;
   }
 
-  public getUrlSearchParams() {
-    const params = super.getUrlSearchParams();
+  public getParams(): any {
+    const params = super.getParams();
+    params['objectType'] = this.objectType;
 
-    const names = ['researchPhases', 'people', 'orgUnits'];
-    const variables = [this.researchPhases, this.people, this.orgUnits];
-    SearchParams.getIdArrayUrlParams(params, names, variables);
+    const names = ['orgUnits', 'contentItems', 'roleTypes', 'contentTypes', 'people', 'researchPhases'];
+    const variables = [this.orgUnits, this.contentItems, this.roleTypes, this.contentTypes, this.people, this.researchPhases];
+    Params.getIdArrayParams(params, names, variables);
 
     return params;
   }
 }
 
 
-export class ContentItemsSearchParams extends SearchParams {
+export class ContentItemsParams extends Params {
 
   private contentTypes: number[];
   private researchPhases: number[];
@@ -173,12 +190,12 @@ export class ContentItemsSearchParams extends SearchParams {
     this.orgUnits = orgUnits;
   }
 
-  public getUrlSearchParams() {
-    const params = super.getUrlSearchParams();
+  public getParams(): any {
+    const params = super.getParams();
 
     const names = ['contentTypes', 'researchPhases', 'people', 'roleTypes', 'orgUnits'];
     const variables = [this.contentTypes, this.researchPhases, this.people, this.roleTypes, this.orgUnits];
-    SearchParams.getIdArrayUrlParams(params, names, variables);
+    Params.getIdArrayParams(params, names, variables);
 
     return params;
   }
@@ -188,20 +205,20 @@ export class ContentItemsSearchParams extends SearchParams {
 @Injectable()
 export class ApiService {
 
-  private static POLICY_URL = 'policy';
-  private static PERSON_URL = 'person';
-  private static CATEGORY_URL = 'category';
-  private static GUIDE_CATEGORY_URL = 'guideCategory';
-  private static CONTENT_URL = 'content';
-  private static SIMILAR_CONTENT_URL = 'similar';
-  private static ORG_UNIT_URL = 'orgUnit';
-  private static ASSET_URL = 'assets/';
-  private static VM_CONSULTATION = 'vmConsultation/create';
-  private static SEARCH_RESULTS_URL = 'search';
-  private host = environment.apiUrl;
+  private static policyUrl = 'policy';
+  private static personUrl = 'person';
+  private static guideCategoryUrl = 'guideCategory';
+  private static contentUrl = 'content';
+  private static similarContentUrl = 'similar';
+  private static orgUnitUrl = 'orgUnit';
+  private static assetUrl = 'assets/';
+  private static vmConsultationUrl = 'vmConsultation/create';
+  private static searchResultsUrl = 'search';
+  private static hostname = environment.apiUrl;
+  private static headers = {'Accept': 'application/json'};
 
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
 
   }
 
@@ -213,116 +230,71 @@ export class ApiService {
       comments: comments
     };
 
-    return this.http.post(this.host + ApiService.VM_CONSULTATION, body).map((response) => response.json());
+    return this.http.post(ApiService.hostname + ApiService.vmConsultationUrl, body);
   }
 
   getAssetUrl(fileName: string) {
-    const uriComponent = this.host + ApiService.ASSET_URL + fileName;
+    const uriComponent = ApiService.hostname + ApiService.assetUrl + fileName;
     return encodeURI(uriComponent.trim());
   }
 
-  getCategory(categoryName) {
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
+  getContent(id: number) {
     return this.http
-      .get(this.host + ApiService.CATEGORY_URL + '/' + categoryName, {headers: headers})
-      .map((response) => response.json());
+      .get(ApiService.hostname + ApiService.contentUrl + '/' + id, {headers: ApiService.headers})
+      .map(response => response as Content);
   }
 
-  getSearchResults(searchParams: SearchResultsSearchParams) {
-    const search = searchParams.getUrlSearchParams();
-
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
+  getPerson(id: number) {
     return this.http
-      .get(this.host + ApiService.SEARCH_RESULTS_URL, {search: search, headers: headers})
-      .map((response) => Page.fromObject<any>(response.json(), (obj) =>  obj));
+      .get(ApiService.hostname + ApiService.personUrl + '/' + id, {headers: ApiService.headers})
+      .map(response => response as Person);
   }
 
-  getContentItems(searchParams: ContentItemsSearchParams) {
-    const search = searchParams.getUrlSearchParams();
-
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
+  getOrgUnit(id: number) {
     return this.http
-      .get(this.host + ApiService.CONTENT_URL, {search: search, headers: headers})
-      .map((response) => Page.fromObject<Content>(response.json(), Content.fromObjects));
+      .get(ApiService.hostname + ApiService.orgUnitUrl + '/' + id, {headers: ApiService.headers})
+      .map(response => response as OrgUnit);
+  }
+
+  getGuideCategory(id: number) {
+    return this.http
+      .get(ApiService.hostname + ApiService.guideCategoryUrl + '/' + id, {headers: ApiService.headers})
+      .map(response => response as GuideCategory);
+  }
+
+  getSearchResults(params: SearchResultsParams) {
+    return this.http
+      .get(ApiService.hostname + ApiService.searchResultsUrl, {params: params.getParams(), headers: ApiService.headers})
+      .map(response => response as Page<ListItem>);
+  }
+
+  getContentItems(params: ContentItemsParams) {
+    return this.http
+      .get(ApiService.hostname + ApiService.contentUrl, {params: params.getParams(), headers: ApiService.headers})
+      .map(response => response as Page<ListItem>);
   }
 
   getSimilarContentItems(id: number) {
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
     return this.http
-      .get(this.host + ApiService.CONTENT_URL + '/' + id + '/' + ApiService.SIMILAR_CONTENT_URL, {headers: headers})
-      .map((response) => Content.fromObjects(response.json()));
+      .get(ApiService.hostname + ApiService.contentUrl + '/' + id + '/' + ApiService.similarContentUrl, {headers: ApiService.headers})
+      .map(response => response as Content[]);
   }
 
-  getContentItem(id) {
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
+  getPeople(params: PeopleParams) {
     return this.http
-      .get(this.host + ApiService.CONTENT_URL + '/' + id, {headers: headers})
-      .map((response) => Content.fromObject(response.json()));
+      .get(ApiService.hostname + ApiService.personUrl, {params: params.getParams(), headers: ApiService.headers})
+      .map(response => response as Page<ListItem>);
   }
 
-  getGuideCategory(guideCategoryId) {
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
+  getOrgUnits(params: Params) {
     return this.http
-      .get(this.host + ApiService.GUIDE_CATEGORY_URL + '/' + guideCategoryId, {headers: headers})
-      .map((response) => GuideCategory.fromObject(response.json()));
+      .get(ApiService.hostname + ApiService.orgUnitUrl, {params: params.getParams(), headers: ApiService.headers})
+      .map(response => response as Page<OrgUnit>);
   }
 
-  getPeople(searchParams: PeopleSearchParams) {
-    const search = searchParams.getUrlSearchParams();
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
+  getPolicies(params: Params) {
     return this.http
-      .get(this.host + ApiService.PERSON_URL, {search: search, headers: headers})
-      .map((response) => Page.fromObject<Person>(response.json(), Person.fromObjects));
-  }
-
-  getPolicies(searchParams: SearchParams) {
-    const search = searchParams.getUrlSearchParams();
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
-    return this.http
-      .get(this.host + ApiService.POLICY_URL, {search: search, headers: headers})
-      .map((response) => Page.fromObject<Policy>(response.json(), Policy.fromObjects));
-  }
-
-  getPerson(id) {
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
-    return this.http
-      .get(this.host + ApiService.PERSON_URL + '/' + id, {headers: headers})
-      .map((response) => Person.fromObject(response.json()));
-  }
-
-  getOrgUnits(searchParams: SearchParams) {
-    const search = searchParams.getUrlSearchParams();
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
-    return this.http
-      .get(this.host + ApiService.ORG_UNIT_URL, {search: search, headers: headers})
-      .map((response) => Page.fromObject<OrgUnit>(response.json(), OrgUnit.fromObjects));
-  }
-
-  getOrgUnit(id) {
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
-
-    return this.http
-      .get(this.host + ApiService.ORG_UNIT_URL + '/' + id, {headers: headers})
-      .map((response) => OrgUnit.fromObject(response.json()));
+      .get(ApiService.hostname + ApiService.policyUrl, {params: params.getParams(), headers: ApiService.headers})
+      .map(response => response as Page<ListItem>);
   }
 }
