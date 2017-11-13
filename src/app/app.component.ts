@@ -52,9 +52,9 @@ export class AppComponent implements OnInit, OnDestroy {
     const type = item['type'];
 
     if (type === OptionType.Category) {
-      return { researchActivities: [], searchText: '', category: item.id};
+      return {categoryId: item.id};
     } else {
-      return { researchActivities: [item.id], searchText: '', category: CategoryId.All};
+      return {researchActivityIds: [item.id]};
     }
   }
 
@@ -68,7 +68,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.searchTextChangeSub = this.searchBarService.searchTextChange.distinctUntilChanged().subscribe(searchText => {
       const url = this.location.path();
       if (url && !url.startsWith('/search') && searchText != null && searchText !== '') {
-        this.router.navigate(['/search']);
+        this.router.navigate(['/search'], {
+          queryParams: {
+            categoryId: this.searchBarService.category,
+            searchText: this.searchBarService.searchText
+          }
+        });
       }
     });
 
