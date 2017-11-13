@@ -13,8 +13,8 @@
       <mat-card *ngIf="person.orgUnits.length">
         <h2>Organisational units</h2>
         <mat-nav-list>
-          <mat-list-item *ngFor="let item of person.orgUnits" [routerLink]="item.getRouterLink()">
-            <h3 mat-line> {{item.title}} </h3>
+          <mat-list-item *ngFor="let orgUnit of person.orgUnits" [routerLink]="['/orgUnit', orgUnit.id]">
+            <h3 mat-line> {{orgUnit.name}} </h3>
           </mat-list-item>
         </mat-nav-list>
       </mat-card>
@@ -22,10 +22,10 @@
       <mat-card *ngIf="supportedContent && supportedContent.length">
         <h2>Supported resources</h2>
         <mat-nav-list>
-          <mat-list-item *ngFor="let item of supportedContent" [routerLink]="item.getRouterLink()">
+          <mat-list-item *ngFor="let item of supportedContent" [routerLink]="item | listItemToRouterLink">
             <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
             <h3 mat-line> {{item.title}} </h3>
-            <p mat-line>{{item.getSubtitle()}}</p>
+            <p mat-line>{{item.subtitle}}</p>
           </mat-list-item>
         </mat-nav-list>
       </mat-card>
