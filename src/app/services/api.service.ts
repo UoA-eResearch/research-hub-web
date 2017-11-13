@@ -75,8 +75,6 @@ export class Params {
 
     params['orderBy'] = this.orderBy;
 
-    console.log('this.orderBy', this.orderBy); // TODO: remove
-
     return params;
   }
 }

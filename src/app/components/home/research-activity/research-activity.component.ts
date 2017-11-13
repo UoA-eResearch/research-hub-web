@@ -13,7 +13,7 @@ export class ResearchActivityComponent implements OnInit {
   }
 
   getQueryParams(activity) {
-    return {categoryId: CategoryId.All, researchActivityIds: [activity.id]};
+    return {researchActivityIds: [activity.id]};
   }
 
   ngOnInit() {

@@ -83,7 +83,6 @@ export class AppComponent implements OnInit, OnDestroy {
         .subscribe(event => {
           // Need to use urlAfterRedirects rather than url to get correct routeName, even when route redirected automatically
           const routeName = this.getRouteName(event['urlAfterRedirects']);
-          console.log('routeName: ', routeName);
 
           if (routeName) {
             const pageInfo = this.optionsService.pageInfo[routeName];

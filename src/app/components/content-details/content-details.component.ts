@@ -74,8 +74,6 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
           const name = content.name;
           this.content = content;
 
-          console.log('content: ', content);
-
           if (!this.isGuide()) {
             this.analyticsService.trackContent(name, url);
 
