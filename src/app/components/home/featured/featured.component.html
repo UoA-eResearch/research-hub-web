@@ -11,8 +11,7 @@
           {{content.name}}
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button [routerLink]="content.getRouterLink()">Details</button>
-          <!--<a mat-button [href]="content.callToAction" target="_blank">Launch</a>-->
+          <button mat-button [routerLink]="['/content', content.id]">Details</button>
         </mat-card-actions>
       </mat-card>
     </div>
