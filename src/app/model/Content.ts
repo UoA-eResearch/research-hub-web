@@ -2,6 +2,7 @@ import {Person} from './Person';
 import {OrgUnit} from './OrgUnit';
 import {Policy} from './Policy';
 import {GuideCategory} from './GuideCategory';
+import {ItemRef} from './ItemRef';
 
 
 export interface Content {
@@ -12,7 +13,7 @@ export interface Content {
   actionableInfo: string;
   additionalInfo: string;
   action: string;
-  actionType: string;
+  actionType: ItemRef;
   image: string;
   orgUnits: Array<OrgUnit>;
   people: Array<Person>;

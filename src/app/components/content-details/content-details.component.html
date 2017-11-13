@@ -1,7 +1,7 @@
 <ng-container *ngIf="content && !isGuide()">
-  <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="1em">
-    <div class="flex-hack" fxFlex="40" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="2" [ngStyle.lt-lg]="{'margin-top': '1em'}">
-      <div fxHide.lt-lg>
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em">
+    <div class="flex-hack" fxFlex="40" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-md="2" [ngStyle.lt-lg]="{'margin-top': '1em'}">
+      <div fxHide.lt-md>
         <img style="width:100%; height:auto;" [src]="apiService.getAssetUrl(content.image)">
       </div>
 
@@ -42,16 +42,19 @@
       </mat-card>
     </div>
 
-    <div class="flex-hack" fxFlex="60" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-lg="1">
+    <div class="flex-hack" fxFlex="60" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-md="1">
       <mat-card [ngClass]="{'description': !isKnowledgeArticle()}" class="description">
         <h1>{{content.name}}</h1>
         <app-markdown [data]="content.description"></app-markdown>
-        <button mat-fab style="position: absolute;z-index: 100;bottom: -28px; right: 28px;" (click)="launchService(content)">
+        <a *ngIf="!isKnowledgeArticle() && !isIntegratedService()" mat-fab class="card-fab" [href]="content.action" target="_blank">
+          <mat-icon>add</mat-icon>
+        </a>
+        <button *ngIf="!isKnowledgeArticle() && isIntegratedService()" mat-fab class="card-fab" [routerLink]="['/'+ content.action]">
           <mat-icon>add</mat-icon>
         </button>
       </mat-card>
 
-      <div fxHide.gt-md>
+      <div fxHide.gt-sm>
         <img fxFlexFill [src]="apiService.getAssetUrl(content.image)">
       </div>
 
@@ -69,6 +72,7 @@
 <ng-container *ngIf="content && isGuide()">
   <div fxLayout="column" fxLayoutGap="1em">
     <mat-card class="description">
+      <h1>{{content.name}}</h1>
       <app-markdown [data]="content.description"></app-markdown>
     </mat-card>
 

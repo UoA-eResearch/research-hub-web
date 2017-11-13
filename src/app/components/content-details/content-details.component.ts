@@ -6,7 +6,7 @@ import marked from 'marked';
 import {Location} from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {ListItem} from '../../model/ListItem';
-import {ContentTypeId} from '../../services/options.service';
+import {ActionTypeId, ContentTypeId} from '../../services/options.service';
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {LayoutService} from '../../services/layout.service';
@@ -58,11 +58,17 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
     }).length > 0;
   }
 
-  launchService(content) {
-    if (content.actionType['id'] === 1) {
-      this.router.navigate(['/' + content.action]);
-    }
+  isIntegratedService() {
+    return this.content.actionType.id === ActionTypeId.Integrated;
   }
+  //
+  // Service(content) {
+  //   if (content.actionType.id === ActionTypeId.Integrated) {
+  //     this.router.navigate(['/' + content.action]);
+  //   } else {
+  //
+  //   }
+  // }
 
   ngOnInit() {
     this.route.params.subscribe(params => {

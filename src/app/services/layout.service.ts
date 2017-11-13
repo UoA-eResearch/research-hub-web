@@ -15,7 +15,7 @@ export class LayoutService {
         numCols = 2;
         break;
       case 'sm':
-        numCols = 3;
+        numCols = 2;
         break;
       case 'md':
         numCols = 3;

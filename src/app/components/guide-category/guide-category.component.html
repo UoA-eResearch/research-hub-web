@@ -1,11 +1,12 @@
 <ng-container *ngIf="guideCategory">
   <div fxLayout="column" fxLayoutGap="2em">
     <mat-card class="description">
+      <h1>{{guideCategory.name}}</h1>
       <app-markdown [data]="guideCategory.description"></app-markdown>
     </mat-card>
 
     <mat-card *ngIf="guideCategory.contentItems && guideCategory.contentItems.length">
-      <h2>Content items</h2>
+      <h2>Resources</h2>
       <mat-nav-list>
         <mat-list-item *ngFor="let content of guideCategory.contentItems" [routerLink]="['/content', content.id]">
           <img mat-list-avatar [src]="apiService.getAssetUrl(content.image)">

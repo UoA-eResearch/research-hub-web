@@ -37,6 +37,12 @@ export enum CategoryId {
   Policies
 }
 
+export enum ActionTypeId {
+  Integrated = 1,
+  ExternalUrl,
+  ExternalMailTo
+}
+
 
 @Injectable()
 export class OptionsService {
@@ -62,10 +68,10 @@ export class OptionsService {
     this.contentTypeMap[CategoryId.Guide] = [ContentTypeId.Guide, ContentTypeId.KnowledgeArticle];
 
     this.categoryOptions = [
-      {id: CategoryId.All, name: 'All Categories', icon: '', type: OptionType.Category},
-      {id: CategoryId.Support, name: 'Services & Support', icon: 'escalator', type: OptionType.Category},
+      {id: CategoryId.All, name: 'All Categories', icon: 'earth', type: OptionType.Category},
+      {id: CategoryId.Support, name: 'Services', icon: 'help-circle', type: OptionType.Category},
       {id: CategoryId.Equipment, name: 'Equipment', icon: 'math-compass', type: OptionType.Category},
-      {id: CategoryId.Training, name: 'Training', icon: 'bike', type: OptionType.Category},
+      {id: CategoryId.Training, name: 'Training', icon: 'school', type: OptionType.Category},
       {id: CategoryId.Software, name: 'Software', icon: 'laptop-windows', type: OptionType.Category},
       {id: CategoryId.Facilities, name: 'Facilities', icon: 'castle', type: OptionType.Category},
       {id: CategoryId.Guide, name: 'Guides', icon: 'book-open-variant', type: OptionType.Category},
