@@ -3,9 +3,9 @@ import {ListItem} from '../model/ListItem';
 
 
 @Pipe({
-  name: 'listItemRouterLink'
+  name: 'listItemToRouterLink'
 })
-export class ListItemRouterLinkPipe implements PipeTransform {
+export class ListItemToRouterLinkPipe implements PipeTransform {
 
   transform(listItem: ListItem): any[] {
       const route = ['/']; // Makes an absolute change to the route
