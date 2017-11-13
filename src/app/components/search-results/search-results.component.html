@@ -19,7 +19,7 @@
   <mat-nav-list>
     <ng-container *ngFor="let item of resultsPage.content">
       <ng-container *ngIf="item.type !== 'policy'">
-        <mat-list-item [routerLink]="item | listItemRouterLink">
+        <mat-list-item [routerLink]="item | listItemToRouterLink">
           <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
           <h3 mat-line> {{item.title}} </h3>
           <p mat-line>
