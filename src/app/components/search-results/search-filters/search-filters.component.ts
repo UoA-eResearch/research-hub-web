@@ -35,6 +35,9 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.updateFilterVisibility(this.filtersForm.controls.categoryId.value); // Set inital filter visibility based on current category id
+
+    // Update filter visibility when categoryId changes
     this.searchCatSub = this.filtersForm.controls.categoryId.valueChanges.subscribe((categoryId) => {
       this.updateFilterVisibility(categoryId);
     });
