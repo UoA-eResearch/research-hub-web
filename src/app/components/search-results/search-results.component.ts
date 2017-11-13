@@ -136,21 +136,20 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       this.route.queryParams
       .subscribe(params => {
         // These need to be set initially so that the combineLatest observable will fire
-        const categoryId = +(params['categoryId'] || this.searchBarService.category);
-        const searchText = typeof params['searchText'] === 'string' ? params['searchText'] : this.searchBarService.searchText;
+        // Always set category id and search text  from url if you want to change them
+        const categoryId = +(params['categoryId'] || CategoryId.All);
+        const searchText = typeof params['searchText'] === 'string' ? params['searchText'] : '';
         const personIds = SearchResultsComponent.parseParamArray(params['personIds']);
         const orgUnitIds = SearchResultsComponent.parseParamArray(params['orgUnitIds']);
         const researchActivityIds = SearchResultsComponent.parseParamArray(params['researchActivityIds']);
 
+        // Update values in search bar and search filters form
         this.searchBarService.setSearchText(searchText);
         this.searchBarService.setCategory(categoryId);
-
-        this.filtersForm.patchValue({
-          categoryId: categoryId,
-          personTags: this.toTags(personIds),
-          orgUnitTags: this.toTags(orgUnitIds),
-          researchActivityIds: researchActivityIds
-        });
+        this.filtersForm.controls.categoryId.setValue(categoryId);
+        this.filtersForm.controls.personTags.setValue(this.toTags(personIds));
+        this.filtersForm.controls.orgUnitTags.setValue(this.toTags(orgUnitIds));
+        this.filtersForm.controls.researchActivityIds.setValue(researchActivityIds);
       });
 
     this.buttonClickSub = this.toolbarService.buttonClickChange.subscribe((buttonName) => {
@@ -161,8 +160,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[]) {
-    console.log('Search for: ', categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
-
     // TODO: get string category
     // const friendlyCategoryId = '';
     // this.analyticsService.trackSearch(friendlyCategoryId, searchText);
@@ -172,23 +169,30 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.updateUrl(categoryId, searchText, personIds, orgUnitIds, researchActivityIds);
 
     const params = new SearchResultsParams();
-    params.setSearchText(searchText);
-    params.setPeople(personIds);
-    params.setOrgUnits(orgUnitIds);
-    params.setResearchPhases(researchActivityIds);
-    params.setRoleTypes([3]);
     params.setObjectType('all');
+    params.setSearchText(searchText);
 
     if (categoryId !== CategoryId.All) {
       if (categoryId === CategoryId.Policies) {
         params.setObjectType('policy');
       } else if (categoryId === CategoryId.Person) {
         params.setObjectType('person');
+        params.setOrgUnits(orgUnitIds);
+        params.setRoleTypes([3]);
       } else {
         const contentTypeIds = this.optionsService.contentTypeMap[categoryId];
-        params.setContentTypes(contentTypeIds);
         params.setObjectType('content');
+        params.setContentTypes(contentTypeIds);
+        params.setResearchPhases(researchActivityIds);
+        params.setPeople(personIds);
+        params.setRoleTypes([3]);
+        params.setOrgUnits(orgUnitIds);
       }
+    } else {
+      params.setPeople(personIds);
+      params.setRoleTypes([3]);
+      params.setOrgUnits(orgUnitIds);
+      params.setResearchPhases(researchActivityIds);
     }
 
     const resultsSub = this.apiService.getSearchResults(params).subscribe(page => {
