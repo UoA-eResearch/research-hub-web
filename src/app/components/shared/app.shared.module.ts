@@ -5,7 +5,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../../app.material.module';
 import {MarkdownComponent} from './markdown/markdown.component';
-import {ListItemRouterLinkPipe} from 'app/pipes/list-item-router-link.pipe';
+import {ListItemToRouterLinkPipe} from 'app/pipes/list-item-to-router-link.pipe';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import {ListItemRouterLinkPipe} from 'app/pipes/list-item-router-link.pipe';
   ],
   declarations: [
     MarkdownComponent,
-    ListItemRouterLinkPipe
+    ListItemToRouterLinkPipe
   ],
   exports: [
     FlexLayoutModule,
@@ -26,7 +26,7 @@ import {ListItemRouterLinkPipe} from 'app/pipes/list-item-router-link.pipe';
     ReactiveFormsModule,
     MaterialModule,
     MarkdownComponent,
-    ListItemRouterLinkPipe
+    ListItemToRouterLinkPipe
   ],
   providers: [
 
