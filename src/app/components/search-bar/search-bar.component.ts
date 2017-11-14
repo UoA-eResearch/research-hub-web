@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} fr
 import {SearchBarService} from './search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
 import {MatInput} from '@angular/material/input';
-import {ToolbarService} from "../../services/toolbar.service";
 
 
 @Component({
@@ -26,7 +25,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private searchCategoryChangeSub: Subscription;
   private searchTextChangeSub: Subscription;
 
-  constructor(private searchBarService: SearchBarService, private toolbarService: ToolbarService) {
+  constructor(private searchBarService: SearchBarService) {
   }
 
   ngOnInit() {
@@ -81,7 +80,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   openSearchFilter() {
-    this.toolbarService.setButtonClicked('filter');
+    this.searchBarService.setFilterButtonClicked();
   }
 
   clearSearchText() {

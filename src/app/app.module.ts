@@ -12,6 +12,7 @@ import {HeaderComponent} from './components/header/header.component';
 import {HeaderService} from './components/header/header.service';
 import {SearchBarComponent} from './components/search-bar/search-bar.component';
 import {SearchBarService} from './components/search-bar/search-bar.service';
+import {AppComponentService} from './app.component.service';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import {SearchBarService} from './components/search-bar/search-bar.service';
     RoutingModule
   ],
   entryComponents: [],
-  providers: [HeaderService, SearchBarService],
+  providers: [HeaderService, SearchBarService, AppComponentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

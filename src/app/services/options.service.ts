@@ -69,7 +69,7 @@ export class OptionsService {
 
     this.categoryOptions = [
       {id: CategoryId.All, name: 'All Categories', icon: 'earth', type: OptionType.Category},
-      {id: CategoryId.Support, name: 'Services', icon: 'help-circle', type: OptionType.Category},
+      {id: CategoryId.Support, name: 'Services', icon: 'ticket', type: OptionType.Category},
       {id: CategoryId.Equipment, name: 'Equipment', icon: 'math-compass', type: OptionType.Category},
       {id: CategoryId.Training, name: 'Training', icon: 'school', type: OptionType.Category},
       {id: CategoryId.Software, name: 'Software', icon: 'laptop-windows', type: OptionType.Category},

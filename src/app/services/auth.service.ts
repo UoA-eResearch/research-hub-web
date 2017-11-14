@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {environment} from 'environments/environment';
-import {Http, Headers} from '@angular/http';
 import {Subject} from 'rxjs/Subject';
 import {User} from '../model/User';
+import {HttpClient} from '@angular/common/http';
 
 
 @Injectable()
@@ -14,7 +14,7 @@ export class AuthService {
   private loginPopup: any;
   public loginChange: Subject<any> = new Subject<any>();
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     this.loginChange.next(false);
     this.getSession().subscribe((session) => {
         this.updateSession(session);
@@ -49,10 +49,9 @@ export class AuthService {
   }
 
   public getSession() {
-    const headers = new Headers();
-    headers.set('Accept', 'application/json');
+    const headers = {'Accept': 'application/json'};
     return this.http
-      .get(environment.shibbolethSessionUrl, {headers: headers})
-      .map((response) => response.json());
+      .get(environment.shibbolethSessionUrl, {headers})
+      .map((response) => response);
   }
 }

@@ -21,7 +21,7 @@
 
           <ng-container *ngIf="menuOption.sublist !== undefined">
             <mat-expansion-panel>
-              <mat-expansion-panel-header style="background-color: #FAFAFA;padding-left: 0;height: 48px !important;">
+              <mat-expansion-panel-header class="expandable-menu">
                 <mat-list-item style="width: 100%;height: 100%;">
                   <mat-icon mat-list-icon>{{menuOption.icon}}</mat-icon>
                   <a mat-line>{{menuOption.name}}</a>
@@ -38,7 +38,7 @@
     </mat-sidenav>
 
     <div class="sidenav-content-wrapper">
-      <div class="sidenav-content" class.xs="sidenav-content-xs">
+      <div class="sidenav-content" ngClass.xs="sidenav-content-xs">
         <mat-toolbar class="primary-toolbar"  color="primary">
             <mat-toolbar-row>
             <button style="margin-left: 0.5em;" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
@@ -105,25 +105,29 @@
         </mat-toolbar>
 
         <app-header></app-header>
+        <mat-progress-bar mode="indeterminate" color="accent" [hidden]="!showProgressBar"></mat-progress-bar>
+
         <div class="site-padding" ngClass.xs="site-padding-xs">
           <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
           <router-outlet></router-outlet>
         </div>
       </div>
-      <footer>
-        <div class="footer-content" class.xs="footer-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
-          <div fxFlex="60%" fxFlex.xs="45" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2em" fxLayoutAlign.xs="end">
-            <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)" class.xs="footer-a-xs">
-              Copyright © {{getYear()}}. Centre for eResearch
-            </a>
-            <a fxHide.lt-lg routerLink="/contact">Contact</a>
-            <a fxHide.lt-lg routerLink="/feedback">Provide Feedback</a>
-            <a fxHide.lt-lg [href]="disclaimerUrl" target="_blank" (click)="analyticsService.trackOutboundLink(disclaimerUrl)">Disclaimer</a>
+      <footer ngClass.xs="footer-xs">
+        <div class="footer-content" ngClass.xs="footer-content-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+          <div fxFlex="70" fxFlex.xs="50" fxLayout="row">
+            <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center">
+              <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)">
+                Copyright © {{getYear()}}, Centre for eResearch
+              </a>
+              <a fxHide.lt-md routerLink="/contact">Contact</a>
+              <a fxHide.lt-md routerLink="/feedback">Provide Feedback</a>
+              <a fxHide.lt-md [href]="disclaimerUrl" target="_blank" (click)="analyticsService.trackOutboundLink(disclaimerUrl)">Disclaimer</a>
+            </div>
           </div>
 
-          <div fxFlex="40%" fxFlex.xs="55" fxLayoutAlign="end" fxLayoutAlign.xs="start">
-            <a class="logo" [href]="aucklandUniUrl" target="_blank" (click)="analyticsService.trackOutboundLink(aucklandUniUrl)">
-              <img [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
+          <div fxFlex="30" fxFlex.xs="50" fxLayoutAlign="end">
+            <a [href]="aucklandUniUrl" target="_blank" (click)="analyticsService.trackOutboundLink(aucklandUniUrl)">
+              <img class="logo-img" ngClass.xs="logo-img-xs" [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
             </a>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {ApiService, PeopleParams} from 'app/services/api.service';
 import {Content} from 'app/model/Content';
 import marked from 'marked';
@@ -28,8 +28,7 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
   // this.analyticsService.trackGo(this.goEventCategory, this.title, this.goHref);
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private media: ObservableMedia,
-              private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService,
-              private router: Router) {
+              private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService) {
 
     // Configure marked
     marked.setOptions({

@@ -3,7 +3,7 @@ import {SearchBarService} from 'app/components/search-bar/search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
 import {CategoryId, OptionsService} from 'app/services/options.service';
 import {
-  ApiService, ContentItemsParams, Params, PeopleParams,
+  ApiService,
   SearchResultsParams
 } from 'app/services/api.service';
 import {Page} from 'app/model/Page';
@@ -15,7 +15,6 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {ToolbarService} from 'app/services/toolbar.service';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
@@ -23,6 +22,7 @@ import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/forkJoin';
 import {Tag} from './mat-tags/mat-tags.component';
 import {ListItem} from '../../model/ListItem';
+import {AppComponentService} from '../../app.component.service';
 
 @Component({
   selector: 'app-search-results',
@@ -88,7 +88,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   constructor(private searchBarService: SearchBarService,
               public optionsService: OptionsService, public apiService: ApiService,
               private analyticsService: AnalyticsService, private titleService: Title, private route: ActivatedRoute,
-              private location: Location, public dialog: MatDialog, private toolbarService: ToolbarService) {
+              private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService) {
   }
 
   ngOnInit() {
@@ -152,17 +152,19 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.filtersForm.controls.researchActivityIds.setValue(researchActivityIds);
       });
 
-    this.buttonClickSub = this.toolbarService.buttonClickChange.subscribe((buttonName) => {
-      if (buttonName === 'filter') {
-        this.openDialog();
-      }
+    this.buttonClickSub = this.searchBarService.filterButtonClickChange.subscribe((buttonName) => {
+      this.openDialog();
     });
   }
 
   onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[]) {
-    // TODO: get string category
-    // const friendlyCategoryId = '';
-    // this.analyticsService.trackSearch(friendlyCategoryId, searchText);
+    const friendlyCategoryId = this.optionsService.categoryOptions.filter((obj) => {
+      return obj.id === categoryId;
+    })[0].name;
+
+    this.analyticsService.trackSearch(friendlyCategoryId, searchText);
+
+    this.appComponentService.setProgressBarVisibility(true);
 
     const personIds = this.fromTags(personTags);
     const orgUnitIds = this.fromTags(orgUnitTags);
@@ -199,6 +201,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       this.resultsPage = page;
       this.updateResultsSummary(page.totalElements, categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
       resultsSub.unsubscribe();
+      this.appComponentService.setProgressBarVisibility(false);
     });
   }
 

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryId, OptionsService} from 'app/services/options.service';
+import {OptionsService} from 'app/services/options.service';
 
 @Component({
   selector: 'app-research-activity',

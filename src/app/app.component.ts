@@ -6,14 +6,14 @@ import {Subscription} from 'rxjs/Subscription';
 import {ApiService} from './services/api.service';
 import {AnalyticsService} from './services/analytics.service';
 import {isPlatformBrowser} from '@angular/common';
-import {ToolbarService} from './services/toolbar.service';
 import {AuthService} from './services/auth.service';
 import {ChangeDetectorRef} from '@angular/core';
 import * as format from 'date-fns/format';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/filter';
-import {HeaderService} from "./components/header/header.service";
-import { Location } from '@angular/common';
+import {HeaderService} from './components/header/header.service';
+import {Location} from '@angular/common';
+import {AppComponentService} from './app.component.service';
 
 
 @Component({
@@ -31,16 +31,18 @@ export class AppComponent implements OnInit, OnDestroy {
   private mediaChangeSub: Subscription;
   private searchTextChangeSub: Subscription;
   private routerSub: Subscription;
+  private progressBarVisibilitySub: Subscription;
 
   public selectedCategory = CategoryId.All;
   public searchText = '';
   public showFilterButton = false;
   public showLoginBtn = true;
+  public showProgressBar = false;
 
   constructor(private location: Location, public optionsService: OptionsService, private headerService: HeaderService,
               private searchBarService: SearchBarService, private router: Router,
               public apiService: ApiService, public analyticsService: AnalyticsService,
-              public authService: AuthService, private ref: ChangeDetectorRef) {
+              public authService: AuthService, private ref: ChangeDetectorRef, private appComponentService: AppComponentService) {
 
     authService.loginChange.subscribe((loggedIn) => {
       this.showLoginBtn = !loggedIn;
@@ -64,6 +66,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.progressBarVisibilitySub = this.appComponentService.progressBarVisibilityChange.subscribe((isVisible) => {
+      this.showProgressBar = isVisible;
+    });
+
     // Navigate to the search page if the user types text in
     this.searchTextChangeSub = this.searchBarService.searchTextChange.distinctUntilChanged().subscribe(searchText => {
       const url = this.location.path();
@@ -100,6 +106,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.mediaChangeSub.unsubscribe();
     this.searchTextChangeSub.unsubscribe();
     this.routerSub.unsubscribe();
+    this.progressBarVisibilitySub.unsubscribe();
   }
 
   getYear() {

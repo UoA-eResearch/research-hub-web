@@ -11,15 +11,20 @@ export class SearchBarParams {
 @Injectable()
 export class SearchBarService {
 
-  searchBarVisibilityChange: Subject<any> = new Subject<any>();
-  searchChange: Subject<any> = new Subject<any>();
-  searchCategoryChange: Subject<any> = new Subject<any>();
-  searchTextChange: Subject<any> = new Subject<any>();
-  isVisible: boolean;
-  searchText: string;
-  category: string;
+  public filterButtonClickChange: Subject<any> = new Subject<any>();
+  public searchBarVisibilityChange: Subject<any> = new Subject<any>();
+  public searchChange: Subject<any> = new Subject<any>();
+  public searchCategoryChange: Subject<any> = new Subject<any>();
+  public searchTextChange: Subject<any> = new Subject<any>();
+  public isVisible: boolean;
+  public searchText: string;
+  public category: string;
 
   constructor() { }
+
+  setFilterButtonClicked() {
+    this.filterButtonClickChange.next('filter');
+  }
 
   setVisibility(isVisible: boolean) {
     this.isVisible = isVisible;

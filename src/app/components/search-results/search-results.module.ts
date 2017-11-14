@@ -7,7 +7,7 @@ import {SearchResultsComponent} from './search-results.component';
 import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';
 import {ResearchActivityInputComponent} from './research-activity-input/research-activity-input.component';
 import {MatTagsComponent} from './mat-tags/mat-tags.component';
-import { SearchFiltersComponent } from './search-filters/search-filters.component';
+import {SearchFiltersComponent} from './search-filters/search-filters.component';
 
 
 @NgModule({

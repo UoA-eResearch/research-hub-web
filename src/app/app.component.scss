@@ -87,8 +87,18 @@ mat-expansion-panel-header .mat-expanded {
 }
 
 .mat-expansion-panel-body .mat-list-item-content {
-  padding-left: 64px !important;
-  //padding-right: 32px !important;
+  padding-left: 40px !important;
+}
+
+.expandable-menu {
+  background-color: #FAFAFA !important;
+  padding-left: 0 !important;
+  height: 48px !important;
+}
+
+.sidenav-container mat-sidenav-content {
+
+  overflow: visible !important;
 }
 
 .sidenav-container mat-sidenav mat-toolbar.toolbar{
@@ -121,11 +131,6 @@ mat-expansion-panel-header .mat-expanded {
   background-color: $color-background;
 }
 
-//.sidenav-container .mat-drawer-content {
-//  //margin-left: $sidenav-width !important;
-//
-//}
-
 .sidenav-container mat-sidenav mat-list {
   padding-left: 1em;
   padding-top: 1em;
@@ -145,12 +150,6 @@ mat-expansion-panel-header .mat-expanded {
 .sidenav-content-xs {
   @extend .sidenav-content;
   min-height: calc(100vh - #{$footer-xs-height});
-}
-
-.footer-a-xs {
-  margin-top: 2.5em;
-  margin-right: 0 !important;
-  margin-bottom: 0.5em;
 }
 
 .primary-header {
@@ -176,13 +175,12 @@ mat-expansion-panel-header .mat-expanded {
 }
 
 .primary-header-xs h1 {
-  margin: 0;
   padding: 0;
   color: white;
   display: inline-block;
   @include mat-typography-level-to-styles($app-primary-header-typography, headline);
   line-height: 1em;
-  margin-bottom: 0.2em;
+  margin: 0 0 0.2em;
 }
 
 
@@ -193,18 +191,24 @@ mat-expansion-panel-header .mat-expanded {
 footer {
   background-color: $color-primary;
   height: $footer-height;
+  padding-left: $gt-xs-offset;
+  padding-right: $gt-xs-offset;
+}
+
+footer.footer-xs {
+  height: $footer-xs-height;
+  padding-left: $xs-offset;
+  padding-right: $xs-offset;
 }
 
 .footer-content {
   @extend .site-content;
-  height: $footer-height;
+  height: $footer-height !important;
 }
 
 .footer-content-xs {
-  @extend .footer-content;
-  height: $footer-xs-height;
-  //padding-left: $xs-offset;
-  //padding-right: $xs-offset;
+  //@extend .footer-content;
+  height: $footer-xs-height !important;
 }
 
 footer a {
@@ -215,9 +219,18 @@ footer a {
   font-weight: mat-font-weight($app-base-typography, caption) !important;
 }
 
-footer .logo img {
+footer.footer-xs a {
+  text-align: center;
+}
+
+.logo-img {
   display: block;
   height: 5em;
+}
+
+.logo-img-xs {
+  @extend .logo-img;
+  height: 4em;
 }
 
 

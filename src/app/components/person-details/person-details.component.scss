@@ -25,9 +25,8 @@
 .content-cover-image {
   height: 200px;
   width: 100%;
-  background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background: no-repeat center;
   padding: 1em;
 }
 
@@ -87,7 +86,6 @@
   @extend .person-image;
   width: 100%;
   height: 250px;
-  margin: 0;
-  margin-bottom: 1em;
+  margin: 0 0 1em;
   background-position: center top;
 }

@@ -3,9 +3,8 @@ import {ApiService, ContentItemsParams} from 'app/services/api.service';
 import {ActivatedRoute} from '@angular/router';
 import {Person} from 'app/model/Person';
 import {Location} from '@angular/common';
-import {Content} from 'app/model/Content';
 import {AnalyticsService} from 'app/services/analytics.service';
-import {ListItem} from "../../model/ListItem";
+import {ListItem} from '../../model/ListItem';
 
 
 @Component({

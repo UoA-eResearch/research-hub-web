@@ -9,6 +9,11 @@ $search-flex: 4;
   padding: 2em;
 }
 
+.search-bar-outer-xs {
+  @extend .search-bar-outer;
+  padding: 1em;
+}
+
 .search-bar-inner {
   background-color: white;
   padding-left: 1em;
