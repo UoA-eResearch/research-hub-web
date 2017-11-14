@@ -76,7 +76,7 @@ export class OptionsService {
       {id: CategoryId.Facilities, name: 'Facilities', icon: 'castle', type: OptionType.Category},
       {id: CategoryId.Guide, name: 'Guides', icon: 'book-open-variant', type: OptionType.Category},
       {id: CategoryId.Person, name: 'People', icon: 'face', type: OptionType.Category},
-      {id: CategoryId.Policies, name: 'Policies', icon: 'bank', type: OptionType.Category}
+      {id: CategoryId.Policies, name: 'Policies', icon: 'gavel', type: OptionType.Category}
     ];
 
     this.researchActivityOptions = [
