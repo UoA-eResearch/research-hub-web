@@ -1,7 +1,8 @@
 <ng-container *ngIf="guideCategory">
   <div fxLayout="column" fxLayoutGap="2em">
     <mat-card class="description">
-      <h1>{{guideCategory.name}}</h1>
+      <a [routerLink]="['/content', guideCategory.content.id]">{{guideCategory.content.name}}</a><h1>{{guideCategory.name}}</h1>
+
       <app-markdown [data]="guideCategory.description"></app-markdown>
     </mat-card>
 
