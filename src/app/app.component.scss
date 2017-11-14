@@ -101,14 +101,6 @@ mat-expansion-panel-header .mat-expanded {
   overflow: visible !important;
 }
 
-.sidenav-container mat-sidenav mat-toolbar.toolbar{
-  min-height: $primary-header-height;
-}
-
-.sidenav-container mat-sidenav mat-toolbar.toolbar-xs{
-  min-height: $primary-header-xs-height;
-}
-
 .sidenav-container mat-sidenav mat-toolbar button mat-icon {
   font-size: mat-font-size($app-sidenav-toolbar-typography, button) !important;
   font-weight: mat-font-weight($app-sidenav-toolbar-typography, button) !important;
@@ -150,37 +142,6 @@ mat-expansion-panel-header .mat-expanded {
 .sidenav-content-xs {
   @extend .sidenav-content;
   min-height: calc(100vh - #{$footer-xs-height});
-}
-
-.primary-header {
-  min-height:$primary-header-height;
-  background: $color-primary;
-  padding-left: $gt-xs-offset;
-  padding-right: $gt-xs-offset;
-}
-
-.primary-header-xs {
-  @extend .primary-header;
-  min-height: $primary-header-xs-height;
-  padding-left: $xs-offset;
-  padding-right: $xs-offset;
-}
-
-.primary-header h1 {
-  margin: 0;
-  padding: 0;
-  color: white;
-  display: inline-block;
-  @include mat-typography-level-to-styles($app-primary-header-typography, headline);
-}
-
-.primary-header-xs h1 {
-  padding: 0;
-  color: white;
-  display: inline-block;
-  @include mat-typography-level-to-styles($app-primary-header-typography, headline);
-  line-height: 1em;
-  margin: 0 0 0.2em;
 }
 
 
@@ -238,26 +199,26 @@ footer.footer-xs a {
  * Breadcrumb styling
  */
 
-breadcrumb span {
+.breadcrumb span {
   color: $breadcrumb-current-color;
 }
 
-breadcrumb a {
+.breadcrumb a {
   color: $breadcrumb-previous-color;
 }
 
-breadcrumb ul {
+.breadcrumb ul {
   padding-left: 0;
 }
 
-breadcrumb ul > li {
+.breadcrumb ul > li {
   display: inline-block;
   zoom:1;
   *display:inline;   /* a fix needed for IE7- */
   cursor: pointer;
 }
 
-breadcrumb li:not(:first-child):before {
+.breadcrumb li:not(:first-child):before {
   padding-left: 0.5em;
   padding-right: 0.4em;
   content: ">";
