@@ -13,6 +13,17 @@
   padding: 0;
 }
 
+.header-padding {
+  @extend .site-content;
+  padding-left: $site-padding;
+  padding-right: $site-padding;
+}
+
+.header-padding-xs {
+  padding: 0;
+
+}
+
 .info-no-bg {
   padding: $gt-xs-offset;
   background-color: white;
@@ -33,6 +44,8 @@
 .info-xs {
   @extend .info;
   padding: $xs-offset;
+  padding-top: $xs-offset * 1.5;
+  padding-bottom: $xs-offset * 2.0;
   margin-bottom: 0;
 }
 
@@ -44,18 +57,4 @@
 .cover-image-xs {
   @extend .div-background-image;
   height: 200px;
-}
-
-.colored-background {
-  //background-color: #28a4b3;
-}
-
-::ng-deep .header-description a  {
-  //color: $color-bold-link-text;
-  text-decoration: none;
-  //font-weight: bold;
-}
-
-::ng-deep .header-description p  {
-  margin-bottom: 0 !important;
 }

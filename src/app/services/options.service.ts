@@ -141,26 +141,34 @@ export class OptionsService {
         isHeaderVisible: true,
         isSearchBarVisible: true
       },
-      search: {isHeaderVisible: false, isSearchBarVisible: true},
+      search: {title: 'Search', isHeaderVisible: false, isSearchBarVisible: true},
       feedback: {
         title: 'Feedback',
         description: 'We appreciate your visit to the beta-version of the Research Hub, our platform for research support.',
+        imageUrl: 'page-elements/AU_Gen_Detail2010_073_1680x220_BW.jpg',
         isHeaderVisible: true,
         isSearchBarVisible: false
       },
       about: {
         title: 'About us',
         description: 'The Centre for eResearch comprises a team of highly qualified research and technical staff dedicated to the delivery of advanced computational solutions to help power the University\'s research mission.',
+        imageUrl: 'page-elements/20151005_Science Detail_013_1680x220_BW.jpg',
         isHeaderVisible: true,
         isSearchBarVisible: false
       },
-      contact: {title: 'Contact us', isHeaderVisible: true, isSearchBarVisible: false},
-      orgUnit: {isHeaderVisible: false, isSearchBarVisible: false},
-      person: {isHeaderVisible: false, isSearchBarVisible: false},
-      content: {isHeaderVisible: false, isSearchBarVisible: false},
-      guide: {isHeaderVisible: false, isSearchBarVisible: false},
-      guideCategory: {isHeaderVisible: false, isSearchBarVisible: false},
-      requestVm: {isHeaderVisible: false, isSearchBarVisible: false}
+      contact: {
+        title: 'Contact us',
+        description: 'If you want to get in touch you can ring us, write to us or even visit us. We\'d love to hear from you.',
+        imageUrl: 'page-elements/DSC_0192_1680x220_BW.jpg',
+        isHeaderVisible: true,
+        isSearchBarVisible: false
+      },
+      orgUnit: {title: '', isHeaderVisible: false, isSearchBarVisible: false},
+      person: {title: '', isHeaderVisible: false, isSearchBarVisible: false},
+      content: {title: '', isHeaderVisible: false, isSearchBarVisible: false},
+      guide: {title: '', isHeaderVisible: false, isSearchBarVisible: false},
+      guideCategory: {title: '', isHeaderVisible: false, isSearchBarVisible: false},
+      requestVm: {title: '', isHeaderVisible: false, isSearchBarVisible: false}
     };
   }
 }

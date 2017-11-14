@@ -5,6 +5,7 @@ import {Person} from 'app/model/Person';
 import {Location} from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {ListItem} from '../../model/ListItem';
+import {AppComponentService} from '../../app.component.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class PersonDetailsComponent implements OnInit {
   supportedContent: ListItem[];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService,
-              private location: Location, private analyticsService: AnalyticsService) {
+              private location: Location, private analyticsService: AnalyticsService,
+              private appComponentService: AppComponentService) {
 
   }
 
@@ -29,9 +31,10 @@ export class PersonDetailsComponent implements OnInit {
       this.apiService.getPerson(id).subscribe(
         person => {
           const url = this.location.path();
-          const title = person.title;
+          const name = person.firstName + ' ' + person.lastName;
 
-          this.analyticsService.trackPerson(title, url);
+          this.appComponentService.setTitle(name);
+          this.analyticsService.trackPerson(name, url);
           this.person = person;
         }
       );

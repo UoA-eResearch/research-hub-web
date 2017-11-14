@@ -10,6 +10,7 @@ import {ActionTypeId, ContentTypeId} from '../../services/options.service';
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {LayoutService} from '../../services/layout.service';
+import {AppComponentService} from '../../app.component.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
   // this.analyticsService.trackGo(this.goEventCategory, this.title, this.goHref);
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private media: ObservableMedia,
-              private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService) {
+              private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService,
+              private appComponentService: AppComponentService) {
 
     // Configure marked
     marked.setOptions({
@@ -60,14 +62,6 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
   isIntegratedService() {
     return this.content.actionType.id === ActionTypeId.Integrated;
   }
-  //
-  // Service(content) {
-  //   if (content.actionType.id === ActionTypeId.Integrated) {
-  //     this.router.navigate(['/' + content.action]);
-  //   } else {
-  //
-  //   }
-  // }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -78,6 +72,8 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
           const url = this.location.path();
           const name = content.name;
           this.content = content;
+
+          this.appComponentService.setTitle(name);
 
           if (!this.isGuide()) {
             this.analyticsService.trackContent(name, url);

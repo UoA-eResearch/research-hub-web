@@ -12,6 +12,10 @@
   @extend .component;
 }
 
+.mat-button.mat-small {
+  min-width: 1%;
+}
+
 
 .content-header {
   padding: $gt-xs-offset;

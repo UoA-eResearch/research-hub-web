@@ -5,6 +5,7 @@ import {OrgUnit} from 'app/model/OrgUnit';
 import { Location } from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {ListItem} from '../../model/ListItem';
+import {AppComponentService} from '../../app.component.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class OrgUnitDetailsComponent implements OnInit {
   userSupport: ListItem[];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService,
-              private location: Location, private analyticsService: AnalyticsService) {
+              private location: Location, private analyticsService: AnalyticsService,
+              private appComponentService: AppComponentService) {
 
   }
 
@@ -30,6 +32,8 @@ export class OrgUnitDetailsComponent implements OnInit {
         orgUnit => {
           const url = this.location.path();
           const name = orgUnit.name;
+
+          this.appComponentService.setTitle(name);
 
           this.analyticsService.trackOrgUnit(name, url);
           this.orgUnit = orgUnit;

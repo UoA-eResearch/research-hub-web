@@ -39,69 +39,77 @@
 
     <div class="sidenav-content-wrapper">
       <div class="sidenav-content" ngClass.xs="sidenav-content-xs">
-        <mat-toolbar class="primary-toolbar"  color="primary">
-            <mat-toolbar-row>
-            <button style="margin-left: 0.5em;" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-            <button mat-button routerLink="/home" style="font-size: 20px;">Research Hub</button>
-            <span style="flex: 1 1 auto;"></span>
+        <div class="app-toolbar-container">
+          <div class="site-content app-toolbar" ngClass.xs="site-content app-toolbar-xs">
+            <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="center end" color="primary">
+              <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+              <button mat-button routerLink="/home" style="font-size: 20px;">Research Hub</button>
+              <span style="flex: 1 1 auto;"></span>
 
-            <button fxHide.xs mat-button routerLink="/search">
-              Search
-            </button>
+              <button fxHide.lt-md mat-button routerLink="/search">
+                Search
+              </button>
 
-            <button fxHide.gt-xs mat-icon-button routerLink="/search">
-              <mat-icon class="mat-24" style="color: white;">search</mat-icon>
-            </button>
+              <button fxHide.gt-sm mat-icon-button routerLink="/search">
+                <mat-icon class="mat-24" style="color: white;">search</mat-icon>
+              </button>
 
-            <button fxHide.xs mat-button [matMenuTriggerFor]="browseMenu">
-              Browse
-            </button>
+              <button fxHide.lt-md mat-button [matMenuTriggerFor]="browseMenu">
+                Browse
+              </button>
 
-            <mat-menu #browseMenu="matMenu">
-              <button mat-menu-item *ngFor="let item of optionsService.categoryOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
-            </mat-menu>
+              <mat-menu #browseMenu="matMenu">
+                <button mat-menu-item *ngFor="let item of optionsService.categoryOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
+              </mat-menu>
 
-            <button fxHide.xs mat-button [matMenuTriggerFor]="researchActivityMenu">
-              Research Activity
-            </button>
+              <button fxHide.lt-md mat-button [matMenuTriggerFor]="researchActivityMenu">
+                Research Activity
+              </button>
 
-            <mat-menu #researchActivityMenu="matMenu">
-              <button mat-menu-item *ngFor="let item of optionsService.researchActivityOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
-            </mat-menu>
+              <mat-menu #researchActivityMenu="matMenu">
+                <button mat-menu-item *ngFor="let item of optionsService.researchActivityOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
+              </mat-menu>
 
-            <button *ngIf="showLoginBtn" mat-button (click)="authService.login()">Sign In</button>
+              <button *ngIf="showLoginBtn" mat-button (click)="authService.login()">Sign In</button>
 
-            <button *ngIf="!showLoginBtn" mat-button [matMenuTriggerFor]="userMenu">
-              <span fxHide.lt-md>{{authService.user.displayName}}</span>
-              <span fxHide.gt-sm>{{authService.user.initials}}</span>
-              <mat-icon matPrefix>expand_more</mat-icon>
-            </button>
+              <button *ngIf="!showLoginBtn" mat-button [matMenuTriggerFor]="userMenu" style="padding-left: 10px; padding-right: 5px;min-width: 0;">
+                <span fxHide.lt-md>{{authService.user.displayName}}</span>
+                <span fxHide.gt-sm>{{authService.user.initials}}</span>
+                <mat-icon matPrefix>expand_more</mat-icon>
+              </button>
 
-            <mat-menu #userMenu="matMenu">
-              <div *ngIf="!showLoginBtn" style="margin-right: 8px; margin-left: 8px;">
-                <img src="/assets/images/uoa-logo-blue.svg">
+              <mat-menu #userMenu="matMenu">
+                <div *ngIf="!showLoginBtn" style="margin-right: 8px; margin-left: 8px;">
+                  <img src="/assets/images/uoa-logo-blue.svg">
 
-                <mat-list class="user-menu-list">
-                  <mat-list-item>
-                    <mat-icon mat-list-icon>person</mat-icon>
-                    <p mat-line>{{authService.user.displayName}}</p>
-                  </mat-list-item>
-                  <mat-list-item>
-                    <mat-icon mat-list-icon>note</mat-icon>
-                    <p mat-line>{{authService.user.mail}}</p>
-                  </mat-list-item>
-                </mat-list>
+                  <mat-list class="user-menu-list">
+                    <mat-list-item>
+                      <mat-icon mat-list-icon>person</mat-icon>
+                      <p mat-line>{{authService.user.displayName}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                      <mat-icon mat-list-icon>note</mat-icon>
+                      <p mat-line>{{authService.user.mail}}</p>
+                    </mat-list-item>
+                  </mat-list>
 
-                <div fxLayout="row" fxLayoutAlign="end">
-                  <a mat-button href="https://www.auckland.ac.nz/en/about-us/about-the-university/identity-and-access-management/single-sign-on/details.html">Sign Out</a>
+                  <div fxLayout="row" fxLayoutAlign="end">
+                    <a mat-button href="https://www.auckland.ac.nz/en/about-us/about-the-university/identity-and-access-management/single-sign-on/details.html">Sign Out</a>
+                  </div>
                 </div>
+              </mat-menu>
+            </div>
+            <div [style.height]="showBackBtn ? '42px' : '12px'">
+              <div *ngIf="showBackBtn">
+                <button mat-icon-button (click)="back()"><mat-icon>navigate_before</mat-icon></button>
+                <span style="padding-left: 12px; font-size: 14px;">{{pageTitle}}</span>
               </div>
-            </mat-menu>
-          </mat-toolbar-row>
-        </mat-toolbar>
+            </div>
+            <mat-progress-bar class="app-progress-bar" mode="indeterminate" color="accent" [hidden]="!showProgressBar"></mat-progress-bar>
+          </div>
+        </div>
 
         <app-header></app-header>
-        <mat-progress-bar mode="indeterminate" color="accent" [hidden]="!showProgressBar"></mat-progress-bar>
 
         <div class="site-padding" ngClass.xs="site-padding-xs">
           <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>

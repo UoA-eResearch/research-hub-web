@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
 import {ApiService} from 'app/services/api.service';
 import {Content} from 'app/model/Content';
+import {AuthService} from '../../services/auth.service';
+import {MatHorizontalStepper} from '@angular/material/stepper';
+import {AppComponentService} from '../../app.component.service';
+
 
 @Component({
   selector: 'app-request-vm',
@@ -11,6 +15,7 @@ import {Content} from 'app/model/Content';
 })
 export class RequestVmComponent implements OnInit {
 
+  @ViewChild('stepper') stepper: MatHorizontalStepper;
   public requestVmForm: FormGroup;
   public times = [];
   public dateToday = new Date();
@@ -40,11 +45,13 @@ export class RequestVmComponent implements OnInit {
   }
 
   constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
-              private apiService: ApiService) {
+              private apiService: ApiService, public authService: AuthService, private appComponentService: AppComponentService) {
     dateAdapter.setLocale('en-GB');
   }
 
   ngOnInit() {
+    this.appComponentService.setTitle('Request a Virtual Machine');
+
     this.times = RequestVmComponent.getTimes();
 
     this.requestVmForm = this.formBuilder.group({
@@ -59,6 +66,10 @@ export class RequestVmComponent implements OnInit {
       });
   }
 
+  stepChanged(event) {
+    console.log('event: ', event);
+  }
+
   submit() {
     const isValid = this.requestVmForm.valid;
     this.dateCtrl.markAsTouched();
@@ -68,14 +79,16 @@ export class RequestVmComponent implements OnInit {
     console.log('Is Valid: ', isValid, this.requestVmForm);
 
     if (isValid) {
+      // this.appComponentService.setProgressBarVisibility(true);
       this.submitting = true;
       const values = this.requestVmForm.getRawValue();
       this.apiService.requestVm(values.date, values.time, values.comments).subscribe((response) => {
+        this.appComponentService.setProgressBarVisibility(false);
+        this.stepper.selectedIndex = 1;
         console.log('requestVM response', response);
       });
     }
   }
-
 }
 
 // ng build --prod --aot --build-optimizer

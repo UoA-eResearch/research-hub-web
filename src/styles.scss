@@ -128,10 +128,19 @@ mat-chip.mat-chip {
   height: 56px;
 }
 
+/*
+ * When using Angular 2 [hidden] parameter, hides element and keeps space
+ */
+
+//[hidden] {
+//  visibility: hidden !important;
+//}
 
 .flex-hack {
   flex: 1 1 auto !important;
 }
+
+$site-padding: 3em;
 
 .site-content {
   @extend .flex-hack;
@@ -142,12 +151,29 @@ mat-chip.mat-chip {
 
 .site-padding {
   @extend .site-content;
-  margin-top: 3em; margin-bottom: 5em; padding-left: 3em; padding-right: 3em;
+  margin-top: $gt-xs-offset / 2.0;
+  margin-bottom: 5em;
+  padding-top: $site-padding;
+  padding-left: $site-padding;
+  padding-right: $site-padding;
 }
 
 .site-padding-xs {
   @extend .site-content;
-  margin-top: $xs-offset; margin-bottom: $xs-offset; padding-left: $xs-offset; padding-right: $xs-offset;
+  margin-top: $xs-offset / 2.0;
+  margin-bottom: $xs-offset;
+  padding-top: $xs-offset;
+  padding-left: $xs-offset;
+  padding-right: $xs-offset;
+}
+
+
+
+.back-button-padding-xs {
+  @extend .site-content;
+  margin-top: $xs-offset / 2.0;
+  padding-left: $xs-offset;
+  padding-right: $xs-offset;
 }
 
 .site-content-padded {
@@ -156,14 +182,18 @@ mat-chip.mat-chip {
   padding-bottom: 3em;
 }
 
+.back-button {
+  padding-left: 0 !important;
+  min-width: 0 !important;
+  padding-right: 10px !important;
+}
+
 
 mat-toolbar-row {
   @extend .site-content;
-  max-width: calc(#{$max-page-width} + 25px);
-  //padding-top:  0;
-  //padding-bottom: 0;
-  //padding-left: 0;
-  //padding-right: 0;
+  max-width: calc(#{$max-page-width + 25px});
+  padding-left: $site-padding !important;
+  padding-right: $site-padding !important;
 }
 
 //.header-content-small {

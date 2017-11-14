@@ -32,12 +32,18 @@ export class AppComponent implements OnInit, OnDestroy {
   private searchTextChangeSub: Subscription;
   private routerSub: Subscription;
   private progressBarVisibilitySub: Subscription;
+  private titleSub: Subscription;
 
   public selectedCategory = CategoryId.All;
   public searchText = '';
   public showFilterButton = false;
   public showLoginBtn = true;
   public showProgressBar = false;
+  public showBackBtn = false;
+  public pageTitle = '';
+
+  private previousRoute = undefined;
+  private currentRoute = undefined;
 
   constructor(private location: Location, public optionsService: OptionsService, private headerService: HeaderService,
               private searchBarService: SearchBarService, private router: Router,
@@ -65,7 +71,19 @@ export class AppComponent implements OnInit, OnDestroy {
     return routeName.split('/')[1];
   }
 
+  back() {
+    if (this.previousRoute) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/home']);
+    }
+  }
+
   ngOnInit() {
+    this.titleSub = this.appComponentService.titleChange.subscribe((title) => {
+      this.pageTitle = title;
+    });
+
     this.progressBarVisibilitySub = this.appComponentService.progressBarVisibilityChange.subscribe((isVisible) => {
       this.showProgressBar = isVisible;
     });
@@ -91,7 +109,17 @@ export class AppComponent implements OnInit, OnDestroy {
           const routeName = this.getRouteName(event['urlAfterRedirects']);
 
           if (routeName) {
+            // Update previous and current routes
+            if (this.currentRoute) {
+              this.previousRoute = this.currentRoute;
+            }
+            this.currentRoute = routeName;
+
+            this.showBackBtn = routeName !== 'home';
+
+            this.appComponentService.setProgressBarVisibility(false);
             const pageInfo = this.optionsService.pageInfo[routeName];
+            this.pageTitle = pageInfo.title;
             this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
             this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
 
@@ -107,6 +135,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.searchTextChangeSub.unsubscribe();
     this.routerSub.unsubscribe();
     this.progressBarVisibilitySub.unsubscribe();
+    this.titleSub.unsubscribe();
   }
 
   getYear() {

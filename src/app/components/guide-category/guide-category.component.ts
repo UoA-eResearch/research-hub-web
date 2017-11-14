@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ApiService} from 'app/services/api.service';
 import { Location } from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
+import {AppComponentService} from '../../app.component.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class GuideCategoryComponent implements OnInit {
   guideCategory: GuideCategory;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private location: Location,
-              private analyticsService: AnalyticsService) {
+              private analyticsService: AnalyticsService, private appComponentService: AppComponentService) {
 
   }
 
@@ -28,6 +29,8 @@ export class GuideCategoryComponent implements OnInit {
         guideCategory => {
           const url = this.location.path();
           const name = guideCategory.name;
+
+          this.appComponentService.setTitle(name);
 
           this.analyticsService.trackGuideCategory(name, url);
           this.guideCategory = guideCategory;
