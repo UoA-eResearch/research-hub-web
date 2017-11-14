@@ -68,13 +68,13 @@ export class OptionsService {
     this.contentTypeMap[CategoryId.Guide] = [ContentTypeId.Guide, ContentTypeId.KnowledgeArticle];
 
     this.categoryOptions = [
-      {id: CategoryId.All, name: 'All Categories', icon: 'earth', type: OptionType.Category},
-      {id: CategoryId.Support, name: 'Services', icon: 'ticket', type: OptionType.Category},
-      {id: CategoryId.Equipment, name: 'Equipment', icon: 'math-compass', type: OptionType.Category},
+      {id: CategoryId.All, name: 'All Categories', icon: 'public', type: OptionType.Category},
+      {id: CategoryId.Support, name: 'Services', icon: 'local_play', type: OptionType.Category},
+      {id: CategoryId.Equipment, name: 'Equipment', icon: 'build', type: OptionType.Category},
       {id: CategoryId.Training, name: 'Training', icon: 'school', type: OptionType.Category},
-      {id: CategoryId.Software, name: 'Software', icon: 'laptop-windows', type: OptionType.Category},
-      {id: CategoryId.Facilities, name: 'Facilities', icon: 'castle', type: OptionType.Category},
-      {id: CategoryId.Guide, name: 'Guides', icon: 'book-open-variant', type: OptionType.Category},
+      {id: CategoryId.Software, name: 'Software', icon: 'desktop_mac', type: OptionType.Category},
+      {id: CategoryId.Facilities, name: 'Facilities', icon: 'home', type: OptionType.Category},
+      {id: CategoryId.Guide, name: 'Guides', icon: 'import_contacts', type: OptionType.Category},
       {id: CategoryId.Person, name: 'People', icon: 'face', type: OptionType.Category},
       {id: CategoryId.Policies, name: 'Policies', icon: 'gavel', type: OptionType.Category}
     ];
@@ -83,35 +83,30 @@ export class OptionsService {
       {
         id: ResearchActivityId.PlanDesign,
         name: 'Plan & Design',
-        icon: 'mdi-timetable',
         className: 'plan',
         type: OptionType.ResearchActivity
       },
       {
         id: ResearchActivityId.CreateCollectCapture,
         name: 'Create, Collect & Capture',
-        icon: 'mdi-google-circles-extended',
         className: 'create',
         type: OptionType.ResearchActivity
       },
       {
         id: ResearchActivityId.AnalyzeInterpret,
         name: 'Analyze & Interpret',
-        icon: 'mdi-chart-areaspline',
         className: 'analyze',
         type: OptionType.ResearchActivity
       },
       {
         id: ResearchActivityId.PublishReport,
         name: 'Publish & Report',
-        icon: 'mdi-cube-send',
         className: 'publish',
         type: OptionType.ResearchActivity
       },
       {
         id: ResearchActivityId.DiscoverReuse,
         name: 'Discover & Reuse',
-        icon: 'mdi-sync',
         className: 'discover',
         type: OptionType.ResearchActivity
       }
