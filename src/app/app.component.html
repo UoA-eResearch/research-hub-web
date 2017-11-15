@@ -105,8 +105,8 @@
                 <span style="padding-left: 12px; font-size: 14px;">{{pageTitle}}</span>
               </div>
             </div>
-            <mat-progress-bar class="app-progress-bar" mode="indeterminate" color="accent" [hidden]="!showProgressBar"></mat-progress-bar>
           </div>
+          <mat-progress-bar class="app-progress-bar" mode="indeterminate" color="accent" [style.visibility]="showProgressBar ? 'visible' : 'hidden'"></mat-progress-bar>
         </div>
 
         <app-header></app-header>
