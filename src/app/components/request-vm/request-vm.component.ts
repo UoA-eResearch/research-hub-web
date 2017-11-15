@@ -24,6 +24,7 @@ export class RequestVmComponent implements OnInit {
   public researchVmContentId = 1;
   public content: Content;
   public submitting = false;
+  public response: any;
 
   private static getTimes() {
     const times = [];
@@ -50,8 +51,6 @@ export class RequestVmComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appComponentService.setTitle('Request a Virtual Machine');
-
     this.times = RequestVmComponent.getTimes();
 
     this.requestVmForm = this.formBuilder.group({
@@ -63,11 +62,8 @@ export class RequestVmComponent implements OnInit {
     this.apiService.getContent(this.researchVmContentId).subscribe(
       content => {
         this.content = content;
+        this.appComponentService.setTitle('Request a Virtual Machine');
       });
-  }
-
-  stepChanged(event) {
-    console.log('event: ', event);
   }
 
   submit() {
@@ -76,19 +72,15 @@ export class RequestVmComponent implements OnInit {
     this.timeCtrl.markAsDirty();
     this.timeCtrl.markAsTouched();
 
-    console.log('Is Valid: ', isValid, this.requestVmForm);
-
     if (isValid) {
-      // this.appComponentService.setProgressBarVisibility(true);
       this.submitting = true;
       const values = this.requestVmForm.getRawValue();
+
       this.apiService.requestVm(values.date, values.time, values.comments).subscribe((response) => {
-        this.appComponentService.setProgressBarVisibility(false);
-        this.stepper.selectedIndex = 1;
-        console.log('requestVM response', response);
+        this.response = response;
+        this.stepper.selectedIndex = 1; // Navigate to second step
+        // TODO: set Done step to completed so that a tick appears next to 'Done', doesn't work at the moment
       });
     }
   }
 }
-
-// ng build --prod --aot --build-optimizer

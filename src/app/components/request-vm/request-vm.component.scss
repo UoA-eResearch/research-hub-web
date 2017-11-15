@@ -2,3 +2,17 @@
 .form-group {
   margin-top: 1em;
 }
+
+.submit-form-container {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+.submit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(235, 234, 235, 0.9);
+  width: 100%;
+  height: 100%;
+}
