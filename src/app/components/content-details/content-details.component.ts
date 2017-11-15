@@ -11,6 +11,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {LayoutService} from '../../services/layout.service';
 import {AppComponentService} from '../../app.component.service';
+import {GuideCategory} from "../../model/GuideCategory";
 
 
 @Component({
@@ -25,6 +26,7 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
   userSupport: ListItem[];
   numCols = 1;
   mediaSub: Subscription;
+  guideCategories: GuideCategory[] = [];
 
   // this.analyticsService.trackGo(this.goEventCategory, this.title, this.goHref);
 
@@ -93,6 +95,16 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
             });
           } else {
             this.analyticsService.trackGuide(name, url);
+
+            // Sort guide categories
+            this.guideCategories = content.guideCategories.sort((a, b) => {
+              if (a.displayOrder < b.displayOrder) {
+                return -1;
+              } else if (a.displayOrder > b.displayOrder) {
+                return 1;
+              }
+              return 0;
+            });
 
             this.numCols = this.layoutService.getNumGridCols(this.layoutService.getMQAlias());
 

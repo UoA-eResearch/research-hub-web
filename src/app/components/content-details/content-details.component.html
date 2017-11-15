@@ -77,7 +77,7 @@
     </mat-card>
 
     <mat-grid-list [cols]="numCols" gutterSize="1em">
-      <mat-grid-tile class="browse-tile" *ngFor="let item of content.guideCategories;" [colspan]="1" [rowspan]="1" [routerLink]="['/guideCategory', item.id]">
+      <mat-grid-tile class="browse-tile" *ngFor="let item of guideCategories;" [colspan]="1" [rowspan]="1" [routerLink]="['/guideCategory', item.id]">
         <div fxLayout="column" fxLayoutAlign="center center" class="tile-content">
           <span class="tile-text">{{item.name}}</span>
           <mat-icon class="tile-icon">{{item.icon}}</mat-icon>
