@@ -63,7 +63,7 @@
       <div style="margin-bottom: 2em;">
         <h3>Request submitted</h3>
         <p>Your virtual machine consultation request has been submitted and an acknowledgement e-mail sent to <a [href]="'mailto:' + authService.user.mail" target="_blank">{{authService.user.mail}}</a>.</p>
-        <p>You may view your request here: <a *ngIf="response" [href]="response.result.requestUrl"  target="_blank">{{response.result.ticketNumber}}</a></p>
+        <p>You may view your request here: <a *ngIf="response" [href]="response.ticketUrl"  target="_blank">{{response.ticketNumber}}</a></p>
       </div>
       <div fxLayout="column" fxLayoutAlign="end">
         <div fxLayout="row" fxLayoutAlign="end">
