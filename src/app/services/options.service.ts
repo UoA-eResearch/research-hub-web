@@ -158,12 +158,12 @@ export class OptionsService {
         isHeaderVisible: true,
         isSearchBarVisible: false
       },
-      orgUnit: {title: '', isHeaderVisible: false, isSearchBarVisible: false},
-      person: {title: '', isHeaderVisible: false, isSearchBarVisible: false},
-      content: {title: '', isHeaderVisible: false, isSearchBarVisible: false},
-      guide: {title: '', isHeaderVisible: false, isSearchBarVisible: false},
-      guideCategory: {title: '', isHeaderVisible: false, isSearchBarVisible: false},
-      requestVm: {title: '', isHeaderVisible: false, isSearchBarVisible: false}
+      orgUnit: {isHeaderVisible: false, isSearchBarVisible: false},
+      person: {isHeaderVisible: false, isSearchBarVisible: false},
+      content: {isHeaderVisible: false, isSearchBarVisible: false},
+      guide: {isHeaderVisible: false, isSearchBarVisible: false},
+      guideCategory: {isHeaderVisible: false, isSearchBarVisible: false},
+      requestVm: {isHeaderVisible: false, isSearchBarVisible: false}
     };
   }
 }

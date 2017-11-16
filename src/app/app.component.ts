@@ -119,6 +119,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
             this.appComponentService.setProgressBarVisibility(false);
             const pageInfo = this.optionsService.pageInfo[routeName];
+
             this.pageTitle = pageInfo.title;
             this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
             this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
