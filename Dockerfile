@@ -15,7 +15,7 @@ RUN           apt-get install -y nodejs
 #RUN           npm install -g npm
 
 # Install angular-cli
-RUN           npm install -g @angular/cli
+RUN           npm install -g @angular/cli@1.5.0
 
 # Copies all files and maintains directory structure
 COPY          / /research-hub-web/
@@ -24,7 +24,7 @@ COPY          / /research-hub-web/
 WORKDIR       /research-hub-web/
 RUN           npm install
 ARG           WEB_ENVIRONMENT
-RUN           ng build --environment=$WEB_ENVIRONMENT
+RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --environment=$WEB_ENVIRONMENT
 
 # Configure nginx
 RUN           cp -a ./dist/. /usr/share/nginx/www/
