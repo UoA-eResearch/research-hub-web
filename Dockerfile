@@ -7,7 +7,7 @@ ARG           https_proxy
 
 # Install curl (used to install nodejs) and build-essential (for compiling native nodejs libraries)
 RUN           apt-get update -qq
-RUN           apt-get install -qqy curl build-essential
+RUN           apt-get install -qqy curl build-essential git
 
 # Install nodejs and update npm to latest version
 RUN           curl -sL https://deb.nodesource.com/setup_6.x | bash -
