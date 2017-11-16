@@ -222,7 +222,6 @@ export class ApiService {
 
   requestVm(date: Date, time: string, comments: string) {
     const body = {
-      researcherUpi: 'jdip004',
       date: format(date, 'YYYY-MM-DD'),
       time: time,
       comments: comments
