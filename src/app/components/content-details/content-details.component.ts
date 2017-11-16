@@ -62,7 +62,7 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
   }
 
   isIntegratedService() {
-    return this.content.actionType.id === ActionTypeId.Integrated;
+    return this.content.actionType && this.content.actionType.id === ActionTypeId.Integrated;
   }
 
   ngOnInit() {
