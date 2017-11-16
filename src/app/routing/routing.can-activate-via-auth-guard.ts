@@ -1,24 +1,25 @@
-import { Injectable } from '@angular/core';
-import {CanActivate, Router} from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import {Injectable} from '@angular/core';
+import {CanActivate} from '@angular/router';
+import {AuthService} from '../services/auth.service';
 import 'rxjs/add/operator/first';
+
 
 @Injectable()
 export class CanActivateViaAuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {
+  }
 
   canActivate() {
-    return this.authService.getSession().map((session) => {
-      const isLoggedIn = Object.getOwnPropertyNames(session).length !== 0; // Checks if session object empty or not
+    return this.authService.getSession().map((isLoggedIn: boolean) => {
+      console.log('Is user authenticated: ', isLoggedIn);
 
-      if (isLoggedIn) {
-        console.log('authenticated');
-        return true;
+      // Redirect user to login page if not logged in
+      if (!isLoggedIn) {
+        this.authService.login();
       }
-      console.log('not authenticated');
-      // this.router.navigateByUrl('/login');
-      return false;
+
+      return isLoggedIn;
     }).first();
   }
 }

@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {environment} from 'environments/environment';
 import {Subject} from 'rxjs/Subject';
 import {User} from '../model/User';
 import {HttpClient} from '@angular/common/http';
+import {DOCUMENT} from '@angular/common';
 
 
 @Injectable()
@@ -10,48 +11,46 @@ export class AuthService {
 
   public user: User;
   private session: any;
-  private loggedIn = false;
-  private loginPopup: any;
+  private isLoggedInVal = false;
   public loginChange: Subject<any> = new Subject<any>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) {
     this.loginChange.next(false);
-    this.getSession().subscribe((session) => {
-        this.updateSession(session);
+
+    // Check if user is logged in after app loads
+    const sessionSub = this.getSession().subscribe((session) => {
+      sessionSub.unsubscribe();
     });
   }
 
   login() {
-    this.loginPopup = window.open('login.html', 'popup', 'width=600,height=600');
-    this.loginPopup.onbeforeunload = () => {
-      this.loginChange.next(this.loggedIn);
-      this.getSession().subscribe((session) => {
-        this.updateSession(session);
-      });
-    };
+    window.location.href = 'login.html?redirectTo=' + encodeURI(this.document.location.href);
   }
 
-  isLoggedIn() {
-    return this.loggedIn;
+  isLoggedIn(): boolean {
+    return this.isLoggedInVal;
   }
 
   private updateSession(session: any) {
-    this.loggedIn = Object.getOwnPropertyNames(session).length !== 0; // Checks if session object empty or not
+    this.isLoggedInVal = Object.getOwnPropertyNames(session).length !== 0; // Checks if session object empty or not
     // If empty then not logged in
-    if (this.loggedIn) {
+    if (this.isLoggedInVal) {
       this.user = User.fromSession(session);
     } else {
       this.user = undefined;
     }
 
     this.session = session;
-    this.loginChange.next(this.loggedIn);
+    this.loginChange.next(this.isLoggedInVal);
   }
 
   public getSession() {
     const headers = {'Accept': 'application/json'};
     return this.http
       .get(environment.shibbolethSessionUrl, {headers})
-      .map((response) => response);
+      .map((session) =>  {
+        this.updateSession(session);
+        return this.isLoggedInVal;
+      });
   }
 }
