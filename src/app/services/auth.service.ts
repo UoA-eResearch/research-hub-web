@@ -1,9 +1,9 @@
-import {Inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from 'environments/environment';
 import {Subject} from 'rxjs/Subject';
 import {User} from '../model/User';
 import {HttpClient} from '@angular/common/http';
-import {DOCUMENT} from '@angular/common';
+import {Location} from '@angular/common';
 
 
 @Injectable()
@@ -14,7 +14,7 @@ export class AuthService {
   private isLoggedInVal = false;
   public loginChange: Subject<any> = new Subject<any>();
 
-  constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) {
+  constructor(private http: HttpClient, private location: Location) {
     this.loginChange.next(false);
 
     // Check if user is logged in after app loads
@@ -24,7 +24,8 @@ export class AuthService {
   }
 
   login() {
-    window.location.href = 'login.html?redirectTo=' + encodeURI(this.document.location.href);
+    const hash = this.location.path(false);
+    window.location.href = 'login.html?hash=' + encodeURIComponent(hash);
   }
 
   isLoggedIn(): boolean {
