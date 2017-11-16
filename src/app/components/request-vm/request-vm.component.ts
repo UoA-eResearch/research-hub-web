@@ -77,7 +77,6 @@ export class RequestVmComponent implements OnInit {
       const values = this.requestVmForm.getRawValue();
 
       this.apiService.requestVm(values.date, values.time, values.comments).subscribe((response) => {
-        console.log('VM response: ', response);
         this.response = response;
         this.stepper.selectedIndex = 1; // Navigate to second step
         // TODO: set Done step to completed so that a tick appears next to 'Done', doesn't work at the moment
