@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   login(redirectPath = this.location.path(false)) {
-    window.location.href = 'login.html?hash=' + encodeURIComponent(redirectPath);
+    window.location.href = 'Shibboleth.sso/Login?target=' + encodeURIComponent('/#' + redirectPath);
   }
 
   isLoggedIn(): boolean {
