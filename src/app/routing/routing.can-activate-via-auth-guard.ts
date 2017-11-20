@@ -11,8 +11,6 @@ export class CanActivateViaAuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log(route, state);
-
     return this.authService.getSession().map((isLoggedIn: boolean) => {
       // Redirect user to login page if not logged in
       if (!isLoggedIn) {
