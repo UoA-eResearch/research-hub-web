@@ -23,9 +23,8 @@ export class AuthService {
     });
   }
 
-  login() {
-    const hash = this.location.path(false);
-    window.location.href = 'login.html?hash=' + encodeURIComponent(hash);
+  login(redirectPath = this.location.path(false)) {
+    window.location.href = 'login.html?hash=' + encodeURIComponent(redirectPath);
   }
 
   isLoggedIn(): boolean {
@@ -52,6 +51,6 @@ export class AuthService {
       .map((session) =>  {
         this.updateSession(session);
         return this.isLoggedInVal;
-      });
+    });
   }
 }

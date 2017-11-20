@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CanActivate} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import 'rxjs/add/operator/first';
 
@@ -10,11 +10,14 @@ export class CanActivateViaAuthGuard implements CanActivate {
   constructor(private authService: AuthService) {
   }
 
-  canActivate() {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    console.log(route, state);
+
     return this.authService.getSession().map((isLoggedIn: boolean) => {
       // Redirect user to login page if not logged in
       if (!isLoggedIn) {
-        this.authService.login();
+        const redirectPath = state.url; // Go to login page and after login redirect back to page that we were going to visit
+        this.authService.login(redirectPath);
       }
 
       return isLoggedIn;
