@@ -9,6 +9,7 @@ import {Person} from '../model/Person';
 import {OrgUnit} from '../model/OrgUnit';
 import {Page} from '../model/Page';
 import {ListItem} from '../model/ListItem';
+import 'rxjs/add/operator/retry';
 
 
 export enum OrderBy {
@@ -214,6 +215,7 @@ export class ApiService {
   private static searchResultsUrl = 'search';
   private static hostname = environment.apiUrl;
   private static headers = {'Accept': 'application/json'};
+  private static numRetries = 3;
 
 
   constructor(private http: HttpClient) {
@@ -237,61 +239,77 @@ export class ApiService {
 
   getContent(id: number) {
     return this.http
-      .get(ApiService.hostname + ApiService.contentUrl + '/' + id, {headers: ApiService.headers})
-      .map(response => response as Content);
+      .get<Content>(ApiService.hostname + ApiService.contentUrl + '/' + id, {headers: ApiService.headers})
+      .retry(ApiService.numRetries);
   }
 
   getPerson(id: number) {
     return this.http
-      .get(ApiService.hostname + ApiService.personUrl + '/' + id, {headers: ApiService.headers})
-      .map(response => response as Person);
+      .get<Person>(ApiService.hostname + ApiService.personUrl + '/' + id, {headers: ApiService.headers})
+      .retry(ApiService.numRetries);
   }
 
   getOrgUnit(id: number) {
     return this.http
-      .get(ApiService.hostname + ApiService.orgUnitUrl + '/' + id, {headers: ApiService.headers})
-      .map(response => response as OrgUnit);
+      .get<OrgUnit>(ApiService.hostname + ApiService.orgUnitUrl + '/' + id, {headers: ApiService.headers})
+      .retry(ApiService.numRetries);
   }
 
   getGuideCategory(id: number) {
     return this.http
-      .get(ApiService.hostname + ApiService.guideCategoryUrl + '/' + id, {headers: ApiService.headers})
-      .map(response => response as GuideCategory);
+      .get<GuideCategory>(ApiService.hostname + ApiService.guideCategoryUrl + '/' + id, {headers: ApiService.headers})
+      .retry(ApiService.numRetries);
   }
 
   getSearchResults(params: SearchResultsParams) {
     return this.http
-      .get(ApiService.hostname + ApiService.searchResultsUrl, {params: params.getParams(), headers: ApiService.headers})
-      .map(response => response as Page<ListItem>);
+      .get<Page<ListItem>>(ApiService.hostname + ApiService.searchResultsUrl, {
+        params: params.getParams(),
+        headers: ApiService.headers
+      })
+      .retry(ApiService.numRetries);
   }
 
   getContentItems(params: ContentItemsParams) {
     return this.http
-      .get(ApiService.hostname + ApiService.contentUrl, {params: params.getParams(), headers: ApiService.headers})
-      .map(response => response as Page<ListItem>);
+      .get<Page<ListItem>>(ApiService.hostname + ApiService.contentUrl, {
+        params: params.getParams(),
+        headers: ApiService.headers
+      })
+      .retry(ApiService.numRetries);
   }
 
   getSimilarContentItems(id: number) {
     return this.http
-      .get(ApiService.hostname + ApiService.contentUrl + '/' + id + '/' + ApiService.similarContentUrl, {headers: ApiService.headers})
-      .map(response => response as Content[]);
+      .get<Content[]>(ApiService.hostname + ApiService.contentUrl + '/' + id + '/' + ApiService.similarContentUrl,
+        {headers: ApiService.headers})
+      .retry(ApiService.numRetries);
   }
 
   getPeople(params: PeopleParams) {
     return this.http
-      .get(ApiService.hostname + ApiService.personUrl, {params: params.getParams(), headers: ApiService.headers})
-      .map(response => response as Page<ListItem>);
+      .get<Page<ListItem>>(ApiService.hostname + ApiService.personUrl, {
+        params: params.getParams(),
+        headers: ApiService.headers
+      })
+      .retry(ApiService.numRetries);
   }
 
   getOrgUnits(params: Params) {
     return this.http
-      .get(ApiService.hostname + ApiService.orgUnitUrl, {params: params.getParams(), headers: ApiService.headers})
-      .map(response => response as Page<OrgUnit>);
+      .get<Page<OrgUnit>>(ApiService.hostname + ApiService.orgUnitUrl, {
+        params: params.getParams(),
+        headers: ApiService.headers
+      })
+      .retry(ApiService.numRetries);
   }
 
   getPolicies(params: Params) {
     return this.http
-      .get(ApiService.hostname + ApiService.policyUrl, {params: params.getParams(), headers: ApiService.headers})
-      .map(response => response as Page<ListItem>);
+      .get<Page<ListItem>>(ApiService.hostname + ApiService.policyUrl, {
+        params: params.getParams(),
+        headers: ApiService.headers
+      })
+      .retry(ApiService.numRetries);
   }
 }
