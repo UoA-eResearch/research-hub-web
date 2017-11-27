@@ -279,6 +279,11 @@ $ra-chip-margin: 0.5em;
   margin-right: $ra-chip-margin;
 }
 
+.ra-chip-container-stacked {
+  margin-bottom: $ra-chip-margin;
+}
+
+
 .ra-chip {
   color: white !important;
 }
