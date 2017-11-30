@@ -4,9 +4,8 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
-  //,
-  // shibbolethSessionUrl: 'http://localhost:4200/Session.json',
-  // apiUrl: 'http://localhost:8080/',
-  // analyticsCode: 'UA-77710107-3'
+  production: false,
+  shibbolethSessionUrl: '',
+  apiUrl: '',
+  analyticsCode: ''
 };
