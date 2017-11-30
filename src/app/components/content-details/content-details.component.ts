@@ -6,12 +6,12 @@ import marked from 'marked';
 import {Location} from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {ListItem} from '../../model/ListItem';
-import {ActionTypeId, ContentTypeId} from '../../services/options.service';
+import {ActionTypeId, ContentTypeId, RoleTypeId} from '../../services/options.service';
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {LayoutService} from '../../services/layout.service';
 import {AppComponentService} from '../../app.component.service';
-import {GuideCategory} from "../../model/GuideCategory";
+import {GuideCategory} from '../../model/GuideCategory';
 
 
 @Component({
@@ -88,7 +88,7 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
 
             const peopleParams = new PeopleParams();
             peopleParams.setContentItems([id]);
-            peopleParams.setRoleTypes([3]);
+            peopleParams.setRoleTypes([RoleTypeId.UserSupport]);
 
             this.apiService.getPeople(peopleParams).subscribe(userSupport => {
               this.userSupport = userSupport.content;

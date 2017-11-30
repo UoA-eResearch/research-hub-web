@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/c
 import {FormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs/Subscription';
 import {Tag} from '../mat-tags/mat-tags.component';
-import {OptionsService} from '../../../services/options.service';
+import {OptionsService, RoleTypeId} from '../../../services/options.service';
 import {ApiService, PeopleParams, Params} from 'app/services/api.service';
 import {Observable} from 'rxjs/Observable';
 import {SearchResultsComponent} from '../search-results.component';
@@ -43,7 +43,7 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
     });
 
     const peopleParams = new PeopleParams();
-    peopleParams.setRoleTypes([3]);
+    peopleParams.setRoleTypes([RoleTypeId.UserSupport]);
 
     this.dataSub = Observable
       .forkJoin(

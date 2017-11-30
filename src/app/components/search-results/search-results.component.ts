@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchBarService} from 'app/components/search-bar/search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
-import {CategoryId, OptionsService} from 'app/services/options.service';
+import {CategoryId, OptionsService, RoleTypeId} from 'app/services/options.service';
 import {
   ApiService,
   SearchResultsParams
@@ -87,13 +87,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   constructor(private searchBarService: SearchBarService,
               public optionsService: OptionsService, public apiService: ApiService,
-              private analyticsService: AnalyticsService, private titleService: Title, private route: ActivatedRoute,
+              private analyticsService: AnalyticsService, private route: ActivatedRoute,
               private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService) {
   }
 
   ngOnInit() {
-    this.titleService.setTitle('Research Hub: Search Results');
-
     // Results page
     this.resultsPage = {} as Page<ListItem>;
 
@@ -163,7 +161,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     })[0].name;
 
     this.analyticsService.trackSearch(friendlyCategoryId, searchText);
-
     this.appComponentService.setProgressBarVisibility(true);
 
     const personIds = this.fromTags(personTags);
@@ -180,19 +177,19 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       } else if (categoryId === CategoryId.Person) {
         params.setObjectType('person');
         params.setOrgUnits(orgUnitIds);
-        params.setRoleTypes([3]);
+        params.setRoleTypes([RoleTypeId.UserSupport]);
       } else {
         const contentTypeIds = this.optionsService.contentTypeMap[categoryId];
         params.setObjectType('content');
         params.setContentTypes(contentTypeIds);
         params.setResearchPhases(researchActivityIds);
         params.setPeople(personIds);
-        params.setRoleTypes([3]);
+        params.setRoleTypes([RoleTypeId.UserSupport]);
         params.setOrgUnits(orgUnitIds);
       }
     } else {
       params.setPeople(personIds);
-      params.setRoleTypes([3]);
+      params.setRoleTypes([RoleTypeId.UserSupport]);
       params.setOrgUnits(orgUnitIds);
       params.setResearchPhases(researchActivityIds);
     }

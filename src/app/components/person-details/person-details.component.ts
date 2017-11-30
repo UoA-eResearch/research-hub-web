@@ -6,6 +6,7 @@ import {Location} from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {ListItem} from '../../model/ListItem';
 import {AppComponentService} from '../../app.component.service';
+import {RoleTypeId} from '../../services/options.service';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class PersonDetailsComponent implements OnInit {
 
       const contentItemsParams = new ContentItemsParams();
       contentItemsParams.setPeople([id]);
-      contentItemsParams.setRoleTypes([3]);
+      contentItemsParams.setRoleTypes([RoleTypeId.UserSupport]);
       this.apiService.getContentItems(contentItemsParams).subscribe(contentItems => {
         this.supportedContent = contentItems.content;
       });
