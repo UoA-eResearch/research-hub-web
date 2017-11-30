@@ -43,6 +43,12 @@ export enum ActionTypeId {
   ExternalMailTo
 }
 
+export enum RoleTypeId {
+  ServiceOwner = 1,
+  CopyOwner,
+  UserSupport
+}
+
 
 @Injectable()
 export class OptionsService {
