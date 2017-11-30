@@ -32,8 +32,9 @@
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
-        "dev": "environments/environment.ts",
-        "stag": "environments/environment.stag.ts",
+        "local": "environments/environment.local.ts",
+        "dev": "environments/environment.dev.ts",
+        "test": "environments/environment.test.ts",
         "prod": "environments/environment.prod.ts"
       }
     }
