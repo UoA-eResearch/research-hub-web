@@ -213,7 +213,7 @@ $guide-tile-bg-color: #0294a5;
   }
 
   /*
-   * Fixes so that select lines up with md-input-container elements
+   * Fixes so that select lines up with mat-input-container elements
    * and contains same sized text
    */
 
@@ -245,15 +245,71 @@ $guide-tile-bg-color: #0294a5;
   @include angular-material-theme($hub-app-theme);
 }
 
-md-dialog-container {
-  max-width: 100% !important;
+mat-dialog-container {
   padding: 0 !important;
 }
 
+.cdk-overlay-pane {
+  max-width: 100% !important;
+  //padding: 0 !important;
+}
+
 //
-//.hub-md-sidenav {
+//.hub-mat-sidenav {
 //  $sidenav-primary: mat-palette($hub-navy, 500);
 //  $sidenav-accent: mat-palette($hub-pink, A200, A100, A400);
 //  $sidenav-theme: mat-light-theme($sidenav-primary, $sidenav-accent);
 //  @include angular-material-theme($sidenav-theme);
 //}
+
+
+$plan-background: #62388e;
+$create-background: #2f99cc;
+$analyze-background: #329a37;
+$publish-background: #f49717;
+$discover-background: #cd3234;
+
+$ra-chip-margin: 0.5em;
+
+.ra-chip-container {
+  margin-bottom: $ra-chip-margin;
+}
+
+.ra-chip-container:not(:last-child) {
+  margin-right: $ra-chip-margin;
+}
+
+.ra-chip-container-stacked {
+  margin-bottom: $ra-chip-margin;
+}
+
+
+.ra-chip {
+  color: white !important;
+}
+
+.plan > mat-chip {
+  @extend .ra-chip;
+  background-color: $plan-background !important;
+}
+
+.create > mat-chip {
+  @extend .ra-chip;
+  background-color: $create-background !important;
+}
+
+.analyze > mat-chip {
+  @extend .ra-chip;
+  background-color: $analyze-background !important;
+}
+
+.publish > mat-chip {
+  @extend .ra-chip;
+  background-color: $publish-background !important;
+}
+
+.discover > mat-chip {
+  @extend .ra-chip;
+  background-color: $discover-background !important;
+}
+

@@ -1,0 +1,49 @@
+<div *ngIf="person" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="1em">
+
+  <div class="flex-hack" fxFlex="40" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-sm="1">
+    <div fxHide.lt-sm>
+      <img style="width:100%; height:auto;" [src]="apiService.getAssetUrl(person.image)">
+    </div>
+
+    <mat-card *ngIf="person.orgUnits.length">
+      <h2>Organisational units</h2>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let orgUnit of person.orgUnits" [routerLink]="['/orgUnit', orgUnit.id]">
+          <h3 mat-line> {{orgUnit.name}} </h3>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-card>
+  </div>
+
+  <div class="flex-hack" fxFlex="60" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-sm="0">
+    <mat-card>
+      <h1>{{person.firstName + ' ' + person.lastName}}</h1>
+      <h3>{{person.jobTitle}}</h3>
+      <mat-list class="user-menu-list">
+        <mat-list-item>
+          <mat-icon mat-list-icon>email</mat-icon>
+          <p mat-line>{{person.email}}</p>
+        </mat-list-item>
+      </mat-list>
+
+      <a mat-fab class="card-fab" [href]="person.directoryUrl" target="_blank">
+        <mat-icon>add</mat-icon>
+      </a>
+    </mat-card>
+
+    <div fxHide.gt-xs>
+      <img fxFlexFill [src]="apiService.getAssetUrl(person.image)">
+    </div>
+
+    <mat-card *ngIf="supportedContent && supportedContent.length">
+      <h2>Supported resources</h2>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let item of supportedContent" [routerLink]="item | listItemToRouterLink">
+          <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
+          <h3 mat-line> {{item.title}} </h3>
+          <p mat-line>{{item.subtitle}}</p>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-card>
+  </div>
+</div>

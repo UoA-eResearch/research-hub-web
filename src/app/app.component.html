@@ -1,57 +1,142 @@
 <section class="mat-typography">
-  <md-sidenav-container class="sidenav-container">
-    <md-sidenav #sidenav [mode]="sideNavMode" [opened]="isSideNavOpened">
-      <md-toolbar color="primary" class="toolbar" class.xs="toolbar-xs">
-        <a routerLink="/home"><span>Research Hub</span></a>
-      </md-toolbar>
-      <md-nav-list>
-        <md-list-item *ngFor="let item of menuItems" [routerLink]="item.href">
-          <md-icon md-list-icon class="mdi mdi-{{item.icon}}"></md-icon>
-          <a md-line >{{item.name}}</a>
-        </md-list-item>
-      </md-nav-list>
-    </md-sidenav>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="over" opened="false">
+      <mat-toolbar color="primary" class="sidenav-home">
+        <mat-nav-list>
+          <mat-list-item routerLink="/home" (click)="sidenav.close()">
+            <mat-icon mat-list-icon style="color:white;">home</mat-icon>
+            <a mat-line style="color: white;">Research Hub</a>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-toolbar>
+
+      <mat-nav-list>
+        <ng-container *ngFor="let menuOption of optionsService.menuOptions;">
+          <ng-container *ngIf="menuOption.sublist === undefined">
+            <mat-list-item [routerLink]="menuOption.routerLink" (click)="sidenav.close()">
+              <mat-icon mat-list-icon>{{menuOption.icon}}</mat-icon>
+              <a mat-line>{{menuOption.name}}</a>
+            </mat-list-item>
+          </ng-container>
+
+          <ng-container *ngIf="menuOption.sublist !== undefined">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header class="expandable-menu">
+                <mat-list-item style="width: 100%;height: 100%;">
+                  <mat-icon mat-list-icon>{{menuOption.icon}}</mat-icon>
+                  <a mat-line>{{menuOption.name}}</a>
+                </mat-list-item>
+              </mat-expansion-panel-header>
+
+              <mat-list-item *ngFor="let item of menuOption.sublist;" (click)="sidenav.close()" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">
+                <a mat-line>{{item.name}}</a>
+              </mat-list-item>
+            </mat-expansion-panel>
+          </ng-container>
+        </ng-container>
+      </mat-nav-list>
+    </mat-sidenav>
 
     <div class="sidenav-content-wrapper">
-      <div class="sidenav-content" class.xs="sidenav-content-xs">
-        <div class="primary-header" ngClass.xs="primary-header-xs">
+      <div class="sidenav-content" ngClass.xs="sidenav-content-xs">
+        <div class="app-toolbar-container">
+          <div class="site-content app-toolbar" ngClass.xs="site-content app-toolbar-xs">
+            <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="center end" color="primary">
+              <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+              <button mat-button routerLink="/home" style="font-size: 20px;">Research Hub</button>
+              <span style="flex: 1 1 auto;"></span>
 
-          <div fxLayout="row" fxLayoutAlign="center center">
+              <button fxHide.lt-md mat-button routerLink="/search">
+                Search
+              </button>
 
-            <button md-icon-button class="mdi mdi-menu mdi-24px menu-button" class.xs="mdi mdi-menu mdi-24px menu-button-xs" (click)="sidenav.toggle()" fxHide.gt-sm></button>
+              <button fxHide.gt-sm mat-icon-button routerLink="/search">
+                <mat-icon class="mat-24" style="color: white;">search</mat-icon>
+              </button>
 
-            <md-toolbar class="primary-toolbar"  color="primary">
-              <app-search-bar class="search-bar-theme" [categories]="categories" [category]="category" [searchText]="searchText"></app-search-bar>
-            </md-toolbar>
+              <button fxHide.lt-md mat-button [matMenuTriggerFor]="browseMenu">
+                Browse
+              </button>
+
+              <mat-menu #browseMenu="matMenu">
+                <button mat-menu-item *ngFor="let item of optionsService.categoryOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
+              </mat-menu>
+
+              <button fxHide.lt-md mat-button [matMenuTriggerFor]="researchActivityMenu">
+                Research Activity
+              </button>
+
+              <mat-menu #researchActivityMenu="matMenu">
+                <button mat-menu-item *ngFor="let item of optionsService.researchActivityOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
+              </mat-menu>
+
+              <button *ngIf="showLoginBtn" mat-button (click)="authService.login()">Sign In</button>
+
+              <button *ngIf="!showLoginBtn" mat-button [matMenuTriggerFor]="userMenu" style="padding-left: 10px; padding-right: 5px;min-width: 0;">
+                <span fxHide.lt-md>{{authService.user.displayName}}</span>
+                <span fxHide.gt-sm>{{authService.user.initials}}</span>
+                <mat-icon matPrefix>expand_more</mat-icon>
+              </button>
+
+              <mat-menu #userMenu="matMenu">
+                <div *ngIf="!showLoginBtn" style="margin-right: 8px; margin-left: 8px;">
+                  <img src="/assets/images/uoa-logo-blue.svg">
+
+                  <mat-list class="user-menu-list">
+                    <mat-list-item>
+                      <mat-icon mat-list-icon>person</mat-icon>
+                      <p mat-line>{{authService.user.displayName}}</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                      <mat-icon mat-list-icon>note</mat-icon>
+                      <p mat-line>{{authService.user.mail}}</p>
+                    </mat-list-item>
+                  </mat-list>
+
+                  <div fxLayout="row" fxLayoutAlign="end">
+                    <a mat-button href="https://www.auckland.ac.nz/en/about-us/about-the-university/identity-and-access-management/single-sign-on/details.html">Sign Out</a>
+                  </div>
+                </div>
+              </mat-menu>
+            </div>
+            <div [style.height]="showBackBtn ? '42px' : '12px'">
+              <div *ngIf="showBackBtn">
+                <button mat-icon-button (click)="back()"><mat-icon>navigate_before</mat-icon></button>
+                <span style="padding-left: 12px; font-size: 14px;">{{pageTitle}}</span>
+              </div>
+            </div>
+          </div>
+          <mat-progress-bar class="app-progress-bar" mode="indeterminate" color="accent" [style.visibility]="showProgressBar ? 'visible' : 'hidden'"></mat-progress-bar>
+        </div>
+
+        <app-header></app-header>
+
+        <div class="site-padding" ngClass.xs="site-padding-xs">
+          <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+      <footer ngClass.xs="footer-xs">
+        <div class="footer-content" ngClass.xs="footer-content-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+          <div fxFlex="70" fxFlex.xs="50" fxLayout="row">
+            <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center">
+              <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)">
+                Copyright © {{getYear()}}, Centre for eResearch
+              </a>
+              <a fxHide.lt-md routerLink="/contact">Contact</a>
+              <a fxHide.lt-md routerLink="/feedback">Provide Feedback</a>
+              <a fxHide.lt-md [href]="disclaimerUrl" target="_blank" (click)="analyticsService.trackOutboundLink(disclaimerUrl)">Disclaimer</a>
+            </div>
           </div>
 
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <h1><breadcrumb [useBootstrap]="false"></breadcrumb></h1>
-            <span class="example-spacer"></span>
-            <button md-icon-button (click)="openSearchFilter()" fxHide.gt-sm *ngIf="showFilterButton">
-              <md-icon class="md-24" style="color: white;">filter_list</md-icon>
-            </button>
+          <div fxFlex="30" fxFlex.xs="50" fxLayoutAlign="end">
+            <a [href]="aucklandUniUrl" target="_blank" (click)="analyticsService.trackOutboundLink(aucklandUniUrl)">
+              <img class="logo-img" ngClass.xs="logo-img-xs" [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
+            </a>
           </div>
         </div>
-        <router-outlet></router-outlet>
-      </div>
-      <footer class.xs="footer-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
-          <div fxFlex="60%" fxFlex.xs="45" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2em" fxLayoutAlign.xs="end">
-            <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)" class.xs="footer-a-xs">
-              Copyright © {{getYear()}}. Centre for eResearch
-            </a>
-            <a fxHide.lt-lg routerLink="/contact">Contact</a>
-            <a fxHide.lt-lg routerLink="/feedback">Provide Feedback</a>
-            <a fxHide.lt-lg [href]="disclaimerUrl" target="_blank" (click)="analyticsService.trackOutboundLink(disclaimerUrl)">Disclaimer</a>
-          </div>
-
-          <div fxFlex="40%" fxFlex.xs="55" fxLayoutAlign="end" fxLayoutAlign.xs="start">
-            <a class="logo" [href]="aucklandUniUrl" target="_blank" (click)="analyticsService.trackOutboundLink(aucklandUniUrl)">
-              <img [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
-            </a>
-          </div>
       </footer>
     </div>
-  </md-sidenav-container>
+  </mat-sidenav-container>
 </section>
 <a fxHide.lt-md class="github-fork-ribbon left-bottom fixed" routerLink="/feedback" title="Beta">Beta</a>

@@ -1,0 +1,43 @@
+<div style="margin-top: 32px;">
+  <app-search-filters style="display: block;" [filtersForm]="filtersForm" fxHide.xs></app-search-filters>
+
+  <div *ngIf="!showEmptyState" style="margin-top: 32px;">
+    <p [innerHTML]="resultsSummary"></p>
+  </div>
+
+  <div *ngIf="showEmptyState" style="margin-top: 32px;">
+    <p [innerHTML]="noResultsSummary"></p>
+    <p>Suggestions:</p>
+    <ul>
+      <li fxHide.gt-sm>Widen your <a (click)="openDialog()">filters</a></li>
+      <li fxHide.lt-md>Widen your filters</li>
+      <li>Let us know what you were looking for via our <a [routerLink]="['/feedback']">Feedback page</a></li>
+      <li>You can try the <a href="https://www.staff.auckland.ac.nz/en.html" target="_blank">Staff Service Centre</a> in the Staff Intranet</li>
+    </ul>
+  </div>
+
+  <mat-nav-list>
+    <ng-container *ngFor="let item of resultsPage.content">
+      <ng-container *ngIf="item.type !== 'policy'">
+        <mat-list-item [routerLink]="item | listItemToRouterLink">
+          <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
+          <h3 mat-line> {{item.title}} </h3>
+          <p mat-line>
+            <span> {{item.subtitle}} </span>
+          </p>
+        </mat-list-item>
+      </ng-container>
+
+      <ng-container *ngIf="item.type === 'policy'">
+        <a mat-list-item [href]="item.url" target="_blank" (click)="trackOutboundLink(item)">
+          <img *ngIf="item.image" mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
+          <h3 mat-line>{{item.title}} </h3>
+          <p mat-line>
+            <span> {{item.subtitle}} </span>
+          </p>
+        </a>
+      </ng-container>
+    </ng-container>
+  </mat-nav-list>
+</div>
+

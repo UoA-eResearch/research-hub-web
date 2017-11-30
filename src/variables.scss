@@ -5,6 +5,7 @@ $mat-toolbar-height-mobile-landscape: 48px !default;
 $sidenav-width: 250px;
 
 
+
 /*
 
   Display widths
@@ -15,6 +16,8 @@ $sidenav-width: 250px;
 
 $width-percentage: 90%;
 $max-content-width: 1060px;
+
+$max-page-width: 960px;
 
 // Breakpoints
 
@@ -34,14 +37,10 @@ $xl-thresh-min: 1920px;
 $xs-offset: 1em;
 $gt-xs-offset: 2em;
 
-$primary-header-height: 124px;
-$primary-header-xs-height: 90px;
-
 $footer-height: 7em;
-$footer-xs-height: 10em;
+$footer-xs-height: 9em;
 
 .div-background-image {
-  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   width: 100%;

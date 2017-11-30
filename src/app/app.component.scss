@@ -2,13 +2,7 @@
 @import '~github-fork-ribbon-css/gh-fork-ribbon';
 
 
-/*
- * When using Angular 2 [hidden] parameter, hides element and keeps space
- */
 
-[hidden] {
-  visibility: hidden !important;
-}
 
 /*
  * Button styles
@@ -32,37 +26,105 @@
  * Navigation list
  */
 
-.sidenav-container md-list-item md-icon {
+.sidenav-container mat-list-item mat-icon {
   color: $color-icon;
   font-size: mat-font-size($app-sidenav-list-typography, body-2) !important;
   font-weight: mat-font-weight($app-sidenav-list-typography, body-2) !important;
 }
 
-.sidenav-container md-list-item .mat-line {
+.sidenav-container mat-list-item .mat-line {
   font-size: mat-font-size($app-sidenav-list-typography, body-1) !important;
   font-weight: mat-font-weight($app-sidenav-list-typography, body-1) !important;
+}
+
+/*
+ * User Menu
+ */
+
+.user-menu-list {
+  margin-bottom: 8px;
+}
+
+.user-menu-list mat-list-item mat-icon {
+  color: $color-icon;
+}
+
+.user-menu-list mat-list-item p {
+  font-size: 0.7em !important;
+}
+
+.app-toolbar-container {
+  position: relative;
+  background-color: $color-primary;
+  color: white;
+}
+
+.app-toolbar {
+  padding-left: $site-padding;
+  padding-right: $site-padding;
+}
+
+.app-toolbar-xs {
+  padding-left: $xs-offset;
+  padding-right: $xs-offset;
+}
+
+.app-toolbar .app-toolbar-row {
+  height: 48px;
+}
+
+.app-toolbar-xs .app-toolbar-row {
+  height: 48px;
 }
 
 /*
  * SideNav
  */
 
-.sidenav-container md-sidenav md-toolbar.toolbar{
-  min-height: $primary-header-height;
+.sidenav-home {
+  padding: 0 !important;
 }
 
-.sidenav-container md-sidenav md-toolbar.toolbar-xs{
-  min-height: $primary-header-xs-height;
+.sidenav-home mat-nav-list {
+  width: 100% !important;
 }
 
-.sidenav-container md-sidenav md-toolbar button md-icon {
+mat-expansion-panel {
+  box-shadow: none !important;
+}
+
+mat-expansion-panel-header .mat-expanded {
+  height: 48px !important;
+}
+
+.mat-expansion-panel-body {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.mat-expansion-panel-body .mat-list-item-content {
+  padding-left: 40px !important;
+}
+
+.expandable-menu {
+  background-color: #FAFAFA !important;
+  padding-left: 0 !important;
+  height: 48px !important;
+}
+
+.sidenav-container mat-sidenav-content {
+
+  overflow: visible !important;
+}
+
+.sidenav-container mat-sidenav mat-toolbar button mat-icon {
   font-size: mat-font-size($app-sidenav-toolbar-typography, button) !important;
   font-weight: mat-font-weight($app-sidenav-toolbar-typography, button) !important;
   color:white;
 }
 
-.sidenav-container md-sidenav md-toolbar span {
-  font-size: mat-font-size($app-sidenav-toolbar-typography, body-1) !important;
+.sidenav-container mat-sidenav mat-toolbar span {
+  //font-size: mat-font-size($app-sidenav-toolbar-typography, body-1) !important;
   font-weight: mat-font-weight($app-sidenav-toolbar-typography, body-1) !important;
   color:white;
 }
@@ -71,18 +133,13 @@
   min-height: calc(100vh);
 }
 
-.sidenav-container md-sidenav {
-  min-width: $sidenav-width;
+.sidenav-container mat-sidenav {
+  //min-width: $sidenav-width;
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
   background-color: $color-background;
 }
 
-.sidenav-container .mat-drawer-content {
-  margin-left: $sidenav-width !important;
-
-}
-
-.sidenav-container md-sidenav md-list {
+.sidenav-container mat-sidenav mat-list {
   padding-left: 1em;
   padding-top: 1em;
 }
@@ -103,42 +160,10 @@
   min-height: calc(100vh - #{$footer-xs-height});
 }
 
-.footer-a-xs {
-  margin-top: 2.5em;
-  margin-right: 0 !important;
-  margin-bottom: 0.5em;
-}
-
-.primary-header {
-  min-height:$primary-header-height;
-  background: $color-primary;
-  padding-left: $gt-xs-offset;
-  padding-right: $gt-xs-offset;
-}
-
-.primary-header-xs {
-  @extend .primary-header;
-  min-height: $primary-header-xs-height;
-  padding-left: $xs-offset;
-  padding-right: $xs-offset;
-}
-
-.primary-header h1 {
-  margin: 0;
-  padding: 0;
-  color: white;
-  display: inline-block;
-  @include mat-typography-level-to-styles($app-primary-header-typography, headline);
-}
-
-.primary-header-xs h1 {
-  margin: 0;
-  padding: 0;
-  color: white;
-  display: inline-block;
-  @include mat-typography-level-to-styles($app-primary-header-typography, headline);
-  line-height: 1em;
-  margin-bottom: 0.2em;
+.app-progress-bar {
+  position: absolute !important;
+  left: 0 !important;
+  bottom: -5px !important; // Offset height of progress bar from bottom of tool
 }
 
 
@@ -149,15 +174,24 @@
 footer {
   background-color: $color-primary;
   height: $footer-height;
-  padding-left: 2em;
-  padding-right: 2em;
+  padding-left: $site-padding;
+  padding-right: $site-padding;
 }
 
-.footer-xs {
-  @extend footer;
+footer.footer-xs {
   height: $footer-xs-height;
   padding-left: $xs-offset;
   padding-right: $xs-offset;
+}
+
+.footer-content {
+  @extend .site-content;
+  height: $footer-height !important;
+}
+
+.footer-content-xs {
+  //@extend .footer-content;
+  height: $footer-xs-height !important;
 }
 
 footer a {
@@ -168,9 +202,18 @@ footer a {
   font-weight: mat-font-weight($app-base-typography, caption) !important;
 }
 
-footer .logo img {
+footer.footer-xs a {
+  text-align: center;
+}
+
+.logo-img {
   display: block;
   height: 5em;
+}
+
+.logo-img-xs {
+  @extend .logo-img;
+  height: 4em;
 }
 
 
@@ -178,26 +221,26 @@ footer .logo img {
  * Breadcrumb styling
  */
 
-breadcrumb span {
+.breadcrumb span {
   color: $breadcrumb-current-color;
 }
 
-breadcrumb a {
+.breadcrumb a {
   color: $breadcrumb-previous-color;
 }
 
-breadcrumb ul {
+.breadcrumb ul {
   padding-left: 0;
 }
 
-breadcrumb ul > li {
+.breadcrumb ul > li {
   display: inline-block;
   zoom:1;
   *display:inline;   /* a fix needed for IE7- */
   cursor: pointer;
 }
 
-breadcrumb li:not(:first-child):before {
+.breadcrumb li:not(:first-child):before {
   padding-left: 0.5em;
   padding-right: 0.4em;
   content: ">";
@@ -209,9 +252,11 @@ breadcrumb li:not(:first-child):before {
  */
 
 .primary-toolbar {
-  //padding-left: 1em;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  //@extend .site-content;
+  position: relative !important; // Needed so we can absolutely position progress bar inside it
+
+  //padding-left: 0 !important;
+  //padding-right: 0 !important;
 }
 
 app-search-bar {
@@ -249,18 +294,18 @@ app-search-bar {
 
 // HACK
 // https://github.com/angular/material2/issues/6958
-
-.sidenav-container .mat-drawer-content {
-  margin-left: $sidenav-width !important;
-
-}
-
-@media (max-width: $md-thresh-min) {
-
-    .sidenav-container .mat-drawer-content {
-      margin-left: 0 !important;
-      //flex-grow: 1;
-    }
-
-}
+//
+//.sidenav-container .mat-drawer-content {
+//  margin-left: $sidenav-width !important;
+//
+//}
+//
+//@media (max-width: $md-thresh-min) {
+//
+//    .sidenav-container .mat-drawer-content {
+//      margin-left: 0 !important;
+//      //flex-grow: 1;
+//    }
+//
+//}
 

@@ -1,0 +1,92 @@
+<ng-container *ngIf="content && !isGuide()">
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em">
+    <div class="flex-hack" fxFlex="40" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-md="2" [ngStyle.lt-lg]="{'margin-top': '1em'}">
+      <div fxHide.lt-md>
+        <img style="width:100%; height:auto;" [src]="apiService.getAssetUrl(content.image)">
+      </div>
+
+      <mat-card *ngIf="similarContentItems && similarContentItems.length">
+        <h2>You might also be interested in</h2>
+        <mat-nav-list>
+          <mat-list-item *ngFor="let item of similarContentItems" [routerLink]="['/content', item.id]">
+            <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
+            <h3 mat-line> {{item.name}} </h3>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-card>
+
+      <mat-card *ngIf="userSupport && userSupport.length">
+        <h2>For support contact</h2>
+        <mat-chip-list [selectable]="true">
+          <mat-chip class="contact-chip" *ngFor="let item of userSupport" [routerLink]="item | listItemToRouterLink">
+            <img class="chip-avatar" [src]="apiService.getAssetUrl(item.image)" height="25"/>
+            {{item.title}}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-card>
+
+      <mat-card>
+        <h2>Organisational units</h2>
+        <mat-chip-list>
+          <mat-chip class="org-unit-chip" *ngFor="let orgUnit of content.orgUnits" [routerLink]="['/orgUnit', orgUnit.id]">
+            {{orgUnit.name}}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-card>
+
+      <mat-card *ngIf="content.policies.length">
+        <h2>Policies</h2>
+        <a class="policy-url" *ngFor="let policy of content.policies" [href]="policy.url" target="_blank" (click)="analyticsService.trackPolicy(policy.name, policy.url);">
+          {{policy.name}}
+        </a>
+      </mat-card>
+    </div>
+
+    <div class="flex-hack" fxFlex="60" fxLayout="column" fxLayoutGap="1em" fxFlexOrder.lt-md="1">
+      <mat-card [ngClass]="{'description': !isKnowledgeArticle()}" class="description">
+        <h1>{{content.name}}</h1>
+        <app-markdown [data]="content.description"></app-markdown>
+        <a *ngIf="!isKnowledgeArticle() && !isIntegratedService()" mat-fab class="card-fab" [href]="content.action" target="_blank">
+          <mat-icon>add</mat-icon>
+        </a>
+        <button *ngIf="!isKnowledgeArticle() && isIntegratedService()" mat-fab class="card-fab" [routerLink]="['/'+ content.action]">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-card>
+
+      <div fxHide.gt-sm>
+        <img fxFlexFill [src]="apiService.getAssetUrl(content.image)">
+      </div>
+
+      <mat-card *ngIf="content.additionalInfo">
+        <app-markdown [data]="content.additionalInfo"></app-markdown>
+      </mat-card>
+
+      <mat-card *ngIf="content.actionableInfo">
+        <app-markdown [data]="content.actionableInfo"></app-markdown>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="content && isGuide()">
+  <div fxLayout="column" fxLayoutGap="1em">
+    <mat-card class="description">
+      <h1>{{content.name}}</h1>
+      <app-markdown [data]="content.description"></app-markdown>
+    </mat-card>
+
+    <mat-grid-list [cols]="numCols" gutterSize="1em">
+      <mat-grid-tile class="browse-tile" *ngFor="let item of guideCategories;" [colspan]="1" [rowspan]="1" [routerLink]="['/guideCategory', item.id]">
+        <div fxLayout="column" fxLayoutAlign="center center" class="tile-content">
+          <span class="tile-text">{{item.name}}</span>
+          <mat-icon class="tile-icon">{{item.icon}}</mat-icon>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-card *ngIf="content.additionalInfo">
+      <app-markdown [data]="content.additionalInfo"></app-markdown>
+    </mat-card>
+  </div>
+</ng-container>
