@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header style="padding-left: 16px;margin-bottom: 1.5em;">
     <img *ngIf="content" mat-card-avatar [src]="apiService.getAssetUrl(content.image)">
-    <h1>Request a Virtual Machine</h1>
+    <h1>{{title}}</h1>
   </mat-card-header>
 
   <mat-horizontal-stepper #stepper linear>

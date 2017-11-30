@@ -6,6 +6,8 @@ import {Content} from 'app/model/Content';
 import {AuthService} from '../../services/auth.service';
 import {MatHorizontalStepper} from '@angular/material/stepper';
 import {AppComponentService} from '../../app.component.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import 'rxjs/add/operator/retryWhen';
 
 
 @Component({
@@ -14,6 +16,8 @@ import {AppComponentService} from '../../app.component.service';
   styleUrls: ['./request-vm.component.scss']
 })
 export class RequestVmComponent implements OnInit {
+
+  private static requestVmFormKey = 'requestVmForm';
 
   @ViewChild('stepper') stepper: MatHorizontalStepper;
   public requestVmForm: FormGroup;
@@ -25,6 +29,8 @@ export class RequestVmComponent implements OnInit {
   public content: Content;
   public submitting = false;
   public response: any;
+  public title = 'Request a Research Virtual Machine Consultation';
+
 
   private static getTimes() {
     const times = [];
@@ -62,9 +68,29 @@ export class RequestVmComponent implements OnInit {
     this.apiService.getContent(this.researchVmContentId).subscribe(
       content => {
         this.content = content;
-        this.appComponentService.setTitle('Request a Virtual Machine');
+        this.appComponentService.setTitle(this.title);
       });
+
+    // this.loadForm();
   }
+
+  // saveForm() {
+  //   localStorage.setItem(RequestVmComponent.requestVmFormKey, JSON.stringify(this.requestVmForm.getRawValue()));
+  // }
+  //
+  // loadForm() {
+  //   const item = localStorage.getItem(RequestVmComponent.requestVmFormKey);
+  //
+  //   if (item !== null) {
+  //     const value = JSON.parse(item);
+  //     console.log(RequestVmComponent.requestVmFormKey, value);
+  //     this.requestVmForm.setValue(value);
+  //   }
+  // }
+  //
+  // clearForm() {
+  //   localStorage.removeItem(RequestVmComponent.requestVmFormKey)
+  // }
 
   submit() {
     const isValid = this.requestVmForm.valid;
@@ -76,11 +102,26 @@ export class RequestVmComponent implements OnInit {
       this.submitting = true;
       const values = this.requestVmForm.getRawValue();
 
-      this.apiService.requestVm(values.date, values.time, values.comments).subscribe((response) => {
-        this.response = response;
-        this.stepper.selectedIndex = 1; // Navigate to second step
-        // TODO: set Done step to completed so that a tick appears next to 'Done', doesn't work at the moment
-      });
+      this.apiService.requestVm(values.date, values.time, values.comments)
+        .subscribe(
+          (response) => {
+            this.response = response;
+            this.stepper.selectedIndex = 1; // Navigate to second step
+            // this.clearForm();
+            // TODO: set Done step to completed so that a tick appears next to 'Done', doesn't work at the moment
+          },
+          (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log(`A client-side or network error occurred: ${err.error.message}`);
+            } else {
+              console.log(`Backend returned code ${err.status}, body was: ${err.error}`, err);
+
+              // if (err.status === 401) {
+              //   // this.saveForm();
+              //   this.authService.login();
+              // }
+            }
+          });
     }
   }
 }
