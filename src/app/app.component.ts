@@ -14,6 +14,7 @@ import 'rxjs/add/operator/filter';
 import {HeaderService} from './components/header/header.service';
 import {Location} from '@angular/common';
 import {AppComponentService} from './app.component.service';
+import {Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -48,7 +49,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private location: Location, public optionsService: OptionsService, private headerService: HeaderService,
               private searchBarService: SearchBarService, private router: Router,
               public apiService: ApiService, public analyticsService: AnalyticsService,
-              public authService: AuthService, private ref: ChangeDetectorRef, private appComponentService: AppComponentService) {
+              public authService: AuthService, private ref: ChangeDetectorRef, private appComponentService: AppComponentService,
+              private titleService: Title) {
 
     authService.loginChange.subscribe((loggedIn) => {
       this.showLoginBtn = !loggedIn;
@@ -106,7 +108,8 @@ export class AppComponent implements OnInit, OnDestroy {
         .filter(event => event instanceof NavigationEnd)
         .subscribe(event => {
           // Need to use urlAfterRedirects rather than url to get correct routeName, even when route redirected automatically
-          const routeName = this.getRouteName(event['urlAfterRedirects']);
+          const url = event['urlAfterRedirects'];
+          const routeName = this.getRouteName(url);
 
           if (routeName) {
             // Update previous and current routes
@@ -119,13 +122,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
             this.appComponentService.setProgressBarVisibility(false);
             const pageInfo = this.optionsService.pageInfo[routeName];
-
             this.pageTitle = pageInfo.title;
+
+            // Set title and track page view for pages with pre-defined titles
+            if (pageInfo.title) {
+              this.titleService.setTitle('Research Hub: ' + pageInfo.title);
+              this.analyticsService.trackPageView(url, pageInfo.title);
+            }
+
             this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
             this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
 
             this.showFilterButton = routeName === 'search';
-            window.scrollTo(0, 0);
+            window.scrollTo(0, 0); // TODO: remove or change when this pull request is merged https://github.com/angular/angular/pull/20030
           }
         });
     }
