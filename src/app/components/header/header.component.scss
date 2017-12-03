@@ -15,8 +15,8 @@
 
 .header-padding {
   @extend .site-content;
-  padding-left: $site-padding;
-  padding-right: $site-padding;
+  padding-left: $padding-site;
+  padding-right: $padding-site;
 }
 
 .header-padding-xs {
@@ -25,7 +25,7 @@
 }
 
 .info-no-bg {
-  padding: $gt-xs-offset;
+  padding: $offset-gt-xs;
   background-color: white;
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
 }
@@ -36,16 +36,16 @@
 }
 
 .info {
-  padding: $gt-xs-offset;
+  padding: $offset-gt-xs;
   background-color: white;
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
 }
 
 .info-xs {
   @extend .info;
-  padding: $xs-offset;
-  padding-top: $xs-offset * 1.5;
-  padding-bottom: $xs-offset * 2.0;
+  padding: $offset-xs;
+  padding-top: $offset-xs * 1.5;
+  padding-bottom: $offset-xs * 2.0;
   margin-bottom: 0;
 }
 

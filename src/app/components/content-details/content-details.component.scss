@@ -18,13 +18,13 @@
 
 
 .content-header {
-  padding: $gt-xs-offset;
+  padding: $offset-gt-xs;
   background-color: $color-content-header;
 }
 
 .content-header-xs {
   @extend .content-header;
-  padding: $xs-offset $xs-offset 1.2em $xs-offset;
+  padding: $offset-xs $offset-xs 1.2em $offset-xs;
 }
 
 .content-header > div:nth-child(1) > h2 {
@@ -91,7 +91,7 @@
 
 .browse-tile {
   cursor: pointer;
-  background-color: $guide-tile-bg-color;
+  background-color: $color-guide-tile-bg;
   text-decoration: none;
 }
 

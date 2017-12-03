@@ -1,0 +1,41 @@
+
+/*
+ * Research Activity Chips
+ */
+
+$ra-chip-margin: 0.5em;
+
+$color-plan-bg: #62388e;
+$color-create-bg: #2f99cc;
+$color-analyze-bg: #329a37;
+$color-publish-bg: #f49717;
+$color-discover-bg: #cd3234;
+
+.ra-chip-container {
+  margin-bottom: $ra-chip-margin;
+}
+
+.ra-chip-container:not(:last-child) {
+  margin-right: $ra-chip-margin;
+}
+
+.ra-chip-container-stacked {
+  margin-bottom: $ra-chip-margin;
+}
+
+.ra-chip {
+  color: white !important;
+}
+
+@mixin research-activity-chip($class-name, $color) {
+  .#{$class-name} > mat-chip {
+    @extend .ra-chip;
+    background-color: $color !important;
+  }
+}
+
+@include research-activity-chip('plan', $color-plan-bg);
+@include research-activity-chip('create', $color-create-bg);
+@include research-activity-chip('analyze', $color-analyze-bg);
+@include research-activity-chip('publish', $color-publish-bg);
+@include research-activity-chip('discover', $color-discover-bg);
