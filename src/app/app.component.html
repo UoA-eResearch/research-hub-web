@@ -55,7 +55,7 @@
                 <mat-icon matPrefix>expand_more</mat-icon>
               </button>
 
-              <mat-menu #browseMenu="matMenu">
+              <mat-menu #browseMenu="matMenu" [overlapTrigger]="false">
                 <button mat-menu-item *ngFor="let item of optionsService.categoryOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
               </mat-menu>
 
@@ -64,7 +64,7 @@
                 <mat-icon matPrefix>expand_more</mat-icon>
               </button>
 
-              <mat-menu #researchActivityMenu="matMenu">
+              <mat-menu #researchActivityMenu="matMenu" [overlapTrigger]="false">
                 <button mat-menu-item *ngFor="let item of optionsService.researchActivityOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
               </mat-menu>
 
@@ -76,7 +76,7 @@
                 <mat-icon matPrefix>expand_more</mat-icon>
               </button>
 
-              <mat-menu #userMenu="matMenu">
+              <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
                 <div *ngIf="!showLoginBtn" style="margin-right: 8px; margin-left: 8px;">
                   <img src="/assets/images/uoa-logo-blue.svg">
 
@@ -97,11 +97,17 @@
                 </div>
               </mat-menu>
             </div>
-            <div [style.height]="showBackBtn ? '42px' : '12px'">
+            <div [style.height]="showBackBtn ? '42px' : '12px'" fxLayout="row" fxLayoutAlign="center end" color="primary">
               <div *ngIf="showBackBtn">
                 <button mat-icon-button (click)="back()"><mat-icon>navigate_before</mat-icon></button>
-                <span style="padding-left: 12px; font-size: 14px;">{{pageTitle}}</span>
+                <!--<span style="padding-left: 12px; font-size: 14px;">{{pageTitle}}</span>-->
               </div>
+
+              <span style="flex: 1 1 auto;"></span>
+
+              <!--<button mat-icon-button routerLink="/search">-->
+                <!--<mat-icon>search</mat-icon>-->
+              <!--</button>-->
             </div>
           </div>
           <mat-progress-bar class="app-progress-bar" mode="indeterminate" color="accent" [style.visibility]="showProgressBar ? 'visible' : 'hidden'"></mat-progress-bar>
