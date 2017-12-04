@@ -6,7 +6,7 @@ import marked from 'marked';
 import {Location} from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {ListItem} from '../../model/ListItem';
-import {ActionTypeId, ContentTypeId, RoleTypeId} from '../../services/options.service';
+import {ActionTypeId, ContentTypeId, OptionsService, RoleTypeId} from '../../services/options.service';
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {LayoutService} from '../../services/layout.service';
@@ -27,12 +27,13 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
   numCols = 1;
   mediaSub: Subscription;
   guideCategories: GuideCategory[] = [];
+  categories: any[] = [];
 
   // this.analyticsService.trackGo(this.goEventCategory, this.title, this.goHref);
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private media: ObservableMedia,
               private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService,
-              private appComponentService: AppComponentService) {
+              private appComponentService: AppComponentService, private optionsService: OptionsService) {
 
     // Configure marked
     marked.setOptions({
@@ -65,6 +66,19 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
     return this.content.actionType && this.content.actionType.id === ActionTypeId.Integrated;
   }
 
+  getCategories(): any[] {
+    return this.categories = this.content.contentTypes.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      } else if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    }).map((contentType) => {
+      return {categoryId: this.optionsService.categoryMap[contentType.id], name: contentType.name};
+    });
+  }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['contentId'];
@@ -74,6 +88,7 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
           const url = this.location.path();
           const name = content.name;
           this.content = content;
+          this.categories = this.getCategories();
 
           this.appComponentService.setTitle(name);
 

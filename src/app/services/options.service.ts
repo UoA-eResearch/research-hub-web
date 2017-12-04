@@ -63,6 +63,7 @@ export class OptionsService {
   public menuOptions: any[];
   public pageInfo: any;
   public contentTypeMap: any;
+  public categoryMap: any;
 
   constructor() {
     this.contentTypeMap = {};
@@ -72,6 +73,15 @@ export class OptionsService {
     this.contentTypeMap[CategoryId.Software] = [ContentTypeId.Software];
     this.contentTypeMap[CategoryId.Facilities] = [ContentTypeId.Facilities];
     this.contentTypeMap[CategoryId.Guide] = [ContentTypeId.Guide, ContentTypeId.KnowledgeArticle];
+
+    this.categoryMap = {};
+    this.categoryMap[ContentTypeId.Support] = [CategoryId.Support];
+    this.categoryMap[ContentTypeId.Equipment] = [CategoryId.Equipment];
+    this.categoryMap[ContentTypeId.Training] = [CategoryId.Training];
+    this.categoryMap[ContentTypeId.Software] = [CategoryId.Software];
+    this.categoryMap[ContentTypeId.Facilities] = [CategoryId.Facilities];
+    this.categoryMap[ContentTypeId.Guide] = [CategoryId.Guide];
+    this.categoryMap[ContentTypeId.KnowledgeArticle] = [CategoryId.Guide];
 
     this.categoryOptions = [
       {id: CategoryId.All, name: 'All Categories', icon: 'public', type: OptionType.Category},
