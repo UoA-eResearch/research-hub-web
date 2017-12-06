@@ -63,7 +63,6 @@ export class OptionsService {
   public menuOptions: any[];
   public pageInfo: any;
   public contentTypeMap: any;
-  public categoryMap: any;
 
   constructor() {
     this.contentTypeMap = {};
@@ -73,15 +72,6 @@ export class OptionsService {
     this.contentTypeMap[CategoryId.Software] = [ContentTypeId.Software];
     this.contentTypeMap[CategoryId.Facilities] = [ContentTypeId.Facilities];
     this.contentTypeMap[CategoryId.Guide] = [ContentTypeId.Guide, ContentTypeId.KnowledgeArticle];
-
-    this.categoryMap = {};
-    this.categoryMap[ContentTypeId.Support] = [CategoryId.Support];
-    this.categoryMap[ContentTypeId.Equipment] = [CategoryId.Equipment];
-    this.categoryMap[ContentTypeId.Training] = [CategoryId.Training];
-    this.categoryMap[ContentTypeId.Software] = [CategoryId.Software];
-    this.categoryMap[ContentTypeId.Facilities] = [CategoryId.Facilities];
-    this.categoryMap[ContentTypeId.Guide] = [CategoryId.Guide];
-    this.categoryMap[ContentTypeId.KnowledgeArticle] = [CategoryId.Guide];
 
     this.categoryOptions = [
       {id: CategoryId.All, name: 'All Categories', icon: 'public', type: OptionType.Category},
@@ -140,8 +130,8 @@ export class OptionsService {
       },
       {name: 'Join User Study', icon: 'people', routerLink: '/feedback', type: OptionType.Menu},
       {name: 'Provide Feedback', icon: 'thumbs_up_down', routerLink: '/feedback', type: OptionType.Menu},
-      {name: 'Contact Us', icon: 'phone', routerLink: '/contact', type: OptionType.Menu},
-      {name: 'About Us', icon: 'info', routerLink: '/about', type: OptionType.Menu}
+      {name: 'Contact', icon: 'phone', routerLink: '/contact', type: OptionType.Menu},
+      {name: 'About', icon: 'info', routerLink: '/about', type: OptionType.Menu}
     ];
 
     this.pageInfo = {
@@ -154,21 +144,21 @@ export class OptionsService {
       },
       search: {title: 'Search', isHeaderVisible: false, isSearchBarVisible: true},
       feedback: {
-        title: 'Feedback',
+        title: 'Feedback & User Study',
         description: 'We appreciate your visit to the beta-version of the Research Hub, our platform for research support.',
         imageUrl: 'page-elements/AU_Gen_Detail2010_073_1680x220_BW.jpg',
         isHeaderVisible: true,
         isSearchBarVisible: false
       },
       about: {
-        title: 'About us',
+        title: 'About',
         description: 'The Centre for eResearch comprises a team of highly qualified research and technical staff dedicated to the delivery of advanced computational solutions to help power the University\'s research mission.',
         imageUrl: 'page-elements/20151005_Science Detail_013_1680x220_BW.jpg',
         isHeaderVisible: true,
         isSearchBarVisible: false
       },
       contact: {
-        title: 'Contact us',
+        title: 'Contact',
         description: 'If you want to get in touch you can ring us, write to us or even visit us. We\'d love to hear from you.',
         imageUrl: 'page-elements/DSC_0192_1680x220_BW.jpg',
         isHeaderVisible: true,

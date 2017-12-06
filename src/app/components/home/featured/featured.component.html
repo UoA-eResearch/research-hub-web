@@ -1,17 +1,17 @@
 <ng-container *ngIf="content">
-  <h2>Have you seen?</h2>
+  <h2>Have you seen...?</h2>
   <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-lg="column">
-    <!--<div fxFlex="auto">-->
-      <!--<p>{{content.summary}}</p>-->
-    <!--</div>-->
     <div ngClass.gt-xs="card-gt-xs">
-      <mat-card >
+      <mat-card>
         <img mat-card-image [src]="apiService.getAssetUrl(content.image)">
         <mat-card-content>
-          {{content.name}}
+          <h2 style="font-size: 20px;">{{content.name}}</h2>
+          <p>{{content.summary}}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button [routerLink]="['/content', content.id]">Details</button>
+          <div fxLayout="column" fxLayoutAlign="center end">
+            <button mat-button [routerLink]="['/content', content.id]">Details</button>
+          </div>
         </mat-card-actions>
       </mat-card>
     </div>

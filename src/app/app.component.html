@@ -41,14 +41,10 @@
       <div class="sidenav-content" ngClass.xs="sidenav-content-xs">
         <div class="app-toolbar-container">
           <div class="site-content app-toolbar" ngClass.xs="site-content app-toolbar-xs">
-            <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="center end" color="primary">
+            <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="center center" color="primary">
               <button fxHide.gt-xs mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
               <button mat-button routerLink="/home" style="font-size: 20px;">Research Hub</button>
               <span style="flex: 1 1 auto;"></span>
-
-              <button mat-button routerLink="/search">
-                Search
-              </button>
 
               <button class="button-menu" fxHide.lt-sm mat-button [matMenuTriggerFor]="browseMenu">
                 Browse
@@ -96,18 +92,10 @@
                   </div>
                 </div>
               </mat-menu>
-            </div>
-            <div [style.height]="showBackBtn ? '42px' : '12px'" fxLayout="row" fxLayoutAlign="center end" color="primary">
-              <div *ngIf="showBackBtn">
-                <button mat-icon-button (click)="back()"><mat-icon>navigate_before</mat-icon></button>
-                <!--<span style="padding-left: 12px; font-size: 14px;">{{pageTitle}}</span>-->
-              </div>
 
-              <span style="flex: 1 1 auto;"></span>
-
-              <!--<button mat-icon-button routerLink="/search">-->
-                <!--<mat-icon>search</mat-icon>-->
-              <!--</button>-->
+              <button mat-icon-button routerLink="/search">
+                <mat-icon>search</mat-icon>
+              </button>
             </div>
           </div>
           <mat-progress-bar class="app-progress-bar" mode="indeterminate" color="accent" [style.visibility]="showProgressBar ? 'visible' : 'hidden'"></mat-progress-bar>
@@ -121,26 +109,31 @@
         </div>
       </div>
       <footer ngClass.xs="footer-xs">
-        <div class="footer-content" ngClass.xs="footer-content-xs" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
-          <div fxFlex="70" fxFlex.xs="50" fxLayout="row">
-            <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="center">
-              <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)">
-                Copyright © {{getYear()}}, Centre for eResearch
-              </a>
-              <a fxHide.lt-md routerLink="/contact">Contact</a>
-              <a fxHide.lt-md routerLink="/feedback">Provide Feedback</a>
-              <a fxHide.lt-md [href]="disclaimerUrl" target="_blank" (click)="analyticsService.trackOutboundLink(disclaimerUrl)">Disclaimer</a>
-            </div>
-          </div>
-
-          <div fxFlex="30" fxFlex.xs="50" fxLayoutAlign="end">
+        <div class="footer-content" ngClass.xs="footer-content-xs" fxLayout="column" fxLayoutGap="1em" fxLayoutAlign="center center">
+          <div>
             <a [href]="aucklandUniUrl" target="_blank" (click)="analyticsService.trackOutboundLink(aucklandUniUrl)">
               <img class="logo-img" ngClass.xs="logo-img-xs" [src]="apiService.getAssetUrl('page-elements/uoa-logo.svg')">
             </a>
           </div>
+
+          <div fxLayout="row" fxLayout.xs="column">
+            <a routerLink="/feedback">Join User Study</a>
+            <span fxHide.xs class="footer-divider">•</span>
+            <a routerLink="/feedback">Provide Feedback</a>
+            <span fxHide.xs class="footer-divider">•</span>
+            <a routerLink="/contact">Contact</a>
+            <span fxHide.xs class="footer-divider">•</span>
+            <a routerLink="/about">About</a>
+            <span fxHide.xs class="footer-divider">•</span>
+            <a [href]="disclaimerUrl" target="_blank" (click)="analyticsService.trackOutboundLink(disclaimerUrl)">Disclaimer</a>
+          </div>
+
+          <a [href]="eResearchUrl" target="_blank" (click)="analyticsService.trackOutboundLink(eResearchUrl)">
+            Copyright © {{getYear()}}, Centre for eResearch
+          </a>
         </div>
       </footer>
     </div>
   </mat-sidenav-container>
 </section>
-<a fxHide.lt-md class="github-fork-ribbon left-bottom fixed" routerLink="/feedback" title="Feedback">Beta</a>
+<a class="github-fork-ribbon left-bottom fixed" routerLink="/feedback" title="Feedback">Beta</a>

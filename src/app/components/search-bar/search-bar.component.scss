@@ -19,3 +19,7 @@ $search-flex: 4;
   padding-left: 1em;
   padding-right: 1em;
 }
+
+.search-bar-inner mat-form-field {
+  min-width: 0 !important;
+}

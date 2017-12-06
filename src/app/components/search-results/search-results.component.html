@@ -19,22 +19,18 @@
   <mat-nav-list>
     <ng-container *ngFor="let item of resultsPage.content">
       <ng-container *ngIf="item.type !== 'policy'">
-        <mat-list-item [routerLink]="item | listItemToRouterLink">
+        <mat-list-item class="list-item" [routerLink]="item | listItemToRouterLink">
           <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
-          <h3 mat-line> {{item.title}} </h3>
-          <p mat-line>
-            <span> {{item.subtitle}} </span>
-          </p>
+          <p mat-line class="item-title">{{item.title}}</p>
+          <p mat-line class="item-subtitle">{{item.subtitle}}</p>
         </mat-list-item>
       </ng-container>
 
       <ng-container *ngIf="item.type === 'policy'">
-        <a mat-list-item [href]="item.url" target="_blank" (click)="trackOutboundLink(item)">
-          <img *ngIf="item.image" mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
-          <h3 mat-line>{{item.title}} </h3>
-          <p mat-line>
-            <span> {{item.subtitle}} </span>
-          </p>
+        <a mat-list-item class="list-item" [href]="item.url" target="_blank" (click)="trackOutboundLink(item)">
+          <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
+          <p mat-line class="item-title">{{item.title}}</p>
+          <p mat-line class="item-subtitle">{{item.subtitle}}</p>
         </a>
       </ng-container>
     </ng-container>

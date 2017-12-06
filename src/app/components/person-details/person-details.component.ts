@@ -6,7 +6,7 @@ import {Location} from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {ListItem} from '../../model/ListItem';
 import {AppComponentService} from '../../app.component.service';
-import {RoleTypeId} from '../../services/options.service';
+import {CategoryId, RoleTypeId} from '../../services/options.service';
 
 
 @Component({
@@ -17,6 +17,7 @@ import {RoleTypeId} from '../../services/options.service';
 export class PersonDetailsComponent implements OnInit {
 
   person: Person;
+  categoryIdPerson = CategoryId.Person;
   supportedContent: ListItem[];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService,

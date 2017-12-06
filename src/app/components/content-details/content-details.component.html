@@ -7,8 +7,8 @@
           <mat-card-title><h2 style="font-size: 24px;">{{content.name}}</h2></mat-card-title>
           <mat-card-subtitle>
             <ng-container *ngFor="let item of categories; let i=index;">
-              <a style="display: inline;" [routerLink]="['/search']" [queryParams]="{categoryId: item.categoryId}">
-                {{item.name}}<ng-container *ngIf="i + 1 < content.contentTypes.length">, </ng-container>
+              <a style="display: inline;" [routerLink]="['/search']" [queryParams]="{categoryId: item.idUiCategory}">
+                {{item.nameUiSingular}}<ng-container *ngIf="i + 1 < content.contentTypes.length">, </ng-container>
               </a>
             </ng-container>
           </mat-card-subtitle>
@@ -24,8 +24,8 @@
               <div fxFlex fxHide.xs>
                 <h1 >{{content.name}}</h1>
                 <ng-container *ngFor="let item of categories; let i=index;">
-                  <a style="display: inline;" [routerLink]="['/search']" [queryParams]="{categoryId: item.categoryId}">
-                    {{item.name}}<ng-container *ngIf="i + 1 < content.contentTypes.length">, </ng-container>
+                  <a style="display: inline;" [routerLink]="['/search']" [queryParams]="{categoryId: item.idUiCategory}">
+                    {{item.nameUiSingular}}<ng-container *ngIf="i + 1 < content.contentTypes.length">, </ng-container>
                   </a>
                 </ng-container>
               </div>
@@ -81,6 +81,7 @@
         <h2>Organisational units</h2>
         <mat-chip-list>
           <mat-chip class="org-unit-chip" *ngFor="let orgUnit of content.orgUnits" [routerLink]="['/orgUnit', orgUnit.id]">
+            <img class="chip-avatar" [src]="apiService.getAssetUrl(orgUnit.image)" height="25"/>
             {{orgUnit.name}}
           </mat-chip>
         </mat-chip-list>

@@ -1,6 +1,6 @@
 <div class="search-bar-outer" ngClass.xs="search-bar-outer-xs" *ngIf="isVisible">
-  <div class="search-bar-inner" fxFlex="100" fxLayout="row" fxLayoutGap="1em">
-    <mat-form-field fxFlex="100" floatPlaceholder="never">
+  <div class="search-bar-inner" fxFlex="100" fxLayout="row" fxLayoutGap="1em" fxLayoutAlign="space-between center">
+    <mat-form-field fxFlex floatPlaceholder="never">
       <button matPrefix mat-icon-button>
         <mat-icon>search</mat-icon>
       </button>
@@ -18,7 +18,7 @@
       </mat-select>
     </mat-form-field>
 
-    <div fxFlex="40px" fxHide.gt-xs fxLayoutAlign="center center">
+    <div fxFlex="40px" fxHide.gt-xs *ngIf="isFilterBtnVisible" fxLayoutAlign="center center">
       <button mat-icon-button (click)="openSearchFilter()">
         <mat-icon class="mat-24" style="color: #757575;">filter_list</mat-icon>
       </button>

@@ -29,7 +29,7 @@ export class RequestVmComponent implements OnInit {
   public content: Content;
   public submitting = false;
   public response: any;
-  public title = 'Request a Research Virtual Machine Consultation';
+  public title = 'Request a Research Virtual Machine';
 
 
   private static getTimes() {

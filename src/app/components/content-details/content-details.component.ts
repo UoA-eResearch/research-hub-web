@@ -74,8 +74,6 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
         return 1;
       }
       return 0;
-    }).map((contentType) => {
-      return {categoryId: this.optionsService.categoryMap[contentType.id], name: contentType.name};
     });
   }
 

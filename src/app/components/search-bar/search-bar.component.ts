@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} fr
 import {SearchBarService} from './search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
 import {MatInput} from '@angular/material/input';
+import {NavigationEnd, Router} from "@angular/router";
 
 
 @Component({
@@ -13,6 +14,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   public isVisible: boolean;
   public categoriesValue = [];
+  public isFilterBtnVisible = false;
   private searchTextValue = '';
   private categoryValue = '';
   @Output() searchTextChange = new EventEmitter();
@@ -24,8 +26,9 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private searchBarVisibilityChangeSub: Subscription;
   private searchCategoryChangeSub: Subscription;
   private searchTextChangeSub: Subscription;
+  private routerSub: Subscription;
 
-  constructor(private searchBarService: SearchBarService) {
+  constructor(private searchBarService: SearchBarService, private router: Router) {
   }
 
   ngOnInit() {
@@ -40,12 +43,19 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     this.searchBarVisibilityChangeSub = this.searchBarService.searchBarVisibilityChange.subscribe(isVisible => {
       this.isVisible = isVisible;
     });
+
+    this.routerSub = this.router.events
+      .filter(event => event instanceof NavigationEnd)
+      .subscribe(event => {
+        this.isFilterBtnVisible = !event['urlAfterRedirects'].startsWith('/home');
+      });
   }
 
   ngOnDestroy() {
     this.searchCategoryChangeSub.unsubscribe();
     this.searchTextChangeSub.unsubscribe();
-  }
+      this.routerSub.unsubscribe();
+    }
 
   @Input()
   get categories() {

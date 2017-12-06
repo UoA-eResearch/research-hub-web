@@ -26,13 +26,13 @@
  * Navigation list
  */
 
-.sidenav-container mat-list-item mat-icon {
+.sidenav-container mat-sidenav mat-list-item mat-icon {
   color: $color-icon;
   font-size: mat-font-size($app-sidenav-list-typography, body-2) !important;
   font-weight: mat-font-weight($app-sidenav-list-typography, body-2) !important;
 }
 
-.sidenav-container mat-list-item .mat-line {
+.sidenav-container mat-sidenav mat-list-item .mat-line {
   font-size: mat-font-size($app-sidenav-list-typography, body-1) !important;
   font-weight: mat-font-weight($app-sidenav-list-typography, body-1) !important;
 }
@@ -70,7 +70,7 @@
 }
 
 .app-toolbar .app-toolbar-row {
-  height: 48px;
+  height: 64px;
 }
 
 .app-toolbar-xs .app-toolbar-row {
@@ -204,6 +204,12 @@ footer a {
 
 footer.footer-xs a {
   text-align: center;
+}
+
+.footer-divider {
+  color: white;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .logo-img {

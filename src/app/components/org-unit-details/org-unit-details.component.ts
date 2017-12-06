@@ -31,6 +31,7 @@ export class OrgUnitDetailsComponent implements OnInit {
 
       this.apiService.getOrgUnit(id).subscribe(
         orgUnit => {
+          console.log('orgUnit', orgUnit);
           const url = this.location.path();
           const name = orgUnit.name;
 
