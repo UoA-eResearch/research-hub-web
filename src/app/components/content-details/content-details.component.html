@@ -32,10 +32,10 @@
 
               <div fxFlex="36px" fxFlexAlign="end">
                 <a *ngIf="!isKnowledgeArticle() && !isIntegratedService()" mat-raised-button color="accent" [href]="content.action" target="_blank">
-                  Open
+                  Request
                 </a>
                 <button *ngIf="!isKnowledgeArticle() && isIntegratedService()" mat-raised-button color="accent" [routerLink]="['/'+ content.action]">
-                  Open
+                  Request
                 </button>
               </div>
             </div>
