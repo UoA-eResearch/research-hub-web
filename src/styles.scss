@@ -188,10 +188,11 @@ mat-toolbar-row {
   margin: $offset-xs;
 }
 
-mat-dialog-container {
-  padding: 0 !important;
-}
+/*
+ * Make app-filter-dialog take up whole page
+ */
 
-.cdk-overlay-pane {
-  max-width: 100% !important;
+app-filter-dialog {
+  display: block;
+  margin: -24px;
 }
