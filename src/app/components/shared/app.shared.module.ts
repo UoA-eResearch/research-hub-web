@@ -6,6 +6,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../../app.material.module';
 import {MarkdownComponent} from './markdown/markdown.component';
 import {ListItemToRouterLinkPipe} from 'app/pipes/list-item-to-router-link.pipe';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import {ListItemToRouterLinkPipe} from 'app/pipes/list-item-to-router-link.pipe'
   ],
   declarations: [
     MarkdownComponent,
-    ListItemToRouterLinkPipe
+    ListItemToRouterLinkPipe,
+    ErrorDialogComponent
   ],
   exports: [
     FlexLayoutModule,
@@ -26,7 +29,11 @@ import {ListItemToRouterLinkPipe} from 'app/pipes/list-item-to-router-link.pipe'
     ReactiveFormsModule,
     MaterialModule,
     MarkdownComponent,
+    ErrorDialogComponent,
     ListItemToRouterLinkPipe
+  ],
+  entryComponents: [
+    ErrorDialogComponent
   ],
   providers: [
 

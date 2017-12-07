@@ -1,9 +1,4 @@
-@import "../../../variables";
 @import '../../../styles';
-
-//.search-results-info {
-//  margin-bottom: 0.5em;
-//}
 
 .search-results-text {
   color: $color-pink !important;
@@ -12,6 +7,35 @@
   font-style: italic;
 }
 
-//.mat-select-trigger {
-//  font-size: 22.4px !important;
-//}
+.list-item {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.item-title {
+  color: #b13462;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  padding-bottom: 5px !important;
+}
+
+.item-subtitle {
+  color: #004059;
+  font-size: 14px;
+  padding-bottom: 7px !important;
+}
+
+.list-item img {
+  width: 64px;
+  height: 64px;
+}
+
+.list-item mat-chip-list {
+  display: block;
+}
+
+.list-item mat-chip-list mat-chip {
+  font-size: 12px !important;
+  padding-top: 0;
+  padding-bottom: 0;
+}

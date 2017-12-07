@@ -1,14 +1,10 @@
 @import 'themes';
-@import 'variables';
 @import 'typography';
-
-
-
 
 html, body {
   margin: 0;
   padding: 0;
-  color:$body-light-bg-font-color;
+  color: $body-light-bg-font-color;
 }
 
 /*
@@ -20,7 +16,6 @@ h1 {
   margin-top: 0;
   color: $heading-1-font-color;
 }
-
 
 h2 {
   color: $heading-2-font-color;
@@ -56,37 +51,26 @@ a {
 }
 
 @mixin links {
- a {
-   @content;
- }
+  a {
+    @content;
+  }
 }
 
 .description {
-  background-color: $content-summary-bg;
+  background-color: $color-content-summary-bg;
 }
 
-.description app-markdown{
-
+.description app-markdown {
   color: $body-light-bg-font-color;
-
-  //@include headings {
-  //  color: $body-dark-bg-font-color;
-  //}
-
-  //@include links {
-  //  color: $link-dark-bg-color-1;
-  //}
-
 }
 
 .input-full-width {
-  width:100% !important;
+  width: 100% !important;
 }
 
 .search-results-text {
   color: $color-pink !important;
   font-weight: 500;
-  //font-size: 1.2em !important;
   font-style: italic;
 }
 
@@ -95,19 +79,17 @@ a {
   border-radius: 50%;
 }
 
-
 app-markdown h3 {
-  color:$heading-2-font-color;
+  color: $heading-2-font-color;
   font-size: mat-font-size($app-base-typography, title) !important;
   font-weight: mat-font-weight($app-base-typography, title) !important;
 }
 
 app-markdown h4 {
-  color:$heading-3-font-color;
+  color: $heading-3-font-color;
   font-size: mat-font-size($app-base-typography, subheading-2) !important;
   font-weight: mat-font-weight($app-base-typography, subheading-2) !important;
 }
-
 
 /*
 Gloabl mat-chip style
@@ -119,8 +101,8 @@ mat-chip.mat-chip {
 }
 
 .avatar-btn > span.mat-button-wrapper {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .avatar-btn > span.mat-button-wrapper > img {
@@ -128,52 +110,40 @@ mat-chip.mat-chip {
   height: 56px;
 }
 
-/*
- * When using Angular 2 [hidden] parameter, hides element and keeps space
- */
-
-//[hidden] {
-//  visibility: hidden !important;
-//}
-
 .flex-hack {
   flex: 1 1 auto !important;
 }
-
-$site-padding: 3em;
 
 .site-content {
   @extend .flex-hack;
   margin-left: auto;
   margin-right: auto;
-  max-width: $max-page-width !important; // If not important then gets overidden by some fxLayout styles
+  max-width: $width-page-max !important; // If not important then gets overidden by some fxLayout styles
 }
 
 .site-padding {
   @extend .site-content;
-  margin-top: $gt-xs-offset / 2.0;
+  margin-top: $offset-gt-xs / 2.0;
   margin-bottom: 5em;
-  padding-top: $site-padding;
-  padding-left: $site-padding;
-  padding-right: $site-padding;
+  padding-top: $padding-site;
+  padding-left: $padding-site;
+  padding-right: $padding-site;
 }
 
 .site-padding-xs {
   @extend .site-content;
-  margin-top: $xs-offset / 2.0;
-  margin-bottom: $xs-offset;
-  padding-top: $xs-offset;
-  padding-left: $xs-offset;
-  padding-right: $xs-offset;
+  margin-top: $offset-xs / 2.0;
+  margin-bottom: $offset-xs;
+  padding-top: $offset-xs;
+  padding-left: $offset-xs;
+  padding-right: $offset-xs;
 }
-
-
 
 .back-button-padding-xs {
   @extend .site-content;
-  margin-top: $xs-offset / 2.0;
-  padding-left: $xs-offset;
-  padding-right: $xs-offset;
+  margin-top: $offset-xs / 2.0;
+  padding-left: $offset-xs;
+  padding-right: $offset-xs;
 }
 
 .site-content-padded {
@@ -188,34 +158,41 @@ $site-padding: 3em;
   padding-right: 10px !important;
 }
 
-
 mat-toolbar-row {
   @extend .site-content;
-  max-width: calc(#{$max-page-width + 25px});
-  padding-left: $site-padding !important;
-  padding-right: $site-padding !important;
+  max-width: calc(#{$width-page-max + 25px});
+  padding-left: $padding-site !important;
+  padding-right: $padding-site !important;
 }
-
-//.header-content-small {
-//  @extend .site-content;
-//  padding-left: 0;
-//  padding-right: 0;
-//  padding-top:  0;
-//
-//}
-
-//
-//mat-toolbar-row-gt-sm {
-//  @extend mat-toolbar-row;
-//  margin-left: auto;
-//  margin-right: auto;
-//  max-width: $max-page-width;
-//}
-
 
 .card-fab {
   position: absolute;
   z-index: 100;
   bottom: -28px;
   right: 28px;
+}
+
+.div-background-image {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+.component {
+  margin: $offset-gt-xs;
+  max-width: $width-page-max;
+}
+
+.component-xs {
+  @extend .component;
+  margin: $offset-xs;
+}
+
+/*
+ * Make app-filter-dialog take up whole page
+ */
+
+app-filter-dialog {
+  display: block;
+  margin: -24px;
 }

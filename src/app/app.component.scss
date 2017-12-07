@@ -26,13 +26,13 @@
  * Navigation list
  */
 
-.sidenav-container mat-list-item mat-icon {
+.sidenav-container mat-sidenav mat-list-item mat-icon {
   color: $color-icon;
   font-size: mat-font-size($app-sidenav-list-typography, body-2) !important;
   font-weight: mat-font-weight($app-sidenav-list-typography, body-2) !important;
 }
 
-.sidenav-container mat-list-item .mat-line {
+.sidenav-container mat-sidenav mat-list-item .mat-line {
   font-size: mat-font-size($app-sidenav-list-typography, body-1) !important;
   font-weight: mat-font-weight($app-sidenav-list-typography, body-1) !important;
 }
@@ -60,17 +60,17 @@
 }
 
 .app-toolbar {
-  padding-left: $site-padding;
-  padding-right: $site-padding;
+  padding-left: $padding-site;
+  padding-right: $padding-site;
 }
 
 .app-toolbar-xs {
-  padding-left: $xs-offset;
-  padding-right: $xs-offset;
+  padding-left: $offset-xs;
+  padding-right: $offset-xs;
 }
 
 .app-toolbar .app-toolbar-row {
-  height: 48px;
+  height: 64px;
 }
 
 .app-toolbar-xs .app-toolbar-row {
@@ -151,13 +151,13 @@ mat-expansion-panel-header .mat-expanded {
 
 .sidenav-content {
   flex: 1;
-  min-height: calc(100vh - #{$footer-height});
+  min-height: calc(100vh - #{$height-footer});
   background-color: $color-background;
 }
 
 .sidenav-content-xs {
   @extend .sidenav-content;
-  min-height: calc(100vh - #{$footer-xs-height});
+  min-height: calc(100vh - #{$height-footer-xs});
 }
 
 .app-progress-bar {
@@ -173,25 +173,25 @@ mat-expansion-panel-header .mat-expanded {
 
 footer {
   background-color: $color-primary;
-  height: $footer-height;
-  padding-left: $site-padding;
-  padding-right: $site-padding;
+  height: $height-footer;
+  padding-left: $padding-site;
+  padding-right: $padding-site;
 }
 
 footer.footer-xs {
-  height: $footer-xs-height;
-  padding-left: $xs-offset;
-  padding-right: $xs-offset;
+  height: $height-footer-xs;
+  padding-left: $offset-xs;
+  padding-right: $offset-xs;
 }
 
 .footer-content {
   @extend .site-content;
-  height: $footer-height !important;
+  height: $height-footer !important;
 }
 
 .footer-content-xs {
   //@extend .footer-content;
-  height: $footer-xs-height !important;
+  height: $height-footer-xs !important;
 }
 
 footer a {
@@ -204,6 +204,12 @@ footer a {
 
 footer.footer-xs a {
   text-align: center;
+}
+
+.footer-divider {
+  color: white;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .logo-img {
@@ -290,6 +296,12 @@ app-search-bar {
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+.button-menu {
+  padding-left: 10px !important;
+  padding-right: 5px !important;
+  min-width: 0 !important;
 }
 
 // HACK

@@ -1,32 +1,54 @@
 <div *ngIf="orgUnit" fxLayout="column" fxLayoutGap="1em">
-  <div >
-    <mat-card>
-      <h1>{{orgUnit.name}}</h1>
-      <a mat-fab class="card-fab" [href]="orgUnit.url" target="_blank">
-        <mat-icon>add</mat-icon>
-      </a>
-    </mat-card>
-  </div>
+  <mat-card>
+    <mat-card-header fxHide.gt-xs>
+      <img style="width: 64px; height: 64px; margin-right: 1em;" mat-card-avatar
+           [src]="apiService.getAssetUrl(orgUnit.image)">
+      <mat-card-title><h2 style="font-size: 24px;">{{orgUnit.name}}</h2></mat-card-title>
+      <mat-card-subtitle>
+        <a style="display: inline;" [routerLink]="['/search']" [queryParams]="{categoryId: 1}">Organisational Unit</a>
+      </mat-card-subtitle>
+    </mat-card-header>
 
-  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="1em">
-    <mat-card fxFlex="50" *ngIf="userSupport && userSupport.length">
-      <h2>People</h2>
-      <mat-nav-list>
-        <mat-list-item *ngFor="let item of userSupport" [routerLink]="item | listItemToRouterLink">
-          <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
-          <h3 mat-line> {{item.title}} </h3>
-        </mat-list-item>
-      </mat-nav-list>
-    </mat-card>
+    <mat-card-content>
+      <div fxLayout="row" fxLayoutGap="2em">
+        <div fxFlex="40" fxHide.lt-sm>
+          <img style="width:100%; height:auto;" [src]="apiService.getAssetUrl(orgUnit.image)">
+        </div>
 
-    <mat-card fxFlex="50" *ngIf="orgUnit.contentItems.length">
-      <h2>Resources</h2>
-      <mat-nav-list>
-        <mat-list-item *ngFor="let content of orgUnit.contentItems" [routerLink]="['/content', content.id]">
-          <img mat-list-avatar [src]="apiService.getAssetUrl(content.image)">
-          <h3 mat-line> {{content.name}} </h3>
-        </mat-list-item>
-      </mat-nav-list>
-    </mat-card>
-  </div>
+        <div fxFlex="60" fxFlex.lt-sm="100" fxLayout="column" fxLayoutGap="1em">
+          <div fxFlex>
+            <h1 fxHide.xs>{{orgUnit.name}}</h1>
+            <a fxHide.xs style="display: inline;" [routerLink]="['/search']"
+               [queryParams]="{categoryId: 1}">Organisational Unit</a>
+          </div>
+
+          <div fxFlex="36px" fxFlexAlign="end">
+            <a mat-raised-button color="accent" [href]="orgUnit.url" target="_blank">
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card fxFlex *ngIf="userSupport && userSupport.length">
+    <h2>People</h2>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let item of userSupport" [routerLink]="item | listItemToRouterLink">
+        <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
+        <h3 mat-line> {{item.title}} </h3>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-card>
+
+  <mat-card fxFlex *ngIf="orgUnit.contentItems.length">
+    <h2>Resources</h2>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let content of orgUnit.contentItems" [routerLink]="['/content', content.id]">
+        <img mat-list-avatar [src]="apiService.getAssetUrl(content.image)">
+        <h3 mat-line> {{content.name}} </h3>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-card>
 </div>

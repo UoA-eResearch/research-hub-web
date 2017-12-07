@@ -3,6 +3,7 @@ import {OrgUnit} from './OrgUnit';
 import {Policy} from './Policy';
 import {GuideCategory} from './GuideCategory';
 import {ItemRef} from './ItemRef';
+import {ContentType} from './ContentType';
 
 
 export interface Content {
@@ -19,5 +20,5 @@ export interface Content {
   people: Array<Person>;
   policies: Array<Policy>;
   guideCategories: Array<GuideCategory>;
-  contentTypes: Array<any>;
+  contentTypes: Array<ContentType>;
 }

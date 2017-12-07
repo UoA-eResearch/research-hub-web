@@ -1,13 +1,13 @@
 @import '../../../styles';
 
 .content-header {
-  padding: $gt-xs-offset;
+  padding: $offset-gt-xs;
   background-color: $color-content-header;
 }
 
 .content-header-xs {
   @extend .content-header;
-  padding: $xs-offset $xs-offset 1.2em $xs-offset;
+  padding: $offset-xs $offset-xs 1.2em $offset-xs;
 }
 
 .content-header > div:nth-child(1) > h2 {
@@ -89,3 +89,12 @@
   margin: 0 0 1em;
   background-position: center top;
 }
+
+mat-list-item /deep/ div.mat-list-item-content {
+  padding-left: 0 !important;
+}
+
+//
+//.user-menu-list div.mat-list-item-content {
+//  padding-left: 0 !important;
+//}

@@ -285,13 +285,14 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     }
 
     const summary = searchTextSummary + statements.join(', ');
-    this.noResultsSummary = 'Sorry - your search ' + summary + ' did not match anything on the Research Hub.';
-    this.resultsSummary = 'Showing results ' + summary + '.';
+    this.noResultsSummary = 'Sorry - your search ' + summary + ', did not match anything on the Research Hub.';
+    this.resultsSummary = 'Showing <span class="search-results-text">' + totalElements + '</span> results ' + summary + '.';
     this.showEmptyState = totalElements === 0;
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(FilterDialogComponent, {
+      maxWidth: '100%',
       width: '100%',
       height: '100%',
       data: {

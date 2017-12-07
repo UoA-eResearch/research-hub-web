@@ -2,12 +2,12 @@
 
 
 .component{
-  max-width:$max-content-width;
+  max-width: $width-page-max;
 }
 
 .browse-tile {
   cursor: pointer;
-  background-color: $browse-tile-bg-color;
+  background-color: $color-browse-tile-bg;
   text-decoration: none;
 }
 

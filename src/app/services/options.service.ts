@@ -75,14 +75,14 @@ export class OptionsService {
 
     this.categoryOptions = [
       {id: CategoryId.All, name: 'All Categories', icon: 'public', type: OptionType.Category},
-      {id: CategoryId.Support, name: 'Services', icon: 'local_play', type: OptionType.Category},
+      {id: CategoryId.Support, name: 'Service', icon: 'local_play', type: OptionType.Category},
       {id: CategoryId.Equipment, name: 'Equipment', icon: 'build', type: OptionType.Category},
       {id: CategoryId.Training, name: 'Training', icon: 'school', type: OptionType.Category},
       {id: CategoryId.Software, name: 'Software', icon: 'desktop_mac', type: OptionType.Category},
-      {id: CategoryId.Facilities, name: 'Facilities', icon: 'home', type: OptionType.Category},
-      {id: CategoryId.Guide, name: 'Guides', icon: 'import_contacts', type: OptionType.Category},
-      {id: CategoryId.Person, name: 'People', icon: 'face', type: OptionType.Category},
-      {id: CategoryId.Policies, name: 'Policies', icon: 'gavel', type: OptionType.Category}
+      {id: CategoryId.Facilities, name: 'Facility', icon: 'home', type: OptionType.Category},
+      {id: CategoryId.Guide, name: 'Guide', icon: 'import_contacts', type: OptionType.Category},
+      {id: CategoryId.Person, name: 'Person', icon: 'face', type: OptionType.Category},
+      {id: CategoryId.Policies, name: 'Policy', icon: 'gavel', type: OptionType.Category}
     ];
 
     this.researchActivityOptions = [
@@ -128,10 +128,10 @@ export class OptionsService {
         sublist: this.researchActivityOptions,
         type: OptionType.Menu
       },
-      {name: 'Join User Study', icon: 'people', routerLink: '/feedback', type: OptionType.Menu},
-      {name: 'Provide Feedback', icon: 'thumbs_up_down', routerLink: '/feedback', type: OptionType.Menu},
-      {name: 'Contact Us', icon: 'phone', routerLink: '/contact', type: OptionType.Menu},
-      {name: 'About Us', icon: 'info', routerLink: '/about', type: OptionType.Menu}
+      {name: 'User Study', icon: 'people', routerLink: '/feedback', type: OptionType.Menu},
+      {name: 'Feedback', icon: 'thumbs_up_down', routerLink: '/feedback', type: OptionType.Menu},
+      {name: 'Contact', icon: 'phone', routerLink: '/contact', type: OptionType.Menu},
+      {name: 'About', icon: 'info', routerLink: '/about', type: OptionType.Menu}
     ];
 
     this.pageInfo = {
@@ -144,21 +144,21 @@ export class OptionsService {
       },
       search: {title: 'Search', isHeaderVisible: false, isSearchBarVisible: true},
       feedback: {
-        title: 'Feedback',
+        title: 'Feedback & User Study',
         description: 'We appreciate your visit to the beta-version of the Research Hub, our platform for research support.',
         imageUrl: 'page-elements/AU_Gen_Detail2010_073_1680x220_BW.jpg',
         isHeaderVisible: true,
         isSearchBarVisible: false
       },
       about: {
-        title: 'About us',
+        title: 'About',
         description: 'The Centre for eResearch comprises a team of highly qualified research and technical staff dedicated to the delivery of advanced computational solutions to help power the University\'s research mission.',
         imageUrl: 'page-elements/20151005_Science Detail_013_1680x220_BW.jpg',
         isHeaderVisible: true,
         isSearchBarVisible: false
       },
       contact: {
-        title: 'Contact us',
+        title: 'Contact',
         description: 'If you want to get in touch you can ring us, write to us or even visit us. We\'d love to hear from you.',
         imageUrl: 'page-elements/DSC_0192_1680x220_BW.jpg',
         isHeaderVisible: true,
