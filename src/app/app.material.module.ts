@@ -22,6 +22,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatNativeDateModule,
     MatMenuModule,
     MatExpansionModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTooltipModule
   ],
   declarations: [],
   exports: [
@@ -71,7 +73,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatNativeDateModule,
     MatMenuModule,
     MatExpansionModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule {

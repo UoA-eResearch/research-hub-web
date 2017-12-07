@@ -42,14 +42,14 @@
         <div class="app-toolbar-container">
           <div class="site-content app-toolbar" ngClass.xs="site-content app-toolbar-xs">
             <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="center center" color="primary">
-              <button fxHide.gt-sm mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+              <button fxHide.gt-sm mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu"><mat-icon>menu</mat-icon></button>
               <button mat-button routerLink="/home" style="font-size: 20px;">
                 <!--<img mat-list-avatar [src]="'assets/HubLogo4.png'">-->
                 Research Hub
               </button>
               <span style="flex: 1 1 auto;"></span>
 
-              <button mat-icon-button fxHide.gt-sm routerLink="/search">
+              <button mat-icon-button fxHide.gt-sm routerLink="/search" matTooltip="Search">
                 <mat-icon>search</mat-icon>
               </button>
 
