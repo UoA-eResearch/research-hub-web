@@ -57,14 +57,6 @@
                 Search
               </button>
 
-              <button mat-button fxHide.lt-md routerLink="/feedback">
-                User Study
-              </button>
-
-              <button mat-button fxHide.lt-md routerLink="/feedback">
-                Feedback
-              </button>
-
               <button class="button-menu" fxHide.lt-md mat-button [matMenuTriggerFor]="browseMenu">
                 Browse
                 <mat-icon matPrefix>expand_more</mat-icon>
@@ -83,12 +75,20 @@
                 <button mat-menu-item *ngFor="let item of optionsService.researchActivityOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
               </mat-menu>
 
+              <button mat-button fxHide.lt-md routerLink="/feedback">
+                User Study
+              </button>
+
+              <button mat-button fxHide.lt-md routerLink="/feedback">
+                Feedback
+              </button>
+
               <button *ngIf="showLoginBtn" mat-button (click)="authService.login()">Sign In</button>
 
               <button class="button-menu" *ngIf="!showLoginBtn" mat-button [matMenuTriggerFor]="userMenu">
+                <mat-icon matPrefix style="margin-right: 5px;">person</mat-icon>
                 <span fxHide.lt-md>{{authService.user.displayName}}</span>
                 <span fxHide.gt-sm>{{authService.user.initials}}</span>
-                <mat-icon matPrefix>expand_more</mat-icon>
               </button>
 
               <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
@@ -151,4 +151,3 @@
     </div>
   </mat-sidenav-container>
 </section>
-<a class="github-fork-ribbon left-bottom fixed" routerLink="/feedback" title="Feedback">Beta</a>

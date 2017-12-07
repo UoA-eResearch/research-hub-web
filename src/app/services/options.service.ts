@@ -128,8 +128,8 @@ export class OptionsService {
         sublist: this.researchActivityOptions,
         type: OptionType.Menu
       },
-      {name: 'Join User Study', icon: 'people', routerLink: '/feedback', type: OptionType.Menu},
-      {name: 'Provide Feedback', icon: 'thumbs_up_down', routerLink: '/feedback', type: OptionType.Menu},
+      {name: 'User Study', icon: 'people', routerLink: '/feedback', type: OptionType.Menu},
+      {name: 'Feedback', icon: 'thumbs_up_down', routerLink: '/feedback', type: OptionType.Menu},
       {name: 'Contact', icon: 'phone', routerLink: '/contact', type: OptionType.Menu},
       {name: 'About', icon: 'info', routerLink: '/about', type: OptionType.Menu}
     ];
