@@ -69,7 +69,7 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
 
   orgUnitToTags(items: OrgUnit[]) {
     return items.map(item => {
-      return {id: item.id, text: item.name, imageUrl: undefined};
+      return {id: item.id, text: item.name, imageUrl: this.apiService.getAssetUrl(item.image)};
     });
   }
 

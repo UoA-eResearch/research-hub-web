@@ -75,14 +75,14 @@ export class OptionsService {
 
     this.categoryOptions = [
       {id: CategoryId.All, name: 'All Categories', icon: 'public', type: OptionType.Category},
-      {id: CategoryId.Support, name: 'Services', icon: 'local_play', type: OptionType.Category},
+      {id: CategoryId.Support, name: 'Service', icon: 'local_play', type: OptionType.Category},
       {id: CategoryId.Equipment, name: 'Equipment', icon: 'build', type: OptionType.Category},
       {id: CategoryId.Training, name: 'Training', icon: 'school', type: OptionType.Category},
       {id: CategoryId.Software, name: 'Software', icon: 'desktop_mac', type: OptionType.Category},
-      {id: CategoryId.Facilities, name: 'Facilities', icon: 'home', type: OptionType.Category},
-      {id: CategoryId.Guide, name: 'Guides', icon: 'import_contacts', type: OptionType.Category},
-      {id: CategoryId.Person, name: 'People', icon: 'face', type: OptionType.Category},
-      {id: CategoryId.Policies, name: 'Policies', icon: 'gavel', type: OptionType.Category}
+      {id: CategoryId.Facilities, name: 'Facility', icon: 'home', type: OptionType.Category},
+      {id: CategoryId.Guide, name: 'Guide', icon: 'import_contacts', type: OptionType.Category},
+      {id: CategoryId.Person, name: 'Person', icon: 'face', type: OptionType.Category},
+      {id: CategoryId.Policies, name: 'Policy', icon: 'gavel', type: OptionType.Category}
     ];
 
     this.researchActivityOptions = [
