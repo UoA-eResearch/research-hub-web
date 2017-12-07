@@ -292,6 +292,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(FilterDialogComponent, {
+      maxWidth: '100%',
       width: '100%',
       height: '100%',
       data: {
