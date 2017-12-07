@@ -1,0 +1,32 @@
+@import "../../../../research-activity";
+
+
+@mixin research-activity-checkbox($class-name, $color) {
+  $checkbox-fill-color: rgba(255, 255, 255, 0.9);
+
+  .#{$class-name}.mat-checkbox-checked /deep/ .mat-checkbox-background {
+    background-color: $checkbox-fill-color;
+  }
+
+  .#{$class-name} /deep/ .mat-checkbox-checkmark {
+    fill: $color;
+  }
+
+  .#{$class-name} /deep/ .mat-checkbox-checkmark-path {
+    stroke: $color !important;
+  }
+
+  .#{$class-name} /deep/ .mat-checkbox-frame {
+    border-color: $checkbox-fill-color;
+  }
+
+  .#{$class-name} /deep/ .mat-primary .mat-checkbox-ripple .mat-ripple-element {
+    background-color: rgba($color, 0.26);
+  }
+}
+
+@include research-activity-checkbox('plan', $color-plan-bg);
+@include research-activity-checkbox('create', $color-create-bg);
+@include research-activity-checkbox('analyze', $color-analyze-bg);
+@include research-activity-checkbox('publish', $color-publish-bg);
+@include research-activity-checkbox('discover', $color-discover-bg);

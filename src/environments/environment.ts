@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/',
-  analyticsCode: 'UA-77710107-3'
+  shibbolethSessionUrl: '',
+  apiUrl: '',
+  analyticsCode: ''
 };

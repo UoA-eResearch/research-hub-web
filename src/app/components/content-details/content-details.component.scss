@@ -1,0 +1,121 @@
+@import '../../../styles';
+
+.flex-hack {
+  flex: 1 1 auto !important;
+}
+
+.component {
+  @extend .flex-hack;
+}
+
+.component-xs {
+  @extend .component;
+}
+
+.mat-button.mat-small {
+  min-width: 1%;
+}
+
+
+.content-header {
+  padding: $offset-gt-xs;
+  background-color: $color-content-header;
+}
+
+.content-header-xs {
+  @extend .content-header;
+  padding: $offset-xs $offset-xs 1.2em $offset-xs;
+}
+
+.content-header > div:nth-child(1) > h2 {
+  color:white;
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+.content-header div:nth-child(1) > h3 {
+  color:white;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.content-cover-image {
+  height: 200px;
+  width: 100%;
+  background-size: cover;
+  background: no-repeat center;
+  padding: 1em;
+}
+
+.content-overview {
+  padding-right: 2em;
+}
+
+.content-overview-xs {
+  @extend .content-overview;
+  padding-right: 0;
+  margin-bottom: 1em;
+}
+
+.content-overview-xs {
+  @extend .content-overview;
+}
+
+.contact-chip {
+  margin: 0.25em !important;
+}
+
+.org-unit-chip {
+  margin: 0.25em !important;
+}
+
+.policy-url {
+  display: block;
+  margin: 0.5em;
+  width: 100%;
+}
+
+.divider {
+  height: 1px;
+  overflow: hidden;
+  background-color: #e0e0e0;
+  margin-top: 1.4em;
+  margin-bottom: 1.6em;
+}
+
+.divider-app-markdown {
+  @extend .divider;
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+}
+
+.browse-tile {
+  cursor: pointer;
+  background-color: $color-guide-tile-bg;
+  text-decoration: none;
+}
+
+/* Put your CSS code in the left column, instead of example, to put or remove unnecessary prefixes. */
+
+.tile-content{
+  text-align: center;
+  min-width:100%;
+  min-height: 100%;
+}
+
+
+.tile-text {
+  color:$browse-tile-font-color;
+  width:80%;
+  transform: translate(0%, -50%);
+  @include mat-typography-level-to-styles($app-browse-grid-typography, body-1);
+}
+
+.tile-icon {
+  color:$browse-tile-font-color;
+  font-size: mat-font-size($app-browse-grid-typography, body-2);
+  font-weight: mat-font-weight($app-browse-grid-typography, body-2);
+  width:100%;
+  position:absolute;
+  bottom:20%;
+}

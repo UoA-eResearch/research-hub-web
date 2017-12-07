@@ -3,8 +3,7 @@
 // Include the common styles for Angular Material. Be sure that you only ever include this mixin once!
 @include mat-core();
 
-//http://mcg.mbitson.com/
-
+// Material design colors generated with: http://mcg.mbitson.com/
 $hub-teal: (
   50 : #e1f2f4,
   100 : #b3dfe4,
@@ -37,8 +36,6 @@ $hub-teal: (
     A700 : #000000,
   )
 );
-
-
 
 $hub-orange: (
   50 : #fff0e0,
@@ -139,121 +136,29 @@ $hub-navy: (
   )
 );
 
-$hub-offwhite: (
-  50 : #fdfdfc,
-  100 : #faf9f7,
-  200 : #f7f6f1,
-  300 : #f4f2eb,
-  400 : #f1efe7,
-  500 : #efece3,
-  600 : #edeae0,
-  700 : #ebe7dc,
-  800 : #e8e4d8,
-  900 : #e4dfd0,
-  A100 : #ffffff,
-  A200 : #ffffff,
-  A400 : #ffffff,
-  A700 : #ffffff,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
-    400 : #000000,
-    500 : #000000,
-    600 : #000000,
-    700 : #000000,
-    800 : #000000,
-    900 : #000000,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
-  )
-);
-
-
 // Create the hub app theme
 $hub-app-primary: mat-palette($hub-teal);
 $hub-app-accent: mat-palette($hub-orange);
-$hub-app-background: mat-palette($hub-offwhite);
 $hub-app-warn: mat-palette($hub-pink);
 $hub-app-theme: mat-light-theme($hub-app-primary, $hub-app-accent, $hub-app-warn);
 @include angular-material-theme($hub-app-theme);
 
-// Create variables to use throughout the rest of the site
+// Site wide measurements
+$width-page-max: 960px;
+$offset-xs: 1em;
+$offset-gt-xs: 2em;
+$height-footer: 12em;
+$height-footer-xs: 16em;
+$padding-site: 3em;
+
+// Site wide colors
 $color-primary: map-get($hub-app-primary, 500);
 $color-accent: map-get($hub-app-accent, A200);
-//$color-bold-link-text: map-get($hub-app-accent, 500);
-
-//$color-background: map-get($hub-app-background, 500);
-//$color-icon: map-get($hub-app-primary, 500);
-$color-background: #fafafa;
-$color-icon: #757575;
-
-$color-content-header: map-get($hub-navy, 500);
-
-// base colors for tiles etc
-$color-tile-navy: map-get($hub-app-primary, 500);
-
 $color-pink: map-get($hub-pink, 500);
 $color-orange: map-get($hub-orange, 500);
-
-$content-summary-bg: #e0e0e0;
-$browse-tile-bg-color: $color-pink;
-$guide-tile-bg-color: #0294a5;
-
-
-// Custom themes for specific components
-.search-bar-theme {
-
-  div.mat-input-infix.mat-form-field-infix {
-    border-top: 0 !important;
-    font-size: 0.8em !important;
-  }
-
-  /*
-   * Fixes so that select lines up with md-input-container elements
-   * and contains same sized text
-   */
-
-  .mat-select-value-text {
-    line-height: 32px !important;
-  }
-
-  .mat-select-trigger {
-    font-size: 22.4px !important;
-  }
-
-  .mat-select-underline {
-    bottom: -10px !important;
-  }
-
-  $search-bar-primary: mat-palette($hub-navy, 50);
-  $search-bar-accent: mat-palette($hub-pink, A200, A100, A400);
-  $search-bar-theme: mat-dark-theme($search-bar-primary, $search-bar-accent);
-  @include angular-material-theme($search-bar-theme);
-
-}
-//
-.filter-theme {
-
-  .mat-select-trigger {
-    font-size: 16px !important;
-  }
-
-  @include angular-material-theme($hub-app-theme);
-}
-
-md-dialog-container {
-  max-width: 100% !important;
-  padding: 0 !important;
-}
-
-//
-//.hub-md-sidenav {
-//  $sidenav-primary: mat-palette($hub-navy, 500);
-//  $sidenav-accent: mat-palette($hub-pink, A200, A100, A400);
-//  $sidenav-theme: mat-light-theme($sidenav-primary, $sidenav-accent);
-//  @include angular-material-theme($sidenav-theme);
-//}
+$color-icon: #757575;
+$color-background: #fafafa;
+$color-content-header: map-get($hub-navy, 500);
+$color-content-summary-bg: auto;
+$color-browse-tile-bg: $color-pink;
+$color-guide-tile-bg: #0294a5;

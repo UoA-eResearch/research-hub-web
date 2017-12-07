@@ -1,0 +1,41 @@
+@import '../../../styles';
+
+.search-results-text {
+  color: $color-pink !important;
+  font-weight: 500;
+  font-size: 1.2em !important;
+  font-style: italic;
+}
+
+.list-item {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.item-title {
+  color: #b13462;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  padding-bottom: 5px !important;
+}
+
+.item-subtitle {
+  color: #004059;
+  font-size: 14px;
+  padding-bottom: 7px !important;
+}
+
+.list-item img {
+  width: 64px;
+  height: 64px;
+}
+
+.list-item mat-chip-list {
+  display: block;
+}
+
+.list-item mat-chip-list mat-chip {
+  font-size: 12px !important;
+  padding-top: 0;
+  padding-bottom: 0;
+}

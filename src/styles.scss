@@ -1,14 +1,10 @@
 @import 'themes';
-@import 'variables';
 @import 'typography';
-
-
-
 
 html, body {
   margin: 0;
   padding: 0;
-  color:$body-light-bg-font-color;
+  color: $body-light-bg-font-color;
 }
 
 /*
@@ -20,7 +16,6 @@ h1 {
   margin-top: 0;
   color: $heading-1-font-color;
 }
-
 
 h2 {
   color: $heading-2-font-color;
@@ -56,61 +51,148 @@ a {
 }
 
 @mixin links {
- a {
-   @content;
- }
+  a {
+    @content;
+  }
 }
 
 .description {
-  background-color: $content-summary-bg;
+  background-color: $color-content-summary-bg;
 }
 
-.description app-markdown{
-
+.description app-markdown {
   color: $body-light-bg-font-color;
-
-  //@include headings {
-  //  color: $body-dark-bg-font-color;
-  //}
-
-  //@include links {
-  //  color: $link-dark-bg-color-1;
-  //}
-
 }
 
 .input-full-width {
-  width:100% !important;
+  width: 100% !important;
 }
 
 .search-results-text {
   color: $color-pink !important;
   font-weight: 500;
-  //font-size: 1.2em !important;
   font-style: italic;
 }
 
-
-
+.chip-avatar {
+  margin-right: 12px;
+  border-radius: 50%;
+}
 
 app-markdown h3 {
-  color:$heading-2-font-color;
+  color: $heading-2-font-color;
   font-size: mat-font-size($app-base-typography, title) !important;
   font-weight: mat-font-weight($app-base-typography, title) !important;
 }
 
 app-markdown h4 {
-  color:$heading-3-font-color;
+  color: $heading-3-font-color;
   font-size: mat-font-size($app-base-typography, subheading-2) !important;
   font-weight: mat-font-weight($app-base-typography, subheading-2) !important;
 }
 
-
 /*
-Gloabl md-chip style
+Gloabl mat-chip style
  */
 
-md-chip.mat-chip {
+mat-chip.mat-chip {
   font-size: mat-font-size($app-chips-typography, button) !important;
   font-weight: mat-font-weight($app-chips-typography, button) !important;
+}
+
+.avatar-btn > span.mat-button-wrapper {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.avatar-btn > span.mat-button-wrapper > img {
+  width: 56px;
+  height: 56px;
+}
+
+.flex-hack {
+  flex: 1 1 auto !important;
+}
+
+.site-content {
+  @extend .flex-hack;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $width-page-max !important; // If not important then gets overidden by some fxLayout styles
+}
+
+.site-padding {
+  @extend .site-content;
+  margin-top: $offset-gt-xs / 2.0;
+  margin-bottom: 5em;
+  padding-top: $padding-site;
+  padding-left: $padding-site;
+  padding-right: $padding-site;
+}
+
+.site-padding-xs {
+  @extend .site-content;
+  margin-top: $offset-xs / 2.0;
+  margin-bottom: $offset-xs;
+  padding-top: $offset-xs;
+  padding-left: $offset-xs;
+  padding-right: $offset-xs;
+}
+
+.back-button-padding-xs {
+  @extend .site-content;
+  margin-top: $offset-xs / 2.0;
+  padding-left: $offset-xs;
+  padding-right: $offset-xs;
+}
+
+.site-content-padded {
+  @extend .site-content;
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+
+.back-button {
+  padding-left: 0 !important;
+  min-width: 0 !important;
+  padding-right: 10px !important;
+}
+
+mat-toolbar-row {
+  @extend .site-content;
+  max-width: calc(#{$width-page-max + 25px});
+  padding-left: $padding-site !important;
+  padding-right: $padding-site !important;
+}
+
+.card-fab {
+  position: absolute;
+  z-index: 100;
+  bottom: -28px;
+  right: 28px;
+}
+
+.div-background-image {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+.component {
+  margin: $offset-gt-xs;
+  max-width: $width-page-max;
+}
+
+.component-xs {
+  @extend .component;
+  margin: $offset-xs;
+}
+
+/*
+ * Make app-filter-dialog take up whole page
+ */
+
+app-filter-dialog {
+  display: block;
+  margin: -24px;
 }

@@ -1,16 +1,20 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from "@angular/core";
-import * as moment from "moment";
-import {BreadcrumbService} from "ng2-breadcrumb/ng2-breadcrumb";
-import {MenuService} from "./menu.service";
-import {SearchBarService} from "./search-bar/search-bar.service";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {Subscription} from "rxjs/Subscription";
-import {MediaChange, ObservableMedia} from "@angular/flex-layout";
-import {ApiService} from "./app.api.service";
-import {AnalyticsService} from "./app.analytics.service";
-import { isPlatformBrowser } from '@angular/common';
-import {BrowseComponent} from "./browse/browse.component";
-import {ToolbarService} from "./toolbar.service";
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {CategoryId, OptionsService, OptionType} from './services/options.service';
+import {SearchBarService} from './components/search-bar/search-bar.service';
+import {NavigationEnd, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {ApiService} from './services/api.service';
+import {AnalyticsService} from './services/analytics.service';
+import {isPlatformBrowser} from '@angular/common';
+import {AuthService} from './services/auth.service';
+import {ChangeDetectorRef} from '@angular/core';
+import * as format from 'date-fns/format';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/filter';
+import {HeaderService} from './components/header/header.service';
+import {Location} from '@angular/common';
+import {AppComponentService} from './app.component.service';
+import {Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -21,73 +25,81 @@ import {ToolbarService} from "./toolbar.service";
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  aucklandUniUrl = 'https://auckland.ac.nz';
-  eResearchUrl = 'http://eresearch.auckland.ac.nz';
-  disclaimerUrl = 'https://www.auckland.ac.nz/en/admin/footer-links/disclaimer.html';
+  public aucklandUniUrl = 'https://auckland.ac.nz';
+  public eResearchUrl = 'http://eresearch.auckland.ac.nz';
+  public disclaimerUrl = 'https://www.auckland.ac.nz/en/admin/footer-links/disclaimer.html';
 
-  private isSideNavOpened = true;
-  private sideNavMode = 'side';
   private mediaChangeSub: Subscription;
-
   private searchTextChangeSub: Subscription;
   private routerSub: Subscription;
+  private progressBarVisibilitySub: Subscription;
+  private titleSub: Subscription;
 
-  menuItems = [
-    {name: 'Home', icon: 'home', href: '/home'},
-    {name: 'Search & Browse', icon: 'magnify', href: '/browse'},
-    {name: 'Provide Feedback', icon: 'thumbs-up-down', href: '/feedback'},
-    {name: 'About Us', icon: 'information', href: '/about'},
-    {name: 'Contact Us', icon: 'phone-classic', href: '/contact'}
-  ];
+  public selectedCategory = CategoryId.All;
+  public searchText = '';
+  public showFilterButton = false;
+  public showLoginBtn = true;
+  public showProgressBar = false;
+  public showBackBtn = false;
+  public pageTitle = '';
 
-  categories = [];
-  category = 'all';
-  searchText = '';
-  showFilterButton = false;
+  private previousRoute = undefined;
+  private currentRoute = undefined;
 
-
-  constructor(private breadcrumbService: BreadcrumbService, private navigationService: MenuService,
+  constructor(private location: Location, public optionsService: OptionsService, private headerService: HeaderService,
               private searchBarService: SearchBarService, private router: Router,
-              private observableMedia: ObservableMedia, private apiService: ApiService, private analyticsService: AnalyticsService,
-              private toolbarService: ToolbarService) {
+              public apiService: ApiService, public analyticsService: AnalyticsService,
+              public authService: AuthService, private ref: ChangeDetectorRef, private appComponentService: AppComponentService,
+              private titleService: Title) {
 
-    // Populate menuItems for search-bar bar
-    this.categories = navigationService.getMenuItem('/').menuItems;
+    authService.loginChange.subscribe((loggedIn) => {
+      this.showLoginBtn = !loggedIn;
+      this.ref.detectChanges();
+    });
+  }
 
-    // Create friendly names for menu items in breadcrumbs
-    for (const item of this.menuItems) {
-      breadcrumbService.addFriendlyNameForRoute(item['href'], item['name']);
+  getSearchQueryParams(item: any) {
+    const type = item['type'];
+
+    if (type === OptionType.Category) {
+      return {categoryId: item.id};
+    } else {
+      return {researchActivityIds: [item.id]};
     }
   }
 
-
-
-  openSearchFilter() {
-    this.toolbarService.setButtonClicked('filter');
+  getRouteName(url: string) {
+    const routeName = url.replace('?', '/');
+    return routeName.split('/')[1];
   }
 
-  updateSideNav(mqAlias) {
-    if (['xs', 'sm'].includes(mqAlias)) {
-      this.sideNavMode = 'over';
-      this.isSideNavOpened = false;
+  back() {
+    if (this.previousRoute) {
+      this.location.back();
     } else {
-      this.sideNavMode = 'side';
-      this.isSideNavOpened = true;
+      this.router.navigate(['/home']);
     }
   }
 
   ngOnInit() {
-    // Update side nav
-    this.updateSideNav(BrowseComponent.getMQAlias());
+    this.titleSub = this.appComponentService.titleChange.subscribe((title) => {
+      this.pageTitle = title;
+    });
 
-    this.mediaChangeSub = this.observableMedia.subscribe((change: MediaChange) => {
-      this.updateSideNav(change.mqAlias);
+    this.progressBarVisibilitySub = this.appComponentService.progressBarVisibilityChange.subscribe((isVisible) => {
+      this.showProgressBar = isVisible;
     });
 
     // Navigate to the search page if the user types text in
     this.searchTextChangeSub = this.searchBarService.searchTextChange.distinctUntilChanged().subscribe(searchText => {
-      if (this.router.url !== '/search' && searchText != null && searchText.trim() !== '') {
-        this.router.navigate(['/search']);
+      const url = this.location.path();
+      if (url && !url.startsWith('/search') && searchText != null && searchText !== '') {
+        this.router.navigate(['/search'], {
+          queryParams: {
+            categoryId: this.searchBarService.category,
+            searchText: this.searchBarService.searchText
+          }
+        });
       }
     });
 
@@ -95,9 +107,35 @@ export class AppComponent implements OnInit, OnDestroy {
       this.routerSub = this.router.events
         .filter(event => event instanceof NavigationEnd)
         .subscribe(event => {
-          const url = event['url'];
-          this.showFilterButton = url.startsWith('/search?') || url === '/search';
-          window.scrollTo(0, 0);
+          // Need to use urlAfterRedirects rather than url to get correct routeName, even when route redirected automatically
+          const url = event['urlAfterRedirects'];
+          const routeName = this.getRouteName(url);
+
+          if (routeName) {
+            // Update previous and current routes
+            if (this.currentRoute) {
+              this.previousRoute = this.currentRoute;
+            }
+            this.currentRoute = routeName;
+
+            this.showBackBtn = routeName !== 'home';
+
+            this.appComponentService.setProgressBarVisibility(false);
+            const pageInfo = this.optionsService.pageInfo[routeName];
+            this.pageTitle = pageInfo.title;
+
+            // Set title and track page view for pages with pre-defined titles
+            if (pageInfo.title) {
+              this.titleService.setTitle('Research Hub: ' + pageInfo.title);
+              this.analyticsService.trackPageView(url, pageInfo.title);
+            }
+
+            this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
+            this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
+
+            this.showFilterButton = routeName === 'search';
+            window.scrollTo(0, 0); // TODO: remove or change when this pull request is merged https://github.com/angular/angular/pull/20030
+          }
         });
     }
   }
@@ -106,9 +144,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.mediaChangeSub.unsubscribe();
     this.searchTextChangeSub.unsubscribe();
     this.routerSub.unsubscribe();
+    this.progressBarVisibilitySub.unsubscribe();
+    this.titleSub.unsubscribe();
   }
 
   getYear() {
-    return moment().year();
+    return format(new Date(), 'YYYY');
   }
 }
