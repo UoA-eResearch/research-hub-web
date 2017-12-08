@@ -143,24 +143,23 @@ export class RequestVmComponent implements OnInit, OnDestroy {
             // TODO: set Done step to completed so that a tick appears next to 'Done', doesn't work at the moment
           },
           (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-              this.submitting = false;
-              this.showErrorDialog(`${err.name}: ${err.status.toString()}`, err.message, 'Close', undefined);
+            this.submitting = false;
+            console.log('Request VM Error: ', err);
+
+            if (err.status === 401) {
+              const dialogRef = this.showErrorDialog(
+                'Session expired',
+                'Redirecting to UoA Single Sign On...',
+                'Login',
+                5000
+              );
+              dialogRef.afterClosed().subscribe(result => {
+                const url = this.location.path(false) + '?retry=true';
+                this.saveRequest();
+                this.authService.login(url);
+              });
             } else {
-              if (err.status === 401) {
-                this.submitting = false;
-                const dialogRef = this.showErrorDialog(
-                  'Session expired',
-                  'Redirecting to UoA Single Sign On...',
-                  'Login',
-                  5000
-                );
-                dialogRef.afterClosed().subscribe(result => {
-                  const url = this.location.path(false) + '?retry=true';
-                  this.saveRequest();
-                  this.authService.login(url);
-                });
-              }
+              this.showErrorDialog(`${err.name}: ${err.status.toString()}`, JSON.stringify(err.error), 'Close', undefined);
             }
           });
     }
