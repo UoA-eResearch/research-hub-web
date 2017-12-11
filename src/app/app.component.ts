@@ -126,7 +126,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
             // Set title and track page view for pages with pre-defined titles
             if (pageInfo.title) {
-              this.titleService.setTitle('Research Hub: ' + pageInfo.title);
+              this.titleService.setTitle('ResearchHub: ' + pageInfo.title);
               this.analyticsService.trackPageView(url, pageInfo.title);
             }
 

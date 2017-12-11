@@ -1,14 +1,13 @@
 <section class="mat-typography">
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #sidenav mode="over" opened="false">
-      <mat-toolbar color="primary" class="sidenav-home">
-        <mat-nav-list>
-          <mat-list-item routerLink="/home" (click)="sidenav.close()">
-            <mat-icon mat-list-icon style="color:white;">home</mat-icon>
-            <a mat-line style="color: white;">Research Hub</a>
-          </mat-list-item>
-        </mat-nav-list>
-      </mat-toolbar>
+      <div class="app-toolbar" ngClass.xs="app-toolbar-xs" style="background-color: #0294a5;padding-left: 24px;">
+        <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="start center" color="primary">
+          <a routerLink="/home" style="height: 18px;">
+            <img style="height: 18px;" [src]="'assets/hub-logo.svg'">
+          </a>
+        </div>
+      </div>
 
       <mat-nav-list>
         <ng-container *ngFor="let menuOption of optionsService.menuOptions;">
@@ -42,11 +41,11 @@
         <div class="app-toolbar-container">
           <div class="site-content app-toolbar" ngClass.xs="site-content app-toolbar-xs">
             <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="center center" color="primary">
-              <button fxHide.gt-sm mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu"><mat-icon>menu</mat-icon></button>
-              <button mat-button routerLink="/home" style="font-size: 20px;">
-                <!--<img mat-list-avatar [src]="'assets/HubLogo4.png'">-->
-                Research Hub
-              </button>
+              <button style="margin-right: 6px;" fxHide.gt-sm mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu"><mat-icon>menu</mat-icon></button>
+              <a routerLink="/home" style="height: 18px;">
+                <img style="height: 18px;" [src]="'assets/hub-logo.svg'">
+              </a>
+
               <span style="flex: 1 1 auto;"></span>
 
               <button mat-icon-button fxHide.gt-sm routerLink="/search" matTooltip="Search">

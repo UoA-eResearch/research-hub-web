@@ -136,8 +136,8 @@ export class OptionsService {
 
     this.pageInfo = {
       home: {
-        title: 'Welcome to the Research Hub',
-        description: 'The Research Hub connects you with people, resources, and services from across the University to enhance and accelerate your research.',
+        title: 'Welcome to the ResearchHub',
+        description: 'The ResearchHub connects you with people, resources, and services from across the University to enhance and accelerate your research.',
         imageUrl: 'page-elements/' + this.coverImages[Math.floor(Math.random() * 3)], // Generate a random number between 1 and 3 and
         isHeaderVisible: true,
         isSearchBarVisible: true
@@ -145,7 +145,7 @@ export class OptionsService {
       search: {title: 'Search', isHeaderVisible: false, isSearchBarVisible: true},
       feedback: {
         title: 'Feedback & User Study',
-        description: 'We appreciate your visit to the beta-version of the Research Hub, our platform for research support.',
+        description: 'We appreciate your visit to the beta-version of the ResearchHub, our platform for research support.',
         imageUrl: 'page-elements/AU_Gen_Detail2010_073_1680x220_BW.jpg',
         isHeaderVisible: true,
         isSearchBarVisible: false
