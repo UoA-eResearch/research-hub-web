@@ -78,7 +78,7 @@
       </mat-card>
 
       <mat-card>
-        <h2>Organisational units</h2>
+        <h2>Organisation units</h2>
         <mat-chip-list>
           <mat-chip class="org-unit-chip" *ngFor="let orgUnit of content.orgUnits" [routerLink]="['/orgUnit', orgUnit.id]">
             <img class="chip-avatar" [src]="apiService.getAssetUrl(orgUnit.image)" height="25"/>

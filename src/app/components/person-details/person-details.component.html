@@ -45,7 +45,7 @@
   </mat-card>
 
   <mat-card *ngIf="person.orgUnits.length">
-    <h2>Organisational units</h2>
+    <h2>Organisation units</h2>
     <mat-nav-list>
       <mat-list-item *ngFor="let orgUnit of person.orgUnits" [routerLink]="['/orgUnit', orgUnit.id]">
         <img mat-list-avatar [src]="apiService.getAssetUrl(orgUnit.image)">
