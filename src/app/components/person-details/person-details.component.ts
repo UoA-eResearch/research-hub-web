@@ -26,6 +26,10 @@ export class PersonDetailsComponent implements OnInit {
 
   }
 
+  trackAction() {
+    this.analyticsService.trackActionExternal('Person', this.person.firstName + ' ' + this.person.lastName, this.person.directoryUrl);
+  }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['personId'];

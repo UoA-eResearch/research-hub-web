@@ -35,7 +35,7 @@
           </div>
 
           <div fxFlex="36px" fxFlexAlign="end">
-            <a mat-raised-button color="accent" [href]="person.directoryUrl" target="_blank">
+            <a mat-raised-button color="accent" [href]="person.directoryUrl" (click)="trackAction()" target="_blank">
               Contact
             </a>
           </div>

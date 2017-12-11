@@ -25,6 +25,10 @@ export class OrgUnitDetailsComponent implements OnInit {
 
   }
 
+  trackAction() {
+    this.analyticsService.trackActionExternal('OrgUnit', this.orgUnit.name, this.orgUnit.url);
+  }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['orgUnitId'];

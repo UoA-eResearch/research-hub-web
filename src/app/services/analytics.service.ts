@@ -11,6 +11,7 @@ export class AnalyticsService {
   eventCategoryGuideCategory = 'GuideCategory';
   eventCategoryPerson = 'Person';
   eventCategoryOrgUnit = 'OrgUnit';
+  eventCategoryIntegratedService = 'IntegratedService';
   eventCategoryPolicy = 'Policy';
 
   eventActionView = 'view';
@@ -61,9 +62,18 @@ export class AnalyticsService {
     this.trackPageView(searchUrl, 'Search Results');
   }
 
-  trackGo(eventCategory: string, name: string, url: string) {
+  trackActionExternal(eventCategory: string, name: string, url: string) {
     this.trackEvent(eventCategory, this.eventActionGo, name);
     this.trackOutboundLink(url);
+  }
+
+  trackIntegratedService(name: string, url: string) {
+    this.trackEvent(this.eventCategoryIntegratedService, this.eventActionView, name);
+    this.trackPageView(url, name);
+  }
+
+  trackActionIntegrated(name: string) {
+    this.trackEvent(this.eventCategoryIntegratedService, this.eventActionGo, name);
   }
 
   trackNoSearchResults(category: string, text: string) {

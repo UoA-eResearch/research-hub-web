@@ -23,7 +23,7 @@
           </div>
 
           <div fxFlex="36px" fxFlexAlign="end">
-            <a mat-raised-button color="accent" [href]="orgUnit.url" target="_blank">
+            <a mat-raised-button color="accent" [href]="orgUnit.url" (click)="trackAction()" target="_blank">
               Contact
             </a>
           </div>

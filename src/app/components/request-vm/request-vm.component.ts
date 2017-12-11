@@ -9,10 +9,10 @@ import {AppComponentService} from '../../app.component.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material/dialog';
-import 'rxjs/add/operator/retryWhen';
 import {ErrorDialogComponent} from '../shared/error-dialog/error-dialog.component';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
+import {AnalyticsService} from '../../services/analytics.service';
 
 
 @Component({
@@ -59,11 +59,14 @@ export class RequestVmComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
               private apiService: ApiService, public authService: AuthService, private appComponentService: AppComponentService,
-              public dialog: MatDialog, private location: Location, private route: ActivatedRoute) {
+              public dialog: MatDialog, private location: Location, private route: ActivatedRoute,
+              private analyticsService: AnalyticsService) {
     dateAdapter.setLocale('en-GB');
   }
 
   ngOnInit() {
+    this.analyticsService.trackIntegratedService('Request a Research Virtual Machine', this.location.path());
+
     this.times = RequestVmComponent.getTimes();
 
     this.requestVmForm = this.formBuilder.group({
@@ -71,6 +74,7 @@ export class RequestVmComponent implements OnInit, OnDestroy {
       time: this.timeCtrl,
       comments: ['']
     });
+
 
     this.apiService.getContent(this.researchVmContentId).subscribe(
       content => {
@@ -138,6 +142,7 @@ export class RequestVmComponent implements OnInit, OnDestroy {
       this.apiService.requestVm(values.date, values.time, values.comments)
         .subscribe(
           (response) => {
+            this.analyticsService.trackActionIntegrated(this.content.name);
             this.response = response;
             this.stepper.selectedIndex = 1; // Navigate to second step
             // TODO: set Done step to completed so that a tick appears next to 'Done', doesn't work at the moment
