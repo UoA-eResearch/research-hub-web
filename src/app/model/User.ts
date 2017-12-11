@@ -1,7 +1,8 @@
 
-
-// TODO: Merge with Person
 export class User {
+
+  public firstName: string;
+  public lastName: string;
   public displayName: string;
   public eppn: string;
   public mail: string;
@@ -28,11 +29,12 @@ export class User {
     user.eppn = User.getAttrValue(attributes, 'eppn');
     user.mail = User.getAttrValue(attributes, 'mail');
     user.uid = User.getAttrValue(attributes, 'uid');
+    user.firstName = User.getAttrValue(attributes, 'givenName');
+    user.lastName = User.getAttrValue(attributes, 'sn');
 
     // Create Initials for user
-    const names = user.displayName.trim().split(' ');
-    if (names.length === 2) {
-      user.initials = (names[0][0] + names[1][0]).toUpperCase();
+    if (user.firstName.length > 0 && user.lastName.length > 0) {
+      user.initials = (user.firstName[0] + user.lastName[0]).toUpperCase();
     } else {
       user.initials = 'Me';
     }

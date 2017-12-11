@@ -19,11 +19,23 @@
       ]
     },
     {
+      "name": "givenName",
+      "values": [
+        "Josephus"
+      ]
+    },
+    {
       "name": "mail",
       "values": [
         "j.miller@auckland.ac.nz",
         "joe.miller@gmail.com",
         "jmil001@aucklanduni.ac.nz"
+      ]
+    },
+    {
+      "name": "sn",
+      "values": [
+        "Miller"
       ]
     },
     {
