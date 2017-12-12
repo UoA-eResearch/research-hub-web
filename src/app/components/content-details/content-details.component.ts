@@ -26,7 +26,6 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
   userSupport: ListItem[];
   numCols = 1;
   mediaSub: Subscription;
-  categories: any[] = [];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private media: ObservableMedia,
               private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService,

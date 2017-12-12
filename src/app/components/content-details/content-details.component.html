@@ -6,7 +6,7 @@
           <img style="width: 64px; height: 64px; margin-right: 1em;" *ngIf="content" mat-card-avatar [src]="apiService.getAssetUrl(content.image)">
           <mat-card-title><h2 style="font-size: 24px;">{{content.name}}</h2></mat-card-title>
           <mat-card-subtitle>
-            <ng-container *ngFor="let item of categories; let i=index;">
+            <ng-container *ngFor="let item of content.contentTypes; let i=index;">
               <a style="display: inline;" [routerLink]="['/search']" [queryParams]="{categoryId: item.idUi}">
                 {{item.nameUi}}<ng-container *ngIf="i + 1 < content.contentTypes.length">, </ng-container>
               </a>
@@ -23,7 +23,7 @@
             <div fxFlex="60" fxFlex.lt-sm="100" fxLayout="column" fxLayoutGap="1em">
               <div fxFlex fxHide.xs>
                 <h1 >{{content.name}}</h1>
-                <ng-container *ngFor="let item of categories; let i=index;">
+                <ng-container *ngFor="let item of content.contentTypes; let i=index;">
                   <a style="display: inline;" [routerLink]="['/search']" [queryParams]="{categoryId: item.idUi}">
                     {{item.nameUi}}<ng-container *ngIf="i + 1 < content.contentTypes.length">, </ng-container>
                   </a>
