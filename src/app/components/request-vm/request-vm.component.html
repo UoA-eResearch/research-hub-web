@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-header style="padding-left: 16px;margin-bottom: 1.5em;">
+  <mat-card-header class="request-card-header">
     <img *ngIf="content" mat-card-avatar [src]="apiService.getAssetUrl(content.image)">
     <h1>{{title}}</h1>
   </mat-card-header>
@@ -10,27 +10,29 @@
       <form [formGroup]="requestVmForm" novalidate>
         <ng-template matStepLabel>Details</ng-template>
 
-        <div class="submit-form-container">
+        <div class="step-form-container">
           <p>In order to request a virtual machine, please book a consultation with us to discuss required details. A consultation typically takes 30 minutes. No preparation on your side is necessary. If you have any questions please put them into the comments field.</p>
 
           <div class="form-group">
             <h3>When would you like the consultation to take place?</h3>
 
-            <mat-form-field style="padding-right: 20px;">
-              <input matInput [matDatepicker]="picker" [min]="dateToday" formControlName="date" placeholder="Date">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-              <mat-error *ngIf="dateCtrl.invalid">Please choose a date</mat-error>
-            </mat-form-field>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="1em">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" [min]="dateToday" formControlName="date" placeholder="Date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="dateCtrl.invalid">Please choose a date</mat-error>
+              </mat-form-field>
 
-            <mat-form-field>
-              <mat-select placeholder="Time" formControlName="time">
-                <mat-option *ngFor="let time of times" [value]="time">
-                  {{time}}
-                </mat-option>
-              </mat-select>
-              <mat-error *ngIf="timeCtrl.invalid">Please choose a time</mat-error>
-            </mat-form-field>
+              <mat-form-field>
+                <mat-select placeholder="Time" formControlName="time">
+                  <mat-option *ngFor="let time of times" [value]="time">
+                    {{time}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="timeCtrl.invalid">Please choose a time</mat-error>
+              </mat-form-field>
+            </div>
           </div>
 
           <div class="form-group">
@@ -46,7 +48,7 @@
             </mat-form-field>
           </div>
 
-          <div class="submit-overlay" fxLayout="row" fxLayoutAlign="center center" *ngIf="submitting">
+          <div class="step-overlay" fxLayout="row" fxLayoutAlign="center center" *ngIf="submitting">
               <mat-spinner></mat-spinner>
           </div>
         </div>
@@ -60,7 +62,7 @@
     </mat-step>
     <mat-step editable="false">
       <ng-template matStepLabel>Done</ng-template>
-      <div style="margin-bottom: 2em;">
+      <div class="step-form-container">
         <h3>Request submitted</h3>
         <p>Your virtual machine consultation request has been submitted and an acknowledgement e-mail sent to <a *ngIf="authService.user" [href]="'mailto:' + authService.user.mail" target="_blank">{{authService.user.mail}}</a>.</p>
         <p>You may view your request here: <a *ngIf="response" [href]="response.ticketUrl"  target="_blank">{{response.ticketNumber}}</a></p>
