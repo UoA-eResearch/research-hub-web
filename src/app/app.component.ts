@@ -122,16 +122,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
             this.appComponentService.setProgressBarVisibility(false);
             const pageInfo = this.optionsService.pageInfo[routeName];
-            this.pageTitle = pageInfo.title;
 
-            // Set title and track page view for pages with pre-defined titles
-            if (pageInfo.title) {
-              this.titleService.setTitle('ResearchHub: ' + pageInfo.title);
-              this.analyticsService.trackPageView(url, pageInfo.title);
+            if (pageInfo) {
+              this.pageTitle = pageInfo.title;
+
+              // Set title and track page view for pages with pre-defined titles
+              if (pageInfo.title) {
+                this.titleService.setTitle('ResearchHub: ' + pageInfo.title);
+                this.analyticsService.trackPageView(url, pageInfo.title);
+              }
+
+              this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
+              this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
+            } else {
+              console.log('Error pageInfo not set for route:', routeName);
             }
-
-            this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
-            this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
 
             this.showFilterButton = routeName === 'search';
             window.scrollTo(0, 0); // TODO: remove or change when this pull request is merged https://github.com/angular/angular/pull/20030

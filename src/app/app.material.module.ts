@@ -23,6 +23,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatMenuModule,
     MatExpansionModule,
     MatStepperModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRadioModule
   ],
   declarations: [],
   exports: [
@@ -74,7 +76,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatMenuModule,
     MatExpansionModule,
     MatStepperModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRadioModule
   ]
 })
 export class MaterialModule {

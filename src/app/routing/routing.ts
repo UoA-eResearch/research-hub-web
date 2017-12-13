@@ -16,6 +16,7 @@ export const appRoutes: Routes = [
   {path: 'guideCategory/:guideCategoryId', loadChildren: 'app/components/guide-category/guide-category.module#GuideCategoryModule'},
 
   {path: 'requestVm', loadChildren: 'app/components/request-vm/request-vm.module#RequestVmModule', canActivate: [CanActivateViaAuthGuard]},
+  {path: 'requestData', loadChildren: 'app/components/request-data/request-data.module#RequestDataModule', canActivate: [CanActivateViaAuthGuard]},
 
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}

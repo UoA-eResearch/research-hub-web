@@ -1,0 +1,227 @@
+<mat-card>
+  <mat-card-header class="request-card-header">
+    <img *ngIf="content" mat-card-avatar [src]="apiService.getAssetUrl(content.image)">
+    <h1>{{title}}</h1>
+  </mat-card-header>
+
+  <p>In order to provide you with research storage please complete the general information in the following sections. If you have any questions feel free to add this into the comments field in Section 4.</p>
+
+  <mat-horizontal-stepper #stepper linear="true">
+    <mat-step editable="false" [stepControl]="storageTypeForm">
+      <form [formGroup]="storageTypeForm" novalidate>
+        <ng-template matStepLabel>Storage Type</ng-template>
+
+        <div class="step-form-container">
+
+          <div class="form-group">
+            <h3>Do you want to request new storage or extend existing storage?</h3>
+
+            <mat-radio-group fxLayout="column" fxLayoutGap="1em" formControlName="storageType">
+              <mat-radio-button value="1">New</mat-radio-button>
+              <mat-radio-button value="2">Existing</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="end">
+          <div fxLayout="row" fxLayoutAlign="end">
+            <button mat-raised-button color="accent" matStepperNext>Next</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step editable="false" [stepControl]="projectForm">
+      <form [formGroup]="projectForm" novalidate>
+        <ng-template matStepLabel>General Information</ng-template>
+
+        <div class="step-form-container">
+          <div class="form-group">
+            <h3>Project title</h3>
+            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
+              <input matInput placeholder="Project title" formControlName="title">
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <h3>Brief abstract or summary of the research for this storage</h3>
+            <mat-form-field class="no-floating-label input-full-width" floatPlaceholder="never">
+              <textarea matInput placeholder="Project abstract" formControlName="abstract"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <h3>Estimated project end date</h3>
+            <mat-form-field floatPlaceholder="never" class="no-floating-label">
+              <input matInput [matDatepicker]="picker" [min]="dateToday" formControlName="endDate" placeholder="Project end date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <!--<mat-error *ngIf="dateCtrl.invalid">Please choose a date</mat-error>-->
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <h3>Please choose a FOR code from the Australian and New Zealand Standard Research Classification (ANZSRC)</h3>
+            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
+              <mat-select placeholder="Field of research" formControlName="fieldOfResearch" multiple>
+                <mat-option *ngFor="let item of fieldOfResearchCodes" [value]="item">{{item}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="end">
+          <div fxLayout="row" fxLayoutAlign="end">
+            <button mat-raised-button color="accent" matStepperNext>Next</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step editable="false" [stepControl]="dataInfoForm">
+      <form [formGroup]="dataInfoForm" novalidate>
+        <ng-template matStepLabel>Data Information</ng-template>
+
+        <div class="step-form-container">
+          <div class="form-group">
+            <h3>To help us store your data appropriately please tick any of the following that apply to the data being stored</h3>
+            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
+              <mat-select placeholder="Data information" formControlName="dataRequirements" multiple>
+                <mat-option *ngFor="let item of dataRequirements" [value]="item">{{item}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <h3>Do you have a short name you would like to use for your storage folder (e.g. GDC-data)?</h3>
+            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
+              <input matInput placeholder="Short name" formControlName="shortName">
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <h3>Please provide a list of people who require access</h3>
+
+            <div fxLayout="column">
+              <div fxLayout="row" fxLayoutAlign="start center" class="data-person-row" fxLayoutGap="1.5em" *ngFor="let item of whoRequiresAccessCtrl.value; let i = index;">
+                <div style="width: 100%; max-width: calc(100% - 50px);" fxFlex="100" fxLayout="column" fxLayoutGap="1em">
+                  <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="data-person-row-inner">
+                    <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
+                      <input matInput placeholder="First name" [(ngModel)]="item.firstName" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
+                      <input matInput placeholder="Last name" [(ngModel)]="item.lastName" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
+                      <input matInput placeholder="Email" [(ngModel)]="item.email" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                  </div>
+
+                  <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="data-person-row-inner">
+                    <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
+                      <input matInput placeholder="Username" [(ngModel)]="item.username" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
+                      <mat-select placeholder="Access" [(ngModel)]="item.access" [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let item of access;" [value]="item">{{item}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
+                      <mat-select placeholder="Role" [(ngModel)]="item.roles" [ngModelOptions]="{standalone: true}" multiple>
+                        <mat-option *ngFor="let item of roleTypes;" [value]="item">{{item}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div fxFlex="40px">
+                  <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;"><mat-icon>delete</mat-icon></button>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="end center">
+                <button mat-button color="primary" (click)="addPerson()">Add Person</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 3em;" fxLayout="column" fxLayoutAlign="end">
+          <div fxLayout="row" fxLayoutAlign="end">
+            <button mat-raised-button color="accent" matStepperNext>Next</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step editable="false" [stepControl]="dataSizeForm">
+      <form [formGroup]="dataSizeForm" novalidate>
+        <ng-template matStepLabel>Data Size</ng-template>
+
+        <div class="step-form-container">
+          <div class="form-group">
+            <h3>Estimated amount of data needed this year</h3>
+            <div fxLayout="row" fxLayoutGap="1em">
+              <mat-form-field floatPlaceholder="never" class="no-floating-label">
+                <input matInput placeholder="Number" formControlName="sizeThisYear" type="number">
+              </mat-form-field>
+              <mat-form-field class="no-floating-label">
+                <mat-select placeholder="Unit" formControlName="unitThisYear">
+                  <mat-option *ngFor="let unit of units" [value]="unit">
+                    {{unit}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <h3>Estimated amount of data needed next year</h3>
+            <div fxLayout="row" fxLayoutGap="1em">
+              <mat-form-field floatPlaceholder="never" class="no-floating-label">
+                <input matInput placeholder="Number" formControlName="sizeNextYear" type="number">
+              </mat-form-field>
+              <mat-form-field class="no-floating-label">
+                <mat-select placeholder="Unit" formControlName="unitNextYear">
+                  <mat-option *ngFor="let unit of units" [value]="unit">
+                    {{unit}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <h3>Do you have any other comments?</h3>
+            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
+              <textarea matInput placeholder="Comments" formControlName="comments"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="step-overlay" fxLayout="row" fxLayoutAlign="center center" *ngIf="submitting">
+            <mat-spinner></mat-spinner>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="end">
+          <div fxLayout="row" fxLayoutAlign="end">
+            <button mat-raised-button color="accent" (click)="submit()" [disabled]="submitting">Next</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step editable="false">
+      <ng-template matStepLabel>Done</ng-template>
+      <div class="step-form-container">
+        <h3>Request submitted</h3>
+        <p>Your research storage request has been submitted and an acknowledgement e-mail sent to <a *ngIf="authService.user" [href]="'mailto:' + authService.user.mail" target="_blank">{{authService.user.mail}}</a>.</p>
+        <p>You may view your request here: <a *ngIf="response" [href]="response.ticketUrl"  target="_blank">{{response.ticketNumber}}</a></p>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="end">
+        <div fxLayout="row" fxLayoutAlign="end">
+          <button mat-raised-button color="accent" [routerLink]="['/content', 1]">Back to Research Virtual Machines</button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-card>
