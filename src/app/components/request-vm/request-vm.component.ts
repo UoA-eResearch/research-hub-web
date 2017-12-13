@@ -30,12 +30,11 @@ export class RequestVmComponent implements OnInit, OnDestroy {
   public dateToday = new Date();
   public dateCtrl = new FormControl(undefined, Validators.required);
   public timeCtrl = new FormControl(undefined, Validators.required);
-  public researchVmContentId = 1;
-  public content: Content;
   public submitting = false;
   public response: any;
   private routeParamsSub: Subscription;
   public title = 'Request a Research Virtual Machine';
+  public image = 'content/research-vm.jpg';
 
 
   private static getTimes() {
@@ -68,19 +67,13 @@ export class RequestVmComponent implements OnInit, OnDestroy {
     this.analyticsService.trackIntegratedService('Request a Research Virtual Machine', this.location.path());
 
     this.times = RequestVmComponent.getTimes();
+    this.appComponentService.setTitle(this.title);
 
     this.requestVmForm = this.formBuilder.group({
       date: this.dateCtrl,
       time: this.timeCtrl,
       comments: ['']
     });
-
-
-    this.apiService.getContent(this.researchVmContentId).subscribe(
-      content => {
-        this.content = content;
-        this.appComponentService.setTitle(this.title);
-      });
 
     this.routeParamsSub =
       this.route.queryParams
@@ -142,7 +135,7 @@ export class RequestVmComponent implements OnInit, OnDestroy {
       this.apiService.requestVm(values.date, values.time, values.comments)
         .subscribe(
           (response) => {
-            this.analyticsService.trackActionIntegrated(this.content.name);
+            this.analyticsService.trackActionIntegrated(this.title);
             this.response = response;
             this.stepper.selectedIndex = 1; // Navigate to second step
             // TODO: set Done step to completed so that a tick appears next to 'Done', doesn't work at the moment
