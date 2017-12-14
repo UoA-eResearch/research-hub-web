@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from 'environments/environment';
-import * as format from 'date-fns/format';
 import 'rxjs/add/operator/map';
 import {Content} from '../model/Content';
 import {GuideCategory} from '../model/GuideCategory';
@@ -211,7 +210,7 @@ export class ApiService {
   private static similarContentUrl = 'similar';
   private static orgUnitUrl = 'orgUnit';
   private static assetUrl = 'assets/';
-  private static vmConsultationUrl = 'vmConsultation/create';
+  private static requestServiceUrl = 'serviceRequest';
   private static searchResultsUrl = 'search';
   private static hostname = environment.apiUrl;
   private static headers = {'Accept': 'application/json'};
@@ -222,14 +221,8 @@ export class ApiService {
 
   }
 
-  requestVm(date: Date, time: string, comments: string) {
-    const body = {
-      date: format(date, 'YYYY-MM-DD'),
-      time: time,
-      comments: comments
-    };
-
-    return this.http.post(ApiService.hostname + ApiService.vmConsultationUrl, body);
+  requestService(serviceName: string, body: any) {
+    return this.http.post(ApiService.hostname + ApiService.requestServiceUrl + '/' + serviceName, body);
   }
 
   getAssetUrl(fileName: string) {

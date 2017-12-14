@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
 import {ApiService} from 'app/services/api.service';
-import {Content} from 'app/model/Content';
 import {AuthService} from '../../services/auth.service';
 import {MatHorizontalStepper} from '@angular/material/stepper';
 import {AppComponentService} from '../../app.component.service';
@@ -13,6 +12,7 @@ import {ErrorDialogComponent} from '../shared/error-dialog/error-dialog.componen
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {AnalyticsService} from '../../services/analytics.service';
+import * as format from 'date-fns/format';
 
 
 @Component({
@@ -132,7 +132,13 @@ export class RequestVmComponent implements OnInit, OnDestroy {
       this.submitting = true;
       const values = this.requestVmForm.getRawValue();
 
-      this.apiService.requestVm(values.date, values.time, values.comments)
+      const body = {
+        date: format(values.date, 'YYYY-MM-DD'),
+        time: values.time,
+        comments: values.comments
+      };
+
+      this.apiService.requestService('vm', body)
         .subscribe(
           (response) => {
             this.analyticsService.trackActionIntegrated(this.title);

@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
 import {ApiService} from 'app/services/api.service';
-import {Content} from 'app/model/Content';
 import {AuthService} from '../../services/auth.service';
 import {MatHorizontalStepper} from '@angular/material/stepper';
 import {AppComponentService} from '../../app.component.service';
@@ -13,7 +12,7 @@ import {ErrorDialogComponent} from '../shared/error-dialog/error-dialog.componen
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {AnalyticsService} from '../../services/analytics.service';
-
+import * as format from 'date-fns/format';
 
 interface DataPerson {
   firstName: string;
@@ -31,21 +30,19 @@ interface DataPerson {
   styleUrls: ['./request-data.component.scss']
 })
 export class RequestDataComponent implements OnInit, OnDestroy {
-  private static requestFormKey = 'requestDataForm';
+  // private static requestFormKey = 'requestDataForm';
 
   @ViewChild('stepper') stepper: MatHorizontalStepper;
-  public requestForm: FormGroup;
   public dateToday = new Date();
   public submitting = false;
-  public response: any;
   private routeParamsSub: Subscription;
   public title = 'Request for Storage';
-
+  public response: any;
   public storageTypeForm: FormGroup;
   public projectForm: FormGroup;
   public dataInfoForm: FormGroup;
   public dataSizeForm: FormGroup;
-  public whoRequiresAccessCtrl = new FormControl([] as DataPerson[], Validators.required);
+  public projectMembersCtrl = new FormControl([] as DataPerson[], Validators.required);
 
   public fieldOfResearchCodes = [
     '01 Mathematical Sciences',
@@ -112,7 +109,7 @@ export class RequestDataComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.addPerson();
 
-    this.analyticsService.trackIntegratedService('Request a Research Virtual Machine', this.location.path());
+    this.analyticsService.trackIntegratedService(this.title, this.location.path());
 
     this.storageTypeForm = this.formBuilder.group({
       storageType: new FormControl(undefined, Validators.required)
@@ -128,7 +125,7 @@ export class RequestDataComponent implements OnInit, OnDestroy {
     this.dataInfoForm = this.formBuilder.group({
       dataRequirements: new FormControl(undefined, Validators.required),
       shortName: new FormControl(undefined, Validators.required),
-      whoRequiresAccess: this.whoRequiresAccessCtrl
+      projectMembers: this.projectMembersCtrl
     });
 
     this.dataSizeForm = this.formBuilder.group({
@@ -138,23 +135,10 @@ export class RequestDataComponent implements OnInit, OnDestroy {
       unitNextYear: new FormControl(undefined, Validators.required),
       comments: new FormControl(undefined, Validators.required)
     });
-
-    this.routeParamsSub =
-      this.route.queryParams
-        .subscribe(params => {
-          const retry = params['retry'];
-
-          if (retry) {
-            this.loadRequest();
-            // this.submit();
-          } else {
-            this.clearRequest();
-          }
-        });
   }
 
   addPerson() {
-    this.whoRequiresAccessCtrl.value.push({
+    this.projectMembersCtrl.value.push({
       firstName: undefined,
       lastName: undefined,
       email: undefined,
@@ -165,29 +149,11 @@ export class RequestDataComponent implements OnInit, OnDestroy {
   }
 
   deletePerson(index: number) {
-    this.whoRequiresAccessCtrl.value.splice(index, 1);
+    this.projectMembersCtrl.value.splice(index, 1);
   }
 
   ngOnDestroy() {
-    this.routeParamsSub.unsubscribe();
-  }
-
-  saveRequest() {
-    localStorage.setItem(RequestDataComponent.requestFormKey, JSON.stringify(this.requestForm.getRawValue()));
-  }
-
-  loadRequest() {
-    const item = localStorage.getItem(RequestDataComponent.requestFormKey);
-
-    if (item !== null) {
-      const value = JSON.parse(item);
-      console.log(RequestDataComponent.requestFormKey, value);
-      this.requestForm.setValue(value);
-    }
-  }
-
-  clearRequest() {
-    localStorage.removeItem(RequestDataComponent.requestFormKey)
+    // this.routeParamsSub.unsubscribe();
   }
 
   showErrorDialog(title: string, message: string, closeButtonName: string, timeout: number) {
@@ -202,43 +168,33 @@ export class RequestDataComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    const isValid = this.requestForm.valid;
-    // this.dateCtrl.markAsTouched();
-    // this.timeCtrl.markAsDirty();
-    // this.timeCtrl.markAsTouched();
+    const isValid = this.dataSizeForm.valid;
+    this.dataSizeForm.markAsTouched();
+    this.dataSizeForm.markAsDirty();
+    this.dataSizeForm.markAsTouched();
 
     if (isValid) {
-      // this.submitting = true;
-      // const values = this.requestForm.getRawValue();
-      //
-      // this.apiService.requestVm(values.date, values.time, values.comments)
-      //   .subscribe(
-      //     (response) => {
-      //       this.analyticsService.trackActionIntegrated(this.content.name);
-      //       this.response = response;
-      //       this.stepper.selectedIndex = 1; // Navigate to second step
-      //       // TODO: set Done step to completed so that a tick appears next to 'Done', doesn't work at the moment
-      //     },
-      //     (err: HttpErrorResponse) => {
-      //       this.submitting = false;
-      //       console.log('Request VM Error: ', err);
-      //
-      //       if (err.status === 401) {
-      //         const dialogRef = this.showErrorDialog(
-      //           'Session expired',
-      //           'Redirecting to UoA Single Sign On...',
-      //           'Login',
-      //           5000
-      //         );
-      //         dialogRef.afterClosed().subscribe(result => {
-      //           const url = this.location.path(false) + '?retry=true';
-      //           this.saveRequest();
-      //           this.authService.login(url);
-      //         });
-      //       } else {
-      //         this.showErrorDialog(`${err.name}: ${err.status.toString()}`, JSON.stringify(err.error), 'Close', undefined);
-      //       }
-      //     });
+      this.submitting = true;
+
+      const body = Object.assign({},
+        this.storageTypeForm.getRawValue(),
+        this.projectForm.getRawValue(),
+        this.dataInfoForm.getRawValue(),
+        this.dataSizeForm.getRawValue());
+
+      // Convert endDate and projectMembers into strings
+      body.endDate = format(body.endDate, 'YYYY-MM-DD');
+      body.projectMembers = body.projectMembers.map((p) => {
+        return `${p.firstName} ${p.lastName}, ${p.email}, ${p.username}, ${p.access}, ${p.roles.join(', ')}`
+      });
+
+      this.apiService.requestService('storage', body)
+        .subscribe(
+          (response) => {
+            this.analyticsService.trackActionIntegrated(this.title);
+            this.response = response;
+            this.stepper.selectedIndex = 4; // Navigate to lat step
+          });
     }
   }
 }

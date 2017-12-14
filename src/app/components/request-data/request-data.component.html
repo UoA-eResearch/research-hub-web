@@ -4,7 +4,7 @@
     <h1>{{title}}</h1>
   </mat-card-header>
 
-  <p>In order to provide you with research storage please complete the general information in the following sections. If you have any questions feel free to add this into the comments field in Section 4.</p>
+  <p style="padding-left: 24px;">In order to provide you with research storage please complete the general information in the following sections. If you have any questions feel free to add this into the comments field in Section 4.</p>
 
   <mat-horizontal-stepper #stepper linear="true">
     <mat-step editable="false" [stepControl]="storageTypeForm">
@@ -12,13 +12,12 @@
         <ng-template matStepLabel>Storage Type</ng-template>
 
         <div class="step-form-container">
-
           <div class="form-group">
             <h3>Do you want to request new storage or extend existing storage?</h3>
 
             <mat-radio-group fxLayout="column" fxLayoutGap="1em" formControlName="storageType">
-              <mat-radio-button value="1">New</mat-radio-button>
-              <mat-radio-button value="2">Existing</mat-radio-button>
+              <mat-radio-button value="New">New</mat-radio-button>
+              <mat-radio-button value="Existing">Existing</mat-radio-button>
             </mat-radio-group>
           </div>
         </div>
@@ -103,7 +102,7 @@
             <h3>Please provide a list of people who require access</h3>
 
             <div fxLayout="column">
-              <div fxLayout="row" fxLayoutAlign="start center" class="data-person-row" fxLayoutGap="1.5em" *ngFor="let item of whoRequiresAccessCtrl.value; let i = index;">
+              <div fxLayout="row" fxLayoutAlign="start center" class="data-person-row" fxLayoutGap="1.5em" *ngFor="let item of projectMembersCtrl.value; let i = index;">
                 <div style="width: 100%; max-width: calc(100% - 50px);" fxFlex="100" fxLayout="column" fxLayoutGap="1em">
                   <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="data-person-row-inner">
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
@@ -214,7 +213,7 @@
       <ng-template matStepLabel>Done</ng-template>
       <div class="step-form-container">
         <h3>Request submitted</h3>
-        <p>Your research storage request has been submitted and an acknowledgement e-mail sent to <a *ngIf="authService.user" [href]="'mailto:' + authService.user.mail" target="_blank">{{authService.user.mail}}</a>.</p>
+        <p>Your storage request has been submitted and an acknowledgement e-mail sent to <a *ngIf="authService.user" [href]="'mailto:' + authService.user.mail" target="_blank">{{authService.user.mail}}</a>.</p>
         <p>You may view your request here: <a *ngIf="response" [href]="response.ticketUrl"  target="_blank">{{response.ticketNumber}}</a></p>
       </div>
       <div fxLayout="column" fxLayoutAlign="end">
