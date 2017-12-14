@@ -57,7 +57,7 @@ export class RequestVmComponent implements OnInit, OnDestroy {
   }
 
   constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
-              private apiService: ApiService, public authService: AuthService, private appComponentService: AppComponentService,
+              public apiService: ApiService, public authService: AuthService, private appComponentService: AppComponentService,
               public dialog: MatDialog, private location: Location, private route: ActivatedRoute,
               private analyticsService: AnalyticsService) {
     dateAdapter.setLocale('en-GB');

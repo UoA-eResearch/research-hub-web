@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header class="request-card-header">
-    <img *ngIf="content" mat-card-avatar [src]="apiService.getAssetUrl(content.image)">
+    <img mat-card-avatar [src]="apiService.getAssetUrl(image)">
     <h1>{{title}}</h1>
   </mat-card-header>
 

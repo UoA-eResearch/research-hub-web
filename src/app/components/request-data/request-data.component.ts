@@ -37,6 +37,7 @@ export class RequestDataComponent implements OnInit, OnDestroy {
   public submitting = false;
   private routeParamsSub: Subscription;
   public title = 'Request for Storage';
+  public image = 'content/vault.jpg';
   public response: any;
   public storageTypeForm: FormGroup;
   public projectForm: FormGroup;
@@ -100,7 +101,7 @@ export class RequestDataComponent implements OnInit, OnDestroy {
   ];
 
   constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
-              private apiService: ApiService, public authService: AuthService, private appComponentService: AppComponentService,
+              public apiService: ApiService, public authService: AuthService, private appComponentService: AppComponentService,
               public dialog: MatDialog, private location: Location, private route: ActivatedRoute,
               private analyticsService: AnalyticsService) {
     dateAdapter.setLocale('en-GB');
