@@ -4,6 +4,8 @@
     <h1>{{title}}</h1>
   </mat-card-header>
 
+  <p style="padding-left: 24px;">In order to request a virtual machine, please book a consultation with us to discuss required details. A consultation typically takes 30 minutes. No preparation on your side is necessary. If you have any questions please put them into the comments field.</p>
+
   <mat-horizontal-stepper #stepper linear>
     <mat-step editable="false" [stepControl]="requestVmForm">
 
@@ -11,7 +13,6 @@
         <ng-template matStepLabel>Details</ng-template>
 
         <div class="step-form-container">
-          <p>In order to request a virtual machine, please book a consultation with us to discuss required details. A consultation typically takes 30 minutes. No preparation on your side is necessary. If you have any questions please put them into the comments field.</p>
 
           <div class="form-group">
             <h3>When would you like the consultation to take place?</h3>
@@ -42,7 +43,7 @@
           </div>
 
           <div class="form-group">
-            <h3>Do you have any comments?</h3>
+            <h3>Do you have any comments? <span style="color: #0294a5;">*optional</span></h3>
             <mat-form-field class="input-full-width">
               <textarea matInput placeholder="Comments" formControlName="comments"></textarea>
             </mat-form-field>

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
 import {ApiService} from 'app/services/api.service';
 import {AuthService} from '../../services/auth.service';
@@ -30,12 +30,14 @@ interface DataPerson {
   styleUrls: ['./request-data.component.scss']
 })
 export class RequestDataComponent implements OnInit, OnDestroy {
-  // private static requestFormKey = 'requestDataForm';
+  private requestFormKey = 'requestDataForm';
 
   @ViewChild('stepper') stepper: MatHorizontalStepper;
   public dateToday = new Date();
   public submitting = false;
   private routeParamsSub: Subscription;
+  private stepperSub: Subscription;
+  private dataRequirementsSub: Subscription;
   public title = 'Request for Storage';
   public image = 'content/vault.jpg';
   public response: any;
@@ -43,7 +45,9 @@ export class RequestDataComponent implements OnInit, OnDestroy {
   public projectForm: FormGroup;
   public dataInfoForm: FormGroup;
   public dataSizeForm: FormGroup;
-  public projectMembersCtrl = new FormControl([] as DataPerson[], Validators.required);
+  private lastStepIndex = 4;
+  public isEditable = true;
+  public showOtherField = false;
 
   public fieldOfResearchCodes = [
     '01 Mathematical Sciences',
@@ -108,8 +112,6 @@ export class RequestDataComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.addPerson();
-
     this.analyticsService.trackIntegratedService(this.title, this.location.path());
 
     this.storageTypeForm = this.formBuilder.group({
@@ -125,21 +127,93 @@ export class RequestDataComponent implements OnInit, OnDestroy {
 
     this.dataInfoForm = this.formBuilder.group({
       dataRequirements: new FormControl(undefined, Validators.required),
+      dataRequirementsOther: new FormControl(undefined),
       shortName: new FormControl(undefined, Validators.required),
-      projectMembers: this.projectMembersCtrl
+      projectMembers: this.formBuilder.array([], Validators.compose([Validators.required]))
     });
 
+    this.dataRequirementsSub = this.dataInfoForm.get('dataRequirements').valueChanges.subscribe(
+      (items: string[]) => {
+        const dataRequirementsOther = this.dataInfoForm.get('dataRequirementsOther');
+        this.showOtherField = items && items.find((item) => item === 'Other') !== undefined;
+
+        if (this.showOtherField) {
+          dataRequirementsOther.setValidators([Validators.required]);
+        } else {
+          dataRequirementsOther.setValidators([]);
+          dataRequirementsOther.setValue(undefined);
+        }
+      }
+    );
+
     this.dataSizeForm = this.formBuilder.group({
-      sizeThisYear: new FormControl(undefined, Validators.required),
+      sizeThisYear: new FormControl(undefined, [Validators.required, Validators.min(1)]),
       unitThisYear: new FormControl(undefined, Validators.required),
-      sizeNextYear: new FormControl(undefined, Validators.required),
+      sizeNextYear: new FormControl(undefined, [Validators.required, Validators.min(1)]),
       unitNextYear: new FormControl(undefined, Validators.required),
-      comments: new FormControl(undefined, Validators.required)
+      comments: new FormControl(undefined)
+    });
+
+    // Pre-populate first person in list with logged in user
+    const user = this.authService.user;
+    this.addPerson({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.mail,
+      username: user.uid,
+      access: 'Full Access',
+      roles: []
+    });
+
+    this.routeParamsSub =
+      this.route.queryParams
+        .subscribe(params => {
+          const retry = params['retry'];
+
+          if (retry) {
+            this.loadRequest();
+          } else {
+            this.clearRequest();
+          }
+        });
+
+    this.stepperSub = this.stepper.selectionChange.subscribe(selection => {
+      this.isEditable = selection.selectedIndex !== this.lastStepIndex;
     });
   }
 
-  addPerson() {
-    this.projectMembersCtrl.value.push({
+  saveRequest() {
+    const form = {
+        storageTypeForm: this.storageTypeForm.getRawValue(),
+        projectForm: this.projectForm.getRawValue(),
+        dataInfoForm: this.dataInfoForm.getRawValue(),
+        dataSizeForm: this.dataSizeForm.getRawValue()
+    };
+
+    localStorage.setItem(this.requestFormKey, JSON.stringify(form));
+  }
+
+  loadRequest() {
+    let form = localStorage.getItem(this.requestFormKey);
+
+    if (form !== null) {
+      form = JSON.parse(form);
+
+      this.storageTypeForm.setValue(form['storageTypeForm']);
+      this.projectForm.setValue(form['projectForm']);
+      this.dataInfoForm.setValue(form['dataInfoForm']);
+      this.dataSizeForm.setValue(form['dataSizeForm']);
+
+      this.stepper.selectedIndex = this.lastStepIndex - 1; // Navigate to last step
+    }
+  }
+
+  clearRequest() {
+    localStorage.removeItem(this.requestFormKey)
+  }
+
+  addNewPerson() {
+    this.addPerson({
       firstName: undefined,
       lastName: undefined,
       email: undefined,
@@ -149,12 +223,29 @@ export class RequestDataComponent implements OnInit, OnDestroy {
     });
   }
 
+  addPerson(person: DataPerson) {
+    const control = <FormArray>this.dataInfoForm.get('projectMembers');
+    control.push(
+      this.formBuilder.group({
+        firstName: new FormControl(person.firstName, Validators.required),
+        lastName: new FormControl(person.lastName, Validators.required),
+        email: new FormControl(person.email, Validators.required),
+        username: new FormControl(person.username),
+        access: new FormControl(person.access, Validators.required),
+        roles: new FormControl(person.roles)
+      })
+    );
+  }
+
   deletePerson(index: number) {
-    this.projectMembersCtrl.value.splice(index, 1);
+    const control = <FormArray>this.dataInfoForm.get('projectMembers');
+    control.removeAt(index);
   }
 
   ngOnDestroy() {
-    // this.routeParamsSub.unsubscribe();
+    this.routeParamsSub.unsubscribe();
+    this.stepperSub.unsubscribe();
+    this.dataRequirementsSub.unsubscribe();
   }
 
   showErrorDialog(title: string, message: string, closeButtonName: string, timeout: number) {
@@ -194,7 +285,26 @@ export class RequestDataComponent implements OnInit, OnDestroy {
           (response) => {
             this.analyticsService.trackActionIntegrated(this.title);
             this.response = response;
-            this.stepper.selectedIndex = 4; // Navigate to lat step
+            this.stepper.selectedIndex = this.lastStepIndex; // Navigate to last step
+          },
+          (err: HttpErrorResponse) => {
+            this.submitting = false;
+
+            if (err.status === 401) {
+              const dialogRef = this.showErrorDialog(
+                'Session expired',
+                'Redirecting to UoA Single Sign On...',
+                'Login',
+                5000
+              );
+              dialogRef.afterClosed().subscribe(result => {
+                const url = this.location.path(false) + '?retry=true';
+                this.saveRequest();
+                this.authService.login(url);
+              });
+            } else {
+              this.showErrorDialog(`${err.name}: ${err.status.toString()}`, JSON.stringify(err.error), 'Close', undefined);
+            }
           });
     }
   }

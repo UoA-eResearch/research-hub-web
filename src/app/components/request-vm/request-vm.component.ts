@@ -82,7 +82,6 @@ export class RequestVmComponent implements OnInit, OnDestroy {
 
           if (retry) {
             this.loadRequest();
-            // this.submit();
           } else {
             this.clearRequest();
           }

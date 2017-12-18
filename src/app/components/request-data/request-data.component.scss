@@ -1,6 +1,7 @@
 
 .form-group {
   margin-top: 1em;
+  margin-bottom: 3em;
 }
 
 .step-form-container {
@@ -37,14 +38,6 @@
   padding-bottom: 1.5em;
 }
 
-.data-person-row-inner /deep/ div.mat-form-field-wrapper {
-  padding-bottom: 0;
-}
-
-.data-person-row-inner /deep/ div.mat-form-field-underline {
-  top: 30px;
-}
-
 .data-person-row:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -53,9 +46,8 @@
   min-width: 0 !important;
 }
 
+mat-horizontal-stepper /deep/ div.mat-horizontal-stepper-header-container>:last-child {
+  pointer-events: none !important;
+}
 
-
-
-//.data-person-row:nth-child(odd) {
-//  background-color: #FFF
-//}
+//pointer-events: none !important;
