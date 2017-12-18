@@ -274,11 +274,8 @@ export class RequestDataComponent implements OnInit, OnDestroy {
         this.dataInfoForm.getRawValue(),
         this.dataSizeForm.getRawValue());
 
-      // Convert endDate and projectMembers into strings
+      // Convert endDate into string
       body.endDate = format(body.endDate, 'YYYY-MM-DD');
-      body.projectMembers = body.projectMembers.map((p) => {
-        return `${p.firstName} ${p.lastName}, ${p.email}, ${p.username}, ${p.access}, ${p.roles.join(', ')}`
-      });
 
       this.apiService.requestService('storage', body)
         .subscribe(
