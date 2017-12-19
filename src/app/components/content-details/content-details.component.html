@@ -32,10 +32,10 @@
 
               <div fxFlex="36px" fxFlexAlign="end">
                 <a *ngIf="!isKnowledgeArticle() && !isIntegratedService()" mat-raised-button color="accent" (click)="trackAction()" [href]="content.action" target="_blank">
-                  Request
+                  {{content.actionLabel}}
                 </a>
                 <button *ngIf="!isKnowledgeArticle() && isIntegratedService()" mat-raised-button color="accent" [routerLink]="['/'+ content.action]">
-                  Request
+                  {{content.actionLabel}}
                 </button>
               </div>
             </div>

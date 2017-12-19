@@ -15,6 +15,7 @@ export interface Content {
   additionalInfo: string;
   action: string;
   actionType: ItemRef;
+  actionLabel: string;
   image: string;
   orgUnits: Array<OrgUnit>;
   people: Array<Person>;
