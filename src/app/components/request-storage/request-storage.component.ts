@@ -48,6 +48,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
   private lastStepIndex = 4;
   public isEditable = true;
   public showOtherField = false;
+  public projectMembers: FormArray;
 
   public fieldOfResearchCodes = [
     '01 Mathematical Sciences',
@@ -125,11 +126,13 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
       fieldOfResearch: new FormControl(undefined, Validators.required),
     });
 
+    this.projectMembers = this.formBuilder.array([], Validators.compose([Validators.required]));
+
     this.dataInfoForm = this.formBuilder.group({
       dataRequirements: new FormControl(undefined, Validators.required),
       dataRequirementsOther: new FormControl(undefined),
       shortName: new FormControl(undefined, Validators.required),
-      projectMembers: this.formBuilder.array([], Validators.compose([Validators.required]))
+      projectMembers: this.projectMembers
     });
 
     this.dataRequirementsSub = this.dataInfoForm.get('dataRequirements').valueChanges.subscribe(
