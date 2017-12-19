@@ -2,7 +2,7 @@
 
 
 @mixin research-activity-checkbox($class-name, $color) {
-  $checkbox-fill-color: rgba(255, 255, 255, 0.9);
+  $checkbox-fill-color: rgba(255, 255, 255, 1.0);
 
   .#{$class-name}.mat-checkbox-checked /deep/ .mat-checkbox-background {
     background-color: $checkbox-fill-color;
