@@ -14,7 +14,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {AnalyticsService} from '../../services/analytics.service';
 import * as format from 'date-fns/format';
 
-interface DataPerson {
+interface Person {
   firstName: string;
   lastName: string;
   email: string;
@@ -26,10 +26,10 @@ interface DataPerson {
 
 @Component({
   selector: 'app-request-data',
-  templateUrl: './request-data.component.html',
-  styleUrls: ['./request-data.component.scss']
+  templateUrl: './request-storage.component.html',
+  styleUrls: ['./request-storage.component.scss']
 })
-export class RequestDataComponent implements OnInit, OnDestroy {
+export class RequestStorageComponent implements OnInit, OnDestroy {
   private requestFormKey = 'requestDataForm';
 
   @ViewChild('stepper') stepper: MatHorizontalStepper;
@@ -38,7 +38,7 @@ export class RequestDataComponent implements OnInit, OnDestroy {
   private routeParamsSub: Subscription;
   private stepperSub: Subscription;
   private dataRequirementsSub: Subscription;
-  public title = 'Request for Storage';
+  public title = 'Request Research Storage';
   public image = 'content/vault.jpg';
   public response: any;
   public storageTypeForm: FormGroup;
@@ -223,7 +223,7 @@ export class RequestDataComponent implements OnInit, OnDestroy {
     });
   }
 
-  addPerson(person: DataPerson) {
+  addPerson(person: Person) {
     const control = <FormArray>this.dataInfoForm.get('projectMembers');
     control.push(
       this.formBuilder.group({

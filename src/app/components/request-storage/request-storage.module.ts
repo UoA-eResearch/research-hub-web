@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {routing} from './request-data.routing';
+import {routing} from './request-storage.routing';
 
 import {SharedModule} from 'app/components/shared/app.shared.module';
-import {RequestDataComponent} from './request-data.component';
+import {RequestStorageComponent} from './request-storage.component';
 
 
 @NgModule({
@@ -13,8 +13,8 @@ import {RequestDataComponent} from './request-data.component';
     routing
   ],
   declarations: [
-    RequestDataComponent
+    RequestStorageComponent
   ]
 })
-export class RequestDataModule {
+export class RequestStorageModule {
 }
