@@ -33,7 +33,7 @@ export class RequestVmComponent implements OnInit, OnDestroy {
   public submitting = false;
   public response: any;
   private routeParamsSub: Subscription;
-  public title = 'Request a Research Virtual Machine';
+  public title = 'Request a Research Virtual Machine Consultation';
   public image = 'content/research-vm.jpg';
 
 
@@ -61,6 +61,12 @@ export class RequestVmComponent implements OnInit, OnDestroy {
               public dialog: MatDialog, private location: Location, private route: ActivatedRoute,
               private analyticsService: AnalyticsService) {
     dateAdapter.setLocale('en-GB');
+  }
+
+  excludeWeekendsFilter(d: Date): boolean {
+    const day = d.getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
   }
 
   ngOnInit() {

@@ -6,7 +6,7 @@
 
   <p style="padding-left: 24px;">In order to provide you with research storage please complete the general information in the following sections. If you have any questions feel free to add this into the comments field in Section 4.</p>
 
-  <mat-horizontal-stepper #stepper linear="true">
+  <mat-horizontal-stepper #stepper linear="true" style="margin-top: 3em;">
     <mat-step [editable]="isEditable" [stepControl]="storageTypeForm">
       <form [formGroup]="storageTypeForm" novalidate>
         <ng-template matStepLabel>Storage Type</ng-template>
@@ -174,11 +174,11 @@
           <div class="form-group">
             <h3>Estimated amount of data needed this year</h3>
             <div fxLayout="row" fxLayoutGap="1em">
-              <mat-form-field floatPlaceholder="never" class="no-floating-label">
+              <mat-form-field>
                 <input matInput placeholder="Amount" formControlName="sizeThisYear" type="number" min="1">
                 <mat-error *ngIf="dataSizeForm.controls.sizeThisYear.invalid">Please enter a value above 0</mat-error>
               </mat-form-field>
-              <mat-form-field class="no-floating-label">
+              <mat-form-field>
                 <mat-select placeholder="Unit" formControlName="unitThisYear">
                   <mat-option *ngFor="let unit of units" [value]="unit">
                     {{unit}}
@@ -192,11 +192,11 @@
           <div class="form-group">
             <h3>Estimated amount of data needed next year</h3>
             <div fxLayout="row" fxLayoutGap="1em">
-              <mat-form-field floatPlaceholder="never" class="no-floating-label">
+              <mat-form-field>
                 <input matInput placeholder="Amount" formControlName="sizeNextYear" type="number" min="1">
                 <mat-error *ngIf="dataSizeForm.controls.sizeNextYear.invalid">Please enter a value above 0</mat-error>
               </mat-form-field>
-              <mat-form-field class="no-floating-label">
+              <mat-form-field>
                 <mat-select placeholder="Unit" formControlName="unitNextYear">
                   <mat-option *ngFor="let unit of units" [value]="unit">
                     {{unit}}
@@ -221,7 +221,7 @@
 
         <div fxLayout="column" fxLayoutAlign="end">
           <div fxLayout="row" fxLayoutAlign="end">
-            <button mat-raised-button color="accent" (click)="submit()" [disabled]="submitting">Next</button>
+            <button mat-raised-button color="accent" (click)="submit()" [disabled]="submitting">Request Storage</button>
           </div>
         </div>
       </form>

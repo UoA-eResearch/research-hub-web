@@ -6,7 +6,7 @@
 
   <p style="padding-left: 24px;">In order to request a virtual machine, please book a consultation with us to discuss required details. A consultation typically takes 30 minutes. No preparation on your side is necessary. If you have any questions please put them into the comments field.</p>
 
-  <mat-horizontal-stepper #stepper linear>
+  <mat-horizontal-stepper #stepper linear style="margin-top: 3em;">
     <mat-step editable="false" [stepControl]="requestVmForm">
 
       <form [formGroup]="requestVmForm" novalidate>
@@ -19,7 +19,7 @@
 
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="1em">
               <mat-form-field>
-                <input matInput [matDatepicker]="picker" [min]="dateToday" formControlName="date" placeholder="Date">
+                <input matInput [matDatepickerFilter]="excludeWeekendsFilter" [matDatepicker]="picker" [min]="dateToday" formControlName="date" placeholder="Date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error *ngIf="dateCtrl.invalid">Please choose a date</mat-error>
@@ -56,7 +56,7 @@
 
         <div fxLayout="column" fxLayoutAlign="end">
           <div fxLayout="row" fxLayoutAlign="end">
-            <button mat-raised-button color="accent" (click)="submit()" [disabled]="submitting">Next</button>
+            <button mat-raised-button color="accent" (click)="submit()" [disabled]="submitting">Book Consultation</button>
           </div>
         </div>
       </form>
