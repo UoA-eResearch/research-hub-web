@@ -17,14 +17,14 @@
             <mat-radio-group fxLayout="column" fxLayoutGap="1em" formControlName="storageType">
               <mat-radio-button value="New">New</mat-radio-button>
               <mat-radio-button value="Existing">Existing</mat-radio-button>
-              <mat-error *ngIf="storageTypeForm.controls.storageType.invalid">Please choose an option</mat-error>
+              <mat-error *ngIf="storageTypeForm.controls.storageType.invalid && storageTypeClicked">Please choose an option</mat-error>
             </mat-radio-group>
           </div>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="end">
           <div fxLayout="row" fxLayoutAlign="end">
-            <button mat-raised-button color="accent" matStepperNext>Next</button>
+            <button mat-raised-button color="accent" matStepperNext (click)="storageTypeClicked = true;">Next</button>
           </div>
         </div>
       </form>

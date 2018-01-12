@@ -49,6 +49,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
   public isEditable = true;
   public showOtherField = false;
   public projectMembers: FormArray;
+  public storageTypeClicked = false;
 
   public fieldOfResearchCodes = [
     '01 Mathematical Sciences',
