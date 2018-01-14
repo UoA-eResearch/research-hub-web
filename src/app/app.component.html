@@ -85,7 +85,7 @@
               <button *ngIf="showLoginBtn" mat-button (click)="authService.login()">Sign In</button>
 
               <button class="button-menu" *ngIf="!showLoginBtn" mat-button [matMenuTriggerFor]="userMenu">
-                <mat-icon matPrefix style="margin-right: 5px;">person</mat-icon>
+                <mat-icon matPrefix style="margin-right: 5px;" fxHide.xs>person</mat-icon>
                 <span fxHide.lt-md>{{authService.user.displayName}}</span>
                 <span fxHide.gt-sm>{{authService.user.initials}}</span>
               </button>
