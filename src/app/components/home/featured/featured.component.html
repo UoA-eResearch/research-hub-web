@@ -4,12 +4,14 @@
     <div ngClass.gt-xs="card-gt-xs">
       <mat-card>
         <a [routerLink]="['/content', content.id]">
-        <div style="margin: 2em;" >
-          <img mat-card-image [src]="apiService.getAssetUrl(content.image)">
-        </div>
+          <div style="margin: 2em;" >
+            <img mat-card-image [src]="apiService.getAssetUrl(content.image)">
+          </div>
         </a>
         <mat-card-content>
-          <h2 style="font-size: 20px;">{{content.name}}</h2>
+          <a [routerLink]="['/content', content.id]">
+            <h2 style="font-size: 20px;">{{content.name}}</h2>
+          </a>
           <p>{{content.summary}}</p>
         </mat-card-content>
         <mat-card-actions>
