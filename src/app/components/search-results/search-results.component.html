@@ -1,5 +1,5 @@
 <div style="margin-top: 32px;">
-  <app-search-filters style="display: block;" [filtersForm]="filtersForm" fxHide.xs></app-search-filters>
+  <app-search-filters style="display: block;" [filtersForm]="filtersForm" fxHide.lt-md></app-search-filters>
 
   <div *ngIf="!showEmptyState" style="margin-top: 32px;">
     <p [innerHTML]="resultsSummary"></p>
@@ -9,8 +9,8 @@
     <p [innerHTML]="noResultsSummary"></p>
     <p>Suggestions:</p>
     <ul>
-      <li fxHide.gt-sm>Widen your <a (click)="openDialog()">filters</a></li>
-      <li fxHide.lt-md>Widen your filters</li>
+      <li fxHide.gt-md>Widen your <a (click)="openDialog()">filters</a></li>
+      <li fxHide.lt-lg>Widen your filters</li>
       <li>Let us know what you were looking for via our <a [routerLink]="['/feedback']">Feedback page</a></li>
       <li>You can try the <a href="https://www.staff.auckland.ac.nz/en.html" target="_blank">Staff Service Centre</a> in the Staff Intranet</li>
     </ul>

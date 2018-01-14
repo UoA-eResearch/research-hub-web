@@ -139,6 +139,15 @@ mat-chip.mat-chip {
   padding-right: $offset-xs;
 }
 
+.site-padding-sm {
+  @extend .site-content;
+  margin-top: $offset-xs / 2.0;
+  margin-bottom: 5em;
+  padding-top: $padding-site / 2.0;
+  padding-left: $padding-site;
+  padding-right: $padding-site;
+}
+
 .back-button-padding-xs {
   @extend .site-content;
   margin-top: $offset-xs / 2.0;
