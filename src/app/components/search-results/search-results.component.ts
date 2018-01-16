@@ -3,7 +3,7 @@ import {SearchBarService} from 'app/components/search-bar/search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
 import {CategoryId, OptionsService, RoleTypeId} from 'app/services/options.service';
 import {
-  ApiService,
+  ApiService, OrderBy,
   SearchResultsParams
 } from 'app/services/api.service';
 import {Page} from 'app/model/Page';
@@ -48,13 +48,17 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public noResultsSummary = '';
   public resultsSummary = '';
   public showEmptyState = false;
+  public sortOptions = [{id: OrderBy.Alphabetical, name: 'Alphabet'}, {id: OrderBy.Relevance, name: 'Relevance'}];
+  public orderBy = OrderBy.Relevance;
 
   public pageSize = 25;
   public pageSizeOptions = [5, 10, 25, 50, 100, 1000];
   private pageEventChange: Subject<any> = new Subject<any>();
+  private orderByChange: Subject<OrderBy> = new Subject<OrderBy>();
   private previousPageEvent: any;
   private previousFiltersFormValues: any;
   private previousSearchText: any;
+
 
   public static getFilterVisibility(categoryId: number) {
     return {
@@ -128,12 +132,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       .combineLatest(
         this.searchBarService.searchTextChange.debounceTime(250).distinctUntilChanged(),
         this.filtersForm.valueChanges.distinctUntilChanged(),
-        this.pageEventChange.distinctUntilChanged()
+        this.pageEventChange.distinctUntilChanged(),
+        this.orderByChange
       )
       .debounceTime(100)
       .subscribe(latestValues => {
         // TODO: set progress bar to visible
-        const [searchText, filtersFormValues, pageEvent] = latestValues;
+        const [searchText, filtersFormValues, pageEvent, orderBy] = latestValues;
 
         if (filtersFormValues.categoryId !== this.searchBarService.category) {
           this.searchBarService.setCategory(filtersFormValues.categoryId);
@@ -145,7 +150,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         }
 
         this.onSearchChange(filtersFormValues.categoryId, searchText, filtersFormValues.personTags,
-          filtersFormValues.orgUnitTags, filtersFormValues.researchActivityIds, pageEvent);
+          filtersFormValues.orgUnitTags, filtersFormValues.researchActivityIds, pageEvent, orderBy);
 
         this.previousPageEvent = pageEvent;
         this.previousSearchText = searchText;
@@ -178,6 +183,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     });
 
     this.pageEventChange.next({pageIndex: 0, pageSize: this.pageSize} as PageEvent);
+    this.orderByChange.next(OrderBy.Relevance);
   }
 
   onPageChange(event: PageEvent) {
@@ -185,7 +191,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.resultsDummyHeader.nativeElement.scrollIntoView();
   }
 
-  onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[], pageEvent: any) {
+  onOrderByChange(event: any) {
+    this.orderByChange.next(event.value);
+  }
+
+  onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
     const friendlyCategoryId = this.optionsService.categoryOptions.filter((obj) => {
       return obj.id === categoryId;
     })[0].name;
@@ -202,6 +212,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     params.setSearchText(searchText);
     params.setPage(pageEvent.pageIndex);
     params.setSize(pageEvent.pageSize);
+    params.setOrderBy(orderBy);
 
     if (categoryId !== CategoryId.All) {
       if (categoryId === CategoryId.Policies) {
@@ -228,6 +239,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     const resultsSub = this.apiService.getSearchResults(params).subscribe(page => {
       this.resultsPage = page;
+      this.orderBy = page.sort;
       this.updateResultsSummary(page, categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
       resultsSub.unsubscribe();
       this.appComponentService.setProgressBarVisibility(false);
