@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {SearchBarService} from 'app/components/search-bar/search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
 import {CategoryId, OptionsService, RoleTypeId} from 'app/services/options.service';
@@ -8,7 +8,6 @@ import {
 } from 'app/services/api.service';
 import {Page} from 'app/model/Page';
 import {AnalyticsService} from 'app/services/analytics.service';
-import {Title} from '@angular/platform-browser';
 
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
@@ -23,6 +22,10 @@ import 'rxjs/add/observable/forkJoin';
 import {Tag} from './mat-tags/mat-tags.component';
 import {ListItem} from '../../model/ListItem';
 import {AppComponentService} from '../../app.component.service';
+import {PageEvent} from '@angular/material/paginator';
+import {Subject} from 'rxjs/Subject';
+import {MatPaginator} from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-search-results',
@@ -30,6 +33,9 @@ import {AppComponentService} from '../../app.component.service';
   styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
+
+  @ViewChild('paginator') paginator: MatPaginator;
+  @ViewChild('resultsDummyHeader') private resultsDummyHeader: ElementRef;
 
   public filtersForm: FormGroup;
   public resultsPage: Page<ListItem>;
@@ -42,6 +48,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public noResultsSummary = '';
   public resultsSummary = '';
   public showEmptyState = false;
+
+  public pageSize = 25;
+  public pageSizeOptions = [5, 10, 25, 50, 100, 1000];
+  private pageEventChange: Subject<any> = new Subject<any>();
+  private previousPageEvent: any;
+  private previousFiltersFormValues: any;
+  private previousSearchText: any;
 
   public static getFilterVisibility(categoryId: number) {
     return {
@@ -93,7 +106,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Results page
-    this.resultsPage = {} as Page<ListItem>;
+    this.resultsPage = {totalElements: 0} as Page<ListItem>;
 
     // Filters form
     this.filtersForm = new FormGroup({
@@ -114,19 +127,29 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.searchChangeSub = Observable
       .combineLatest(
         this.searchBarService.searchTextChange.debounceTime(250).distinctUntilChanged(),
-        this.filtersForm.valueChanges.distinctUntilChanged()
+        this.filtersForm.valueChanges.distinctUntilChanged(),
+        this.pageEventChange.distinctUntilChanged()
       )
       .debounceTime(100)
       .subscribe(latestValues => {
         // TODO: set progress bar to visible
-        const [searchText, filtersFormValues] = latestValues;
+        const [searchText, filtersFormValues, pageEvent] = latestValues;
 
         if (filtersFormValues.categoryId !== this.searchBarService.category) {
           this.searchBarService.setCategory(filtersFormValues.categoryId);
         }
 
+        if ((this.previousSearchText !== searchText || this.previousFiltersFormValues !== filtersFormValues) && this.previousPageEvent === pageEvent) {
+          pageEvent.pageIndex = 0;
+          this.paginator.pageIndex = 0;
+        }
+
         this.onSearchChange(filtersFormValues.categoryId, searchText, filtersFormValues.personTags,
-          filtersFormValues.orgUnitTags, filtersFormValues.researchActivityIds);
+          filtersFormValues.orgUnitTags, filtersFormValues.researchActivityIds, pageEvent);
+
+        this.previousPageEvent = pageEvent;
+        this.previousSearchText = searchText;
+        this.previousFiltersFormValues = filtersFormValues;
       });
 
     // Update filtersForm and searchBar based on route parameters
@@ -153,9 +176,16 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.buttonClickSub = this.searchBarService.filterButtonClickChange.subscribe((buttonName) => {
       this.openDialog();
     });
+
+    this.pageEventChange.next({pageIndex: 0, pageSize: this.pageSize} as PageEvent);
   }
 
-  onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[]) {
+  onPageChange(event: PageEvent) {
+    this.pageEventChange.next({pageSize: event.pageSize, pageIndex: event.pageIndex});
+    this.resultsDummyHeader.nativeElement.scrollIntoView();
+  }
+
+  onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[], pageEvent: any) {
     const friendlyCategoryId = this.optionsService.categoryOptions.filter((obj) => {
       return obj.id === categoryId;
     })[0].name;
@@ -170,6 +200,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     const params = new SearchResultsParams();
     params.setObjectType('all');
     params.setSearchText(searchText);
+    params.setPage(pageEvent.pageIndex);
+    params.setSize(pageEvent.pageSize);
 
     if (categoryId !== CategoryId.All) {
       if (categoryId === CategoryId.Policies) {
@@ -196,7 +228,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     const resultsSub = this.apiService.getSearchResults(params).subscribe(page => {
       this.resultsPage = page;
-      this.updateResultsSummary(page.totalElements, categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
+      this.updateResultsSummary(page, categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
       resultsSub.unsubscribe();
       this.appComponentService.setProgressBarVisibility(false);
     });
@@ -235,7 +267,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.location.replaceState(encodeURI(url)); // Update url without reloading page
   }
 
-  updateResultsSummary(totalElements: number, categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[]) {
+  updateResultsSummary(page: Page<ListItem>, categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[]) {
     const statements = [];
     const visibilities = SearchResultsComponent.getFilterVisibility(categoryId);
 
@@ -286,8 +318,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     const summary = searchTextSummary + statements.join(', ');
     this.noResultsSummary = 'Sorry - your search ' + summary + ', did not match anything on the ResearchHub.';
-    this.resultsSummary = 'Showing <span class="search-results-text">' + totalElements + '</span> results ' + summary + '.';
-    this.showEmptyState = totalElements === 0;
+    this.resultsSummary = 'Page <span class="search-results-text">' + (page.number + 1) + '</span> out of <span class="search-results-text">' + page.totalElements + '</span> results ' + summary + '.';
+    this.showEmptyState = page.totalElements === 0;
   }
 
   openDialog(): void {

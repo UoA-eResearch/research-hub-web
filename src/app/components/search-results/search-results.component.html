@@ -1,6 +1,8 @@
 <div style="margin-top: 32px;">
   <app-search-filters style="display: block;" [filtersForm]="filtersForm" fxHide.lt-md></app-search-filters>
 
+  <div #resultsDummyHeader></div>
+
   <div *ngIf="!showEmptyState" style="margin-top: 32px;">
     <p [innerHTML]="resultsSummary"></p>
   </div>
@@ -35,5 +37,12 @@
       </ng-container>
     </ng-container>
   </mat-nav-list>
+
+  <mat-paginator #paginator [style.visibility]="!showEmptyState ? 'visible' : 'hidden'"
+                 [length]="resultsPage.totalElements"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="onPageChange($event)">
+  </mat-paginator>
 </div>
 
