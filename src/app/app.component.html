@@ -74,7 +74,7 @@
                 <button mat-menu-item *ngFor="let item of optionsService.researchActivityOptions" [routerLink]="['/search']" [queryParams]="getSearchQueryParams(item)">{{item.name}}</button>
               </mat-menu>
 
-              <button mat-button fxHide.lt-md routerLink="/feedback">
+              <button mat-button fxHide.lt-md routerLink="/userStudy">
                 User Study
               </button>
 
@@ -131,7 +131,7 @@
           </div>
 
           <div fxLayout="row" fxLayout.xs="column">
-            <a routerLink="/feedback">Join User Study</a>
+            <a routerLink="/userStudy">Join User Study</a>
             <span fxHide.xs class="footer-divider">•</span>
             <a routerLink="/feedback">Provide Feedback</a>
             <span fxHide.xs class="footer-divider">•</span>

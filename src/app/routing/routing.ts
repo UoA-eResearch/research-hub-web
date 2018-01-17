@@ -7,6 +7,7 @@ export const appRoutes: Routes = [
   {path: 'search', loadChildren: 'app/components/search-results/search-results.module#SearchResultsModule'},
   ///:category/:searchText/:people/:orgUnits/:researchActivities
   {path: 'feedback', loadChildren: 'app/components/feedback/feedback.module#FeedbackModule'},
+  {path: 'userStudy', loadChildren: 'app/components/user-study/user-study.module#UserStudyModule'},
   {path: 'about', loadChildren: 'app/components/about/about.module#AboutModule'},
   {path: 'contact', loadChildren: 'app/components/contact/contact.module#ContactModule'},
 

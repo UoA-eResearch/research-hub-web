@@ -128,7 +128,7 @@ export class OptionsService {
         sublist: this.researchActivityOptions,
         type: OptionType.Menu
       },
-      {name: 'User Study', icon: 'people', routerLink: '/feedback', type: OptionType.Menu},
+      {name: 'User Study', icon: 'people', routerLink: '/userStudy', type: OptionType.Menu},
       {name: 'Feedback', icon: 'thumbs_up_down', routerLink: '/feedback', type: OptionType.Menu},
       {name: 'Contact', icon: 'phone', routerLink: '/contact', type: OptionType.Menu},
       {name: 'About', icon: 'info', routerLink: '/about', type: OptionType.Menu}
@@ -144,7 +144,14 @@ export class OptionsService {
       },
       search: {title: 'Search', isHeaderVisible: false, isSearchBarVisible: true},
       feedback: {
-        title: 'Feedback & User Study',
+        title: 'Feedback',
+        description: 'We appreciate your visit to the beta-version of the ResearchHub, our platform for research support.',
+        imageUrl: 'page-elements/AU_Gen_Detail2010_073_1680x220_BW.jpg',
+        isHeaderVisible: true,
+        isSearchBarVisible: false
+      },
+      userStudy: {
+        title: 'User Study',
         description: 'We appreciate your visit to the beta-version of the ResearchHub, our platform for research support.',
         imageUrl: 'page-elements/AU_Gen_Detail2010_073_1680x220_BW.jpg',
         isHeaderVisible: true,
