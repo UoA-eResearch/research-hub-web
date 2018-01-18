@@ -16,3 +16,8 @@ $chip-margin: 0.5em;
 .mat-tags-chip:not(:last-of-type) {
   margin-right: $chip-margin !important;
 }
+
+.mat-tags-option {
+  height: 64px;
+}
+

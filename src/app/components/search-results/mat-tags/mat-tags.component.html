@@ -22,7 +22,7 @@
            #chipInput/>
   </mat-chip-list>
   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="add($event, chipInput)">
-    <mat-option *ngFor="let tag of filteredSources" [value]="tag.id">
+    <mat-option *ngFor="let tag of filteredSources" [value]="tag.id" class="mat-tags-option">
       <img class="chip-avatar" *ngIf="tag.imageUrl !== undefined" aria-hidden [src]="tag.imageUrl" height="25"/>
       <span>{{ tag.text }}</span>
     </mat-option>
