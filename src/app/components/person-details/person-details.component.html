@@ -6,7 +6,7 @@
       <mat-card-title><h2 style="font-size: 24px;">{{person.firstName + ' ' + person.lastName}}</h2></mat-card-title>
       <mat-card-subtitle>
         <a style="display: inline;" [routerLink]="['/search']"
-           [queryParams]="{categoryId: categoryIdPerson}">Person</a>
+           [queryParams]="{categoryId: categoryIdPerson}">People</a>
       </mat-card-subtitle>
     </mat-card-header>
 
@@ -20,7 +20,7 @@
           <div fxFlex>
             <h1 fxHide.xs>{{person.firstName + ' ' + person.lastName}}</h1>
             <a fxHide.xs style="display: inline;" [routerLink]="['/search']"
-               [queryParams]="{categoryId: categoryIdPerson}">Person</a>
+               [queryParams]="{categoryId: categoryIdPerson}">People</a>
 
             <mat-list class="user-menu-list">
               <mat-list-item>
