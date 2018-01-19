@@ -81,7 +81,7 @@ export class OptionsService {
       {id: CategoryId.Software, name: 'Software', icon: 'desktop_mac', type: OptionType.Category},
       {id: CategoryId.Facilities, name: 'Facility', icon: 'home', type: OptionType.Category},
       {id: CategoryId.Guide, name: 'Guide', icon: 'import_contacts', type: OptionType.Category},
-      {id: CategoryId.Person, name: 'Person', icon: 'face', type: OptionType.Category},
+      {id: CategoryId.Person, name: 'People', icon: 'face', type: OptionType.Category},
       {id: CategoryId.Policies, name: 'Policy', icon: 'gavel', type: OptionType.Category}
     ];
 
