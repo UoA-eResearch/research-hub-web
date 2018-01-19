@@ -35,9 +35,9 @@
           <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
           <p mat-line class="item-title">{{item.title}}</p>
           <p mat-line class="item-subtitle">{{item.subtitle}}</p>
-          <mat-chip-list mat-line>
-            <mat-chip *ngFor="let contentType of item.contentTypes">{{contentType.nameUi}}</mat-chip>
-            <mat-chip *ngIf="item.type === 'person'">Person</mat-chip>
+          <mat-chip-list mat-line style="overflow: hidden;height: 18px;">
+            <mat-chip *ngFor="let contentType of item.contentTypes" style="margin-bottom: 2px;"><span style="color: #004059;">{{contentType.nameUi}}</span></mat-chip>
+            <mat-chip *ngIf="item.type === 'person'" style="margin-bottom: 2px;"><span style="color: #004059;">People</span></mat-chip>
           </mat-chip-list>
         </mat-list-item>
       </ng-container>
@@ -47,8 +47,8 @@
           <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
           <p mat-line class="item-title">{{item.title}}</p>
           <p mat-line class="item-subtitle">{{item.subtitle}}</p>
-          <mat-chip-list mat-line>
-            <mat-chip>Policy</mat-chip>
+          <mat-chip-list mat-line style="overflow: hidden;height: 18px;">
+            <mat-chip><span style="color: #004059;">Policy</span></mat-chip>
           </mat-chip-list>
         </a>
       </ng-container>
