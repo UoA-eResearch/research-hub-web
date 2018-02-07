@@ -36,8 +36,7 @@
           <p mat-line class="item-title">{{item.title}}</p>
           <p mat-line class="item-subtitle">{{item.subtitle}}</p>
           <mat-chip-list mat-line style="overflow: hidden;height: 18px;">
-            <mat-chip *ngFor="let contentType of item.contentTypes" style="margin-bottom: 2px;"><span style="color: #004059;">{{contentType.nameUi}}</span></mat-chip>
-            <mat-chip *ngIf="item.type === 'person'" style="margin-bottom: 2px;"><span style="color: #004059;">People</span></mat-chip>
+            <mat-chip disabled *ngFor="let category of item.categories" style="cursor: pointer;"><span style="color: #004059;">{{category}}</span></mat-chip>
           </mat-chip-list>
         </mat-list-item>
       </ng-container>
@@ -48,7 +47,7 @@
           <p mat-line class="item-title">{{item.title}}</p>
           <p mat-line class="item-subtitle">{{item.subtitle}}</p>
           <mat-chip-list mat-line style="overflow: hidden;height: 18px;">
-            <mat-chip><span style="color: #004059;">Policy</span></mat-chip>
+            <mat-chip disabled *ngFor="let category of item.categories" style="margin-bottom: 2px;cursor: pointer;"><span style="color: #004059;">{{category}}</span></mat-chip>
           </mat-chip-list>
         </a>
       </ng-container>

@@ -1,5 +1,3 @@
-import {ContentType} from './ContentType';
-
 
 export interface ListItem {
   id: number;
@@ -8,6 +6,6 @@ export interface ListItem {
   subtitle: string;
   image: string;
   url: string;
-  categories: Array<ContentType>;
+  categories: Array<String>;
 }
 
