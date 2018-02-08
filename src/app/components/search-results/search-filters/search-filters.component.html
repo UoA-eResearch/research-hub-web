@@ -11,9 +11,9 @@
 
   <div fxFlex="50">
     <div fxLayout="column" fxLayoutGap="1em">
-      <app-mat-tags style="display: block;" fxFlex="100" *ngIf="showPersonFilter" [placeholder]="'People'"
+      <app-mat-tags *ngIf="showPersonFilter" [placeholder]="'People'"
                     [addNew]="false" [source]="personTagSource" formControlName="personTags"></app-mat-tags>
-      <app-mat-tags style="display: block;" fxFlex="100" *ngIf="showOrgUnitFilter" [placeholder]="'Organisation units'"
+      <app-mat-tags *ngIf="showOrgUnitFilter" [placeholder]="'Organisation units'"
                     [addNew]="false" [source]="orgUnitTagSource" formControlName="orgUnitTags"></app-mat-tags>
     </div>
   </div>

@@ -109,10 +109,10 @@
 
           <div class="form-group">
             <h3>Please provide a list of people who require access</h3>
-            <div fxLayout="column" formArrayName="projectMembers">
-              <div fxLayout="row" fxLayoutAlign="start center" class="data-person-row" fxLayoutGap="1.5em" *ngFor="let member of projectMembers.controls; let i = index">
-                <div style="width: 100%; max-width: calc(100% - 50px);" fxFlex="100" fxLayout="column" fxLayoutGap="1em" [formGroupName]="i">
-                  <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="data-person-row-inner">
+            <div class="flex-hack" fxLayout="column" formArrayName="projectMembers">
+              <div fxLayout="row" fxLayoutAlign="start center" class="flex-hack data-person-row" fxLayoutGap="1.5em" *ngFor="let member of projectMembers.controls; let i = index">
+                <div class="flex-hack" style="width: 100%; max-width: calc(100% - 50px);" fxFlex="100" fxLayout="column" fxLayoutGap="1em" [formGroupName]="i">
+                  <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="flex-hack data-person-row-inner">
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
                       <input matInput placeholder="First name" formControlName="firstName">
                       <mat-error *ngIf="member.controls.firstName.invalid">Please enter a first name</mat-error>
@@ -127,7 +127,7 @@
                     </mat-form-field>
                   </div>
 
-                  <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="data-person-row-inner">
+                  <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="flex-hack data-person-row-inner">
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
                       <input matInput placeholder="Username" formControlName="username">
                       <mat-error *ngIf="member.controls.username.invalid">Please enter a username</mat-error>
