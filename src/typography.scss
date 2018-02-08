@@ -10,11 +10,11 @@ $app-base-typography: mat-typography-config(
   $display-2:     mat-typography-level(45px, 48px, 400),
   $display-1:     mat-typography-level(34px, 40px, 400),
   $headline:      mat-typography-level(28px, 32px, 400), // <h1>
-  $title:         mat-typography-level(28px, 32px, 500), // <h2>
-  $subheading-2:  mat-typography-level(20px, 28px, 400), // <h3>
-  $subheading-1:  mat-typography-level(16px, 24px, 400), // <h4>
+  $title:         mat-typography-level(24px, 28px, 500), // <h2>
+  $subheading-2:  mat-typography-level(20px, 24px, 400), // <h3>
+  $subheading-1:  mat-typography-level(16px, 20px, 400), // <h4>
   $body-2:        mat-typography-level(16px, 24px, 500), // bolder body text
-  $body-1:        mat-typography-level(16px, 20px, 400), // base body text <p> ?
+  $body-1:        mat-typography-level(16px, 22px, 400), // base body text <p> ?
   $caption:       mat-typography-level(12px, 20px, 400), // smaller body and hint text
   $button:        mat-typography-level(14px, 14px, 500),
   $input:         mat-typography-level(16px, 1.125, 400) // Line-height must be unit-less fraction of the font-size.
@@ -108,7 +108,7 @@ Colors
 
 $heading-1-font-color: map-get($hub-pink, 500);
 $heading-2-font-color: map-get($hub-pink, 500);
-$heading-3-font-color: map-get($hub-navy, 500);
+$heading-3-font-color: map-get($hub-pink, 500);
 $heading-4-font-color: map-get($hub-navy, 500);
 
 $subheading-font-color: map-get($hub-pink, 500); // used in results list

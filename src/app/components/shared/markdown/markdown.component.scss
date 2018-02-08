@@ -1,3 +1,11 @@
 @import "../../../../styles";
 
 
+/deep/ div h3:first-child {
+  margin-bottom: 8px !important;
+}
+
+/deep/ div h3:not(:first-child) {
+  margin-top: 24px !important;
+  margin-bottom: 8px !important;
+}

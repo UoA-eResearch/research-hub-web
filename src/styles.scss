@@ -79,18 +79,6 @@ a {
   border-radius: 50%;
 }
 
-app-markdown h3 {
-  color: $heading-2-font-color;
-  font-size: mat-font-size($app-base-typography, title) !important;
-  font-weight: mat-font-weight($app-base-typography, title) !important;
-}
-
-app-markdown h4 {
-  color: $heading-3-font-color;
-  font-size: mat-font-size($app-base-typography, subheading-2) !important;
-  font-weight: mat-font-weight($app-base-typography, subheading-2) !important;
-}
-
 /*
 Gloabl mat-chip style
  */
