@@ -13,6 +13,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {AnalyticsService} from '../../services/analytics.service';
 import * as format from 'date-fns/format';
+import * as subYears from 'date-fns/sub_years';
 
 interface Person {
   firstName: string;
@@ -38,6 +39,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
   private routeParamsSub: Subscription;
   private stepperSub: Subscription;
   private dataRequirementsSub: Subscription;
+  private endDateSub: Subscription;
   public title = 'Request Research Storage';
   public image = 'content/vault.jpg';
   public response: any;
@@ -50,6 +52,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
   public showOtherField = false;
   public projectMembers: FormArray;
   public storageTypeClicked = false;
+  public showSizeNextYear = true;
 
   public fieldOfResearchCodes = [
     '01 Mathematical Sciences',
@@ -103,7 +106,8 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
 
   public roleTypes = [
     'Data Owner',
-    'Data Contact'
+    'Data Contact',
+    'Project Member'
   ];
 
   constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
@@ -127,12 +131,24 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
       fieldOfResearch: new FormControl(undefined, Validators.required),
     });
 
+    this.endDateSub = this.projectForm.get('endDate').valueChanges.subscribe(
+      (date: Date) => {
+        this.showSizeNextYear = new Date() <= subYears(date, 1);
+
+        if (!this.showSizeNextYear) {
+          this.dataSizeForm.get('sizeNextYear').setValue(undefined);
+          this.dataSizeForm.get('unitNextYear').setValue(undefined);
+          console.log('hide dataSizeForm: ', date);
+        }
+      }
+    );
+
     this.projectMembers = this.formBuilder.array([], Validators.compose([Validators.required]));
 
     this.dataInfoForm = this.formBuilder.group({
-      dataRequirements: new FormControl(undefined, Validators.required),
+      dataRequirements: new FormControl(undefined),
       dataRequirementsOther: new FormControl(undefined),
-      shortName: new FormControl(undefined, Validators.required),
+      shortName: new FormControl(undefined),
       projectMembers: this.projectMembers
     });
 
@@ -188,10 +204,10 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
 
   saveRequest() {
     const form = {
-        storageTypeForm: this.storageTypeForm.getRawValue(),
-        projectForm: this.projectForm.getRawValue(),
-        dataInfoForm: this.dataInfoForm.getRawValue(),
-        dataSizeForm: this.dataSizeForm.getRawValue()
+      storageTypeForm: this.storageTypeForm.getRawValue(),
+      projectForm: this.projectForm.getRawValue(),
+      dataInfoForm: this.dataInfoForm.getRawValue(),
+      dataSizeForm: this.dataSizeForm.getRawValue()
     };
 
     localStorage.setItem(this.requestFormKey, JSON.stringify(form));
@@ -236,7 +252,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
         email: new FormControl(person.email, Validators.required),
         username: new FormControl(person.username),
         access: new FormControl(person.access, Validators.required),
-        roles: new FormControl(person.roles)
+        roles: new FormControl(person.roles, Validators.required)
       })
     );
   }
@@ -250,6 +266,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
     this.routeParamsSub.unsubscribe();
     this.stepperSub.unsubscribe();
     this.dataRequirementsSub.unsubscribe();
+    this.endDateSub.unsubscribe();
   }
 
   showErrorDialog(title: string, message: string, closeButtonName: string, timeout: number) {

@@ -62,7 +62,7 @@
           </div>
 
           <div class="form-group">
-            <h3>Please choose a FOR code from the Australian and New Zealand Standard Research Classification (ANZSRC)</h3>
+            <h3>Please choose at least one FOR code from the Australian and New Zealand Standard Research Classification (ANZSRC)</h3>
             <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
               <mat-select placeholder="Field of research" formControlName="fieldOfResearch" multiple>
                 <mat-option *ngFor="let item of fieldOfResearchCodes" [value]="item">{{item}}</mat-option>
@@ -86,7 +86,7 @@
 
         <div class="step-form-container">
             <div class="form-group">
-              <h3>To help us store your data appropriately please tick any of the following that apply to the data being stored</h3>
+              <h3>To help us store your data appropriately please tick any of the following that apply to the data being stored [optional]</h3>
               <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
                 <mat-select placeholder="Data information" formControlName="dataRequirements" multiple>
                   <mat-option *ngFor="let item of dataRequirements" [value]="item">{{item}}</mat-option>
@@ -100,7 +100,7 @@
             </div>
 
             <div class="form-group">
-              <h3>Do you have a short name you would like to use for your storage folder (e.g. GDC-data)?</h3>
+              <h3>Please provide a short name for your storage folder (e.g. GDC-data)? [optional]</h3>
               <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
                 <input matInput placeholder="Short name" formControlName="shortName">
                 <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">Please enter a short name</mat-error>
@@ -142,6 +142,7 @@
                       <mat-select placeholder="Role" formControlName="roles" multiple>
                         <mat-option *ngFor="let item of roleTypes;" [value]="item">{{item}}</mat-option>
                       </mat-select>
+                      <mat-error *ngIf="member.controls.roles.invalid">Please choose a role</mat-error>
                     </mat-form-field>
                   </div>
                 </div>
@@ -172,7 +173,7 @@
 
         <div class="step-form-container">
           <div class="form-group">
-            <h3>Estimated amount of data needed this year</h3>
+            <h3>Estimate how much storage you need in the next 12 months</h3>
             <div fxLayout="row" fxLayoutGap="1em">
               <mat-form-field>
                 <input matInput placeholder="Amount" formControlName="sizeThisYear" type="number" min="1">
@@ -189,8 +190,8 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <h3>Estimated amount of data needed next year</h3>
+          <div class="form-group" *ngIf="showSizeNextYear">
+            <h3>Estimate how much storage you need for the entire project duration</h3>
             <div fxLayout="row" fxLayoutGap="1em">
               <mat-form-field>
                 <input matInput placeholder="Amount" formControlName="sizeNextYear" type="number" min="1">
@@ -208,7 +209,7 @@
           </div>
 
           <div class="form-group">
-            <h3>Do you have any other comments? <span style="color: #0294a5;">*optional</span></h3>
+            <h3>Comments? [optional]</h3>
             <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
               <textarea matInput placeholder="Comments" formControlName="comments"></textarea>
             </mat-form-field>

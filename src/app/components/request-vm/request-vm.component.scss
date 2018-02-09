@@ -1,3 +1,4 @@
+@import '../../../themes';
 
 .form-group {
   margin-top: 1em;
@@ -25,4 +26,8 @@
 
 mat-horizontal-stepper /deep/ div.mat-horizontal-stepper-header-container>:last-child {
   pointer-events: none !important;
+}
+
+h3 {
+  color: map-get($hub-navy, 500);
 }
