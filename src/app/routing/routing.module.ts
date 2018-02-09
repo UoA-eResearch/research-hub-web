@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {appRoutes} from './routing';
 import {CanActivateViaAuthGuard} from './routing.can-activate-via-auth-guard';
+import {ConfirmDeactivateGuard} from './routing.confirm-deactivate';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {CanActivateViaAuthGuard} from './routing.can-activate-via-auth-guard';
     RouterModule
   ],
   providers: [
-    CanActivateViaAuthGuard
+    CanActivateViaAuthGuard,
+    ConfirmDeactivateGuard
   ]
 })
 export class RoutingModule {

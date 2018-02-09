@@ -1,5 +1,6 @@
 import {Routes} from '@angular/router';
 import {CanActivateViaAuthGuard} from './routing.can-activate-via-auth-guard';
+import {ConfirmDeactivateGuard} from './routing.confirm-deactivate';
 
 
 export const appRoutes: Routes = [
@@ -16,8 +17,8 @@ export const appRoutes: Routes = [
   {path: 'content/:contentId',  loadChildren: 'app/components/content-details/content-details.module#ContentDetailsModule'},
   {path: 'guideCategory/:guideCategoryId', loadChildren: 'app/components/guide-category/guide-category.module#GuideCategoryModule'},
 
-  {path: 'requestVm', loadChildren: 'app/components/request-vm/request-vm.module#RequestVmModule', canActivate: [CanActivateViaAuthGuard]},
-  {path: 'requestStorage', loadChildren: 'app/components/request-storage/request-storage.module#RequestStorageModule', canActivate: [CanActivateViaAuthGuard]},
+  {path: 'requestVm', loadChildren: 'app/components/request-vm/request-vm.module#RequestVmModule', canActivate: [CanActivateViaAuthGuard], canDeactivate: [ConfirmDeactivateGuard]},
+  {path: 'requestStorage', loadChildren: 'app/components/request-storage/request-storage.module#RequestStorageModule', canActivate: [CanActivateViaAuthGuard], canDeactivate: [ConfirmDeactivateGuard]},
 
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}
