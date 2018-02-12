@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
 import {ApiService} from 'app/services/api.service';
@@ -24,6 +24,7 @@ export class RequestVmComponent implements OnInit, OnDestroy {
 
   private static requestVmFormKey = 'requestVmForm';
 
+  @ViewChild('resultsDummyHeader') private resultsDummyHeader: ElementRef;
   @ViewChild('stepper') stepper: MatHorizontalStepper;
   public requestVmForm: FormGroup;
   public times = [];
@@ -149,6 +150,7 @@ export class RequestVmComponent implements OnInit, OnDestroy {
             this.analyticsService.trackActionIntegrated(this.title);
             this.response = response;
             this.stepper.selectedIndex = 1; // Navigate to second step
+            this.resultsDummyHeader.nativeElement.scrollIntoView();
             // TODO: set Done step to completed so that a tick appears next to 'Done', doesn't work at the moment
           },
           (err: HttpErrorResponse) => {

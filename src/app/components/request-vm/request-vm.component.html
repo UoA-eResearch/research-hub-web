@@ -6,7 +6,8 @@
 
   <p style="padding-left: 24px;">In order to request a virtual machine, please book a consultation with us to discuss required details. A consultation typically takes 30 minutes. No preparation on your side is necessary. If you have any questions please put them into the comments field.</p>
 
-  <mat-horizontal-stepper #stepper linear style="margin-top: 3em;">
+  <div #resultsDummyHeader style="margin-top: 3em;"></div>
+  <mat-horizontal-stepper #stepper linear>
     <mat-step editable="false" [stepControl]="requestVmForm">
 
       <form [formGroup]="requestVmForm" novalidate>

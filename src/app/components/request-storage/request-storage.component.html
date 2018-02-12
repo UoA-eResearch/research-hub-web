@@ -6,9 +6,11 @@
 
   <p style="padding-left: 24px;">In order to provide you with research storage please complete the general information in the following sections. If you have any questions feel free to add this into the comments field in Section 4.</p>
 
-  <mat-horizontal-stepper #stepper linear="true" style="margin-top: 3em;">
+  <div #resultsDummyHeader style="margin-top: 3em;"></div>
+  <mat-horizontal-stepper #stepper linear="true">
     <mat-step [editable]="isEditable" [stepControl]="storageTypeForm">
       <form [formGroup]="storageTypeForm" novalidate>
+
         <ng-template matStepLabel>Storage Type</ng-template>
 
         <div class="step-form-container">

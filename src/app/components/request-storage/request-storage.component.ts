@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
 import {ApiService} from 'app/services/api.service';
@@ -33,6 +33,7 @@ interface Person {
 export class RequestStorageComponent implements OnInit, OnDestroy {
   private requestFormKey = 'requestDataForm';
 
+  @ViewChild('resultsDummyHeader') private resultsDummyHeader: ElementRef;
   @ViewChild('stepper') stepper: MatHorizontalStepper;
   public dateToday = new Date();
   public submitting = false;
@@ -113,7 +114,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
               public apiService: ApiService, public authService: AuthService, private appComponentService: AppComponentService,
               public dialog: MatDialog, private location: Location, private route: ActivatedRoute,
-              private analyticsService: AnalyticsService) {
+              private analyticsService: AnalyticsService, private el: ElementRef) {
     dateAdapter.setLocale('en-GB');
   }
 
@@ -199,6 +200,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
 
     this.stepperSub = this.stepper.selectionChange.subscribe(selection => {
       this.isEditable = selection.selectedIndex !== this.lastStepIndex;
+      this.resultsDummyHeader.nativeElement.scrollIntoView();
     });
   }
 
