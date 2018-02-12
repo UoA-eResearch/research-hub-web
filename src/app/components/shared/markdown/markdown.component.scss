@@ -9,3 +9,12 @@
   margin-top: 24px !important;
   margin-bottom: 8px !important;
 }
+
+/deep/ ul {
+  margin: 0 0 12px !important;
+}
+
+/deep/ div h4:not(:first-child) {
+  margin-top: 20px !important;
+  margin-bottom: 6px !important;
+}
