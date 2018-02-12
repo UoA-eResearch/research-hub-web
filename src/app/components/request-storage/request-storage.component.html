@@ -19,7 +19,7 @@
             <mat-radio-group fxLayout="column" fxLayoutGap="1em" formControlName="storageType">
               <mat-radio-button value="New">New</mat-radio-button>
               <mat-radio-button value="Existing">Existing</mat-radio-button>
-              <mat-error *ngIf="storageTypeForm.controls.storageType.invalid && storageTypeClicked">Please choose an option</mat-error>
+              <mat-error *ngIf="storageTypeForm.controls.storageType.invalid && storageTypeClicked">* Please choose an option</mat-error>
             </mat-radio-group>
           </div>
         </div>
@@ -41,7 +41,7 @@
             <h3>Project title</h3>
             <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
               <input matInput placeholder="Project title" formControlName="title">
-              <mat-error *ngIf="projectForm.controls.title.invalid">Please enter a title</mat-error>
+              <mat-error *ngIf="projectForm.controls.title.invalid">* Please enter a title</mat-error>
             </mat-form-field>
           </div>
 
@@ -49,7 +49,7 @@
             <h3>Brief abstract or summary of the research for this storage</h3>
             <mat-form-field class="no-floating-label input-full-width" floatPlaceholder="never">
               <textarea matInput placeholder="Project abstract" formControlName="abstract"></textarea>
-              <mat-error *ngIf="projectForm.controls.abstract.invalid">Please enter an abstract</mat-error>
+              <mat-error *ngIf="projectForm.controls.abstract.invalid">* Please enter an abstract</mat-error>
             </mat-form-field>
           </div>
 
@@ -59,7 +59,7 @@
               <input matInput [matDatepicker]="picker" [min]="dateToday" formControlName="endDate" placeholder="Project end date">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
-              <mat-error *ngIf="projectForm.controls.endDate.invalid">Please choose a date</mat-error>
+              <mat-error *ngIf="projectForm.controls.endDate.invalid">* Please choose a date</mat-error>
             </mat-form-field>
           </div>
 
@@ -69,7 +69,7 @@
               <mat-select placeholder="Field of research" formControlName="fieldOfResearch" multiple>
                 <mat-option *ngFor="let item of fieldOfResearchCodes" [value]="item">{{item}}</mat-option>
               </mat-select>
-              <mat-error *ngIf="projectForm.controls.fieldOfResearch.invalid">Please choose at least one item from the list</mat-error>
+              <mat-error *ngIf="projectForm.controls.fieldOfResearch.invalid">* Please choose at least one item from the list</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -93,11 +93,11 @@
                 <mat-select placeholder="Data information" formControlName="dataRequirements" multiple>
                   <mat-option *ngFor="let item of dataRequirements" [value]="item">{{item}}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="dataInfoForm.controls.dataRequirements.invalid">Please choose at least one item from the list</mat-error>
+                <mat-error *ngIf="dataInfoForm.controls.dataRequirements.invalid">* Please choose at least one item from the list</mat-error>
               </mat-form-field>
               <mat-form-field style="margin-top: 1em;" *ngIf="showOtherField" floatPlaceholder="never" class="no-floating-label input-full-width">
                 <input matInput placeholder="Other" formControlName="dataRequirementsOther">
-                <mat-error *ngIf="dataInfoForm.controls.dataRequirementsOther.invalid">Please enter a name for other</mat-error>
+                <mat-error *ngIf="dataInfoForm.controls.dataRequirementsOther.invalid">* Please enter a name for other</mat-error>
               </mat-form-field>
             </div>
 
@@ -105,7 +105,7 @@
               <h3>Please provide a short name for your storage folder (e.g. GDC-data)? [optional]</h3>
               <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
                 <input matInput placeholder="Short name" formControlName="shortName">
-                <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">Please enter a short name</mat-error>
+                <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">* Please enter a short name</mat-error>
               </mat-form-field>
             </div>
 
@@ -117,34 +117,34 @@
                   <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="flex-hack data-person-row-inner">
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
                       <input matInput placeholder="First name" formControlName="firstName">
-                      <mat-error *ngIf="member.controls.firstName.invalid">Please enter a first name</mat-error>
+                      <mat-error *ngIf="member.controls.firstName.invalid">* Please enter a first name</mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
                       <input matInput placeholder="Last name" formControlName="lastName">
-                      <mat-error *ngIf="member.controls.lastName.invalid">Please enter a last name</mat-error>
+                      <mat-error *ngIf="member.controls.lastName.invalid">* Please enter a last name</mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
                       <input matInput placeholder="Email" formControlName="email">
-                      <mat-error *ngIf="member.controls.email.invalid">Please enter an email</mat-error>
+                      <mat-error *ngIf="member.controls.email.invalid">* Please enter an email</mat-error>
                     </mat-form-field>
                   </div>
 
                   <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="flex-hack data-person-row-inner">
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
                       <input matInput placeholder="Username" formControlName="username">
-                      <mat-error *ngIf="member.controls.username.invalid">Please enter a username</mat-error>
+                      <mat-error *ngIf="member.controls.username.invalid">* Please enter a username</mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
                       <mat-select placeholder="Access" formControlName="access">
                         <mat-option *ngFor="let item of access;" [value]="item">{{item}}</mat-option>
                       </mat-select>
-                      <mat-error *ngIf="member.controls.access.invalid">Please choose an option</mat-error>
+                      <mat-error *ngIf="member.controls.access.invalid">* Please choose an option</mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
                       <mat-select placeholder="Role" formControlName="roles" multiple>
                         <mat-option *ngFor="let item of roleTypes;" [value]="item">{{item}}</mat-option>
                       </mat-select>
-                      <mat-error *ngIf="member.controls.roles.invalid">Please choose a role</mat-error>
+                      <mat-error *ngIf="member.controls.roles.invalid">* Please choose a role</mat-error>
                     </mat-form-field>
                   </div>
                 </div>
@@ -153,7 +153,7 @@
                   <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;"><mat-icon>delete</mat-icon></button>
                 </div>
               </div>
-              <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('required')">Please add at least 1 person</mat-error>
+              <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('required')">* Please add at least 1 person</mat-error>
               <div fxLayout="row" fxLayoutAlign="end center">
                 <button mat-button color="primary" (click)="addNewPerson()">Add Person</button>
               </div>
@@ -179,7 +179,7 @@
             <div fxLayout="row" fxLayoutGap="1em">
               <mat-form-field>
                 <input matInput placeholder="Amount" formControlName="sizeThisYear" type="number" min="1">
-                <mat-error *ngIf="dataSizeForm.controls.sizeThisYear.invalid">Please enter a value above 0</mat-error>
+                <mat-error *ngIf="dataSizeForm.controls.sizeThisYear.invalid">* Please enter a value above 0</mat-error>
               </mat-form-field>
               <mat-form-field>
                 <mat-select placeholder="Unit" formControlName="unitThisYear">
@@ -187,7 +187,7 @@
                     {{unit}}
                   </mat-option>
                 </mat-select>
-                <mat-error *ngIf="dataSizeForm.controls.unitThisYear.invalid">Please choose an option</mat-error>
+                <mat-error *ngIf="dataSizeForm.controls.unitThisYear.invalid">* Please choose an option</mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -197,7 +197,7 @@
             <div fxLayout="row" fxLayoutGap="1em">
               <mat-form-field>
                 <input matInput placeholder="Amount" formControlName="sizeNextYear" type="number" min="1">
-                <mat-error *ngIf="dataSizeForm.controls.sizeNextYear.invalid">Please enter a value above 0</mat-error>
+                <mat-error *ngIf="dataSizeForm.controls.sizeNextYear.invalid">* Please enter a value above 0</mat-error>
               </mat-form-field>
               <mat-form-field>
                 <mat-select placeholder="Unit" formControlName="unitNextYear">
@@ -205,7 +205,7 @@
                     {{unit}}
                   </mat-option>
                 </mat-select>
-                <mat-error *ngIf="dataSizeForm.controls.unitNextYear.invalid">Please choose an option</mat-error>
+                <mat-error *ngIf="dataSizeForm.controls.unitNextYear.invalid">* Please choose an option</mat-error>
               </mat-form-field>
             </div>
           </div>

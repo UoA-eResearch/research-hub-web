@@ -23,7 +23,7 @@
                 <input matInput [matDatepickerFilter]="excludeWeekendsFilter" [matDatepicker]="picker" [min]="dateToday" formControlName="date" placeholder="Date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-                <mat-error *ngIf="dateCtrl.invalid">Please choose a date</mat-error>
+                <mat-error *ngIf="dateCtrl.invalid">* Please choose a date</mat-error>
               </mat-form-field>
 
               <mat-form-field>
@@ -32,7 +32,7 @@
                     {{time}}
                   </mat-option>
                 </mat-select>
-                <mat-error *ngIf="timeCtrl.invalid">Please choose a time</mat-error>
+                <mat-error *ngIf="timeCtrl.invalid">* Please choose a time</mat-error>
               </mat-form-field>
             </div>
           </div>
