@@ -33,6 +33,7 @@
       </mat-card>
 
       <mat-card [ngClass]="{'description': !isKnowledgeArticle()}" class="description">
+        <h3>Overview</h3>
         <app-markdown [data]="content.description"></app-markdown>
       </mat-card>
 
