@@ -51,7 +51,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public sortOptions = [{id: OrderBy.Alphabetical, name: 'Alphabet'}, {id: OrderBy.Relevance, name: 'Relevance'}];
   public orderBy = OrderBy.Relevance;
 
-  public pageSize = 25;
+  public pageSize = 10;
   public pageSizeOptions = [5, 10, 25, 50, 100, 1000];
   private pageEventChange: Subject<any> = new Subject<any>();
   private orderByChange: Subject<OrderBy> = new Subject<OrderBy>();
