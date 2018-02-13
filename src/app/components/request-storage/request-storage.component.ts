@@ -132,18 +132,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
       fieldOfResearch: new FormControl(undefined, Validators.required),
     });
 
-    this.endDateSub = this.projectForm.get('endDate').valueChanges.subscribe(
-      (date: Date) => {
-        this.showSizeNextYear = new Date() <= subYears(date, 1);
-
-        if (!this.showSizeNextYear) {
-          this.dataSizeForm.get('sizeNextYear').setValue(undefined);
-          this.dataSizeForm.get('unitNextYear').setValue(undefined);
-          console.log('hide dataSizeForm: ', date);
-        }
-      }
-    );
-
     this.projectMembers = this.formBuilder.array([], Validators.compose([Validators.required]));
 
     this.dataInfoForm = this.formBuilder.group({
@@ -174,6 +162,26 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
       unitNextYear: new FormControl(undefined, Validators.required),
       comments: new FormControl(undefined)
     });
+
+    this.endDateSub = this.projectForm.get('endDate').valueChanges.subscribe(
+      (date: Date) => {
+        this.showSizeNextYear = new Date() <= subYears(date, 1);
+
+        const sizeNextYear = this.dataSizeForm.get('sizeNextYear');
+        const unitNextYear = this.dataSizeForm.get('unitNextYear');
+
+        if (this.showSizeNextYear) {
+          sizeNextYear.setValidators([Validators.required, Validators.min(1)]);
+          unitNextYear.setValidators([Validators.required]);
+        } else {
+          sizeNextYear.setValidators(null);
+          unitNextYear.setValidators(null);
+
+          sizeNextYear.setValue(undefined);
+          unitNextYear.setValue(undefined);
+        }
+      }
+    );
 
     // Pre-populate first person in list with logged in user
     const user = this.authService.user;
@@ -287,6 +295,11 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
     this.dataSizeForm.markAsTouched();
     this.dataSizeForm.markAsDirty();
     this.dataSizeForm.markAsTouched();
+
+    // console.log(this.storageTypeForm);
+    // console.log(this.projectForm);
+    // console.log(this.dataInfoForm);
+    console.log(this.dataSizeForm);
 
     if (isValid) {
       this.submitting = true;
