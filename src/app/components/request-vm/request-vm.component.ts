@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
 import {ApiService} from 'app/services/api.service';
@@ -13,6 +13,9 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {AnalyticsService} from '../../services/analytics.service';
 import * as format from 'date-fns/format';
+import {CanComponentDeactivate} from '../../routing/routing.confirm-deactivate';
+import 'rxjs/add/operator/map';
+import {ConfirmDialogComponent} from '../shared/confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -20,7 +23,7 @@ import * as format from 'date-fns/format';
   templateUrl: './request-vm.component.html',
   styleUrls: ['./request-vm.component.scss']
 })
-export class RequestVmComponent implements OnInit, OnDestroy {
+export class RequestVmComponent implements OnInit, OnDestroy, CanComponentDeactivate {
 
   private static requestVmFormKey = 'requestVmForm';
 
@@ -62,6 +65,26 @@ export class RequestVmComponent implements OnInit, OnDestroy {
               public dialog: MatDialog, private location: Location, private route: ActivatedRoute,
               private analyticsService: AnalyticsService) {
     dateAdapter.setLocale('en-GB');
+  }
+
+  canDeactivate() {
+    if (!this.requestVmForm.dirty || this.response !== undefined) {
+      return true;
+    }
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Leave form?',
+        message: 'Leaving this form will delete all of the information you have filled in.'
+      }
+    });
+    const afterClosedObs = dialogRef.afterClosed();
+    const afterClosedSub = afterClosedObs.subscribe();
+
+    return afterClosedObs.map(result => {
+      afterClosedSub.unsubscribe();
+      return result;
+    }).first();
   }
 
   excludeWeekendsFilter(d: Date): boolean {

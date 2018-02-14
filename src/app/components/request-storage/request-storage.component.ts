@@ -14,6 +14,9 @@ import {Subscription} from 'rxjs/Subscription';
 import {AnalyticsService} from '../../services/analytics.service';
 import * as format from 'date-fns/format';
 import * as subYears from 'date-fns/sub_years';
+import {ConfirmDialogComponent} from '../shared/confirm-dialog/confirm-dialog.component';
+import {CanComponentDeactivate} from '../../routing/routing.confirm-deactivate';
+
 
 interface Person {
   firstName: string;
@@ -30,7 +33,7 @@ interface Person {
   templateUrl: './request-storage.component.html',
   styleUrls: ['./request-storage.component.scss']
 })
-export class RequestStorageComponent implements OnInit, OnDestroy {
+export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   private requestFormKey = 'requestDataForm';
 
   @ViewChild('resultsDummyHeader') private resultsDummyHeader: ElementRef;
@@ -212,6 +215,26 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
     });
   }
 
+  canDeactivate() {
+    if ((!this.storageTypeForm.dirty && !this.projectForm.dirty && !this.dataInfoForm.dirty && !this.dataSizeForm.dirty) || this.response !== undefined) {
+      return true;
+    }
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Leave form?',
+        message: 'Leaving this form will delete all of the information you have filled in.'
+      }
+    });
+    const afterClosedObs = dialogRef.afterClosed();
+    const afterClosedSub = afterClosedObs.subscribe();
+
+    return afterClosedObs.map(result => {
+      afterClosedSub.unsubscribe();
+      return result;
+    }).first();
+  }
+
   saveRequest() {
     const form = {
       storageTypeForm: this.storageTypeForm.getRawValue(),
@@ -295,11 +318,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy {
     this.dataSizeForm.markAsTouched();
     this.dataSizeForm.markAsDirty();
     this.dataSizeForm.markAsTouched();
-
-    // console.log(this.storageTypeForm);
-    // console.log(this.projectForm);
-    // console.log(this.dataInfoForm);
-    console.log(this.dataSizeForm);
 
     if (isValid) {
       this.submitting = true;

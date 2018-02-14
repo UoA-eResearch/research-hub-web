@@ -6,8 +6,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../../app.material.module';
 import {MarkdownComponent} from './markdown/markdown.component';
 import {ListItemToRouterLinkPipe} from 'app/pipes/list-item-to-router-link.pipe';
-import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
-
+import {ErrorDialogComponent} from './error-dialog/error-dialog.component';
+import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
   declarations: [
     MarkdownComponent,
     ListItemToRouterLinkPipe,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    ConfirmDialogComponent
   ],
   exports: [
     FlexLayoutModule,
@@ -33,11 +34,10 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     ListItemToRouterLinkPipe
   ],
   entryComponents: [
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    ConfirmDialogComponent
   ],
-  providers: [
-
-  ],
+  providers: [],
 })
 export class SharedModule {
 }

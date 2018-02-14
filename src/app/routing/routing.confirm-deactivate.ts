@@ -1,13 +1,17 @@
 import {CanDeactivate} from '@angular/router';
-import {Component} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
 
-export class ConfirmDeactivateGuard implements CanDeactivate<Component> {
+export interface CanComponentDeactivate {
+  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+}
+
+export class ConfirmDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
 
   constructor() {
   }
 
-  canDeactivate(target: Component) {
-    return window.confirm('Leaving this form will delete all information you have filled in. Do you want to leave the form?');
+  canDeactivate(component: CanComponentDeactivate) {
+    return component.canDeactivate ? component.canDeactivate() : true;
   }
 }
