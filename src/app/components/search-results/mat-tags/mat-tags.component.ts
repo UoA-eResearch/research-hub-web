@@ -1,9 +1,11 @@
 import {Component, Input, ViewChild, forwardRef, OnChanges, SimpleChanges} from '@angular/core';
 import {
-  MatAutocompleteSelectedEvent,
-  MatAutocompleteTrigger,
   MatInput
-} from '@angular/material';
+} from '@angular/material/input';
+import {
+  MatAutocompleteSelectedEvent,
+  MatAutocompleteTrigger
+} from '@angular/material/autocomplete';
 import {
   FormControl,
   ControlValueAccessor,
