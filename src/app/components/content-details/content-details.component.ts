@@ -2,16 +2,14 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiService, PeopleParams} from 'app/services/api.service';
 import {Content} from 'app/model/Content';
-import marked from 'marked';
 import {Location} from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {ListItem} from '../../model/ListItem';
-import {ActionTypeId, ContentTypeId, OptionsService, RoleTypeId} from '../../services/options.service';
+import {ActionTypeId, ContentTypeId, RoleTypeId} from '../../services/options.service';
 import {Subscription} from 'rxjs/Subscription';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {LayoutService} from '../../services/layout.service';
 import {AppComponentService} from '../../app.component.service';
-import {GuideCategory} from '../../model/GuideCategory';
 
 
 @Component({
@@ -29,19 +27,7 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private media: ObservableMedia,
               private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService,
-              private appComponentService: AppComponentService, private optionsService: OptionsService) {
-
-    // Configure marked
-    marked.setOptions({
-      renderer: new marked.Renderer(),
-      gfm: true,
-      tables: true,
-      breaks: false,
-      pedantic: false,
-      sanitize: true,
-      smartLists: true,
-      smartypants: false
-    });
+              private appComponentService: AppComponentService) {
   }
 
   isGuide() {

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import marked from 'marked';
+import * as marked from 'marked';
 
 
 @Component({
