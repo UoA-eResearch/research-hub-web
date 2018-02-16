@@ -49,10 +49,12 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public resultsSummary = '';
   public showEmptyState = false;
   public sortOptions = [{id: OrderBy.Alphabetical, name: 'Alphabet'}, {id: OrderBy.Relevance, name: 'Relevance'}];
-  public orderBy = OrderBy.Relevance;
-
-  public pageSize = 10;
   public pageSizeOptions = [5, 10, 25, 50, 100, 1000];
+
+  public orderBy;
+  public pageSize;
+  public pageIndex;
+
   private pageEventChange: Subject<any> = new Subject<any>();
   private orderByChange: Subject<OrderBy> = new Subject<OrderBy>();
   private previousPageEvent: any;
@@ -137,7 +139,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       )
       .debounceTime(100)
       .subscribe(latestValues => {
-        // TODO: set progress bar to visible
         const [searchText, filtersFormValues, pageEvent, orderBy] = latestValues;
 
         if (filtersFormValues.categoryId !== this.searchBarService.category) {
@@ -168,6 +169,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         const personIds = SearchResultsComponent.parseParamArray(params['personIds']);
         const orgUnitIds = SearchResultsComponent.parseParamArray(params['orgUnitIds']);
         const researchActivityIds = SearchResultsComponent.parseParamArray(params['researchActivityIds']);
+        this.pageIndex = +(params['pageIndex'] || 0);
+        this.pageSize = +(params['pageSize'] || 10);
+        this.orderBy = params['orderBy'] || OrderBy.Relevance;
 
         // Update values in search bar and search filters form
         this.searchBarService.setSearchText(searchText);
@@ -176,14 +180,15 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.filtersForm.controls.personTags.setValue(this.toTags(personIds));
         this.filtersForm.controls.orgUnitTags.setValue(this.toTags(orgUnitIds));
         this.filtersForm.controls.researchActivityIds.setValue(researchActivityIds);
+
+        // Send page event order by event to trigger search
+        this.pageEventChange.next({pageIndex: this.pageIndex, pageSize: this.pageSize} as PageEvent);
+        this.orderByChange.next(this.orderBy);
       });
 
     this.buttonClickSub = this.searchBarService.filterButtonClickChange.subscribe((buttonName) => {
       this.openDialog();
     });
-
-    this.pageEventChange.next({pageIndex: 0, pageSize: this.pageSize} as PageEvent);
-    this.orderByChange.next(OrderBy.Relevance);
   }
 
   onPageChange(event: PageEvent) {
@@ -205,7 +210,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     const personIds = this.fromTags(personTags);
     const orgUnitIds = this.fromTags(orgUnitTags);
-    this.updateUrl(categoryId, searchText, personIds, orgUnitIds, researchActivityIds);
+    this.updateUrl(categoryId, searchText, personIds, orgUnitIds, researchActivityIds, pageEvent, orderBy);
 
     const params = new SearchResultsParams();
     params.setObjectType('all');
@@ -246,7 +251,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateUrl(categoryId: number, searchText: string, personIds: number[], orgUnitIds: number[], researchActivityIds: number[]) {
+  updateUrl(categoryId: number, searchText: string, personIds: number[], orgUnitIds: number[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
     let url = '/search';
     const params = [];
     const visibilities = SearchResultsComponent.getFilterVisibility(categoryId);
@@ -269,6 +274,15 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     if (researchActivityIds && researchActivityIds.length && visibilities['researchActivity']) {
       params.push('researchActivityIds=' + researchActivityIds.join(','));
+    }
+
+    if (pageEvent) {
+      params.push('pageIndex=' + pageEvent.pageIndex);
+      params.push('pageSize=' + pageEvent.pageSize);
+    }
+
+    if (orderBy) {
+      params.push('orderBy=' + orderBy);
     }
 
     const paramsStr = params.join('&');

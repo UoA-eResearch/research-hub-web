@@ -57,6 +57,7 @@
   <mat-paginator #paginator [style.visibility]="!showEmptyState ? 'visible' : 'hidden'"
                  [length]="resultsPage.totalElements"
                  [pageSize]="pageSize"
+                 [pageIndex]="pageIndex"
                  [pageSizeOptions]="pageSizeOptions"
                  (page)="onPageChange($event)">
   </mat-paginator>
