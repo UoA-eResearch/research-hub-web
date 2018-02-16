@@ -17,7 +17,6 @@
   min-width: 1%;
 }
 
-
 .content-header {
   padding: $offset-gt-xs;
   background-color: $color-content-header;
@@ -29,13 +28,13 @@
 }
 
 .content-header > div:nth-child(1) > h2 {
-  color:white;
+  color: white;
   margin-top: 0;
   margin-bottom: 0.25em;
 }
 
 .content-header div:nth-child(1) > h3 {
-  color:white;
+  color: white;
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -98,25 +97,24 @@
 
 /* Put your CSS code in the left column, instead of example, to put or remove unnecessary prefixes. */
 
-.tile-content{
+.tile-content {
   text-align: center;
-  min-width:100%;
+  min-width: 100%;
   min-height: 100%;
 }
 
-
 .tile-text {
-  color:$browse-tile-font-color;
-  width:80%;
+  color: $browse-tile-font-color;
+  width: 80%;
   transform: translate(0%, -50%);
   @include mat-typography-level-to-styles($app-browse-grid-typography, body-1);
 }
 
 .tile-icon {
-  color:$browse-tile-font-color;
+  color: $browse-tile-font-color;
   font-size: mat-font-size($app-browse-grid-typography, body-2);
   font-weight: mat-font-weight($app-browse-grid-typography, body-2);
-  width:100%;
-  position:absolute;
-  bottom:20%;
+  width: 100%;
+  position: absolute;
+  bottom: 20%;
 }
