@@ -5,6 +5,7 @@ import {ApiService} from 'app/services/api.service';
 import { Location } from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {AppComponentService} from '../../app.component.service';
+import {Content} from '../../model/Content';
 
 
 @Component({
@@ -14,6 +15,7 @@ import {AppComponentService} from '../../app.component.service';
 })
 export class GuideCategoryComponent implements OnInit {
 
+  contentItems: Content[];
   guideCategory: GuideCategory;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private location: Location,
@@ -34,6 +36,13 @@ export class GuideCategoryComponent implements OnInit {
 
           this.analyticsService.trackGuideCategory(name, url);
           this.guideCategory = guideCategory;
+        }
+      );
+
+      this.apiService.getGuideCategoryContentItems(id).subscribe(
+        contentItems => {
+          console.log('contentItems: ', contentItems);
+          this.contentItems = contentItems;
         }
       );
     });

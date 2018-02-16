@@ -9,5 +9,4 @@ export interface GuideCategory {
   description: string;
   additionalInfo: string;
   icon: string;
-  contentItems: Array<Content>;
 }

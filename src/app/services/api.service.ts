@@ -254,6 +254,12 @@ export class ApiService {
       .retry(ApiService.numRetries);
   }
 
+  getGuideCategoryContentItems(id: number) {
+    return this.http
+      .get<Content[]>(ApiService.hostname + ApiService.guideCategoryUrl + '/' + id + '/contentItems', {headers: ApiService.headers})
+      .retry(ApiService.numRetries);
+  }
+
   getSearchResults(params: SearchResultsParams) {
     return this.http
       .get<Page<ListItem>>(ApiService.hostname + ApiService.searchResultsUrl, {

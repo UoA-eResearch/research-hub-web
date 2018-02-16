@@ -5,12 +5,12 @@
       <app-markdown style="display: block;" [data]="guideCategory.description"></app-markdown>
     </mat-card>
 
-    <mat-card *ngIf="guideCategory.contentItems && guideCategory.contentItems.length">
+    <mat-card *ngIf="contentItems && contentItems.length">
       <h2>Resources</h2>
       <mat-nav-list>
-        <mat-list-item *ngFor="let content of guideCategory.contentItems" [routerLink]="['/content', content.id]">
+        <mat-list-item *ngFor="let content of contentItems" [routerLink]="['/content', content.id]">
           <img mat-list-avatar [src]="apiService.getAssetUrl(content.image)">
-          <h3 mat-line> {{content.name}} </h3>
+          <h4 mat-line style="font-size: 16px;"> {{content.name}} </h4>
         </mat-list-item>
       </mat-nav-list>
     </mat-card>
