@@ -1,6 +1,25 @@
 @import '../styles';
 
 
+/*
+ * Hub Logo
+ */
+
+.hub-logo {
+  height: 24px;
+}
+
+.hub-logo img {
+  @extend .hub-logo;
+}
+
+.hub-logo-xs {
+  height: 18px;
+}
+
+.hub-logo-xs img {
+  @extend .hub-logo-xs;
+}
 
 
 /*

@@ -3,8 +3,8 @@
     <mat-sidenav #sidenav mode="over" opened="false">
       <div class="app-toolbar" ngClass.xs="app-toolbar-xs" style="background-color: #0294a5;padding-left: 24px;">
         <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="start center" color="primary">
-          <a routerLink="/home" style="height: 18px;">
-            <img style="height: 18px;" [src]="'assets/hub-logo.svg'">
+          <a routerLink="/home" class="hub-logo" ngClass.xs="hub-logo-xs">
+            <img [src]="'assets/hub-logo.svg'">
           </a>
         </div>
       </div>
@@ -42,8 +42,8 @@
           <div class="site-content app-toolbar" ngClass.xs="site-content app-toolbar-xs">
             <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="center center" color="primary">
               <button style="margin-right: 6px;" fxHide.gt-sm mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu"><mat-icon>menu</mat-icon></button>
-              <a routerLink="/home" style="height: 18px;">
-                <img style="height: 18px;" [src]="'assets/hub-logo.svg'">
+              <a routerLink="/home" class="hub-logo" ngClass.xs="hub-logo-xs">
+                <img [src]="'assets/hub-logo.svg'">
               </a>
 
               <span style="flex: 1 1 auto;"></span>
