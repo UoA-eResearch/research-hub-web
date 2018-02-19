@@ -34,7 +34,7 @@ interface Person {
   styleUrls: ['./request-storage.component.scss']
 })
 export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentDeactivate {
-  private requestFormKey = 'requestDataForm';
+  private requestFormKey = 'requestStorageForm';
 
   @ViewChild('resultsDummyHeader') private resultsDummyHeader: ElementRef;
   @ViewChild('stepper') stepper: MatHorizontalStepper;
