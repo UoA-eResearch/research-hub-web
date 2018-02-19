@@ -40,7 +40,7 @@
           <div class="form-group">
             <h3>Project title</h3>
             <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
-              <input matInput placeholder="Project title" formControlName="title">
+              <input matInput placeholder="Project title" formControlName="title" type="text">
               <mat-error *ngIf="projectForm.controls.title.invalid">* Please enter a title</mat-error>
             </mat-form-field>
           </div>
@@ -48,7 +48,7 @@
           <div class="form-group">
             <h3>Brief abstract or summary of the research for this storage</h3>
             <mat-form-field class="no-floating-label input-full-width" floatPlaceholder="never">
-              <textarea matInput placeholder="Project abstract" formControlName="abstract"></textarea>
+              <textarea matInput placeholder="Project abstract" formControlName="abstract" type="text"></textarea>
               <mat-error *ngIf="projectForm.controls.abstract.hasError('required')">* Please enter an abstract</mat-error>
               <mat-error *ngIf="projectForm.controls.abstract.hasError('minlength')">* Please enter at least 50 characters</mat-error>
             </mat-form-field>
@@ -105,7 +105,7 @@
             <div class="form-group">
               <h3>Please provide a short name for your storage folder (e.g. GDC-data)? [optional]</h3>
               <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
-                <input matInput placeholder="Short name" formControlName="shortName">
+                <input matInput placeholder="Short name" formControlName="shortName" type="text">
                 <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">* Please enter a short name</mat-error>
               </mat-form-field>
             </div>
@@ -117,22 +117,22 @@
                 <div class="flex-hack" style="width: 100%; max-width: calc(100% - 50px);" fxFlex="100" fxLayout="column" fxLayoutGap="1em" [formGroupName]="i">
                   <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="flex-hack data-person-row-inner">
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
-                      <input matInput placeholder="First name" formControlName="firstName">
+                      <input matInput placeholder="First name" formControlName="firstName" autocapitalize=words>
                       <mat-error *ngIf="member.controls.firstName.invalid">* Please enter a first name</mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
-                      <input matInput placeholder="Last name" formControlName="lastName">
+                      <input matInput placeholder="Last name" formControlName="lastName" autocapitalize=words>
                       <mat-error *ngIf="member.controls.lastName.invalid">* Please enter a last name</mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
-                      <input matInput placeholder="Email" formControlName="email">
+                      <input matInput placeholder="Email" formControlName="email" type="email">
                       <mat-error *ngIf="member.controls.email.invalid">* Please enter an email</mat-error>
                     </mat-form-field>
                   </div>
 
                   <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="flex-hack data-person-row-inner">
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
-                      <input matInput placeholder="Username" formControlName="username">
+                      <input matInput placeholder="Username" formControlName="username" autocapitalize=off>
                       <mat-error *ngIf="member.controls.username.invalid">* Please enter a username</mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatPlaceholder="never" class="no-floating-label">
@@ -195,7 +195,7 @@
 
           <div class="form-group" *ngIf="showSizeNextYear">
             <h3>Estimate how much storage you need for the entire project duration</h3>
-            <div fxLayout="row" fxLayoutGap="1em">
+            <div fxLayout="row" fxLayoutGap="1em" fxLayout.xs="column">
               <mat-form-field>
                 <input matInput placeholder="Amount" formControlName="sizeNextYear" type="number" min="1">
                 <mat-error *ngIf="dataSizeForm.controls.sizeNextYear.invalid">* Please enter a value above 0</mat-error>
@@ -214,7 +214,7 @@
           <div class="form-group">
             <h3>Comments? [optional]</h3>
             <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
-              <textarea matInput placeholder="Comments" formControlName="comments"></textarea>
+              <textarea matInput placeholder="Comments" formControlName="comments" type="text"></textarea>
             </mat-form-field>
           </div>
 
