@@ -94,14 +94,16 @@
       <app-markdown [data]="content.description"></app-markdown>
     </mat-card>
 
-    <mat-grid-list [cols]="numCols" gutterSize="1em">
-      <mat-grid-tile class="browse-tile" *ngFor="let item of content.guideCategories;" [colspan]="1" [rowspan]="1" [routerLink]="['/guideCategory', item.id]">
-        <div fxLayout="column" fxLayoutAlign="center center" class="tile-content">
-          <span class="tile-text">{{item.name}}</span>
-          <mat-icon class="tile-icon">{{item.icon}}</mat-icon>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
+    <div> <!-- Need to wrap mat-grid-list with a div otherwise it doesn't get given a height in firefox -->
+      <mat-grid-list [cols]="numCols" gutterSize="1em">
+        <mat-grid-tile class="browse-tile" *ngFor="let item of content.guideCategories;" [colspan]="1" [rowspan]="1" [routerLink]="['/guideCategory', item.id]">
+          <div fxLayout="column" fxLayoutAlign="center center" class="tile-content">
+            <span class="tile-text">{{item.name}}</span>
+            <mat-icon class="tile-icon">{{item.icon}}</mat-icon>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
 
     <mat-card *ngIf="content.additionalInfo">
       <app-markdown [data]="content.additionalInfo"></app-markdown>
