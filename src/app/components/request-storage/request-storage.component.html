@@ -177,12 +177,12 @@
         <div class="step-form-container">
           <div class="form-group">
             <h3>Estimate how much storage you need in the next 12 months</h3>
-            <div fxLayout="row" fxLayoutGap="1em">
-              <mat-form-field>
+            <div fxLayout="row" fxLayoutGap="1em" fxLayout.xs="column">
+              <mat-form-field fxFlex="50">
                 <input matInput placeholder="Amount" formControlName="sizeThisYear" type="number" min="1">
                 <mat-error *ngIf="dataSizeForm.controls.sizeThisYear.invalid">* Please enter a value above 0</mat-error>
               </mat-form-field>
-              <mat-form-field>
+              <mat-form-field fxFlex="50">
                 <mat-select placeholder="Unit" formControlName="unitThisYear">
                   <mat-option *ngFor="let unit of units" [value]="unit">
                     {{unit}}
@@ -196,11 +196,11 @@
           <div class="form-group" *ngIf="showSizeNextYear">
             <h3>Estimate how much storage you need for the entire project duration</h3>
             <div fxLayout="row" fxLayoutGap="1em" fxLayout.xs="column">
-              <mat-form-field>
+              <mat-form-field fxFlex="50">
                 <input matInput placeholder="Amount" formControlName="sizeNextYear" type="number" min="1">
                 <mat-error *ngIf="dataSizeForm.controls.sizeNextYear.invalid">* Please enter a value above 0</mat-error>
               </mat-form-field>
-              <mat-form-field>
+              <mat-form-field fxFlex="50">
                 <mat-select placeholder="Unit" formControlName="unitNextYear">
                   <mat-option *ngFor="let unit of units" [value]="unit">
                     {{unit}}
