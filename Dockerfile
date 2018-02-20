@@ -14,7 +14,7 @@ RUN           curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN           apt-get install -y nodejs
 
 # Install angular-cli
-RUN           npm install -g @angular/cli@1.5.0
+RUN           npm install -g @angular/cli@1.6.8
 
 WORKDIR       /research-hub-web/
 
