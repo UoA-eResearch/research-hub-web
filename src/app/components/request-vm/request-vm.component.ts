@@ -16,6 +16,7 @@ import * as format from 'date-fns/format';
 import {CanComponentDeactivate} from '../../routing/routing.confirm-deactivate';
 import 'rxjs/add/operator/map';
 import {ConfirmDialogComponent} from '../shared/confirm-dialog/confirm-dialog.component';
+import {ResearchHubApiService} from '../../services/research-hub-api.service';
 
 
 @Component({
@@ -61,7 +62,8 @@ export class RequestVmComponent implements OnInit, OnDestroy, CanComponentDeacti
   }
 
   constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
-              public apiService: CerApiService, public authService: AuthService, private appComponentService: AppComponentService,
+              private cerApiService: CerApiService, public apiService: ResearchHubApiService,
+              public authService: AuthService, private appComponentService: AppComponentService,
               public dialog: MatDialog, private location: Location, private route: ActivatedRoute,
               private analyticsService: AnalyticsService) {
     dateAdapter.setLocale('en-GB');
@@ -167,7 +169,7 @@ export class RequestVmComponent implements OnInit, OnDestroy, CanComponentDeacti
         comments: values.comments
       };
 
-      this.apiService.requestService('vm', body)
+      this.cerApiService.requestService('vm', body)
         .subscribe(
           (response) => {
             this.analyticsService.trackActionIntegrated(this.title);

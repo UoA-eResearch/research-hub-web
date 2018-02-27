@@ -16,6 +16,7 @@ import * as format from 'date-fns/format';
 import * as subYears from 'date-fns/sub_years';
 import {ConfirmDialogComponent} from '../shared/confirm-dialog/confirm-dialog.component';
 import {CanComponentDeactivate} from '../../routing/routing.confirm-deactivate';
+import {ResearchHubApiService} from '../../services/research-hub-api.service';
 
 
 interface Person {
@@ -115,7 +116,8 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   ];
 
   constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
-              public apiService: CerApiService, public authService: AuthService, private appComponentService: AppComponentService,
+              private cerApiService: CerApiService, public apiService: ResearchHubApiService,
+              public authService: AuthService, private appComponentService: AppComponentService,
               public dialog: MatDialog, private location: Location, private route: ActivatedRoute,
               private analyticsService: AnalyticsService, private el: ElementRef) {
     dateAdapter.setLocale('en-GB');
@@ -331,7 +333,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       // Convert endDate into string
       body.endDate = format(body.endDate, 'YYYY-MM-DD');
 
-      this.apiService.requestService('storage', body)
+      this.cerApiService.requestService('storage', body)
         .subscribe(
           (response) => {
             this.analyticsService.trackActionIntegrated(this.title);
