@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ApiService} from 'app/services/api.service';
+import {ResearchHubApiService} from 'app/services/research-hub-api.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ export class AboutComponent {
 
   theDirectorUrl = this.apiService.getAssetUrl('page-elements/mark.jpg');
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ResearchHubApiService) {
 
   }
 }

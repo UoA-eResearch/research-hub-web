@@ -3,9 +3,9 @@ import {SearchBarService} from 'app/components/search-bar/search-bar.service';
 import {Subscription} from 'rxjs/Subscription';
 import {CategoryId, OptionsService, RoleTypeId} from 'app/services/options.service';
 import {
-  ApiService, OrderBy,
+  ResearchHubApiService, OrderBy,
   SearchResultsParams
-} from 'app/services/api.service';
+} from 'app/services/research-hub-api.service';
 import {Page} from 'app/model/Page';
 import {AnalyticsService} from 'app/services/analytics.service';
 
@@ -105,7 +105,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   constructor(private searchBarService: SearchBarService,
-              public optionsService: OptionsService, public apiService: ApiService,
+              public optionsService: OptionsService, public apiService: ResearchHubApiService,
               private analyticsService: AnalyticsService, private route: ActivatedRoute,
               private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService) {
   }

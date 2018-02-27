@@ -1,4 +1,4 @@
-import {OrderBy} from '../services/api.service';
+import {OrderBy} from '../services/research-hub-api.service';
 
 
 export interface Page<T> {

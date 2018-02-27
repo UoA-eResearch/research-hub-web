@@ -6,6 +6,7 @@
 export const environment = {
   production: false,
   shibbolethSessionUrl: 'http://localhost:4200/Session.json',
-  apiUrl: 'http://localhost:8080/',
+  researchHubApiUrl: 'http://localhost:8080/',
+  cerApiUrl: 'http://localhost:8081/',
   analyticsCode: 'UA-77710107-3'
 };

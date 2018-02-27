@@ -3,7 +3,7 @@ import {FormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs/Subscription';
 import {Tag} from '../mat-tags/mat-tags.component';
 import {OptionsService, RoleTypeId} from '../../../services/options.service';
-import {ApiService, PeopleParams, Params} from 'app/services/api.service';
+import {ResearchHubApiService, PeopleParams, Params} from 'app/services/research-hub-api.service';
 import {Observable} from 'rxjs/Observable';
 import {SearchResultsComponent} from '../search-results.component';
 import {ListItem} from '../../../model/ListItem';
@@ -31,7 +31,7 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
   public personTagSource: Tag[] = [];
   public orgUnitTagSource: Tag[] = [];
 
-  constructor(private apiService: ApiService, public optionsService: OptionsService) {
+  constructor(private apiService: ResearchHubApiService, public optionsService: OptionsService) {
   }
 
   ngOnInit() {

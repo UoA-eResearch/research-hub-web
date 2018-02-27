@@ -6,6 +6,7 @@
 export const environment = {
   production: false,
   shibbolethSessionUrl: '',
-  apiUrl: '',
+  researchHubApiUrl: '',
+  cerApiUrl: '',
   analyticsCode: ''
 };

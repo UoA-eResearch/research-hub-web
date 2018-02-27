@@ -201,7 +201,7 @@ export class ContentItemsParams extends Params {
 
 
 @Injectable()
-export class ApiService {
+export class ResearchHubApiService {
 
   private static policyUrl = 'policy';
   private static personUrl = 'person';
@@ -210,9 +210,8 @@ export class ApiService {
   private static similarContentUrl = 'similar';
   private static orgUnitUrl = 'orgUnit';
   private static assetUrl = 'assets/';
-  private static requestServiceUrl = 'serviceRequest';
   private static searchResultsUrl = 'search';
-  private static hostname = environment.apiUrl;
+  private static hostname = environment.researchHubApiUrl;
   private static headers = {'Accept': 'application/json'};
   private static numRetries = 3;
 
@@ -221,94 +220,90 @@ export class ApiService {
 
   }
 
-  requestService(serviceName: string, body: any) {
-    return this.http.post(ApiService.hostname + ApiService.requestServiceUrl + '/' + serviceName, body);
-  }
-
   getAssetUrl(fileName: string) {
-    const uriComponent = ApiService.hostname + ApiService.assetUrl + fileName;
+    const uriComponent = ResearchHubApiService.hostname + ResearchHubApiService.assetUrl + fileName;
     return encodeURI(uriComponent.trim());
   }
 
   getContent(id: number) {
     return this.http
-      .get<Content>(ApiService.hostname + ApiService.contentUrl + '/' + id, {headers: ApiService.headers})
-      .retry(ApiService.numRetries);
+      .get<Content>(ResearchHubApiService.hostname + ResearchHubApiService.contentUrl + '/' + id, {headers: ResearchHubApiService.headers})
+      .retry(ResearchHubApiService.numRetries);
   }
 
   getPerson(id: number) {
     return this.http
-      .get<Person>(ApiService.hostname + ApiService.personUrl + '/' + id, {headers: ApiService.headers})
-      .retry(ApiService.numRetries);
+      .get<Person>(ResearchHubApiService.hostname + ResearchHubApiService.personUrl + '/' + id, {headers: ResearchHubApiService.headers})
+      .retry(ResearchHubApiService.numRetries);
   }
 
   getOrgUnit(id: number) {
     return this.http
-      .get<OrgUnit>(ApiService.hostname + ApiService.orgUnitUrl + '/' + id, {headers: ApiService.headers})
-      .retry(ApiService.numRetries);
+      .get<OrgUnit>(ResearchHubApiService.hostname + ResearchHubApiService.orgUnitUrl + '/' + id, {headers: ResearchHubApiService.headers})
+      .retry(ResearchHubApiService.numRetries);
   }
 
   getGuideCategory(id: number) {
     return this.http
-      .get<GuideCategory>(ApiService.hostname + ApiService.guideCategoryUrl + '/' + id, {headers: ApiService.headers})
-      .retry(ApiService.numRetries);
+      .get<GuideCategory>(ResearchHubApiService.hostname + ResearchHubApiService.guideCategoryUrl + '/' + id, {headers: ResearchHubApiService.headers})
+      .retry(ResearchHubApiService.numRetries);
   }
 
   getGuideCategoryContentItems(id: number) {
     return this.http
-      .get<Content[]>(ApiService.hostname + ApiService.guideCategoryUrl + '/' + id + '/contentItems', {headers: ApiService.headers})
-      .retry(ApiService.numRetries);
+      .get<Content[]>(ResearchHubApiService.hostname + ResearchHubApiService.guideCategoryUrl + '/' + id + '/contentItems', {headers: ResearchHubApiService.headers})
+      .retry(ResearchHubApiService.numRetries);
   }
 
   getSearchResults(params: SearchResultsParams) {
     return this.http
-      .get<Page<ListItem>>(ApiService.hostname + ApiService.searchResultsUrl, {
+      .get<Page<ListItem>>(ResearchHubApiService.hostname + ResearchHubApiService.searchResultsUrl, {
         params: params.getParams(),
-        headers: ApiService.headers
+        headers: ResearchHubApiService.headers
       })
-      .retry(ApiService.numRetries);
+      .retry(ResearchHubApiService.numRetries);
   }
 
   getContentItems(params: ContentItemsParams) {
     return this.http
-      .get<Page<ListItem>>(ApiService.hostname + ApiService.contentUrl, {
+      .get<Page<ListItem>>(ResearchHubApiService.hostname + ResearchHubApiService.contentUrl, {
         params: params.getParams(),
-        headers: ApiService.headers
+        headers: ResearchHubApiService.headers
       })
-      .retry(ApiService.numRetries);
+      .retry(ResearchHubApiService.numRetries);
   }
 
   getSimilarContentItems(id: number) {
     return this.http
-      .get<Content[]>(ApiService.hostname + ApiService.contentUrl + '/' + id + '/' + ApiService.similarContentUrl,
-        {headers: ApiService.headers})
-      .retry(ApiService.numRetries);
+      .get<Content[]>(ResearchHubApiService.hostname + ResearchHubApiService.contentUrl + '/' + id + '/' + ResearchHubApiService.similarContentUrl,
+        {headers: ResearchHubApiService.headers})
+      .retry(ResearchHubApiService.numRetries);
   }
 
   getPeople(params: PeopleParams) {
     return this.http
-      .get<Page<ListItem>>(ApiService.hostname + ApiService.personUrl, {
+      .get<Page<ListItem>>(ResearchHubApiService.hostname + ResearchHubApiService.personUrl, {
         params: params.getParams(),
-        headers: ApiService.headers
+        headers: ResearchHubApiService.headers
       })
-      .retry(ApiService.numRetries);
+      .retry(ResearchHubApiService.numRetries);
   }
 
   getOrgUnits(params: Params) {
     return this.http
-      .get<Page<OrgUnit>>(ApiService.hostname + ApiService.orgUnitUrl, {
+      .get<Page<OrgUnit>>(ResearchHubApiService.hostname + ResearchHubApiService.orgUnitUrl, {
         params: params.getParams(),
-        headers: ApiService.headers
+        headers: ResearchHubApiService.headers
       })
-      .retry(ApiService.numRetries);
+      .retry(ResearchHubApiService.numRetries);
   }
 
   getPolicies(params: Params) {
     return this.http
-      .get<Page<ListItem>>(ApiService.hostname + ApiService.policyUrl, {
+      .get<Page<ListItem>>(ResearchHubApiService.hostname + ResearchHubApiService.policyUrl, {
         params: params.getParams(),
-        headers: ApiService.headers
+        headers: ResearchHubApiService.headers
       })
-      .retry(ApiService.numRetries);
+      .retry(ResearchHubApiService.numRetries);
   }
 }

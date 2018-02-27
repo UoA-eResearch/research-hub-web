@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ApiService, PeopleParams} from 'app/services/api.service';
+import {ResearchHubApiService, PeopleParams} from 'app/services/research-hub-api.service';
 import {OrgUnit} from 'app/model/OrgUnit';
 import { Location } from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
@@ -19,7 +19,7 @@ export class OrgUnitDetailsComponent implements OnInit {
   public orgUnit: OrgUnit;
   userSupport: ListItem[];
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService,
+  constructor(private route: ActivatedRoute, private apiService: ResearchHubApiService,
               private location: Location, private analyticsService: AnalyticsService,
               private appComponentService: AppComponentService) {
 

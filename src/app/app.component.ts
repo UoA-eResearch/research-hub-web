@@ -3,7 +3,7 @@ import {CategoryId, OptionsService, OptionType} from './services/options.service
 import {SearchBarService} from './components/search-bar/search-bar.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {ApiService} from './services/api.service';
+import {ResearchHubApiService} from './services/research-hub-api.service';
 import {AnalyticsService} from './services/analytics.service';
 import {isPlatformBrowser} from '@angular/common';
 import {AuthService} from './services/auth.service';
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private location: Location, public optionsService: OptionsService, private headerService: HeaderService,
               private searchBarService: SearchBarService, private router: Router,
-              public apiService: ApiService, public analyticsService: AnalyticsService,
+              public apiService: ResearchHubApiService, public analyticsService: AnalyticsService,
               public authService: AuthService, private ref: ChangeDetectorRef, private appComponentService: AppComponentService,
               private titleService: Title) {
 

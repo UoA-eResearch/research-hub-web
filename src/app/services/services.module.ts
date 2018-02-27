@@ -2,10 +2,11 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {AnalyticsService} from './analytics.service';
-import {ApiService} from './api.service';
+import {ResearchHubApiService} from './research-hub-api.service';
 import {OptionsService} from './options.service';
 import {AuthService} from './auth.service';
 import {LayoutService} from './layout.service';
+import {CerApiService} from './cer-api.service';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {LayoutService} from './layout.service';
   declarations: [],
   providers: [
     AnalyticsService,
-    ApiService,
+    CerApiService,
+    ResearchHubApiService,
     OptionsService,
     AuthService,
     LayoutService

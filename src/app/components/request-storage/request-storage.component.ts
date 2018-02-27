@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
-import {ApiService} from 'app/services/api.service';
+import {CerApiService} from 'app/services/cer-api.service';
 import {AuthService} from '../../services/auth.service';
 import {MatHorizontalStepper} from '@angular/material/stepper';
 import {AppComponentService} from '../../app.component.service';
@@ -115,7 +115,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   ];
 
   constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
-              public apiService: ApiService, public authService: AuthService, private appComponentService: AppComponentService,
+              public apiService: CerApiService, public authService: AuthService, private appComponentService: AppComponentService,
               public dialog: MatDialog, private location: Location, private route: ActivatedRoute,
               private analyticsService: AnalyticsService, private el: ElementRef) {
     dateAdapter.setLocale('en-GB');

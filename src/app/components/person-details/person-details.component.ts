@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService, ContentItemsParams} from 'app/services/api.service';
+import {ResearchHubApiService, ContentItemsParams} from 'app/services/research-hub-api.service';
 import {ActivatedRoute} from '@angular/router';
 import {Person} from 'app/model/Person';
 import {Location} from '@angular/common';
@@ -20,7 +20,7 @@ export class PersonDetailsComponent implements OnInit {
   categoryIdPerson = CategoryId.Person;
   supportedContent: ListItem[];
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService,
+  constructor(private route: ActivatedRoute, private apiService: ResearchHubApiService,
               private location: Location, private analyticsService: AnalyticsService,
               private appComponentService: AppComponentService) {
 

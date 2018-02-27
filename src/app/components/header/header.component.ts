@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HeaderService} from './header.service';
 import {Subscription} from 'rxjs/Subscription';
-import {ApiService} from '../../services/api.service';
+import {ResearchHubApiService} from '../../services/research-hub-api.service';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private headerChangeSub: Subscription;
 
-  constructor(public headerService: HeaderService, private apiService: ApiService) {
+  constructor(public headerService: HeaderService, private apiService: ResearchHubApiService) {
 
   }
 

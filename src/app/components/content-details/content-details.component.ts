@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ApiService, PeopleParams} from 'app/services/api.service';
+import {ResearchHubApiService, PeopleParams} from 'app/services/research-hub-api.service';
 import {Content} from 'app/model/Content';
 import {Location} from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
@@ -25,7 +25,7 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
   numCols = 1;
   mediaSub: Subscription;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private media: ObservableMedia,
+  constructor(private route: ActivatedRoute, private apiService: ResearchHubApiService, private media: ObservableMedia,
               private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService,
               private appComponentService: AppComponentService) {
   }
