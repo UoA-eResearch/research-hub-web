@@ -46,7 +46,7 @@ export class Params {
   }
 
   public setSearchText(searchText: string) {
-    this.searchText = searchText;
+    this.searchText = encodeURIComponent(searchText);
   }
 
   public setOrderBy(orderBy: OrderBy) {
