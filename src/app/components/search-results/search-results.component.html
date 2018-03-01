@@ -54,7 +54,8 @@
     </ng-container>
   </mat-nav-list>
 
-  <mat-paginator #paginator [style.visibility]="!showEmptyState ? 'visible' : 'hidden'"
+  <mat-paginator class="search-paginator"
+                 #paginator [style.visibility]="!showEmptyState ? 'visible' : 'hidden'"
                  [length]="resultsPage.totalElements"
                  [pageSize]="pageSize"
                  [pageIndex]="pageIndex"
