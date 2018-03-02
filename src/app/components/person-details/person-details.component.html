@@ -10,25 +10,27 @@
       </mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content>
-      <div fxLayout="column" fxLayoutGap="1em">
-        <div fxFlex>
-          <mat-list class="user-menu-list">
-            <mat-list-item>
-              <mat-icon mat-list-icon>work</mat-icon>
-              <p mat-line>{{person.jobTitle}}</p>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon>email</mat-icon>
-              <p mat-line>{{person.email}}</p>
-            </mat-list-item>
-          </mat-list>
-        </div>
+    <mat-card-content style="margin-top: 1em;">
+      <div fxLayout="row" fxLayoutGap="2em">
+        <div fxFlex="100" fxFlex.lt-sm="100" fxLayout="column" fxLayoutGap="1em">
+          <div>
+            <mat-list class="user-menu-list">
+              <mat-list-item>
+                <mat-icon mat-list-icon>work</mat-icon>
+                <p mat-line>{{person.jobTitle}}</p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon>email</mat-icon>
+                <p mat-line>{{person.email}}</p>
+              </mat-list-item>
+            </mat-list>
+          </div>
 
-        <div fxFlex="36px" fxFlexAlign="end">
-          <a mat-raised-button color="accent" [href]="person.directoryUrl" (click)="trackAction()" target="_blank">
-            Details on Staff Intranet
-          </a>
+          <div fxFlex="36px" fxFlexAlign="end">
+            <a mat-raised-button color="accent" [href]="person.directoryUrl" (click)="trackAction()" target="_blank">
+              Details on Staff Intranet
+            </a>
+          </div>
         </div>
       </div>
     </mat-card-content>

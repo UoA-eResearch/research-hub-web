@@ -20,7 +20,7 @@
     "@angular/common": "5.2.3",
     "@angular/compiler": "5.2.3",
     "@angular/core": "5.2.3",
-    "@angular/flex-layout": "git+https://github.com/angular/flex-layout-builds.git#074d883156a26090ec94681986e899074171fde5",
+    "@angular/flex-layout": "git+https://github.com/angular/flex-layout-builds.git#da93d4a705f7dede59af0808b10f1b86455c2d40",
     "@angular/forms": "5.2.3",
     "@angular/http": "5.2.3",
     "@angular/material": "5.2.0",

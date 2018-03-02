@@ -1,11 +1,11 @@
-<div fxFlex="fill" fxLayout="column">
+<div fxLayout="column">
   <h2>Explore research activities</h2>
 
-  <div class="flex-hack" fxFlex="grow" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="center center" fxLayoutAlign.lt-lg="">
+  <div fxFlex="noshrink">
     <div fxFlex.lt-lg="100%">
       <mat-chip-list ngClass.xs="mat-chip-list-stacked">
         <div *ngFor="let activity of optionsService.researchActivityOptions" [ngClass]="['ra-chip-container', activity.className]" ngStyle.xs="margin-right: 0;">
-          <mat-chip fxLayout="row" fxLayoutAlign="start center" style="height: 48px !important;" [routerLink]="['/search']" [queryParams]="getQueryParams(activity)">
+          <mat-chip fxLayout="row" fxLayoutAlign="start center" style="height: 48px !important;cursor: pointer;"  [routerLink]="['/search']" [queryParams]="getQueryParams(activity)">
             <span style="padding-left: 0.5em;padding-right: 0.5em;">{{activity.name}}</span>
           </mat-chip>
         </div>

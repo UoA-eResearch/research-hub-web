@@ -1,5 +1,5 @@
 <form *ngIf="filtersForm" [formGroup]="filtersForm"  fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="2.5em" fxLayoutGap.xs="1em">
-  <div fxHide.gt-xs>
+  <div fxHide.gt-xs fxFlex.lt-sm="noshrink">
     <mat-form-field fxFlex="100" style="margin-top: 1em !important;">
       <mat-select formControlName="categoryId" placeholder="Category">
         <mat-option *ngFor="let category of optionsService.categoryOptions" [value]="category.id">
@@ -9,7 +9,7 @@
     </mat-form-field>
   </div>
 
-  <div fxFlex="50">
+  <div fxFlex="50" fxFlex.lt-sm="noshrink">
     <div fxLayout="column" fxLayoutGap="1em">
       <app-mat-tags *ngIf="showPersonFilter" [placeholder]="'People'"
                     [addNew]="false" [source]="personTagSource" formControlName="personTags"></app-mat-tags>
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div fxLayout="column" fxFlex="50">
+  <div fxLayout="column" fxFlex="50" fxFlex.lt-sm="noshrink">
     <app-research-activity-input style="display: block;" *ngIf="showResearchActivityFilter"
                                  formControlName="researchActivityIds"></app-research-activity-input>
   </div>

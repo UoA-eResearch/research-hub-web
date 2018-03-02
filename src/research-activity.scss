@@ -13,6 +13,7 @@ $color-discover-bg: #cd3234;
 
 .ra-chip-container {
   margin-bottom: $ra-chip-margin;
+  cursor: pointer;
 }
 
 .ra-chip-container:not(:last-child) {
