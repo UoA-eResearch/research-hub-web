@@ -2,7 +2,7 @@
 
 ## Developing
 
-Follow steps 1 and 2 in the [README](https://github.com/UoA-eResearch/research-hub-deploy).
+Follow steps 1 and 2 in the [research-hub-deploy README](https://github.com/UoA-eResearch/research-hub-deploy#research-hub-deploy).
 
 To experience the full functionality of the app, you also need to run research-hub-api and research-hub-db whilst developing. 
 Follow the instructions on the following pages:
