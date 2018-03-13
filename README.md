@@ -7,8 +7,8 @@ Follow steps 1 and 2 in the [research-hub-deploy README](https://github.com/UoA-
 To experience the full functionality of the app, you also need to run research-hub-api and research-hub-db whilst developing. 
 Follow the instructions on the following pages:
 
-* [research-hub-db](https://github.com/UoA-eResearch/research-hub-db): run the database using Docker
-* [research-hub-api](https://github.com/UoA-eResearch/research-hub-api): run the api directly with Maven or via the IntelliJ IDE
+* [research-hub-db](https://github.com/UoA-eResearch/research-hub-db#research-hub-db): run the database using Docker
+* [research-hub-api](https://github.com/UoA-eResearch/research-hub-api#research-hub-api): run the api directly with Maven or via the IntelliJ IDE
 
 Navigate to the research-hub-web folder (this command assumes you're in the `research-hub-deploy` folder):
 ```bash
