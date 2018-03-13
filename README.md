@@ -1,12 +1,31 @@
 # ResearchHub
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.
+## Developing
 
-## Development server
+Start by cloning the `research-hub-deploy` project and follow steps 1 and 2 in the [README](https://github.com/UoA-eResearch/research-hub-deploy).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+git clone https://github.com/UoA-eResearch/research-hub-deploy
+```
 
-To run the REST API and database whilst developing, follow [these instructions](https://github.com/UoA-eResearch/research-hub-deploy#development).
+To experience the full functionality of the app, you also need to run research-hub-api and research-hub-db whilst developing. Follow the instructions on the following pages:
+
+* [research-hub-db](https://github.com/UoA-eResearch/research-hub-db): run the database using Docker
+* [research-hub-api](https://github.com/UoA-eResearch/research-hub-api): run the api directly with Maven or via the IntelliJ IDE
+
+Navigate to the research-hub-web folder:
+```bash
+cd research-hub-deploy/build/research-hub-web
+```
+
+Install dependencies:
+```bash
+npm install
+```
+
+Then run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+To test run the app in production mode, run `npm run test-prod`.
 
 ## Code scaffolding
 
@@ -14,7 +33,14 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. 
+
+## Build production and visualise components & dependencies
+
+Run `npm run build-prod` to build the project in production mode.
+
+After the build finishes, run `npm run bundle-report` to view a visualisation of all of the components
+and dependencies of your app.
 
 ## Running unit tests
 
