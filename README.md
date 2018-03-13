@@ -1,4 +1,5 @@
-# ResearchHub
+# Research Hub Web
+The front end for the [Research Hub](https://research-hub.auckland.ac.nz/), built with [Angular](https://angular.io/) and [Angular Material](https://material.angular.io/).
 
 ## Developing
 
