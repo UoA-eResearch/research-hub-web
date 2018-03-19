@@ -59,13 +59,14 @@
 
           <div class="form-group">
             <h3>Estimated project end date</h3>
-            <mat-form-field floatPlaceholder="never" class="no-floating-label">
-              <input matInput [matDatepicker]="picker" [min]="dateToday" formControlName="endDate" placeholder="Project end date">
+            <mat-form-field floatPlaceholder="never" class="no-floating-label" (click)="picker.open()">
+              <input matInput [matDatepicker]="picker" [min]="dateToday" formControlName="endDate" placeholder="Choose a date" readonly>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
               <mat-error *ngIf="projectForm.controls.endDate.invalid">* Please choose a date</mat-error>
             </mat-form-field>
           </div>
+
 
           <div class="form-group">
             <h3>Please choose at least one FOR code from the Australian and New Zealand Standard Research Classification (ANZSRC)</h3>
