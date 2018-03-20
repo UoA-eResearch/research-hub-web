@@ -11,7 +11,9 @@
     <div fxFlex="100px">
       <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
         <mat-select placeholder="Sort By" (change)="onOrderByChange($event)" [(value)]="orderBy">
-          <mat-option *ngFor="let item of sortOptions" [value]="item.id">{{item.name}}</mat-option>
+          <mat-option *ngFor="let item of sortOptions" [value]="item.id" [disabled]="searchTextIsBlank && item.name=='Relevance'">
+            {{ item.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
