@@ -1,4 +1,3 @@
-<div style="margin-top: 32px;">
   <app-search-filters style="display: block;" [filtersForm]="filtersForm" fxHide.lt-md></app-search-filters>
 
   <div #resultsDummyHeader></div>
@@ -56,6 +55,33 @@
     </ng-container>
   </mat-nav-list>
 
+  <!--Testing Card View for Results-->
+  <mat-grid-list [cols]="3" gutterSize="1em" rowHeight="50em">
+    <mat-grid-tile class="browse-tile" *ngFor="let item of resultsPage.content;" [colspan]="1" [rowspan]="1" [routerLink]="item | listItemToRouterLink">
+      <div style="height: 50%; width: 100%; background-color: #fff; padding: 0; margin: 0; position: absolute; left: 0; top: 0;">
+        Img
+      </div>
+      <div style="height: 50%; width: 100%; padding: 0; margin: 0; position: absolute; left: 0; top: 25em; color: white">
+        <div style="width: 90%; height: 30%; position: relative; padding: 0; margin: 0 auto; display: flex; align-items: center;">
+          {{item.title}}
+        </div>
+        <div style="width: 90%; height: 40%; position: relative; padding: 0; margin: 0 auto; font-size: small">
+          {{item.subtitle}}
+        </div>
+        <div style="width: 90%; height: 20%; position: relative; padding: 0; margin: 0 auto;">
+          <mat-chip-list mat-line style="overflow: hidden; height: 1em;">
+            <mat-chip disabled *ngFor="let category of item.categories" style="margin-bottom: 2px; margin-left: 0px; margin-right: 2px; cursor: pointer; background-color: #fff;"><span style="color: #004059;font-size: small;">{{category}}</span></mat-chip>
+          </mat-chip-list>
+        </div>
+        <div style="width: 90%; height: 10%; position: relative; padding: 0; margin: 0 auto; font-size: small">
+          <span style="float: left;">Details</span><span style="float: right;">Quick Launch</span>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <!------------------------------------------------------------------------------------------>
+
+
   <mat-paginator class="search-paginator"
                  #paginator [style.visibility]="!showEmptyState ? 'visible' : 'hidden'"
                  [length]="resultsPage.totalElements"
@@ -64,5 +90,4 @@
                  [pageSizeOptions]="pageSizeOptions"
                  (page)="onPageChange($event)">
   </mat-paginator>
-</div>
 
