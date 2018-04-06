@@ -44,4 +44,62 @@
   background-color: $color-background;
 }
 
+//Card Result Styles
+.card-result-image {
+  height: 50%;
+  width: 100%;
+  background-color: #fff;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 
+.card-result-content {
+  background-color: $color-browse-tile-bg;
+  height: 50%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  color: $light-primary-text;
+}
+
+.card-result-title {
+  width: 90%;
+  height: 30%;
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.card-result-subtitle {
+  width: 90%;
+  height: 40%;
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+  font-size: small;
+}
+
+.card-result-chip-list {
+  width: 90%;
+  height: 20%;
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.card-result-footer {
+  width: 90%;
+  height: 10%;
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+  font-size: small;
+}
