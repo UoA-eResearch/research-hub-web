@@ -25,7 +25,9 @@ import {AppComponentService} from '../../app.component.service';
 import {PageEvent} from '@angular/material/paginator';
 import {Subject} from 'rxjs/Subject';
 import {MatPaginator} from '@angular/material/paginator';
+import {LayoutService} from '../../services/layout.service';
 
+import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 
 @Component({
   selector: 'app-search-results',
@@ -45,7 +47,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
 
-  public searchTextIsBlank: boolean;
+  public searchTextIsBlank = true;
   public noResultsSummary = '';
   public resultsSummary = '';
   public showEmptyState = false;
@@ -62,6 +64,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private previousFiltersFormValues: any;
   private previousSearchText: any;
 
+  // Card Results Tests
+  public cardViewResultsNumberOfColumns = 3;
+  private mediaSub: Subscription;
 
   public static getFilterVisibility(categoryId: number) {
     return {
@@ -108,10 +113,24 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   constructor(private searchBarService: SearchBarService,
               public optionsService: OptionsService, public apiService: ResearchHubApiService,
               private analyticsService: AnalyticsService, private route: ActivatedRoute,
-              private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService) {
+              private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService,
+              private layoutService: LayoutService, private media: ObservableMedia) {
+  }
+
+  //Results cards
+  updateCols(mqAlias: string) {
+    const cols = this.layoutService.getNumGridColsCardResults(mqAlias);
+    this.cardViewResultsNumberOfColumns = Math.min(3, cols);
   }
 
   ngOnInit() {
+    //Results cards
+    this.updateCols(this.layoutService.getMQAlias());
+
+    this.mediaSub = this.media.subscribe((change: MediaChange) => {
+      this.updateCols(change.mqAlias);
+    });
+
     // Results page
     this.resultsPage = {totalElements: 0} as Page<ListItem>;
 
@@ -175,6 +194,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.pageIndex = +(params['pageIndex'] || 0);
         this.pageSize = +(params['pageSize'] || 10);
         this.orderBy = params['orderBy'] || OrderBy.Relevance;
+        // this.orderBy = this.searchTextIsBlank ? params['orderBy'] || OrderBy.Alphabetical : params['orderBy'] || OrderBy.Relevance;
+        //Issue: Only gets called once
 
         // Update values in search bar and search filters form
         this.searchBarService.setSearchText(searchText);

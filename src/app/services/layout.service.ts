@@ -56,4 +56,35 @@ export class LayoutService {
       return 'xl';
     }
   }
+
+  /**
+   * Layout method for card view search results
+   * Requires different number of columns to above getNumGridCols() method
+   */
+  public getNumGridColsCardResults(mqAlias: string) {
+    let numCols = 0;
+    switch (mqAlias) {
+      case 'xs':
+        numCols = 1;
+        break;
+      case 'sm':
+        numCols = 2;
+        break;
+      case 'md':
+        numCols = 3;
+        break;
+      case 'lg':
+        numCols = 3;
+        break;
+      case 'xl':
+        numCols = 3;
+        break;
+      default:
+        numCols = 3;
+        break;
+    }
+
+    return numCols;
+  }
+
 }
