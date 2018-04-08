@@ -64,9 +64,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private previousFiltersFormValues: any;
   private previousSearchText: any;
 
-  // Card Results Tests
+  // Used for determining number of columns for card-view results
   public cardViewResultsNumberOfColumns = 3;
   private mediaSub: Subscription;
+
+  public showCardView = false;
 
   public static getFilterVisibility(categoryId: number) {
     return {
@@ -117,14 +119,14 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
               private layoutService: LayoutService, private media: ObservableMedia) {
   }
 
-  //Results cards
+  // Results cards
   updateCols(mqAlias: string) {
     const cols = this.layoutService.getNumGridColsCardResults(mqAlias);
     this.cardViewResultsNumberOfColumns = Math.min(3, cols);
   }
 
   ngOnInit() {
-    //Results cards
+    // Results cards
     this.updateCols(this.layoutService.getMQAlias());
 
     this.mediaSub = this.media.subscribe((change: MediaChange) => {
