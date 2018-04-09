@@ -9,7 +9,7 @@
 
     <!-- Results View Switcher -->
     <div fxFlex="50px" style="display: flex; align-content: center">
-      <img (click)="showCardView = !showCardView" [src]="showCardView ? 'https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_view_list_black_24px.svg' : 'https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_view_module_black_24px.svg'">
+      <img (click)="showCardView = !showCardView" [src]="showCardView ? apiService.getAssetUrl('page-elements/list-view-icon.svg') : apiService.getAssetUrl('page-elements/card-view-icon.svg')">
     </div>
 
     <div fxFlex="100px">
@@ -64,7 +64,7 @@
   <mat-grid-list *ngIf="showCardView" [cols]="cardViewResultsNumberOfColumns" gutterSize="1em" rowHeight="1:2">
     <mat-grid-tile *ngFor="let item of resultsPage.content;" [colspan]="1" [rowspan]="1" [routerLink]="item | listItemToRouterLink" style="cursor: pointer">
       <div class="card-result-image">
-        <img src="https://research-hub.cer.auckland.ac.nz/api/assets/{{item.image}}" style="width: 100%; height: 100%;"/>
+        <img src="{{apiService.getAssetUrl(item.image)}}" style="width: 100%; height: 100%;"/>
       </div>
       <div class="card-result-content">
         <div class="card-result-title">
