@@ -354,10 +354,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         activities.push('<span class="search-results-text">' + this.optionsService.researchActivityOptions[researchActivityId - 1]['name'] + '</span>');
       }
 
-      let researchPhaseText = 'applicable to the ' + activities.join(', ') + ' research phase';
+      let researchPhaseText = 'applicable to the ' + activities.join(', ') + ' research activity';
 
       if (researchActivityIds.length > 1) {
-        researchPhaseText += 's';
+        researchPhaseText = researchPhaseText.slice(0, -1) + 'ies';
       }
 
       statements.push(researchPhaseText);
