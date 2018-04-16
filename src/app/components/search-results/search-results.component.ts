@@ -52,7 +52,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public resultsSummary = '';
   public showEmptyState = false;
   public sortOptions = [{id: OrderBy.Alphabetical, name: 'Alphabet'}, {id: OrderBy.Relevance, name: 'Relevance'}];
-  public pageSizeOptions = [5, 10, 25, 50, 100, 1000];
+  public pageSizeOptions = [6, 12, 60, 120, 600];
 
   public orderBy;
   public pageSize;
@@ -194,7 +194,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         const orgUnitIds = SearchResultsComponent.parseParamArray(params['orgUnitIds']);
         const researchActivityIds = SearchResultsComponent.parseParamArray(params['researchActivityIds']);
         this.pageIndex = +(params['pageIndex'] || 0);
-        this.pageSize = +(params['pageSize'] || 10);
+        this.pageSize = +(params['pageSize'] || 12);
         this.orderBy = params['orderBy'] || OrderBy.Relevance;
         // this.orderBy = this.searchTextIsBlank ? params['orderBy'] || OrderBy.Alphabetical : params['orderBy'] || OrderBy.Relevance;
         //Issue: Only gets called once
