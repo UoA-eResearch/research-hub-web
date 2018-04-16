@@ -8,8 +8,8 @@
     </div>
 
     <!-- Results View Switcher -->
-    <div fxFlex="50px" style="display: flex; align-content: center">
-      <img (click)="showCardView = !showCardView" [src]="showCardView ? apiService.getAssetUrl('page-elements/list-view-icon.svg') : apiService.getAssetUrl('page-elements/card-view-icon.svg')">
+    <div fxFlex="65px" style="display: flex; align-content: center">
+      <i (click)="showCardView = !showCardView" style="cursor: pointer; font-size: 40px; color: #004059" class="material-icons">{{showCardView? "view_list" : "view_module"}}</i>&nbsp;
     </div>
 
     <div fxFlex="100px">
