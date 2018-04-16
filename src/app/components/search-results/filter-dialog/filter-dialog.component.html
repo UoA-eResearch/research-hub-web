@@ -1,9 +1,15 @@
 <mat-toolbar color="primary">
-  <span style="font-size: 20px;">Refine</span>
+  <span style="font-size: 20px; cursor: pointer;" (click)="done()">Refine</span>
   <span class="example-spacer"></span>
   <button mat-icon-button (click)="clear()"><mat-icon>clear_all</mat-icon></button>
   <button mat-button (click)="done()">Search</button>
 </mat-toolbar>
 <div class="component" ngClass.xs="component-xs">
   <app-search-filters *ngIf="filtersForm" [filtersForm]="filtersForm"></app-search-filters>
+  <div style="float: right; padding-top: 3em">
+    <span style="color: #2f99cc; padding-right: 1em; cursor: pointer" (click)="clear(); done()"> Cancel </span>
+    <button mat-raised-button color="accent" (click)="done()">
+      Refine Search
+    </button>
+  </div>
 </div>
