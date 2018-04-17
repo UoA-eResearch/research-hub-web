@@ -1,4 +1,4 @@
-  <app-search-filters style="display: block;" [filtersForm]="filtersForm" fxHide.lt-md></app-search-filters>
+<app-search-filters style="display: block;" [filtersForm]="filtersForm" fxHide.lt-md></app-search-filters>
 
   <div #resultsDummyHeader></div>
 
@@ -8,8 +8,8 @@
     </div>
 
     <!-- Results View Switcher -->
-    <div fxFlex="65px" style="display: flex; align-content: center">
-      <i (click)="showCardView = !showCardView" style="cursor: pointer; font-size: 40px; color: #004059" class="material-icons">{{showCardView? "view_list" : "view_module"}}</i>&nbsp;
+    <div fxFlex="65px" style="display: flex; align-content: center; justify-content: center">
+      <i (click)="showCardView = !showCardView" style="cursor: pointer; font-size: 36px; color: rgba(00, 40, 59, .8)" class="material-icons">{{showCardView? "view_list" : "view_module"}}</i>&nbsp;
     </div>
 
     <div fxFlex="100px">
