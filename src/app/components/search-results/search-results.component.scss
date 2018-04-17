@@ -42,6 +42,13 @@
 
 .search-paginator {
   background-color: $color-background;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 16px;
+}
+
+//Paginator items per page selector/popup font size
+/deep/ .search-paginator .mat-select, /deep/ .mat-option-text, /deep/ .search-paginator .mat-select-value {
+  font-size: 16px;
 }
 
 //Card Result Styles
