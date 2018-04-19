@@ -50,7 +50,7 @@
       <mat-card *ngIf="similarContentItems && similarContentItems.length">
         <h3>You might also be interested in</h3>
         <mat-nav-list>
-          <mat-list-item *ngFor="let item of similarContentItems" [routerLink]="['/content', item.id]">
+            <mat-list-item class="tooltip" *ngFor="let item of similarContentItems" [routerLink]="['/content', item.id]" matTooltip="{{item.name}}" matTooltipShowDelay="300">
             <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
             <h4 style="font-size: 16px;" mat-line> {{item.name}} </h4>
           </mat-list-item>

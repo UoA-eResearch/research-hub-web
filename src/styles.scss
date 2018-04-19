@@ -235,3 +235,21 @@ app-filter-dialog {
   bottom: 20%;
   left: 0; // For IE11, so that the icon will be centred, despite absolute positioning being used
 }
+
+/*
+ * Override site-wide material design tooltip style
+ */
+.mat-tooltip {
+  color: #ffffff;
+  font-size: smaller;
+  background-color: #004059;
+}
+
+/*
+ * Top menu drop-down style
+ */
+.mat-menu-content, .mat-menu-item {
+  background-color: #0294A5;
+  color: #ffffff;
+  font-size: mat-font-size($app-base-typography, body-1);
+}

@@ -19,8 +19,8 @@
             <h3>When would you like the consultation to take place?</h3>
 
             <div fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="1em">
-              <mat-form-field>
-                <input matInput [matDatepickerFilter]="excludeWeekendsFilter" [matDatepicker]="picker" [min]="dateToday" formControlName="date" placeholder="Date">
+              <mat-form-field (click)="picker.open()">
+                <input matInput [matDatepickerFilter]="excludeWeekendsFilter" [matDatepicker]="picker" [min]="dateToday" formControlName="date" placeholder="Choose a date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error *ngIf="dateCtrl.invalid">* Please choose a date</mat-error>

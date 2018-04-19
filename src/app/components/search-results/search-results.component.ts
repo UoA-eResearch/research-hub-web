@@ -45,6 +45,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
 
+  public searchTextIsBlank: boolean;
   public noResultsSummary = '';
   public resultsSummary = '';
   public showEmptyState = false;
@@ -140,6 +141,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       .debounceTime(100)
       .subscribe(latestValues => {
         const [searchText, filtersFormValues, pageEvent, orderBy] = latestValues;
+
+        this.searchTextIsBlank = searchText == "";
 
         if (filtersFormValues.categoryId !== this.searchBarService.category) {
           this.searchBarService.setCategory(filtersFormValues.categoryId);
