@@ -70,6 +70,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   public showCardView = false;
 
+  // Display number of results from each category type
+  public categoryListArray = [];
+
   public static getFilterVisibility(categoryId: number) {
     return {
       person: categoryId !== CategoryId.Policies && categoryId !== CategoryId.Person,
@@ -100,6 +103,26 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     }
 
     return nums;
+  }
+
+  // Update the category if someone clicks a category in the mat-list search results list
+  public updateCategoryFromCategoryList(category: string) {
+    // Necessary because of discrepancies between item category description and service enums (enums should be updated in future)
+    switch (category) {
+      case 'Policy':
+        category = 'Policies';
+        break;
+      case 'Service':
+        category = 'Support';
+        break;
+      case 'Facility':
+        category = 'Facilities';
+        break;
+      case 'People':
+        category = 'Person';
+        break;
+    }
+    this.searchBarService.setCategory(CategoryId[category]);
   }
 
   fromTags(tags: Tag[]) {
@@ -275,6 +298,20 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       resultsSub.unsubscribe();
       this.appComponentService.setProgressBarVisibility(false);
     });
+
+    const categoryList = {}; this.categoryListArray = [];
+    const resultsSubCategories = this.apiService.getSearchResultsCategories(params).subscribe(res => {
+      for (let i = 0; i < res['content'].length; i++) {
+        for (let j = 0; j < res['content'][i]['categories'].length; j++) {
+            categoryList[res['content'][i]['categories'][j]] = categoryList[res['content'][i]['categories'][j]] === undefined ? 1 : categoryList[res['content'][i]['categories'][j]] + 1;
+        }
+      }
+      // Convert JSON to array for Angular *ngFor
+      for (const categoryTuple in categoryList) {
+        this.categoryListArray.push([categoryTuple, categoryList[categoryTuple]]);
+      }
+      resultsSubCategories.unsubscribe();
+    });
   }
 
   updateUrl(categoryId: number, searchText: string, personIds: number[], orgUnitIds: number[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
@@ -372,6 +409,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.noResultsSummary = 'Sorry - your search ' + summary + ', did not match anything on the ResearchHub.';
     this.resultsSummary = 'Found <span class="search-results-text">' + (page.totalElements) + '</span> results ' + summary + '. Showing page <span class="search-results-text">' + (page.number + 1) + '</span> of <span class="search-results-text">' + (page.totalPages) + '</span>.';
     this.showEmptyState = page.totalElements === 0;
+
   }
 
   openDialog(): void {

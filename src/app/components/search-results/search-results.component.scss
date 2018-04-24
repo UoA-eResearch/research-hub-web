@@ -107,3 +107,25 @@
   margin: 0 auto;
   overflow: hidden;
 }
+
+.category-list > * {
+  display: flex;
+  align-self: flex-start;
+  overflow: hidden;
+  padding-top: 0px;
+  outline: 0;
+  outline: none;
+}
+
+.category-list mat-chip {
+  margin: 0px 2px 2px 0px;
+  background-color: #e0e0e0;
+  height: 0.5em;
+  cursor: pointer;
+}
+
+@media screen and (max-width: $width-page-max) {
+  .category-list {
+    display: none !important;
+  }
+}
