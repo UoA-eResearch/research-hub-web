@@ -120,8 +120,13 @@
 .category-list mat-chip {
   margin: 0px 2px 2px 0px;
   background-color: #e0e0e0;
+  color: #004059;
   height: 0.5em;
   cursor: pointer;
+}
+
+.category-list mat-chip-selected {
+  color: white !important;
 }
 
 @media screen and (max-width: $width-page-max) {

@@ -125,6 +125,33 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.searchBarService.setCategory(CategoryId[category]);
   }
 
+  /**
+   * Checks if the passed string corresponds with the currently searched for category.
+   * Used to highlight the mat-chip corresponding to the currently searched category.
+   * @param {string} category
+   */
+  public isCurrentCategory(category: string) {
+    switch (category) {
+      case 'Service':
+        return this.searchBarService.category == '2';
+      case 'Equipment':
+        return this.searchBarService.category == '3';
+      case 'Training':
+        return this.searchBarService.category == '4';
+      case 'Software':
+        return this.searchBarService.category == '5';
+      case 'Facility':
+        return this.searchBarService.category == '6';
+      case 'Guide':
+        return this.searchBarService.category == '7';
+      case 'People':
+        return this.searchBarService.category == '8';
+      case 'Policy':
+        return this.searchBarService.category == '9';
+    }
+    return false;
+  }
+
   fromTags(tags: Tag[]) {
     return tags.map(tag => tag.id);
   }
@@ -303,7 +330,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     const resultsSubCategories = this.apiService.getSearchResultsCategories(params).subscribe(res => {
       for (let i = 0; i < res['content'].length; i++) {
         for (let j = 0; j < res['content'][i]['categories'].length; j++) {
-            categoryList[res['content'][i]['categories'][j]] = categoryList[res['content'][i]['categories'][j]] === undefined ? 1 : categoryList[res['content'][i]['categories'][j]] + 1;
+          categoryList[res['content'][i]['categories'][j]] = categoryList[res['content'][i]['categories'][j]] === undefined ? 1 : categoryList[res['content'][i]['categories'][j]] + 1;
         }
       }
       // Convert JSON to array for Angular *ngFor
