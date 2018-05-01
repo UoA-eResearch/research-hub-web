@@ -73,6 +73,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   // Display number of results from each category type
   public categoryListArray = [];
 
+  public currentCategoryString = '';
+
   public static getFilterVisibility(categoryId: number) {
     return {
       person: categoryId !== CategoryId.Policies && categoryId !== CategoryId.Person,
@@ -388,6 +390,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     const visibilities = SearchResultsComponent.getFilterVisibility(categoryId);
 
     if (categoryId) {
+      this.currentCategoryString = this.optionsService.categoryOptions[categoryId - 1]['name'];
       statements.push('in <span class="search-results-text">' + this.optionsService.categoryOptions[categoryId - 1]['name'] + '</span>');
     }
 

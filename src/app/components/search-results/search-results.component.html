@@ -24,14 +24,30 @@
   </div>
 
   <!-- Category List -->
-  <div class="category-list">
+  <div class="category-list" *ngIf="searchBarService.getCategory() == 1 && !showEmptyState">
       <mat-chip-list mat-line style="height: 1.5em;">
-        <span style="padding-right: 0.5em">Categories: </span>
-        <mat-chip disabled *ngFor="let categoryTuple of categoryListArray" (click)="updateCategoryFromCategoryList(categoryTuple[0])" [selected]="isCurrentCategory(categoryTuple[0])">
-          <span style="font-size: 14px; margin-right: 2px;" *ngFor="let categoryValue of categoryTuple; let first=first;">{{categoryValue}}<span *ngIf="first" style="padding-right: 1px">: </span></span>
+        <div style="padding-right: 0.5em">Categories: </div>
+        <mat-chip disabled selected>
+          <span style="font-size: 14px;">All: {{ resultsPage.totalElements }}</span>
+        </mat-chip>
+        <mat-chip disabled style="padding-right: 9px; padding-left:9px;" *ngFor="let categoryTuple of categoryListArray" (click)="updateCategoryFromCategoryList(categoryTuple[0])" [selected]="isCurrentCategory(categoryTuple[0])">
+          <span style="font-size: 14px; margin-right: 2px;" *ngFor="let categoryValue of categoryTuple; let first=first;">{{categoryValue}}<span *ngIf="first" style="padding-right: 0px">: </span></span>
         </mat-chip>
       </mat-chip-list>
     </div>
+
+  <div class="category-list" *ngIf="searchBarService.getCategory() != 1 && !showEmptyState">
+    <mat-chip-list mat-line style="height: 1.5em;">
+      <div style="padding-right: 0.5em">Category: </div>
+      <mat-chip disabled>
+        <span style="font-size: 14px;" (click)="searchBarService.setCategory(1)">All Categories</span>
+      </mat-chip>
+      <mat-chip disabled selected>
+        <span style="font-size: 14px; margin-right: 2px;">{{ currentCategoryString + ': ' + resultsPage.totalElements }} </span>
+      </mat-chip>
+
+    </mat-chip-list>
+  </div>
 
   <div *ngIf="showEmptyState" style="margin-top: 32px;">
     <p [innerHTML]="noResultsSummary"></p>
