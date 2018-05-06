@@ -36,7 +36,7 @@
       </mat-chip-list>
     </div>
 
-  <div class="category-list" *ngIf="searchBarService.getCategory() != 1 && !showEmptyState">
+  <div *ngIf="searchBarService.getCategory() != 1 && !showEmptyState" fxHide fxShow.gt-sm>
     <mat-chip-list mat-line style="height: 1.5em;">
       <div style="padding-right: 0.5em">Category: </div>
       <mat-chip disabled>
@@ -45,7 +45,6 @@
       <mat-chip disabled selected>
         <span style="font-size: 14px; margin-right: 2px;">{{ currentCategoryString + ': ' + resultsPage.totalElements }} </span>
       </mat-chip>
-
     </mat-chip-list>
   </div>
 

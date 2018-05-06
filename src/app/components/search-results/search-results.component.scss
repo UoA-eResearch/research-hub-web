@@ -34,6 +34,7 @@
   display: block;
 }
 
+
 .list-item mat-chip-list mat-chip {
   font-size: 12px !important;
   padding-top: 0;
@@ -127,10 +128,4 @@
 
 .category-list mat-chip-selected {
   color: white !important;
-}
-
-@media screen and (max-width: $width-page-max) {
-  .category-list {
-    display: none !important;
-  }
 }
