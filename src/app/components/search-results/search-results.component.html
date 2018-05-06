@@ -24,7 +24,7 @@
   </div>
 
   <!-- Category List -->
-  <div class="category-list" *ngIf="searchBarService.getCategory() == 1 && !showEmptyState">
+  <div class="category-list" *ngIf="searchBarService.getCategory() == 1 && !showEmptyState" fxHide fxShow.gt-sm>
       <mat-chip-list mat-line style="height: 1.5em;">
         <div style="padding-right: 0.5em">Categories: </div>
         <mat-chip disabled selected>
