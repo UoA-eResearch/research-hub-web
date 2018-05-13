@@ -110,6 +110,28 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   // Return a number version of the category version to the view (decoupling model/view/controller)
   public getCategoryId = () => Number(this.searchBarService.getCategory());
 
+  public getCurrentCategoryId(category: string) {
+    switch (category) {
+      case 'Service':
+        return 2;
+      case 'Equipment':
+        return 3;
+      case 'Training':
+        return 4;
+      case 'Software':
+        return 5;
+      case 'Facility':
+        return 6;
+      case 'Guide':
+        return 7;
+      case 'People':
+        return 8;
+      case 'Policy':
+        return 9;
+    }
+    return false;
+  }
+
   // Update the category if someone clicks a category in the mat-list search results list
   public updateCategoryFromCategoryList(category: string) {
     // Necessary because of discrepancies between item category description and service enums (enums should be updated in future)

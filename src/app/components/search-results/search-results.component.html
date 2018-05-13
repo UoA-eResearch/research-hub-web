@@ -30,8 +30,8 @@
         <mat-chip disabled selected>
           <span style="font-size: 14px;">All: {{ resultsPage.totalElements }}</span>
         </mat-chip>
-        <mat-chip disabled style="padding-right: 9px; padding-left:9px;" *ngFor="let categoryTuple of categoryListArray" (click)="updateCategoryFromCategoryList(categoryTuple[0])" [selected]="isCurrentCategory(categoryTuple[0])">
-          <span style="font-size: 14px; margin-right: 2px;" *ngFor="let categoryValue of categoryTuple; let first=first;">{{categoryValue}}<span *ngIf="first" style="padding-right: 0px">: </span></span>
+        <mat-chip style="padding-right: 9px; padding-left:9px;" *ngFor="let categoryTuple of categoryListArray" (click)="updateCategoryFromCategoryList(categoryTuple[0])" [selected]="isCurrentCategory(categoryTuple[0])">
+        <span style="font-size: 14px; margin-right: 2px;" *ngFor="let categoryValue of categoryTuple; let first=first;">{{categoryValue}}<span *ngIf="first" style="padding-right: 0px">: </span></span>
         </mat-chip>
       </mat-chip-list>
     </div>
@@ -40,7 +40,7 @@
     <mat-chip-list mat-line style="height: 1.5em;">
       <div style="padding-right: 0.5em">Category: </div>
       <mat-chip disabled>
-        <span style="font-size: 14px;" (click)="searchBarService.setCategory(1)">All Categories</span>
+        <span (click)="updateCategoryFromCategoryList('All')">All Categories</span>
       </mat-chip>
       <mat-chip disabled selected>
         <span style="font-size: 14px; margin-right: 2px;">{{ currentCategoryString + ': ' + resultsPage.totalElements }} </span>
