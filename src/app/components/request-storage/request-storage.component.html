@@ -93,9 +93,9 @@
 
         <div class="step-form-container">
             <div class="form-group">
-              <h3>To help us store your data appropriately please tick any of the following that apply to the data being stored [optional]</h3>
+              <h3>To help us store your data appropriately please tick any of the following that apply to the data being stored</h3>
               <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
-                <mat-select placeholder="Data information" formControlName="dataRequirements" multiple>
+                <mat-select placeholder="Data information [optional]" formControlName="dataRequirements" multiple>
                   <mat-option *ngFor="let item of dataRequirements" [value]="item">{{item}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="dataInfoForm.controls.dataRequirements.invalid">* Please choose at least one item from the list</mat-error>
@@ -107,9 +107,9 @@
             </div>
 
             <div class="form-group">
-              <h3>Please provide a short name for your storage folder (e.g. GDC-data)? [optional]</h3>
+              <h3>Please provide a short name for your storage folder (e.g. GDC-data)?</h3>
               <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
-                <input matInput placeholder="Short name" formControlName="shortName" type="text">
+                <input matInput placeholder="Short name [optional]" formControlName="shortName" type="text">
                 <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">* Please enter a short name</mat-error>
               </mat-form-field>
             </div>
@@ -216,9 +216,9 @@
           </div>
 
           <div class="form-group">
-            <h3>Comments? [optional]</h3>
+            <h3>Comments?</h3>
             <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
-              <textarea matInput placeholder="Comments" formControlName="comments" type="text"></textarea>
+              <textarea matInput placeholder="Comments [optional]" formControlName="comments" type="text"></textarea>
             </mat-form-field>
           </div>
 
