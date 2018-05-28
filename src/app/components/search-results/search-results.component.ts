@@ -273,8 +273,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.pageIndex = +(params['pageIndex'] || 0);
         this.pageSize = +(params['pageSize'] || 12);
         this.orderBy = params['orderBy'] || OrderBy.Relevance;
-        // this.orderBy = this.searchTextIsBlank ? params['orderBy'] || OrderBy.Alphabetical : params['orderBy'] || OrderBy.Relevance;
-        //Issue: Only gets called once
+
 
         // Update values in search bar and search filters form
         this.searchBarService.setSearchText(searchText);
