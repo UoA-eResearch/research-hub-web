@@ -59,6 +59,13 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   public storageTypeClicked = false;
   public showSizeNextYear = true;
 
+  public storageOptionsList = [
+    'Dropbox',
+    'Network Research Storage',
+    'Archive',
+    'I don\'t know'
+  ]
+
   public fieldOfResearchCodes = [
     '01 Mathematical Sciences',
     '02 Physical Sciences',
@@ -127,7 +134,8 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     this.analyticsService.trackIntegratedService(this.title, this.location.path());
 
     this.storageTypeForm = this.formBuilder.group({
-      storageType: new FormControl(undefined, Validators.required)
+      storageType: new FormControl(undefined, Validators.required),
+      storageOptions: new FormControl(undefined, Validators.required)
     });
 
     this.projectForm = this.formBuilder.group({
@@ -162,9 +170,9 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
 
     this.dataSizeForm = this.formBuilder.group({
       sizeThisYear: new FormControl(undefined, [Validators.required, Validators.min(1)]),
-      unitThisYear: new FormControl(undefined, Validators.required),
+      unitThisYear: new FormControl(this.units[0], Validators.required),
       sizeNextYear: new FormControl(undefined, [Validators.required, Validators.min(1)]),
-      unitNextYear: new FormControl(undefined, Validators.required),
+      unitNextYear: new FormControl(this.units[0], Validators.required),
       comments: new FormControl(undefined)
     });
 
