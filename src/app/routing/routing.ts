@@ -19,6 +19,9 @@ export const appRoutes: Routes = [
   {path: 'requestVm', loadChildren: 'app/components/request-vm/request-vm.module#RequestVmModule', canActivate: [CanActivateViaAuthGuard]},
   {path: 'requestStorage', loadChildren: 'app/components/request-storage/request-storage.module#RequestStorageModule', canActivate: [CanActivateViaAuthGuard]},
 
+  {path: 'myResearch', loadChildren: 'app/components/my-research/my-research.module#MyResearchModule'},
+
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', redirectTo: '/home', pathMatch: 'full'}
+  {path: '**', redirectTo: '/home', pathMatch: 'full'},
+
 ];
