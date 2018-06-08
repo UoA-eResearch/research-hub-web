@@ -22,6 +22,16 @@
               <mat-error *ngIf="storageTypeForm.controls.storageType.invalid && storageTypeClicked">* Please choose an option</mat-error>
             </mat-radio-group>
           </div>
+
+          <div class="form-group">
+            <h3>Which of the following storage options would you like?</h3>
+            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
+              <mat-select placeholder="Storage options" formControlName="storageOptions" multiple>
+                <mat-option *ngFor="let item of storageOptionsList" [value]="item">{{item}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="storageTypeForm.controls.storageOptions.invalid">* Please choose at least one item from the list</mat-error>
+            </mat-form-field>
+          </div>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="end">
@@ -93,9 +103,9 @@
 
         <div class="step-form-container">
             <div class="form-group">
-              <h3>To help us store your data appropriately please tick any of the following that apply to the data being stored [optional]</h3>
+              <h3>To help us store your data appropriately please tick any of the following that apply to the data being stored</h3>
               <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
-                <mat-select placeholder="Data information" formControlName="dataRequirements" multiple>
+                <mat-select placeholder="Data information [optional]" formControlName="dataRequirements" multiple>
                   <mat-option *ngFor="let item of dataRequirements" [value]="item">{{item}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="dataInfoForm.controls.dataRequirements.invalid">* Please choose at least one item from the list</mat-error>
@@ -107,9 +117,9 @@
             </div>
 
             <div class="form-group">
-              <h3>Please provide a short name for your storage folder (e.g. GDC-data)? [optional]</h3>
+              <h3>Please provide a short name for your storage folder (e.g. GDC-data)?</h3>
               <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
-                <input matInput placeholder="Short name" formControlName="shortName" type="text">
+                <input matInput placeholder="Short name [optional]" formControlName="shortName" type="text">
                 <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">* Please enter a short name</mat-error>
               </mat-form-field>
             </div>
@@ -180,14 +190,14 @@
 
         <div class="step-form-container">
           <div class="form-group">
-            <h3>Estimate how much storage you need in the next 12 months</h3>
+            <h3>Estimate how much total storage you need in the next 12 months</h3>
             <div fxLayout="row" fxLayoutGap="1em" fxLayout.xs="column">
               <mat-form-field fxFlex="50">
                 <input matInput placeholder="Amount" formControlName="sizeThisYear" type="number" min="1">
                 <mat-error *ngIf="dataSizeForm.controls.sizeThisYear.invalid">* Please enter a value above 0</mat-error>
               </mat-form-field>
               <mat-form-field fxFlex="50">
-                <mat-select placeholder="Unit" formControlName="unitThisYear">
+                <mat-select formControlName="unitThisYear">
                   <mat-option *ngFor="let unit of units" [value]="unit">
                     {{unit}}
                   </mat-option>
@@ -198,7 +208,7 @@
           </div>
 
           <div class="form-group" *ngIf="showSizeNextYear">
-            <h3>Estimate how much storage you need for the entire project duration</h3>
+            <h3>Estimate how much total storage you need for the entire project duration</h3>
             <div fxLayout="row" fxLayoutGap="1em" fxLayout.xs="column">
               <mat-form-field fxFlex="50">
                 <input matInput placeholder="Amount" formControlName="sizeNextYear" type="number" min="1">
@@ -216,9 +226,9 @@
           </div>
 
           <div class="form-group">
-            <h3>Comments? [optional]</h3>
+            <h3>Is there anything else you would like to tell us?</h3>
             <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
-              <textarea matInput placeholder="Comments" formControlName="comments" type="text"></textarea>
+              <textarea matInput placeholder="Comments [optional]" formControlName="comments" type="text"></textarea>
             </mat-form-field>
           </div>
 

@@ -34,6 +34,7 @@
   display: block;
 }
 
+
 .list-item mat-chip-list mat-chip {
   font-size: 12px !important;
   padding-top: 0;
@@ -42,6 +43,89 @@
 
 .search-paginator {
   background-color: $color-background;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 16px;
 }
 
+//Paginator items per page selector/popup font size
+/deep/ .search-paginator .mat-select, /deep/ .mat-option-text, /deep/ .search-paginator .mat-select-value {
+  font-size: 16px;
+}
 
+//Card Result Styles
+.card-result-image {
+  height: 50%;
+  width: 100%;
+  background-color: #fff;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.card-result-content {
+  background-color: $color-browse-tile-bg;
+  height: 50%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  color: $light-primary-text;
+}
+
+.card-result-title {
+  width: 90%;
+  height: 25%;
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  overflow: hidden;
+}
+
+.card-result-subtitle {
+  width: 90%;
+  height: 55%;
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.card-result-chip-list {
+  width: 90%;
+  height: 20%;
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.category-list > * {
+  display: flex;
+  align-self: flex-start;
+  overflow: hidden;
+  padding-top: 0px;
+  outline: 0;
+  outline: none;
+}
+
+.category-list mat-chip {
+  margin: 0px 0px 2px 0px;
+  background-color: #e0e0e0;
+  color: #004059;
+  height: 0.5em;
+  cursor: pointer;
+}
+
+.category-list mat-chip-selected {
+  color: white !important;
+}

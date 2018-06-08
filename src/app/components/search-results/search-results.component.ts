@@ -25,7 +25,9 @@ import {AppComponentService} from '../../app.component.service';
 import {PageEvent} from '@angular/material/paginator';
 import {Subject} from 'rxjs/Subject';
 import {MatPaginator} from '@angular/material/paginator';
+import {LayoutService} from '../../services/layout.service';
 
+import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 
 @Component({
   selector: 'app-search-results',
@@ -45,12 +47,12 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
 
-  public searchTextIsBlank: boolean;
+  public searchTextIsBlank = true;
   public noResultsSummary = '';
   public resultsSummary = '';
   public showEmptyState = false;
   public sortOptions = [{id: OrderBy.Alphabetical, name: 'Alphabet'}, {id: OrderBy.Relevance, name: 'Relevance'}];
-  public pageSizeOptions = [5, 10, 25, 50, 100, 1000];
+  public pageSizeOptions = [6, 12, 60, 120, 600];
 
   public orderBy;
   public pageSize;
@@ -62,6 +64,16 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private previousFiltersFormValues: any;
   private previousSearchText: any;
 
+  // Used for determining number of columns for card-view results
+  public cardViewResultsNumberOfColumns = 3;
+  private mediaSub: Subscription;
+
+  public showCardView = false;
+
+  // Display number of results from each category type
+  public categoryListArray = [];
+
+  public currentCategoryString = '';
 
   public static getFilterVisibility(categoryId: number) {
     return {
@@ -95,6 +107,78 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     return nums;
   }
 
+  // Return a number version of the category version to the view (decoupling model/view/controller)
+  public getCategoryId = () => Number(this.searchBarService.getCategory());
+
+  public getCurrentCategoryId(category: string) {
+    switch (category) {
+      case 'Service':
+        return 2;
+      case 'Equipment':
+        return 3;
+      case 'Training':
+        return 4;
+      case 'Software':
+        return 5;
+      case 'Facility':
+        return 6;
+      case 'Guide':
+        return 7;
+      case 'People':
+        return 8;
+      case 'Policy':
+        return 9;
+    }
+    return false;
+  }
+
+  // Update the category if someone clicks a category in the mat-list search results list
+  public updateCategoryFromCategoryList(category: string) {
+    // Necessary because of discrepancies between item category description and service enums (enums should be updated in future)
+    switch (category) {
+      case 'Policy':
+        category = 'Policies';
+        break;
+      case 'Service':
+        category = 'Support';
+        break;
+      case 'Facility':
+        category = 'Facilities';
+        break;
+      case 'People':
+        category = 'Person';
+        break;
+    }
+    this.searchBarService.setCategory(CategoryId[category]);
+  }
+
+  /**
+   * Checks if the passed string corresponds with the currently searched for category.
+   * Used to highlight the mat-chip corresponding to the currently searched category.
+   * @param {string} category
+   */
+  public isCurrentCategory(category: string) {
+    switch (category) {
+      case 'Service':
+        return this.searchBarService.category == '2';
+      case 'Equipment':
+        return this.searchBarService.category == '3';
+      case 'Training':
+        return this.searchBarService.category == '4';
+      case 'Software':
+        return this.searchBarService.category == '5';
+      case 'Facility':
+        return this.searchBarService.category == '6';
+      case 'Guide':
+        return this.searchBarService.category == '7';
+      case 'People':
+        return this.searchBarService.category == '8';
+      case 'Policy':
+        return this.searchBarService.category == '9';
+    }
+    return false;
+  }
+
   fromTags(tags: Tag[]) {
     return tags.map(tag => tag.id);
   }
@@ -108,10 +192,24 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   constructor(private searchBarService: SearchBarService,
               public optionsService: OptionsService, public apiService: ResearchHubApiService,
               private analyticsService: AnalyticsService, private route: ActivatedRoute,
-              private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService) {
+              private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService,
+              private layoutService: LayoutService, private media: ObservableMedia) {
+  }
+
+  // Results cards
+  updateCols(mqAlias: string) {
+    const cols = this.layoutService.getNumGridColsCardResults(mqAlias);
+    this.cardViewResultsNumberOfColumns = Math.min(3, cols);
   }
 
   ngOnInit() {
+    // Results cards
+    this.updateCols(this.layoutService.getMQAlias());
+
+    this.mediaSub = this.media.subscribe((change: MediaChange) => {
+      this.updateCols(change.mqAlias);
+    });
+
     // Results page
     this.resultsPage = {totalElements: 0} as Page<ListItem>;
 
@@ -173,8 +271,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         const orgUnitIds = SearchResultsComponent.parseParamArray(params['orgUnitIds']);
         const researchActivityIds = SearchResultsComponent.parseParamArray(params['researchActivityIds']);
         this.pageIndex = +(params['pageIndex'] || 0);
-        this.pageSize = +(params['pageSize'] || 10);
+        this.pageSize = +(params['pageSize'] || 12);
         this.orderBy = params['orderBy'] || OrderBy.Relevance;
+
 
         // Update values in search bar and search filters form
         this.searchBarService.setSearchText(searchText);
@@ -252,6 +351,20 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       resultsSub.unsubscribe();
       this.appComponentService.setProgressBarVisibility(false);
     });
+
+    const categoryList = {}; this.categoryListArray = [];
+    const resultsSubCategories = this.apiService.getSearchResultsCategories(params).subscribe(res => {
+      for (let i = 0; i < res['content'].length; i++) {
+        for (let j = 0; j < res['content'][i]['categories'].length; j++) {
+          categoryList[res['content'][i]['categories'][j]] = categoryList[res['content'][i]['categories'][j]] === undefined ? 1 : categoryList[res['content'][i]['categories'][j]] + 1;
+        }
+      }
+      // Convert JSON to array for Angular *ngFor
+      for (const categoryTuple in categoryList) {
+        this.categoryListArray.push([categoryTuple, categoryList[categoryTuple]]);
+      }
+      resultsSubCategories.unsubscribe();
+    });
   }
 
   updateUrl(categoryId: number, searchText: string, personIds: number[], orgUnitIds: number[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
@@ -301,6 +414,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     const visibilities = SearchResultsComponent.getFilterVisibility(categoryId);
 
     if (categoryId) {
+      this.currentCategoryString = this.optionsService.categoryOptions[categoryId - 1]['name'];
       statements.push('in <span class="search-results-text">' + this.optionsService.categoryOptions[categoryId - 1]['name'] + '</span>');
     }
 
@@ -331,10 +445,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         activities.push('<span class="search-results-text">' + this.optionsService.researchActivityOptions[researchActivityId - 1]['name'] + '</span>');
       }
 
-      let researchPhaseText = 'applicable to the ' + activities.join(', ') + ' research phase';
+      let researchPhaseText = 'applicable to the ' + activities.join(', ') + ' research activity';
 
       if (researchActivityIds.length > 1) {
-        researchPhaseText += 's';
+        researchPhaseText = researchPhaseText.slice(0, -1) + 'ies';
       }
 
       statements.push(researchPhaseText);
@@ -347,8 +461,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     const summary = searchTextSummary + statements.join(', ');
     this.noResultsSummary = 'Sorry - your search ' + summary + ', did not match anything on the ResearchHub.';
-    this.resultsSummary = 'Page <span class="search-results-text">' + (page.number + 1) + '</span> of <span class="search-results-text">' + page.totalElements + '</span> results ' + summary + '.';
+    this.resultsSummary = 'Found <span class="search-results-text">' + (page.totalElements) + '</span> results ' + summary + '. Showing page <span class="search-results-text">' + (page.number + 1) + '</span> of <span class="search-results-text">' + (page.totalPages) + '</span>.';
     this.showEmptyState = page.totalElements === 0;
+
   }
 
   openDialog(): void {

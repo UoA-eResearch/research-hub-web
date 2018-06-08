@@ -264,6 +264,19 @@ export class ResearchHubApiService {
       .retry(ResearchHubApiService.numRetries);
   }
 
+  // Same query as above, but returns total number of results from each category
+  getSearchResultsCategories(params: SearchResultsParams) {
+    params.setSize(65535); // Return results from all pages
+
+    return this.http
+      .get(ResearchHubApiService.hostname + ResearchHubApiService.searchResultsUrl,
+        {
+          params: params.getParams(),
+          headers: ResearchHubApiService.headers
+        })
+      .retry(ResearchHubApiService.numRetries);
+  }
+
   getContentItems(params: ContentItemsParams) {
     return this.http
       .get<Page<ListItem>>(ResearchHubApiService.hostname + ResearchHubApiService.contentUrl, {

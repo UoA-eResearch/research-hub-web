@@ -1,11 +1,15 @@
-<div style="margin-top: 32px;">
-  <app-search-filters style="display: block;" [filtersForm]="filtersForm" fxHide.lt-md></app-search-filters>
+<app-search-filters style="display: block;" [filtersForm]="filtersForm" fxHide.lt-md></app-search-filters>
 
   <div #resultsDummyHeader></div>
 
   <div *ngIf="!showEmptyState" style="margin-top: 32px;" fxLayout="row" fxLayoutAlign="left center">
     <div fxFlex>
       <p [innerHTML]="resultsSummary" style="margin-bottom: 0; margin-right: 1em;"></p>
+    </div>
+
+    <!-- Results View Switcher -->
+    <div fxFlex="65px" style="display: flex; align-content: center; justify-content: center">
+      <i (click)="showCardView = !showCardView" style="cursor: pointer; font-size: 36px; color: rgba(00, 40, 59, .8)" class="material-icons">{{showCardView? "view_list" : "view_module"}}</i>&nbsp;
     </div>
 
     <div fxFlex="100px">
@@ -19,6 +23,31 @@
     </div>
   </div>
 
+  <!-- Category List -->
+  <div class="category-list" *ngIf="getCategoryId() == 1 && !showEmptyState" fxHide fxShow.gt-sm>
+      <mat-chip-list mat-line style="height: 1.5em;">
+        <div style="padding-right: 0.5em">Categories: </div>
+        <mat-chip disabled selected>
+          <span style="font-size: 14px;">All: {{ resultsPage.totalElements }}</span>
+        </mat-chip>
+        <mat-chip style="padding-right: 9px; padding-left:9px;" *ngFor="let categoryTuple of categoryListArray" (click)="updateCategoryFromCategoryList(categoryTuple[0])" [selected]="isCurrentCategory(categoryTuple[0])">
+        <span style="font-size: 14px; margin-right: 2px;" *ngFor="let categoryValue of categoryTuple; let first=first;">{{categoryValue}}<span *ngIf="first" style="padding-right: 0px">: </span></span>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+
+  <div class="category-list" *ngIf="getCategoryId() != 1 && !showEmptyState" fxHide fxShow.gt-sm>
+    <mat-chip-list mat-line style="height: 1.5em;">
+      <div style="padding-right: 0.5em">Category: </div>
+      <mat-chip disabled>
+        <span (click)="updateCategoryFromCategoryList('All')">All Categories</span>
+      </mat-chip>
+      <mat-chip disabled selected>
+        <span style="font-size: 14px; margin-right: 2px;">{{ currentCategoryString + ': ' + resultsPage.totalElements }} </span>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+
   <div *ngIf="showEmptyState" style="margin-top: 32px;">
     <p [innerHTML]="noResultsSummary"></p>
     <p>Suggestions:</p>
@@ -30,7 +59,7 @@
     </ul>
   </div>
 
-  <mat-nav-list>
+  <mat-nav-list *ngIf="!showCardView">
     <ng-container *ngFor="let item of resultsPage.content">
       <ng-container *ngIf="item.type !== 'policy'">
         <mat-list-item class="list-item" [routerLink]="item | listItemToRouterLink">
@@ -56,6 +85,32 @@
     </ng-container>
   </mat-nav-list>
 
+  <!--Testing Card View for Results-->
+  <mat-grid-list *ngIf="showCardView" [cols]="cardViewResultsNumberOfColumns" gutterSize="1em" rowHeight="1:2" style="padding-top: 1em">
+    <mat-grid-tile *ngFor="let item of resultsPage.content;" [colspan]="1" [rowspan]="1" [routerLink]="item | listItemToRouterLink" style="cursor: pointer">
+      <div class="card-result-image">
+        <img src="{{apiService.getAssetUrl(item.image)}}" style="width: 100%; height: 100%;"/>
+      </div>
+      <div class="card-result-content">
+        <div class="card-result-title">
+          {{item.title}}
+        </div>
+        <div class="card-result-subtitle">
+          {{item.subtitle}}
+        </div>
+        <div class="card-result-chip-list">
+          <mat-chip-list mat-line style="overflow: hidden; height: 1em;">
+            <mat-chip disabled *ngFor="let category of item.categories" style="margin: 2px 2px 2px 0px; cursor: pointer; background-color: #fff; height: .5em">
+              <span style="color: #004059;font-size: small;">{{category}}</span>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <!------------------------------------------------------------------------------------------>
+
+
   <mat-paginator class="search-paginator"
                  #paginator [style.visibility]="!showEmptyState ? 'visible' : 'hidden'"
                  [length]="resultsPage.totalElements"
@@ -64,5 +119,4 @@
                  [pageSizeOptions]="pageSizeOptions"
                  (page)="onPageChange($event)">
   </mat-paginator>
-</div>
 
