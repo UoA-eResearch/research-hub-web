@@ -1,0 +1,40 @@
+@import '../../../styles';
+
+/deep/ .mat-tab-label {
+  color: $color-primary !important;
+  font-size: large;
+  opacity: 1 !important;
+}
+
+.list-item {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.item-title {
+  color: #b13462;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  padding-bottom: 5px !important;
+}
+
+.item-subtitle {
+  color: #004059;
+  font-size: 14px;
+  padding-bottom: 7px !important;
+}
+
+.list-item img {
+  width: 64px;
+  height: 64px;
+}
+
+.list-item mat-chip-list {
+  display: block;
+}
+
+.research-chips {
+  margin: 0px 2px 0px 0px  !important;
+  height: .5em !important;
+  color: #004059 !important;
+}

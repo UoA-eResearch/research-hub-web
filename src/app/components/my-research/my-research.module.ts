@@ -5,6 +5,7 @@ import {routing} from './my-research.routing';
 import {SharedModule} from 'app/components/shared/app.shared.module';
 import {MyResearchComponent} from './my-research.component';
 
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {MyResearchComponent} from './my-research.component';
   imports: [
     CommonModule,
     SharedModule,
-    routing
+    routing,
+    MatTabsModule
   ]
 })
 export class MyResearchModule {

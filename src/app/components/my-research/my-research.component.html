@@ -1,3 +1,26 @@
-<p>
-  My Research
-</p>
+<h1>My Research</h1>
+
+<mat-tab-group>
+  <mat-tab label="My Projects" class="tab-label">
+    <mat-nav-list>
+      <mat-list-item *ngFor="let project of projects" style="margin-top: 0.5em;">
+        <img mat-list-avatar [src]="apiService.getAssetUrl('content/book.svg')">
+        <p mat-line class="item-title">{{project.title}}</p>
+        <p mat-line class="item-subtitle">{{project.subtitle}}</p>
+        <mat-chip-list mat-line style="height: 1.5em;">
+          <mat-chip *ngIf="project.numAllocations!=0" class="research-chips" style="font-size: small !important;">{{project.numAllocations}} Resource Allocation<span *ngIf="project.numAllocations!=1">s</span></mat-chip>
+          <mat-chip *ngIf="project.numResearchOutputs!=0" class="research-chips" style="font-size: small !important;">{{project.numResearchOutputs}} Research Output<span *ngIf="project.numResearchOutputs!=1">s</span></mat-chip>
+        </mat-chip-list>
+      </mat-list-item>
+    </mat-nav-list>
+    <mat-paginator style="background-color: transparent;" [length]="projects.length"
+                    [pageSize]="10"
+                    [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </mat-tab>
+
+  <mat-tab label="My Research Outputs">
+    Coming soon(ish)...
+  </mat-tab>
+
+</mat-tab-group>
