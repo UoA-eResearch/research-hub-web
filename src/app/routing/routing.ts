@@ -19,7 +19,9 @@ export const appRoutes: Routes = [
   {path: 'requestVm', loadChildren: 'app/components/request-vm/request-vm.module#RequestVmModule', canActivate: [CanActivateViaAuthGuard]},
   {path: 'requestStorage', loadChildren: 'app/components/request-storage/request-storage.module#RequestStorageModule', canActivate: [CanActivateViaAuthGuard]},
 
+  //Routes for Hackday project
   {path: 'myResearch', loadChildren: 'app/components/my-research/my-research.module#MyResearchModule'},
+  {path: 'project', loadChildren: 'app/components/project/project.module#ProjectModule'},
 
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home', pathMatch: 'full'},

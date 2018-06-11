@@ -178,7 +178,8 @@ export class OptionsService {
       guideCategory: {isHeaderVisible: false, isSearchBarVisible: false},
       requestVm: {isHeaderVisible: false, isSearchBarVisible: false},
       requestStorage: {isHeaderVisible: false, isSearchBarVisible: false},
-      myResearch: {isHeaderVisible: false, isSearchBarVisible: false}
+      myResearch: {isHeaderVisible: false, isSearchBarVisible: false},
+      project: {isHeaderVisible: false, isSearchBarVisible: false}
     };
   }
 }

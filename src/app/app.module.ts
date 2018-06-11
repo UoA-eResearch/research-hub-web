@@ -14,12 +14,11 @@ import {SearchBarComponent} from './components/search-bar/search-bar.component';
 import {SearchBarService} from './components/search-bar/search-bar.service';
 import {AppComponentService} from './app.component.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    SearchBarComponent
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
