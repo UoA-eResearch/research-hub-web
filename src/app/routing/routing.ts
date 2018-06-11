@@ -21,7 +21,7 @@ export const appRoutes: Routes = [
 
   //Routes for Hackday project
   {path: 'myResearch', loadChildren: 'app/components/my-research/my-research.module#MyResearchModule'},
-  {path: 'project', loadChildren: 'app/components/project/project.module#ProjectModule'},
+  {path: 'project/:projectId', loadChildren: 'app/components/project/project.module#ProjectModule'},
 
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home', pathMatch: 'full'},

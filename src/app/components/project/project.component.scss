@@ -1,0 +1,8 @@
+@import '../../../styles';
+
+/deep/ .projectResourceTile {
+  background-color: $color-content-summary-bg;
+  text-decoration: none;
+  border: 1px solid $color-guide-tile-bg;
+  font-size: 14px;
+}

@@ -1,3 +1,46 @@
-<p>
-  project works!
-</p>
+<mat-card>
+  <h2 style="text-align: center;">Project Dashboard</h2>
+  <h4 style="text-align: center;">Project Id: {{projectId}}</h4>
+</mat-card>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><h3>{{ projectTitle }}</h3></mat-card-title>
+    <mat-card-subtitle>{{projectDescription}}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><h3>Manage Project Resource Access</h3></mat-card-title>
+    <mat-card-subtitle>Manage the project members access to project resources</mat-card-subtitle>
+  </mat-card-header>
+  <mat-grid-list [cols]="projectResources.length+1" rowHeight="8:1">
+    <mat-grid-tile [rowspan]="2" class="projectResourceTile" style="color: #B13462;">User</mat-grid-tile>
+    <mat-grid-tile [colspan]="projectResources.length" class="projectResourceTile" style="color: #B13462;">Project Resources</mat-grid-tile>
+    <mat-grid-tile *ngFor="let resource of projectResources" class="projectResourceTile">
+      {{resource}}
+    </mat-grid-tile>
+    <!--List of users-->
+    <div *ngFor="let projectMember of projectMembers" >
+      <mat-grid-tile class="projectResourceTile">
+        {{projectMember}}  <button mat-icon-button style="color: #757575;"><mat-icon>delete</mat-icon></button>
+      </mat-grid-tile>
+      <mat-grid-tile *ngFor="let resource of projectResources" class="projectResourceTile">
+        <mat-select style="width: 100px" placeholder="Read Only">
+          <mat-option value="readOnly">Read Only</mat-option>
+          <mat-option value="admin">Admin</mat-option>
+        </mat-select>
+      </mat-grid-tile>
+    </div>
+    <!--End list of users-->
+  </mat-grid-list>
+
+  <div style="display: flex; justify-content: flex-end;">
+    <button mat-button color="primary" style="margin-bottom: 1em">Add User</button>
+  </div>
+
+  <div style="display: flex; justify-content: flex-end;">
+    <button mat-raised-button color="accent">Update Access</button>
+  </div>
+</mat-card>

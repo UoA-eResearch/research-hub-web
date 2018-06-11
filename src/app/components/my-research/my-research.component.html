@@ -3,7 +3,7 @@
 <mat-tab-group>
   <mat-tab label="My Projects" class="tab-label">
     <mat-nav-list>
-      <mat-list-item *ngFor="let project of projects" style="margin-top: 0.5em;">
+      <mat-list-item *ngFor="let project of projects" style="margin-top: 0.5em;" [routerLink]="['/project/', project.id]">
         <img mat-list-avatar [src]="apiService.getAssetUrl('content/book.svg')">
         <p mat-line class="item-title">{{project.title}}</p>
         <p mat-line class="item-subtitle">{{project.subtitle}}</p>
