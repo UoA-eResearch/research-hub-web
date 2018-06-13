@@ -1,12 +1,12 @@
 <mat-card>
   <h2 style="text-align: center;">Project Dashboard</h2>
-  <h4 style="text-align: center;">Project Id: {{projectId}}</h4>
+  <h4 style="text-align: center;">Project ID: {{project.id}}</h4>
 </mat-card>
 
 <mat-card>
   <mat-card-header>
-    <mat-card-title><h3>{{ projectTitle }}</h3></mat-card-title>
-    <mat-card-subtitle>{{projectDescription}}</mat-card-subtitle>
+    <mat-card-title><h3>{{project.title}}</h3></mat-card-title>
+    <mat-card-subtitle>{{project.description}}</mat-card-subtitle>
   </mat-card-header>
 </mat-card>
 
@@ -22,9 +22,9 @@
       {{resource}}
     </mat-grid-tile>
     <!--List of users-->
-    <div *ngFor="let projectMember of projectMembers" >
+    <div *ngFor="let projectMember of project.members" >
       <mat-grid-tile class="projectResourceTile">
-        {{projectMember}}  <button mat-icon-button style="color: #757575;"><mat-icon>delete</mat-icon></button>
+        {{projectMember.id}}  <button mat-icon-button style="color: #757575;"><mat-icon>delete</mat-icon></button>
       </mat-grid-tile>
       <mat-grid-tile *ngFor="let resource of projectResources" class="projectResourceTile">
         <mat-select style="width: 100px" placeholder="Read Only">
