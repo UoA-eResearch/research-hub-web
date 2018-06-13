@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CerApiService} from '../../services/cer-api.service';
 import {Project, Member} from '../../model/Project';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-project',
@@ -52,6 +53,11 @@ export class ProjectComponent implements OnInit, OnDestroy {
       this.project.description = response.description;
       this.project.members = response.members;
     });
+
+    // this.cerApiService.getProjectDetails(projectId).flatMap((res: any) => {
+    // });
+
+
   }
 
   ngOnDestroy() {

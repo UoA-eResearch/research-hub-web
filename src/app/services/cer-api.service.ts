@@ -4,6 +4,7 @@ import {environment} from 'environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {Project, Member} from '../model/Project';
 import 'rxjs/add/operator/map';
+import { mergeMap } from 'rxjs/operators';
 import 'rxjs/add/operator/retry';
 
 @Injectable()
@@ -96,41 +97,56 @@ export class CerApiService {
     return this.http.get(CerApiService.projectDbHostname + 'project/' + projectId + '?expand=services,codes,members')
       .map(response => {
 
-        // Get User Ids
-        const memberIds: Member[] = [];
+        // Initially get User IDs (used to make further API calls to get more information about person)
+        const members: Member[] = [];
+
         for (const memberId of response['members']['items']) {
-          memberIds.push({id: memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1)});
+          members.push({id: memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1)});
         }
 
-        this.getPersonDetails(93).subscribe(res => {
-          console.log(res);
-        });
+        // Call getPersonDetails on each id, getting further details (UoA ID, full name etc)
+        for (let member of members) {
+          this.getPersonDetails(member.id).subscribe(res => {
+           console.log(res);
+          });
+        }
 
         return {
           id: response['id'],
           title: response['title'],
           description: response['description'],
-          members: memberIds
+          members: members
         };
       });
-  }
+    }
 
-  getPersonDetails(memberId: number) {
-    return this.http.get(CerApiService.projectDbHostname + 'person/' + memberId + '?expand=properties')
+  /**
+   * Gets further details about a person with a given ID (e.g. UoA ID, full name etc)
+   * @param {number} id
+   * @returns {Observable<{id: number; fullname: any; uoaId: string}>}
+   */
+  getPersonDetails(id: number) {
+    return this.http.get(CerApiService.projectDbHostname + 'person/' + id + '?expand=properties')
       .map(response => {
+
         const fullName = response['full_name'];
-        const uoaId;
+        let uoaId: string;
 
         const properties = response['properties']['items'];
         for (const property of properties) {
-          if (property['propname'] === 'uoaid')
-            console.log(property['propvalue']);
+          if (property['propname'] === 'uoaid') {
+            uoaId = property['propvalue'];
+          }
         }
 
-        return properties['propname'];
 
-        // return fullName;
-      });
+
+        return {
+          id: id,
+          fullname: fullName,
+          uoaId: uoaId
+      };
+        });
   }
 
   /**
@@ -138,3 +154,64 @@ export class CerApiService {
    */
 
 }
+
+/********************************/
+/**********Test Methods**********/
+/********************************/
+
+/* Testing mergemap
+newGetProjectDetails(projectId: string) {
+  this.http.get(CerApiService.projectDbHostname + 'project/' + projectId + '?expand=services,codes,members')
+    .pipe(
+     mergeMap(response => {
+
+         // Initially get User IDs (used to make further API calls to get more information about person)
+         const members: Member[] = [];
+
+         for (const memberId of response['members']['items']) {
+           members.push({id: memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1)});
+           return this.http.get(CerApiService.projectDbHostname + 'person/' + memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1) + '?expand=properties');
+         }
+       }
+     )
+    )
+    .subscribe(res => console.log(res));
+}
+
+
+        // for (let member of members) {
+        //     this.getPersonDetails(member.id).subscribe(res => {
+        //       console.log(res);
+        //     });
+        // }
+
+        // for (let member of members) {
+        //   setTimeout(function getData() {
+        //     this.getPersonDetails(member.id).subscribe(res =>
+        //   }, 1000);
+        // }
+
+
+        // let meh = function meh() {
+        //   this.getPersonDetails(56).subscribe()
+          // console.log('hi');
+        // };
+
+        // let myVar = setInterval(meh, 2000);
+
+        // clearInterval(myVar);
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
