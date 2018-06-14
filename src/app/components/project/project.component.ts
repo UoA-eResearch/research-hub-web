@@ -12,6 +12,8 @@ import {Observable} from 'rxjs/Observable';
 })
 export class ProjectComponent implements OnInit, OnDestroy {
 
+  showContent = false;
+
   private routeParamsSub: any;
 
   /**
@@ -53,8 +55,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.projectResources2.push(vmResource);
     this.projectResources2.push(fileShareResource);
 
-    // console.log(this.projectResources2);
-
+    console.log(this.projectResources2);
   }
 
   getProjectDetails(projectId: string) {
@@ -81,10 +82,13 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
       for (const resource of this.projectResources2) {
         for (let accessLevel of resource.accessLevels) {
-          // this.cerApiService.getProjectResources(this.project.code, accessLevel.grouperGroupId);
          this.cerApiService.getProjectResources(this.project.code, accessLevel.grouperGroupId).subscribe(res =>  accessLevel.users = res);
         }
       }
+
+      console.log('Finished project2: ', this.projectResources2);
+
+      this.showContent = true;
     });
 
   }
@@ -97,8 +101,11 @@ export class ProjectComponent implements OnInit, OnDestroy {
   getUserResourceAccessLevel(uoaId: number, resource: Resource) {
     console.log('getUserResourceAccessLevel() passed: ', uoaId, resource);
      for (const accessLevel of resource.accessLevels) {
-       console.log('Access level users: ', accessLevel.users);
+       if (accessLevel.users.indexOf(uoaId) > 0) {
+         return accessLevel.name;
+       }
      }
+     return 'No Access';
   }
 
   ngOnDestroy() {

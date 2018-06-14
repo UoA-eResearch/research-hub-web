@@ -11,7 +11,7 @@
   </mat-card-header>
 </mat-card>
 
-<mat-card>
+<mat-card *ngIf="showContent">
   <mat-card-header>
     <mat-card-title><h3>Manage Project Resource Access</h3></mat-card-title>
     <mat-card-subtitle>Manage the project members access to project resources</mat-card-subtitle>
@@ -29,8 +29,10 @@
       </mat-grid-tile>
       <!-- Iterate through project resources-->
       <div *ngFor="let resource of projectResources2" >
-        <mat-grid-tile class="projectResourceTile" (click)="getUserResourceAccessLevel(projectMember.uoaId, resource)">
-          <mat-select style="width: 100px" placeholder="No Access">
+        <mat-grid-tile class="projectResourceTile">
+          <!--<div [innerHTML]=[avar]></div>-->
+          <!--{{getUserResourceAccessLevel(projectMember.uoaId, resource)}}-->
+          <mat-select style="width: 100px" [placeholder]="getUserResourceAccessLevel(projectMember.uoaId, resource)">
             <mat-option value="readOnly">User</mat-option>
             <mat-option value="admin">Read Write</mat-option>
           </mat-select>

@@ -24,7 +24,7 @@ export class CerApiService {
    * Grouper Related Variables
    */
   private static grouperHostname = 'https://api.dev.auckland.ac.nz/service/regroup/v1/group/cer-hackday';
-  private static grouperApiKey = '0a03659e8fe944f5bdcce7c2e43acd66';
+  private static grouperApiKey = '';
   private static  grouperHttpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -171,14 +171,12 @@ export class CerApiService {
     // });
     return this.http.get(CerApiService.grouperHostname + ':' + projectCode + '_' + grouperGroupId + '/member?direct=true', CerApiService.grouperHttpOptions)
       .map(response => {
-        console.log('Members in group: ', grouperGroupId, response);
         let memberIds: number[] = [];
 
         for (const membership of response['memberships']) {
           memberIds.push(membership['memberid']);
         }
 
-        console.log('getProjectResources returning: ', memberIds);
         return memberIds;
       });
     }
