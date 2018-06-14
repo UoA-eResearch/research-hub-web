@@ -23,8 +23,14 @@ export class CerApiService {
   /**
    * Grouper Related Variables
    */
-  private static grouperHostname = 'https://api.dev.auckland.ac.nz/service/regroup/v1/group/cer-hackday/';
+  private static grouperHostname = 'https://api.dev.auckland.ac.nz/service/regroup/v1/group/cer-hackday';
   private static grouperApiKey = '0a03659e8fe944f5bdcce7c2e43acd66';
+  private static  grouperHttpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'apikey': CerApiService.grouperApiKey
+    })
+  };
 
   constructor(private http: HttpClient) {}
 
@@ -160,16 +166,10 @@ export class CerApiService {
    */
 
   getProjectResources(projectCode: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'apikey': CerApiService.grouperApiKey
-      })
-    };
-
-    return this.http.get(CerApiService.grouperHostname + 'group:' + projectCode + '_vmuser/member?direct=true', httpOptions).subscribe(res => {
+    // VM Users
+    return this.http.get(CerApiService.grouperHostname + ':' + projectCode + '_vmuser/member?direct=true', CerApiService.grouperHttpOptions).subscribe(res => {
       console.log(res);
-    })
+    });
   }
 
 }

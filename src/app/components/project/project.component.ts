@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CerApiService} from '../../services/cer-api.service';
 import {Project, Member} from '../../model/Project';
+import {Resource, AccessLevel, FileShare, Vm} from '../../model/Resource';
 import {Observable} from 'rxjs/Observable';
 
 @Component({
@@ -20,6 +21,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   projectResources: string[];
 
+  projectResources2: Resource[];
+
   project: Project = {
     id: '',
     title: '',
@@ -34,6 +37,21 @@ export class ProjectComponent implements OnInit, OnDestroy {
     });
 
     this.getProjectDetails(this.projectId);
+    this.getResourceDetails(this.projectResources);
+  }
+
+  getResourceDetails(projectResourcesString: string[]) {
+    // Two resources manually instantiated. *ToDo: iterate over the array passed to this method in future
+
+    let vmResource: Vm = new Vm();
+    vmResource.name = 'Virtual Machine';
+    vmResource.id = 5;
+
+    // let fileshareResource
+
+    console.log(vmResource);
+    // this.projectResources2.push()
+
   }
 
   getProjectDetails(projectId: string) {
@@ -53,7 +71,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
       this.project.members = response.members;
 
       // Get Grouper Details
-      // this.cerApiService.getProjectResources(this.project.code);
+      this.cerApiService.getProjectResources(this.project.code);
 
     });
 

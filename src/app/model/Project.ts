@@ -1,6 +1,7 @@
 /**
- * Interface representing data in the project database
+ * Interface representing data in the project database and grouper
  */
+
 export interface Project {
   id: string;
   title: string;
