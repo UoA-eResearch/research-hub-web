@@ -108,6 +108,13 @@ export class ProjectComponent implements OnInit, OnDestroy {
      return 'No Access';
   }
 
+  /**
+   * Hardcoded method to add specific user to group
+   */
+  updateProjectResourceGroupAccess(uoaId: number, groupId: string) {
+    console.log('UoA ID: ', uoaId, ' groupId: ', groupId);
+  }
+
   ngOnDestroy() {
     this.routeParamsSub.unsubscribe();
   }

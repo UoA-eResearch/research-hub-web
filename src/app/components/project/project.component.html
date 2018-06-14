@@ -32,7 +32,7 @@
         <mat-grid-tile class="projectResourceTile">
           <!--<div [innerHTML]=[avar]></div>-->
           <!--{{getUserResourceAccessLevel(projectMember.uoaId, resource)}}-->
-          <mat-select style="width: 100px" [placeholder]="getUserResourceAccessLevel(projectMember.uoaId, resource)">
+          <mat-select style="width: 100px" placeholder="No Access" (change)="updateProjectResourceGroupAccess(projectMember.uoaId, 'cer-hackday:res12345_vmuser')">
             <mat-option value="readOnly">User</mat-option>
             <mat-option value="admin">Read Write</mat-option>
           </mat-select>
