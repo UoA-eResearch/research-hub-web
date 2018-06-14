@@ -31,6 +31,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
     code: ''
   };
 
+  newUserUoaId: number;
+
+  newUserInformation; // String representing new user information info box
+
   constructor(private cerApiService: CerApiService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -55,7 +59,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.projectResources2.push(vmResource);
     this.projectResources2.push(fileShareResource);
 
-    console.log(this.projectResources2);
+    // console.log(this.projectResources2);
   }
 
   getProjectDetails(projectId: string) {
@@ -86,7 +90,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
         }
       }
 
-      console.log('Finished project2: ', this.projectResources2);
+      // console.log('Finished project2: ', this.projectResources2);
 
       this.showContent = true;
     });
@@ -99,7 +103,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
    * @param {Resource} resource
    */
   getUserResourceAccessLevel(uoaId: number, resource: Resource) {
-    console.log('getUserResourceAccessLevel() passed: ', uoaId, resource);
+    // console.log('getUserResourceAccessLevel() passed: ', uoaId, resource);
      for (const accessLevel of resource.accessLevels) {
        if (accessLevel.users.indexOf(uoaId) > 0) {
          return accessLevel.name;
@@ -111,8 +115,15 @@ export class ProjectComponent implements OnInit, OnDestroy {
   /**
    * Hardcoded method to add specific user to group
    */
-  updateProjectResourceGroupAccess(uoaId: number, groupId: string) {
-    console.log('UoA ID: ', uoaId, ' groupId: ', groupId);
+  updateProjectResourceGroupAccess(grouperGroupId: string, uoaId: number) {
+    this.cerApiService.updateProjectResourceGroupAccess(this.project.code, grouperGroupId, uoaId).subscribe(response => {
+      console.log('Grouper response to add user request: ', response);
+      this.newUserInformation = '<h3>Success!</h3> User (UoA ID: <span>' + uoaId + '</span>) to group: <span>' + grouperGroupId + '</span><br />Access to the associated VM may take up to 20 minutes';
+    });
+  }
+
+  addProjectMember() {
+    this.cerApiService.addProjectMember(this.newUserUoaId);
   }
 
   ngOnDestroy() {

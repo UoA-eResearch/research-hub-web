@@ -30,11 +30,10 @@
       <!-- Iterate through project resources-->
       <div *ngFor="let resource of projectResources2" >
         <mat-grid-tile class="projectResourceTile">
-          <!--<div [innerHTML]=[avar]></div>-->
           <!--{{getUserResourceAccessLevel(projectMember.uoaId, resource)}}-->
-          <mat-select style="width: 100px" placeholder="No Access" (change)="updateProjectResourceGroupAccess(projectMember.uoaId, 'cer-hackday:res12345_vmuser')">
+          <mat-select style="width: 100px" placeholder="No Access" (change)="updateProjectResourceGroupAccess('cer-hackday:res12345_vmuser', projectMember.uoaId)">
             <mat-option value="readOnly">User</mat-option>
-            <mat-option value="admin">Read Write</mat-option>
+            <mat-option value="admin">Admin</mat-option>
           </mat-select>
         </mat-grid-tile>
       </div>
@@ -43,11 +42,12 @@
     <!--End iterating through project members-->
   </mat-grid-list>
 
+  <br />
   <div style="display: flex; justify-content: flex-end;">
-    <button mat-button color="primary" style="margin-bottom: 1em">Add User</button>
+      <input placeholder="UoA ID" style="width: 100px" type="number" [(ngModel)]="newUserUoaId"><br/>
+      <button (click)="addProjectMember()" mat-raised-button color="primary">Add User</button>
   </div>
 
-  <div style="display: flex; justify-content: flex-end;">
-    <button mat-raised-button color="accent">Update Access</button>
-  </div>
+  <div *ngIf="newUserInformation" [innerHTML]="newUserInformation" style="width: 100%; background-color: rgba(100,200,0, .25); text-align: center; padding: 3px 0em 3px 0em; border: 1px solid; font-size: small;"></div>
+
 </mat-card>

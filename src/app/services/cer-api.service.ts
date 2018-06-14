@@ -23,7 +23,7 @@ export class CerApiService {
   /**
    * Grouper Related Variables
    */
-  private static grouperHostname = 'https://api.dev.auckland.ac.nz/service/regroup/v1/group/cer-hackday';
+  private static grouperHostname = 'https://api.dev.auckland.ac.nz/service/regroup/v1/group/';
   private static grouperApiKey = '';
   private static  grouperHttpOptions = {
     headers: new HttpHeaders({
@@ -135,6 +135,14 @@ export class CerApiService {
     }
 
   /**
+   * Make the 3 chained POST required to add a user to the database
+   * @param {number} uoaId
+   */
+  addProjectMember(uoaId: number) {
+      console.log('Adding user: ', uoaId);
+    }
+
+  /**
    * Gets further details about a person with a given ID (e.g. UoA ID, full name etc)
    * @param {number} id
    * @returns {Observable<{id: number; fullname: any; uoaId: string}>}
@@ -166,10 +174,7 @@ export class CerApiService {
    */
 
   getProjectResources(projectCode: string, grouperGroupId: string) {
-    // return this.http.get(CerApiService.grouperHostname + ':' + projectCode + '_' + grouperGroupId + '/member?direct=true', CerApiService.grouperHttpOptions).subscribe(res => {
-    //   console.log('Members in group: ', grouperGroupId, res);
-    // });
-    return this.http.get(CerApiService.grouperHostname + ':' + projectCode + '_' + grouperGroupId + '/member?direct=true', CerApiService.grouperHttpOptions)
+    return this.http.get(CerApiService.grouperHostname + 'cer-hackday:' + projectCode + '_' + grouperGroupId + '/member?direct=true', CerApiService.grouperHttpOptions)
       .map(response => {
         let memberIds: number[] = [];
 
@@ -180,5 +185,18 @@ export class CerApiService {
         return memberIds;
       });
     }
+
+  updateProjectResourceGroupAccess(projectCode: string, grouperGroupId: string, uoaId: number) {
+    let newMembershipJsonBody = {
+      'memberships': [
+        {
+          'memberid': uoaId,
+          'type': 'USER'
+        }
+      ]
+    };
+
+    return this.http.post(CerApiService.grouperHostname + grouperGroupId + '/member', newMembershipJsonBody, CerApiService.grouperHttpOptions);
+  }
 
 }
