@@ -166,72 +166,21 @@ export class CerApiService {
    */
 
   getProjectResources(projectCode: string, grouperGroupId: string) {
-    // VM Users
-    return this.http.get(CerApiService.grouperHostname + ':' + projectCode + '_' + grouperGroupId + '/member?direct=true', CerApiService.grouperHttpOptions).subscribe(res => {
-      console.log('Members in group: ', grouperGroupId, res);
-    });
-  }
+    // return this.http.get(CerApiService.grouperHostname + ':' + projectCode + '_' + grouperGroupId + '/member?direct=true', CerApiService.grouperHttpOptions).subscribe(res => {
+    //   console.log('Members in group: ', grouperGroupId, res);
+    // });
+    return this.http.get(CerApiService.grouperHostname + ':' + projectCode + '_' + grouperGroupId + '/member?direct=true', CerApiService.grouperHttpOptions)
+      .map(response => {
+        console.log('Members in group: ', grouperGroupId, response);
+        let memberIds: number[] = [];
+
+        for (const membership of response['memberships']) {
+          memberIds.push(membership['memberid']);
+        }
+
+        console.log('getProjectResources returning: ', memberIds);
+        return memberIds;
+      });
+    }
 
 }
-
-/********************************/
-/**********Test Methods**********/
-/********************************/
-
-/* Testing mergemap
-newGetProjectDetails(projectId: string) {
-  this.http.get(CerApiService.projectDbHostname + 'project/' + projectId + '?expand=services,codes,members')
-    .pipe(
-     mergeMap(response => {
-
-         // Initially get User IDs (used to make further API calls to get more information about person)
-         const members: Member[] = [];
-
-         for (const memberId of response['members']['items']) {
-           members.push({id: memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1)});
-           return this.http.get(CerApiService.projectDbHostname + 'person/' +
-            memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1) + '?expand=properties');
-         }
-       }
-     )
-    )
-    .subscribe(res => console.log(res));
-}
-
-
-        // for (let member of members) {
-        //     this.getPersonDetails(member.id).subscribe(res => {
-        //       console.log(res);
-        //     });
-        // }
-
-        // for (let member of members) {
-        //   setTimeout(function getData() {
-        //     this.getPersonDetails(member.id).subscribe(res =>
-        //   }, 1000);
-        // }
-
-
-        // let meh = function meh() {
-        //   this.getPersonDetails(56).subscribe()
-          // console.log('hi');
-        // };
-
-        // let myVar = setInterval(meh, 2000);
-
-        // clearInterval(myVar);
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
-

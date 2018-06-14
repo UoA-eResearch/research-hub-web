@@ -46,7 +46,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     vmResource.name = 'Virtual Machine';
     vmResource.id = 5;
 
-    let fileShareResource: FileShare = new Vm();
+    let fileShareResource: FileShare = new FileShare();
     fileShareResource.name = 'File Share';
     fileShareResource.id = 6;
 
@@ -80,13 +80,25 @@ export class ProjectComponent implements OnInit, OnDestroy {
       this.getResourceDetails(this.projectResources);
 
       for (const resource of this.projectResources2) {
-        for (const accessLevel of resource.accessLevels) {
-          this.cerApiService.getProjectResources(this.project.code, accessLevel.grouperGroupId);
+        for (let accessLevel of resource.accessLevels) {
+          // this.cerApiService.getProjectResources(this.project.code, accessLevel.grouperGroupId);
+         this.cerApiService.getProjectResources(this.project.code, accessLevel.grouperGroupId).subscribe(res =>  accessLevel.users = res);
         }
       }
-
     });
 
+  }
+
+  /**
+   * Get a users access level for a particular resource
+   * @param {number} uoaId
+   * @param {Resource} resource
+   */
+  getUserResourceAccessLevel(uoaId: number, resource: Resource) {
+    console.log('getUserResourceAccessLevel() passed: ', uoaId, resource);
+     for (const accessLevel of resource.accessLevels) {
+       console.log('Access level users: ', accessLevel.users);
+     }
   }
 
   ngOnDestroy() {

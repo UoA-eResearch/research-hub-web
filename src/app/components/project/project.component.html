@@ -22,19 +22,23 @@
     <mat-grid-tile *ngFor="let resource of projectResources" class="projectResourceTile">
       {{resource}}
     </mat-grid-tile>
-    <!--List of users-->
+    <!-- Iterate through project members-->
     <div *ngFor="let projectMember of project.members" >
       <mat-grid-tile class="projectResourceTile">
         {{projectMember.uoaId}}  <button mat-icon-button style="color: #757575;"><mat-icon>delete</mat-icon></button>
       </mat-grid-tile>
-      <mat-grid-tile *ngFor="let resource of projectResources" class="projectResourceTile">
-        <mat-select style="width: 100px" placeholder="Read Only">
-          <mat-option value="readOnly">User</mat-option>
-          <mat-option value="admin">Read Write</mat-option>
-        </mat-select>
-      </mat-grid-tile>
+      <!-- Iterate through project resources-->
+      <div *ngFor="let resource of projectResources2" >
+        <mat-grid-tile class="projectResourceTile" (click)="getUserResourceAccessLevel(projectMember.uoaId, resource)">
+          <mat-select style="width: 100px" placeholder="No Access">
+            <mat-option value="readOnly">User</mat-option>
+            <mat-option value="admin">Read Write</mat-option>
+          </mat-select>
+        </mat-grid-tile>
+      </div>
+      <!--End iterating through project resources-->
     </div>
-    <!--End list of users-->
+    <!--End iterating through project members-->
   </mat-grid-list>
 
   <div style="display: flex; justify-content: flex-end;">
