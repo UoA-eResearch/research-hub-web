@@ -1,6 +1,7 @@
 <mat-card>
   <h2 style="text-align: center;">Project Dashboard</h2>
   <h4 style="text-align: center;">Project ID: {{project.id}}</h4>
+  <h4 style="text-align: center;">Project Code: {{project.code}}</h4>
 </mat-card>
 
 <mat-card>
@@ -16,7 +17,7 @@
     <mat-card-subtitle>Manage the project members access to project resources</mat-card-subtitle>
   </mat-card-header>
   <mat-grid-list [cols]="projectResources.length+1" rowHeight="8:1">
-    <mat-grid-tile [rowspan]="2" class="projectResourceTile" style="color: #B13462;">User</mat-grid-tile>
+    <mat-grid-tile [rowspan]="2" class="projectResourceTile" style="color: #B13462;">UoA ID</mat-grid-tile>
     <mat-grid-tile [colspan]="projectResources.length" class="projectResourceTile" style="color: #B13462;">Project Resources</mat-grid-tile>
     <mat-grid-tile *ngFor="let resource of projectResources" class="projectResourceTile">
       {{resource}}
@@ -24,7 +25,7 @@
     <!--List of users-->
     <div *ngFor="let projectMember of project.members" >
       <mat-grid-tile class="projectResourceTile">
-        {{projectMember.id}}  <button mat-icon-button style="color: #757575;"><mat-icon>delete</mat-icon></button>
+        {{projectMember.uoaId}}  <button mat-icon-button style="color: #757575;"><mat-icon>delete</mat-icon></button>
       </mat-grid-tile>
       <mat-grid-tile *ngFor="let resource of projectResources" class="projectResourceTile">
         <mat-select style="width: 100px" placeholder="Read Only">

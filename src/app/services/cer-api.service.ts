@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from 'environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {Project, Member} from '../model/Project';
 import 'rxjs/add/operator/map';
-import { mergeMap } from 'rxjs/operators';
 import 'rxjs/add/operator/retry';
 
 @Injectable()
@@ -21,6 +20,11 @@ export class CerApiService {
    */
   private static projectDbHostname = 'http://130.216.216.116:8080/api/v1/';
 
+  /**
+   * Grouper Related Variables
+   */
+  private static grouperHostname = 'https://api.dev.auckland.ac.nz/service/regroup/v1/group/cer-hackday/';
+  private static grouperApiKey = '0a03659e8fe944f5bdcce7c2e43acd66';
 
   constructor(private http: HttpClient) {}
 
@@ -99,15 +103,18 @@ export class CerApiService {
 
         // Initially get User IDs (used to make further API calls to get more information about person)
         const members: Member[] = [];
+        const memberIds: number[] = [];
+
+        const code = response['codes']['items'][0]['code'];
 
         for (const memberId of response['members']['items']) {
-          members.push({id: memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1)});
+          memberIds.push(memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1));
         }
 
         // Call getPersonDetails on each id, getting further details (UoA ID, full name etc)
-        for (let member of members) {
-          this.getPersonDetails(member.id).subscribe(res => {
-           console.log(res);
+        for (const memberId of memberIds) {
+          this.getPersonDetails(memberId).subscribe(res => {
+            members.push(res);
           });
         }
 
@@ -115,6 +122,7 @@ export class CerApiService {
           id: response['id'],
           title: response['title'],
           description: response['description'],
+          code: code,
           members: members
         };
       });
@@ -139,19 +147,30 @@ export class CerApiService {
           }
         }
 
-
-
         return {
           id: id,
           fullname: fullName,
           uoaId: uoaId
-      };
-        });
+        };
+    });
   }
 
   /**
    * Grouper Related Methods Follow
    */
+
+  getProjectResources(projectCode: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'apikey': CerApiService.grouperApiKey
+      })
+    };
+
+    return this.http.get(CerApiService.grouperHostname + 'group:' + projectCode + '_vmuser/member?direct=true', httpOptions).subscribe(res => {
+      console.log(res);
+    })
+  }
 
 }
 
@@ -170,7 +189,8 @@ newGetProjectDetails(projectId: string) {
 
          for (const memberId of response['members']['items']) {
            members.push({id: memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1)});
-           return this.http.get(CerApiService.projectDbHostname + 'person/' + memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1) + '?expand=properties');
+           return this.http.get(CerApiService.projectDbHostname + 'person/' +
+            memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1) + '?expand=properties');
          }
        }
      )

@@ -4,6 +4,7 @@
 export interface Project {
   id: string;
   title: string;
+  code: string;
   description?: string;
   members?: Member[];
 }

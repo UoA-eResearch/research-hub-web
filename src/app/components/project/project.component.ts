@@ -19,11 +19,11 @@ export class ProjectComponent implements OnInit, OnDestroy {
   projectId: string; // Loaded from route subscription
 
   projectResources: string[];
-  projectMembers: string[];
 
   project: Project = {
     id: '',
-    title: ''
+    title: '',
+    code: ''
   };
 
   constructor(private cerApiService: CerApiService, private route: ActivatedRoute) { }
@@ -40,23 +40,22 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
     // Hardcoded call
     this.cerApiService.getProjectDetailsHardcoded(projectId).subscribe(response => {
-        this.projectResources = response.projectMembers;
-        this.projectMembers = response.projectMembers;
         this.projectResources = response.projectResources;
     });
 
-    // Actual API Call
+    // Get Project Details
     this.cerApiService.getProjectDetails(projectId).subscribe((response: Project) => {
-      console.log(response);
+      // console.log('CeR API Returned: ', response);
       this.project.id = response.id;
       this.project.title = response.title;
       this.project.description = response.description;
+      this.project.code = response.code;
       this.project.members = response.members;
+
+      // Get Grouper Details
+      // this.cerApiService.getProjectResources(this.project.code);
+
     });
-
-    // this.cerApiService.getProjectDetails(projectId).flatMap((res: any) => {
-    // });
-
 
   }
 
