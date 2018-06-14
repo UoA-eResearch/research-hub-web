@@ -19,6 +19,11 @@ export class CerApiService {
    * Project Db Related Variables
    */
   private static projectDbHostname = 'http://130.216.216.116:8080/api/v1/';
+  private static  projectDbHttpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
 
   /**
    * Grouper Related Variables
@@ -139,8 +144,25 @@ export class CerApiService {
    * @param {number} uoaId
    */
   addProjectMember(uoaId: number) {
-      console.log('Adding user: ', uoaId);
-    }
+
+
+
+    // Step 1: Add person to project database
+    const randomEmailAddress = Math.random().toString(36).substring(7) + '@auckland.ac.nz';
+    const addUserToProjDbRequestJsonBody = {
+      'email': randomEmailAddress,
+      'full_name': 'Hackday Test User',
+      'start_date': '2018-06-13',
+      'status_id': 1
+    };
+
+    this.http.post('URL: ' + CerApiService.projectDbHostname + 'person', addUserToProjDbRequestJsonBody, CerApiService.projectDbHttpOptions).subscribe(response => {
+      console.log('Response from adding a user to the project database: ', response);
+    });
+
+    // Step 2: Add UoA ID to person
+    // Step 3: Add person to project
+  }
 
   /**
    * Gets further details about a person with a given ID (e.g. UoA ID, full name etc)
