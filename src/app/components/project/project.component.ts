@@ -21,7 +21,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   projectResources: string[];
 
-  projectResources2: Resource[];
+  projectResources2: Resource[] = [];
 
   project: Project = {
     id: '',
@@ -40,17 +40,21 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.getResourceDetails(this.projectResources);
   }
 
+  // Two resources manually instantiated. *ToDo: iterate over the array passed to this method in future
   getResourceDetails(projectResourcesString: string[]) {
-    // Two resources manually instantiated. *ToDo: iterate over the array passed to this method in future
 
     let vmResource: Vm = new Vm();
     vmResource.name = 'Virtual Machine';
     vmResource.id = 5;
 
-    // let fileshareResource
+    let fileShareResource: FileShare = new Vm();
+    fileShareResource.name = 'File Share';
+    fileShareResource.id = 6;
 
-    console.log(vmResource);
-    // this.projectResources2.push()
+    this.projectResources2.push(vmResource);
+    this.projectResources2.push(fileShareResource);
+
+    console.log(this.projectResources2);
 
   }
 
@@ -71,7 +75,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
       this.project.members = response.members;
 
       // Get Grouper Details
-      this.cerApiService.getProjectResources(this.project.code);
+      // this.cerApiService.getProjectResources(this.project.code);
+
+      // for(resource in this.)
 
     });
 

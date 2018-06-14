@@ -24,7 +24,7 @@ export class CerApiService {
    * Grouper Related Variables
    */
   private static grouperHostname = 'https://api.dev.auckland.ac.nz/service/regroup/v1/group/cer-hackday';
-  private static grouperApiKey = '0a03659e8fe944f5bdcce7c2e43acd66';
+  private static grouperApiKey = '';
   private static  grouperHttpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
