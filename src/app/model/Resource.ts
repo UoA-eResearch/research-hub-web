@@ -6,7 +6,8 @@ export interface Resource {
 
 export interface AccessLevel {
   name: string,
-  users: number[]
+  users: number[],
+  grouperGroupId: string
 }
 
 export class Vm implements Resource {

@@ -37,7 +37,6 @@ export class ProjectComponent implements OnInit, OnDestroy {
     });
 
     this.getProjectDetails(this.projectId);
-    this.getResourceDetails(this.projectResources);
   }
 
   // Two resources manually instantiated. *ToDo: iterate over the array passed to this method in future
@@ -54,7 +53,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.projectResources2.push(vmResource);
     this.projectResources2.push(fileShareResource);
 
-    console.log(this.projectResources2);
+    // console.log(this.projectResources2);
 
   }
 
@@ -75,9 +74,16 @@ export class ProjectComponent implements OnInit, OnDestroy {
       this.project.members = response.members;
 
       // Get Grouper Details
-      // this.cerApiService.getProjectResources(this.project.code);
+      // this.cerApiService.getProjectResources(this.project.code, 'vmuser');
 
-      // for(resource in this.)
+      // Setup initial resource objects
+      this.getResourceDetails(this.projectResources);
+
+      for (const resource of this.projectResources2) {
+        for (const accessLevel of resource.accessLevels) {
+          this.cerApiService.getProjectResources(this.project.code, accessLevel.grouperGroupId);
+        }
+      }
 
     });
 
