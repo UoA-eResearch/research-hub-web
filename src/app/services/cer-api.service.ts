@@ -21,7 +21,7 @@ export class CerApiService {
   private static projectDbHostname = 'http://130.216.216.116:8080/api/v1/';
   private static  projectDbHttpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json'
+      'Content-Type':  'application/json',
     })
   };
 
@@ -145,8 +145,6 @@ export class CerApiService {
    */
   addProjectMember(uoaId: number) {
 
-
-
     // Step 1: Add person to project database
     const randomEmailAddress = Math.random().toString(36).substring(7) + '@auckland.ac.nz';
     const addUserToProjDbRequestJsonBody = {
@@ -156,9 +154,14 @@ export class CerApiService {
       'status_id': 1
     };
 
-    this.http.post('URL: ' + CerApiService.projectDbHostname + 'person', addUserToProjDbRequestJsonBody, CerApiService.projectDbHttpOptions).subscribe(response => {
-      console.log('Response from adding a user to the project database: ', response);
-    });
+    // this.http.post(CerApiService.projectDbHostname + 'person', addUserToProjDbRequestJsonBody).subscribe(response => {
+    //   console.log('Response from adding a user to the project database: ', response);
+    // });
+
+     this.http.post(CerApiService.projectDbHostname + 'person', addUserToProjDbRequestJsonBody, {observe: 'response'}).subscribe(response => {
+       console.log('Response from adding a user to the project database: ', response.headers.keys());
+     });
+
 
     // Step 2: Add UoA ID to person
     // Step 3: Add person to project
@@ -170,7 +173,7 @@ export class CerApiService {
    * @returns {Observable<{id: number; fullname: any; uoaId: string}>}
    */
   getPersonDetails(id: number) {
-    return this.http.get(CerApiService.projectDbHostname + 'person/' + id + '?expand=properties')
+    return this.http.get(CerApiService.projectDbHostname + 'person/' + id + '?expand=properties', CerApiService.projectDbHttpOptions)
       .map(response => {
 
         const fullName = response['full_name'];
