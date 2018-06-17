@@ -116,6 +116,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
    * Hardcoded method to add specific user to group
    */
   updateProjectResourceGroupAccess(grouperGroupId: string, uoaId: number) {
+    // console.log('Adding user: ', grouperGroupId, uoaId)
+
     this.cerApiService.updateProjectResourceGroupAccess(this.project.code, grouperGroupId, uoaId).subscribe(response => {
       console.log('Grouper response to add user request: ', response);
       this.newUserInformation = '<h3>Success!</h3> User (UoA ID: <span>' + uoaId + '</span>) to group: <span>' + grouperGroupId + '</span><br />Access to the associated VM may take a few minutes';
