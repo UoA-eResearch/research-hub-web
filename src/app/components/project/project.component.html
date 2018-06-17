@@ -30,8 +30,8 @@
       <!-- Iterate through project resources-->
       <div *ngFor="let resource of projectResources2" >
         <mat-grid-tile class="projectResourceTile">
-          <mat-select style="width: 100px" [placeholder]="getUserResourceAccessLevel(projectMember.uoaId, resource)" (change)="updateProjectResourceGroupAccess('cer-hackday:res12345_vmuser', projectMember.uoaId)">
-            <mat-option *ngFor="let accessLevel of resource.accessLevels" [value]="accessLevel.name">{{accessLevel.name}}</mat-option>
+          <mat-select style="width: 100px" [placeholder]="getUserResourceAccessLevel(projectMember.uoaId, resource)">
+            <mat-option *ngFor="let accessLevel of resource.accessLevels" [value]="accessLevel.name" (click)="updateProjectResourceGroupAccess(accessLevel.grouperGroupId, projectMember.uoaId)">{{accessLevel.name}}</mat-option>
             <mat-option value="noAccess">No Access</mat-option>
           </mat-select>
         </mat-grid-tile>
