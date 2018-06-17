@@ -98,31 +98,39 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Get a users access level for a particular resource
+   * Get a users access level name for a particular resource
    * @param {number} uoaId
    * @param {Resource} resource
    */
   getUserResourceAccessLevel(uoaId: number, resource: Resource) {
-    // console.log('getUserResourceAccessLevel() passed: ', uoaId, resource);
      for (const accessLevel of resource.accessLevels) {
-       if (accessLevel.users.indexOf(uoaId) > 0) {
-         return accessLevel.name;
+       if (accessLevel.users.indexOf(uoaId) !== -1) {
+         return accessLevel;
        }
      }
      return 'No Access';
   }
 
   /**
-   * Hardcoded method to add specific user to group
+   * Update a project members resource access group
    */
   updateProjectResourceGroupAccess(grouperGroupId: string, uoaId: number) {
-    // console.log('Adding user: ', grouperGroupId, uoaId)
-
     this.cerApiService.updateProjectResourceGroupAccess(this.project.code, grouperGroupId, uoaId).subscribe(response => {
       console.log('Grouper response to add user request: ', response);
-      this.newUserInformation = '<h3>Success!</h3> User (UoA ID: <span>' + uoaId + '</span>) to group: <span>' + grouperGroupId + '</span><br />Access to the associated VM may take a few minutes';
+      this.newUserInformation = '<h3>Success!</h3> User (UoA ID: <span>' + uoaId + '</span>) to group: <span>' + grouperGroupId + '</span><br />Access to the associated resource may take a few minutes';
     });
   }
+
+  /**
+   * Update a project members resource access group
+   */
+  deleteProjectResourceGroupAccess(grouperGroupId: string, uoaId: number) {
+    this.cerApiService.deleteProjectResourceGroupAccess(this.project.code, grouperGroupId, uoaId).subscribe(response => {
+      console.log('Grouper response to delete user request: ', response);
+      this.newUserInformation = '<h3>Success!</h3> User (UoA ID: <span>' + uoaId + '</span>) deleted from group: <span>' + grouperGroupId + '</span><br />';
+    });
+  }
+
 
   addProjectMember() {
     this.cerApiService.addProjectMember(this.newUserUoaId);

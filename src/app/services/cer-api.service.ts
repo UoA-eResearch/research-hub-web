@@ -213,15 +213,19 @@ export class CerApiService {
 
   updateProjectResourceGroupAccess(projectCode: string, grouperGroupId: string, uoaId: number) {
     let newMembershipJsonBody = {
-      'memberships': [
+      "memberships": [
         {
-          'memberid': uoaId,
-          'type': 'USER'
+          "memberid": uoaId,
+          "type": "USER"
         }
       ]
     };
 
-    return this.http.post(CerApiService.grouperHostname + grouperGroupId + '/member', newMembershipJsonBody, CerApiService.grouperHttpOptions);
+    console.log('membershipJsonBody: ', newMembershipJsonBody);
+
+    return this.http.post(CerApiService.grouperHostname + 'cer-hackday:' + projectCode + '_' +  grouperGroupId + '/member', newMembershipJsonBody, CerApiService.grouperHttpOptions);
   }
 
-}
+  deleteProjectResourceGroupAccess(projectCode: string, grouperGroupId: string, uoaId: number) {
+    return this.http.delete(CerApiService.grouperHostname + 'cer-hackday:' + projectCode + '_' +  grouperGroupId + '/member/' + uoaId, CerApiService.grouperHttpOptions);
+  }

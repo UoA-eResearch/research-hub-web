@@ -17,7 +17,7 @@
     <mat-card-subtitle>Manage the project members access to project resources</mat-card-subtitle>
   </mat-card-header>
   <mat-grid-list [cols]="projectResources.length+1" rowHeight="8:1">
-    <mat-grid-tile [rowspan]="2" class="projectResourceTile" style="color: #B13462;">UoA ID</mat-grid-tile>
+    <mat-grid-tile [rowspan]="2" class="projectResourceTile" style="color: #B13462;">Project Member</mat-grid-tile>
     <mat-grid-tile [colspan]="projectResources.length" class="projectResourceTile" style="color: #B13462;">Project Resources</mat-grid-tile>
     <mat-grid-tile *ngFor="let resource of projectResources" class="projectResourceTile">
       {{resource}}
@@ -25,14 +25,14 @@
     <!-- Iterate through project members-->
     <div *ngFor="let projectMember of project.members" >
       <mat-grid-tile class="projectResourceTile">
-        {{projectMember.fullname}} <button mat-icon-button style="color: #757575;"><mat-icon>delete</mat-icon></button>
+        {{projectMember.fullname}} ({{projectMember.uoaId}})<button mat-icon-button style="color: #757575;"><mat-icon>delete</mat-icon></button>
       </mat-grid-tile>
       <!-- Iterate through project resources-->
       <div *ngFor="let resource of projectResources2" >
         <mat-grid-tile class="projectResourceTile">
-          <mat-select style="width: 100px" [placeholder]="getUserResourceAccessLevel(projectMember.uoaId, resource)">
+          <mat-select style="width: 100px" [value]="getUserResourceAccessLevel(projectMember.uoaId, resource).name" placeholder="No Access">
             <mat-option *ngFor="let accessLevel of resource.accessLevels" [value]="accessLevel.name" (click)="updateProjectResourceGroupAccess(accessLevel.grouperGroupId, projectMember.uoaId)">{{accessLevel.name}}</mat-option>
-            <mat-option value="noAccess">No Access</mat-option>
+            <mat-option (click)="deleteProjectResourceGroupAccess(getUserResourceAccessLevel(projectMember.uoaId, resource).grouperGroupId, projectMember.uoaId)">No Access</mat-option>
           </mat-select>
         </mat-grid-tile>
       </div>
