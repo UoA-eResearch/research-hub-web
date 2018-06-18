@@ -4,6 +4,7 @@ import {CerApiService} from '../../services/cer-api.service';
 import {Project, Member} from '../../model/Project';
 import {Resource, AccessLevel, FileShare, Vm} from '../../model/Resource';
 import {Observable} from 'rxjs/Observable';
+import {isUndefined} from "util";
 
 @Component({
   selector: 'app-project',
@@ -115,6 +116,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
    * Update a project members resource access group
    */
   updateProjectResourceGroupAccess(accessLevel: AccessLevel, projectMember: Member, resource: Resource) {
+
+    // Remove user from any existing groups from the resource
+    if (this.getUserResourceAccessLevel(projectMember.uoaId, resource) !== 'No Access') {
+      this.cerApiService.
+        deleteProjectResourceGroupAccess( this.project.code,
+                                          (<AccessLevel>this.getUserResourceAccessLevel(projectMember.uoaId, resource)).grouperGroupId,
+                                          projectMember.uoaId).subscribe();
+    }
 
     this.cerApiService.updateProjectResourceGroupAccess(this.project.code, accessLevel.grouperGroupId, projectMember.uoaId).subscribe(response => {
       console.log('Grouper response to add user request: ', response);

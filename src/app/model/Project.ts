@@ -12,6 +12,6 @@ export interface Project {
 
 export interface Member {
   id: number,
-  uoaId?: string,
+  uoaId?: number,
   fullName?: string
 }

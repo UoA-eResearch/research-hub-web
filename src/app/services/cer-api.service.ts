@@ -170,14 +170,14 @@ export class CerApiService {
   /**
    * Gets further details about a person with a given ID (e.g. UoA ID, full name etc)
    * @param {number} id
-   * @returns {Observable<{id: number; fullname: any; uoaId: string}>}
+   * @returns {Observable<{id: number; fullname: any; uoaId: number}>}
    */
   getPersonDetails(id: number) {
     return this.http.get(CerApiService.projectDbHostname + 'person/' + id + '?expand=properties', CerApiService.projectDbHttpOptions)
       .map(response => {
 
         const fullName = response['full_name'];
-        let uoaId: string;
+        let uoaId: number;
 
         const properties = response['properties']['items'];
         for (const property of properties) {
@@ -211,7 +211,7 @@ export class CerApiService {
       });
     }
 
-  updateProjectResourceGroupAccess(projectCode: string, grouperGroupId: string, uoaId: string) {
+  updateProjectResourceGroupAccess(projectCode: string, grouperGroupId: string, uoaId: number) {
     let newMembershipJsonBody = {
       "memberships": [
         {
@@ -226,6 +226,6 @@ export class CerApiService {
     return this.http.post(CerApiService.grouperHostname + 'cer-hackday:' + projectCode + '_' +  grouperGroupId + '/member', newMembershipJsonBody, CerApiService.grouperHttpOptions);
   }
 
-  deleteProjectResourceGroupAccess(projectCode: string, grouperGroupId: string, uoaId: string) {
+  deleteProjectResourceGroupAccess(projectCode: string, grouperGroupId: string, uoaId: number) {
     return this.http.delete(CerApiService.grouperHostname + 'cer-hackday:' + projectCode + '_' +  grouperGroupId + '/member/' + uoaId, CerApiService.grouperHttpOptions);
   }
