@@ -33,7 +33,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   newUserUoaId: number;
 
-  newUserInformation; // String representing new user information info box
+  resourceAccessNotice: string; // String representing resource access change notices
 
   constructor(private cerApiService: CerApiService, private route: ActivatedRoute) { }
 
@@ -48,13 +48,13 @@ export class ProjectComponent implements OnInit, OnDestroy {
   // Two resources manually instantiated. *ToDo: iterate over the array passed to this method in future
   getResourceDetails(projectResourcesString: string[]) {
 
-    let vmResource: Vm = new Vm();
+    const vmResource: Vm = new Vm();
     vmResource.name = 'Virtual Machine';
-    vmResource.id = 5;
+    vmResource.id = 15785;
 
-    let fileShareResource: FileShare = new FileShare();
+    const fileShareResource: FileShare = new FileShare();
     fileShareResource.name = 'File Share';
-    fileShareResource.id = 6;
+    fileShareResource.id = 42864;
 
     this.projectResources2.push(vmResource);
     this.projectResources2.push(fileShareResource);
@@ -114,20 +114,28 @@ export class ProjectComponent implements OnInit, OnDestroy {
   /**
    * Update a project members resource access group
    */
-  updateProjectResourceGroupAccess(grouperGroupId: string, uoaId: number) {
-    this.cerApiService.updateProjectResourceGroupAccess(this.project.code, grouperGroupId, uoaId).subscribe(response => {
+  updateProjectResourceGroupAccess(accessLevel: AccessLevel, projectMember: Member, resource: Resource) {
+
+    this.cerApiService.updateProjectResourceGroupAccess(this.project.code, accessLevel.grouperGroupId, projectMember.uoaId).subscribe(response => {
       console.log('Grouper response to add user request: ', response);
-      this.newUserInformation = '<h3>Success!</h3> User (UoA ID: <span>' + uoaId + '</span>) to group: <span>' + grouperGroupId + '</span><br />Access to the associated resource may take a few minutes';
+      this.resourceAccessNotice = '<h3>Success!</h3>' + projectMember.fullName + ' (<span class="infoText">' + projectMember.uoaId +
+                                  '</span>) added to the ' + resource.name + ' (<span class="infoText">' +  resource.id +
+                                  '</span>) group ' + accessLevel.name + ' (<span class="infoText">' + accessLevel.grouperGroupId +
+                                  '</span>)<br />Changes to the ' + resource.name + ' may take a few minutes to take effect';
     });
   }
 
   /**
-   * Update a project members resource access group
+   * Remove a project members access to a resource group
    */
-  deleteProjectResourceGroupAccess(grouperGroupId: string, uoaId: number) {
-    this.cerApiService.deleteProjectResourceGroupAccess(this.project.code, grouperGroupId, uoaId).subscribe(response => {
+  deleteProjectResourceGroupAccess(accessLevel: AccessLevel, projectMember: Member, resource: Resource) {
+
+    this.cerApiService.deleteProjectResourceGroupAccess(this.project.code, accessLevel.grouperGroupId, projectMember.uoaId).subscribe(response => {
       console.log('Grouper response to delete user request: ', response);
-      this.newUserInformation = '<h3>Success!</h3> User (UoA ID: <span>' + uoaId + '</span>) deleted from group: <span>' + grouperGroupId + '</span><br />';
+      this.resourceAccessNotice = '<h3>Success!</h3>' + projectMember.fullName + ' (<span class="infoText">' + projectMember.uoaId +
+                                  '</span>) removed from the ' + resource.name + ' (<span class="infoText">' +  resource.id +
+                                  '</span>) group ' + accessLevel.name + ' (<span class="infoText">' + accessLevel.grouperGroupId +
+                                  '</span>)<br />Changes to the ' + resource.name + ' may take a few minutes to take effect';
     });
   }
 

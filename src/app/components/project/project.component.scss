@@ -6,3 +6,17 @@
   border: 1px solid $color-guide-tile-bg;
   font-size: 14px;
 }
+
+/deep/ .resourceAccessNotice {
+  width: 100%;
+  //background-color: rgba(2, 148, 165, .01);
+  background-color: $color-content-summary-bg;
+  text-align: center;
+  padding: 5px 0em 5px 0em;
+  border: 1px solid $color-guide-tile-bg;
+  font-size: 14px !important;
+}
+
+/deep/ .infoText {
+  color: #B13462 !important;
+}
