@@ -13,5 +13,6 @@ export interface Project {
 export interface Member {
   id: number,
   uoaId?: number,
-  fullName?: string
+  fullName?: string,
+  email?: string
 }

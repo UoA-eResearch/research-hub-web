@@ -150,7 +150,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
 
   addProjectMember() {
-    this.cerApiService.addProjectMember(this.newUserUoaId);
+    this.cerApiService.addProjectMember(this.newUserUoaId, this.project.id);
   }
 
   ngOnDestroy() {

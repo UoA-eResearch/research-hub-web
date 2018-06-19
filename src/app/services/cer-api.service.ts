@@ -140,10 +140,10 @@ export class CerApiService {
     }
 
   /**
-   * Make the 3 chained POST required to add a user to the database
+   * Make the chain of requests required to add a user to the database
    * @param {number} uoaId
    */
-  addProjectMember(uoaId: number) {
+  addProjectMember(uoaId: number, projectId: string) {
 
     // Step 1: Add person to project database
     const randomEmailAddress = Math.random().toString(36).substring(7) + '@auckland.ac.nz';
@@ -153,18 +153,33 @@ export class CerApiService {
       'start_date': '2018-06-13',
       'status_id': 1
     };
+    this.http.post(CerApiService.projectDbHostname + 'person', addUserToProjDbRequestJsonBody, CerApiService.projectDbHttpOptions).subscribe(addPersonResponse => {
 
-    // this.http.post(CerApiService.projectDbHostname + 'person', addUserToProjDbRequestJsonBody).subscribe(response => {
-    //   console.log('Response from adding a user to the project database: ', response);
-    // });
+      // Step 2: Get that new persons ID by looking up their unique email address in project db
+      this.http.get<Member[]>(CerApiService.projectDbHostname + 'person', CerApiService.projectDbHttpOptions)
+        .subscribe(personListResponse => {
+          const newPersonId = personListResponse.filter(res => res.email === randomEmailAddress)[0].id;
+          console.log('New Person Id: ', newPersonId);
 
-     this.http.post(CerApiService.projectDbHostname + 'person', addUserToProjDbRequestJsonBody, {observe: 'response'}).subscribe(response => {
-       console.log('Response from adding a user to the project database: ', response.headers.keys());
-     });
+          // Step 3: Add UoA ID to person
+          const addUpiToProjDbPerson = {
+            'propname': 'uoaid',
+            'propvalue': uoaId.toString(),
+            'person_id': newPersonId
+          };
+          this.http.post(CerApiService.projectDbHostname + 'person/' + newPersonId + '/property', addUpiToProjDbPerson, CerApiService.projectDbHttpOptions).subscribe(addUpiResponse => {
+            console.log('addUpiResponse: ', addUpiResponse);
 
-
-    // Step 2: Add UoA ID to person
-    // Step 3: Add person to project
+            // Step 4: Add person to project
+            const addPersontoProject = {
+              'person_id': newPersonId,
+              'role_id': 3 // 1 = Project Admin
+            };
+            this.http.post(CerApiService.projectDbHostname + 'project/' + projectId + '/member', addPersontoProject, CerApiService.projectDbHttpOptions)
+              .subscribe(addPersonToProjectResponse => console.log('Add person to project response: ', addPersonToProjectResponse));
+          });
+        });
+    });
   }
 
   /**
