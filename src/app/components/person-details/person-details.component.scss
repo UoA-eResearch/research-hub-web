@@ -93,6 +93,19 @@
 mat-list-item /deep/ div.mat-list-item-content {
   padding-left: 0 !important;
 }
+
+.person-list {
+  margin-bottom: 8px;
+}
+
+.person-list mat-list-item mat-icon {
+  color: $color-icon;
+}
+
+.person-list mat-list-item p {
+  font-size: 0.7em !important;
+}
+
 //
 //.user-menu-list div.mat-list-item-content {
 //  padding-left: 0 !important;
