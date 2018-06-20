@@ -153,6 +153,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.cerApiService.addProjectMember(this.newUserUoaId, this.project.id);
   }
 
+  deleteProjectMember(memberId: number) {
+    this.cerApiService.deleteProjectMember(memberId, this.project.id)
+  }
+
   ngOnDestroy() {
     this.routeParamsSub.unsubscribe();
   }

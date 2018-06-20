@@ -19,9 +19,9 @@ export class CerApiService {
    * Project Db Related Variables
    */
   private static projectDbHostname = 'http://130.216.216.116:8080/api/v1/';
-  private static  projectDbHttpOptions = {
+  private static projectDbHttpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
     })
   };
 
@@ -30,14 +30,15 @@ export class CerApiService {
    */
   private static grouperHostname = 'https://api.dev.auckland.ac.nz/service/regroup/v1/group/';
   private static grouperApiKey = '';
-  private static  grouperHttpOptions = {
+  private static grouperHttpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
       'apikey': CerApiService.grouperApiKey
     })
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   /**
    * ServiceNow Related Methods Follow
@@ -53,53 +54,53 @@ export class CerApiService {
 
   // Return all projects associated with a particular netId
   getAssociatedProjects(upi: string) {
-     return Observable.create(observer => {
+    return Observable.create(observer => {
       const projects = [
-         {
-           id: 'res12345',
-           title: 'Exterminate: A Quantitative Analysis of Dalek Speech Patterns',
-           subtitle: 'Using polymorphic linguistic quantum state machine learning techniques.',
-           numAllocations: 1,
-           numResearchOutputs: 2
-         },
-         {
-           id: 'res12345',
-           title: 'Tardis Percussive Maintenance',
-           subtitle: 'Advanced isomorphic techniques for TARDIS telepathic circuitry maintenance.',
-           numAllocations: 1,
-           numResearchOutputs: 0
-         },
-         {
-           id: 'res12345',
-           title: 'Sonic Screwdrivers: A Meta-Analysis',
-           subtitle: 'A systematic mapping study considering usability factors.',
-           numAllocations: 1,
-           numResearchOutputs: 1
-         },
-         {
-           id: 'res12345',
-           title: 'A Bounded Model of Infinite Timelines',
-           subtitle: 'Time-based asymmetric linear regression.',
-           numAllocations: 1,
-           numResearchOutputs: 2
-         }];
+        {
+          id: 'res12345',
+          title: 'Exterminate: A Quantitative Analysis of Dalek Speech Patterns',
+          subtitle: 'Using polymorphic linguistic quantum state machine learning techniques.',
+          numAllocations: 1,
+          numResearchOutputs: 2
+        },
+        {
+          id: 'res12345',
+          title: 'Tardis Percussive Maintenance',
+          subtitle: 'Advanced isomorphic techniques for TARDIS telepathic circuitry maintenance.',
+          numAllocations: 1,
+          numResearchOutputs: 0
+        },
+        {
+          id: 'res12345',
+          title: 'Sonic Screwdrivers: A Meta-Analysis',
+          subtitle: 'A systematic mapping study considering usability factors.',
+          numAllocations: 1,
+          numResearchOutputs: 1
+        },
+        {
+          id: 'res12345',
+          title: 'A Bounded Model of Infinite Timelines',
+          subtitle: 'Time-based asymmetric linear regression.',
+          numAllocations: 1,
+          numResearchOutputs: 2
+        }];
       observer.next(projects);
     });
   }
 
   getProjectDetailsHardcoded(projectId: string) {
-    return Observable.create(observer =>  {
-        const projectDetails = {
-          id: 'res12345',
-          title: 'Exterminate: A Quantitative Analysis of Dalek Speech Patterns',
-          subtitle: 'Using polymorphic linguistic quantum state machine learning techniques.',
-          numAllocations: 1,
-          numResearchOutputs: 2,
-          projectResources: ['Virtual Machine', 'File Share'],
-          projectMembers: ['Sam Kavanagh', 'Noel Zeng', 'Cameron McLean', 'Arron McLaughlin', 'Doris Jung']
-        };
-        observer.next(projectDetails);
-      });
+    return Observable.create(observer => {
+      const projectDetails = {
+        id: 'res12345',
+        title: 'Exterminate: A Quantitative Analysis of Dalek Speech Patterns',
+        subtitle: 'Using polymorphic linguistic quantum state machine learning techniques.',
+        numAllocations: 1,
+        numResearchOutputs: 2,
+        projectResources: ['Virtual Machine', 'File Share'],
+        projectMembers: ['Sam Kavanagh', 'Noel Zeng', 'Cameron McLean', 'Arron McLaughlin', 'Doris Jung']
+      };
+      observer.next(projectDetails);
+    });
   }
 
   /**
@@ -112,22 +113,37 @@ export class CerApiService {
     return this.http.get(CerApiService.projectDbHostname + 'project/' + projectId + '?expand=services,codes,members')
       .map(response => {
 
+        console.log('response[\'members\'][\'items\']... ', response['members']['items']);
+
         // Initially get User IDs (used to make further API calls to get more information about person)
         const members: Member[] = [];
+
         const memberIds: number[] = [];
+
+        const memberIdList: [{
+          memberId: number,
+          personId: number
+        }] = [];
 
         const code = response['codes']['items'][0]['code'];
 
         for (const memberId of response['members']['items']) {
-          memberIds.push(memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1));
+          memberIdList.push({
+            memberId: memberId['id'],
+            personId: memberId['person']['href'].substring(memberId['person']['href'].lastIndexOf('/') + 1)
+          });
+
+          memberIds.push(memberId['id']);
         }
 
         // Call getPersonDetails on each id, getting further details (UoA ID, full name etc)
-        for (const memberId of memberIds) {
+        for (const memberId of memberIdList) {
           this.getPersonDetails(memberId).subscribe(res => {
             members.push(res);
           });
         }
+
+        console.log('Finished members id list: ', memberIdList);
 
         return {
           id: response['id'],
@@ -137,7 +153,35 @@ export class CerApiService {
           members: members
         };
       });
-    }
+  }
+
+  /**
+   * Gets further details about a person with a given ID (e.g. UoA ID, full name etc)
+   * @param {number} id
+   * @returns {Observable<{id: number; fullname: any; uoaId: number}>}
+   */
+  getPersonDetails(memberId: Object) {
+    return this.http.get(CerApiService.projectDbHostname + 'person/' + memberId['personId'] + '?expand=properties', CerApiService.projectDbHttpOptions)
+      .map(response => {
+
+        const fullName = response['full_name'];
+        let uoaId: number;
+
+        const properties = response['properties']['items'];
+        for (const property of properties) {
+          if (property['propname'] === 'uoaid') {
+            uoaId = property['propvalue'];
+          }
+        }
+
+        return {
+          id: memberId['personId'],
+          memberId: memberId['memberId'],
+          fullName: fullName,
+          uoaId: uoaId
+        };
+      });
+  }
 
   /**
    * Make the chain of requests required to add a user to the database
@@ -183,29 +227,15 @@ export class CerApiService {
   }
 
   /**
-   * Gets further details about a person with a given ID (e.g. UoA ID, full name etc)
-   * @param {number} id
-   * @returns {Observable<{id: number; fullname: any; uoaId: number}>}
+   * Remove and existing member from the project
+   * @param {number} memberId
+   * @param {string} projectId
    */
-  getPersonDetails(id: number) {
-    return this.http.get(CerApiService.projectDbHostname + 'person/' + id + '?expand=properties', CerApiService.projectDbHttpOptions)
-      .map(response => {
+  deleteProjectMember(memberId: number, projectId: string) {
+    console.log('CerApiService.deleteProjectMember() passed memberId/projectId', memberId, projectId);
 
-        const fullName = response['full_name'];
-        let uoaId: number;
-
-        const properties = response['properties']['items'];
-        for (const property of properties) {
-          if (property['propname'] === 'uoaid') {
-            uoaId = property['propvalue'];
-          }
-        }
-
-        return {
-          id: id,
-          fullName: fullName,
-          uoaId: uoaId
-        };
+    this.http.delete(CerApiService.projectDbHostname + 'project/' + projectId + '/member/' + memberId, CerApiService.projectDbHttpOptions).subscribe(deleteProjectMemberResponse => {
+      console.log('deleteProjectMemberResponse: ', deleteProjectMemberResponse);
     });
   }
 
@@ -224,7 +254,7 @@ export class CerApiService {
 
         return memberIds;
       });
-    }
+  }
 
   updateProjectResourceGroupAccess(projectCode: string, grouperGroupId: string, uoaId: number) {
     let newMembershipJsonBody = {
@@ -238,9 +268,10 @@ export class CerApiService {
 
     console.log('membershipJsonBody: ', newMembershipJsonBody);
 
-    return this.http.post(CerApiService.grouperHostname + 'cer-hackday:' + projectCode + '_' +  grouperGroupId + '/member', newMembershipJsonBody, CerApiService.grouperHttpOptions);
+    return this.http.post(CerApiService.grouperHostname + 'cer-hackday:' + projectCode + '_' + grouperGroupId + '/member', newMembershipJsonBody, CerApiService.grouperHttpOptions);
   }
 
   deleteProjectResourceGroupAccess(projectCode: string, grouperGroupId: string, uoaId: number) {
-    return this.http.delete(CerApiService.grouperHostname + 'cer-hackday:' + projectCode + '_' +  grouperGroupId + '/member/' + uoaId, CerApiService.grouperHttpOptions);
+    return this.http.delete(CerApiService.grouperHostname + 'cer-hackday:' + projectCode + '_' + grouperGroupId + '/member/' + uoaId, CerApiService.grouperHttpOptions);
   }
+}

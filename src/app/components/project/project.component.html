@@ -25,7 +25,7 @@
     <!-- Iterate through project members-->
     <div *ngFor="let projectMember of project.members" >
       <mat-grid-tile class="projectResourceTile">
-        {{projectMember.fullName}} (<span class="infoText">{{projectMember.uoaId}}</span>)<button mat-icon-button style="color: #757575;"><mat-icon>delete</mat-icon></button>
+        {{projectMember.fullName}} (<span class="infoText">{{projectMember.uoaId}}</span>)<button mat-icon-button style="color: #757575;" (click)="deleteProjectMember(projectMember.memberId)"><mat-icon>delete</mat-icon></button>
       </mat-grid-tile>
       <!-- Iterate through project resources-->
       <div *ngFor="let resource of projectResources2" >
