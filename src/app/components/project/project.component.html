@@ -16,10 +16,10 @@
     <mat-card-title><h3>Manage Project Resource Access</h3></mat-card-title>
     <mat-card-subtitle>Manage the project members access to project resources</mat-card-subtitle>
   </mat-card-header>
-  <mat-grid-list [cols]="projectResources2.length+1" rowHeight="8:1">
+  <mat-grid-list [cols]="projectResources.length+1" rowHeight="8:1">
     <mat-grid-tile [rowspan]="2" class="projectResourceTile" style="color: #B13462;">Project Member</mat-grid-tile>
-    <mat-grid-tile [colspan]="projectResources2.length" class="projectResourceTile" style="color: #B13462;">Project Resources</mat-grid-tile>
-    <mat-grid-tile *ngFor="let resource of projectResources2" class="projectResourceTile">
+    <mat-grid-tile [colspan]="projectResources.length" class="projectResourceTile" style="color: #B13462;">Project Resources</mat-grid-tile>
+    <mat-grid-tile *ngFor="let resource of projectResources" class="projectResourceTile">
       {{resource.name}} (<span class="infoText">{{resource.id}}</span>)
     </mat-grid-tile>
     <!-- Iterate through project members-->
@@ -28,7 +28,7 @@
         {{projectMember.fullName}} (<span class="infoText">{{projectMember.uoaId}}</span>)<button mat-icon-button style="color: #757575;" (click)="deleteProjectMember(projectMember.memberId)"><mat-icon>delete</mat-icon></button>
       </mat-grid-tile>
       <!-- Iterate through project resources-->
-      <div *ngFor="let resource of projectResources2" >
+      <div *ngFor="let resource of projectResources" >
         <mat-grid-tile class="projectResourceTile">
           <mat-select style="width: 100px" [value]="getUserResourceAccessLevel(projectMember.uoaId, resource).name" placeholder="No Access">
             <mat-option *ngFor="let accessLevel of resource.accessLevels" [value]="accessLevel.name" (click)="updateProjectResourceGroupAccess(accessLevel, projectMember, resource)">{{accessLevel.name}}</mat-option>

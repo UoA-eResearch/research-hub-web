@@ -88,21 +88,6 @@ export class CerApiService {
         });
     }
 
-    getProjectDetailsHardcoded(projectId: string) {
-        return Observable.create(observer => {
-            const projectDetails = {
-                id: 'res12345',
-                title: 'Exterminate: A Quantitative Analysis of Dalek Speech Patterns',
-                subtitle: 'Using polymorphic linguistic quantum state machine learning techniques.',
-                numAllocations: 1,
-                numResearchOutputs: 2,
-                projectResources: ['Virtual Machine', 'File Share'],
-                projectMembers: ['Sam Kavanagh', 'Noel Zeng', 'Cameron McLean', 'Arron McLaughlin', 'Doris Jung']
-            };
-            observer.next(projectDetails);
-        });
-    }
-
     /**
      * Gets the initial project details from project db, getNetIDs needs to be called next and passed member array
      * to get the NetIds corresponding to each project member
@@ -113,8 +98,7 @@ export class CerApiService {
         return this.http.get(CerApiService.projectDbHostname + 'project/' + projectId + '?expand=services,codes,members')
             .map(response => {
 
-                console.log('response[\'members\'][\'items\']... ', response['members']['items']);
-
+                console.log(response);
                 // Initially get User IDs (used to make further API calls to get more information about person)
                 const members: Member[] = [];
 
@@ -140,7 +124,6 @@ export class CerApiService {
                     });
                 }
 
-                console.log('Finished members id list: ', memberIdList);
 
                 return {
                     id: response['id'],
@@ -234,6 +217,7 @@ export class CerApiService {
         this.http.delete(CerApiService.projectDbHostname + 'project/' + projectId + '/member/' + memberId, CerApiService.projectDbHttpOptions).subscribe(deleteProjectMemberResponse => {
             console.log('deleteProjectMemberResponse: ', deleteProjectMemberResponse);
         });
+
     }
 
     /**
