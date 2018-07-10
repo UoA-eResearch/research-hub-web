@@ -14,10 +14,22 @@ export class Vm implements Resource {
   id;
   name;
 
+  instance?;
+  status?;
+
   accessLevels = [
     { name: 'Admin',  grouperGroupId: 'vmadmin', users: []},
     { name: 'User Access', grouperGroupId: 'vmuser', users: []}
   ];
+}
+
+export class Nectar implements  Resource {
+  id;
+  name;
+  accessLevels = [
+    { name: 'N/A', grouperGroupId: 'n/a', users: []} // *ToDo Update with real Nectar grouper access levels
+  ];
+
 }
 
 export class FileShare implements Resource {
@@ -29,3 +41,4 @@ export class FileShare implements Resource {
     { name: 'Read Only', grouperGroupId: 'ro', users: []}
   ];
 }
+
