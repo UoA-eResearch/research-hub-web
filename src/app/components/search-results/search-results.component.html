@@ -1,12 +1,9 @@
-<app-search-filters style="display: block;" [filtersForm]="filtersForm" fxHide.lt-md></app-search-filters>
-
   <div #resultsDummyHeader></div>
 
   <div *ngIf="!showEmptyState" style="margin-top: 32px;" fxLayout="row" fxLayoutAlign="left center">
     <div fxFlex>
       <p [innerHTML]="resultsSummary" style="margin-bottom: 0; margin-right: 1em;"></p>
-    </div>
-
+    </div>    
     <!-- Results View Switcher -->
     <div fxFlex="65px" style="display: flex; align-content: center; justify-content: center">
       <i (click)="showCardView = !showCardView" style="cursor: pointer; font-size: 36px; color: rgba(00, 40, 59, .8)" class="material-icons">{{showCardView? "view_list" : "view_module"}}</i>&nbsp;
@@ -22,7 +19,7 @@
       </mat-form-field>
     </div>
   </div>
-
+  
   <!-- Category List -->
   <div class="category-list" *ngIf="getCategoryId() == 1 && !showEmptyState" fxHide fxShow.gt-sm>
       <mat-chip-list mat-line style="height: 1.5em;">
@@ -46,6 +43,10 @@
         <span style="font-size: 14px; margin-right: 2px;">{{ currentCategoryString + ': ' + resultsPage.totalElements }} </span>
       </mat-chip>
     </mat-chip-list>
+  </div>
+
+  <div>
+    <p><span class="search-results-text">Too many results?</span> <a href="#">Refine your search.</a></p>
   </div>
 
   <div *ngIf="showEmptyState" style="margin-top: 32px;">
