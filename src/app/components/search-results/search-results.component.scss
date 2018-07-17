@@ -3,7 +3,6 @@
 .search-results-text {
   color: $color-pink !important;
   font-weight: 500;
-  font-size: 1.2em !important;
   font-style: italic;
 }
 
@@ -128,4 +127,9 @@
 
 .category-list mat-chip-selected {
   color: white !important;
+}
+
+.refine-search-hint {
+    // Add gap between the refine search section and the category list on medium and large devices.
+    padding-top:20px;
 }
