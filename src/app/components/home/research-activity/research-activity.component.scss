@@ -1,1 +1,33 @@
 @import "../../../../research-activity";
+
+/*
+* Spread the chips out evenly when the viewport is large
+* enough to display the chips on one line, with the
+* rightmost chip aligned to the right border.
+* $home-ra-chip-list-wrap-breakpoint depends on the length of each chip.
+* It will need to change in the future if:
+* - research activities have changed (e.g. added, removed, restyled,
+*   reworded)
+*/
+
+$home-ra-chip-list-wrap-breakpoint: 1023px;
+
+.ra-chip-container {
+    margin-left: inherit;
+    margin-right: inherit;
+}
+
+@media screen and (min-width:$home-ra-chip-list-wrap-breakpoint) {
+    .ra-chip-container {
+	margin-left:auto;
+	margin-right: auto;
+    }
+
+    .ra-chip-container:first-child {
+	margin-left: 0px;
+    }
+
+    .ra-chip-container:last-child {
+	margin-right: 0px;
+    }
+}

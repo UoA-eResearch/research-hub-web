@@ -19,6 +19,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/observable/of';
 import {Tag} from './mat-tags/mat-tags.component';
 import {ListItem} from '../../model/ListItem';
 import {AppComponentService} from '../../app.component.service';
@@ -28,6 +29,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {LayoutService} from '../../services/layout.service';
 
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+import {forkJoin} from 'rxjs/observable/forkJoin';
 
 @Component({
   selector: 'app-search-results',
@@ -302,6 +304,24 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.orderByChange.next(event.value);
   }
 
+  setFiltersTextIfUndefined(personTags: Tag[], orgUnitTags: Tag[]) {
+    // To be filled with API request observables
+    const observablePersonBatch = [];
+    const observableOrgUnitBatch = [];
+
+    // Queue up API requests for persons and orgUnits
+    orgUnitTags.forEach(key => observableOrgUnitBatch.push(this.apiService.getOrgUnit(key.id)));
+    personTags.forEach(key => observablePersonBatch.push(this.apiService.getPerson(key.id)));
+
+    // Return an observable containing the batches of observables for both personTags and orgUnitTags
+    return Observable.forkJoin(
+      forkJoin(observablePersonBatch).map(x => x.map(y => {y['text'] = y['firstName'] + ' ' + y['lastName']; return (y)}))
+        .pipe(z => observablePersonBatch.length ? z : Observable.of([])),
+      forkJoin(observableOrgUnitBatch).map(x => x.map(y => {y['text'] = y['name'];  return (y)}))
+        .pipe(z => observableOrgUnitBatch.length ? z : Observable.of([]))
+    );
+  }
+
   onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
     const friendlyCategoryId = this.optionsService.categoryOptions.filter((obj) => {
       return obj.id === categoryId;
@@ -347,7 +367,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     const resultsSub = this.apiService.getSearchResults(params).subscribe(page => {
       this.resultsPage = page;
       this.orderBy = page.sort;
-      this.updateResultsSummary(page, categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
+      // Fixes bug where filter/orgUnit tags are not defined when the page is not visited dynamically
+      this.setFiltersTextIfUndefined(personTags, orgUnitTags).subscribe(res => {
+        const[personTagsRes, orgUnitTagsRes] = res;
+        personTags = personTagsRes;
+        orgUnitTags = orgUnitTagsRes;
+        this.updateResultsSummary(page, categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
+      });
       resultsSub.unsubscribe();
       this.appComponentService.setProgressBarVisibility(false);
     });
