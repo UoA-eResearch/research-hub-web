@@ -13,6 +13,8 @@ import {HeaderService} from './components/header/header.service';
 import {SearchBarComponent} from './components/search-bar/search-bar.component';
 import {SearchBarService} from './components/search-bar/search-bar.service';
 import {AppComponentService} from './app.component.service';
+import {SearchFiltersModule} from './components/search-results/search-filters/search-filters.module';
+import {SearchFiltersService} from './components/search-results/search-filters/search-filters.service';
 
 
 @NgModule({
@@ -26,10 +28,11 @@ import {AppComponentService} from './app.component.service';
     BrowserAnimationsModule,
     ServicesModule,
     SharedModule,
-    RoutingModule
+    RoutingModule,
+    SearchFiltersModule
   ],
   entryComponents: [],
-  providers: [HeaderService, SearchBarService, AppComponentService],
+  providers: [HeaderService, SearchBarService, AppComponentService,SearchFiltersService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

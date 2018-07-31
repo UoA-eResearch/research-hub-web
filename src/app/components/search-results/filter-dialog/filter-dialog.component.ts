@@ -10,7 +10,6 @@ import {CategoryId} from 'app/services/options.service';
 })
 export class FilterDialogComponent {
 
-  @Input()
   public filtersForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<FilterDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {

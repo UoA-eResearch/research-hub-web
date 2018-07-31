@@ -29,6 +29,8 @@ import {LayoutService} from '../../services/layout.service';
 
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 
+import {SearchFiltersService} from './search-filters/search-filters.service';
+
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
@@ -193,7 +195,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
               public optionsService: OptionsService, public apiService: ResearchHubApiService,
               private analyticsService: AnalyticsService, private route: ActivatedRoute,
               private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService,
-              private layoutService: LayoutService, private media: ObservableMedia) {
+              private layoutService: LayoutService, private media: ObservableMedia,
+              private searchFiltersService: SearchFiltersService) {
+    this.filtersForm = searchFiltersService.filtersForm;
   }
 
   // Results cards
@@ -212,14 +216,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     // Results page
     this.resultsPage = {totalElements: 0} as Page<ListItem>;
-
-    // Filters form
-    this.filtersForm = new FormGroup({
-      categoryId: new FormControl(),
-      personTags: new FormControl([]),
-      orgUnitTags: new FormControl([]),
-      researchActivityIds: new FormControl()
-    });
 
     // Category changes
     this.categoryIdSub = this.searchBarService.searchCategoryChange.subscribe(category => {

@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Observable';
 import {SearchResultsComponent} from '../search-results.component';
 import {ListItem} from '../../../model/ListItem';
 import {OrgUnit} from '../../../model/OrgUnit';
-
+import {SearchFiltersService} from './search-filters.service';
 
 @Component({
   selector: 'app-search-filters',
@@ -31,7 +31,8 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
   public personTagSource: Tag[] = [];
   public orgUnitTagSource: Tag[] = [];
 
-  constructor(private apiService: ResearchHubApiService, public optionsService: OptionsService) {
+  constructor(private apiService: ResearchHubApiService, public optionsService: OptionsService,searchFiltersService: SearchFiltersService) {
+    this.filtersForm = searchFiltersService.filtersForm;
   }
 
   ngOnInit() {
