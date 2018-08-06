@@ -108,7 +108,7 @@
   overflow: hidden;
 }
 
-.category-list > * {
+.category-list > mat-chip-list {
   display: flex;
   align-self: flex-start;
   overflow: hidden;
@@ -129,7 +129,18 @@
   color: white !important;
 }
 
-.refine-search-hint {
-    // Add gap between the refine search section and the category list on medium and large devices.
-    padding-top:20px;
+.category-list {
+  margin-top:2em;
+}
+
+.search-results-title {
+  margin-top:1em;
+}
+
+.refine-search {
+  margin-top:1em;
+}
+
+.refine-search-text {
+  margin-bottom:0px;
 }
