@@ -324,11 +324,6 @@ app-search-bar {
   min-width: 0 !important;
 }
 
-.search-filters {
-  width: 300px;
-  max-width: 500px;
-}
-
 // HACK
 // https://github.com/angular/material2/issues/6958
 //
@@ -345,4 +340,3 @@ app-search-bar {
 //    }
 //
 //}
-
