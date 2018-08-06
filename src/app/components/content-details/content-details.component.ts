@@ -11,7 +11,6 @@ import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {LayoutService} from '../../services/layout.service';
 import {AppComponentService} from '../../app.component.service';
 
-
 @Component({
   selector: 'app-content-details',
   templateUrl: './content-details.component.html',
@@ -24,6 +23,8 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
   userSupport: ListItem[];
   numCols = 1;
   mediaSub: Subscription;
+
+  readonly CONTENT_TYPE_ID_GUIDE: ContentTypeId = ContentTypeId.Guide; // Used to provide a link to all guides in guide breadcrumbs
 
   constructor(private route: ActivatedRoute, private apiService: ResearchHubApiService, private media: ObservableMedia,
               private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService,
