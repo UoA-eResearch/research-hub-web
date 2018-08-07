@@ -8,7 +8,7 @@
     </div>
 
   <!-- Category List -->
-  <div class="category-list" *ngIf="getCategoryId() == 1 && !showEmptyState" fxHide fxShow.gt-sm>
+    <div class="category-list" *ngIf="getCategoryId() == 1 && !showEmptyState" fxHide fxShow.gt-sm>
       <p><span class="search-results-text">Not what you were looking for?</span> Check out a different category.</p>
       <mat-chip-list mat-line style="height: 1.5em;">
         <div style="padding-right: 0.5em">Categories: </div>
@@ -33,7 +33,7 @@
     </mat-chip-list>
   </div>
 
-  <div *ngIf="!showEmptyState" fxLayout="row" fxLayoutAlign="start center" class="refine-search">
+  <div fxLayout="row" fxLayoutAlign="start center" class="refine-search">
     <div fxFlex>
       <p class="refine-search-text"><span class="search-results-text">Too many results?</span> <a href="#">Refine your search.</a></p>
     </div>
@@ -53,7 +53,7 @@
       </mat-form-field>
     </div>
   </div>
-
+  </div>
 
   <div *ngIf="showEmptyState" style="margin-top: 32px;">
     <p [innerHTML]="noResultsSummary"></p>
