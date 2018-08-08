@@ -6,7 +6,7 @@ import { Location } from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {AppComponentService} from '../../app.component.service';
 import {Content} from '../../model/Content';
-
+import {ContentTypeId} from '../../services/options.service';
 
 @Component({
   selector: 'app-guide-category',
@@ -17,10 +17,10 @@ export class GuideCategoryComponent implements OnInit {
 
   contentItems: Content[];
   guideCategory: GuideCategory;
+  readonly CONTENT_TYPE_ID_GUIDE: ContentTypeId = ContentTypeId.Guide;
 
   constructor(private route: ActivatedRoute, private apiService: ResearchHubApiService, private location: Location,
               private analyticsService: AnalyticsService, private appComponentService: AppComponentService) {
-
   }
 
   ngOnInit() {
@@ -41,7 +41,6 @@ export class GuideCategoryComponent implements OnInit {
 
       this.apiService.getGuideCategoryContentItems(id).subscribe(
         contentItems => {
-          console.log('contentItems: ', contentItems);
           this.contentItems = contentItems;
         }
       );

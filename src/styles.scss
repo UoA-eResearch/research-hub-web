@@ -253,3 +253,10 @@ app-filter-dialog {
   color: #ffffff;
   font-size: mat-font-size($app-base-typography, body-1);
 }
+
+/*
+ * Colour of &bull; used to separate breadcrumbs
+ */
+.breadcrumb-separator {
+    color: map-get($hub-teal, 500);
+}
