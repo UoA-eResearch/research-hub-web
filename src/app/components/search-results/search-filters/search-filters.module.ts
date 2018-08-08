@@ -4,6 +4,7 @@ import {SharedModule} from 'app/components/shared/app.shared.module';
 import {SearchFiltersComponent} from './search-filters.component';
 import {FilterDialogComponent} from '../filter-dialog/filter-dialog.component';
 import {ResearchActivityInputComponent} from '../research-activity-input/research-activity-input.component';
+import {FilterSidenavComponent} from '../filter-sidenav/filter-sidenav.component';
 import {MatTagsComponent} from '../mat-tags/mat-tags.component';
 
 @NgModule({
@@ -15,10 +16,11 @@ import {MatTagsComponent} from '../mat-tags/mat-tags.component';
     SearchFiltersComponent,
     FilterDialogComponent,
     ResearchActivityInputComponent,
-    MatTagsComponent
+    MatTagsComponent,
+    FilterSidenavComponent
   ],
   exports: [
-    SearchFiltersComponent,
+    FilterSidenavComponent,
     MatTagsComponent,
     FilterDialogComponent
   ]

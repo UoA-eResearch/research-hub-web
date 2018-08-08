@@ -117,11 +117,14 @@
 
         <app-header></app-header>
         <mat-sidenav-container>
-          <mat-sidenav class="search-filters" mode="side" opened>
-            <app-search-filters></app-search-filters>
+          <!-- Search filters sidenav -->
+          <mat-sidenav class="search-filters-sidenav" mode="side" opened>
+            <app-filter-sidenav></app-filter-sidenav>
           </mat-sidenav>
+          <!-- Search bar  -->
             <div class="site-padding" ngClass.xs="site-padding-xs" ngClass.sm="site-padding-sm">
               <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
+              <!-- Page content -->
               <router-outlet></router-outlet>
             </div>
         </mat-sidenav-container>

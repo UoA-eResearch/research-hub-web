@@ -1,0 +1,9 @@
+<mat-toolbar class="filter-toolbar" fxLayout="row" fxLayoutGap="0em">
+  <div fxFlex="1 1 auto">
+    <h2>Refine your search</h2>
+  </div>
+  <button class="close-button" mat-icon-button>
+    <mat-icon aria-label="Close the refine search sidebar.">close</mat-icon>
+  </button>
+</mat-toolbar>
+<app-search-filters [filtersForm]="filtersForm"></app-search-filters>

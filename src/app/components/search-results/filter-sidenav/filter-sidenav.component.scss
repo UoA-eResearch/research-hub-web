@@ -1,0 +1,9 @@
+@import '../../../../styles';
+
+.filter-toolbar {
+  background-color: inherit;
+
+  mat-icon {
+    color: $color-icon;
+  }
+}

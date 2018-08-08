@@ -1,12 +1,5 @@
 <form *ngIf="filtersForm" [formGroup]="filtersForm" fxLayout="column" fxLayoutGap="2.5em" fxLayoutGap.xs="1em">
-  <mat-toolbar class="filter-toolbar" fxLayout="row" fxLayoutGap="0em">
-    <div fxFlex="1 1 auto">
-      <h2>Refine your search</h2>
-    </div>
-      <button class="close-button" mat-icon-button>
-        <mat-icon aria-label="Close the refine search sidebar.">close</mat-icon>
-      </button>
-  </mat-toolbar>
+
   <div fxHide.gt-xs fxFlex.lt-sm="noshrink">
     <mat-form-field fxFlex="100" style="margin-top: 1em !important;">
       <mat-select formControlName="categoryId" placeholder="Category">
