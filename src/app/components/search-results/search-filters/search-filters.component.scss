@@ -1,4 +1,14 @@
+@import '../../../../styles';
+
 .search-filters {
   width: 400px;
   max-width: 500px;
+}
+
+.filter-toolbar {
+  background-color: inherit;
+
+  mat-icon {
+    color: $color-icon;
+  }
 }
