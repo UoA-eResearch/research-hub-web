@@ -166,13 +166,6 @@ mat-chip.mat-chip {
   padding-right: 10px !important;
 }
 
-mat-toolbar-row {
-  @extend .site-content;
-  max-width: calc(#{$width-page-max + 25px});
-  padding-left: $padding-site !important;
-  padding-right: $padding-site !important;
-}
-
 .card-fab {
   position: absolute;
   z-index: 100;

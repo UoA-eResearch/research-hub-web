@@ -116,11 +116,18 @@
         </div>
 
         <app-header></app-header>
-
-        <div class="site-padding" ngClass.xs="site-padding-xs" ngClass.sm="site-padding-sm">
-          <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
-          <router-outlet></router-outlet>
-        </div>
+        <mat-sidenav-container>
+          <!-- Search filters sidenav -->
+          <mat-sidenav class="search-filters-sidenav" mode="side" opened>
+            <app-filter-sidenav></app-filter-sidenav>
+          </mat-sidenav>
+          <!-- Search bar  -->
+            <div class="site-padding" ngClass.xs="site-padding-xs" ngClass.sm="site-padding-sm">
+              <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
+              <!-- Page content -->
+              <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-container>
       </div>
       <footer ngClass.xs="footer-xs">
         <div class="footer-content" ngClass.xs="footer-content-xs" fxLayout="column" fxLayoutGap="1em" fxLayoutAlign="center center">

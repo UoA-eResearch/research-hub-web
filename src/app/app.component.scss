@@ -44,6 +44,7 @@
  * Navigation list
  */
 
+
 .sidenav-container mat-sidenav mat-list-item mat-icon {
   color: $color-icon;
   font-size: mat-font-size($app-sidenav-list-typography, body-2) !important;
@@ -134,18 +135,6 @@ mat-expansion-panel-header .mat-expanded {
 .sidenav-container mat-sidenav-content {
 
   overflow: visible !important;
-}
-
-.sidenav-container mat-sidenav mat-toolbar button mat-icon {
-  font-size: mat-font-size($app-sidenav-toolbar-typography, button) !important;
-  font-weight: mat-font-weight($app-sidenav-toolbar-typography, button) !important;
-  color:white;
-}
-
-.sidenav-container mat-sidenav mat-toolbar span {
-  //font-size: mat-font-size($app-sidenav-toolbar-typography, body-1) !important;
-  font-weight: mat-font-weight($app-sidenav-toolbar-typography, body-1) !important;
-  color:white;
 }
 
 .sidenav-container {
@@ -324,6 +313,10 @@ app-search-bar {
   min-width: 0 !important;
 }
 
+.search-filters-sidenav {
+  width:400px;
+}
+
 // HACK
 // https://github.com/angular/material2/issues/6958
 //
@@ -340,4 +333,3 @@ app-search-bar {
 //    }
 //
 //}
-

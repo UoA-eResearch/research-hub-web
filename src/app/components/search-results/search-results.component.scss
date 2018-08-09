@@ -3,7 +3,6 @@
 .search-results-text {
   color: $color-pink !important;
   font-weight: 500;
-  font-size: 1.2em !important;
   font-style: italic;
 }
 
@@ -109,7 +108,7 @@
   overflow: hidden;
 }
 
-.category-list > * {
+.category-list > mat-chip-list {
   display: flex;
   align-self: flex-start;
   overflow: hidden;
@@ -128,4 +127,20 @@
 
 .category-list mat-chip-selected {
   color: white !important;
+}
+
+.category-list {
+  margin-top:1em;
+}
+
+.search-results-title {
+  margin-top:2.5em;
+}
+
+.refine-search {
+  margin-top:0em;
+}
+
+.refine-search-text {
+  margin-bottom:0px;
 }

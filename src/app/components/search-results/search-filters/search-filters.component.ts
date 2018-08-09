@@ -9,7 +9,6 @@ import {SearchResultsComponent} from '../search-results.component';
 import {ListItem} from '../../../model/ListItem';
 import {OrgUnit} from '../../../model/OrgUnit';
 
-
 @Component({
   selector: 'app-search-filters',
   templateUrl: './search-filters.component.html',
