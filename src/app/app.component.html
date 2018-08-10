@@ -118,7 +118,7 @@
         <app-header></app-header>
         <mat-sidenav-container>
           <!-- Search filters sidenav -->
-          <mat-sidenav class="content-sidenav" mode="side" (keydown)="this.showContentSidenav=false" [opened]="showContentSidenav">
+          <mat-sidenav class="content-sidenav" mode="side" disableClose [opened]="showContentSidenav">
             <router-outlet name="contentSidenav"
                            (activate)="setContentSidenavHasContent(true)"
                            (deactivate)="setContentSidenavHasContent(false)"></router-outlet>
