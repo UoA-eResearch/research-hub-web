@@ -318,6 +318,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     );
   }
 
+  openSidenav(){
+    this.appComponentService.setContentSidenavVisibility(true);
+  }
+
   onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
     const friendlyCategoryId = this.optionsService.categoryOptions.filter((obj) => {
       return obj.id === categoryId;

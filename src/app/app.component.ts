@@ -34,6 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private routerSub: Subscription;
   private progressBarVisibilitySub: Subscription;
   private titleSub: Subscription;
+  private contentSidenavVisibilitySub: Subscription;
 
   public selectedCategory = CategoryId.All;
   public searchText = '';
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public showLoginBtn = true;
   public showProgressBar = false;
   public showBackBtn = false;
+  public showContentSidenav = false;
   public pageTitle = '';
 
   private previousRoute = undefined;
@@ -88,6 +90,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.progressBarVisibilitySub = this.appComponentService.progressBarVisibilityChange.subscribe((isVisible) => {
       this.showProgressBar = isVisible;
+    });
+
+    this.contentSidenavVisibilitySub = this.appComponentService.contentSidenavVisibilityChange.subscribe((isVisible) => {
+      this.showContentSidenav = isVisible;
     });
 
     // Navigate to the search page if the user types text in
@@ -151,6 +157,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.routerSub.unsubscribe();
     this.progressBarVisibilitySub.unsubscribe();
     this.titleSub.unsubscribe();
+    this.contentSidenavVisibilitySub.unsubscribe();
   }
 
   getYear() {

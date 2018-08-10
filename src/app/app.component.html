@@ -118,7 +118,7 @@
         <app-header></app-header>
         <mat-sidenav-container>
           <!-- Search filters sidenav -->
-          <mat-sidenav class="search-filters-sidenav" mode="side" opened>
+          <mat-sidenav class="content-sidenav" mode="side" (keydown)="this.showContentSidenav=false" [opened]="showContentSidenav">
             <app-filter-sidenav></app-filter-sidenav>
           </mat-sidenav>
           <!-- Search bar  -->
