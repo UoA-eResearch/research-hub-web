@@ -119,7 +119,9 @@
         <mat-sidenav-container>
           <!-- Search filters sidenav -->
           <mat-sidenav class="content-sidenav" mode="side" (keydown)="this.showContentSidenav=false" [opened]="showContentSidenav">
-            <app-filter-sidenav></app-filter-sidenav>
+            <router-outlet name="contentSidenav"
+                           (activate)="setContentSidenavHasContent(true)"
+                           (deactivate)="setContentSidenavHasContent(false)"></router-outlet>
           </mat-sidenav>
           <!-- Search bar  -->
             <div class="site-padding" ngClass.xs="site-padding-xs" ngClass.sm="site-padding-sm">

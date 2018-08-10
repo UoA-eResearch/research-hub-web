@@ -43,6 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public showProgressBar = false;
   public showBackBtn = false;
   public showContentSidenav = false;
+  public contentSidenavHasContent = false;
   public pageTitle = '';
 
   private previousRoute = undefined;
@@ -83,6 +84,24 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  initContentSidenav(){
+    this.contentSidenavVisibilitySub = this.appComponentService.contentSidenavVisibilityChange.subscribe((isVisible) => {
+      // Sets if we pop out the content sidenav.
+      // First check if there is content inside the sidenav, if not, then don't bother popping it out.
+      if (this.contentSidenavHasContent){
+        this.showContentSidenav = isVisible;
+      }
+    });
+  }
+
+  setContentSidenavHasContent(hasContent: boolean){
+    // Hide the content sidenav if there is no longer any content inside.
+    if (!hasContent){
+      this.showContentSidenav = false;
+    }
+    this.contentSidenavHasContent = hasContent;
+  }
+
   ngOnInit() {
     this.titleSub = this.appComponentService.titleChange.subscribe((title) => {
       this.pageTitle = title;
@@ -92,10 +111,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.showProgressBar = isVisible;
     });
 
-    this.contentSidenavVisibilitySub = this.appComponentService.contentSidenavVisibilityChange.subscribe((isVisible) => {
-      this.showContentSidenav = isVisible;
-    });
-
+    this.initContentSidenav();
     // Navigate to the search page if the user types text in
     this.searchTextChangeSub = this.searchBarService.searchTextChange.distinctUntilChanged().subscribe(searchText => {
       const url = this.location.path();
