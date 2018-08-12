@@ -17,7 +17,11 @@ export class FilterSidenavComponent implements OnInit {
     this.filtersForm = searchFiltersService.filtersForm;
   }
 
-  closeSidenav(){
+  clear(){
+    //TODO Reset state
+  }
+
+  done(){
     this.appComponentService.setContentSidenavVisibility(false);
   }
 

@@ -1,9 +1,17 @@
-<mat-toolbar class="filter-toolbar" fxLayout="row" fxLayoutGap="0em">
+<mat-toolbar class="filter-header" fxLayout="row" fxLayoutGap="0em">
   <div fxFlex="1 1 auto">
     <h2>Refine your search</h2>
   </div>
-  <button class="close-button" mat-icon-button (click)="closeSidenav()">
+  <button class="close-button" mat-icon-button (click)="done()">
     <mat-icon aria-label="Close the refine search sidebar.">close</mat-icon>
   </button>
 </mat-toolbar>
+<div class="filter-sidenav-content">
 <app-search-filters [filtersForm]="filtersForm"></app-search-filters>
+  <div fxLayout="row" fxLayoutAlign="space-between center" style="padding-top: 3em;">
+    <span style="color: #2f99cc; cursor: pointer" (click)="clear(); done()"> Cancel </span>
+    <button mat-raised-button color="accent" (click)="done()">
+      Refine Search
+    </button>
+  </div>
+</div>

@@ -1,6 +1,11 @@
 @import '../../../../styles';
 
-.filter-toolbar {
+.filter-sidenav-content {
+  padding-left:16px;
+  padding-right:16px;
+}
+
+.filter-header {
   background-color: inherit;
 
   mat-icon {
