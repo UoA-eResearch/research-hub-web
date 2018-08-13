@@ -3,13 +3,22 @@
   <h2 class="search-results-title">Results</h2>
 
   <div *ngIf="!showEmptyState">
-    <div>
-      <p [innerHTML]="resultsSummary" style="margin-bottom: 0; margin-right: 1em;"></p>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <p fxFlex [innerHTML]="resultsSummary" style="margin-bottom: 0; margin-right: 1em;"></p>
+      <!-- The view and order by switchers will show in the results summary line if filters are visible. -->
+      <ng-container *ngIf="filterVisible">
+        <view-switcher [(showCardView)]="showCardView"></view-switcher>
+        <orderby-switcher [value]="orderBy" (valueChange)="onOrderByChange($event)" [relevanceDisabled]="searchTextIsBlank">
+        </orderby-switcher>
+      </ng-container>
+
     </div>
 
   <!-- Category List -->
-    <div class="category-list" *ngIf="getCategoryId() == 1 && !showEmptyState" fxHide fxShow.gt-sm>
+  <div class="category-list" *ngIf="!filterVisible && getCategoryId() == 1 && !showEmptyState" fxHide fxShow.gt-sm>
+    <div>
       <p><span class="search-results-text">Not what you were looking for?</span> Check out a different category.</p>
+    </div>
       <mat-chip-list mat-line style="height: 1.5em;">
         <div style="padding-right: 0.5em">Categories: </div>
         <mat-chip disabled selected>
@@ -21,7 +30,8 @@
       </mat-chip-list>
     </div>
 
-  <div class="category-list" *ngIf="getCategoryId() != 1 && !showEmptyState" fxHide fxShow.gt-sm>
+  <!-- Category list for when a category is selected. -->
+  <div class="category-list" *ngIf="!filterVisible && getCategoryId() != 1 && !showEmptyState" fxHide fxShow.gt-sm>
     <mat-chip-list mat-line style="height: 1.5em;">
       <div style="padding-right: 0.5em">Category: </div>
       <mat-chip disabled>
@@ -33,25 +43,18 @@
     </mat-chip-list>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="start center" class="refine-search">
+  <div fxLayout="row" fxLayoutAlign="start center" class="refine-search" *ngIf="!filterVisible">
     <div fxFlex>
-      <p class="refine-search-text"><span class="search-results-text">Too many results?</span> <a style="cursor:pointer;" role="button" (click)="openSidenav()">Refine your search.</a></p>
+      <p class="refine-search-text">
+        <span class="search-results-text">Too many results?</span> <a style="cursor:pointer;" role="button" (click)="openSidenav()">Refine your search.</a>
+      </p>
     </div>
 
-      <!-- Results View Switcher -->
-    <div fxFlex="65px" style="display: flex; align-content: center; justify-content: center">
-      <i (click)="showCardView = !showCardView" style="cursor: pointer; font-size: 36px; color: rgba(00, 40, 59, .8)" class="material-icons">{{showCardView? "view_list" : "view_module"}}</i>&nbsp;
-    </div>
+    <!-- Results View Switcher -->
+    <view-switcher [(showCardView)]="showCardView"></view-switcher>
 
-    <div fxFlex="100px">
-      <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
-        <mat-select placeholder="Sort By" (change)="onOrderByChange($event)" [(value)]="orderBy">
-          <mat-option *ngFor="let item of sortOptions" [value]="item.id" [disabled]="searchTextIsBlank && item.name=='Relevance'">
-            {{ item.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+    <orderby-switcher [value]="orderBy" (valueChange)="onOrderByChange($event)" [relevanceDisabled]="searchTextIsBlank">
+    </orderby-switcher>
   </div>
   </div>
 

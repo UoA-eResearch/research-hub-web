@@ -50,12 +50,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private categoryIdSub: Subscription;
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
+  private contentNavVisibilitySub: Subscription;
 
   public searchTextIsBlank = true;
   public noResultsSummary = '';
   public resultsSummary = '';
   public showEmptyState = false;
-  public sortOptions = [{id: OrderBy.Alphabetical, name: 'Alphabet'}, {id: OrderBy.Relevance, name: 'Relevance'}];
+
   public pageSizeOptions = [6, 12, 60, 120, 600];
 
   public orderBy;
@@ -67,6 +68,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private previousPageEvent: any;
   private previousFiltersFormValues: any;
   private previousSearchText: any;
+  private filterVisible: boolean = false;
 
   // Used for determining number of columns for card-view results
   public cardViewResultsNumberOfColumns = 3;
@@ -208,7 +210,15 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.cardViewResultsNumberOfColumns = Math.min(3, cols);
   }
 
+  initFilterSidenav(){
+    this.contentNavVisibilitySub = this.appComponentService.contentSidenavVisibilityChange.subscribe(
+      (isSidenavVisible: boolean) => {
+        this.filterVisible = isSidenavVisible;
+      });
+  }
+
   ngOnInit() {
+    this.initFilterSidenav();
     // Results cards
     this.updateCols(this.layoutService.getMQAlias());
 
@@ -296,8 +306,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.resultsDummyHeader.nativeElement.scrollIntoView();
   }
 
-  onOrderByChange(event: any) {
-    this.orderByChange.next(event.value);
+  onOrderByChange(orderBy) {
+    this.orderByChange.next(orderBy);
   }
 
   setFiltersTextIfUndefined(personTags: Tag[], orgUnitTags: Tag[]) {
@@ -502,8 +512,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.filterVisible = true;
+
     dialogRef.afterClosed().subscribe(rawFormValues => {
       this.filtersForm.patchValue(rawFormValues);
+      this.filterVisible = false;
     });
   }
 
@@ -520,5 +533,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.searchChangeSub.unsubscribe();
     this.routeParamsSub.unsubscribe();
     this.buttonClickSub.unsubscribe();
+    this.contentNavVisibilitySub.unsubscribe();
   }
 }
