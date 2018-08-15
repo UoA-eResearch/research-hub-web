@@ -18,8 +18,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/observable/of';
+import { map } from 'rxjs/operators';
 import {Tag} from './mat-tags/mat-tags.component';
 import {ListItem} from '../../model/ListItem';
 import {AppComponentService} from '../../app.component.service';
@@ -32,6 +32,7 @@ import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {forkJoin} from 'rxjs/observable/forkJoin';
 
 import {SearchFiltersService} from './search-filters/search-filters.service';
+import { SearchResultsComponentService } from './search-results-component.service';
 
 @Component({
   selector: 'app-search-results',
@@ -51,6 +52,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
   private contentNavVisibilitySub: Subscription;
+
+  private resultsSub : Subscription;
+  private categoriesSub : Subscription;
 
   public searchTextIsBlank = true;
   public noResultsSummary = '';
@@ -199,6 +203,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
               public optionsService: OptionsService, public apiService: ResearchHubApiService,
               private analyticsService: AnalyticsService, private route: ActivatedRoute,
               private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService,
+              private componentService : SearchResultsComponentService,
               private layoutService: LayoutService, private media: ObservableMedia,
               private searchFiltersService: SearchFiltersService) {
     this.filtersForm = searchFiltersService.filtersForm;
@@ -217,8 +222,35 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       });
   }
 
+  initResultSubs(){
+    this.resultsSub = this.componentService.results$.subscribe(
+      page => {
+        this.resultsPage = page;
+        this.orderBy = page.sort;
+        const filtersFormValue = this.filtersForm.value;
+        const personTags = filtersFormValue.personTags;
+        const orgUnitTags = filtersFormValue.orgUnitTags;
+        const categoryId = filtersFormValue.categoryId;
+        const searchText = this.searchBarService.searchText;
+        const researchActivityIds = filtersFormValue.researchActivityIds;
+        this.setFiltersTextIfUndefined(personTags, orgUnitTags).subscribe(res => {
+          const[personTagsRes, orgUnitTagsRes] = res;
+          this.updateResultsSummary(page, categoryId, searchText, personTagsRes, orgUnitTagsRes, researchActivityIds);
+        });
+        console.log("New results!");
+        this.appComponentService.setProgressBarVisibility(false);
+      }
+    );
+    this.categoriesSub = this.componentService.resultsCategories$.subscribe(
+      categories => {
+        this.categoryListArray = categories;
+        console.log("New results categories!");
+      });
+  }
+
   ngOnInit() {
     this.initFilterSidenav();
+    this.initResultSubs();
     // Results cards
     this.updateCols(this.layoutService.getMQAlias());
 
@@ -320,7 +352,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     personTags.forEach(key => observablePersonBatch.push(this.apiService.getPerson(key.id)));
 
     // Return an observable containing the batches of observables for both personTags and orgUnitTags
-    return Observable.forkJoin(
+    return forkJoin(
       forkJoin(observablePersonBatch).map(x => x.map(y => {y['text'] = y['firstName'] + ' ' + y['lastName']; return (y)}))
         .pipe(z => observablePersonBatch.length ? z : Observable.of([])),
       forkJoin(observableOrgUnitBatch).map(x => x.map(y => {y['text'] = y['name'];  return (y)}))
@@ -374,34 +406,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       params.setResearchPhases(researchActivityIds);
     }
 
-    const resultsSub = this.apiService.getSearchResults(params).subscribe(page => {
-      this.resultsPage = page;
-      this.orderBy = page.sort;
-      // Fixes bug where filter/orgUnit tags are not defined when the page is not visited dynamically
-      this.setFiltersTextIfUndefined(personTags, orgUnitTags).subscribe(res => {
-        const[personTagsRes, orgUnitTagsRes] = res;
-        personTags = personTagsRes;
-        orgUnitTags = orgUnitTagsRes;
-        this.updateResultsSummary(page, categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
-      });
-      resultsSub.unsubscribe();
-      this.appComponentService.setProgressBarVisibility(false);
-    });
-
-    const categoryList = {}; this.categoryListArray = [];
-    const resultsSubCategories = this.apiService.getSearchResultsCategories(params).subscribe(res => {
-      for (let i = 0; i < res['content'].length; i++) {
-        for (let j = 0; j < res['content'][i]['categories'].length; j++) {
-          categoryList[res['content'][i]['categories'][j]] = categoryList[res['content'][i]['categories'][j]] === undefined ? 1 : categoryList[res['content'][i]['categories'][j]] + 1;
-        }
-      }
-      // Convert JSON to array for Angular *ngFor
-      for (const categoryTuple in categoryList) {
-        this.categoryListArray.push([categoryTuple, categoryList[categoryTuple]]);
-      }
-      resultsSubCategories.unsubscribe();
-    });
+    this.componentService.searchWithParams(params);
   }
+
 
   updateUrl(categoryId: number, searchText: string, personIds: number[], orgUnitIds: number[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
     let url = '/search';
@@ -534,5 +541,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.routeParamsSub.unsubscribe();
     this.buttonClickSub.unsubscribe();
     this.contentNavVisibilitySub.unsubscribe();
+    this.resultsSub.unsubscribe();
+    this.categoriesSub.unsubscribe();
   }
 }

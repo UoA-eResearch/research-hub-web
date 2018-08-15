@@ -7,6 +7,8 @@ import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';
 import {SearchFiltersModule} from './search-filters/search-filters.module';
 import { ViewSwitcherComponent } from './view-switcher/view-switcher.component';
 import { OrderbySwitcherComponent } from './orderby-switcher/orderby-switcher.component';
+import { CategoryListComponent } from './category-list/category-list.component';
+import { SearchResultsComponentService } from './search-results-component.service';
 
 @NgModule({
   imports: [
@@ -18,10 +20,14 @@ import { OrderbySwitcherComponent } from './orderby-switcher/orderby-switcher.co
   declarations: [
     SearchResultsComponent,
     ViewSwitcherComponent,
-    OrderbySwitcherComponent
+    OrderbySwitcherComponent,
+    CategoryListComponent
   ],
   entryComponents: [
     FilterDialogComponent
+  ],
+  providers: [
+    SearchResultsComponentService
   ]
 })
 export class SearchResultsModule {
