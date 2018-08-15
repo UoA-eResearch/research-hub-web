@@ -1,5 +1,9 @@
 <form *ngIf="filtersForm" [formGroup]="filtersForm" fxLayout="column" fxLayoutGap="2.5em" fxLayoutGap.xs="1em">
 
+  <div>
+  <span style="color: rgba(0,0,0,0.54);padding-bottom:0.5em;font-size: 12px;display: block;">Check out a different category</span>
+  <category-list></category-list>
+  </div>
   <div fxHide.gt-xs fxFlex.lt-sm="noshrink">
     <mat-form-field fxFlex="100" style="margin-top: 1em !important;">
       <mat-select formControlName="categoryId" placeholder="Category">

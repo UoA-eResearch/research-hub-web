@@ -1,0 +1,28 @@
+<!-- Category List -->
+<div class="category-list" *ngIf="selectedCategory == 1">
+  <div>
+  </div>
+  <mat-chip-list mat-line style="height: 1.5em;">
+    <!-- <div style="padding-right: 0.5em">Categories: </div> -->
+    <mat-chip disabled selected>
+      <span style="font-size: 14px;">All: {{ (results$ | async)?.totalElements }}</span>
+    </mat-chip>
+    <mat-chip style="padding-right: 9px; padding-left:9px;" *ngFor="let categoryTuple of resultsCategories$ | async" (click)="onCategorySelected(categoryTuple[0])" [selected]="isCurrentCategory(categoryTuple[0])">
+
+      <span style="font-size: 1.5em; margin-right: 2px;" *ngFor="let categoryValue of categoryTuple; let first=first;">{{categoryValue}}<span *ngIf="first" style="padding-right: 0px">: </span></span>
+    </mat-chip>
+  </mat-chip-list>
+</div>
+
+<!-- Category list for when a category is selected. -->
+<div class="category-list" *ngIf="selectedCategory != 1">
+  <mat-chip-list mat-line style="height: 1.5em;">
+    <!-- <div style="padding-right: 0.5em">Category: </div> -->
+    <mat-chip disabled>
+      <span (click)="onCategorySelected('All')">All Categories</span>
+    </mat-chip>
+    <mat-chip disabled selected>
+      <span style="font-size: 14px; margin-right: 2px;">{{ selectedCategory + ': ' + (results$ | async)?.totalElements }} </span>
+    </mat-chip>
+  </mat-chip-list>
+</div>
