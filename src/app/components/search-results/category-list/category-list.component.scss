@@ -1,7 +1,18 @@
+.category-list .mat-chip {
+  cursor: pointer;
+  color: #004059;
+  margin: 4px 0px !important;
+  margin-right: 8px !important;
+}
+
+.category-list .mat-chip-selected {
+  color: white;
+}
+
+/*
 .category-list > mat-chip-list {
-  // display: flex;
   // align-self: flex-start;
-  // overflow: hidden;
+  overflow: hidden;
   padding-top: 0px;
   outline: 0;
   outline: none;
@@ -18,3 +29,14 @@
 .category-list mat-chip-selected {
   color: white !important;
 }
+
+
+//Style for vertical mode.
+.category-list.vertical {
+
+  > mat-chip-list {
+    // align-self: start;
+    overflow: visible;
+  }
+}
+*/
