@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import {FormGroup, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { CategoryId } from 'app/services/options.service';
 
 @Injectable()
 export class SearchFiltersService {
 
   readonly filtersForm : FormGroup;
-  private categoriesSubject: Subject<Array<Object>>;
-  currentCategories$ : Observable<Array<Object>>;
 
   constructor() {
     this.filtersForm = new FormGroup({
@@ -18,11 +17,9 @@ export class SearchFiltersService {
       researchActivityIds: new FormControl(),
       categories: new FormControl([])
     });
-    this.categoriesSubject = new Subject<Array<Object>>();
-    this.currentCategories$ = this.categoriesSubject.asObservable();
   }
 
-  setSearchResultCategories(categories : Array<Object>){
-    this.categoriesSubject.next(categories);
+  public resetFilters(){
+    this.filtersForm.patchValue({categoryId: CategoryId.All, personTags: [], orgUnitTags: [], researchActivityIds: []});
   }
 }

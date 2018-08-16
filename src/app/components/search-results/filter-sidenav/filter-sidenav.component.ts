@@ -12,13 +12,13 @@ export class FilterSidenavComponent implements OnInit {
 
   private filtersForm : FormGroup;
 
-  constructor(searchFiltersService: SearchFiltersService,
+  constructor(private searchFiltersService: SearchFiltersService,
               private appComponentService: AppComponentService) {
     this.filtersForm = searchFiltersService.filtersForm;
   }
 
   clear(){
-    //TODO Reset state
+    this.searchFiltersService.resetFilters();
   }
 
   done(){

@@ -3,13 +3,13 @@
     <h2>Refine your search</h2>
   </div>
   <button class="close-button" mat-icon-button (click)="done()">
-    <mat-icon aria-label="Close the refine search sidebar.">close</mat-icon>
+    <mat-icon aria-label="Close the refine search panel.">close</mat-icon>
   </button>
 </mat-toolbar>
 <div class="filter-sidenav-content">
 <app-search-filters [filtersForm]="filtersForm"></app-search-filters>
-  <div fxLayout="row" fxLayoutAlign="space-between center" style="padding-top: 3em;">
-    <span style="color: #2f99cc; cursor: pointer" (click)="clear(); done()"> Cancel </span>
+  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="1em" style="padding-top: 3em;">
+    <span style="color: #2f99cc; cursor: pointer" (click)="clear()">Reset</span>
     <button mat-raised-button color="accent" (click)="done()">
       Refine Search
     </button>
