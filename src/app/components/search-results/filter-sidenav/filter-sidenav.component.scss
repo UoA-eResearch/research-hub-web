@@ -1,13 +1,12 @@
 @import '../../../../styles';
 
-.filter-sidenav-content {
-  padding-left:16px;
-  padding-right:16px;
+.filter-sidenav-content,.filter-header {
+  padding-left:32px;
+  padding-right:32px;
 }
 
 .filter-header {
   background-color: inherit;
-
   mat-icon {
     color: $color-icon;
   }
