@@ -22,7 +22,7 @@
       <span (click)="onCategorySelected('All')">All Categories</span>
     </mat-chip>
     <mat-chip disabled selected>
-      <span style="margin-right: 2px;">{{ getCurrentCategoryDisplayName() + ': ' + (results$ | async)?.totalElements }} </span>
+      <span style="margin-right: 2px;">{{ getCurrentCategoryDisplayName()}}: {{(results$ | async)?.totalElements }} </span>
     </mat-chip>
   </mat-chip-list>
 </div>
