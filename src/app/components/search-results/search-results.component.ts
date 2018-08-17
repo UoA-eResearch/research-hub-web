@@ -515,15 +515,14 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       width: '100%',
       height: '100%',
       data: {
-        rawFormValues: this.filtersForm.getRawValue()
+        form: this.searchFiltersService.duplicateFilters()
       }
     });
 
-    this.filterVisible = true;
-
-    dialogRef.afterClosed().subscribe(rawFormValues => {
-      this.filtersForm.patchValue(rawFormValues);
-      this.filterVisible = false;
+    dialogRef.afterClosed().subscribe(newFiltersForm => {
+      if (newFiltersForm) {
+        this.searchFiltersService.patchFilters(newFiltersForm);
+      }
     });
   }
 

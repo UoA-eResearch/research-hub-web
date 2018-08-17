@@ -24,6 +24,12 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
   @Input()
   public filtersForm: FormGroup;
 
+  /**
+  * Determines whether we should show certain widgets in a small size.
+  */
+  @Input()
+  public compact : boolean = false;
+
   public showPersonFilter = true;
   public showOrgUnitFilter = true;
   public showResearchActivityFilter = true;
