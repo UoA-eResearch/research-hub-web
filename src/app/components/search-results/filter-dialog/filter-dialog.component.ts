@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup} from '@angular/forms';
 import {CategoryId} from 'app/services/options.service';
@@ -9,7 +9,7 @@ import { DEFAULT_FILTERS_VALUE } from '../search-filters/search-filters.service'
   templateUrl: './filter-dialog.component.html',
   styleUrls: ['./filter-dialog.component.scss']
 })
-export class FilterDialogComponent implements OnInit {
+export class FilterDialogComponent {
 
   public filtersForm: FormGroup;
 

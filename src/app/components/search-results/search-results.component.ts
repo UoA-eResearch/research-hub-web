@@ -13,7 +13,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
@@ -84,6 +84,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public categoryListArray = [];
 
   public currentCategoryString = '';
+
+  // A reference to the search filters dialog, if one is currently displayed.
+  // Otherwise null.
+  private filterDialogRef : MatDialogRef;
 
   public static getFilterVisibility(categoryId: number) {
     return {
@@ -256,6 +260,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     this.mediaSub = this.media.subscribe((change: MediaChange) => {
       this.updateCols(change.mqAlias);
+      this.updateFiltersView(change.mqAlias);
     });
 
     // Results page
@@ -360,8 +365,47 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     );
   }
 
-  openSidenav(){
-    this.appComponentService.setContentSidenavVisibility(true);
+  openFilters(){
+    const winWidth = this.layoutService.getMQAlias();
+    if (this.layoutService.isWidthLessThan('md')){
+      this.openDialog();
+    } else {
+      this.appComponentService.setContentSidenavVisibility(true);
+    }
+  }
+
+  private openDialog(): void {
+    this.filterDialogRef = this.dialog.open(FilterDialogComponent, {
+      maxWidth: '100%',
+      width: '100%',
+      height: '100%',
+      data: {
+        form: this.searchFiltersService.duplicateFilters()
+      }
+    });
+
+    this.filterDialogRef.afterClosed().subscribe(newFiltersForm => {
+      if (newFiltersForm) {
+        this.searchFiltersService.patchFilters(newFiltersForm);
+      }
+      this.filterDialogRef = null;
+    });
+  }
+
+
+  /**
+  * Hide the filters view that isn't applicable to the screen size
+  * if media width has changed.
+  * See ngOnInit.
+  */
+  private updateFiltersView(winWidth: string){
+    if (this.layoutService.isWidthLessThan('md')){
+      this.appComponentService.setContentSidenavVisibility(false);
+    } else {
+      if (this.filterDialogRef){
+        this.filterDialogRef.close();
+      }
+    }
   }
 
   onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
@@ -507,23 +551,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.resultsSummary = 'Found <span class="search-results-text">' + (page.totalElements) + '</span> results ' + summary + '. Showing page <span class="search-results-text">' + (page.number + 1) + '</span> of <span class="search-results-text">' + (page.totalPages) + '</span>.';
     this.showEmptyState = page.totalElements === 0;
 
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(FilterDialogComponent, {
-      maxWidth: '100%',
-      width: '100%',
-      height: '100%',
-      data: {
-        form: this.searchFiltersService.duplicateFilters()
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(newFiltersForm => {
-      if (newFiltersForm) {
-        this.searchFiltersService.patchFilters(newFiltersForm);
-      }
-    });
   }
 
   trackOutboundLink(result: ListItem) {
