@@ -38,7 +38,7 @@
 
     <div class="sidenav-content-wrapper">
       <div class="sidenav-content" ngClass.xs="sidenav-content-xs">
-        <div class="app-toolbar-container">
+        <div #topbar class="app-toolbar-container">
           <div class="site-content app-toolbar" ngClass.xs="site-content app-toolbar-xs">
             <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="center center" color="primary">
               <button style="margin-right: 6px;" fxHide.gt-sm mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu"><mat-icon>menu</mat-icon></button>
@@ -116,9 +116,12 @@
         </div>
 
         <app-header></app-header>
+        <!-- <mat-drawer-container> -->
         <mat-sidenav-container>
-          <!-- Search filters sidenav -->
-          <mat-sidenav class="content-sidenav" mode="side" disableClose [opened]="showContentSidenav">
+          <!-- Content sidenav -->
+          <mat-sidenav class="content-sidenav" mode="side"
+                       disableClose [opened]="showContentSidenav"
+                       [fixedInViewport]="isContentSidenavFixed">
             <router-outlet name="contentSidenav"
                            (activate)="setContentSidenavHasContent(true)"
                            (deactivate)="setContentSidenavHasContent(false)"></router-outlet>

@@ -42,7 +42,7 @@ export class LayoutService {
   }
 
   public getMQAlias(): string {
-    const width = window.innerWidth,
+    const width = window.innerWidth;
     if ( width < MQ_ALIASES.sm) {
       return 'xs';
     } else if (width >= MQ_ALIASES.sm && width < MQ_ALIASES.md) {
