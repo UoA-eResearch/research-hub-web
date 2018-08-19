@@ -37,7 +37,7 @@
     </mat-sidenav>
 
     <div class="sidenav-content-wrapper">
-      <div class="sidenav-content" ngClass.xs="sidenav-content-xs">
+      <div class="sidenav-content" fxLayout="column" ngClass.xs="sidenav-content-xs">
         <div #topbar class="app-toolbar-container">
           <div class="site-content app-toolbar" ngClass.xs="site-content app-toolbar-xs">
             <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="center center" color="primary">
@@ -117,7 +117,7 @@
 
         <app-header></app-header>
         <!-- <mat-drawer-container> -->
-        <mat-sidenav-container>
+        <mat-sidenav-container fxFlex="grow">
           <!-- Content sidenav -->
           <mat-sidenav class="content-sidenav" mode="side"
                        disableClose [opened]="showContentSidenav"
