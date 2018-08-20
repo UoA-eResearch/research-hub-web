@@ -56,9 +56,10 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
   }
 
   writeValue(value) {
-    if (value) {
-      this.value = value;
+    if (value === null || value === undefined){
+      value = [];
     }
+    this.value = value;
   }
 
   registerOnTouched(fn) {

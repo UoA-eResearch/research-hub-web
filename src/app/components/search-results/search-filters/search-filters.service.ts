@@ -8,7 +8,7 @@ export const DEFAULT_FILTERS_VALUE = {
   categoryId: CategoryId.All,
   personTags: [],
   orgUnitTags: [],
-  researchActivityIds: null,
+  researchActivityIds: [],
   categories: []
 }
 
