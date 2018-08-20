@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, AfterViewInit, ElementRef, NgZone} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, AfterViewInit, ElementRef, NgZone, HostListener} from '@angular/core';
 import {CategoryId, OptionsService, OptionType} from './services/options.service';
 import {SearchBarService} from './components/search-bar/search-bar.service';
 import {NavigationEnd, Router} from '@angular/router';
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private previousRoute = undefined;
   private currentRoute = undefined;
   private isContentSidenavFixed = false;
-  private contentSidenavAffixedHeight;
+  private contentSidenavHeight;
 
   @ViewChild('topbar')
   private topbarElement : ElementRef;
@@ -101,6 +101,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       // First check if there is content inside the sidenav, if not, then don't bother popping it out.
       if (this.contentSidenavHasContent){
         this.showContentSidenav = isVisible;
+        if (isVisible){
+          // Do a restyle when the filter sidenav opens to initialise the height.
+          this.restyleContentSidenav();
+        }
       }
     });
   }
@@ -179,43 +183,62 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  @HostListener('window:resize')
+  restyleContentSidenav(){
+    if (!this.showContentSidenav){
+      // If content sidenav is not visible, don't need to calculate style.
+      return;
+    }
+    if (!window){
+      // If not running in a browser, do not do anything.
+      return;
+    }
+    const topbar = this.topbarElement.nativeElement,
+    topContent = this.topContentElement.nativeElement,
+    topbarRect = topbar.getBoundingClientRect(),
+    contentHeight = topContent.clientHeight,
+    topbarBottom = topbarRect.bottom,
+    winY = window.scrollY,
+    winHeight = window.innerHeight;
+    let newFixedValue, newSidenavHeight;
+    if (topbarBottom < 0){
+      // The topbar is now scrolled out of view, so we need to affix the
+      // content sidenav if it is not affixed.
+      if (!this.isContentSidenavFixed){
+          newFixedValue = true;
+      }
+    } else {
+      // The topbar is now in view, so we need to un-affix the content
+      // sidenav if it is affixed.
+      if (this.isContentSidenavFixed){
+        newFixedValue = false;
+      }
+    }
+      // We calculate the height of the affixed content sidenav so that the sidenav does not
+      // overlap with the footer.
+    newSidenavHeight = Math.min(contentHeight - winY,winHeight);
+
+    if ((newFixedValue === false) || (newFixedValue === undefined && !this.isContentSidenavFixed)){
+      // If the sidenav is not yet fixed - i.e. some of the topbar is still visible,
+      // remove the visible topbar height from the sidenav height.
+      newSidenavHeight -= topbarBottom;
+    }
+    this.ngZone.runGuarded(() => {
+      if (newFixedValue !== undefined){
+        this.isContentSidenavFixed = newFixedValue;
+      }
+      if (newSidenavHeight !== undefined){
+        this.contentSidenavHeight = newSidenavHeight;
+      }
+    });
+  }
+
   setupContentSidenavFixedSub(){
     this.topbarScrollSub = this.scrollDispatcher.scrolled(150).subscribe(
-      event => {
-        const topbarRect = this.topbarElement.nativeElement.getBoundingClientRect(),
-        contentHeight = this.topContentElement.nativeElement.clientHeight,
-        topbarBottom = topbarRect.bottom,
-        winY = window.scrollY,
-        winHeight = window.innerHeight;
-        let newFixedValue, newSidenavHeight;
-        if (topbarBottom < 0){
-          // The topbar is now scrolled out of view, so we need to affix the
-          // content sidenav if it is not affixed.
-          if (!this.isContentSidenavFixed){
-              newFixedValue = true;
-          }
-        } else {
-          // The topbar is now in view, so we need to un-affix the content
-          // sidenav if it is affixed.
-          if (this.isContentSidenavFixed){
-            newFixedValue = false;
-          }
-        }
-        if (newFixedValue || (newFixedValue === undefined && this.isContentSidenavFixed)){
-          // We calculate the height of the affixed content sidenav so that the sidenav does not
-          // overlap with the footer.
-          newSidenavHeight = Math.min(contentHeight - winY,winHeight);
-        }
-        this.ngZone.runGuarded(() => {
-          if (newFixedValue !== undefined){
-            this.isContentSidenavFixed = newFixedValue;
-          }
-          if (newSidenavHeight !== undefined){
-            this.contentSidenavAffixedHeight = newSidenavHeight;
-          }
-        });
-      });
-
+      () => {
+        this.restyleContentSidenav();
+      }
+    );
   }
 
   ngAfterViewInit() {
