@@ -34,6 +34,9 @@ import {forkJoin} from 'rxjs/observable/forkJoin';
 import {SearchFiltersService} from './search-filters/search-filters.service';
 import { SearchResultsComponentService } from './search-results-component.service';
 
+// The screen size at which we should switch to opening filters in dialog or sidenav.
+const FILTER_VIEW_BREAKPOINT = "md";
+
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
@@ -87,7 +90,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   // A reference to the search filters dialog, if one is currently displayed.
   // Otherwise null.
-  private filterDialogRef : MatDialogRef;
+  private filterDialogRef : MatDialogRef<any>;
 
   public static getFilterVisibility(categoryId: number) {
     return {
@@ -224,6 +227,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       (isSidenavVisible: boolean) => {
         this.filterVisible = isSidenavVisible;
       });
+    if (!this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
+      // If we are in desktop mode, pop open the filters by default.
+      this.openFilters();
+    }
   }
 
   initResultSubs(){
@@ -367,7 +374,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   openFilters(){
     const winWidth = this.layoutService.getMQAlias();
-    if (this.layoutService.isWidthLessThan('md')){
+    if (this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
       this.openDialog();
     } else {
       this.appComponentService.setContentSidenavVisibility(true);
@@ -399,7 +406,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   * See ngOnInit.
   */
   private updateFiltersView(winWidth: string){
-    if (this.layoutService.isWidthLessThan('md')){
+    if (this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
       this.appComponentService.setContentSidenavVisibility(false);
     } else {
       if (this.filterDialogRef){

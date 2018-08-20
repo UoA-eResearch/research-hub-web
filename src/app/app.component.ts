@@ -216,7 +216,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
       // We calculate the height of the affixed content sidenav so that the sidenav does not
       // overlap with the footer.
-    newSidenavHeight = Math.min(contentHeight - winY,winHeight);
+    newSidenavHeight = Math.min(Math.max(contentHeight,winHeight) - winY,winHeight);
 
     if ((newFixedValue === false) || (newFixedValue === undefined && !this.isContentSidenavFixed)){
       // If the sidenav is not yet fixed - i.e. some of the topbar is still visible,
