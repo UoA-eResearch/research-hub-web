@@ -37,7 +37,7 @@
     </mat-sidenav>
 
     <div class="sidenav-content-wrapper">
-      <div class="sidenav-content" fxLayout="column" ngClass.xs="sidenav-content-xs">
+      <div #topContent class="sidenav-content" fxLayout="column" ngClass.xs="sidenav-content-xs">
         <div #topbar class="app-toolbar-container">
           <div class="site-content app-toolbar" ngClass.xs="site-content app-toolbar-xs">
             <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="center center" color="primary">
@@ -121,7 +121,8 @@
           <!-- Content sidenav -->
           <mat-sidenav class="content-sidenav" mode="side"
                        disableClose [opened]="showContentSidenav"
-                       [fixedInViewport]="isContentSidenavFixed">
+                       [fixedInViewport]="isContentSidenavFixed"
+                       [ngStyle]="{'height':isContentSidenavFixed ? contentSidenavAffixedHeight + 'px' : null}">
             <router-outlet name="contentSidenav"
                            (activate)="setContentSidenavHasContent(true)"
                            (deactivate)="setContentSidenavHasContent(false)"></router-outlet>
