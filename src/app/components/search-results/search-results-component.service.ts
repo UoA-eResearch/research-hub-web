@@ -4,17 +4,15 @@ import { ListItem } from 'app/model/ListItem';
 import { ResearchHubApiService, SearchResultsParams } from 'app/services/research-hub-api.service';
 import { map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
-import { Subject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class SearchResultsComponentService {
 
-  private resultsSubject: Subject<Page<ListItem>>;
-  public results : Page<ListItem>;
+  private resultsSubject: BehaviorSubject<Page<ListItem>>;
   public results$ : Observable<Page<ListItem>>;
 
-  private categorySubject: Subject<Array<Object>>;
-  public resultsCategories : Array<Object>;
+  private categorySubject: BehaviorSubject<Array<Object>>;
   public resultsCategories$ : Observable<Array<Object>>;
 
   constructor(public apiService: ResearchHubApiService) {
@@ -25,14 +23,12 @@ export class SearchResultsComponentService {
     const resultsSub = this.updateSearchResults(params)
       .subscribe(page =>
                  {
-                   this.results = page;
                    this.resultsSubject.next(page);
                    resultsSub.unsubscribe();
                  }
                 );
     const categorySub = this.updateSearchResultsCategories(params)
       .subscribe(categories => {
-          this.resultsCategories = categories;
           this.categorySubject.next(categories);
           categorySub.unsubscribe();
         }
@@ -40,9 +36,10 @@ export class SearchResultsComponentService {
   }
 
   private initialiseSubjects(){
-    this.resultsSubject = new Subject<Page<ListItem>>();
+    // We initialise the Subjects with an empty initial value.
+    this.resultsSubject = new BehaviorSubject<Page<ListItem>>(<Page<ListItem>>{});
     this.results$ = this.resultsSubject.asObservable();
-    this.categorySubject = new Subject<Array<Object>>();
+    this.categorySubject = new BehaviorSubject<Array<Object>>([]);
     this.resultsCategories$ = this.categorySubject.asObservable();
   }
 
