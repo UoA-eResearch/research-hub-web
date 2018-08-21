@@ -182,14 +182,12 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
           const[personTagsRes, orgUnitTagsRes] = res;
           this.updateResultsSummary(page, categoryId, searchText, personTagsRes, orgUnitTagsRes, researchActivityIds);
         });
-        console.log("New results!");
         this.appComponentService.setProgressBarVisibility(false);
       }
     );
     this.categoriesSub = this.componentService.resultsCategories$.subscribe(
       categories => {
         this.categoryListArray = categories;
-        console.log("New results categories!");
       });
   }
 
