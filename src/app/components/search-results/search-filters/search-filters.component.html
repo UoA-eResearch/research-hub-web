@@ -6,17 +6,18 @@
                  (selectedCategoryChange)="setCategory($event)">
   </category-list>
   </div>
-  <div *ngIf="compact" fxFlex.lt-sm="noshrink">
-    <mat-form-field fxFlex="100" style="margin-top: 1em !important;">
-      <mat-select formControlName="categoryId" placeholder="Category">
-        <mat-option *ngFor="let category of optionsService.categoryOptions" [value]="category.id">
-          {{category.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
 
   <div fxFlex="noshrink">
+    <div *ngIf="compact" style="margin-bottom: 1em;">
+      <mat-form-field fxFlex="100" style="margin-top: 1em !important;">
+        <mat-select formControlName="categoryId" placeholder="Category">
+          <mat-option *ngFor="let category of optionsService.categoryOptions" [value]="category.id">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
     <div fxLayout="column" fxLayoutGap="1em">
       <app-mat-tags *ngIf="showPersonFilter" [placeholder]="'Refine by person'"
                     [addNew]="false" [source]="personTagSource" formControlName="personTags"></app-mat-tags>
