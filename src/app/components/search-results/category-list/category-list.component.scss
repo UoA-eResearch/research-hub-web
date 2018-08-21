@@ -1,42 +1,31 @@
 .category-list .mat-chip {
   cursor: pointer;
   color: #004059;
-  margin: 4px 0px !important;
+  margin: 0.15em 0px !important; // !important required to override a rule with selectors that have pseudoclasses
   margin-right: 8px !important;
+  outline: 0;
+  outline: none;
 }
+
 
 .category-list .mat-chip-selected {
   color: white;
 }
 
-/*
-.category-list > mat-chip-list {
-  // align-self: flex-start;
-  overflow: hidden;
-  padding-top: 0px;
-  outline: 0;
-  outline: none;
-}
+.category-list.compact {
+  .mat-chip, .mat-chip-list {
+    font-size: 14px;
+  }
 
-.category-list mat-chip {
-  margin: 0px 0px 2px 0px;
-  background-color: #e0e0e0;
-  color: #004059;
-  height: 0.5em;
-  cursor: pointer;
-}
+  .mat-chip {
+    padding: 0.25em 9px;
+  }
 
-.category-list mat-chip-selected {
-  color: white !important;
-}
-
-
-//Style for vertical mode.
-.category-list.vertical {
-
-  > mat-chip-list {
-    // align-self: start;
-    overflow: visible;
+  mat-chip-list {
+    // Hide overflowing chips by setting the height to one line's height.
+    display: flex;
+    align-items: flex-start;
+    overflow: hidden;
+    height: 2.2em; // 1em from the chip text + 0.25 x 2 from top/bottom paddings + 0.15 x 2 from top/bottom margins + rest from the highlight shadow.
   }
 }
-*/

@@ -3,8 +3,8 @@
   <div *ngIf="!compact">
   <span style="color: rgba(0,0,0,0.54);padding-bottom:0.5em;font-size: 12px;display: block;">Check out a different category</span>
   <category-list [selectedCategory]="filtersForm.controls.categoryId.value"
-                 (selectedCategoryChange)="setCategory($event)"
-                 vertical="true"></category-list>
+                 (selectedCategoryChange)="setCategory($event)">
+  </category-list>
   </div>
   <div *ngIf="compact" fxFlex.lt-sm="noshrink">
     <mat-form-field fxFlex="100" style="margin-top: 1em !important;">

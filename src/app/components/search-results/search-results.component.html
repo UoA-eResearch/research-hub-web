@@ -14,34 +14,13 @@
 
     </div>
 
-  <!-- Category List -->
-  <div class="category-list" *ngIf="!filterVisible && getCategoryId() == 1 && !showEmptyState" fxHide fxShow.gt-sm>
-    <div>
+    <!-- Category List -->
+    <div class="inline-category-list" fxHide.lt-md *ngIf="!filterVisible">
       <p><span class="search-results-text">Not what you were looking for?</span> Check out a different category.</p>
+      <category-list [selectedCategory]="filtersForm.controls.categoryId.value"
+                      (selectedCategoryChange)="setCategory($event)"
+                      compact="true"></category-list>
     </div>
-      <mat-chip-list mat-line style="height: 1.5em;">
-        <div style="padding-right: 0.5em">Categories: </div>
-        <mat-chip disabled selected>
-          <span style="font-size: 14px;">All: {{ resultsPage.totalElements }}</span>
-        </mat-chip>
-        <mat-chip style="padding-right: 9px; padding-left:9px;" *ngFor="let categoryTuple of categoryListArray" (click)="updateCategoryFromCategoryList(categoryTuple[0])" [selected]="isCurrentCategory(categoryTuple[0])">
-        <span style="font-size: 14px; margin-right: 2px;" *ngFor="let categoryValue of categoryTuple; let first=first;">{{categoryValue}}<span *ngIf="first" style="padding-right: 0px">: </span></span>
-        </mat-chip>
-      </mat-chip-list>
-    </div>
-
-  <!-- Category list for when a category is selected. -->
-  <div class="category-list" *ngIf="!filterVisible && getCategoryId() != 1 && !showEmptyState" fxHide fxShow.gt-sm>
-    <mat-chip-list mat-line style="height: 1.5em;">
-      <div style="padding-right: 0.5em">Category: </div>
-      <mat-chip disabled>
-        <span (click)="updateCategoryFromCategoryList('All')">All Categories</span>
-      </mat-chip>
-      <mat-chip disabled selected>
-        <span style="font-size: 14px; margin-right: 2px;">{{ currentCategoryString + ': ' + resultsPage.totalElements }} </span>
-      </mat-chip>
-    </mat-chip-list>
-  </div>
 
   <div fxLayout="row" fxLayoutAlign="start center" class="refine-search" *ngIf="!filterVisible">
     <div fxFlex>

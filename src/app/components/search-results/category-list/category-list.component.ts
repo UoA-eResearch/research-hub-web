@@ -18,7 +18,7 @@ export class CategoryListComponent implements OnInit, OnChanges {
   @Input()
   private selectedCategory : number;
   @Output()
-  public selectedCategoryChange: EventEmitter<Object> = new EventEmitter<Object>();
+  public selectedCategoryChange: EventEmitter<number> = new EventEmitter<number>();
 
   isSelectedCategoryAll : boolean;
   /**
@@ -26,7 +26,7 @@ export class CategoryListComponent implements OnInit, OnChanges {
    * Defaults to horizontal.
    */
   @Input()
-  public vertical : boolean = false;
+  public compact : boolean = false;
 
   private results$ : Observable<Page<ListItem>>;
   private resultsCategories$ : Observable<Array<Object>>;
@@ -87,6 +87,7 @@ export class CategoryListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges){
+    // Set whether we are in All Categories.
     if (!!changes["selectedCategory"]){
       this.isSelectedCategoryAll = changes['selectedCategory'].currentValue === CategoryId.All;
     }

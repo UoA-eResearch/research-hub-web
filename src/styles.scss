@@ -94,8 +94,8 @@ Gloabl mat-chip style
  */
 
 mat-chip.mat-chip {
-  font-size: mat-font-size($app-chips-typography, button) !important;
-  font-weight: mat-font-weight($app-chips-typography, button) !important;
+  font-size: mat-font-size($app-chips-typography, button);
+  font-weight: mat-font-weight($app-chips-typography, button);
 }
 
 .avatar-btn > span.mat-button-wrapper {

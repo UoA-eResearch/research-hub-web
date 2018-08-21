@@ -124,77 +124,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     return nums;
   }
 
-  // Return a number version of the category version to the view (decoupling model/view/controller)
-  public getCategoryId = () => Number(this.searchBarService.getCategory());
-
-  public getCurrentCategoryId(category: string) {
-    switch (category) {
-      case 'Service':
-        return 2;
-      case 'Equipment':
-        return 3;
-      case 'Training':
-        return 4;
-      case 'Software':
-        return 5;
-      case 'Facility':
-        return 6;
-      case 'Guide':
-        return 7;
-      case 'People':
-        return 8;
-      case 'Policy':
-        return 9;
-    }
-    return false;
+  // Update the category if someone clicks a category
+  public setCategory(category: number) {
+    this.filtersForm.controls.categoryId.setValue(category);
   }
 
-  // Update the category if someone clicks a category in the mat-list search results list
-  public updateCategoryFromCategoryList(category: string) {
-    // Necessary because of discrepancies between item category description and service enums (enums should be updated in future)
-    switch (category) {
-      case 'Policy':
-        category = 'Policies';
-        break;
-      case 'Service':
-        category = 'Support';
-        break;
-      case 'Facility':
-        category = 'Facilities';
-        break;
-      case 'People':
-        category = 'Person';
-        break;
-    }
-    this.searchBarService.setCategory(CategoryId[category]);
-  }
-
-  /**
-   * Checks if the passed string corresponds with the currently searched for category.
-   * Used to highlight the mat-chip corresponding to the currently searched category.
-   * @param {string} category
-   */
-  public isCurrentCategory(category: string) {
-    switch (category) {
-      case 'Service':
-        return this.searchBarService.category == '2';
-      case 'Equipment':
-        return this.searchBarService.category == '3';
-      case 'Training':
-        return this.searchBarService.category == '4';
-      case 'Software':
-        return this.searchBarService.category == '5';
-      case 'Facility':
-        return this.searchBarService.category == '6';
-      case 'Guide':
-        return this.searchBarService.category == '7';
-      case 'People':
-        return this.searchBarService.category == '8';
-      case 'Policy':
-        return this.searchBarService.category == '9';
-    }
-    return false;
-  }
 
   fromTags(tags: Tag[]) {
     return tags.map(tag => tag.id);
