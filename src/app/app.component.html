@@ -128,7 +128,7 @@
                            (deactivate)="setContentSidenavHasContent(false)"></router-outlet>
           </mat-sidenav>
           <!-- Search bar  -->
-            <div class="site-padding" ngClass.xs="site-padding-xs" ngClass.sm="site-padding-sm">
+            <div class="site-padding" #content ngClass.xs="site-padding-xs" ngClass.sm="site-padding-sm">
               <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
               <!-- Page content -->
               <router-outlet></router-outlet>
