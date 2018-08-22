@@ -1,10 +1,12 @@
 version: '3.0'
 services:
   web:
+    image: ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}
+    restart: always
     build:
       context: ./research-hub-web/
       args:
-        - WEB_ENVIRONMENT=${WEB_ENVIRONMENT}
+        - WEB_ENVIRONMENT
         - http_proxy
         - https_proxy
-    restart: always
+        - no_proxy
