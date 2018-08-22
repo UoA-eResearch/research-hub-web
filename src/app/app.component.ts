@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, AfterViewInit, ElementRef, NgZone, HostListener} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, AfterViewInit, ElementRef, NgZone} from '@angular/core';
 import {CategoryId, OptionsService, OptionType} from './services/options.service';
 import {SearchBarService} from './components/search-bar/search-bar.service';
 import {NavigationEnd, Router} from '@angular/router';
@@ -16,6 +16,7 @@ import {Location} from '@angular/common';
 import {AppComponentService} from './app.component.service';
 import {Title} from "@angular/platform-browser";
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,7 @@ import { ScrollDispatcher } from '@angular/cdk/scrolling';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
 
   public aucklandUniUrl = 'https://auckland.ac.nz';
   public eResearchUrl = 'http://eresearch.auckland.ac.nz';
@@ -35,7 +36,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private progressBarVisibilitySub: Subscription;
   private titleSub: Subscription;
   private contentSidenavVisibilitySub: Subscription;
-  private topbarScrollSub : Subscription;
+  private scrollSub : Subscription;
+  private winResizeSub : Subscription;
 
   public selectedCategory = CategoryId.All;
   public searchText = '';
@@ -57,6 +59,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('topContent')
   private topContentElement : ElementRef;
+
+  @ViewChild('content')
+  private contentElement : ElementRef;
+  private contentElementHeight : number;
 
   constructor(private location: Location, public optionsService: OptionsService, private headerService: HeaderService,
               private searchBarService: SearchBarService, private router: Router,
@@ -183,14 +189,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  @HostListener('window:resize')
   restyleContentSidenav(){
     if (!this.showContentSidenav){
       // If content sidenav is not visible, don't need to calculate style.
-      return;
-    }
-    if (!window){
-      // If not running in a browser, do not do anything.
       return;
     }
     const topbar = this.topbarElement.nativeElement,
@@ -216,7 +217,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
       // We calculate the height of the affixed content sidenav so that the sidenav does not
       // overlap with the footer.
-    newSidenavHeight = Math.min(Math.max(contentHeight,winHeight) - winY,winHeight);
+    newSidenavHeight = Math.min(contentHeight - winY,winHeight);
 
     if ((newFixedValue === false) || (newFixedValue === undefined && !this.isContentSidenavFixed)){
       // If the sidenav is not yet fixed - i.e. some of the topbar is still visible,
@@ -233,16 +234,35 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  setupContentSidenavFixedSub(){
-    this.topbarScrollSub = this.scrollDispatcher.scrolled(150).subscribe(
-      () => {
+  setupContentSidenavRestyleSub(){
+    // If not running in a browser, do not do any listener setup.
+    if (!isPlatformBrowser){
+      return;
+    }
+    const restyleFn = () => (this.restyleContentSidenav());
+    this.scrollSub = this.scrollDispatcher.scrolled(150).subscribe(()=>{console.log("From scroll");restyleFn();});
+    this.winResizeSub = Observable.fromEvent(window,'resize').debounceTime(150).subscribe(restyleFn);
+    this.contentElementHeight = this.contentElement.nativeElement.clientHeight;
+  }
+
+  checkContentHeightChanged(){
+    this.ngZone.runOutsideAngular(() => {
+      const contentHeight = this.contentElement.nativeElement.clientHeight;
+      if (contentHeight !== this.contentElementHeight){
+        console.log("Content size changed, resizing sidenav height");
+        // Recompute content sidenav size when the content has changed.
         this.restyleContentSidenav();
+        this.contentElementHeight = contentHeight;
       }
-    );
+    });
   }
 
   ngAfterViewInit() {
-    this.setupContentSidenavFixedSub();
+    this.setupContentSidenavRestyleSub();
+  }
+
+  ngAfterViewChecked() {
+    this.checkContentHeightChanged();
   }
 
   ngOnDestroy() {
@@ -252,7 +272,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.progressBarVisibilitySub.unsubscribe();
     this.titleSub.unsubscribe();
     this.contentSidenavVisibilitySub.unsubscribe();
-    this.topbarScrollSub.unsubscribe();
+    this.scrollSub.unsubscribe();
+    this.winResizeSub.unsubscribe();
   }
 
   getYear() {
