@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   web:
-    image: ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}
+    image: ${DOCKER_REGISTRY_URI}/research-hub-web:${TAG_WEB}
     restart: always
     build:
       context: ./research-hub-web/
