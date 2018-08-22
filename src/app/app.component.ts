@@ -37,6 +37,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   private titleSub: Subscription;
   private contentSidenavVisibilitySub: Subscription;
   private scrollSub : Subscription;
+  private winResizeSub : Subscription;
 
   public selectedCategory = CategoryId.All;
   public searchText = '';
@@ -240,7 +241,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
     }
     const restyleFn = () => (this.restyleContentSidenav());
     this.scrollSub = this.scrollDispatcher.scrolled(150).subscribe(()=>{console.log("From scroll");restyleFn();});
-    Observable.fromEvent(window,'resize').debounceTime(150).subscribe(restyleFn);
+    this.winResizeSub = Observable.fromEvent(window,'resize').debounceTime(150).subscribe(restyleFn);
     this.contentElementHeight = this.contentElement.nativeElement.clientHeight;
   }
 
@@ -272,6 +273,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
     this.titleSub.unsubscribe();
     this.contentSidenavVisibilitySub.unsubscribe();
     this.scrollSub.unsubscribe();
+    this.winResizeSub.unsubscribe();
   }
 
   getYear() {
