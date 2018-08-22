@@ -1,7 +1,7 @@
 <span style="color: rgba(0,0,0,0.54);padding-bottom: 0.3em;font-size: 12px;display: block;">See items relevant to research activity</span>
 <mat-chip-list selectable="false" ngClass="mat-chip-list-stacked">
   <div *ngFor="let activity of optionsService.researchActivityOptions" [ngClass]="['ra-chip-container-stacked', activity.className]">
-    <mat-chip (click)="onChipClick(activity.id)" fxLayout="row" fxLayoutAlign="start center" style="height: 48px !important;">
+    <mat-chip (click)="onChipClick(activity.id)" fxLayout="row" fxLayoutAlign="start center" [class.touch]="touchFriendly" class="ra-input-chip">
       <mat-checkbox style="padding-left: 0.5em;padding-right: 0.5em;" [ngClass]="[activity.className]" color="primary" [(ngModel)]="model[activity.id].selected">{{activity.name}}</mat-checkbox>
     </mat-chip>
   </div>

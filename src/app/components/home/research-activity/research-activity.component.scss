@@ -10,12 +10,22 @@
 *   reworded)
 */
 
-$home-ra-chip-list-wrap-breakpoint: 1023px;
+$home-ra-chip-list-wrap-breakpoint: 1040px;
 
 .ra-chip-container {
     margin-left: inherit;
     margin-right: inherit;
+
+    mat-chip {
+      height: $ra-chip-height;
+    }
+
+    mat-chip.sm {
+      // Make button size bigger on mobile devices so touch users can use them.
+      height: $ra-chip-height-touch;
+    }
 }
+
 
 @media screen and (min-width:$home-ra-chip-list-wrap-breakpoint) {
     .ra-chip-container {

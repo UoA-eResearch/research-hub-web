@@ -1,6 +1,5 @@
 @import "../../../../research-activity";
 
-
 @mixin research-activity-checkbox($class-name, $color) {
   $checkbox-fill-color: rgba(255, 255, 255, 1.0);
 
@@ -24,7 +23,13 @@
     background-color: rgba($color, 0.26);
   }
 }
+mat-chip.ra-input-chip {
+  height: $ra-chip-height;
+}
 
+mat-chip.ra-input-chip.touch {
+  height: $ra-chip-height-touch;
+}
 @include research-activity-checkbox('plan', $color-plan-bg);
 @include research-activity-checkbox('create', $color-create-bg);
 @include research-activity-checkbox('analyze', $color-analyze-bg);

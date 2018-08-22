@@ -25,6 +25,11 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
   onTouched: any = () => {
   };
 
+  /**
+   * Determines whether we show the larger, thicker inputs that are touch-friendly.
+   */
+  @Input() touchFriendly : boolean = false;
+
 
   get value() {
     return this._value;

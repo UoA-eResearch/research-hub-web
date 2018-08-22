@@ -28,7 +28,8 @@
 
   <div fxFlex="noshrink">
     <app-research-activity-input style="display: block;" *ngIf="showResearchActivityFilter"
-                                 formControlName="researchActivityIds"></app-research-activity-input>
+                                 formControlName="researchActivityIds"
+                                 [touchFriendly]="compact"></app-research-activity-input>
 
   </div>
 </form>
