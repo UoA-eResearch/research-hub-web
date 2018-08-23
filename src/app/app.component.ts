@@ -51,8 +51,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
 
   private previousRoute = undefined;
   private currentRoute = undefined;
-  private isContentSidenavFixed = false;
-  private contentSidenavHeight;
+  public isContentSidenavFixed = false;
+  public contentSidenavHeight;
 
   @ViewChild('topbar')
   private topbarElement : ElementRef;

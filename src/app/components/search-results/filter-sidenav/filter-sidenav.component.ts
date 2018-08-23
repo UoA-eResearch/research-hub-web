@@ -10,7 +10,7 @@ import {AppComponentService} from '../../../app.component.service';
 })
 export class FilterSidenavComponent implements OnInit {
 
-  private filtersForm : FormGroup;
+  public filtersForm : FormGroup;
 
   constructor(private searchFiltersService: SearchFiltersService,
               private appComponentService: AppComponentService) {
