@@ -9,10 +9,6 @@ pipeline {
     stages {
         stage('Build') {
           
-            environment {
-                WEB_ENVIRONMENT = 'prod'
-            }
-          
             steps {
                 checkout scm
                 

@@ -6,7 +6,6 @@ services:
     build:
       context: .
       args:
-        - WEB_ENVIRONMENT
         - http_proxy
         - https_proxy
         - no_proxy
