@@ -5,3 +5,8 @@ services:
     image: ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}
     build:
       context: .
+      args:
+        - WEB_ENVIRONMENT
+        - http_proxy
+        - https_proxy
+        - no_proxy

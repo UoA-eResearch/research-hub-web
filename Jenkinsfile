@@ -4,7 +4,6 @@ pipeline {
   
     environment {
         DOCKER_IMAGE_NAME = 'research-hub-web'
-        DOCKER_REGISTRY_URI = 'localhost:5000'
     }
   
     stages {
@@ -47,9 +46,10 @@ pipeline {
               sh 'curl -I ${DOCKER_REGISTRY_URI}'
               
               sh '''
-                 export TAGGED="${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}:${BRANCH_NAME}.$(git log -1 --pretty=%h)"
-                 docker image tag ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME} ${TAGGED}
-                 docker push ${TAGGED}
+                 export VERSIONED_NAME="${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}:${BRANCH_NAME}.$(git log -1 --pretty=%h)"
+                 docker image tag ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME} ${VERSIONED_NAME}
+                 docker push ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}:latest
+                 docker push ${VERSIONED_NAME}
                  '''
             }
           
