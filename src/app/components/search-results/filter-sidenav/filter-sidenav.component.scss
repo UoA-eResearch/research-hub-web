@@ -5,11 +5,19 @@
   padding-right:32px;
 }
 
-.filter-header {
-  background-color: inherit;
-  mat-icon {
+.close-button {
+  padding-right:19px;
+  padding-top:17px;
+  color: #b3b3b3;
+  :hover {
     color: $color-icon;
   }
+}
+
+
+.filter-header {
+  background-color: inherit;
+  padding-top:6px; // Make it align with the search bar
 }
 
 .filter-footer {
