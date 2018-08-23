@@ -18,6 +18,7 @@ $home-ra-chip-list-wrap-breakpoint: 1040px;
 
     mat-chip {
       height: $ra-chip-height;
+      cursor: pointer;
     }
 
     mat-chip.sm {
