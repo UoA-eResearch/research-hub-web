@@ -240,16 +240,19 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
       return;
     }
     const restyleFn = () => (this.restyleContentSidenav());
-    this.scrollSub = this.scrollDispatcher.scrolled(150).subscribe(()=>{console.log("From scroll");restyleFn();});
+    this.scrollSub = this.scrollDispatcher.scrolled(150).subscribe(restyleFn);
     this.winResizeSub = Observable.fromEvent(window,'resize').debounceTime(150).subscribe(restyleFn);
     this.contentElementHeight = this.contentElement.nativeElement.clientHeight;
   }
 
   checkContentHeightChanged(){
+    if (!this.showContentSidenav){
+      // If content sidenav is not visible, don't need to calculate style.
+      return;
+    }
     this.ngZone.runOutsideAngular(() => {
       const contentHeight = this.contentElement.nativeElement.clientHeight;
       if (contentHeight !== this.contentElementHeight){
-        console.log("Content size changed, resizing sidenav height");
         // Recompute content sidenav size when the content has changed.
         this.restyleContentSidenav();
         this.contentElementHeight = contentHeight;
