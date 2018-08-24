@@ -184,6 +184,7 @@ footer {
   height: $height-footer;
   padding-left: $padding-site;
   padding-right: $padding-site;
+  z-index: 1; // Hide excess height of content sidenav underneath footer.
 }
 
 footer.footer-xs {
