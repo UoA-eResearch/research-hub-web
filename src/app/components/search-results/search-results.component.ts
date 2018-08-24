@@ -191,6 +191,15 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       });
   }
 
+  resultIdentity(index : number,result){
+    // The identity function for each result item.
+    // This reduces DOM operations of the ngFor
+    // statements and also ensures the refine search panel
+    // does not resize/flash unnecessarily.
+    // See https://angular.io/api/common/NgForOf#change-propagation
+    return index;
+  }
+
   ngOnInit() {
     this.initFilterSidenav();
     this.initResultSubs();

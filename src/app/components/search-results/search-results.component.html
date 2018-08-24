@@ -48,7 +48,7 @@
   </div>
 
   <mat-nav-list *ngIf="!showCardView">
-    <ng-container *ngFor="let item of resultsPage.content">
+    <ng-container *ngFor="let item of resultsPage.content; trackBy: resultIdentity">
       <ng-container *ngIf="item.type !== 'policy'">
         <mat-list-item class="list-item" [routerLink]="item | listItemToRouterLink">
           <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
@@ -75,7 +75,7 @@
 
   <!--Testing Card View for Results-->
   <mat-grid-list *ngIf="showCardView" [cols]="cardViewResultsNumberOfColumns" gutterSize="1em" rowHeight="1:2" style="padding-top: 1em">
-    <mat-grid-tile *ngFor="let item of resultsPage.content;" [colspan]="1" [rowspan]="1" [routerLink]="item | listItemToRouterLink" style="cursor: pointer">
+    <mat-grid-tile *ngFor="let item of resultsPage.content; trackBy: resultIdentity" [colspan]="1" [rowspan]="1" [routerLink]="item | listItemToRouterLink" style="cursor: pointer">
       <div class="card-result-image">
         <img src="{{apiService.getAssetUrl(item.image)}}" style="width: 100%; height: 100%;"/>
       </div>
