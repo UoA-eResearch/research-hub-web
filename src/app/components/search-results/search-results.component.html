@@ -16,7 +16,6 @@
 
     <!-- Category List -->
     <div class="inline-category-list" fxHide.lt-md *ngIf="!filterVisible">
-      <p><span class="search-results-text">Not what you were looking for?</span> Check out a different category.</p>
       <category-list [selectedCategory]="filtersForm.controls.categoryId.value"
                       (selectedCategoryChange)="setCategory($event)"
                       compact="true"></category-list>
