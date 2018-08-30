@@ -1,6 +1,8 @@
 version: '3.0'
 services:
   web:
+    build:
+      context: ./research-hub-web/
     image: ${DOCKER_REGISTRY_URI}/research-hub-web:${TAG_WEB}
     restart: always
     volumes:
