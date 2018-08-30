@@ -48,9 +48,13 @@ pipeline {
               
               sh '''
                  export VERSIONED_NAME="${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}:${BRANCH_NAME}.$(git log -1 --pretty=%h)"
-                 docker image tag ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME} ${VERSIONED_NAME}
-                 docker push ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}:${BRANCH_NAME}.latest
+                 export LATEST_NAME="${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}:${BRANCH_NAME}.latest"
+
+                 docker image tag ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME} ${VERSIONED_NAME} # Tag {branch}.{commit hash}
+                 docker image tag ${DOCKER_REGISTRY_URI/${DOCKER_IMAGE_NAME} ${LATEST_NAME} # Tag {branch}.latest
+
                  docker push ${VERSIONED_NAME}
+                 docker push ${LATEST_NAME}
                  '''
             }
           
