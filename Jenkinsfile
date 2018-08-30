@@ -33,8 +33,9 @@ pipeline {
                    docker-compose                        \\
                      -f docker-compose.yml               \\
                      -f docker-compose.ci.yml            \\
-                     run -T --no-deps web                \\
-                     /bin/bash -c "echo tests passed"
+                     run --entrypoint /bin/bash          \\
+                     -T --rm --no-deps web               \\
+                     -c "echo tests passed"
                    '''
             }
           
