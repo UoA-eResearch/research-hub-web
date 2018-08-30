@@ -4,4 +4,4 @@ services:
     image: ${DOCKER_REGISTRY_URI}/research-hub-web:${TAG_WEB}
     restart: always
     volumes:
-      - ../webconfig:/usr/share/nginx/www/assets/webconfig
+      - ${DATA_DIR}/config/env.js:/env.js

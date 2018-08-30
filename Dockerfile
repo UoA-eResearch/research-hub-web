@@ -36,3 +36,6 @@ RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng 
 # Configure nginx
 RUN           cp -a ./dist/. /usr/share/nginx/www/
 COPY          /nginx.conf /etc/nginx/nginx.conf
+
+COPY ./docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
