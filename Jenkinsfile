@@ -51,7 +51,7 @@ pipeline {
                  export LATEST_NAME="${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}:${BRANCH_NAME}.latest"
 
                  docker image tag ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME} ${VERSIONED_NAME} # Tag branch.commit hash
-                 docker image tag ${DOCKER_REGISTRY_URI/${DOCKER_IMAGE_NAME} ${LATEST_NAME} # Tag branch.latest
+                 docker image tag ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME} ${LATEST_NAME} # Tag branch.latest
 
                  docker push ${VERSIONED_NAME}
                  docker push ${LATEST_NAME}
