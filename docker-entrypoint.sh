@@ -1,9 +1,8 @@
 #!/bin/bash
-ENV_FILE_PATH=/env.js
+env_js_path=/env.js
 
-if [ -e ENV_FILE_PATH ]; then
-  exec cp /env.js /usr/share/nginx/www/assets/env.js
+if [ -e $env_js_path ]; then
+  cp $env_js_path /usr/share/nginx/www/assets/env.js
 fi
 
 exec nginx -g 'daemon off;' "$@"
-
