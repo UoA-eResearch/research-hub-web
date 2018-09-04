@@ -10,7 +10,7 @@ RUN           apt-get update -qq && apt-get install -qqy curl build-essential gi
 
 # Install nodejs and update npm to latest version
 RUN           curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN           apt-get install -y nodejs
+RUN           apt-get update -qq && apt-get install -y nodejs
 
 # Install angular-cli
 RUN           npm install -g @angular/cli@1.6.8
