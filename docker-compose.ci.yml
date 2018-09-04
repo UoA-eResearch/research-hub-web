@@ -1,11 +1,5 @@
 version: '3.0'
 services:
   web:
-    restart: "no"
     image: ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}
-    build:
-      context: .
-      args:
-        - http_proxy
-        - https_proxy
-        - no_proxy
+    restart: "no"
