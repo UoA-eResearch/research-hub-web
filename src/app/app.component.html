@@ -122,7 +122,8 @@
           <mat-sidenav class="content-sidenav" mode="side"
                        disableClose [opened]="showContentSidenav"
                        [fixedInViewport]="isContentSidenavFixed"
-                       [ngStyle]="{'height':contentSidenavHeight + 'px'}">
+                       [ngStyle]="{'height':contentSidenavHeight + 'px'}"
+                       [@fadeIn]="showContentSidenav">
             <router-outlet name="contentSidenav"
                            (activate)="setContentSidenavHasContent(true)"
                            (deactivate)="setContentSidenavHasContent(false)"></router-outlet>

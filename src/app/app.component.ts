@@ -17,12 +17,69 @@ import {AppComponentService} from './app.component.service';
 import {Title} from "@angular/platform-browser";
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import { Observable } from 'rxjs';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('slowLeftRight',[
+      state('false', style({
+        transform: 'translate(-100%,0)',
+      })),
+      state('true', style({
+        transform: 'translate(0,0)'
+      })),
+      transition('false => true', animate('1000ms ease-in')),
+      transition('true => false', animate('100ms ease-out'))
+    ]),
+    trigger('topDown', [
+      state("false", style({
+        opacity: 0,
+        transform: 'translate(0,-100%)'
+      })),
+      state("true",   style({
+        opacity: 1,
+        transform: 'translate(0,0px)'
+      })),
+      transition('false => true', animate('300ms ease-in')),
+      transition('true => false', animate('100ms ease-out'))
+      // transition(':enter', [
+      //   style({ transform: 'translate(0,-100%)'}),
+      //   animate('1s ease-in'),
+      //   style({ transform: 'translate(0,0)'})
+      // ])
+    ]),
+    trigger('noAnimation',[
+      state('false', style({
+        transform: 'translate(0,0)'
+      })),
+      state('true', style({
+        transform: 'translate(0,0)'
+      })),
+      transition('false <=> true',animate('0ms'))
+    ]),
+    trigger('fadeIn', [
+      state("false", style({
+        opacity: 0,
+        transform: 'translate(0,0px)'
+      })),
+      state("true",   style({
+        opacity: 1,
+        transform: 'translate(0,0px)'
+      })),
+      transition('false => true', animate('1000ms ease-in')),
+      transition('true => false', animate('100ms ease-out'))
+    ])
+  ]
 })
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
 
