@@ -11,36 +11,51 @@ export class SearchResultsComponentService {
 
   private resultsSubject: BehaviorSubject<Page<ListItem>>;
   public results$ : Observable<Page<ListItem>>;
+  private resultsLoadingSubject : BehaviorSubject<boolean>;
+  public resultsLoading$ : Observable<boolean>;
 
   private categorySubject: BehaviorSubject<Array<Object>>;
   public resultsCategories$ : Observable<Array<Object>>;
+  private categoriesLoadingSubject : BehaviorSubject<boolean>;
+  public categoriesLoading$ : Observable<boolean>;
 
   constructor(public apiService: ResearchHubApiService) {
     this.initialiseSubjects();
   }
 
   public searchWithParams(params: SearchResultsParams){
+    this.resultsLoadingSubject.next(true);
     const resultsSub = this.updateSearchResults(params)
       .subscribe(page =>
                  {
                    this.resultsSubject.next(page);
+                   this.resultsLoadingSubject.next(false);
                    resultsSub.unsubscribe();
                  }
                 );
+
+    this.categoriesLoadingSubject.next(true);
     const categorySub = this.updateSearchResultsCategories(params)
       .subscribe(categories => {
-          this.categorySubject.next(categories);
-          categorySub.unsubscribe();
-        }
-      );
+        this.categoriesLoadingSubject.next(false);
+        this.categorySubject.next(categories);
+        categorySub.unsubscribe();
+      });
   }
 
   private initialiseSubjects(){
     // We initialise the Subjects with an empty initial value.
     this.resultsSubject = new BehaviorSubject<Page<ListItem>>(<Page<ListItem>>{});
     this.results$ = this.resultsSubject.asObservable();
+
+    this.resultsLoadingSubject = new BehaviorSubject<boolean>(false);
+    this.resultsLoading$ = this.resultsLoadingSubject.asObservable();
+
     this.categorySubject = new BehaviorSubject<Array<Object>>([]);
     this.resultsCategories$ = this.categorySubject.asObservable();
+
+    this.categoriesLoadingSubject = new BehaviorSubject<boolean>(false);
+    this.categoriesLoading$ = this.categoriesLoadingSubject.asObservable();
   }
 
   private updateSearchResults(params: SearchResultsParams){
