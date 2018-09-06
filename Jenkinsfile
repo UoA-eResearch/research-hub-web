@@ -20,12 +20,12 @@ pipeline {
             steps {
                 checkout scm
                 
-                sh '''
-                   docker-compose                        \\
-                     -f docker-compose.yml               \\
-                     -f docker-compose.ci.yml            \\
-                     build --build-arg ngBuildParams=\${params.ngBuildParams} web
-                   '''
+                sh """\
+                   docker-compose                        \
+                     -f docker-compose.yml               \
+                     -f docker-compose.ci.yml            \
+                     build --build-arg ngBuildParams=${params.ngBuildParams} web\
+                   """
             }
           
         }
