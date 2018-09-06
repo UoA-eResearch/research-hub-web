@@ -49,20 +49,24 @@ pipeline {
 
             stages {
                 stage('Registry connection check') {
-                    sh 'curl -I ${DOCKER_REGISTRY_URI}'
+                    steps {
+                        sh 'curl -I ${DOCKER_REGISTRY_URI}'
+                    }
                 }
                 stage('Tag') {
-                    sh '''
-                        export VERSIONED_NAME="${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}/${BRANCH_NAME}:$(git log -1 --pretty=%h)"
-                        export LATEST_NAME="${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}/${BRANCH_NAME}:latest"
+                    steps {
+                        sh '''
+                            export VERSIONED_NAME="${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}/${BRANCH_NAME}:$(git log -1 --pretty=%h)"
+                            export LATEST_NAME="${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}/${BRANCH_NAME}:latest"
 
-                        docker image tag ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME} ${VERSIONED_NAME} # Tag branch.commit hash
-                        docker image tag ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME} ${LATEST_NAME} # Tag branch.latest
+                            docker image tag ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME} ${VERSIONED_NAME} # Tag branch.commit hash
+                            docker image tag ${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME} ${LATEST_NAME} # Tag branch.latest
 
-                        docker push ${VERSIONED_NAME}
-                        docker push ${LATEST_NAME}
-                    '''
-                 }
+                            docker push ${VERSIONED_NAME}
+                            docker push ${LATEST_NAME}
+                        '''
+                    }
+                }
                 stage('Experimental Tag') {
                     when {
                         expression { ${params.ngBuildParams} != '--prod --environment=prod' }
