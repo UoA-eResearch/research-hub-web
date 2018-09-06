@@ -24,7 +24,7 @@ pipeline {
                    docker-compose                        \\
                      -f docker-compose.yml               \\
                      -f docker-compose.ci.yml            \\
-                     build --build-arg ngBuildParams=${params.ngBuildParams} web
+                     build --build-arg ngBuildParams=\${params.ngBuildParams} web
                    '''
             }
           
