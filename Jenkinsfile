@@ -7,7 +7,7 @@ pipeline {
     }
   
     parameters {
-        string(name: 'ngBuildParams', defaultValue: '--prod --environment=prod', description: 'Parameters to be passed to the ng build command')
+        string(name: 'ngBuildParams', defaultValue: "'--prod --environment=prod'", description: 'Parameters to be passed to the ng build command')
     }
 
     environment {
