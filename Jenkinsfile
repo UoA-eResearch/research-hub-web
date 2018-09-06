@@ -44,9 +44,9 @@ pipeline {
             }
           
         }
-       }
 
         stage('Deploy') {
+
             stages {
                 stage('Tag') {
                     export VERSIONED_NAME="${DOCKER_REGISTRY_URI}/${DOCKER_IMAGE_NAME}:${BRANCH_NAME}.$(git log -1 --pretty=%h)"
