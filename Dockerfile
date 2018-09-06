@@ -4,6 +4,7 @@ MAINTAINER    Sam Kavanagh "s.kavanagh@auckland.ac.nz"
 # Build args required to work behind proxy
 ARG           http_proxy
 ARG           https_proxy
+ARG           ngBuildParams
 
 # Install curl (used to install nodejs) and build-essential (for compiling native nodejs libraries)
 RUN           apt-get update -qq && apt-get install -qqy curl build-essential git
@@ -31,7 +32,7 @@ RUN           npm install
 COPY          /src /research-hub-web/src
 
 # Build research hub with angular-cli
-RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --environment=prod
+RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build ${ngBuildParams}
 
 # Configure nginx
 RUN           cp -a ./dist/. /usr/share/nginx/www/
