@@ -69,7 +69,7 @@ pipeline {
                 }
                 stage('Experimental Tag') {
                     when {
-                        expression { ${params.ngBuildParams} != '--prod --environment=prod' }
+                        expression { params.ngBuildParams != "'--prod --environment=prod'" }
                     }
                     steps {
                         sh '''
