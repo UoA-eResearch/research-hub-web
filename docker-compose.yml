@@ -6,3 +6,5 @@ services:
       args:
         - http_proxy
         - https_proxy
+    volumes:
+      - ${HUB_PATH}/config/web/env.js:/env.js
