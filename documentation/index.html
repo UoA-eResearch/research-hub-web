@@ -1,0 +1,130 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>research-hub-web documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">research-hub-web documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="research-hub-web">Research Hub Web</h1>
+<p>The front end for the <a href="https://research-hub.auckland.ac.nz/">Research Hub</a>, built with <a href="https://angular.io/">Angular</a> and <a href="https://material.angular.io/">Angular Material</a>.</p>
+<h2 id="developing">Developing</h2>
+<p>Follow steps 1 and 2 in the <a href="https://github.com/UoA-eResearch/research-hub-deploy#research-hub-deploy">research-hub-deploy README</a>.</p>
+<p>To experience the full functionality of the app, you also need to run research-hub-api and research-hub-db whilst developing. 
+Follow the instructions on the following pages:</p>
+<ul>
+<li><a href="https://github.com/UoA-eResearch/research-hub-db#research-hub-db">research-hub-db</a>: run the database using Docker</li>
+<li><a href="https://github.com/UoA-eResearch/research-hub-api#research-hub-api">research-hub-api</a>: run the api directly with Maven or via the IntelliJ IDE</li>
+</ul>
+<p>Navigate to the research-hub-web folder (this command assumes you&#39;re in the <code>research-hub-deploy</code> folder):</p>
+<div><pre class="line-numbers"><code class="language-bash">cd build/research-hub-web</code></pre></div><p>Install dependencies:</p>
+<div><pre class="line-numbers"><code class="language-bash">npm install</code></pre></div><p>Then run <code>npm run start</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The app will automatically reload if you 
+change any of the source files.</p>
+<p>To test run the app in production mode, run <code>npm run test-prod</code>.</p>
+<h2 id="code-scaffolding">Code scaffolding</h2>
+<p>Run <code>npm run ng generate component component-name</code> to generate a new component. You can also use <code>npm run ng generate directive|pipe|service|class|module</code>.</p>
+<h2 id="build">Build</h2>
+<p>Run <code>npm run build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory. </p>
+<h2 id="build-production-and-use-webpack-bundle-analyzer">Build production and use webpack bundle analyzer</h2>
+<p>Run <code>npm run build-prod</code> to build the project in production mode.</p>
+<p>You can also visualise the size of the webpack output files with <a href="https://www.npmjs.com/package/webpack-bundle-analyzer">webpack bundle analyzer</a>, 
+an interactive zoomable treemap. To do this, once the build has finished, run <code>npm run bundle-report</code>.</p>
+<h2 id="running-unit-tests">Running unit tests</h2>
+<p>Run <code>npm run test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
+<h2 id="running-end-to-end-tests">Running end-to-end tests</h2>
+<p>Run <code>npm run e2e</code> to execute the end-to-end tests via <a href="http://www.protractortest.org/">Protractor</a>.
+Before running the tests make sure you are serving the app via <code>npm run start</code>.</p>
+<h2 id="further-help">Further help</h2>
+<p>To get more help on the Angular CLI use <code>npm run ng help</code> or go check out the <a href="https://github.com/angular/angular-cli/blob/master/README.md">Angular CLI README</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <script src="./js/menu-wc.js"></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,675 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>research-hub-web documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">research-hub-web documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>PersonDetailsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/person-details/person-details.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-person-details</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>person-details.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./person-details.component.html</code></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#categoryIdPerson">categoryIdPerson</a>
+                            </li>
+                            <li>
+                                <a href="#person">person</a>
+                            </li>
+                            <li>
+                                <a href="#supportedContent">supportedContent</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#trackAction">trackAction</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, apiService: <a href="../injectables/ResearchHubApiService.html">ResearchHubApiService</a>, location: <a href="https://angular.io/api/common/Location" target="_blank">Location</a>, analyticsService: <a href="../injectables/AnalyticsService.html">AnalyticsService</a>, appComponentService: <a href="../injectables/AppComponentService.html">AppComponentService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/person-details/person-details.component.ts:21</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>apiService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/ResearchHubApiService.html" target="_self" >ResearchHubApiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>location</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/common/Location" target="_blank" >Location</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>analyticsService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/AnalyticsService.html" target="_self" >AnalyticsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>appComponentService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/AppComponentService.html" target="_self" >AppComponentService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/person-details/person-details.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="trackAction"></a>
+                        <span class="name">
+                            <b>
+                            trackAction
+                            </b>
+                            <a href="#trackAction"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>trackAction()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/person-details/person-details.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="categoryIdPerson"></a>
+                        <span class="name">
+                            <b>
+                            categoryIdPerson
+                            </b>
+                            <a href="#categoryIdPerson"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>categoryIdPerson:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>CategoryId.Person</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/person-details/person-details.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="person"></a>
+                        <span class="name">
+                            <b>
+                            person
+                            </b>
+                            <a href="#person"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>person:     <code><a href="../interfaces/Person.html" target="_self" >Person</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/Person.html" target="_self" >Person</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/person-details/person-details.component.ts:19</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="supportedContent"></a>
+                        <span class="name">
+                            <b>
+                            supportedContent
+                            </b>
+                            <a href="#supportedContent"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>supportedContent:     <code><a href="../interfaces/ListItem.html" target="_self" >ListItem[]</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/ListItem.html" target="_self" >ListItem[]</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/person-details/person-details.component.ts:21</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
+import {ResearchHubApiService, ContentItemsParams} from &#x27;app/services/research-hub-api.service&#x27;;
+import {ActivatedRoute} from &#x27;@angular/router&#x27;;
+import {Person} from &#x27;app/model/Person&#x27;;
+import {Location} from &#x27;@angular/common&#x27;;
+import {AnalyticsService} from &#x27;app/services/analytics.service&#x27;;
+import {ListItem} from &#x27;../../model/ListItem&#x27;;
+import {AppComponentService} from &#x27;../../app.component.service&#x27;;
+import {CategoryId, RoleTypeId} from &#x27;../../services/options.service&#x27;;
+
+
+@Component({
+  selector: &#x27;app-person-details&#x27;,
+  templateUrl: &#x27;./person-details.component.html&#x27;,
+  styleUrls: [&#x27;./person-details.component.scss&#x27;]
+})
+export class PersonDetailsComponent implements OnInit {
+
+  person: Person;
+  categoryIdPerson &#x3D; CategoryId.Person;
+  supportedContent: ListItem[];
+
+  constructor(private route: ActivatedRoute, private apiService: ResearchHubApiService,
+              private location: Location, private analyticsService: AnalyticsService,
+              private appComponentService: AppComponentService) {
+
+  }
+
+  trackAction() {
+    this.analyticsService.trackActionExternal(&#x27;Person&#x27;, this.person.firstName + &#x27; &#x27; + this.person.lastName, this.person.directoryUrl);
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params &#x3D;&gt; {
+      const id &#x3D; params[&#x27;personId&#x27;];
+
+      this.apiService.getPerson(id).subscribe(
+        person &#x3D;&gt; {
+          const url &#x3D; this.location.path();
+          const name &#x3D; person.firstName + &#x27; &#x27; + person.lastName;
+
+          this.appComponentService.setTitle(name);
+          this.analyticsService.trackPerson(name, url);
+          this.person &#x3D; person;
+        }
+      );
+
+      const contentItemsParams &#x3D; new ContentItemsParams();
+      contentItemsParams.setPeople([id]);
+      contentItemsParams.setRoleTypes([RoleTypeId.UserSupport]);
+      this.apiService.getContentItems(contentItemsParams).subscribe(contentItems &#x3D;&gt; {
+        this.supportedContent &#x3D; contentItems.content;
+      });
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div *ngIf&#x3D;&quot;person&quot; fxLayout&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;1em&quot;&gt;
+  &lt;mat-card&gt;
+    &lt;mat-card-header&gt;
+      &lt;img fxHide.xs style&#x3D;&quot;width: 64px; height: 64px; margin-right: 1em;&quot; mat-card-avatar
+           [src]&#x3D;&quot;apiService.getAssetUrl(person.image)&quot;&gt;
+      &lt;mat-card-title&gt;&lt;h2 style&#x3D;&quot;font-size: 24px;&quot;&gt;{{person.firstName + &#x27; &#x27; + person.lastName}}&lt;/h2&gt;&lt;/mat-card-title&gt;
+      &lt;mat-card-subtitle&gt;
+        &lt;a style&#x3D;&quot;display: inline;&quot; [routerLink]&#x3D;&quot;[&#x27;/search&#x27;]&quot;
+           [queryParams]&#x3D;&quot;{categoryId: categoryIdPerson}&quot;&gt;People&lt;/a&gt;
+      &lt;/mat-card-subtitle&gt;
+    &lt;/mat-card-header&gt;
+
+    &lt;mat-card-content style&#x3D;&quot;margin-top: 1em;&quot;&gt;
+      &lt;div fxLayout&#x3D;&quot;row&quot; fxLayoutGap&#x3D;&quot;2em&quot;&gt;
+        &lt;div fxFlex&#x3D;&quot;100&quot; fxFlex.lt-sm&#x3D;&quot;100&quot; fxLayout&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;1em&quot;&gt;
+          &lt;div&gt;
+            &lt;mat-list class&#x3D;&quot;person-list&quot;&gt;
+              &lt;mat-list-item&gt;
+                &lt;mat-icon mat-list-icon&gt;work&lt;/mat-icon&gt;
+                &lt;p mat-line&gt;{{person.jobTitle}}&lt;/p&gt;
+              &lt;/mat-list-item&gt;
+              &lt;mat-list-item&gt;
+                &lt;mat-icon mat-list-icon&gt;email&lt;/mat-icon&gt;
+                &lt;p mat-line&gt;{{person.email}}&lt;/p&gt;
+              &lt;/mat-list-item&gt;
+            &lt;/mat-list&gt;
+          &lt;/div&gt;
+
+          &lt;div fxFlex&#x3D;&quot;36px&quot; fxFlexAlign&#x3D;&quot;end&quot;&gt;
+            &lt;a mat-raised-button color&#x3D;&quot;accent&quot; [href]&#x3D;&quot;person.directoryUrl&quot; (click)&#x3D;&quot;trackAction()&quot; target&#x3D;&quot;_blank&quot;&gt;
+              Details on Staff Intranet
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/mat-card-content&gt;
+  &lt;/mat-card&gt;
+
+  &lt;mat-card *ngIf&#x3D;&quot;person.orgUnits.length&quot;&gt;
+    &lt;h3&gt;Organisation units&lt;/h3&gt;
+    &lt;mat-nav-list&gt;
+      &lt;mat-list-item *ngFor&#x3D;&quot;let orgUnit of person.orgUnits&quot; [routerLink]&#x3D;&quot;[&#x27;/orgUnit&#x27;, orgUnit.id]&quot;&gt;
+        &lt;img mat-list-avatar [src]&#x3D;&quot;apiService.getAssetUrl(orgUnit.image)&quot;&gt;
+        &lt;h4 mat-line style&#x3D;&quot;font-size: 16px;&quot;&gt; {{orgUnit.name}} &lt;/h4&gt;
+        &lt;p mat-line style&#x3D;&quot;font-size: 14px;&quot;&gt; {{orgUnit.summary}} &lt;/p&gt;
+      &lt;/mat-list-item&gt;
+    &lt;/mat-nav-list&gt;
+  &lt;/mat-card&gt;
+
+  &lt;mat-card *ngIf&#x3D;&quot;supportedContent &amp;&amp; supportedContent.length&quot;&gt;
+    &lt;h3&gt;Supported resources&lt;/h3&gt;
+    &lt;mat-nav-list&gt;
+      &lt;mat-list-item *ngFor&#x3D;&quot;let item of supportedContent&quot; [routerLink]&#x3D;&quot;item | listItemToRouterLink&quot;&gt;
+        &lt;img mat-list-avatar [src]&#x3D;&quot;apiService.getAssetUrl(item.image)&quot;&gt;
+        &lt;h4 mat-line style&#x3D;&quot;font-size: 16px;&quot;&gt; {{item.title}} &lt;/h4&gt;
+        &lt;p mat-line style&#x3D;&quot;font-size: 14px;&quot;&gt;{{item.subtitle}}&lt;/p&gt;
+      &lt;/mat-list-item&gt;
+    &lt;/mat-nav-list&gt;
+  &lt;/mat-card&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div *ngIf="person" fxLayout="column" fxLayoutGap="1em">  <mat-card>    <mat-card-header>      <img fxHide.xs style="width: 64px; height: 64px; margin-right: 1em;" mat-card-avatar           [src]="apiService.getAssetUrl(person.image)">      <mat-card-title><h2 style="font-size: 24px;">{{person.firstName + \' \' + person.lastName}}</h2></mat-card-title>      <mat-card-subtitle>        <a style="display: inline;" [routerLink]="[\'/search\']"           [queryParams]="{categoryId: categoryIdPerson}">People</a>      </mat-card-subtitle>    </mat-card-header>    <mat-card-content style="margin-top: 1em;">      <div fxLayout="row" fxLayoutGap="2em">        <div fxFlex="100" fxFlex.lt-sm="100" fxLayout="column" fxLayoutGap="1em">          <div>            <mat-list class="person-list">              <mat-list-item>                <mat-icon mat-list-icon>work</mat-icon>                <p mat-line>{{person.jobTitle}}</p>              </mat-list-item>              <mat-list-item>                <mat-icon mat-list-icon>email</mat-icon>                <p mat-line>{{person.email}}</p>              </mat-list-item>            </mat-list>          </div>          <div fxFlex="36px" fxFlexAlign="end">            <a mat-raised-button color="accent" [href]="person.directoryUrl" (click)="trackAction()" target="_blank">              Details on Staff Intranet            </a>          </div>        </div>      </div>    </mat-card-content>  </mat-card>  <mat-card *ngIf="person.orgUnits.length">    <h3>Organisation units</h3>    <mat-nav-list>      <mat-list-item *ngFor="let orgUnit of person.orgUnits" [routerLink]="[\'/orgUnit\', orgUnit.id]">        <img mat-list-avatar [src]="apiService.getAssetUrl(orgUnit.image)">        <h4 mat-line style="font-size: 16px;"> {{orgUnit.name}} </h4>        <p mat-line style="font-size: 14px;"> {{orgUnit.summary}} </p>      </mat-list-item>    </mat-nav-list>  </mat-card>  <mat-card *ngIf="supportedContent && supportedContent.length">    <h3>Supported resources</h3>    <mat-nav-list>      <mat-list-item *ngFor="let item of supportedContent" [routerLink]="item | listItemToRouterLink">        <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">        <h4 mat-line style="font-size: 16px;"> {{item.title}} </h4>        <p mat-line style="font-size: 14px;">{{item.subtitle}}</p>      </mat-list-item>    </mat-nav-list>  </mat-card></div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BrowseComponent', 'selector': 'app-browse'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'ContentDetailsComponent', 'selector': 'app-content-details'},{'name': 'ErrorDialogComponent', 'selector': 'app-error-dialog'},{'name': 'FeaturedComponent', 'selector': 'app-featured'},{'name': 'FeedbackComponent', 'selector': 'app-feedback'},{'name': 'FilterDialogComponent', 'selector': 'app-filter-dialog'},{'name': 'GuideCategoryComponent', 'selector': 'app-guide-category'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ImageViewComponent', 'selector': 'app-image-view'},{'name': 'ImageViewDialogComponent', 'selector': 'app-image-view-dialog'},{'name': 'MarkdownComponent', 'selector': 'app-markdown'},{'name': 'MatTagsComponent', 'selector': 'app-mat-tags'},{'name': 'OrgUnitDetailsComponent', 'selector': 'app-org-unit-details'},{'name': 'PersonDetailsComponent', 'selector': 'app-person-details'},{'name': 'RequestStorageComponent', 'selector': 'app-request-data'},{'name': 'RequestVmComponent', 'selector': 'app-request-vm'},{'name': 'ResearchActivityComponent', 'selector': 'app-research-activity'},{'name': 'ResearchActivityInputComponent', 'selector': 'app-research-activity-input'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SearchFiltersComponent', 'selector': 'app-search-filters'},{'name': 'SearchResultsComponent', 'selector': 'app-search-results'},{'name': 'UserStudyComponent', 'selector': 'app-user-study'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PersonDetailsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PersonDetailsComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
