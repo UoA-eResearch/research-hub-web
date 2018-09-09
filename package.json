@@ -11,7 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "bundle-report": "webpack-bundle-analyzer dist/stats.json"
+    "bundle-report": "webpack-bundle-analyzer dist/stats.json",
+    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json -w"
   },
   "private": true,
   "dependencies": {
@@ -40,6 +41,7 @@
   "devDependencies": {
     "@angular/cli": "1.6.8",
     "@angular/compiler-cli": "5.2.3",
+    "@compodoc/compodoc": "^1.1.5",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.88",
     "codelyzer": "~4.0.0",
