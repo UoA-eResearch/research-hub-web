@@ -4,6 +4,7 @@ import { ListItem } from 'app/model/ListItem';
 import { ResearchHubApiService, SearchResultsParams } from 'app/services/research-hub-api.service';
 import { map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { delay } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
@@ -26,6 +27,7 @@ export class SearchResultsComponentService {
   public searchWithParams(params: SearchResultsParams){
     this.resultsLoadingSubject.next(true);
     const resultsSub = this.updateSearchResults(params)
+      .pipe(delay(300)) // Add delay to make result changes obvious.
       .subscribe(page =>
                  {
                    this.resultsSubject.next(page);

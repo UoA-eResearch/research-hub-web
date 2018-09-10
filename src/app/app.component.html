@@ -123,7 +123,7 @@
                        disableClose [opened]="showContentSidenav"
                        [fixedInViewport]="isContentSidenavFixed"
                        [ngStyle]="{'height':contentSidenavHeight + 'px'}"
-                       [@fadeIn]="showContentSidenav">
+                       [@.disabled]="true">
             <router-outlet name="contentSidenav"
                            (activate)="setContentSidenavHasContent(true)"
                            (deactivate)="setContentSidenavHasContent(false)"></router-outlet>

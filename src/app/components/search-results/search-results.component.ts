@@ -57,6 +57,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private contentNavVisibilitySub: Subscription;
 
   private resultsSub : Subscription;
+  private resultsLoading$ : Observable<boolean>;
   private categoriesSub : Subscription;
 
   public searchTextIsBlank = true;
@@ -189,6 +190,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       categories => {
         this.categoryListArray = categories;
       });
+    this.resultsLoading$ = this.componentService.resultsLoading$;
   }
 
   resultIdentity(index : number,result){

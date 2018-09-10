@@ -76,7 +76,7 @@ import {
         opacity: 1,
         transform: 'translate(0,0px)'
       })),
-      transition('false => true', animate('1000ms ease-in')),
+      transition('false => true', animate('300ms ease-in')),
       transition('true => false', animate('100ms ease-out'))
     ])
   ]

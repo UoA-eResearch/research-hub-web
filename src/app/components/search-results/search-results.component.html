@@ -46,7 +46,8 @@
     </ul>
   </div>
 
-  <mat-nav-list class="results-list" *ngIf="!showCardView">
+  <mat-nav-list class="results-list" [class.empty]="(resultsLoading$ | async) === true" *ngIf="!showCardView">
+    <ng-container *ngIf="(resultsLoading$ | async) === false"> <!-- Only show results when new results aren't being loaded.-->
     <ng-container *ngFor="let item of resultsPage.content; trackBy: resultIdentity">
       <ng-container *ngIf="item.type !== 'policy'">
         <mat-list-item class="list-item" [routerLink]="item | listItemToRouterLink">
@@ -69,6 +70,7 @@
           </mat-chip-list>
         </a>
       </ng-container>
+    </ng-container>
     </ng-container>
   </mat-nav-list>
 

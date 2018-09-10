@@ -125,15 +125,12 @@
   margin-bottom:0px;
 }
 
-.results-list:empty {
-  margin: auto;
-	width: 500px;
-	height: 600px; /* change height to see repeat-y behavior */
-
+mat-nav-list.results-list.empty {
+  height: 430px;
+  border-radius: 5px;
 	background-image:
-	radial-gradient( circle 50px at 50px 50px, lightgray 99%, transparent 0 ),
+	radial-gradient( circle 30px at 50px 50px, lightgray 99%, transparent 0 ),
 	linear-gradient( 100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80% ),
-	linear-gradient( lightgray 20px, transparent 0 ),
 	linear-gradient( lightgray 20px, transparent 0 ),
 	linear-gradient( lightgray 20px, transparent 0 ),
 	linear-gradient( lightgray 20px, transparent 0 );
@@ -141,20 +138,19 @@
 	background-repeat: repeat-y;
 
 	background-size:
-	100px 200px, /* circle */
-	50px 200px, /* highlight */
-	150px 200px,
-	350px 200px,
-	300px 200px,
-	250px 200px;
+	100px 110px, /* circle */
+	50px 110px, /* highlight */
+	150px 110px,
+	400px 110px,
+	250px 110px;
 
 	background-position:
 	0 0, /* circle */
 	0 0, /* highlight */
-	120px 0,
-	120px 40px,
-	120px 80px,
-	120px 120px;
+	100px 10px,
+	100px 40px,
+	100px 70px,
+	100px 100px;
 
 	animation: shine 1s infinite;
 }
@@ -164,9 +160,9 @@
 		background-position:
 		0 0,
 		100% 0, /* move highlight to right */
-		120px 0,
-		120px 40px,
-		120px 80px,
-		120px 120px;
+		100px 10px,
+		100px 40px,
+		100px 70px,
+		100px 100px;
 	}
 }
