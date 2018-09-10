@@ -1,10 +1,7 @@
 version: '3.0'
 services:
   web:
-    build:
-      context: ./research-hub-web/
-      args:
-        - WEB_ENVIRONMENT=${WEB_ENVIRONMENT}
-        - http_proxy
-        - https_proxy
+    image: ${DOCKER_REGISTRY_URI}/research-hub-web:${TAG_WEB}
     restart: always
+    volumes:
+      - ${DATA_DIR}/config/env.js:/env.js
