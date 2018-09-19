@@ -35,7 +35,7 @@
         </ng-container>
       </mat-nav-list>
     </mat-sidenav>
-
+    <mat-sidenav-content>
     <div class="sidenav-content-wrapper">
       <div #topContent class="sidenav-content" fxLayout="column" ngClass.xs="sidenav-content-xs">
         <div #topbar class="app-toolbar-container">
@@ -123,17 +123,19 @@
                        disableClose [opened]="showContentSidenav"
                        [fixedInViewport]="isContentSidenavFixed"
                        [ngStyle]="{'height':contentSidenavHeight + 'px'}"
-                       [@.disabled]="true">
+                       [@noAnimation]="showContentSidenav">
             <router-outlet name="contentSidenav"
                            (activate)="setContentSidenavHasContent(true)"
                            (deactivate)="setContentSidenavHasContent(false)"></router-outlet>
           </mat-sidenav>
           <!-- Search bar  -->
+          <mat-sidenav-content [@contentPushLeft]="showContentSidenav">
             <div class="site-padding" #content ngClass.xs="site-padding-xs" ngClass.sm="site-padding-sm">
               <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
               <!-- Page content -->
               <router-outlet></router-outlet>
             </div>
+            </mat-sidenav-content>
         </mat-sidenav-container>
       </div>
       <footer ngClass.xs="footer-xs">
@@ -162,5 +164,6 @@
         </div>
       </footer>
     </div>
+    </mat-sidenav-content>
   </mat-sidenav-container>
 </section>

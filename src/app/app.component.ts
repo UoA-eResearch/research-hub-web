@@ -67,6 +67,27 @@ import {
       })),
       transition('false <=> true',animate('0ms'))
     ]),
+    trigger('contentPushLeft',[
+      state('true',style({
+        marginLeft:'400px'
+      })),
+      state('false',style({
+        marginLeft:'0'
+      })),
+      transition('false => true', animate('500ms  cubic-bezier(.63,.66,.47,.9)')),
+      transition('true => false', animate('300ms ease-out'))
+    ]),
+    trigger('sidenavPushLeft',[
+      state('false',style({
+        transform:'translate(-400px)'
+      })),
+      state('true',style({
+        transform:'translate(0)'
+      })),
+      transition('true => false', animate('300ms ease-out')),
+      transition('false => true', animate('500ms cubic-bezier(.63,.66,.47,.9)'))
+    ]),
+
     trigger('fadeIn', [
       state("false", style({
         opacity: 0,
@@ -109,7 +130,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   private previousRoute = undefined;
   private currentRoute = undefined;
   public isContentSidenavFixed = false;
-  public contentSidenavHeight;
+  public contentSidenavHeight = 0;
 
   @ViewChild('topbar')
   private topbarElement : ElementRef;
@@ -158,20 +179,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
     }
   }
 
-  initContentSidenav(){
-    this.contentSidenavVisibilitySub = this.appComponentService.contentSidenavVisibilityChange.subscribe((isVisible) => {
-      // Sets if we pop out the content sidenav.
-      // First check if there is content inside the sidenav, if not, then don't bother popping it out.
-      if (this.contentSidenavHasContent){
-        this.showContentSidenav = isVisible;
-        if (isVisible){
-          // Do a restyle when the filter sidenav opens to initialise the height.
-          this.restyleContentSidenav();
-        }
-      }
-    });
-  }
-
   setContentSidenavHasContent(hasContent: boolean){
     // Hide the content sidenav if there is no longer any content inside.
     if (!hasContent){
@@ -190,7 +197,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
       this.showProgressBar = isVisible;
     });
 
-    this.initContentSidenav();
     // Navigate to the search page if the user types text in
     this.searchTextChangeSub = this.searchBarService.searchTextChange.distinctUntilChanged().subscribe(searchText => {
       const url = this.location.path();
@@ -247,10 +253,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
 
   restyleContentSidenav(){
+    console.log("Restyle called");
     if (!this.showContentSidenav){
       // If content sidenav is not visible, don't need to calculate style.
       return;
     }
+    console.log("Is stable?", this.ngZone.isStable);
     const topbar = this.topbarElement.nativeElement,
     topContent = this.topContentElement.nativeElement,
     topbarRect = topbar.getBoundingClientRect(),
@@ -291,11 +299,24 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
     });
   }
 
-  setupContentSidenavRestyleSub(){
+  setupContentSidenav(){
     // If not running in a browser, do not do any listener setup.
     if (!isPlatformBrowser){
       return;
     }
+    this.contentSidenavVisibilitySub = this.appComponentService.contentSidenavVisibilityChange.subscribe((isVisible) => {
+      // Sets if we pop out the content sidenav.
+      // First check if there is content inside the sidenav, if not, then don't bother popping it out.
+      if (this.contentSidenavHasContent){
+        this.showContentSidenav = isVisible;
+        if (isVisible){
+          // Do a restyle when the filter sidenav opens to initialise the height.
+          this.ngZone.runOutsideAngular( _ => {
+            this.restyleContentSidenav();
+          });
+        }
+      }
+    });
     const restyleFn = () => (this.restyleContentSidenav());
     this.scrollSub = this.scrollDispatcher.scrolled(150).subscribe(restyleFn);
     this.winResizeSub = Observable.fromEvent(window,'resize').debounceTime(150).subscribe(restyleFn);
@@ -318,7 +339,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
 
   ngAfterViewInit() {
-    this.setupContentSidenavRestyleSub();
+    this.setupContentSidenav();
   }
 
   ngAfterViewChecked() {
