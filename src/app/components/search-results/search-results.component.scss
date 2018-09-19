@@ -171,18 +171,20 @@
   }
 
   .results-items,.skeleton {
-    transition: opacity 100ms ease-in-out; // Crossfade between results and skeleton component.
+    transition: opacity 300ms ease-in-out; // Crossfade between results and skeleton component.
   }
 
   &.loading {
     min-height:94px;
 
     .results-items {
-      opacity: 0;
+      opacity: 0.1;
+      pointer-events: none;
+      cursor: default;
     }
 
     .skeleton {
-      opacity: 1;
+      //opacity: 1;
     }
 
   }
