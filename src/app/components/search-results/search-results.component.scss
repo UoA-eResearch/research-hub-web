@@ -136,56 +136,16 @@
 	}
 }
 
-.results-list {
-  position: relative; // This ensures the skeleton's height and width will be relative to results list.
-
-  .skeleton {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-	  background-image:
-	    radial-gradient( circle 30px at 50px 50px, lightgray 99%, transparent 0 ),
-      linear-gradient( 100deg, rgba($color-background,0), rgba($color-background, 0.5) 50%, rgba($color-background,0) 80% ),
-	    linear-gradient( lightgray 20px, transparent 0 ),
-	    linear-gradient( lightgray 20px, transparent 0 ),
-	    linear-gradient( lightgray 20px, transparent 0 );
-
-	    background-repeat: repeat-y;
-
-	    background-size:
-      100px 94px, /* circle */
-      50px 94px, /* highlight */
-	    30% 94px,
-	    80% 94px,
-	    40% 94px;
-
-	    background-position:
-	    0 0, /* circle */
-	    0 0, /* highlight */
-	    95px 10px,
-	    95px 40px,
-	    95px 65px;
-
-	    animation: shine 1s cubic-bezier(.43,.28,.28,.66) infinite;
-  }
-
-  .results-items,.skeleton {
-    transition: opacity 300ms ease-in-out; // Crossfade between results and skeleton component.
-  }
-
-  &.loading {
-    min-height:94px;
-
-    .results-items {
-      opacity: 0.1;
+.results-list.loading, .resultsCards.loading {
       pointer-events: none;
       cursor: default;
-    }
+      transition: opacity 300ms ease-in-out;
+}
 
-    .skeleton {
-      //opacity: 1;
-    }
+.results-list.loading {
+  opacity: 0.1;
+}
 
-  }
+.resultsCards.loading {
+  opacity: 0.5;
 }

@@ -47,8 +47,6 @@
   </div>
 
   <mat-nav-list class="results-list" [class.loading]="(resultsLoading$ | async) === true" *ngIf="!showCardView">
-    <div class="skeleton"></div>
-    <div class="results-items">
     <ng-container *ngFor="let item of resultsPage.content; trackBy: resultIdentity">
       <ng-container *ngIf="item.type !== 'policy'">
         <mat-list-item class="list-item" [routerLink]="item | listItemToRouterLink">
@@ -72,11 +70,10 @@
         </a>
       </ng-container>
     </ng-container>
-    </div>
   </mat-nav-list>
 
   <!--Testing Card View for Results-->
-  <mat-grid-list class="resultsCards" *ngIf="showCardView" [cols]="cardViewResultsNumberOfColumns" gutterSize="1em" rowHeight="1:2" style="padding-top: 1em">
+  <mat-grid-list class="resultsCards" [class.loading]="(resultsLoading$ | async) === true" *ngIf="showCardView" [cols]="cardViewResultsNumberOfColumns" gutterSize="1em" rowHeight="1:2" style="padding-top: 1em">
     <mat-grid-tile *ngFor="let item of resultsPage.content; trackBy: resultIdentity" [colspan]="1" [rowspan]="1" [routerLink]="item | listItemToRouterLink" style="cursor: pointer">
       <div class="card-result-image">
         <img src="{{apiService.getAssetUrl(item.image)}}" style="width: 100%; height: 100%;"/>
