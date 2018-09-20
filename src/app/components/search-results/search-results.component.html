@@ -24,7 +24,7 @@
   <div fxLayout="row" fxLayoutAlign="start center" class="refine-search" *ngIf="!filterVisible">
     <div fxFlex>
       <p class="refine-search-text">
-        <span class="search-results-text" [hidden]="resultsPage.totalElements <= 12">Too many results?</span> <a style="cursor:pointer;" role="button" (click)="openFilters()">Refine your search{{resultsPage.totalElements <= 12 ? "?" : "."}}</a>
+        <span class="search-results-text" [hidden]="resultsPage.totalElements <= 12" style="margin-right:8px;">Too many results?</span><a style="cursor:pointer;" role="button" (click)="openFilters()">Refine your search{{resultsPage.totalElements <= 12 ? "?" : "."}}</a>
       </p>
     </div>
 
