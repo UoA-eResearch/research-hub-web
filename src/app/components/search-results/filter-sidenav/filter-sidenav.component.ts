@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import {SearchFiltersService} from '../search-filters/search-filters.service';
+import {SearchFiltersService, DEFAULT_FILTERS_VALUE} from '../search-filters/search-filters.service';
 import {AppComponentService} from '../../../app.component.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class FilterSidenavComponent implements OnInit {
   }
 
   clear(){
-    this.searchFiltersService.resetFilters();
+    this.filtersForm.patchValue(DEFAULT_FILTERS_VALUE);
   }
 
   done(){

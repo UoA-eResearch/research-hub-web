@@ -336,7 +336,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     this.filterDialogRef.afterClosed().subscribe(newFiltersForm => {
       if (newFiltersForm) {
-        this.searchFiltersService.patchFilters(newFiltersForm);
+        this.filtersForm.patchValue(newFiltersForm.getRawValue());
       }
       this.filterDialogRef = null;
     });
@@ -353,7 +353,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       this.appComponentService.setContentSidenavVisibility(false);
     } else {
       if (this.filterDialogRef){
-        this.filterDialogRef.close();
+        this.filterDialogRef.componentInstance.saveAndClose();
+        this.appComponentService.setContentSidenavVisibility(true);
       }
     }
   }

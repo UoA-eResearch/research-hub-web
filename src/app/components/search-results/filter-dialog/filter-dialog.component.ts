@@ -18,11 +18,11 @@ export class FilterDialogComponent {
     this.filtersForm = data.form;
   }
 
-  clear() {
+  public clear() {
     this.filtersForm.patchValue(DEFAULT_FILTERS_VALUE);
   }
 
-  done() {
+  public saveAndClose() {
     this.dialogRef.close(this.filtersForm);
   }
 }
