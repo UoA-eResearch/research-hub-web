@@ -54,7 +54,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private categoryIdSub: Subscription;
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
-  private contentNavVisibilitySub: Subscription;
+
+  // Visibility and open states are different. The filter
+  // may be open but hidden - if the user resized the window,
+  // we will need to hide the filter, but it should still be open
+  // if the window becomes bigger again.
+  private filterSidenavVisibilitySub: Subscription;
+  private filterOpenSub : Subscription;
 
   private resultsSub : Subscription;
   private resultsLoading$ : Observable<boolean>;
@@ -76,6 +82,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private previousPageEvent: any;
   private previousFiltersFormValues: any;
   private previousSearchText: any;
+
   private filterVisible: boolean = false;
 
   // Used for determining number of columns for card-view results
@@ -157,14 +164,24 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.cardViewResultsNumberOfColumns = Math.min(3, cols);
   }
 
-  initFilterSidenav(){
-    this.contentNavVisibilitySub = this.appComponentService.contentSidenavVisibilityChange.subscribe(
+  initFilter(){
+    this.filterSidenavVisibilitySub = this.appComponentService.contentSidenavVisibilityChange.subscribe(
       (isSidenavVisible: boolean) => {
         this.filterVisible = isSidenavVisible;
+      }
+    );
+    this.filterOpenSub = this.searchFiltersService.filtersOpen$.subscribe(
+      (isOpen: boolean) => {
+        if (isOpen){
+          this.showFilters();
+        } else {
+          this.hideFilters();
+        }
       });
+
     if (!this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
-      // If we are in desktop mode, pop open the filters by default.
-      this.openFilters();
+      // If we are in desktop view, pop open the filters by default.
+      this.searchFiltersService.openFilters();
     }
   }
 
@@ -203,7 +220,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.initFilterSidenav();
+    this.initFilter();
     this.initResultSubs();
     // Results cards
     this.updateCols(this.layoutService.getMQAlias());
@@ -284,7 +301,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       });
 
     this.buttonClickSub = this.searchBarService.filterButtonClickChange.subscribe((buttonName) => {
-      this.openDialog();
+      this.searchFiltersService.openFilters();
     });
   }
 
@@ -315,46 +332,59 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     );
   }
 
-  openFilters(){
+  private showFilters(){
     const winWidth = this.layoutService.getMQAlias();
     if (this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
-      this.openDialog();
+      this.filterDialogRef = this.dialog.open(FilterDialogComponent, {
+        maxWidth: '100%',
+        width: '100%',
+        height: '100%'
+      });
+      this.filterDialogRef.afterClosed().subscribe(() => {
+        // Clean up so we don't have a redundant reference.
+        this.filterDialogRef = null;
+      });
+      // Make the panel invisible as it is not applicable in the mobile view.
+      this.appComponentService.setContentSidenavVisibility(false);
     } else {
+      if (this.filterDialogRef){
+        this.filterDialogRef.close();
+      }
       this.appComponentService.setContentSidenavVisibility(true);
     }
   }
 
-  private openDialog(): void {
-    this.filterDialogRef = this.dialog.open(FilterDialogComponent, {
-      maxWidth: '100%',
-      width: '100%',
-      height: '100%',
-      data: {
-        form: this.searchFiltersService.duplicateFilters()
-      }
-    });
-
-    this.filterDialogRef.afterClosed().subscribe(newFiltersForm => {
-      if (newFiltersForm) {
-        this.filtersForm.patchValue(newFiltersForm.getRawValue());
-      }
-      this.filterDialogRef = null;
-    });
+  private hideFilters(){
+    if (this.filterDialogRef){
+      this.filterDialogRef.close();
+    }
+    this.appComponentService.setContentSidenavVisibility(false);
   }
-
 
   /**
   * Hide the filters view that isn't applicable to the screen size
-  * if media width has changed.
+  * if window width has changed.
   * See ngOnInit.
   */
   private updateFiltersView(winWidth: string){
     if (this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
-      this.appComponentService.setContentSidenavVisibility(false);
+      // Always hide filters when in mobile view, even if we are in open
+      // state.
+      this.hideFilters();
     } else {
       if (this.filterDialogRef){
-        this.filterDialogRef.componentInstance.saveAndClose();
-        this.appComponentService.setContentSidenavVisibility(true);
+        // If we are transitioning from mobile to desktop, and the
+        // user has the filters open, we should save the state of
+        // the filters, then make the refine search panel visible.
+        this.filterDialogRef.componentInstance.save();
+        this.showFilters();
+      }
+
+      // If the filters are open but invisible (e.g. when the user made the
+      // window smaller), we make it visible when the window is large
+      // enough again.
+      if (this.searchFiltersService.areFiltersOpen){
+        this.showFilters();
       }
     }
   }
@@ -517,7 +547,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.searchChangeSub.unsubscribe();
     this.routeParamsSub.unsubscribe();
     this.buttonClickSub.unsubscribe();
-    this.contentNavVisibilitySub.unsubscribe();
+    this.filterSidenavVisibilitySub.unsubscribe();
+    this.filterOpenSub.unsubscribe();
     this.resultsSub.unsubscribe();
     this.categoriesSub.unsubscribe();
   }

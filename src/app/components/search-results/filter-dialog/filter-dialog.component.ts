@@ -1,8 +1,7 @@
 import {Component, Inject, Input} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup} from '@angular/forms';
 import {CategoryId} from 'app/services/options.service';
-import { DEFAULT_FILTERS_VALUE } from '../search-filters/search-filters.service';
+import { SearchFiltersService, DEFAULT_FILTERS_VALUE } from '../search-filters/search-filters.service';
 
 @Component({
   selector: 'app-filter-dialog',
@@ -13,16 +12,19 @@ export class FilterDialogComponent {
 
   public filtersForm: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<FilterDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.filtersForm = data.form;
+  constructor(public searchFiltersService : SearchFiltersService) {
+    this.filtersForm = searchFiltersService.duplicateFilters();
   }
 
   public clear() {
     this.filtersForm.patchValue(DEFAULT_FILTERS_VALUE);
   }
 
-  public saveAndClose() {
-    this.dialogRef.close(this.filtersForm);
+  public save(){
+    this.searchFiltersService.patchFilters(this.filtersForm);
+  }
+
+  public close(){
+    this.searchFiltersService.closeFilters();
   }
 }

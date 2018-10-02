@@ -24,7 +24,7 @@
   <div fxLayout="row" fxLayoutAlign="start center" class="refine-search" *ngIf="!filterVisible">
     <div fxFlex>
       <p class="refine-search-text">
-        <span class="search-results-text" [hidden]="resultsPage.totalElements <= 12" style="margin-right:8px;">Too many results?</span><a style="cursor:pointer;" role="button" (click)="openFilters()">Refine your search{{resultsPage.totalElements <= 12 ? "?" : "."}}</a>
+        <span class="search-results-text" [hidden]="resultsPage.totalElements <= 12" style="margin-right:8px;">Too many results?</span><a style="cursor:pointer;" role="button" (click)="searchFiltersService.openFilters()">Refine your search{{resultsPage.totalElements <= 12 ? "?" : "."}}</a>
       </p>
     </div>
 
@@ -40,7 +40,7 @@
     <p [innerHTML]="noResultsSummary"></p>
     <p>Suggestions:</p>
     <ul>
-      <li>Widen your <a (click)="openFilters()" style="cursor:pointer;">filters</a></li>
+      <li>Widen your <a (click)="searchFiltersService.openFilters()" style="cursor:pointer;">filters</a></li>
       <li>Let us know what you were looking for via our <a [routerLink]="['/feedback']">Feedback page</a></li>
       <li>You can try the <a href="https://www.staff.auckland.ac.nz/en.html" target="_blank">Staff Service Centre</a> in the Staff Intranet</li>
     </ul>
