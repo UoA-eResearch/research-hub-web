@@ -368,8 +368,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   */
   private updateFiltersView(winWidth: string){
     if (this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
-      // Always hide filters when in mobile view, even if we are in open
-      // state.
+      // Always hide filters by default when in mobile view, even if
+      // we are in open state.
       this.hideFilters();
     } else {
       if (this.filterDialogRef){

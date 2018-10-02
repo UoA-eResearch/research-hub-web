@@ -125,21 +125,13 @@
   margin-bottom:0px;
 }
 
-@keyframes shine {
-	to {
-		background-position:
-		0 0,
-    100% 0, /* move highlight to right */
-		95px 10px,
-		95px 40px,
-		95px 65px;
-	}
-}
+.results-list,.resultsCards {
+  transition: opacity 200ms ease-in-out;
 
-.results-list.loading, .resultsCards.loading {
-      pointer-events: none;
-      cursor: default;
-      transition: opacity 300ms ease-in-out;
+  .loading {
+    pointer-events: none;
+    cursor: default;
+  }
 }
 
 .results-list.loading {
