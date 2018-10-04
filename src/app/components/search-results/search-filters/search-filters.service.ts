@@ -18,6 +18,7 @@ export class SearchFiltersService {
 
   private filtersOpenSubject: Subject<boolean>;
   public filtersOpen$ : Observable<boolean>;
+  // The current value of whether the filters are in open state.
   public areFiltersOpen : boolean;
 
 
@@ -38,10 +39,10 @@ export class SearchFiltersService {
   }
 
   /**
-  * Create and return a new filters FormGroup that has the same
-  * values as the current filters.
-  * Used for filter dialog which does not change values instantly.
-  */
+   * Create and return a new filters FormGroup that has the same
+   * values as the current filters.
+   * Used for filter dialog which does not change values instantly.
+   */
   public duplicateFilters() : FormGroup {
     const duplicate = this.createFilters();
     duplicate.patchValue(this.filtersForm.getRawValue());

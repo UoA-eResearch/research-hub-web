@@ -31,42 +31,6 @@ import {
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: [
-    trigger('slowLeftRight',[
-      state('false', style({
-        transform: 'translate(-100%,0)',
-      })),
-      state('true', style({
-        transform: 'translate(0,0)'
-      })),
-      transition('false => true', animate('1000ms ease-in')),
-      transition('true => false', animate('100ms ease-out'))
-    ]),
-    trigger('topDown', [
-      state("false", style({
-        opacity: 0,
-        transform: 'translate(0,-100%)'
-      })),
-      state("true",   style({
-        opacity: 1,
-        transform: 'translate(0,0px)'
-      })),
-      transition('false => true', animate('300ms ease-in')),
-      transition('true => false', animate('100ms ease-out'))
-      // transition(':enter', [
-      //   style({ transform: 'translate(0,-100%)'}),
-      //   animate('1s ease-in'),
-      //   style({ transform: 'translate(0,0)'})
-      // ])
-    ]),
-    trigger('noAnimation',[
-      state('false', style({
-        transform: 'translate(0,0)'
-      })),
-      state('true', style({
-        transform: 'translate(0,0)'
-      })),
-      transition('false <=> true',animate('0ms'))
-    ]),
     trigger('contentPushLeft',[
       state('true',style({
         marginLeft:'400px'
@@ -76,29 +40,6 @@ import {
       })),
       transition('false => true', animate('500ms  cubic-bezier(.63,.66,.47,.9)')),
       transition('true => false', animate('300ms ease-out'))
-    ]),
-    trigger('sidenavPushLeft',[
-      state('false',style({
-        transform:'translate(-400px)'
-      })),
-      state('true',style({
-        transform:'translate(0)'
-      })),
-      transition('true => false', animate('300ms ease-out')),
-      transition('false => true', animate('500ms cubic-bezier(.63,.66,.47,.9)'))
-    ]),
-
-    trigger('fadeIn', [
-      state("false", style({
-        opacity: 0,
-        transform: 'translate(0,0px)'
-      })),
-      state("true",   style({
-        opacity: 1,
-        transform: 'translate(0,0px)'
-      })),
-      transition('false => true', animate('300ms ease-in')),
-      transition('true => false', animate('100ms ease-out'))
     ])
   ]
 })
@@ -123,7 +64,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   public showLoginBtn = true;
   public showProgressBar = false;
   public showBackBtn = false;
-  public showContentSidenav = false;
   public contentSidenavHasContent = false;
   public pageTitle = '';
 
@@ -182,7 +122,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   setContentSidenavHasContent(hasContent: boolean){
     // Hide the content sidenav if there is no longer any content inside.
     if (!hasContent){
-      this.showContentSidenav = false;
+      this.appComponentService.setContentSidenavVisibility(false);
     }
     this.contentSidenavHasContent = hasContent;
   }
@@ -253,12 +193,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
 
   restyleContentSidenav(){
-    console.log("Restyle called");
-    if (!this.showContentSidenav){
+    if (!this.appComponentService.showContentSidenav){
       // If content sidenav is not visible, don't need to calculate style.
       return;
     }
-    console.log("Is stable?", this.ngZone.isStable);
     const topbar = this.topbarElement.nativeElement,
     topContent = this.topContentElement.nativeElement,
     topbarRect = topbar.getBoundingClientRect(),
@@ -290,12 +228,14 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
       newSidenavHeight -= topbarBottom;
     }
     this.ngZone.runGuarded(() => {
-      if (newFixedValue !== undefined){
-        this.isContentSidenavFixed = newFixedValue;
-      }
-      if (newSidenavHeight !== undefined){
-        this.contentSidenavHeight = newSidenavHeight;
-      }
+      setTimeout(()=>{
+        if (newFixedValue !== undefined){
+          this.isContentSidenavFixed = newFixedValue;
+        }
+        if (newSidenavHeight !== undefined){
+          this.contentSidenavHeight = newSidenavHeight;
+        }
+      },0);
     });
   }
 
@@ -304,18 +244,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
     if (!isPlatformBrowser){
       return;
     }
-    this.contentSidenavVisibilitySub = this.appComponentService.contentSidenavVisibilityChange.subscribe((isVisible) => {
+    this.contentSidenavVisibilitySub = this.appComponentService.contentSidenavVisibility$.subscribe((isVisible) => {
       // Sets if we pop out the content sidenav.
-      // First check if there is content inside the sidenav, if not, then don't bother popping it out.
-      if (this.contentSidenavHasContent){
-        this.showContentSidenav = isVisible;
-        if (isVisible){
-          // Do a restyle when the filter sidenav opens to initialise the height.
-          this.ngZone.runOutsideAngular( _ => {
+          if (isVisible){
+            // Do a restyle when the filter sidenav opens to initialise the height.
             this.restyleContentSidenav();
-          });
-        }
-      }
+          }
     });
     const restyleFn = () => (this.restyleContentSidenav());
     this.scrollSub = this.scrollDispatcher.scrolled(150).subscribe(restyleFn);
@@ -324,22 +258,23 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
 
   checkContentHeightChanged(){
-    if (!this.showContentSidenav){
+    if (!this.appComponentService.showContentSidenav){
       // If content sidenav is not visible, don't need to calculate style.
       return;
     }
-    this.ngZone.runOutsideAngular(() => {
-      const contentHeight = this.contentElement.nativeElement.clientHeight;
-      if (contentHeight !== this.contentElementHeight){
-        // Recompute content sidenav size when the content has changed.
-        this.restyleContentSidenav();
+
+    const contentHeight = this.contentElement.nativeElement.clientHeight;
+    if (contentHeight !== this.contentElementHeight){
+      // Recompute content sidenav size when the content has changed.
+      this.restyleContentSidenav();
+      setTimeout(()=> {
         this.contentElementHeight = contentHeight;
-      }
-    });
+      },0);
+    }
   }
 
   ngAfterViewInit() {
-    this.setupContentSidenav();
+      this.setupContentSidenav()
   }
 
   ngAfterViewChecked() {

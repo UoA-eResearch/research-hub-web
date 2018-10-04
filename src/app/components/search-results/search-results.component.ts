@@ -165,7 +165,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   initFilter(){
-    this.filterSidenavVisibilitySub = this.appComponentService.contentSidenavVisibilityChange.subscribe(
+    this.filterSidenavVisibilitySub = this.appComponentService.contentSidenavVisibility$.subscribe(
       (isSidenavVisible: boolean) => {
         this.filterVisible = isSidenavVisible;
       }
@@ -181,7 +181,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     if (!this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
       // If we are in desktop view, pop open the filters by default.
-      this.searchFiltersService.openFilters();
+        this.searchFiltersService.openFilters();
     }
   }
 
@@ -288,13 +288,14 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
 
         // Update values in search bar and search filters form
-        this.searchBarService.setSearchText(searchText);
-        this.searchBarService.setCategory(categoryId);
-        this.filtersForm.controls.categoryId.setValue(categoryId);
-        this.filtersForm.controls.personTags.setValue(this.toTags(personIds));
-        this.filtersForm.controls.orgUnitTags.setValue(this.toTags(orgUnitIds));
-        this.filtersForm.controls.researchActivityIds.setValue(researchActivityIds);
-
+        setTimeout(() => {
+          this.searchBarService.setSearchText(searchText);
+          this.searchBarService.setCategory(categoryId);
+          this.filtersForm.controls.categoryId.setValue(categoryId);
+          this.filtersForm.controls.personTags.setValue(this.toTags(personIds));
+          this.filtersForm.controls.orgUnitTags.setValue(this.toTags(orgUnitIds));
+          this.filtersForm.controls.researchActivityIds.setValue(researchActivityIds);
+        });
         // Send page event order by event to trigger search
         this.pageEventChange.next({pageIndex: this.pageIndex, pageSize: this.pageSize} as PageEvent);
         this.orderByChange.next(this.orderBy);
