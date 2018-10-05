@@ -84,7 +84,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   constructor(private location: Location, public optionsService: OptionsService, private headerService: HeaderService,
               private searchBarService: SearchBarService, private router: Router,
               public apiService: ResearchHubApiService, public analyticsService: AnalyticsService,
-              public authService: AuthService, private ref: ChangeDetectorRef, private appComponentService: AppComponentService,
+              public authService: AuthService, private ref: ChangeDetectorRef, public appComponentService: AppComponentService,
               private titleService: Title,
               private scrollDispatcher: ScrollDispatcher,
               private ngZone : NgZone) {
