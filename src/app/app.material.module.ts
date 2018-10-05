@@ -26,6 +26,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -82,7 +83,8 @@ import {ScrollDispatchModule} from '@angular/cdk/scrolling';
     MatTooltipModule,
     MatRadioModule,
     MatPaginatorModule,
-    ScrollDispatchModule
+    ScrollDispatchModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialModule {

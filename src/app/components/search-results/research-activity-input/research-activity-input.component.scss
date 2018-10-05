@@ -1,38 +1,25 @@
 @import "../../../../research-activity";
 
-@mixin research-activity-checkbox($class-name, $color) {
+@mixin research-activity-toggle($class-name, $color,$color-light) {
   $checkbox-fill-color: rgba(255, 255, 255, 1.0);
 
-  .#{$class-name}.mat-checkbox-checked /deep/ .mat-checkbox-background {
-    background-color: $checkbox-fill-color;
+  .#{$class-name}.mat-slide-toggle.mat-checked:not(.mat-disabled) /deep/ .mat-slide-toggle-bar {
+    background-color: $color-light;
   }
 
-  .#{$class-name} /deep/ .mat-checkbox-checkmark {
-    fill: $color;
-  }
-
-  .#{$class-name} /deep/ .mat-checkbox-checkmark-path {
-    stroke: $color !important;
-  }
-
-  .#{$class-name} /deep/ .mat-checkbox-frame {
-    border-color: $checkbox-fill-color;
-  }
-
-  .#{$class-name} /deep/ .mat-primary .mat-checkbox-ripple .mat-ripple-element {
-    background-color: rgba($color, 0.26);
+  .#{$class-name}.mat-slide-toggle.mat-checked:not(.mat-disabled) /deep/ .mat-slide-toggle-thumb {
+    background-color: $color;
   }
 }
-mat-chip.ra-input-chip {
-  height: $ra-chip-height;
-  cursor: pointer;
+
+:host {
+  .mat-slide-toggle /deep/ .mat-slide-toggle-content {
+    color: #004059;
+  }
 }
 
-mat-chip.ra-input-chip.touch {
-  height: $ra-chip-height-touch;
-}
-@include research-activity-checkbox('plan', $color-plan-bg);
-@include research-activity-checkbox('create', $color-create-bg);
-@include research-activity-checkbox('analyze', $color-analyze-bg);
-@include research-activity-checkbox('publish', $color-publish-bg);
-@include research-activity-checkbox('discover', $color-discover-bg);
+@include research-activity-toggle('plan', $color-plan-bg,$color-plan-bg-light);
+@include research-activity-toggle('create', $color-create-bg, $color-create-bg-light);
+@include research-activity-toggle('analyze', $color-analyze-bg, $color-analyze-bg-light);
+@include research-activity-toggle('publish', $color-publish-bg, $color-publish-bg-light);
+@include research-activity-toggle('discover', $color-discover-bg, $color-discover-bg-light);

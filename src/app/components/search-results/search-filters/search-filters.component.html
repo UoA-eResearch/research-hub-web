@@ -1,4 +1,10 @@
 <form *ngIf="filtersForm" [formGroup]="filtersForm" fxLayout="column" fxLayoutGap="2.5em" fxLayoutGap.xs="1em">
+  <div fxFlex="noshrink">
+    <app-research-activity-input style="display: block;" *ngIf="showResearchActivityFilter"
+                                 formControlName="researchActivityIds"
+                                 [touchFriendly]="compact"></app-research-activity-input>
+
+  </div>
 
   <div *ngIf="!compact">
   <span style="color: rgba(0,0,0,0.54);padding-bottom:0.5em;display: block;">Check out a different category</span>
@@ -26,10 +32,4 @@
     </div>
   </div>
 
-  <div fxFlex="noshrink">
-    <app-research-activity-input style="display: block;" *ngIf="showResearchActivityFilter"
-                                 formControlName="researchActivityIds"
-                                 [touchFriendly]="compact"></app-research-activity-input>
-
-  </div>
 </form>
