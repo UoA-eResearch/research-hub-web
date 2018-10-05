@@ -120,7 +120,7 @@
         <mat-sidenav-container fxFlex="grow">
           <!-- Content sidenav -->
           <mat-sidenav class="content-sidenav" mode="side"
-                       disableClose [opened]="appComponentService.showContentSidenav"
+                       disableClose [opened]="appComponentService.isContentSidenavVisible"
                        [fixedInViewport]="isContentSidenavFixed"
                        [ngStyle]="{'height':contentSidenavHeight + 'px'}"
                        [@.disabled]="true">
@@ -129,7 +129,7 @@
                            (deactivate)="setContentSidenavHasContent(false)"></router-outlet>
           </mat-sidenav>
           <!-- Search bar  -->
-          <mat-sidenav-content [@contentPushLeft]="appComponentService.showContentSidenav">
+          <mat-sidenav-content [@contentPushLeft]="appComponentService.isContentSidenavVisible">
             <div class="site-padding" #content ngClass.xs="site-padding-xs" ngClass.sm="site-padding-sm">
               <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
               <!-- Page content -->

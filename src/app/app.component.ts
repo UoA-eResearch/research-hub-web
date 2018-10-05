@@ -64,7 +64,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   public showLoginBtn = true;
   public showProgressBar = false;
   public showBackBtn = false;
-  public contentSidenavHasContent = false;
   public pageTitle = '';
 
   private previousRoute = undefined;
@@ -120,11 +119,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
 
   setContentSidenavHasContent(hasContent: boolean){
-    // Hide the content sidenav if there is no longer any content inside.
-    if (!hasContent){
-      this.appComponentService.setContentSidenavVisibility(false);
-    }
-    this.contentSidenavHasContent = hasContent;
+    this.appComponentService.setContentSidenavHasContent(hasContent);
   }
 
   ngOnInit() {
@@ -193,7 +188,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
 
   restyleContentSidenav(){
-    if (!this.appComponentService.showContentSidenav){
+    if (!this.appComponentService.isContentSidenavVisible){
       // If content sidenav is not visible, don't need to calculate style.
       return;
     }
@@ -258,7 +253,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
 
   checkContentHeightChanged(){
-    if (!this.appComponentService.showContentSidenav){
+    if (!this.appComponentService.isContentSidenavVisible){
       // If content sidenav is not visible, don't need to calculate style.
       return;
     }

@@ -552,5 +552,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.filterOpenSub.unsubscribe();
     this.resultsSub.unsubscribe();
     this.categoriesSub.unsubscribe();
+    this.mediaSub.unsubscribe();
   }
 }

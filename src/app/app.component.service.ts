@@ -9,12 +9,14 @@ export class AppComponentService {
 
   private contentSidenavVisibilityChange: Subject<boolean>;
   public contentSidenavVisibility$ : Observable<boolean>;
-  public showContentSidenav : boolean;
+  public isContentSidenavVisible : boolean;
+
+  public contentSidenavHasContent : boolean;
 
   constructor() {
     this.contentSidenavVisibilityChange = new Subject<boolean>();
     this.contentSidenavVisibility$ = this.contentSidenavVisibilityChange.asObservable();
-    this.showContentSidenav = false;
+    this.isContentSidenavVisible = false;
   }
 
   setTitle(title: string) {
@@ -29,9 +31,20 @@ export class AppComponentService {
     // Need to use setTimeout, as this may be called by a child component.
     // setTimeout means the changes won't be made in the same VM turn.
     // See https://blog.angularindepth.com/everything-you-need-to-know-about-the-expressionchangedafterithasbeencheckederror-error-e3fd9ce7dbb4
+    if (!this.contentSidenavHasContent && isVisible) {
+      // Do not allow an empty content sidenav to show.
+      return;
+    }
     setTimeout(() => {
       this.contentSidenavVisibilityChange.next(isVisible);
-      this.showContentSidenav = isVisible;
+      this.isContentSidenavVisible = isVisible;
     });
+  }
+
+  setContentSidenavHasContent(hasContent: boolean){
+    this.contentSidenavHasContent = hasContent;
+    if (!hasContent && this.isContentSidenavVisible){
+      this.setContentSidenavVisibility(false);
+    }
   }
 }
