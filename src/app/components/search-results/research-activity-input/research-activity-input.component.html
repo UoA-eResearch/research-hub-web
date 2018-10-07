@@ -3,7 +3,7 @@
 <mat-slide-toggle *ngFor="let activity of optionsService.researchActivityOptions"
                   [ngClass]="[activity.className]"
                   [checked]="model[activity.id].selected"
-                  (change)="onToggle(activity.id)">
+                  (change)="onToggle(activity.id,$event)">
   {{activity.name}}
 </mat-slide-toggle>
 </div>
