@@ -16,6 +16,14 @@
   .mat-slide-toggle /deep/ .mat-slide-toggle-content {
     color: #004059;
   }
+
+  .research-activity-inputs * {
+    margin-bottom:0.5em;
+  }
+
+  .research-activity-inputs.touch * {
+    margin-bottom:1.5em;
+  }
 }
 
 @include research-activity-toggle('plan', $color-plan-bg,$color-plan-bg-light);

@@ -51,7 +51,7 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
   ngOnInit() {
   }
 
-  onChipClick(activityId) {
+  onToggle(activityId) {
     this.model[activityId].selected = !this.model[activityId].selected;
     this.updateValue();
   }

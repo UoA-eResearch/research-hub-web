@@ -1,8 +1,9 @@
 <span style="color: rgba(0,0,0,0.54);padding-bottom: 0.5em;display: block;">See items relevant to research activity</span>
-<div fxLayout="column" fxLayoutGap="0.5em" fxLayoutGap.sm="1.5em">
+<div class="research-activity-inputs" [ngClass]="{'research-activity-inputs':true,'touch':touchFriendly}" fxLayout="column">
 <mat-slide-toggle *ngFor="let activity of optionsService.researchActivityOptions"
                   [ngClass]="[activity.className]"
-                  checked="true">
+                  [checked]="model[activity.id].selected"
+                  (change)="onToggle(activity.id)">
   {{activity.name}}
 </mat-slide-toggle>
 </div>
