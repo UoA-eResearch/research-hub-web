@@ -1,6 +1,6 @@
 <form *ngIf="filtersForm" [formGroup]="filtersForm" fxLayout="column" fxLayoutGap="2.5em" fxLayoutGap.xs="1em">
-  <div fxFlex="noshrink">
-    <app-research-activity-input style="display: block;" *ngIf="showResearchActivityFilter"
+  <div fxFlex="noshrink" *ngIf="showResearchActivityFilter">
+    <app-research-activity-input style="display: block;"
                                  formControlName="researchActivityIds"
                                  [touchFriendly]="compact"></app-research-activity-input>
 
