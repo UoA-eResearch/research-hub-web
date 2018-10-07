@@ -30,6 +30,8 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
    */
   @Input() touchFriendly : boolean = false;
 
+  @Input() disabled : boolean = false;
+
 
   get value() {
     return this._value;

@@ -57,6 +57,8 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
 
   @Input() placeholder = '';
 
+  @Input() disabled = false;
+
   @Input()
   set value(v: Tag[]) {
     this.onChange(v);
