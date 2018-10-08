@@ -119,6 +119,10 @@
 
 .refine-search {
   margin-top:0em;
+
+  &.small {
+    margin-top:1em;
+  }
 }
 
 .refine-search-text {

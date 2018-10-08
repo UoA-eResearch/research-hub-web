@@ -21,7 +21,7 @@
                       compact="true"></category-list>
     </div>
 
-  <div fxLayout="row" fxLayoutAlign="start center" class="refine-search" *ngIf="!filterVisible">
+  <div fxLayout="row" fxLayoutAlign="start center" class="refine-search" ngClass.xs="small" *ngIf="!filterVisible">
     <div fxFlex>
       <p class="refine-search-text">
         <span class="search-results-text" [hidden]="resultsPage.totalElements <= 12" style="margin-right:8px;">Too many results?</span><a style="cursor:pointer;" role="button" (click)="searchFiltersService.openFilters()">Refine your search{{resultsPage.totalElements <= 12 ? "?" : "."}}</a>
