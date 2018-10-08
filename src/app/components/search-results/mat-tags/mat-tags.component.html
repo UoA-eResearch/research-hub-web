@@ -1,4 +1,4 @@
-<mat-form-field fxFlex="100" [ngClass]="{'disabled':disabled}">
+<mat-form-field fxFlex="100" [ngClass]="{'disabled':disabled}" (click)="triggerAutocomplete()">
   <mat-chip-list #chipList>
     <div>
       <ng-container *ngFor="let tag of _value; let last = last">

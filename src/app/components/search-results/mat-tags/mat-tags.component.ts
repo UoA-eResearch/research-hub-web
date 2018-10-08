@@ -125,6 +125,12 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
     this.addTag(event.option.value, input);
   }
 
+  triggerAutocomplete(){
+    if (!this.autoTrigger.panelOpen){
+      this.autoTrigger.openPanel();
+    }
+  }
+
   addTextChip(input: MatInput): void {
     if (this.addNew) {
       if (input.value && !this.autoTrigger.activeOption) {
