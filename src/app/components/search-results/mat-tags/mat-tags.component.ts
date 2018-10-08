@@ -126,6 +126,9 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
   }
 
   triggerAutocomplete(){
+    if (this.disabled){
+      return;
+    }
     if (!this.autoTrigger.panelOpen){
       this.autoTrigger.openPanel();
     }
