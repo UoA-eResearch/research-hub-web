@@ -17,12 +17,27 @@
     color: #004059;
   }
 
-  .research-activity-inputs * {
+  .inputs * {
     margin-bottom:0.5em;
   }
 
-  .research-activity-inputs.touch * {
+  .inputs.touch * {
     margin-bottom:1.5em;
+  }
+
+  span, .mat-slide-toggle /deep/ .mat-slide-toggle-content {
+    transition: opacity 0.3s, color 0.3s;
+  }
+
+  .disabled {
+    span {
+      opacity: 0.4;
+    }
+
+    .mat-slide-toggle /deep/ .mat-slide-toggle-content {
+      color:rgba(0,0,0,0.54);
+      opacity: 0.4;
+    }
   }
 }
 
