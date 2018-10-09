@@ -54,24 +54,6 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
   }
 
   onToggle(activityId,toggleEvent) {
-    const selectedActivities = Object.keys(this.model).map(
-      (key) =>
-        (this.model[key].selected ? key : null));
-    const filteredActivities = selectedActivities.filter(
-      (activityId) =>
-        (activityId !== null));
-    if (filteredActivities.length === 1 &&
-        parseInt(filteredActivities[0]) === activityId){
-      // Do not allow users to deselect the only selected research activity.
-      // Reset the toggle state if required.
-      // TODO In Angular Material 6 we can disable internal state in
-      // the slide toggles - use that instead when we migrate:
-      // https://material.angular.io/components/slide-toggle/api#MatSlideToggleDefaultOptions
-      if (!toggleEvent.checked){
-        toggleEvent.source.toggle();
-      }
-      return;
-    }
     this.model[activityId].selected = !this.model[activityId].selected;
     this.updateValue();
   }
@@ -92,17 +74,9 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
   }
 
   updateState() {
-    if (this._value.length === 0){
-      // If no research activity is selected in filter,
-      //we should show all research activites as toggled.
-      Object.keys(this.model).forEach(key => {
-        this.model[key].selected = true;
-      });
-    } else {
-      Object.keys(this.model).forEach(key => {
-        this.model[key].selected = this._value.indexOf(+key) >= 0;
-      });
-    }
+    Object.keys(this.model).forEach(key => {
+      this.model[key].selected = this._value.indexOf(+key) >= 0;
+    });
   }
 
   updateValue() {
@@ -110,17 +84,6 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
       key => (this.model[key].selected ? +key : null));
     const filteredActivities = selectedActivities.filter(
       key => (key !== null));
-
-
-     if (selectedActivities.length === filteredActivities.length) {
-      // If every research activity is selected,
-      // the research activity filter should be
-      // empty in order to show ALL content - those that
-      // are applicable to all research activities and
-      // also those that apply to none.
-      this.value = [];
-    } else {
-      this.value = filteredActivities;
-    }
+    this.value = filteredActivities;
   }
 }

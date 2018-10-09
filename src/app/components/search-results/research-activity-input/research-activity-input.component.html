@@ -1,5 +1,5 @@
 <div [ngClass]="{'disabled':disabled}" >
-<span style="color: rgba(0,0,0,0.54);padding-bottom: 0.5em;display: block;">See items relevant to research activity</span>
+<span style="color: rgba(0,0,0,0.54);padding-bottom: 0.5em;display: block;">Limit items by research activity</span>
 <div class="inputs" [ngClass]="{'touch':touchFriendly}" fxLayout="column">
   <mat-slide-toggle *ngFor="let activity of optionsService.researchActivityOptions"
                     [disabled]="disabled"
