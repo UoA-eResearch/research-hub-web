@@ -1,6 +1,13 @@
 import {Injectable} from '@angular/core';
 
-
+// fxFlex breakpoint min widths
+// https://github.com/angular/flex-layout/wiki/Responsive-API
+export const MQ_ALIASES = {
+  'sm': 600,
+  'md': 960,
+  'lg': 1280,
+  'xl': 1920
+};
 @Injectable()
 export class LayoutService {
 
@@ -36,25 +43,25 @@ export class LayoutService {
 
   public getMQAlias(): string {
     const width = window.innerWidth;
-
-    // fxFlex breakpoint min widths
-    // https://github.com/angular/flex-layout/wiki/Responsive-API
-    const sm = 600;
-    const md = 960;
-    const lg = 1280;
-    const xl = 1920;
-
-    if ( width < sm) {
+    if ( width < MQ_ALIASES.sm) {
       return 'xs';
-    } else if (width >= sm && width < md) {
+    } else if (width >= MQ_ALIASES.sm && width < MQ_ALIASES.md) {
       return 'sm';
-    } else if (width >= md && width < lg) {
+    } else if (width >= MQ_ALIASES.md && width < MQ_ALIASES.lg) {
       return 'md';
-    } else if (width >= lg && width < xl) {
+    } else if (width >= MQ_ALIASES.lg && width < MQ_ALIASES.xl) {
       return 'lg';
-    } else if (width >= xl) {
+    } else if (width >= MQ_ALIASES.xl) {
       return 'xl';
     }
+  }
+
+  public isWidthLessThan(mqAlias:string):boolean {
+    const aliasWidth = MQ_ALIASES[mqAlias];
+    if (!aliasWidth) {
+      return false;
+    }
+    return window.innerWidth < aliasWidth;
   }
 
   /**

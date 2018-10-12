@@ -13,13 +13,13 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/observable/of';
+import { map } from 'rxjs/operators';
 import {Tag} from './mat-tags/mat-tags.component';
 import {ListItem} from '../../model/ListItem';
 import {AppComponentService} from '../../app.component.service';
@@ -30,6 +30,12 @@ import {LayoutService} from '../../services/layout.service';
 
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {forkJoin} from 'rxjs/observable/forkJoin';
+
+import {SearchFiltersService} from './search-filters/search-filters.service';
+import { SearchResultsComponentService } from './search-results-component.service';
+
+// The screen size at which we should switch to opening filters in dialog or sidenav.
+const FILTER_VIEW_BREAKPOINT = "md";
 
 @Component({
   selector: 'app-search-results',
@@ -49,11 +55,22 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
 
+  // Visibility and open states are different. The filter
+  // may be open but hidden - if the user resized the window,
+  // we will need to hide the filter, but it should still be open
+  // if the window becomes bigger again.
+  private filterSidenavVisibilitySub: Subscription;
+  private filterOpenSub : Subscription;
+
+  private resultsSub : Subscription;
+  private resultsLoading$ : Observable<boolean>;
+  private categoriesSub : Subscription;
+
   public searchTextIsBlank = true;
   public noResultsSummary = '';
   public resultsSummary = '';
   public showEmptyState = false;
-  public sortOptions = [{id: OrderBy.Alphabetical, name: 'Alphabet'}, {id: OrderBy.Relevance, name: 'Relevance'}];
+
   public pageSizeOptions = [6, 12, 60, 120, 600];
 
   public orderBy;
@@ -66,6 +83,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private previousFiltersFormValues: any;
   private previousSearchText: any;
 
+  private filterVisible: boolean = false;
+
   // Used for determining number of columns for card-view results
   public cardViewResultsNumberOfColumns = 3;
   private mediaSub: Subscription;
@@ -76,6 +95,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public categoryListArray = [];
 
   public currentCategoryString = '';
+
+  // A reference to the search filters dialog, if one is currently displayed.
+  // Otherwise null.
+  private filterDialogRef : MatDialogRef<any>;
 
   public static getFilterVisibility(categoryId: number) {
     return {
@@ -109,77 +132,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     return nums;
   }
 
-  // Return a number version of the category version to the view (decoupling model/view/controller)
-  public getCategoryId = () => Number(this.searchBarService.getCategory());
-
-  public getCurrentCategoryId(category: string) {
-    switch (category) {
-      case 'Service':
-        return 2;
-      case 'Equipment':
-        return 3;
-      case 'Training':
-        return 4;
-      case 'Software':
-        return 5;
-      case 'Facility':
-        return 6;
-      case 'Guide':
-        return 7;
-      case 'People':
-        return 8;
-      case 'Policy':
-        return 9;
-    }
-    return false;
+  // Update the category if someone clicks a category
+  public setCategory(category: number) {
+    this.filtersForm.controls.categoryId.setValue(category);
   }
 
-  // Update the category if someone clicks a category in the mat-list search results list
-  public updateCategoryFromCategoryList(category: string) {
-    // Necessary because of discrepancies between item category description and service enums (enums should be updated in future)
-    switch (category) {
-      case 'Policy':
-        category = 'Policies';
-        break;
-      case 'Service':
-        category = 'Support';
-        break;
-      case 'Facility':
-        category = 'Facilities';
-        break;
-      case 'People':
-        category = 'Person';
-        break;
-    }
-    this.searchBarService.setCategory(CategoryId[category]);
-  }
-
-  /**
-   * Checks if the passed string corresponds with the currently searched for category.
-   * Used to highlight the mat-chip corresponding to the currently searched category.
-   * @param {string} category
-   */
-  public isCurrentCategory(category: string) {
-    switch (category) {
-      case 'Service':
-        return this.searchBarService.category == '2';
-      case 'Equipment':
-        return this.searchBarService.category == '3';
-      case 'Training':
-        return this.searchBarService.category == '4';
-      case 'Software':
-        return this.searchBarService.category == '5';
-      case 'Facility':
-        return this.searchBarService.category == '6';
-      case 'Guide':
-        return this.searchBarService.category == '7';
-      case 'People':
-        return this.searchBarService.category == '8';
-      case 'Policy':
-        return this.searchBarService.category == '9';
-    }
-    return false;
-  }
 
   fromTags(tags: Tag[]) {
     return tags.map(tag => tag.id);
@@ -195,7 +152,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
               public optionsService: OptionsService, public apiService: ResearchHubApiService,
               private analyticsService: AnalyticsService, private route: ActivatedRoute,
               private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService,
-              private layoutService: LayoutService, private media: ObservableMedia) {
+              private componentService : SearchResultsComponentService,
+              private layoutService: LayoutService, private media: ObservableMedia,
+              private searchFiltersService: SearchFiltersService) {
+    this.filtersForm = searchFiltersService.filtersForm;
   }
 
   // Results cards
@@ -204,24 +164,74 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.cardViewResultsNumberOfColumns = Math.min(3, cols);
   }
 
+  initFilter(){
+    this.filterSidenavVisibilitySub = this.appComponentService.contentSidenavVisibility$.subscribe(
+      (isSidenavVisible: boolean) => {
+        this.filterVisible = isSidenavVisible;
+      }
+    );
+    this.filterOpenSub = this.searchFiltersService.filtersOpen$.subscribe(
+      (isOpen: boolean) => {
+        if (isOpen){
+          this.showFilters();
+        } else {
+          this.hideFilters();
+        }
+      });
+
+    if (!this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
+      // If we are in desktop view, pop open the filters by default.
+        this.searchFiltersService.openFilters();
+    }
+  }
+
+  initResultSubs(){
+    this.resultsSub = this.componentService.results$.subscribe(
+      page => {
+        this.resultsPage = page;
+        this.orderBy = page.sort;
+        const filtersFormValue = this.filtersForm.value;
+        const personTags = filtersFormValue.personTags;
+        const orgUnitTags = filtersFormValue.orgUnitTags;
+        const categoryId = filtersFormValue.categoryId;
+        const searchText = this.searchBarService.searchText;
+        const researchActivityIds = filtersFormValue.researchActivityIds;
+        this.setFiltersTextIfUndefined(personTags, orgUnitTags).subscribe(res => {
+          const[personTagsRes, orgUnitTagsRes] = res;
+          this.updateResultsSummary(page, categoryId, searchText, personTagsRes, orgUnitTagsRes, researchActivityIds);
+        });
+        this.appComponentService.setProgressBarVisibility(false);
+      }
+    );
+    this.categoriesSub = this.componentService.resultsCategories$.subscribe(
+      categories => {
+        this.categoryListArray = categories;
+      });
+    this.resultsLoading$ = this.componentService.resultsLoading$;
+  }
+
+  resultIdentity(index : number,result){
+    // The identity function for each result item.
+    // This reduces DOM operations of the ngFor
+    // statements and also ensures the refine search panel
+    // does not resize/flash unnecessarily.
+    // See https://angular.io/api/common/NgForOf#change-propagation
+    return index;
+  }
+
   ngOnInit() {
+    this.initFilter();
+    this.initResultSubs();
     // Results cards
     this.updateCols(this.layoutService.getMQAlias());
 
     this.mediaSub = this.media.subscribe((change: MediaChange) => {
       this.updateCols(change.mqAlias);
+      this.updateFiltersView(change.mqAlias);
     });
 
     // Results page
     this.resultsPage = {totalElements: 0} as Page<ListItem>;
-
-    // Filters form
-    this.filtersForm = new FormGroup({
-      categoryId: new FormControl(),
-      personTags: new FormControl([]),
-      orgUnitTags: new FormControl([]),
-      researchActivityIds: new FormControl()
-    });
 
     // Category changes
     this.categoryIdSub = this.searchBarService.searchCategoryChange.subscribe(category => {
@@ -278,20 +288,21 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
 
         // Update values in search bar and search filters form
-        this.searchBarService.setSearchText(searchText);
-        this.searchBarService.setCategory(categoryId);
-        this.filtersForm.controls.categoryId.setValue(categoryId);
-        this.filtersForm.controls.personTags.setValue(this.toTags(personIds));
-        this.filtersForm.controls.orgUnitTags.setValue(this.toTags(orgUnitIds));
-        this.filtersForm.controls.researchActivityIds.setValue(researchActivityIds);
-
+        setTimeout(() => {
+          this.searchBarService.setSearchText(searchText);
+          this.searchBarService.setCategory(categoryId);
+          this.filtersForm.controls.categoryId.setValue(categoryId);
+          this.filtersForm.controls.personTags.setValue(this.toTags(personIds));
+          this.filtersForm.controls.orgUnitTags.setValue(this.toTags(orgUnitIds));
+          this.filtersForm.controls.researchActivityIds.setValue(researchActivityIds);
+        });
         // Send page event order by event to trigger search
         this.pageEventChange.next({pageIndex: this.pageIndex, pageSize: this.pageSize} as PageEvent);
         this.orderByChange.next(this.orderBy);
       });
 
     this.buttonClickSub = this.searchBarService.filterButtonClickChange.subscribe((buttonName) => {
-      this.openDialog();
+      this.searchFiltersService.openFilters();
     });
   }
 
@@ -300,8 +311,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.resultsDummyHeader.nativeElement.scrollIntoView();
   }
 
-  onOrderByChange(event: any) {
-    this.orderByChange.next(event.value);
+  onOrderByChange(orderBy) {
+    this.orderByChange.next(orderBy);
   }
 
   setFiltersTextIfUndefined(personTags: Tag[], orgUnitTags: Tag[]) {
@@ -314,12 +325,69 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     personTags.forEach(key => observablePersonBatch.push(this.apiService.getPerson(key.id)));
 
     // Return an observable containing the batches of observables for both personTags and orgUnitTags
-    return Observable.forkJoin(
+    return forkJoin(
       forkJoin(observablePersonBatch).map(x => x.map(y => {y['text'] = y['firstName'] + ' ' + y['lastName']; return (y)}))
         .pipe(z => observablePersonBatch.length ? z : Observable.of([])),
       forkJoin(observableOrgUnitBatch).map(x => x.map(y => {y['text'] = y['name'];  return (y)}))
         .pipe(z => observableOrgUnitBatch.length ? z : Observable.of([]))
     );
+  }
+
+  private showFilters(){
+    const winWidth = this.layoutService.getMQAlias();
+    if (this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
+      this.filterDialogRef = this.dialog.open(FilterDialogComponent, {
+        maxWidth: '100%',
+        width: '100%',
+        height: '100%'
+      });
+      this.filterDialogRef.afterClosed().subscribe(() => {
+        // Clean up so we don't have a redundant reference.
+        this.filterDialogRef = null;
+      });
+      // Make the panel invisible as it is not applicable in the mobile view.
+      this.appComponentService.setContentSidenavVisibility(false);
+    } else {
+      if (this.filterDialogRef){
+        this.filterDialogRef.close();
+      }
+      this.appComponentService.setContentSidenavVisibility(true);
+    }
+  }
+
+  private hideFilters(){
+    if (this.filterDialogRef){
+      this.filterDialogRef.close();
+    }
+    this.appComponentService.setContentSidenavVisibility(false);
+  }
+
+  /**
+  * Hide the filters view that isn't applicable to the screen size
+  * if window width has changed.
+  * See ngOnInit.
+  */
+  private updateFiltersView(winWidth: string){
+    if (this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
+      // Always hide filters by default when in mobile view, even if
+      // we are in open state.
+      this.hideFilters();
+    } else {
+      if (this.filterDialogRef){
+        // If we are transitioning from mobile to desktop, and the
+        // user has the filters open, we should save the state of
+        // the filters, then make the refine search panel visible.
+        this.filterDialogRef.componentInstance.save();
+        this.showFilters();
+      }
+
+      // If the filters are open but invisible (e.g. when the user made the
+      // window smaller), we make it visible when the window is large
+      // enough again.
+      if (this.searchFiltersService.areFiltersOpen){
+        this.showFilters();
+      }
+    }
   }
 
   onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
@@ -364,34 +432,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       params.setResearchPhases(researchActivityIds);
     }
 
-    const resultsSub = this.apiService.getSearchResults(params).subscribe(page => {
-      this.resultsPage = page;
-      this.orderBy = page.sort;
-      // Fixes bug where filter/orgUnit tags are not defined when the page is not visited dynamically
-      this.setFiltersTextIfUndefined(personTags, orgUnitTags).subscribe(res => {
-        const[personTagsRes, orgUnitTagsRes] = res;
-        personTags = personTagsRes;
-        orgUnitTags = orgUnitTagsRes;
-        this.updateResultsSummary(page, categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
-      });
-      resultsSub.unsubscribe();
-      this.appComponentService.setProgressBarVisibility(false);
-    });
-
-    const categoryList = {}; this.categoryListArray = [];
-    const resultsSubCategories = this.apiService.getSearchResultsCategories(params).subscribe(res => {
-      for (let i = 0; i < res['content'].length; i++) {
-        for (let j = 0; j < res['content'][i]['categories'].length; j++) {
-          categoryList[res['content'][i]['categories'][j]] = categoryList[res['content'][i]['categories'][j]] === undefined ? 1 : categoryList[res['content'][i]['categories'][j]] + 1;
-        }
-      }
-      // Convert JSON to array for Angular *ngFor
-      for (const categoryTuple in categoryList) {
-        this.categoryListArray.push([categoryTuple, categoryList[categoryTuple]]);
-      }
-      resultsSubCategories.unsubscribe();
-    });
+    this.componentService.searchWithParams(params);
   }
+
 
   updateUrl(categoryId: number, searchText: string, personIds: number[], orgUnitIds: number[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
     let url = '/search';
@@ -487,24 +530,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     const summary = searchTextSummary + statements.join(', ');
     this.noResultsSummary = 'Sorry - your search ' + summary + ', did not match anything on the ResearchHub.';
-    this.resultsSummary = 'Found <span class="search-results-text">' + (page.totalElements) + '</span> results ' + summary + '. Showing page <span class="search-results-text">' + (page.number + 1) + '</span> of <span class="search-results-text">' + (page.totalPages) + '</span>.';
+    this.resultsSummary = 'Found <span class="search-results-text">' + (page.totalElements || 0) + '</span> results ' + summary + '. Showing page <span class="search-results-text">' + ((page.number || 0) + 1) + '</span> of <span class="search-results-text">' + (page.totalPages || 0) + '</span>.';
     this.showEmptyState = page.totalElements === 0;
 
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(FilterDialogComponent, {
-      maxWidth: '100%',
-      width: '100%',
-      height: '100%',
-      data: {
-        rawFormValues: this.filtersForm.getRawValue()
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(rawFormValues => {
-      this.filtersForm.patchValue(rawFormValues);
-    });
   }
 
   trackOutboundLink(result: ListItem) {
@@ -520,5 +548,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.searchChangeSub.unsubscribe();
     this.routeParamsSub.unsubscribe();
     this.buttonClickSub.unsubscribe();
+    this.filterSidenavVisibilitySub.unsubscribe();
+    this.filterOpenSub.unsubscribe();
+    this.resultsSub.unsubscribe();
+    this.categoriesSub.unsubscribe();
+    this.mediaSub.unsubscribe();
   }
 }

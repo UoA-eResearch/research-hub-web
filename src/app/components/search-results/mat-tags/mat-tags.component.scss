@@ -21,3 +21,9 @@ $chip-margin: 0.5em;
   height: 64px;
 }
 
+:host mat-form-field {
+  transition: opacity 0.3s;
+  &.disabled {
+    opacity: 0.4;
+  }
+}
