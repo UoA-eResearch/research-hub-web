@@ -288,8 +288,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
 
         // Update values in search bar and search filters form
+        this.searchBarService.setSearchText(searchText);
         setTimeout(() => {
-          this.searchBarService.setSearchText(searchText);
+          // Have to run this in a task to avoid 'changed after checked' errors during init.
+          // This is because these affect the filter panel, which is rendered
+          // by the parent.
           this.searchBarService.setCategory(categoryId);
           this.filtersForm.controls.categoryId.setValue(categoryId);
           this.filtersForm.controls.personTags.setValue(this.toTags(personIds));
