@@ -138,6 +138,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
+                                <a href="#categoriesSub">categoriesSub</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
                                 <a href="#categoryIdSub">categoryIdSub</a>
                             </li>
                             <li>
@@ -153,12 +157,24 @@
                                 <a href="#dialog">dialog</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#filterDialogRef">filterDialogRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#filterOpenSub">filterOpenSub</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#filtersForm">filtersForm</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#getCategoryId">getCategoryId</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#filterSidenavVisibilitySub">filterSidenavVisibilitySub</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#filterVisible">filterVisible</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -216,8 +232,16 @@
                                 <a href="#resultsDummyHeader">resultsDummyHeader</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#resultsLoading$">resultsLoading$</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#resultsPage">resultsPage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#resultsSub">resultsSub</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -243,10 +267,6 @@
                                     <span class="modifier">Public</span>
                                 <a href="#showEmptyState">showEmptyState</a>
                             </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#sortOptions">sortOptions</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -263,16 +283,18 @@
                                 <a href="#fromTags">fromTags</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#getCurrentCategoryId">getCurrentCategoryId</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Static</span>
                                 <a href="#getFilterVisibility">getFilterVisibility</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#isCurrentCategory">isCurrentCategory</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#hideFilters">hideFilters</a>
+                            </li>
+                            <li>
+                                <a href="#initFilter">initFilter</a>
+                            </li>
+                            <li>
+                                <a href="#initResultSubs">initResultSubs</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy">ngOnDestroy</a>
@@ -290,15 +312,23 @@
                                 <a href="#onSearchChange">onSearchChange</a>
                             </li>
                             <li>
-                                <a href="#openDialog">openDialog</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Static</span>
                                 <a href="#parseParamArray">parseParamArray</a>
                             </li>
                             <li>
+                                <a href="#resultIdentity">resultIdentity</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setCategory">setCategory</a>
+                            </li>
+                            <li>
                                 <a href="#setFiltersTextIfUndefined">setFiltersTextIfUndefined</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showFilters">showFilters</a>
                             </li>
                             <li>
                                 <a href="#toTags">toTags</a>
@@ -307,11 +337,11 @@
                                 <a href="#trackOutboundLink">trackOutboundLink</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#updateCategoryFromCategoryList">updateCategoryFromCategoryList</a>
+                                <a href="#updateCols">updateCols</a>
                             </li>
                             <li>
-                                <a href="#updateCols">updateCols</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateFiltersView">updateFiltersView</a>
                             </li>
                             <li>
                                 <a href="#updateResultsSummary">updateResultsSummary</a>
@@ -337,12 +367,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(searchBarService: <a href="../injectables/SearchBarService.html">SearchBarService</a>, optionsService: <a href="../injectables/OptionsService.html">OptionsService</a>, apiService: <a href="../injectables/ResearchHubApiService.html">ResearchHubApiService</a>, analyticsService: <a href="../injectables/AnalyticsService.html">AnalyticsService</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, location: <a href="https://angular.io/api/common/Location" target="_blank">Location</a>, dialog: MatDialog, appComponentService: <a href="../injectables/AppComponentService.html">AppComponentService</a>, layoutService: <a href="../injectables/LayoutService.html">LayoutService</a>, media: ObservableMedia)</code>
+<code>constructor(searchBarService: <a href="../injectables/SearchBarService.html">SearchBarService</a>, optionsService: <a href="../injectables/OptionsService.html">OptionsService</a>, apiService: <a href="../injectables/ResearchHubApiService.html">ResearchHubApiService</a>, analyticsService: <a href="../injectables/AnalyticsService.html">AnalyticsService</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, location: <a href="https://angular.io/api/common/Location" target="_blank">Location</a>, dialog: MatDialog, appComponentService: <a href="../injectables/AppComponentService.html">AppComponentService</a>, componentService: <a href="../injectables/SearchResultsComponentService.html">SearchResultsComponentService</a>, layoutService: <a href="../injectables/LayoutService.html">LayoutService</a>, media: ObservableMedia, searchFiltersService: <a href="../injectables/SearchFiltersService.html">SearchFiltersService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="192" class="link-to-prism">src/app/components/search-results/search-results.component.ts:192</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/app/components/search-results/search-results.component.ts:149</a></div>
                             </td>
                         </tr>
 
@@ -456,6 +486,18 @@
                                                     
                                                 </tr>
                                                 <tr>
+                                                        <td>componentService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/SearchResultsComponentService.html" target="_self" >SearchResultsComponentService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
                                                         <td>layoutService</td>
                                                   
                                                         <td>
@@ -472,6 +514,18 @@
                                                   
                                                         <td>
                                                                     <code>ObservableMedia</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>searchFiltersService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/SearchFiltersService.html" target="_self" >SearchFiltersService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -519,7 +573,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="184" class="link-to-prism">src/app/components/search-results/search-results.component.ts:184</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/components/search-results/search-results.component.ts:141</a></div>
                             </td>
                         </tr>
 
@@ -570,77 +624,6 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="getCurrentCategoryId"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            getCurrentCategoryId
-                            </b>
-                            <a href="#getCurrentCategoryId"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>getCurrentCategoryId(category: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/components/search-results/search-results.component.ts:115</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>category</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code>false | 3 | 2 | 4 | 5 | 6 | 7 | 8 | 9</code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="getFilterVisibility"></a>
                         <span class="name">
                             <b>
@@ -661,7 +644,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/components/search-results/search-results.component.ts:80</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/components/search-results/search-results.component.ts:103</a></div>
                             </td>
                         </tr>
 
@@ -712,72 +695,114 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="isCurrentCategory"></a>
+                        <a name="hideFilters"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Public</span>
-                            isCurrentCategory
+                                <span class="modifier">Private</span>
+                            hideFilters
                             </b>
-                            <a href="#isCurrentCategory"><span class="icon ion-ios-link"></span></a>
+                            <a href="#hideFilters"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>isCurrentCategory(category: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                        <code>hideFilters()</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/components/search-results/search-results.component.ts:162</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="361" class="link-to-prism">src/app/components/search-results/search-results.component.ts:361</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Checks if the passed string corresponds with the currently searched for category.
-Used to highlight the mat-chip corresponding to the currently searched category.</p>
-</div>
 
                             <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>category</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
                             </div>
-                            <div>
-                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="initFilter"></a>
+                        <span class="name">
+                            <b>
+                            initFilter
+                            </b>
+                            <a href="#initFilter"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>initFilter()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="167" class="link-to-prism">src/app/components/search-results/search-results.component.ts:167</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
-                                <div class="io-description">
-                                    
-                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="initResultSubs"></a>
+                        <span class="name">
+                            <b>
+                            initResultSubs
+                            </b>
+                            <a href="#initResultSubs"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>initResultSubs()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="188" class="link-to-prism">src/app/components/search-results/search-results.component.ts:188</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
                     </td>
                 </tr>
             </tbody>
@@ -804,7 +829,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="518" class="link-to-prism">src/app/components/search-results/search-results.component.ts:518</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="549" class="link-to-prism">src/app/components/search-results/search-results.component.ts:549</a></div>
                             </td>
                         </tr>
 
@@ -842,7 +867,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="207" class="link-to-prism">src/app/components/search-results/search-results.component.ts:207</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="222" class="link-to-prism">src/app/components/search-results/search-results.component.ts:222</a></div>
                             </td>
                         </tr>
 
@@ -873,14 +898,14 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>onOrderByChange(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+<code>onOrderByChange(orderBy: )</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="303" class="link-to-prism">src/app/components/search-results/search-results.component.ts:303</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="317" class="link-to-prism">src/app/components/search-results/search-results.component.ts:317</a></div>
                             </td>
                         </tr>
 
@@ -894,16 +919,12 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
-                                                    <td>Type</td>
                                                 <td>Optional</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>event</td>
-                                                        <td>
-                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                                        </td>
+                                                        <td>orderBy</td>
                                                     
                                                     <td>
                                                             No
@@ -949,7 +970,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="298" class="link-to-prism">src/app/components/search-results/search-results.component.ts:298</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="312" class="link-to-prism">src/app/components/search-results/search-results.component.ts:312</a></div>
                             </td>
                         </tr>
 
@@ -1018,7 +1039,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="325" class="link-to-prism">src/app/components/search-results/search-results.component.ts:325</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="396" class="link-to-prism">src/app/components/search-results/search-results.component.ts:396</a></div>
                             </td>
                         </tr>
 
@@ -1141,44 +1162,6 @@ Used to highlight the mat-chip corresponding to the currently searched category.
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="openDialog"></a>
-                        <span class="name">
-                            <b>
-                            openDialog
-                            </b>
-                            <a href="#openDialog"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>openDialog()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="495" class="link-to-prism">src/app/components/search-results/search-results.component.ts:495</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="parseParamArray"></a>
                         <span class="name">
                             <b>
@@ -1200,7 +1183,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/components/search-results/search-results.component.ts:88</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/components/search-results/search-results.component.ts:111</a></div>
                             </td>
                         </tr>
 
@@ -1251,6 +1234,157 @@ Used to highlight the mat-chip corresponding to the currently searched category.
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="resultIdentity"></a>
+                        <span class="name">
+                            <b>
+                            resultIdentity
+                            </b>
+                            <a href="#resultIdentity"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>resultIdentity(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, result: )</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="213" class="link-to-prism">src/app/components/search-results/search-results.component.ts:213</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>index</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>result</td>
+                                                        <td>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setCategory"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            setCategory
+                            </b>
+                            <a href="#setCategory"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>setCategory(category: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/app/components/search-results/search-results.component.ts:136</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>category</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="setFiltersTextIfUndefined"></a>
                         <span class="name">
                             <b>
@@ -1269,7 +1403,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="307" class="link-to-prism">src/app/components/search-results/search-results.component.ts:307</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="321" class="link-to-prism">src/app/components/search-results/search-results.component.ts:321</a></div>
                             </td>
                         </tr>
 
@@ -1332,6 +1466,46 @@ Used to highlight the mat-chip corresponding to the currently searched category.
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="showFilters"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            showFilters
+                            </b>
+                            <a href="#showFilters"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>showFilters()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="339" class="link-to-prism">src/app/components/search-results/search-results.component.ts:339</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="toTags"></a>
                         <span class="name">
                             <b>
@@ -1350,7 +1524,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="188" class="link-to-prism">src/app/components/search-results/search-results.component.ts:188</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/components/search-results/search-results.component.ts:145</a></div>
                             </td>
                         </tr>
 
@@ -1419,7 +1593,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="510" class="link-to-prism">src/app/components/search-results/search-results.component.ts:510</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="541" class="link-to-prism">src/app/components/search-results/search-results.component.ts:541</a></div>
                             </td>
                         </tr>
 
@@ -1470,77 +1644,6 @@ Used to highlight the mat-chip corresponding to the currently searched category.
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="updateCategoryFromCategoryList"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            updateCategoryFromCategoryList
-                            </b>
-                            <a href="#updateCategoryFromCategoryList"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>updateCategoryFromCategoryList(category: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/app/components/search-results/search-results.component.ts:138</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>category</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="updateCols"></a>
                         <span class="name">
                             <b>
@@ -1559,7 +1662,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="202" class="link-to-prism">src/app/components/search-results/search-results.component.ts:202</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/components/search-results/search-results.component.ts:162</a></div>
                             </td>
                         </tr>
 
@@ -1610,6 +1713,81 @@ Used to highlight the mat-chip corresponding to the currently searched category.
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="updateFiltersView"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            updateFiltersView
+                            </b>
+                            <a href="#updateFiltersView"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>updateFiltersView(winWidth: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="373" class="link-to-prism">src/app/components/search-results/search-results.component.ts:373</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Hide the filters view that isn&#39;t applicable to the screen size
+if window width has changed.
+See ngOnInit.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>winWidth</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="updateResultsSummary"></a>
                         <span class="name">
                             <b>
@@ -1628,7 +1806,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="438" class="link-to-prism">src/app/components/search-results/search-results.component.ts:438</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="484" class="link-to-prism">src/app/components/search-results/search-results.component.ts:484</a></div>
                             </td>
                         </tr>
 
@@ -1757,7 +1935,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="396" class="link-to-prism">src/app/components/search-results/search-results.component.ts:396</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="442" class="link-to-prism">src/app/components/search-results/search-results.component.ts:442</a></div>
                             </td>
                         </tr>
 
@@ -1911,7 +2089,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="195" class="link-to-prism">src/app/components/search-results/search-results.component.ts:195</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/components/search-results/search-results.component.ts:152</a></div>
                             </td>
                         </tr>
 
@@ -1946,7 +2124,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/search-results/search-results.component.ts:47</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/search-results/search-results.component.ts:53</a></div>
                             </td>
                         </tr>
 
@@ -1986,7 +2164,42 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/components/search-results/search-results.component.ts:70</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/components/search-results/search-results.component.ts:89</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="categoriesSub"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            categoriesSub
+                            </b>
+                            <a href="#categoriesSub"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>categoriesSub:     <code>Subscription</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Subscription</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/search-results/search-results.component.ts:67</a></div>
                             </td>
                         </tr>
 
@@ -2021,7 +2234,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/search-results/search-results.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/search-results/search-results.component.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -2061,7 +2274,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/components/search-results/search-results.component.ts:76</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/components/search-results/search-results.component.ts:95</a></div>
                             </td>
                         </tr>
 
@@ -2101,7 +2314,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/components/search-results/search-results.component.ts:78</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/components/search-results/search-results.component.ts:97</a></div>
                             </td>
                         </tr>
 
@@ -2136,7 +2349,77 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="197" class="link-to-prism">src/app/components/search-results/search-results.component.ts:197</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="154" class="link-to-prism">src/app/components/search-results/search-results.component.ts:154</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filterDialogRef"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            filterDialogRef
+                            </b>
+                            <a href="#filterDialogRef"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>filterDialogRef:     <code>MatDialogRef&lt;any&gt;</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>MatDialogRef&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/components/search-results/search-results.component.ts:101</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filterOpenSub"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            filterOpenSub
+                            </b>
+                            <a href="#filterOpenSub"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>filterOpenSub:     <code>Subscription</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Subscription</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/components/search-results/search-results.component.ts:63</a></div>
                             </td>
                         </tr>
 
@@ -2171,7 +2454,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/search-results/search-results.component.ts:44</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/search-results/search-results.component.ts:50</a></div>
                             </td>
                         </tr>
 
@@ -2182,30 +2465,71 @@ Used to highlight the mat-chip corresponding to the currently searched category.
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="getCategoryId"></a>
+                        <a name="filterSidenavVisibilitySub"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Public</span>
-                            getCategoryId
+                                <span class="modifier">Private</span>
+                            filterSidenavVisibilitySub
                             </b>
-                            <a href="#getCategoryId"><span class="icon ion-ios-link"></span></a>
+                            <a href="#filterSidenavVisibilitySub"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>getCategoryId:     <code></code>
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>filterSidenavVisibilitySub:     <code>Subscription</code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>() &#x3D;&gt; Number(this.searchBarService.getCategory())</code>
+                            <i>Type : </i>    <code>Subscription</code>
+
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/components/search-results/search-results.component.ts:113</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/search-results/search-results.component.ts:62</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filterVisible"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            filterVisible
+                            </b>
+                            <a href="#filterVisible"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>filterVisible:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/components/search-results/search-results.component.ts:86</a></div>
                             </td>
                         </tr>
 
@@ -2240,7 +2564,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/components/search-results/search-results.component.ts:71</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/components/search-results/search-results.component.ts:90</a></div>
                             </td>
                         </tr>
 
@@ -2280,7 +2604,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/search-results/search-results.component.ts:53</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/components/search-results/search-results.component.ts:70</a></div>
                             </td>
                         </tr>
 
@@ -2315,7 +2639,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="195" class="link-to-prism">src/app/components/search-results/search-results.component.ts:195</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/components/search-results/search-results.component.ts:152</a></div>
                             </td>
                         </tr>
 
@@ -2344,7 +2668,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/search-results/search-results.component.ts:59</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/components/search-results/search-results.component.ts:76</a></div>
                             </td>
                         </tr>
 
@@ -2384,7 +2708,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/search-results/search-results.component.ts:64</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/components/search-results/search-results.component.ts:81</a></div>
                             </td>
                         </tr>
 
@@ -2424,7 +2748,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/components/search-results/search-results.component.ts:63</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/components/search-results/search-results.component.ts:80</a></div>
                             </td>
                         </tr>
 
@@ -2453,7 +2777,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/components/search-results/search-results.component.ts:61</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/components/search-results/search-results.component.ts:78</a></div>
                             </td>
                         </tr>
 
@@ -2482,7 +2806,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/search-results/search-results.component.ts:60</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/components/search-results/search-results.component.ts:77</a></div>
                             </td>
                         </tr>
 
@@ -2522,7 +2846,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/components/search-results/search-results.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/components/search-results/search-results.component.ts:74</a></div>
                             </td>
                         </tr>
 
@@ -2561,7 +2885,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/search-results/search-results.component.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/search-results/search-results.component.ts:47</a></div>
                             </td>
                         </tr>
 
@@ -2596,7 +2920,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/components/search-results/search-results.component.ts:66</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/components/search-results/search-results.component.ts:83</a></div>
                             </td>
                         </tr>
 
@@ -2631,7 +2955,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/components/search-results/search-results.component.ts:65</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/components/search-results/search-results.component.ts:82</a></div>
                             </td>
                         </tr>
 
@@ -2666,7 +2990,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/search-results/search-results.component.ts:67</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/components/search-results/search-results.component.ts:84</a></div>
                             </td>
                         </tr>
 
@@ -2706,7 +3030,42 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/search-results/search-results.component.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/search-results/search-results.component.ts:48</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="resultsLoading$"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            resultsLoading$
+                            </b>
+                            <a href="#resultsLoading$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>resultsLoading$:     <code>Observable&lt;boolean&gt;</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/components/search-results/search-results.component.ts:66</a></div>
                             </td>
                         </tr>
 
@@ -2741,7 +3100,42 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/search-results/search-results.component.ts:45</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/search-results/search-results.component.ts:51</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="resultsSub"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            resultsSub
+                            </b>
+                            <a href="#resultsSub"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>resultsSub:     <code>Subscription</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Subscription</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/components/search-results/search-results.component.ts:65</a></div>
                             </td>
                         </tr>
 
@@ -2781,7 +3175,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/search-results/search-results.component.ts:54</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/components/search-results/search-results.component.ts:71</a></div>
                             </td>
                         </tr>
 
@@ -2816,7 +3210,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/search-results/search-results.component.ts:50</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/search-results/search-results.component.ts:56</a></div>
                             </td>
                         </tr>
 
@@ -2851,7 +3245,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/search-results/search-results.component.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/search-results/search-results.component.ts:55</a></div>
                             </td>
                         </tr>
 
@@ -2885,7 +3279,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/search-results/search-results.component.ts:52</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/components/search-results/search-results.component.ts:69</a></div>
                             </td>
                         </tr>
 
@@ -2919,7 +3313,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/search-results/search-results.component.ts:73</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/components/search-results/search-results.component.ts:92</a></div>
                             </td>
                         </tr>
 
@@ -2953,47 +3347,7 @@ Used to highlight the mat-chip corresponding to the currently searched category.
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/search-results/search-results.component.ts:55</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="sortOptions"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            sortOptions
-                            </b>
-                            <a href="#sortOptions"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>sortOptions:     <code>[]</code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>[]</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>[{id: OrderBy.Alphabetical, name: &#x27;Alphabet&#x27;}, {id: OrderBy.Relevance, name: &#x27;Relevance&#x27;}]</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/search-results/search-results.component.ts:56</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/components/search-results/search-results.component.ts:72</a></div>
                             </td>
                         </tr>
 
@@ -3021,13 +3375,13 @@ import {FormControl, FormGroup} from &#x27;@angular/forms&#x27;;
 import {ActivatedRoute} from &#x27;@angular/router&#x27;;
 import {Location} from &#x27;@angular/common&#x27;;
 import {FilterDialogComponent} from &#x27;./filter-dialog/filter-dialog.component&#x27;;
-import {MatDialog} from &#x27;@angular/material/dialog&#x27;;
+import {MatDialog, MatDialogRef} from &#x27;@angular/material/dialog&#x27;;
 
 import {Observable} from &#x27;rxjs/Observable&#x27;;
 import &#x27;rxjs/add/operator/debounceTime&#x27;;
 import &#x27;rxjs/add/observable/combineLatest&#x27;;
-import &#x27;rxjs/add/observable/forkJoin&#x27;;
 import &#x27;rxjs/add/observable/of&#x27;;
+import { map } from &#x27;rxjs/operators&#x27;;
 import {Tag} from &#x27;./mat-tags/mat-tags.component&#x27;;
 import {ListItem} from &#x27;../../model/ListItem&#x27;;
 import {AppComponentService} from &#x27;../../app.component.service&#x27;;
@@ -3038,6 +3392,12 @@ import {LayoutService} from &#x27;../../services/layout.service&#x27;;
 
 import {MediaChange, ObservableMedia} from &#x27;@angular/flex-layout&#x27;;
 import {forkJoin} from &#x27;rxjs/observable/forkJoin&#x27;;
+
+import {SearchFiltersService} from &#x27;./search-filters/search-filters.service&#x27;;
+import { SearchResultsComponentService } from &#x27;./search-results-component.service&#x27;;
+
+// The screen size at which we should switch to opening filters in dialog or sidenav.
+const FILTER_VIEW_BREAKPOINT &#x3D; &quot;md&quot;;
 
 @Component({
   selector: &#x27;app-search-results&#x27;,
@@ -3057,11 +3417,22 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private searchChangeSub: Subscription;
   private routeParamsSub: Subscription;
 
+  // Visibility and open states are different. The filter
+  // may be open but hidden - if the user resized the window,
+  // we will need to hide the filter, but it should still be open
+  // if the window becomes bigger again.
+  private filterSidenavVisibilitySub: Subscription;
+  private filterOpenSub : Subscription;
+
+  private resultsSub : Subscription;
+  private resultsLoading$ : Observable&lt;boolean&gt;;
+  private categoriesSub : Subscription;
+
   public searchTextIsBlank &#x3D; true;
   public noResultsSummary &#x3D; &#x27;&#x27;;
   public resultsSummary &#x3D; &#x27;&#x27;;
   public showEmptyState &#x3D; false;
-  public sortOptions &#x3D; [{id: OrderBy.Alphabetical, name: &#x27;Alphabet&#x27;}, {id: OrderBy.Relevance, name: &#x27;Relevance&#x27;}];
+
   public pageSizeOptions &#x3D; [6, 12, 60, 120, 600];
 
   public orderBy;
@@ -3074,6 +3445,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private previousFiltersFormValues: any;
   private previousSearchText: any;
 
+  private filterVisible: boolean &#x3D; false;
+
   // Used for determining number of columns for card-view results
   public cardViewResultsNumberOfColumns &#x3D; 3;
   private mediaSub: Subscription;
@@ -3084,6 +3457,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public categoryListArray &#x3D; [];
 
   public currentCategoryString &#x3D; &#x27;&#x27;;
+
+  // A reference to the search filters dialog, if one is currently displayed.
+  // Otherwise null.
+  private filterDialogRef : MatDialogRef&lt;any&gt;;
 
   public static getFilterVisibility(categoryId: number) {
     return {
@@ -3117,77 +3494,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     return nums;
   }
 
-  // Return a number version of the category version to the view (decoupling model/view/controller)
-  public getCategoryId &#x3D; () &#x3D;&gt; Number(this.searchBarService.getCategory());
-
-  public getCurrentCategoryId(category: string) {
-    switch (category) {
-      case &#x27;Service&#x27;:
-        return 2;
-      case &#x27;Equipment&#x27;:
-        return 3;
-      case &#x27;Training&#x27;:
-        return 4;
-      case &#x27;Software&#x27;:
-        return 5;
-      case &#x27;Facility&#x27;:
-        return 6;
-      case &#x27;Guide&#x27;:
-        return 7;
-      case &#x27;People&#x27;:
-        return 8;
-      case &#x27;Policy&#x27;:
-        return 9;
-    }
-    return false;
+  // Update the category if someone clicks a category
+  public setCategory(category: number) {
+    this.filtersForm.controls.categoryId.setValue(category);
   }
 
-  // Update the category if someone clicks a category in the mat-list search results list
-  public updateCategoryFromCategoryList(category: string) {
-    // Necessary because of discrepancies between item category description and service enums (enums should be updated in future)
-    switch (category) {
-      case &#x27;Policy&#x27;:
-        category &#x3D; &#x27;Policies&#x27;;
-        break;
-      case &#x27;Service&#x27;:
-        category &#x3D; &#x27;Support&#x27;;
-        break;
-      case &#x27;Facility&#x27;:
-        category &#x3D; &#x27;Facilities&#x27;;
-        break;
-      case &#x27;People&#x27;:
-        category &#x3D; &#x27;Person&#x27;;
-        break;
-    }
-    this.searchBarService.setCategory(CategoryId[category]);
-  }
-
-  /**
-   * Checks if the passed string corresponds with the currently searched for category.
-   * Used to highlight the mat-chip corresponding to the currently searched category.
-   * @param {string} category
-   */
-  public isCurrentCategory(category: string) {
-    switch (category) {
-      case &#x27;Service&#x27;:
-        return this.searchBarService.category &#x3D;&#x3D; &#x27;2&#x27;;
-      case &#x27;Equipment&#x27;:
-        return this.searchBarService.category &#x3D;&#x3D; &#x27;3&#x27;;
-      case &#x27;Training&#x27;:
-        return this.searchBarService.category &#x3D;&#x3D; &#x27;4&#x27;;
-      case &#x27;Software&#x27;:
-        return this.searchBarService.category &#x3D;&#x3D; &#x27;5&#x27;;
-      case &#x27;Facility&#x27;:
-        return this.searchBarService.category &#x3D;&#x3D; &#x27;6&#x27;;
-      case &#x27;Guide&#x27;:
-        return this.searchBarService.category &#x3D;&#x3D; &#x27;7&#x27;;
-      case &#x27;People&#x27;:
-        return this.searchBarService.category &#x3D;&#x3D; &#x27;8&#x27;;
-      case &#x27;Policy&#x27;:
-        return this.searchBarService.category &#x3D;&#x3D; &#x27;9&#x27;;
-    }
-    return false;
-  }
 
   fromTags(tags: Tag[]) {
     return tags.map(tag &#x3D;&gt; tag.id);
@@ -3203,7 +3514,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
               public optionsService: OptionsService, public apiService: ResearchHubApiService,
               private analyticsService: AnalyticsService, private route: ActivatedRoute,
               private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService,
-              private layoutService: LayoutService, private media: ObservableMedia) {
+              private componentService : SearchResultsComponentService,
+              private layoutService: LayoutService, private media: ObservableMedia,
+              private searchFiltersService: SearchFiltersService) {
+    this.filtersForm &#x3D; searchFiltersService.filtersForm;
   }
 
   // Results cards
@@ -3212,24 +3526,74 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.cardViewResultsNumberOfColumns &#x3D; Math.min(3, cols);
   }
 
+  initFilter(){
+    this.filterSidenavVisibilitySub &#x3D; this.appComponentService.contentSidenavVisibility$.subscribe(
+      (isSidenavVisible: boolean) &#x3D;&gt; {
+        this.filterVisible &#x3D; isSidenavVisible;
+      }
+    );
+    this.filterOpenSub &#x3D; this.searchFiltersService.filtersOpen$.subscribe(
+      (isOpen: boolean) &#x3D;&gt; {
+        if (isOpen){
+          this.showFilters();
+        } else {
+          this.hideFilters();
+        }
+      });
+
+    if (!this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
+      // If we are in desktop view, pop open the filters by default.
+        this.searchFiltersService.openFilters();
+    }
+  }
+
+  initResultSubs(){
+    this.resultsSub &#x3D; this.componentService.results$.subscribe(
+      page &#x3D;&gt; {
+        this.resultsPage &#x3D; page;
+        this.orderBy &#x3D; page.sort;
+        const filtersFormValue &#x3D; this.filtersForm.value;
+        const personTags &#x3D; filtersFormValue.personTags;
+        const orgUnitTags &#x3D; filtersFormValue.orgUnitTags;
+        const categoryId &#x3D; filtersFormValue.categoryId;
+        const searchText &#x3D; this.searchBarService.searchText;
+        const researchActivityIds &#x3D; filtersFormValue.researchActivityIds;
+        this.setFiltersTextIfUndefined(personTags, orgUnitTags).subscribe(res &#x3D;&gt; {
+          const[personTagsRes, orgUnitTagsRes] &#x3D; res;
+          this.updateResultsSummary(page, categoryId, searchText, personTagsRes, orgUnitTagsRes, researchActivityIds);
+        });
+        this.appComponentService.setProgressBarVisibility(false);
+      }
+    );
+    this.categoriesSub &#x3D; this.componentService.resultsCategories$.subscribe(
+      categories &#x3D;&gt; {
+        this.categoryListArray &#x3D; categories;
+      });
+    this.resultsLoading$ &#x3D; this.componentService.resultsLoading$;
+  }
+
+  resultIdentity(index : number,result){
+    // The identity function for each result item.
+    // This reduces DOM operations of the ngFor
+    // statements and also ensures the refine search panel
+    // does not resize/flash unnecessarily.
+    // See https://angular.io/api/common/NgForOf#change-propagation
+    return index;
+  }
+
   ngOnInit() {
+    this.initFilter();
+    this.initResultSubs();
     // Results cards
     this.updateCols(this.layoutService.getMQAlias());
 
     this.mediaSub &#x3D; this.media.subscribe((change: MediaChange) &#x3D;&gt; {
       this.updateCols(change.mqAlias);
+      this.updateFiltersView(change.mqAlias);
     });
 
     // Results page
     this.resultsPage &#x3D; {totalElements: 0} as Page&lt;ListItem&gt;;
-
-    // Filters form
-    this.filtersForm &#x3D; new FormGroup({
-      categoryId: new FormControl(),
-      personTags: new FormControl([]),
-      orgUnitTags: new FormControl([]),
-      researchActivityIds: new FormControl()
-    });
 
     // Category changes
     this.categoryIdSub &#x3D; this.searchBarService.searchCategoryChange.subscribe(category &#x3D;&gt; {
@@ -3287,19 +3651,23 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
         // Update values in search bar and search filters form
         this.searchBarService.setSearchText(searchText);
-        this.searchBarService.setCategory(categoryId);
-        this.filtersForm.controls.categoryId.setValue(categoryId);
-        this.filtersForm.controls.personTags.setValue(this.toTags(personIds));
-        this.filtersForm.controls.orgUnitTags.setValue(this.toTags(orgUnitIds));
-        this.filtersForm.controls.researchActivityIds.setValue(researchActivityIds);
-
+        setTimeout(() &#x3D;&gt; {
+          // Have to run this in a task to avoid &#x27;changed after checked&#x27; errors during init.
+          // This is because these affect the filter panel, which is rendered
+          // by the parent.
+          this.searchBarService.setCategory(categoryId);
+          this.filtersForm.controls.categoryId.setValue(categoryId);
+          this.filtersForm.controls.personTags.setValue(this.toTags(personIds));
+          this.filtersForm.controls.orgUnitTags.setValue(this.toTags(orgUnitIds));
+          this.filtersForm.controls.researchActivityIds.setValue(researchActivityIds);
+        });
         // Send page event order by event to trigger search
         this.pageEventChange.next({pageIndex: this.pageIndex, pageSize: this.pageSize} as PageEvent);
         this.orderByChange.next(this.orderBy);
       });
 
     this.buttonClickSub &#x3D; this.searchBarService.filterButtonClickChange.subscribe((buttonName) &#x3D;&gt; {
-      this.openDialog();
+      this.searchFiltersService.openFilters();
     });
   }
 
@@ -3308,8 +3676,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.resultsDummyHeader.nativeElement.scrollIntoView();
   }
 
-  onOrderByChange(event: any) {
-    this.orderByChange.next(event.value);
+  onOrderByChange(orderBy) {
+    this.orderByChange.next(orderBy);
   }
 
   setFiltersTextIfUndefined(personTags: Tag[], orgUnitTags: Tag[]) {
@@ -3322,12 +3690,69 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     personTags.forEach(key &#x3D;&gt; observablePersonBatch.push(this.apiService.getPerson(key.id)));
 
     // Return an observable containing the batches of observables for both personTags and orgUnitTags
-    return Observable.forkJoin(
+    return forkJoin(
       forkJoin(observablePersonBatch).map(x &#x3D;&gt; x.map(y &#x3D;&gt; {y[&#x27;text&#x27;] &#x3D; y[&#x27;firstName&#x27;] + &#x27; &#x27; + y[&#x27;lastName&#x27;]; return (y)}))
         .pipe(z &#x3D;&gt; observablePersonBatch.length ? z : Observable.of([])),
       forkJoin(observableOrgUnitBatch).map(x &#x3D;&gt; x.map(y &#x3D;&gt; {y[&#x27;text&#x27;] &#x3D; y[&#x27;name&#x27;];  return (y)}))
         .pipe(z &#x3D;&gt; observableOrgUnitBatch.length ? z : Observable.of([]))
     );
+  }
+
+  private showFilters(){
+    const winWidth &#x3D; this.layoutService.getMQAlias();
+    if (this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
+      this.filterDialogRef &#x3D; this.dialog.open(FilterDialogComponent, {
+        maxWidth: &#x27;100%&#x27;,
+        width: &#x27;100%&#x27;,
+        height: &#x27;100%&#x27;
+      });
+      this.filterDialogRef.afterClosed().subscribe(() &#x3D;&gt; {
+        // Clean up so we don&#x27;t have a redundant reference.
+        this.filterDialogRef &#x3D; null;
+      });
+      // Make the panel invisible as it is not applicable in the mobile view.
+      this.appComponentService.setContentSidenavVisibility(false);
+    } else {
+      if (this.filterDialogRef){
+        this.filterDialogRef.close();
+      }
+      this.appComponentService.setContentSidenavVisibility(true);
+    }
+  }
+
+  private hideFilters(){
+    if (this.filterDialogRef){
+      this.filterDialogRef.close();
+    }
+    this.appComponentService.setContentSidenavVisibility(false);
+  }
+
+  /**
+  * Hide the filters view that isn&#x27;t applicable to the screen size
+  * if window width has changed.
+  * See ngOnInit.
+  */
+  private updateFiltersView(winWidth: string){
+    if (this.layoutService.isWidthLessThan(FILTER_VIEW_BREAKPOINT)){
+      // Always hide filters by default when in mobile view, even if
+      // we are in open state.
+      this.hideFilters();
+    } else {
+      if (this.filterDialogRef){
+        // If we are transitioning from mobile to desktop, and the
+        // user has the filters open, we should save the state of
+        // the filters, then make the refine search panel visible.
+        this.filterDialogRef.componentInstance.save();
+        this.showFilters();
+      }
+
+      // If the filters are open but invisible (e.g. when the user made the
+      // window smaller), we make it visible when the window is large
+      // enough again.
+      if (this.searchFiltersService.areFiltersOpen){
+        this.showFilters();
+      }
+    }
   }
 
   onSearchChange(categoryId: number, searchText: string, personTags: Tag[], orgUnitTags: Tag[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
@@ -3372,34 +3797,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       params.setResearchPhases(researchActivityIds);
     }
 
-    const resultsSub &#x3D; this.apiService.getSearchResults(params).subscribe(page &#x3D;&gt; {
-      this.resultsPage &#x3D; page;
-      this.orderBy &#x3D; page.sort;
-      // Fixes bug where filter/orgUnit tags are not defined when the page is not visited dynamically
-      this.setFiltersTextIfUndefined(personTags, orgUnitTags).subscribe(res &#x3D;&gt; {
-        const[personTagsRes, orgUnitTagsRes] &#x3D; res;
-        personTags &#x3D; personTagsRes;
-        orgUnitTags &#x3D; orgUnitTagsRes;
-        this.updateResultsSummary(page, categoryId, searchText, personTags, orgUnitTags, researchActivityIds);
-      });
-      resultsSub.unsubscribe();
-      this.appComponentService.setProgressBarVisibility(false);
-    });
-
-    const categoryList &#x3D; {}; this.categoryListArray &#x3D; [];
-    const resultsSubCategories &#x3D; this.apiService.getSearchResultsCategories(params).subscribe(res &#x3D;&gt; {
-      for (let i &#x3D; 0; i &lt; res[&#x27;content&#x27;].length; i++) {
-        for (let j &#x3D; 0; j &lt; res[&#x27;content&#x27;][i][&#x27;categories&#x27;].length; j++) {
-          categoryList[res[&#x27;content&#x27;][i][&#x27;categories&#x27;][j]] &#x3D; categoryList[res[&#x27;content&#x27;][i][&#x27;categories&#x27;][j]] &#x3D;&#x3D;&#x3D; undefined ? 1 : categoryList[res[&#x27;content&#x27;][i][&#x27;categories&#x27;][j]] + 1;
-        }
-      }
-      // Convert JSON to array for Angular *ngFor
-      for (const categoryTuple in categoryList) {
-        this.categoryListArray.push([categoryTuple, categoryList[categoryTuple]]);
-      }
-      resultsSubCategories.unsubscribe();
-    });
+    this.componentService.searchWithParams(params);
   }
+
 
   updateUrl(categoryId: number, searchText: string, personIds: number[], orgUnitIds: number[], researchActivityIds: number[], pageEvent: any, orderBy: OrderBy) {
     let url &#x3D; &#x27;/search&#x27;;
@@ -3495,24 +3895,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     const summary &#x3D; searchTextSummary + statements.join(&#x27;, &#x27;);
     this.noResultsSummary &#x3D; &#x27;Sorry - your search &#x27; + summary + &#x27;, did not match anything on the ResearchHub.&#x27;;
-    this.resultsSummary &#x3D; &#x27;Found &lt;span class&#x3D;&quot;search-results-text&quot;&gt;&#x27; + (page.totalElements) + &#x27;&lt;/span&gt; results &#x27; + summary + &#x27;. Showing page &lt;span class&#x3D;&quot;search-results-text&quot;&gt;&#x27; + (page.number + 1) + &#x27;&lt;/span&gt; of &lt;span class&#x3D;&quot;search-results-text&quot;&gt;&#x27; + (page.totalPages) + &#x27;&lt;/span&gt;.&#x27;;
+    this.resultsSummary &#x3D; &#x27;Found &lt;span class&#x3D;&quot;search-results-text&quot;&gt;&#x27; + (page.totalElements || 0) + &#x27;&lt;/span&gt; results &#x27; + summary + &#x27;. Showing page &lt;span class&#x3D;&quot;search-results-text&quot;&gt;&#x27; + ((page.number || 0) + 1) + &#x27;&lt;/span&gt; of &lt;span class&#x3D;&quot;search-results-text&quot;&gt;&#x27; + (page.totalPages || 0) + &#x27;&lt;/span&gt;.&#x27;;
     this.showEmptyState &#x3D; page.totalElements &#x3D;&#x3D;&#x3D; 0;
 
-  }
-
-  openDialog(): void {
-    const dialogRef &#x3D; this.dialog.open(FilterDialogComponent, {
-      maxWidth: &#x27;100%&#x27;,
-      width: &#x27;100%&#x27;,
-      height: &#x27;100%&#x27;,
-      data: {
-        rawFormValues: this.filtersForm.getRawValue()
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(rawFormValues &#x3D;&gt; {
-      this.filtersForm.patchValue(rawFormValues);
-    });
   }
 
   trackOutboundLink(result: ListItem) {
@@ -3528,75 +3913,67 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.searchChangeSub.unsubscribe();
     this.routeParamsSub.unsubscribe();
     this.buttonClickSub.unsubscribe();
+    this.filterSidenavVisibilitySub.unsubscribe();
+    this.filterOpenSub.unsubscribe();
+    this.resultsSub.unsubscribe();
+    this.categoriesSub.unsubscribe();
+    this.mediaSub.unsubscribe();
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;app-search-filters style&#x3D;&quot;display: block;&quot; [filtersForm]&#x3D;&quot;filtersForm&quot; fxHide.lt-md&gt;&lt;/app-search-filters&gt;
+        <pre class="line-numbers"><code class="language-html">  &lt;div #resultsDummyHeader&gt;&lt;/div&gt;
 
-  &lt;div #resultsDummyHeader&gt;&lt;/div&gt;
+  &lt;h2 class&#x3D;&quot;search-results-title&quot;&gt;Results&lt;/h2&gt;
 
-  &lt;div *ngIf&#x3D;&quot;!showEmptyState&quot; style&#x3D;&quot;margin-top: 32px;&quot; fxLayout&#x3D;&quot;row&quot; fxLayoutAlign&#x3D;&quot;left center&quot;&gt;
+  &lt;div class&#x3D;&quot;summary-section&quot; *ngIf&#x3D;&quot;!showEmptyState&quot;&gt;
+    &lt;div fxLayout&#x3D;&quot;row&quot; fxLayoutAlign&#x3D;&quot;start center&quot;&gt;
+      &lt;p fxFlex [innerHTML]&#x3D;&quot;resultsSummary&quot; style&#x3D;&quot;margin-bottom: 0; margin-right: 1em;&quot;&gt;&lt;/p&gt;
+      &lt;!-- The view and order by switchers will show in the results summary line if filters are visible. --&gt;
+      &lt;ng-container *ngIf&#x3D;&quot;filterVisible&quot;&gt;
+        &lt;view-switcher [(showCardView)]&#x3D;&quot;showCardView&quot;&gt;&lt;/view-switcher&gt;
+        &lt;orderby-switcher [value]&#x3D;&quot;orderBy&quot; (valueChange)&#x3D;&quot;onOrderByChange($event)&quot; [relevanceDisabled]&#x3D;&quot;searchTextIsBlank&quot;&gt;
+        &lt;/orderby-switcher&gt;
+      &lt;/ng-container&gt;
+
+    &lt;/div&gt;
+
+    &lt;!-- Category List --&gt;
+    &lt;div class&#x3D;&quot;inline-category-list&quot; fxHide.lt-md *ngIf&#x3D;&quot;!filterVisible&quot;&gt;
+      &lt;category-list [selectedCategory]&#x3D;&quot;filtersForm.controls.categoryId.value&quot;
+                      (selectedCategoryChange)&#x3D;&quot;setCategory($event)&quot;
+                      compact&#x3D;&quot;true&quot;&gt;&lt;/category-list&gt;
+    &lt;/div&gt;
+
+  &lt;div fxLayout&#x3D;&quot;row&quot; fxLayoutAlign&#x3D;&quot;start center&quot; class&#x3D;&quot;refine-search&quot; ngClass.xs&#x3D;&quot;small&quot; *ngIf&#x3D;&quot;!filterVisible&quot;&gt;
     &lt;div fxFlex&gt;
-      &lt;p [innerHTML]&#x3D;&quot;resultsSummary&quot; style&#x3D;&quot;margin-bottom: 0; margin-right: 1em;&quot;&gt;&lt;/p&gt;
+      &lt;p class&#x3D;&quot;refine-search-text&quot;&gt;
+        &lt;span class&#x3D;&quot;search-results-text&quot; [hidden]&#x3D;&quot;resultsPage.totalElements &lt;&#x3D; 12&quot; style&#x3D;&quot;margin-right:8px;&quot;&gt;Too many results?&lt;/span&gt;&lt;a style&#x3D;&quot;cursor:pointer;&quot; role&#x3D;&quot;button&quot; (click)&#x3D;&quot;searchFiltersService.openFilters()&quot;&gt;Refine your search{{resultsPage.totalElements &lt;&#x3D; 12 ? &quot;?&quot; : &quot;.&quot;}}&lt;/a&gt;
+      &lt;/p&gt;
     &lt;/div&gt;
 
     &lt;!-- Results View Switcher --&gt;
-    &lt;div fxFlex&#x3D;&quot;65px&quot; style&#x3D;&quot;display: flex; align-content: center; justify-content: center&quot;&gt;
-      &lt;i (click)&#x3D;&quot;showCardView &#x3D; !showCardView&quot; style&#x3D;&quot;cursor: pointer; font-size: 36px; color: rgba(00, 40, 59, .8)&quot; class&#x3D;&quot;material-icons&quot;&gt;{{showCardView? &quot;view_list&quot; : &quot;view_module&quot;}}&lt;/i&gt;&amp;nbsp;
-    &lt;/div&gt;
+    &lt;view-switcher [(showCardView)]&#x3D;&quot;showCardView&quot;&gt;&lt;/view-switcher&gt;
 
-    &lt;div fxFlex&#x3D;&quot;100px&quot;&gt;
-      &lt;mat-form-field floatPlaceholder&#x3D;&quot;never&quot; class&#x3D;&quot;no-floating-label input-full-width&quot;&gt;
-        &lt;mat-select placeholder&#x3D;&quot;Sort By&quot; (change)&#x3D;&quot;onOrderByChange($event)&quot; [(value)]&#x3D;&quot;orderBy&quot;&gt;
-          &lt;mat-option *ngFor&#x3D;&quot;let item of sortOptions&quot; [value]&#x3D;&quot;item.id&quot; [disabled]&#x3D;&quot;searchTextIsBlank &amp;&amp; item.name&#x3D;&#x3D;&#x27;Relevance&#x27;&quot;&gt;
-            {{ item.name }}
-          &lt;/mat-option&gt;
-        &lt;/mat-select&gt;
-      &lt;/mat-form-field&gt;
-    &lt;/div&gt;
+    &lt;orderby-switcher [value]&#x3D;&quot;orderBy&quot; (valueChange)&#x3D;&quot;onOrderByChange($event)&quot; [relevanceDisabled]&#x3D;&quot;searchTextIsBlank&quot;&gt;
+    &lt;/orderby-switcher&gt;
   &lt;/div&gt;
-
-  &lt;!-- Category List --&gt;
-  &lt;div class&#x3D;&quot;category-list&quot; *ngIf&#x3D;&quot;getCategoryId() &#x3D;&#x3D; 1 &amp;&amp; !showEmptyState&quot; fxHide fxShow.gt-sm&gt;
-      &lt;mat-chip-list mat-line style&#x3D;&quot;height: 1.5em;&quot;&gt;
-        &lt;div style&#x3D;&quot;padding-right: 0.5em&quot;&gt;Categories: &lt;/div&gt;
-        &lt;mat-chip disabled selected&gt;
-          &lt;span style&#x3D;&quot;font-size: 14px;&quot;&gt;All: {{ resultsPage.totalElements }}&lt;/span&gt;
-        &lt;/mat-chip&gt;
-        &lt;mat-chip style&#x3D;&quot;padding-right: 9px; padding-left:9px;&quot; *ngFor&#x3D;&quot;let categoryTuple of categoryListArray&quot; (click)&#x3D;&quot;updateCategoryFromCategoryList(categoryTuple[0])&quot; [selected]&#x3D;&quot;isCurrentCategory(categoryTuple[0])&quot;&gt;
-        &lt;span style&#x3D;&quot;font-size: 14px; margin-right: 2px;&quot; *ngFor&#x3D;&quot;let categoryValue of categoryTuple; let first&#x3D;first;&quot;&gt;{{categoryValue}}&lt;span *ngIf&#x3D;&quot;first&quot; style&#x3D;&quot;padding-right: 0px&quot;&gt;: &lt;/span&gt;&lt;/span&gt;
-        &lt;/mat-chip&gt;
-      &lt;/mat-chip-list&gt;
-    &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;category-list&quot; *ngIf&#x3D;&quot;getCategoryId() !&#x3D; 1 &amp;&amp; !showEmptyState&quot; fxHide fxShow.gt-sm&gt;
-    &lt;mat-chip-list mat-line style&#x3D;&quot;height: 1.5em;&quot;&gt;
-      &lt;div style&#x3D;&quot;padding-right: 0.5em&quot;&gt;Category: &lt;/div&gt;
-      &lt;mat-chip disabled&gt;
-        &lt;span (click)&#x3D;&quot;updateCategoryFromCategoryList(&#x27;All&#x27;)&quot;&gt;All Categories&lt;/span&gt;
-      &lt;/mat-chip&gt;
-      &lt;mat-chip disabled selected&gt;
-        &lt;span style&#x3D;&quot;font-size: 14px; margin-right: 2px;&quot;&gt;{{ currentCategoryString + &#x27;: &#x27; + resultsPage.totalElements }} &lt;/span&gt;
-      &lt;/mat-chip&gt;
-    &lt;/mat-chip-list&gt;
   &lt;/div&gt;
 
   &lt;div *ngIf&#x3D;&quot;showEmptyState&quot; style&#x3D;&quot;margin-top: 32px;&quot;&gt;
     &lt;p [innerHTML]&#x3D;&quot;noResultsSummary&quot;&gt;&lt;/p&gt;
     &lt;p&gt;Suggestions:&lt;/p&gt;
     &lt;ul&gt;
-      &lt;li fxHide.gt-md&gt;Widen your &lt;a (click)&#x3D;&quot;openDialog()&quot;&gt;filters&lt;/a&gt;&lt;/li&gt;
-      &lt;li fxHide.lt-lg&gt;Widen your filters&lt;/li&gt;
+      &lt;li&gt;Widen your &lt;a (click)&#x3D;&quot;searchFiltersService.openFilters()&quot; style&#x3D;&quot;cursor:pointer;&quot;&gt;filters&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;Let us know what you were looking for via our &lt;a [routerLink]&#x3D;&quot;[&#x27;/feedback&#x27;]&quot;&gt;Feedback page&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;You can try the &lt;a href&#x3D;&quot;https://www.staff.auckland.ac.nz/en.html&quot; target&#x3D;&quot;_blank&quot;&gt;Staff Service Centre&lt;/a&gt; in the Staff Intranet&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/div&gt;
 
-  &lt;mat-nav-list *ngIf&#x3D;&quot;!showCardView&quot;&gt;
-    &lt;ng-container *ngFor&#x3D;&quot;let item of resultsPage.content&quot;&gt;
+  &lt;mat-nav-list class&#x3D;&quot;results-list&quot; [class.loading]&#x3D;&quot;(resultsLoading$ | async) &#x3D;&#x3D;&#x3D; true&quot; *ngIf&#x3D;&quot;!showCardView&quot;&gt;
+    &lt;ng-container *ngFor&#x3D;&quot;let item of resultsPage.content; trackBy: resultIdentity&quot;&gt;
       &lt;ng-container *ngIf&#x3D;&quot;item.type !&#x3D;&#x3D; &#x27;policy&#x27;&quot;&gt;
         &lt;mat-list-item class&#x3D;&quot;list-item&quot; [routerLink]&#x3D;&quot;item | listItemToRouterLink&quot;&gt;
           &lt;img mat-list-avatar [src]&#x3D;&quot;apiService.getAssetUrl(item.image)&quot;&gt;
@@ -3622,8 +3999,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   &lt;/mat-nav-list&gt;
 
   &lt;!--Testing Card View for Results--&gt;
-  &lt;mat-grid-list *ngIf&#x3D;&quot;showCardView&quot; [cols]&#x3D;&quot;cardViewResultsNumberOfColumns&quot; gutterSize&#x3D;&quot;1em&quot; rowHeight&#x3D;&quot;1:2&quot; style&#x3D;&quot;padding-top: 1em&quot;&gt;
-    &lt;mat-grid-tile *ngFor&#x3D;&quot;let item of resultsPage.content;&quot; [colspan]&#x3D;&quot;1&quot; [rowspan]&#x3D;&quot;1&quot; [routerLink]&#x3D;&quot;item | listItemToRouterLink&quot; style&#x3D;&quot;cursor: pointer&quot;&gt;
+  &lt;mat-grid-list class&#x3D;&quot;resultsCards&quot; [class.loading]&#x3D;&quot;(resultsLoading$ | async) &#x3D;&#x3D;&#x3D; true&quot; *ngIf&#x3D;&quot;showCardView&quot; [cols]&#x3D;&quot;cardViewResultsNumberOfColumns&quot; gutterSize&#x3D;&quot;1em&quot; rowHeight&#x3D;&quot;1:2&quot; style&#x3D;&quot;padding-top: 1em&quot;&gt;
+    &lt;mat-grid-tile *ngFor&#x3D;&quot;let item of resultsPage.content; trackBy: resultIdentity&quot; [colspan]&#x3D;&quot;1&quot; [rowspan]&#x3D;&quot;1&quot; [routerLink]&#x3D;&quot;item | listItemToRouterLink&quot; style&#x3D;&quot;cursor: pointer&quot;&gt;
       &lt;div class&#x3D;&quot;card-result-image&quot;&gt;
         &lt;img src&#x3D;&quot;{{apiService.getAssetUrl(item.image)}}&quot; style&#x3D;&quot;width: 100%; height: 100%;&quot;/&gt;
       &lt;/div&gt;
@@ -3655,7 +4032,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
                  [pageSizeOptions]&#x3D;&quot;pageSizeOptions&quot;
                  (page)&#x3D;&quot;onPageChange($event)&quot;&gt;
   &lt;/mat-paginator&gt;
-
 </code></pre>
     </div>
 
@@ -3684,8 +4060,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-search-filters style="display: block;" [filtersForm]="filtersForm" fxHide.lt-md></app-search-filters>  <div #resultsDummyHeader></div>  <div *ngIf="!showEmptyState" style="margin-top: 32px;" fxLayout="row" fxLayoutAlign="left center">    <div fxFlex>      <p [innerHTML]="resultsSummary" style="margin-bottom: 0; margin-right: 1em;"></p>    </div>    <!-- Results View Switcher -->    <div fxFlex="65px" style="display: flex; align-content: center; justify-content: center">      <i (click)="showCardView = !showCardView" style="cursor: pointer; font-size: 36px; color: rgba(00, 40, 59, .8)" class="material-icons">{{showCardView? "view_list" : "view_module"}}</i>&nbsp;    </div>    <div fxFlex="100px">      <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">        <mat-select placeholder="Sort By" (change)="onOrderByChange($event)" [(value)]="orderBy">          <mat-option *ngFor="let item of sortOptions" [value]="item.id" [disabled]="searchTextIsBlank && item.name==\'Relevance\'">            {{ item.name }}          </mat-option>        </mat-select>      </mat-form-field>    </div>  </div>  <!-- Category List -->  <div class="category-list" *ngIf="getCategoryId() == 1 && !showEmptyState" fxHide fxShow.gt-sm>      <mat-chip-list mat-line style="height: 1.5em;">        <div style="padding-right: 0.5em">Categories: </div>        <mat-chip disabled selected>          <span style="font-size: 14px;">All: {{ resultsPage.totalElements }}</span>        </mat-chip>        <mat-chip style="padding-right: 9px; padding-left:9px;" *ngFor="let categoryTuple of categoryListArray" (click)="updateCategoryFromCategoryList(categoryTuple[0])" [selected]="isCurrentCategory(categoryTuple[0])">        <span style="font-size: 14px; margin-right: 2px;" *ngFor="let categoryValue of categoryTuple; let first=first;">{{categoryValue}}<span *ngIf="first" style="padding-right: 0px">: </span></span>        </mat-chip>      </mat-chip-list>    </div>  <div class="category-list" *ngIf="getCategoryId() != 1 && !showEmptyState" fxHide fxShow.gt-sm>    <mat-chip-list mat-line style="height: 1.5em;">      <div style="padding-right: 0.5em">Category: </div>      <mat-chip disabled>        <span (click)="updateCategoryFromCategoryList(\'All\')">All Categories</span>      </mat-chip>      <mat-chip disabled selected>        <span style="font-size: 14px; margin-right: 2px;">{{ currentCategoryString + \': \' + resultsPage.totalElements }} </span>      </mat-chip>    </mat-chip-list>  </div>  <div *ngIf="showEmptyState" style="margin-top: 32px;">    <p [innerHTML]="noResultsSummary"></p>    <p>Suggestions:</p>    <ul>      <li fxHide.gt-md>Widen your <a (click)="openDialog()">filters</a></li>      <li fxHide.lt-lg>Widen your filters</li>      <li>Let us know what you were looking for via our <a [routerLink]="[\'/feedback\']">Feedback page</a></li>      <li>You can try the <a href="https://www.staff.auckland.ac.nz/en.html" target="_blank">Staff Service Centre</a> in the Staff Intranet</li>    </ul>  </div>  <mat-nav-list *ngIf="!showCardView">    <ng-container *ngFor="let item of resultsPage.content">      <ng-container *ngIf="item.type !== \'policy\'">        <mat-list-item class="list-item" [routerLink]="item | listItemToRouterLink">          <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">          <p mat-line class="item-title">{{item.title}}</p>          <p mat-line class="item-subtitle">{{item.subtitle}}</p>          <mat-chip-list mat-line style="overflow: hidden;height: 18px;">            <mat-chip disabled *ngFor="let category of item.categories" style="cursor: pointer;"><span style="color: #004059;">{{category}}</span></mat-chip>          </mat-chip-list>        </mat-list-item>      </ng-container>      <ng-container *ngIf="item.type === \'policy\'">        <a mat-list-item class="list-item" [href]="item.url" target="_blank" (click)="trackOutboundLink(item)">          <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">          <p mat-line class="item-title">{{item.title}}</p>          <p mat-line class="item-subtitle">{{item.subtitle}}</p>          <mat-chip-list mat-line style="overflow: hidden;height: 18px;">            <mat-chip disabled *ngFor="let category of item.categories" style="margin-bottom: 2px;cursor: pointer;"><span style="color: #004059;">{{category}}</span></mat-chip>          </mat-chip-list>        </a>      </ng-container>    </ng-container>  </mat-nav-list>  <!--Testing Card View for Results-->  <mat-grid-list *ngIf="showCardView" [cols]="cardViewResultsNumberOfColumns" gutterSize="1em" rowHeight="1:2" style="padding-top: 1em">    <mat-grid-tile *ngFor="let item of resultsPage.content;" [colspan]="1" [rowspan]="1" [routerLink]="item | listItemToRouterLink" style="cursor: pointer">      <div class="card-result-image">        <img src="{{apiService.getAssetUrl(item.image)}}" style="width: 100%; height: 100%;"/>      </div>      <div class="card-result-content">        <div class="card-result-title">          {{item.title}}        </div>        <div class="card-result-subtitle">          {{item.subtitle}}        </div>        <div class="card-result-chip-list">          <mat-chip-list mat-line style="overflow: hidden; height: 1em;">            <mat-chip disabled *ngFor="let category of item.categories" style="margin: 2px 2px 2px 0px; cursor: pointer; background-color: #fff; height: .5em">              <span style="color: #004059;font-size: small;">{{category}}</span>            </mat-chip>          </mat-chip-list>        </div>      </div>    </mat-grid-tile>  </mat-grid-list>  <!------------------------------------------------------------------------------------------>  <mat-paginator class="search-paginator"                 #paginator [style.visibility]="!showEmptyState ? \'visible\' : \'hidden\'"                 [length]="resultsPage.totalElements"                 [pageSize]="pageSize"                 [pageIndex]="pageIndex"                 [pageSizeOptions]="pageSizeOptions"                 (page)="onPageChange($event)">  </mat-paginator></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BrowseComponent', 'selector': 'app-browse'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'ContentDetailsComponent', 'selector': 'app-content-details'},{'name': 'ErrorDialogComponent', 'selector': 'app-error-dialog'},{'name': 'FeaturedComponent', 'selector': 'app-featured'},{'name': 'FeedbackComponent', 'selector': 'app-feedback'},{'name': 'FilterDialogComponent', 'selector': 'app-filter-dialog'},{'name': 'GuideCategoryComponent', 'selector': 'app-guide-category'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ImageViewComponent', 'selector': 'app-image-view'},{'name': 'ImageViewDialogComponent', 'selector': 'app-image-view-dialog'},{'name': 'MarkdownComponent', 'selector': 'app-markdown'},{'name': 'MatTagsComponent', 'selector': 'app-mat-tags'},{'name': 'OrgUnitDetailsComponent', 'selector': 'app-org-unit-details'},{'name': 'PersonDetailsComponent', 'selector': 'app-person-details'},{'name': 'RequestStorageComponent', 'selector': 'app-request-data'},{'name': 'RequestVmComponent', 'selector': 'app-request-vm'},{'name': 'ResearchActivityComponent', 'selector': 'app-research-activity'},{'name': 'ResearchActivityInputComponent', 'selector': 'app-research-activity-input'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SearchFiltersComponent', 'selector': 'app-search-filters'},{'name': 'SearchResultsComponent', 'selector': 'app-search-results'},{'name': 'UserStudyComponent', 'selector': 'app-user-study'}];
+        var COMPONENT_TEMPLATE = '<div>  <div #resultsDummyHeader></div>  <h2 class="search-results-title">Results</h2>  <div class="summary-section" *ngIf="!showEmptyState">    <div fxLayout="row" fxLayoutAlign="start center">      <p fxFlex [innerHTML]="resultsSummary" style="margin-bottom: 0; margin-right: 1em;"></p>      <!-- The view and order by switchers will show in the results summary line if filters are visible. -->      <ng-container *ngIf="filterVisible">        <view-switcher [(showCardView)]="showCardView"></view-switcher>        <orderby-switcher [value]="orderBy" (valueChange)="onOrderByChange($event)" [relevanceDisabled]="searchTextIsBlank">        </orderby-switcher>      </ng-container>    </div>    <!-- Category List -->    <div class="inline-category-list" fxHide.lt-md *ngIf="!filterVisible">      <category-list [selectedCategory]="filtersForm.controls.categoryId.value"                      (selectedCategoryChange)="setCategory($event)"                      compact="true"></category-list>    </div>  <div fxLayout="row" fxLayoutAlign="start center" class="refine-search" ngClass.xs="small" *ngIf="!filterVisible">    <div fxFlex>      <p class="refine-search-text">        <span class="search-results-text" [hidden]="resultsPage.totalElements <= 12" style="margin-right:8px;">Too many results?</span><a style="cursor:pointer;" role="button" (click)="searchFiltersService.openFilters()">Refine your search{{resultsPage.totalElements <= 12 ? "?" : "."}}</a>      </p>    </div>    <!-- Results View Switcher -->    <view-switcher [(showCardView)]="showCardView"></view-switcher>    <orderby-switcher [value]="orderBy" (valueChange)="onOrderByChange($event)" [relevanceDisabled]="searchTextIsBlank">    </orderby-switcher>  </div>  </div>  <div *ngIf="showEmptyState" style="margin-top: 32px;">    <p [innerHTML]="noResultsSummary"></p>    <p>Suggestions:</p>    <ul>      <li>Widen your <a (click)="searchFiltersService.openFilters()" style="cursor:pointer;">filters</a></li>      <li>Let us know what you were looking for via our <a [routerLink]="[\'/feedback\']">Feedback page</a></li>      <li>You can try the <a href="https://www.staff.auckland.ac.nz/en.html" target="_blank">Staff Service Centre</a> in the Staff Intranet</li>    </ul>  </div>  <mat-nav-list class="results-list" [class.loading]="(resultsLoading$ | async) === true" *ngIf="!showCardView">    <ng-container *ngFor="let item of resultsPage.content; trackBy: resultIdentity">      <ng-container *ngIf="item.type !== \'policy\'">        <mat-list-item class="list-item" [routerLink]="item | listItemToRouterLink">          <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">          <p mat-line class="item-title">{{item.title}}</p>          <p mat-line class="item-subtitle">{{item.subtitle}}</p>          <mat-chip-list mat-line style="overflow: hidden;height: 18px;">            <mat-chip disabled *ngFor="let category of item.categories" style="cursor: pointer;"><span style="color: #004059;">{{category}}</span></mat-chip>          </mat-chip-list>        </mat-list-item>      </ng-container>      <ng-container *ngIf="item.type === \'policy\'">        <a mat-list-item class="list-item" [href]="item.url" target="_blank" (click)="trackOutboundLink(item)">          <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">          <p mat-line class="item-title">{{item.title}}</p>          <p mat-line class="item-subtitle">{{item.subtitle}}</p>          <mat-chip-list mat-line style="overflow: hidden;height: 18px;">            <mat-chip disabled *ngFor="let category of item.categories" style="margin-bottom: 2px;cursor: pointer;"><span style="color: #004059;">{{category}}</span></mat-chip>          </mat-chip-list>        </a>      </ng-container>    </ng-container>  </mat-nav-list>  <!--Testing Card View for Results-->  <mat-grid-list class="resultsCards" [class.loading]="(resultsLoading$ | async) === true" *ngIf="showCardView" [cols]="cardViewResultsNumberOfColumns" gutterSize="1em" rowHeight="1:2" style="padding-top: 1em">    <mat-grid-tile *ngFor="let item of resultsPage.content; trackBy: resultIdentity" [colspan]="1" [rowspan]="1" [routerLink]="item | listItemToRouterLink" style="cursor: pointer">      <div class="card-result-image">        <img src="{{apiService.getAssetUrl(item.image)}}" style="width: 100%; height: 100%;"/>      </div>      <div class="card-result-content">        <div class="card-result-title">          {{item.title}}        </div>        <div class="card-result-subtitle">          {{item.subtitle}}        </div>        <div class="card-result-chip-list">          <mat-chip-list mat-line style="overflow: hidden; height: 1em;">            <mat-chip disabled *ngFor="let category of item.categories" style="margin: 2px 2px 2px 0px; cursor: pointer; background-color: #fff; height: .5em">              <span style="color: #004059;font-size: small;">{{category}}</span>            </mat-chip>          </mat-chip-list>        </div>      </div>    </mat-grid-tile>  </mat-grid-list>  <!------------------------------------------------------------------------------------------>  <mat-paginator class="search-paginator"                 #paginator [style.visibility]="!showEmptyState ? \'visible\' : \'hidden\'"                 [length]="resultsPage.totalElements"                 [pageSize]="pageSize"                 [pageIndex]="pageIndex"                 [pageSizeOptions]="pageSizeOptions"                 (page)="onPageChange($event)">  </mat-paginator></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BrowseComponent', 'selector': 'app-browse'},{'name': 'CategoryListComponent', 'selector': 'category-list'},{'name': 'ConfirmDialogComponent', 'selector': 'app-confirm-dialog'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'ContentDetailsComponent', 'selector': 'app-content-details'},{'name': 'ErrorDialogComponent', 'selector': 'app-error-dialog'},{'name': 'FeaturedComponent', 'selector': 'app-featured'},{'name': 'FeedbackComponent', 'selector': 'app-feedback'},{'name': 'FilterDialogComponent', 'selector': 'app-filter-dialog'},{'name': 'FilterSidenavComponent', 'selector': 'app-filter-sidenav'},{'name': 'GuideCategoryComponent', 'selector': 'app-guide-category'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ImageViewComponent', 'selector': 'app-image-view'},{'name': 'ImageViewDialogComponent', 'selector': 'app-image-view-dialog'},{'name': 'MarkdownComponent', 'selector': 'app-markdown'},{'name': 'MatTagsComponent', 'selector': 'app-mat-tags'},{'name': 'OrderbySwitcherComponent', 'selector': 'orderby-switcher'},{'name': 'OrgUnitDetailsComponent', 'selector': 'app-org-unit-details'},{'name': 'PersonDetailsComponent', 'selector': 'app-person-details'},{'name': 'RequestStorageComponent', 'selector': 'app-request-data'},{'name': 'RequestVmComponent', 'selector': 'app-request-vm'},{'name': 'ResearchActivityComponent', 'selector': 'app-research-activity'},{'name': 'ResearchActivityInputComponent', 'selector': 'app-research-activity-input'},{'name': 'SearchBarComponent', 'selector': 'app-search-bar'},{'name': 'SearchFiltersComponent', 'selector': 'app-search-filters'},{'name': 'SearchResultsComponent', 'selector': 'app-search-results'},{'name': 'UserStudyComponent', 'selector': 'app-user-study'},{'name': 'ViewSwitcherComponent', 'selector': 'view-switcher'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SearchResultsComponent'};
 </script>

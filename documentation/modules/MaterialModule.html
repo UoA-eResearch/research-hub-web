@@ -98,7 +98,8 @@ import {MatStepperModule} from &#x27;@angular/material/stepper&#x27;;
 import {MatTooltipModule} from &#x27;@angular/material/tooltip&#x27;;
 import {MatRadioModule} from &#x27;@angular/material/radio&#x27;;
 import {MatPaginatorModule} from &#x27;@angular/material/paginator&#x27;;
-
+import {ScrollDispatchModule} from &#x27;@angular/cdk/scrolling&#x27;;
+import {MatSlideToggleModule} from &#x27;@angular/material/slide-toggle&#x27;;
 
 @NgModule({
   imports: [
@@ -126,7 +127,8 @@ import {MatPaginatorModule} from &#x27;@angular/material/paginator&#x27;;
     MatStepperModule,
     MatTooltipModule,
     MatRadioModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ScrollDispatchModule
   ],
   declarations: [],
   exports: [
@@ -153,7 +155,9 @@ import {MatPaginatorModule} from &#x27;@angular/material/paginator&#x27;;
     MatStepperModule,
     MatTooltipModule,
     MatRadioModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ScrollDispatchModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialModule {

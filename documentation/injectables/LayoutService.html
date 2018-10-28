@@ -89,6 +89,10 @@
                                     <span class="modifier">Public</span>
                                 <a href="#getNumGridColsCardResults">getNumGridColsCardResults</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isWidthLessThan">isWidthLessThan</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -112,7 +116,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/app/services/layout.service.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/services/layout.service.ts:12</a></div>
                             </td>
                         </tr>
 
@@ -149,7 +153,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/services/layout.service.ts:37</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/services/layout.service.ts:44</a></div>
                             </td>
                         </tr>
 
@@ -189,7 +193,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/layout.service.ts:11</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/services/layout.service.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -260,7 +264,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/services/layout.service.ts:64</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/services/layout.service.ts:71</a></div>
                             </td>
                         </tr>
 
@@ -310,6 +314,77 @@ Requires different number of columns to above getNumGridCols() method</p>
                 </tr>
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isWidthLessThan"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            isWidthLessThan
+                            </b>
+                            <a href="#isWidthLessThan"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>isWidthLessThan(mqAlias: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/services/layout.service.ts:59</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>mqAlias</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 </section>
 
 
@@ -319,7 +394,14 @@ Requires different number of columns to above getNumGridCols() method</p>
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
 
-
+// fxFlex breakpoint min widths
+// https://github.com/angular/flex-layout/wiki/Responsive-API
+export const MQ_ALIASES &#x3D; {
+  &#x27;sm&#x27;: 600,
+  &#x27;md&#x27;: 960,
+  &#x27;lg&#x27;: 1280,
+  &#x27;xl&#x27;: 1920
+};
 @Injectable()
 export class LayoutService {
 
@@ -355,25 +437,25 @@ export class LayoutService {
 
   public getMQAlias(): string {
     const width &#x3D; window.innerWidth;
-
-    // fxFlex breakpoint min widths
-    // https://github.com/angular/flex-layout/wiki/Responsive-API
-    const sm &#x3D; 600;
-    const md &#x3D; 960;
-    const lg &#x3D; 1280;
-    const xl &#x3D; 1920;
-
-    if ( width &lt; sm) {
+    if ( width &lt; MQ_ALIASES.sm) {
       return &#x27;xs&#x27;;
-    } else if (width &gt;&#x3D; sm &amp;&amp; width &lt; md) {
+    } else if (width &gt;&#x3D; MQ_ALIASES.sm &amp;&amp; width &lt; MQ_ALIASES.md) {
       return &#x27;sm&#x27;;
-    } else if (width &gt;&#x3D; md &amp;&amp; width &lt; lg) {
+    } else if (width &gt;&#x3D; MQ_ALIASES.md &amp;&amp; width &lt; MQ_ALIASES.lg) {
       return &#x27;md&#x27;;
-    } else if (width &gt;&#x3D; lg &amp;&amp; width &lt; xl) {
+    } else if (width &gt;&#x3D; MQ_ALIASES.lg &amp;&amp; width &lt; MQ_ALIASES.xl) {
       return &#x27;lg&#x27;;
-    } else if (width &gt;&#x3D; xl) {
+    } else if (width &gt;&#x3D; MQ_ALIASES.xl) {
       return &#x27;xl&#x27;;
     }
+  }
+
+  public isWidthLessThan(mqAlias:string):boolean {
+    const aliasWidth &#x3D; MQ_ALIASES[mqAlias];
+    if (!aliasWidth) {
+      return false;
+    }
+    return window.innerWidth &lt; aliasWidth;
   }
 
   /**
