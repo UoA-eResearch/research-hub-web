@@ -1,33 +1,43 @@
 @import "../../../../research-activity";
 
 /*
-* Spread the chips out evenly when the viewport is large
-* enough to display the chips on one line, with the
-* rightmost chip aligned to the right border.
-* $home-ra-chip-list-wrap-breakpoint depends on the length of each chip.
-* It will need to change in the future if:
-* - research activities have changed (e.g. added, removed, restyled,
-*   reworded)
-*/
+ * Spread the chips out evenly when the viewport is large
+ * enough to display the chips on one line, with the
+ * rightmost chip aligned to the right border.
+ * $home-ra-chip-list-wrap-breakpoint depends on the length of each chip.
+ * It will need to change in the future if:
+ * - research activities have changed (e.g. added, removed, restyled,
+ *   reworded)
+ */
 
-$home-ra-chip-list-wrap-breakpoint: 1023px;
+$home-ra-chip-list-wrap-breakpoint: 1040px;
+:host {
+  .ra-chip-container {
 
-.ra-chip-container {
-    margin-left: inherit;
-    margin-right: inherit;
-}
+    mat-chip {
+      height: $ra-chip-height;
+      cursor: pointer;
+    }
 
-@media screen and (min-width:$home-ra-chip-list-wrap-breakpoint) {
+    mat-chip.sm {
+      // Make button size bigger on mobile devices so touch users can use them.
+      height: $ra-chip-height-touch;
+    }
+  }
+
+
+  @media screen and (min-width:$home-ra-chip-list-wrap-breakpoint) {
     .ra-chip-container {
-	margin-left:auto;
-	margin-right: auto;
+	    margin-left:auto;
+	    margin-right: auto;
     }
 
     .ra-chip-container:first-child {
-	margin-left: 0px;
+	    margin-left: 0px;
     }
 
     .ra-chip-container:last-child {
-	margin-right: 0px;
+	    margin-right: 0px;
     }
+  }
 }

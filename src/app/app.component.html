@@ -35,10 +35,10 @@
         </ng-container>
       </mat-nav-list>
     </mat-sidenav>
-
+    <mat-sidenav-content>
     <div class="sidenav-content-wrapper">
-      <div class="sidenav-content" ngClass.xs="sidenav-content-xs">
-        <div class="app-toolbar-container">
+      <div #topContent class="sidenav-content" fxLayout="column" ngClass.xs="sidenav-content-xs">
+        <div #topbar class="app-toolbar-container">
           <div class="site-content app-toolbar" ngClass.xs="site-content app-toolbar-xs">
             <div class="app-toolbar-row" fxLayout="row" fxLayoutAlign="center center" color="primary">
               <button style="margin-right: 6px;" fxHide.gt-sm mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu"><mat-icon>menu</mat-icon></button>
@@ -116,11 +116,27 @@
         </div>
 
         <app-header></app-header>
-
-        <div class="site-padding" ngClass.xs="site-padding-xs" ngClass.sm="site-padding-sm">
-          <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
-          <router-outlet></router-outlet>
-        </div>
+        <!-- <mat-drawer-container> -->
+        <mat-sidenav-container  fxFlex="grow" [ngStyle]="{'overflow':'visible'}">
+          <!-- Content sidenav -->
+          <mat-sidenav class="content-sidenav" mode="side"
+                       disableClose [opened]="appComponentService.isContentSidenavVisible"
+                       [fixedInViewport]="isContentSidenavFixed"
+                       [ngStyle]="{'height':contentSidenavHeight + 'px'}"
+                       [@.disabled]="true">
+            <router-outlet name="contentSidenav"
+                           (activate)="setContentSidenavHasContent(true)"
+                           (deactivate)="setContentSidenavHasContent(false)"></router-outlet>
+          </mat-sidenav>
+          <!-- Search bar  -->
+          <mat-sidenav-content [@contentPushLeft]="appComponentService.isContentSidenavVisible">
+            <div class="site-padding" #content ngClass.xs="site-padding-xs" ngClass.sm="site-padding-sm">
+              <app-search-bar [categories]="optionsService.categoryOptions" [category]="selectedCategory" [searchText]="searchText"></app-search-bar>
+              <!-- Page content -->
+              <router-outlet></router-outlet>
+            </div>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
       </div>
       <footer ngClass.xs="footer-xs">
         <div class="footer-content" ngClass.xs="footer-content-xs" fxLayout="column" fxLayoutGap="1em" fxLayoutAlign="center center">
@@ -148,5 +164,6 @@
         </div>
       </footer>
     </div>
+    </mat-sidenav-content>
   </mat-sidenav-container>
 </section>

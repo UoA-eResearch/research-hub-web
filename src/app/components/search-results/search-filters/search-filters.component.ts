@@ -5,10 +5,10 @@ import {Tag} from '../mat-tags/mat-tags.component';
 import {OptionsService, RoleTypeId} from '../../../services/options.service';
 import {ResearchHubApiService, PeopleParams, Params} from 'app/services/research-hub-api.service';
 import {Observable} from 'rxjs/Observable';
+import {forkJoin} from 'rxjs/observable/forkJoin';
 import {SearchResultsComponent} from '../search-results.component';
 import {ListItem} from '../../../model/ListItem';
 import {OrgUnit} from '../../../model/OrgUnit';
-
 
 @Component({
   selector: 'app-search-filters',
@@ -23,6 +23,12 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
 
   @Input()
   public filtersForm: FormGroup;
+
+  /**
+  * Determines whether we should show certain widgets in a small size.
+  */
+  @Input()
+  public compact : boolean = false;
 
   public showPersonFilter = true;
   public showOrgUnitFilter = true;
@@ -45,8 +51,7 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
     const peopleParams = new PeopleParams();
     peopleParams.setRoleTypes([RoleTypeId.UserSupport]);
 
-    this.dataSub = Observable
-      .forkJoin(
+    this.dataSub = forkJoin(
         this.apiService.getPeople(peopleParams),
         this.apiService.getOrgUnits(new Params())
       ).subscribe(latestValues => {
@@ -71,6 +76,10 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
     return items.map(item => {
       return {id: item.id, text: item.name, imageUrl: this.apiService.getAssetUrl(item.image)};
     });
+  }
+
+  setCategory(value){
+    this.filtersForm.controls.categoryId.setValue(value);
   }
 
   updateFilterVisibility(categoryId: number) {

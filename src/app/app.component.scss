@@ -44,6 +44,7 @@
  * Navigation list
  */
 
+
 .sidenav-container mat-sidenav mat-list-item mat-icon {
   color: $color-icon;
   font-size: mat-font-size($app-sidenav-list-typography, body-2) !important;
@@ -131,23 +132,6 @@ mat-expansion-panel-header .mat-expanded {
   height: 48px !important;
 }
 
-.sidenav-container mat-sidenav-content {
-
-  overflow: visible !important;
-}
-
-.sidenav-container mat-sidenav mat-toolbar button mat-icon {
-  font-size: mat-font-size($app-sidenav-toolbar-typography, button) !important;
-  font-weight: mat-font-weight($app-sidenav-toolbar-typography, button) !important;
-  color:white;
-}
-
-.sidenav-container mat-sidenav mat-toolbar span {
-  //font-size: mat-font-size($app-sidenav-toolbar-typography, body-1) !important;
-  font-weight: mat-font-weight($app-sidenav-toolbar-typography, body-1) !important;
-  color:white;
-}
-
 .sidenav-container {
   min-height: calc(100vh);
 }
@@ -195,6 +179,7 @@ footer {
   height: $height-footer;
   padding-left: $padding-site;
   padding-right: $padding-site;
+  z-index: 1; // Hide excess height of content sidenav underneath footer.
 }
 
 footer.footer-xs {
@@ -324,6 +309,12 @@ app-search-bar {
   min-width: 0 !important;
 }
 
+.content-sidenav {
+  width:400px;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  background-color: $color-background;
+}
+
 // HACK
 // https://github.com/angular/material2/issues/6958
 //
@@ -340,4 +331,3 @@ app-search-bar {
 //    }
 //
 //}
-

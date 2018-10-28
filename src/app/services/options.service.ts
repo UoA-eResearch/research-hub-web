@@ -37,6 +37,13 @@ export enum CategoryId {
   Policies
 }
 
+export const CategoryDisplayNames = {
+  "Policies":"Policy",
+  "Support":"Service",
+  "Facilities":"Facility",
+  "Person":"People"
+};
+
 export enum ActionTypeId {
   Integrated = 1,
   ExternalUrl,

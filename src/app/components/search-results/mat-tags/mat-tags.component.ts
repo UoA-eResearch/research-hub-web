@@ -57,6 +57,8 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
 
   @Input() placeholder = '';
 
+  @Input() disabled = false;
+
   @Input()
   set value(v: Tag[]) {
     this.onChange(v);
@@ -121,6 +123,15 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
 
   add(event: MatAutocompleteSelectedEvent, input: any): void {
     this.addTag(event.option.value, input);
+  }
+
+  triggerAutocomplete(){
+    if (this.disabled){
+      return;
+    }
+    if (!this.autoTrigger.panelOpen){
+      this.autoTrigger.openPanel();
+    }
   }
 
   addTextChip(input: MatInput): void {

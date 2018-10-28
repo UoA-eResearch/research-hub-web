@@ -25,6 +25,13 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
   onTouched: any = () => {
   };
 
+  /**
+   * Determines whether we show the larger, thicker inputs that are touch-friendly.
+   */
+  @Input() touchFriendly : boolean = false;
+
+  @Input() disabled : boolean = false;
+
 
   get value() {
     return this._value;
@@ -46,7 +53,7 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
   ngOnInit() {
   }
 
-  onChipClick(activityId) {
+  onToggle(activityId,toggleEvent) {
     this.model[activityId].selected = !this.model[activityId].selected;
     this.updateValue();
   }
@@ -56,9 +63,10 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
   }
 
   writeValue(value) {
-    if (value) {
-      this.value = value;
+    if (value === null || value === undefined){
+      value = [];
     }
+    this.value = value;
   }
 
   registerOnTouched(fn) {
@@ -72,16 +80,10 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
   }
 
   updateValue() {
-    const selectedResearchActivities = [];
-
-    Object.keys(this.model).forEach(key => {
-      const isSelected = this.model[key].selected;
-
-      if (isSelected) {
-        selectedResearchActivities.push(+key);
-      }
-    });
-
-    this.value = selectedResearchActivities;
+    const selectedActivities = Object.keys(this.model).map(
+      key => (this.model[key].selected ? +key : null));
+    const filteredActivities = selectedActivities.filter(
+      key => (key !== null));
+    this.value = filteredActivities;
   }
 }

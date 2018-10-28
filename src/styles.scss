@@ -94,8 +94,8 @@ Gloabl mat-chip style
  */
 
 mat-chip.mat-chip {
-  font-size: mat-font-size($app-chips-typography, button) !important;
-  font-weight: mat-font-weight($app-chips-typography, button) !important;
+  font-size: mat-font-size($app-chips-typography, button);
+  font-weight: mat-font-weight($app-chips-typography, button);
 }
 
 .avatar-btn > span.mat-button-wrapper {
@@ -164,13 +164,6 @@ mat-chip.mat-chip {
   padding-left: 0 !important;
   min-width: 0 !important;
   padding-right: 10px !important;
-}
-
-mat-toolbar-row {
-  @extend .site-content;
-  max-width: calc(#{$width-page-max + 25px});
-  padding-left: $padding-site !important;
-  padding-right: $padding-site !important;
 }
 
 .card-fab {

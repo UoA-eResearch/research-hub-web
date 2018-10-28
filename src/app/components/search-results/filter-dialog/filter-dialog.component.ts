@@ -1,7 +1,7 @@
 import {Component, Inject, Input} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup} from '@angular/forms';
 import {CategoryId} from 'app/services/options.service';
+import { SearchFiltersService, DEFAULT_FILTERS_VALUE } from '../search-filters/search-filters.service';
 
 @Component({
   selector: 'app-filter-dialog',
@@ -10,25 +10,21 @@ import {CategoryId} from 'app/services/options.service';
 })
 export class FilterDialogComponent {
 
-  @Input()
   public filtersForm: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<FilterDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.filtersForm = new FormGroup({
-      categoryId: new FormControl(),
-      personTags: new FormControl([]),
-      orgUnitTags: new FormControl([]),
-      researchActivityIds: new FormControl()
-    });
-
-    this.filtersForm.patchValue(data['rawFormValues']);
+  constructor(public searchFiltersService : SearchFiltersService) {
+    this.filtersForm = searchFiltersService.duplicateFilters();
   }
 
-  clear() {
-    this.filtersForm.patchValue({categoryId: CategoryId.All, personTags: [], orgUnitTags: [], researchActivityIds: []});
+  public clear() {
+    this.filtersForm.patchValue(DEFAULT_FILTERS_VALUE);
   }
 
-  done() {
-    this.dialogRef.close(this.filtersForm.getRawValue());
+  public save(){
+    this.searchFiltersService.patchFilters(this.filtersForm);
+  }
+
+  public close(){
+    this.searchFiltersService.closeFilters();
   }
 }
