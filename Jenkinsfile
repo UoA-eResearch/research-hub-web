@@ -15,11 +15,19 @@ pipeline {
         stage('Unit test') {
           
             steps {
+
                 sh '''
                    docker-compose               \\
                      -f docker-compose.yml      \\
                      -f docker-compose.test.yml \\
-                     run -T --rm --no-deps web  \\
+                     build web                  \\
+                   '''
+                
+                sh '''
+                   docker-compose               \\
+                     -f docker-compose.yml      \\
+                     -f docker-compose.test.yml \\
+                     run web                    \\
                    '''
             }
           
@@ -28,6 +36,7 @@ pipeline {
         stage('Build image') {
           
             steps {
+
                 checkout scm
                 
                 sh '''
@@ -43,6 +52,7 @@ pipeline {
         stage('Push to registry') {
           
             steps {
+
               sh 'curl -I ${DOCKER_REGISTRY_URI}'
               
               sh '''
@@ -55,8 +65,9 @@ pipeline {
                  docker push ${VERSIONED_NAME}
                  docker push ${LATEST_NAME}
                  '''
+
             }
-          
+            
         }
     }
 }
