@@ -30,11 +30,9 @@ pipeline {
           
             steps {
                 sh '''
-                   docker-compose                         \\
-                     -f docker-compose.yml                \\
-                     -f docker-compose.ci.yml             \\
-                     -f docker-compose.test.yml           \\
-                     run -T --rm -no-deps web             \\
+                   docker-compose               \\
+                     -f docker-compose.test.yml \\
+                     run -T --rm --no-deps web  \\
                    '''
             }
           
