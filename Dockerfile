@@ -1,6 +1,5 @@
-#
-#  Building Stage
-#
+# ================   Building stage   ================ 
+
 
 FROM          nginx as building
 MAINTAINER    Sam Kavanagh "s.kavanagh@auckland.ac.nz"
@@ -38,27 +37,27 @@ COPY          /src /research-hub-web/src
 RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --environment=prod
 
 
-#
-# Testing stage
-#
+# ================   Testing stage   ================ 
+
 
 FROM          markadams/chromium-xvfb-js as testing
 WORKDIR       /
 COPY          --from=building /research-hub-web .
 ENTRYPOINT    npm run test
 
-#
-# Running Stage
-#
+
+# ================   Running stage   ================ 
+
 
 FROM          nginx as running
 
 # Copy dist from building stage
-COPY          --from=building ./dist /usr/share/nginx/www
+COPY          --from=building ./research-hub-web/dist /usr/share/nginx/www
 
 # Configure nginx
 COPY          /nginx.conf /etc/nginx/nginx.conf
 
+# Custom entrypoint to copy over env.js at runtime from volume
 COPY          ./docker-entrypoint.sh /
 ENTRYPOINT    ["/docker-entrypoint.sh"]
 
