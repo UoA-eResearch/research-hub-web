@@ -11,6 +11,20 @@ pipeline {
     }
   
     stages {
+
+        stage('Unit test') {
+          
+            steps {
+                sh '''
+                   docker-compose               \\
+                     -f docker-compose.yml      \\
+                     -f docker-compose.test.yml \\
+                     run -T --rm --no-deps web  \\
+                   '''
+            }
+          
+        }
+
         stage('Build image') {
           
             steps {
@@ -20,24 +34,12 @@ pipeline {
                    docker-compose              \\
                      -f docker-compose.yml     \\
                      -f docker-compose.ci.yml  \\
-                     build                     \\
+                     build web                 \\
                    '''
             }
           
         }
       
-        stage('Unit test') {
-          
-            steps {
-                sh '''
-                   docker-compose               \\
-                     -f docker-compose.test.yml \\
-                     run -T --rm --no-deps web  \\
-                   '''
-            }
-          
-        }
-
         stage('Push to registry') {
           
             steps {

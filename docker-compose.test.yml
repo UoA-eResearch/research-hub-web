@@ -2,9 +2,4 @@ version: '3.4'
 services:
   web:
     build:
-      context: .
-      target: testing
-      args:
-        - http_proxy
-        - https_proxy
-
+      target: test
