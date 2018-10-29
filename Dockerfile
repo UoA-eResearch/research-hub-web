@@ -1,4 +1,8 @@
-FROM          nginx
+#
+#  Building Stage
+#
+
+FROM          nginx as building
 MAINTAINER    Sam Kavanagh "s.kavanagh@auckland.ac.nz"
 
 # Build args required to work behind proxy
@@ -30,12 +34,31 @@ RUN           npm install
 # Copy sources
 COPY          /src /research-hub-web/src
 
-# Build research hub with angular-cli
+# Build  with angular-cli
 RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --environment=prod
 
+
+#
+# Testing stage
+#
+
+FROM          chromium-xvfb-js as testing
+WORKDIR       /
+COPY          --from=building /research-hub-web .
+ENTRYPOINT    npm run test
+
+#
+# Running Stage
+#
+
+FROM          nginx as running
+
+# Copy dist from building stage
+COPY          --from=building ./dist /usr/share/nginx/www
+
 # Configure nginx
-RUN           cp -a ./dist/. /usr/share/nginx/www/
 COPY          /nginx.conf /etc/nginx/nginx.conf
 
-COPY ./docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY          ./docker-entrypoint.sh /
+ENTRYPOINT    ["/docker-entrypoint.sh"]
+
