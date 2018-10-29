@@ -29,7 +29,6 @@ RUN           npm install
 
 # Copy sources
 COPY          /src /research-hub-web/src
-ENTRYPOINT    npm run test
 
 # ================   Build stage   ================
 
