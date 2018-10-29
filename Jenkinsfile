@@ -11,37 +11,35 @@ pipeline {
     }
   
     stages {
-        stage('Build') {
+        stage('Build image') {
           
             steps {
                 checkout scm
                 
                 sh '''
-                   docker-compose                        \\
-                     -f docker-compose.yml               \\
-                     -f docker-compose.ci.yml            \\
-                     build web
+                   docker-compose              \\
+                     -f docker-compose.yml     \\
+                     -f docker-compose.ci.yml  \\
                    '''
             }
           
         }
       
-        stage('Test') {
+        stage('Unit test') {
           
             steps {
                 sh '''
-                   docker-compose                        \\
-                     -f docker-compose.yml               \\
-                     -f docker-compose.ci.yml            \\
-                     run --entrypoint /bin/bash          \\
-                     -T --rm --no-deps web               \\
-                     -c "echo tests passed"
+                   docker-compose                 \\
+                     -f docker-compose.yml        \\
+                     -f docker-compose.ci.yml     \\
+                     -f docker-compose.test.yml   \\
+                     run -T --rm -no-deps         \\
                    '''
             }
           
         }
-      
-        stage('Deploy') {
+
+        stage('Push to registry') {
           
             steps {
               sh 'curl -I ${DOCKER_REGISTRY_URI}'

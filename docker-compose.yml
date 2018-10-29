@@ -1,4 +1,4 @@
-version: '3.0'
+version: '3.4'
 services:
   web:
     build:
@@ -6,5 +6,6 @@ services:
       args:
         - http_proxy
         - https_proxy
+      target: running
     volumes:
       - ${HUB_PATH}/config/web/env.js:/env.js
