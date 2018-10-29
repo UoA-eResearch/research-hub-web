@@ -42,7 +42,7 @@ RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng 
 # Testing stage
 #
 
-FROM          chromium-xvfb-js as testing
+FROM          markadams/chromium-xvfb-js as testing
 WORKDIR       /
 COPY          --from=building /research-hub-web .
 ENTRYPOINT    npm run test
