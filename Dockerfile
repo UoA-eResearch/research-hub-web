@@ -50,6 +50,9 @@ COPY          --from=test ./research-hub-web/ /
 
 WORKDIR       /research-hub-web/
 
+# Copy sources
+COPY          /src /research-hub-web/src
+
 # Build  with angular-cli
 RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --environment=prod
 
