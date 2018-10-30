@@ -48,7 +48,7 @@ RUN           apt-get update -qq && apt-get install -y nodejs
 WORKDIR       /research-hub-web/
 
 # Copy node_modules folder from test stage
-COPY          --from=test ./research-hub-web/node_modules/ /research-hub/web/node_modules
+COPY          --from=test ./research-hub-web/node_modules/ /research-hub-web/node_modules
 
 # Copy sources
 COPY          /src /research-hub-web/src
