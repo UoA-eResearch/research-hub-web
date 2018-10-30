@@ -11,39 +11,48 @@ pipeline {
     }
   
     stages {
-        stage('Build') {
+
+        stage('Unit test') {
           
             steps {
+
+                sh '''
+                   docker-compose               \\
+                     -f docker-compose.yml      \\
+                     -f docker-compose.test.yml \\
+                     build web                  \\
+                   '''
+                
+                sh '''
+                   docker-compose               \\
+                     -f docker-compose.yml      \\
+                     -f docker-compose.test.yml \\
+                     run web                    \\
+                   '''
+            }
+          
+        }
+
+        stage('Build image') {
+          
+            steps {
+
                 checkout scm
                 
                 sh '''
-                   docker-compose                        \\
-                     -f docker-compose.yml               \\
-                     -f docker-compose.ci.yml            \\
-                     build web
+                   docker-compose              \\
+                     -f docker-compose.yml     \\
+                     -f docker-compose.ci.yml  \\
+                     build web                 \\
                    '''
             }
           
         }
       
-        stage('Test') {
+        stage('Push to registry') {
           
             steps {
-                sh '''
-                   docker-compose                        \\
-                     -f docker-compose.yml               \\
-                     -f docker-compose.ci.yml            \\
-                     run --entrypoint /bin/bash          \\
-                     -T --rm --no-deps web               \\
-                     -c "echo tests passed"
-                   '''
-            }
-          
-        }
-      
-        stage('Deploy') {
-          
-            steps {
+
               sh 'curl -I ${DOCKER_REGISTRY_URI}'
               
               sh '''
@@ -56,8 +65,9 @@ pipeline {
                  docker push ${VERSIONED_NAME}
                  docker push ${LATEST_NAME}
                  '''
+
             }
-          
+            
         }
     }
 }
