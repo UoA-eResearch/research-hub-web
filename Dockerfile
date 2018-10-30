@@ -45,13 +45,10 @@ RUN           apt-get update -qq && apt-get install -qqy curl build-essential gi
 RUN           curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN           apt-get update -qq && apt-get install -y nodejs
 
+# Copy everything from test stage
+COPY          --from=test ./research-hub-web/ /
+
 WORKDIR       /research-hub-web/
-
-# Copy node_modules folder from test stage
-COPY          --from=test ./research-hub-web/node_modules/ /research-hub-web/node_modules
-
-# Copy sources
-COPY          /src /research-hub-web/src
 
 # Build  with angular-cli
 RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --environment=prod
