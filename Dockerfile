@@ -50,8 +50,7 @@ WORKDIR       /research-hub-web/
 # Copy everything from test stage
 COPY          --from=test ./research-hub-web/ .
 
-# Copy sources
-COPY          /src ./src
+RUN           npm rebuild
 
 # Build  with angular-cli
 RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --environment=prod
