@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FilterSidenavComponent } from './filter-sidenav.component';
+import { SearchResultsModule } from '../search-results.module';
+import { SearchFiltersService } from '../search-filters/search-filters.service';
+import { ResearchHubApiService } from 'app/services/research-hub-api.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { OptionsService } from 'app/services/options.service';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from 'app/components/shared/app.shared.module';
 
 describe('FilterSidenavComponent', () => {
   let component: FilterSidenavComponent;
@@ -8,7 +15,18 @@ describe('FilterSidenavComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FilterSidenavComponent ]
+      imports: [
+        CommonModule,
+        SharedModule,
+        SearchResultsModule,
+      ],
+      providers: [
+        SearchFiltersService,
+        ResearchHubApiService,
+        OptionsService,
+        HttpClient,
+        HttpHandler
+      ]
     })
     .compileComponents();
   }));
@@ -16,7 +34,6 @@ describe('FilterSidenavComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FilterSidenavComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
