@@ -139,6 +139,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
 
   fromTags(tags: Tag[]) {
+    if (tags == null) return [];
     return tags.map(tag => tag.id);
   }
 
@@ -322,6 +323,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     // To be filled with API request observables
     const observablePersonBatch = [];
     const observableOrgUnitBatch = [];
+
+    if (!personTags) { personTags = [];}
+    if (!orgUnitTags) { orgUnitTags = [];}
 
     // Queue up API requests for persons and orgUnits
     orgUnitTags.forEach(key => observableOrgUnitBatch.push(this.apiService.getOrgUnit(key.id)));
