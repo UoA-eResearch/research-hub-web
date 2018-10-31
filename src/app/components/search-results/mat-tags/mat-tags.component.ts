@@ -130,7 +130,6 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
   }
 
   triggerAutocomplete(){
-    console.log("Is this disabled?",this.isDisabled);
     if (this.isDisabled){
       return;
     }
