@@ -37,6 +37,9 @@ import { SearchResultLinkDirective } from 'app/directives/search-result-link.dir
   ],
   providers: [
     SearchResultsComponentService
+  ],
+  exports: [
+    SearchResultLinkDirective
   ]
 })
 export class SearchResultsModule {
