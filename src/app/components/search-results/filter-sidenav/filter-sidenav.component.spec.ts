@@ -8,35 +8,33 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { OptionsService } from 'app/services/options.service';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'app/components/shared/app.shared.module';
+import { SearchResultsComponentService } from '../search-results-component.service';
 
 describe('FilterSidenavComponent', () => {
-  let component: FilterSidenavComponent;
   let fixture: ComponentFixture<FilterSidenavComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        CommonModule,
-        SharedModule,
-        SearchResultsModule,
-      ],
-      providers: [
-        SearchFiltersService,
-        ResearchHubApiService,
-        OptionsService,
-        HttpClient,
-        HttpHandler
-      ]
-    })
-    .compileComponents();
-  }));
-
   beforeEach(() => {
-    fixture = TestBed.createComponent(FilterSidenavComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.configureTestingModule({
+        imports: [
+          CommonModule,
+          SharedModule,
+          SearchResultsModule,
+        ],
+        providers: [
+          SearchResultsComponentService,
+          SearchFiltersService,
+          ResearchHubApiService,
+          OptionsService,
+          HttpClient,
+          HttpHandler
+        ]
+    }).createComponent(FilterSidenavComponent);
+
+    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  afterEach(() => {
+    fixture.destroy();
+  })
+
 });
