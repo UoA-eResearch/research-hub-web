@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrderbySwitcherComponent } from './orderby-switcher.component';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from 'app/components/shared/app.shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SearchResultsComponentService } from '../search-results-component.service';
+import { ResearchHubApiService } from 'app/services/research-hub-api.service';
 
 describe('OrderbySwitcherComponent', () => {
   let component: OrderbySwitcherComponent;
@@ -8,7 +13,18 @@ describe('OrderbySwitcherComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderbySwitcherComponent ]
+      imports: [
+        CommonModule,
+        SharedModule,
+        BrowserAnimationsModule,
+      ],
+      declarations: [
+        OrderbySwitcherComponent
+      ],
+      providers: [
+        ResearchHubApiService,
+        SearchResultsComponentService
+      ]
     })
     .compileComponents();
   }));
