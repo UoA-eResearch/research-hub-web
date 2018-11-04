@@ -45,7 +45,7 @@ export class SearchResultsComponentService {
       });
   }
 
-  private initialiseSubjects(){
+  initialiseSubjects(){
     // We initialise the Subjects with an empty initial value.
     this.resultsSubject = new BehaviorSubject<Page<ListItem>>(<Page<ListItem>>{});
     this.results$ = this.resultsSubject.asObservable();

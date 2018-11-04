@@ -24,6 +24,7 @@ export class AnalyticsService {
 
   // This method needs to be called first to initalise Google Analytics
   private initialize() {
+    if (typeof ga === 'undefined') { return; }
     ga('create', environment.analyticsCode, 'auto');
   }
 
@@ -95,12 +96,14 @@ export class AnalyticsService {
   }
 
   trackPageView(url: string, title: string) {
+    if (typeof ga === 'undefined') { return; }
     ga('set', 'page', url);
     ga('set', 'title', title);
     ga('send', 'pageview');
   }
 
   trackEvent(eventCategory, eventAction, eventLabel) {
+    if (typeof ga === 'undefined') { return; }
     ga('set', 'eventCategory', eventCategory);
     ga('set', 'eventAction', eventAction);
     ga('set', 'eventLabel', eventLabel);
