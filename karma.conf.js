@@ -13,7 +13,7 @@ module.exports = function (config) {
       require('@angular/cli/plugins/karma')
     ],
     client:{
-      clearContext: true // leave Jasmine Spec Runner output visible in browser
+      clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     files: [
       { pattern: './src/test.ts', watched: false }
@@ -29,7 +29,7 @@ module.exports = function (config) {
       fixWebpackSourcePaths: true
     },
     angularCli: {
-      environment: 'dev',
+      environment: 'prod',
       codeCoverage: true
     },
     reporters: config.angularCli && config.angularCli.codeCoverage
@@ -38,9 +38,9 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
+    autoWatch: false,
     browsers: ['Chrome'],
-    singleRun: false,
+    singleRun: true,
     failOnEmptyTestSuite: false
   });
 };

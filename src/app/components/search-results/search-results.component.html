@@ -51,7 +51,6 @@
     <ng-container *ngFor="let item of resultsPage.content; trackBy: resultIdentity">
       <ng-container>
         <a appSearchResultLink [item]="item">
-          {{ item | json }}
           <mat-list-item class="list-item">
               <img mat-list-avatar [src]="apiService.getAssetUrl(item.image)">
               <p mat-line class="item-title">{{item.title}}</p>

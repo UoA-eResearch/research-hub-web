@@ -6,9 +6,7 @@
 export const environment = {
   production: false,
   shibbolethSessionUrl: 'http://localhost:4200/Session.json',
-  researchHubApiUrl: 'https://test.research-hub.cer.auckland.ac.nz/api/',
-  cerApiUrl: 'https://test.research-hub.cer.auckland.ac.nz/cer-api/',
-//  researchHubApiUrl: 'http://localhost/api/',
-//  cerApiUrl: 'http://localhost/cer-api',
+  researchHubApiUrl: 'http://localhost/api/',
+  cerApiUrl: 'http://localhost/cer-api',
   analyticsCode: 'UA-77710107-3'
 };
