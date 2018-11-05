@@ -30,6 +30,8 @@ RUN           npm install
 # Copy sources
 COPY          /src ./src
 
+CMD           npm run ci-test
+
 # ================   Build stage   ================
 
 FROM          nginx as build
