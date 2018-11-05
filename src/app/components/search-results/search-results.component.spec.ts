@@ -1,27 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SearchResultsComponent } from './search-results.component';
 import { SearchResultsModule } from './search-results.module';
 import { ServicesModule } from 'app/services/services.module';
 import { SearchBarService } from '../search-bar/search-bar.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterModule, ActivatedRoute } from '@angular/router';
-import { Location,LocationStrategy } from '@angular/common';
-import { SpyLocation, MockLocationStrategy } from '@angular/common/testing';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponentService } from 'app/app.component.service';
 import { SearchFiltersService } from './search-filters/search-filters.service';
-import { ResearchHubApiService } from 'app/services/research-hub-api.service';
 import { SearchResultsComponentService } from './search-results-component.service';
 import { Observable } from 'rxjs';
+import { SharedModule } from 'app/components/shared/app.shared.module';
+import { Page } from 'app/model/Page';
+import { ListItem } from 'app/model/ListItem';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+// Stub class for the search results component service.
+// Currently it returns an empty page.
 class SearchResultsComponentStubService {
-  public results$ : Observable<any> = Observable.of([]);
+  private emptyPage = {totalElements: 0} as Page<ListItem>;
+  public results$ : Observable<Page<ListItem>> = Observable.of(this.emptyPage);
   public resultsLoading$ : Observable<boolean> = Observable.of(false);
+  public resultsCategories$ : Observable<Page<ListItem>> = Observable.of(this.emptyPage);
+  public resultsCategoriesLoading$ : Observable<boolean> = Observable.of(false);
   public searchWithParams(params: any){
-    return;
-  }
-
-  initialiseSubjects(){
     return;
   }
 }
@@ -29,7 +30,8 @@ class SearchResultsComponentStubService {
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
   let fixture: ComponentFixture<SearchResultsComponent>;
-  let mockRoute : ActivatedRoute = {} as ActivatedRoute;
+  let activatedRoute = { queryParams: Observable.of({})};
+
   function expectToHandleNulls(fn,expectedValue,thisArg){
     const undefinedArgs = [],
     nullArgs = [];
@@ -38,22 +40,32 @@ describe('SearchResultsComponent', () => {
       undefinedArgs.push(undefined);
       nullArgs.push(null);
     }
-    expect(fn.apply(thisArg,undefinedArgs)).toBe(expectedValue,'successful and return expected value.');
-    expect(fn.apply(thisArg,nullArgs)).toBe(expectedValue,'successful and return expected value.');
+    expect(fn.apply(thisArg,undefinedArgs)).toEqual(expectedValue,'successful and return expected value.');
+    expect(fn.apply(thisArg,nullArgs)).toEqual(expectedValue,'successful and return expected value.');
   }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule, ServicesModule, RouterModule ],
+      imports: [ SharedModule,
+                 SearchResultsModule,
+                 NoopAnimationsModule,
+                 ServicesModule,
+                 RouterTestingModule.withRoutes(
+                   [{path:'', component: SearchResultsComponent}]
+                 )],
       providers: [ SearchBarService,
                    AppComponentService,
                    SearchFiltersService,
-                   ResearchHubApiService,
-                   {provide: SearchResultsComponentService, useClass:SearchResultsComponentStubService},
-                   {provide: ActivatedRoute, useValue: mockRoute},
-                   {provide: Location, useClass: SpyLocation},
-                   {provide: LocationStrategy, useClass: MockLocationStrategy}]
+                   {provide: ActivatedRoute, useValue: activatedRoute}]
     })
+      .overrideModule(SearchResultsModule,{
+        // Replace the real component service with our stub one.
+        set: {
+          providers: [
+            {provide: SearchResultsComponentService, useClass:SearchResultsComponentStubService}
+          ]
+        }
+      })
     .compileComponents();
   }));
 
@@ -72,6 +84,13 @@ describe('SearchResultsComponent', () => {
   });
 
   it('#setFiltersIfUndefined should handle null tags', ()=> {
-    expectToHandleNulls(component.setFiltersTextIfUndefined, [], component);
+    component.setFiltersTextIfUndefined(undefined,undefined).subscribe(
+      (res) =>
+        {
+          expect(res.length).toEqual(2,"that there are two elements in the resulting array");
+          expect(res[0]).toEqual([],"that the people array is empty.");
+          expect(res[1]).toEqual([],"that the org unit array is empty.");
+        }
+    );
   });
 });
