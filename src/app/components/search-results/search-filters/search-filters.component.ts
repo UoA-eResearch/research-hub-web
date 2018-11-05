@@ -30,10 +30,6 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
   @Input()
   public compact : boolean = false;
 
-  public showPersonFilter = true;
-  public showOrgUnitFilter = true;
-  public showResearchActivityFilter = true;
-
   public personTagSource: Tag[] = [];
   public orgUnitTagSource: Tag[] = [];
 
@@ -100,8 +96,5 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
     } else {
       controls.researchActivityIds.disable();
     }
-    //this.showPersonFilter = visibilities['person'];
-    //this.showOrgUnitFilter = visibilities['orgUnit'];
-    //this.showResearchActivityFilter = visibilities['researchActivity'];
   }
 }
