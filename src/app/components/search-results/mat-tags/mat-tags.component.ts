@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, forwardRef, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, ViewChild, forwardRef, OnChanges, SimpleChanges, Optional} from '@angular/core';
 import {
   MatInput
 } from '@angular/material/input';
@@ -8,10 +8,13 @@ import {
 } from '@angular/material/autocomplete';
 import {
   FormControl,
+  ControlContainer,
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS
 } from '@angular/forms';
+
+
 
 export interface Tag {
   id: number;
@@ -59,8 +62,11 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
 
   @Input() disabled = false;
 
+  @Input() formControlName: string;
+
   @Input()
   set value(v: Tag[]) {
+    this.onTouched();
     this.onChange(v);
   }
 
@@ -75,8 +81,22 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
     // mock
   };
 
+
+  constructor (@Optional private controlContainer: ControlContainer) {
+  }
+
   writeValue(v: Tag[]): void {
     this._value = v;
+    if (this.controlContainer && this.formControlName){
+      const control = this.controlContainer.control.get(this.formControlName);
+      if (!!control){
+        const isPristine = control.pristine;
+        if ((!v || v.length === 0) && isPristine){
+          this.chipInput.nativeElement.value = ""; // Clear the input when form is reset.
+          this.textChanged(""); // Reset autocomplete suggestions too.
+        }
+      }
+    }
 
     // If value changes and source exists, then populate _value with Tag objects
     if (this.source && this.source.length) {
