@@ -64,10 +64,12 @@ RUN           npm rebuild
 # Copy sources
 COPY          /src ./src
 
+RUN           npm run ci-test
+
 # Build
 RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --environment=prod
 
-# ================   Clean stage   ================ 
+# ================   Clean stage   ================
 
 FROM          nginx as clean
 
