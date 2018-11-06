@@ -9,7 +9,7 @@
     "build-prod": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --stats-json",
     "test-prod": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve --port 4000 --prod",
     "test": "ng test",
-    "ci-test":"ng test --prod --single-run",
+    "ci-test":"ng test --environment prod --single-run",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
