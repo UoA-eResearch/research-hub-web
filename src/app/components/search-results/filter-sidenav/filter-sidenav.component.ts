@@ -18,7 +18,7 @@ export class FilterSidenavComponent implements OnInit {
   }
 
   clear(){
-    this.filtersForm.patchValue(DEFAULT_FILTERS_VALUE);
+    this.filtersForm.reset(DEFAULT_FILTERS_VALUE);
   }
 
   done(){

@@ -17,7 +17,7 @@ export class FilterDialogComponent {
   }
 
   public clear() {
-    this.filtersForm.patchValue(DEFAULT_FILTERS_VALUE);
+    this.filtersForm.reset(DEFAULT_FILTERS_VALUE);
   }
 
   public save(){
