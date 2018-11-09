@@ -57,8 +57,6 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
 
   @Input() placeholder = '';
 
-  @Input() disabled = false;
-
   @Input()
   set value(v: Tag[]) {
     this.onChange(v);
@@ -68,12 +66,18 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
     return this._value;
   }
 
+  isDisabled : boolean;
+
   onChange = (_: any): void => {
     // mock
   };
   onTouched = (_: any): void => {
     // mock
   };
+
+  setDisabledState(isDisabled){
+    this.isDisabled = isDisabled;
+  }
 
   writeValue(v: Tag[]): void {
     this._value = v;
@@ -126,7 +130,7 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
   }
 
   triggerAutocomplete(){
-    if (this.disabled){
+    if (this.isDisabled){
       return;
     }
     if (!this.autoTrigger.panelOpen){

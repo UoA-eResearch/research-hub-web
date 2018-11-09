@@ -30,10 +30,6 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
   @Input()
   public compact : boolean = false;
 
-  public showPersonFilter = true;
-  public showOrgUnitFilter = true;
-  public showResearchActivityFilter = true;
-
   public personTagSource: Tag[] = [];
   public orgUnitTagSource: Tag[] = [];
 
@@ -83,9 +79,22 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
   }
 
   updateFilterVisibility(categoryId: number) {
-    const visibilities = SearchResultsComponent.getFilterVisibility(categoryId);
-    this.showPersonFilter = visibilities['person'];
-    this.showOrgUnitFilter = visibilities['orgUnit'];
-    this.showResearchActivityFilter = visibilities['researchActivity'];
+    const visibilities = SearchResultsComponent.getFilterVisibility(categoryId),
+    controls = this.filtersForm.controls;
+    if (visibilities['person']){
+      controls.personTags.enable();
+    } else {
+      controls.personTags.disable();
+    }
+    if (visibilities['orgUnit']){
+      controls.orgUnitTags.enable();
+    } else {
+      controls.orgUnitTags.disable();
+    }
+    if (visibilities['researchActivity']){
+      controls.researchActivityIds.enable();
+    } else {
+      controls.researchActivityIds.disable();
+    }
   }
 }

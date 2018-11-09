@@ -30,8 +30,7 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
    */
   @Input() touchFriendly : boolean = false;
 
-  @Input() disabled : boolean = false;
-
+  isDisabled : boolean;
 
   get value() {
     return this._value;
@@ -51,6 +50,10 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
   }
 
   ngOnInit() {
+  }
+
+  setDisabledState(isDisabled){
+    this.isDisabled = isDisabled;
   }
 
   onToggle(activityId,toggleEvent) {

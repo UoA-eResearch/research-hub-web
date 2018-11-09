@@ -33,6 +33,7 @@ import {forkJoin} from 'rxjs/observable/forkJoin';
 
 import {SearchFiltersService} from './search-filters/search-filters.service';
 import { SearchResultsComponentService } from './search-results-component.service';
+import { debounceTime,distinctUntilChanged } from 'rxjs/operators';
 
 // The screen size at which we should switch to opening filters in dialog or sidenav.
 const FILTER_VIEW_BREAKPOINT = "md";
@@ -139,6 +140,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
 
   fromTags(tags: Tag[]) {
+    if (tags == null) return [];
     return tags.map(tag => tag.id);
   }
 
@@ -243,9 +245,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     // Subscribe to search parameter changes
     this.searchChangeSub = Observable
       .combineLatest(
-        this.searchBarService.searchTextChange.debounceTime(250).distinctUntilChanged(),
-        this.filtersForm.valueChanges.distinctUntilChanged(),
-        this.pageEventChange.distinctUntilChanged(),
+        this.searchBarService.searchTextChange.pipe(debounceTime(250),distinctUntilChanged()),
+        this.filtersForm.valueChanges.pipe(distinctUntilChanged()),
+        this.pageEventChange.pipe(distinctUntilChanged()),
         this.orderByChange
       )
       .debounceTime(100)
@@ -322,6 +324,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     // To be filled with API request observables
     const observablePersonBatch = [];
     const observableOrgUnitBatch = [];
+
+    if (!personTags) { personTags = [];}
+    if (!orgUnitTags) { orgUnitTags = [];}
 
     // Queue up API requests for persons and orgUnits
     orgUnitTags.forEach(key => observableOrgUnitBatch.push(this.apiService.getOrgUnit(key.id)));

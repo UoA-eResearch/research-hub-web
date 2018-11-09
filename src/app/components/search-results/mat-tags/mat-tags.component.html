@@ -1,4 +1,4 @@
-<mat-form-field fxFlex="100" [ngClass]="{'disabled':disabled}" (click)="triggerAutocomplete()">
+<mat-form-field fxFlex="100" [ngClass]="{'disabled':isDisabled}" (click)="triggerAutocomplete()">
   <mat-chip-list #chipList>
     <div>
       <ng-container *ngFor="let tag of _value; let last = last">
@@ -14,7 +14,7 @@
       </ng-container>
     </div>
 
-    <input [disabled]="disabled"
+    <input [disabled]="isDisabled"
            [matChipInputFor]="chipList"
            [matChipInputAddOnBlur]="false"
            [matAutocomplete]="auto"
