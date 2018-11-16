@@ -4,7 +4,7 @@
       <button matPrefix mat-icon-button>
         <mat-icon>search</mat-icon>
       </button>
-      <input #searchTextInput matInput placeholder="Search" [(ngModel)]="searchText">
+      <input #searchTextInput matInput placeholder="Search" [(ngModel)]="searchText" autofocus>
       <button matSuffix (click)="clearSearchText()" mat-icon-button>
         <mat-icon>close</mat-icon>
       </button>
