@@ -4,7 +4,7 @@
     <h1>{{title}}</h1>
   </mat-card-header>
 
-  <p style="padding-left: 24px;">In order to request a virtual machine, please book a consultation with us to discuss required details. A consultation typically takes 30 minutes. No preparation on your side is necessary. If you have any questions please put them into the comments field.</p>
+  <p style="padding-left: 24px;">In order to request a virtual machine, please book a consultation with us to discuss details like the desired operating system, software, memory, storage and processing power. A consultation typically takes 30 minutes. No preparation on your side is necessary. If you have any questions please put them into the comments field.</p>
 
   <div #resultsDummyHeader style="margin-top: 3em;"></div>
   <mat-horizontal-stepper #stepper linear>
@@ -39,8 +39,7 @@
 
           <div class="form-group">
             <h3>Location</h3>
-            <p>Please meet us at 23 Symonds Street, Building 302, Floor 5, Room 585 or make alternative arrangements with us
-              through the comments field.</p>
+            <p>Our office is at 23 Symonds Street, Building 302, Floor 5, Room 585. We will contact you to confirm the time and arrange the location.</p>
           </div>
 
           <div class="form-group">
@@ -67,6 +66,7 @@
       <div class="step-form-container">
         <h3>Request submitted</h3>
         <p>Your virtual machine consultation request has been submitted and an acknowledgement e-mail sent to <a *ngIf="authService.user" [href]="'mailto:' + authService.user.mail" target="_blank">{{authService.user.mail}}</a>.</p>
+        <p>We will contact you to confirm the time and arrange the location.</p>
         <p>You may view your request here: <a *ngIf="response" [href]="response.ticketUrl"  target="_blank">{{response.ticketNumber}}</a></p>
       </div>
       <div fxLayout="column" fxLayoutAlign="end">
