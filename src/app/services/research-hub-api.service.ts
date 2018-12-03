@@ -267,6 +267,7 @@ export class ResearchHubApiService {
   // Same query as above, but returns total number of results from each category
   getSearchResultsCategories(params: SearchResultsParams) {
     params.setSize(65535); // Return results from all pages
+    params.setPage(0);
 
     return this.http
       .get(ResearchHubApiService.hostname + ResearchHubApiService.searchResultsUrl,
