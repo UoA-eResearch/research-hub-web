@@ -117,9 +117,10 @@
             </div>
 
             <div class="form-group">
-              <h3>Please provide a short name for your storage folder (e.g. GDC-data)?</h3>
+              <h3>Please provide a descriptive name for your storage folder (e.g. GDC-data)?</h3>
               <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
                 <input matInput placeholder="Short name [optional]" formControlName="shortName" type="text">
+                <mat-hint align="start">Avoid generic names like <i>my-project</i> or <i>my-data</i></mat-hint>
                 <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">* Please enter a short name</mat-error>
               </mat-form-field>
             </div>
