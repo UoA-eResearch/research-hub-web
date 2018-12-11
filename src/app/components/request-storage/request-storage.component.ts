@@ -134,13 +134,13 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     this.analyticsService.trackIntegratedService(this.title, this.location.path());
 
     this.storageTypeForm = this.formBuilder.group({
-      storageType: new FormControl(undefined, Validators.required),
-      storageOptions: new FormControl(undefined, Validators.required)
+      storageType: new FormControl(undefined, Validators.required)
     });
 
     this.projectForm = this.formBuilder.group({
       title: new FormControl(undefined, Validators.required),
       abstract: new FormControl(undefined, [Validators.required, Validators.minLength(50)]),
+      storageOptions: new FormControl(undefined, Validators.required),
       endDate: new FormControl(undefined, [Validators.required]),
       fieldOfResearch: new FormControl(undefined, Validators.required),
     });

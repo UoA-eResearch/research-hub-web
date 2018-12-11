@@ -22,16 +22,6 @@
               <mat-error *ngIf="storageTypeForm.controls.storageType.invalid && storageTypeClicked">* Please choose an option</mat-error>
             </mat-radio-group>
           </div>
-
-          <div class="form-group">
-            <h3>Which of the following storage options would you like?</h3>
-            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
-              <mat-select placeholder="Storage options" formControlName="storageOptions" multiple>
-                <mat-option *ngFor="let item of storageOptionsList" [value]="item">{{item}}</mat-option>
-              </mat-select>
-              <mat-error *ngIf="storageTypeForm.controls.storageOptions.invalid">* Please choose at least one item from the list</mat-error>
-            </mat-form-field>
-          </div>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="end">
@@ -64,6 +54,16 @@
               <mat-error *ngIf="projectForm.controls.abstract.hasError('minlength')" align="end">{{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0  }}/50</mat-error>
               <mat-hint align="start">Min 50 Characters</mat-hint>
               <mat-hint align="end">{{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0  }}/50</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <h3>Which of the following storage options would you like?</h3>
+            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
+              <mat-select placeholder="Storage options" formControlName="storageOptions" multiple>
+                <mat-option *ngFor="let item of storageOptionsList" [value]="item">{{item}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="projectForm.controls.storageOptions.invalid">* Please choose at least one item from the list</mat-error>
             </mat-form-field>
           </div>
 
