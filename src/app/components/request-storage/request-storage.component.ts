@@ -149,7 +149,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     this.dataInfoForm = this.formBuilder.group({
       dataRequirements: new FormControl(undefined),
       dataRequirementsOther: new FormControl(undefined),
-      shortName: new FormControl(undefined),
+      shortName: new FormControl(undefined, [Validators.required]),
       projectMembers: this.projectMembers
     });
 
