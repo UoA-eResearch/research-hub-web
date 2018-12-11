@@ -62,8 +62,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   public storageOptionsList = [
     'Dropbox',
     'Network Research Storage',
-    'Archive',
-    'I don\'t know'
+    'Something else'
   ]
 
   public fieldOfResearchCodes = [
