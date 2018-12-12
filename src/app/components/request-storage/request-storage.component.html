@@ -8,31 +8,38 @@
 
   <div #resultsDummyHeader style="margin-top: 3em;"></div>
   <mat-horizontal-stepper #stepper linear="true">
-    <mat-step [editable]="isEditable" [stepControl]="storageTypeForm">
-      <form [formGroup]="storageTypeForm" novalidate>
+    <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
+      <form [formGroup]="requestTypeForm" novalidate>
 
         <ng-template matStepLabel>Request Type</ng-template>
 
         <div class="step-form-container">
           <div class="form-group">
             <h3>Do you want to request new storage or update existing storage?</h3>
-            <mat-radio-group fxLayout="column" fxLayoutGap="1em" formControlName="storageType">
+            <mat-radio-group fxLayout="column" fxLayoutGap="1em" formControlName="requestType">
               <mat-radio-button value="New">New</mat-radio-button>
               <mat-radio-button value="Existing">Existing</mat-radio-button>
-              <mat-error *ngIf="storageTypeForm.controls.storageType.invalid && storageTypeClicked">* Please choose an option</mat-error>
+              <mat-error *ngIf="requestTypeForm.controls.requestType.invalid && requestTypeClicked">* Please choose an option</mat-error>
             </mat-radio-group>
           </div>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="end">
           <div fxLayout="row" fxLayoutAlign="end">
-            <button mat-raised-button color="accent" matStepperNext (click)="storageTypeClicked = true;">Next</button>
+            <button mat-raised-button color="accent" matStepperNext (click)="requestTypeClicked = true;">Next</button>
           </div>
         </div>
       </form>
     </mat-step>
 
-    <mat-step [editable]="isEditable" [stepControl]="projectForm">
+    <mat-step [editable]="isEditable" [stepControl]="requestDetailsForm" *ngIf="requestTypeForm.controls.requestType.value === 'Existing'">
+      <ng-template matStepLabel>Request Details</ng-template>
+      <form [formGroup]="requestDetailsForm">
+        <h1>Howdy!</h1>
+      </form>
+    </mat-step>
+
+    <mat-step [editable]="isEditable" [stepControl]="projectForm" *ngIf="requestTypeForm.controls.requestType.value === 'New'">  
       <form [formGroup]="projectForm" novalidate>
         <ng-template matStepLabel>General Information</ng-template>
 
@@ -97,7 +104,7 @@
       </form>
     </mat-step>
 
-    <mat-step [editable]="isEditable" [stepControl]="dataInfoForm">
+    <mat-step [editable]="isEditable" [stepControl]="dataInfoForm" *ngIf="requestTypeForm.controls.requestType.value === 'New'">
       <form [formGroup]="dataInfoForm" novalidate>
         <ng-template matStepLabel>Data Information</ng-template>
 
@@ -185,7 +192,7 @@
       </form>
     </mat-step>
 
-    <mat-step [editable]="isEditable" [stepControl]="dataSizeForm">
+    <mat-step [editable]="isEditable" [stepControl]="dataSizeForm" *ngIf="requestTypeForm.controls.requestType.value === 'New'">
       <form [formGroup]="dataSizeForm" novalidate>
         <ng-template matStepLabel>Data Size</ng-template>
 

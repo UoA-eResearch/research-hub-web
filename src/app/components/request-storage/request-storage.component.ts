@@ -48,15 +48,16 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   public title = 'Request Research Storage';
   public image = 'content/vault.jpg';
   public response: any;
-  public storageTypeForm: FormGroup;
+  public requestTypeForm: FormGroup;
   public projectForm: FormGroup;
   public dataInfoForm: FormGroup;
   public dataSizeForm: FormGroup;
+  public requestDetailsForm: FormGroup;
   private lastStepIndex = 4;
   public isEditable = true;
   public showOtherField = false;
   public projectMembers: FormArray;
-  public storageTypeClicked = false;
+  public requestTypeClicked = false;
   public showSizeNextYear = true;
 
   public storageOptionsList = [
@@ -132,8 +133,8 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   ngOnInit() {
     this.analyticsService.trackIntegratedService(this.title, this.location.path());
 
-    this.storageTypeForm = this.formBuilder.group({
-      storageType: new FormControl(undefined, Validators.required)
+    this.requestTypeForm = this.formBuilder.group({
+      requestType: new FormControl('New', Validators.required)
     });
 
     this.projectForm = this.formBuilder.group({
@@ -142,6 +143,10 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       storageOptions: new FormControl(undefined, Validators.required),
       endDate: new FormControl(undefined, [Validators.required]),
       fieldOfResearch: new FormControl(undefined, Validators.required),
+    });
+
+    this.requestDetailsForm = this.formBuilder.group({
+      existingStorageFolderName: new FormControl(undefined)
     });
 
     this.projectMembers = this.formBuilder.array([], Validators.compose([Validators.required]));
@@ -225,7 +230,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   }
 
   canDeactivate() {
-    if ((!this.storageTypeForm.dirty && !this.projectForm.dirty && !this.dataInfoForm.dirty && !this.dataSizeForm.dirty) || this.response !== undefined) {
+    if ((!this.requestTypeForm.dirty && !this.projectForm.dirty && !this.dataInfoForm.dirty && !this.dataSizeForm.dirty) || this.response !== undefined) {
       return true;
     }
 
@@ -246,7 +251,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
 
   saveRequest() {
     const form = {
-      storageTypeForm: this.storageTypeForm.getRawValue(),
+      requestTypeForm: this.requestTypeForm.getRawValue(),
       projectForm: this.projectForm.getRawValue(),
       dataInfoForm: this.dataInfoForm.getRawValue(),
       dataSizeForm: this.dataSizeForm.getRawValue()
@@ -261,7 +266,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     if (form !== null) {
       form = JSON.parse(form);
 
-      this.storageTypeForm.setValue(form['storageTypeForm']);
+      this.requestTypeForm.setValue(form['requestTypeForm']);
       this.projectForm.setValue(form['projectForm']);
       this.dataInfoForm.setValue(form['dataInfoForm']);
       this.dataSizeForm.setValue(form['dataSizeForm']);
@@ -305,6 +310,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   }
 
   ngOnDestroy() {
+    this.requestTypeSub.unsubscribe();
     this.routeParamsSub.unsubscribe();
     this.stepperSub.unsubscribe();
     this.dataRequirementsSub.unsubscribe();
@@ -332,7 +338,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       this.submitting = true;
 
       const body = Object.assign({},
-        this.storageTypeForm.getRawValue(),
+        this.requestTypeForm.getRawValue(),
         this.projectForm.getRawValue(),
         this.dataInfoForm.getRawValue(),
         this.dataSizeForm.getRawValue());
