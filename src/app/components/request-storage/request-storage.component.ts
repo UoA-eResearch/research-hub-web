@@ -60,11 +60,17 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   public requestTypeClicked = false;
   public showSizeNextYear = true;
 
+  public updateOptionsList = [
+    'Extend Storage',
+    'Change Access',
+    'Other'
+  ];
+
   public storageOptionsList = [
     'Dropbox',
     'Network Research Storage',
     'Something else'
-  ]
+  ];
 
   public fieldOfResearchCodes = [
     '01 Mathematical Sciences',
@@ -146,7 +152,10 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     });
 
     this.requestDetailsForm = this.formBuilder.group({
-      existingStorageFolderName: new FormControl(undefined)
+      existingFolderName: new FormControl(undefined, [Validators.required]),
+      updateType: new FormControl(undefined, [Validators.required]),
+      requestDetails: new FormControl(undefined, [Validators.required]),
+      comments: new FormControl(undefined)
     });
 
     this.projectMembers = this.formBuilder.array([], Validators.compose([Validators.required]));

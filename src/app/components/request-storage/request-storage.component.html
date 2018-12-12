@@ -33,9 +33,47 @@
     </mat-step>
 
     <mat-step [editable]="isEditable" [stepControl]="requestDetailsForm" *ngIf="requestTypeForm.controls.requestType.value === 'Existing'">
-      <ng-template matStepLabel>Request Details</ng-template>
       <form [formGroup]="requestDetailsForm">
-        <h1>Howdy!</h1>
+        <ng-template matStepLabel>Request Details</ng-template>
+
+        <div class="step-form-container">
+          <div class="form-group">
+            <h3>Please provide the name of your existing research folder</h3>
+
+            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
+              <input matInput placeholder="Folder name" formControlName="existingFolderName" type="text">
+              <mat-error *ngIf="requestDetailsForm.controls.existingFolderName.invalid">* Please enter folder name</mat-error>
+            </mat-form-field>
+
+
+          <div class="form-group">
+            <h3>Would you like to: </h3>
+            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
+              <mat-select placeholder="Type of update" formControlName="updateType" multiple>
+                <mat-option *ngFor="let item of updateOptionsList" [value]="item">{{item}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="requestDetailsForm.controls.updateType.invalid">* Please choose at least one item from the list</mat-error>
+            </mat-form-field>
+          </div>
+
+
+          <div class="form-group">
+            <h3>Please provide details of your request</h3>
+            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
+              <textarea matInput placeholder="Request Details" formControlName="requestDetails" type="text"></textarea>
+            </mat-form-field>
+          </div>
+
+
+          <div class="form-group">
+            <h3>Is there anything else you would like to tell us?</h3>
+            <mat-form-field floatPlaceholder="never" class="no-floating-label input-full-width">
+              <textarea matInput placeholder="Comments [optional]" formControlName="comments" type="text"></textarea>
+            </mat-form-field>
+          </div>
+
+          </div>
+        </div>
       </form>
     </mat-step>
 
