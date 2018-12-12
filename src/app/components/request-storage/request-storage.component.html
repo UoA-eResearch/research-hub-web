@@ -72,6 +72,16 @@
             </mat-form-field>
           </div>
 
+          <div class="step-overlay" fxLayout="row" fxLayoutAlign="center center" *ngIf="submitting">
+            <mat-spinner></mat-spinner>
+          </div>
+
+          <div fxLayout="column" fxLayoutAlign="end">
+            <div fxLayout="row" fxLayoutAlign="end">
+              <button mat-raised-button color="accent" (click)="submit(requestTypeForm.controls.requestType.value, requestDetailsForm)" [disabled]="submitting">Request Storage</button>
+            </div>
+          </div>
+
           </div>
         </div>
       </form>
@@ -285,7 +295,7 @@
 
         <div fxLayout="column" fxLayoutAlign="end">
           <div fxLayout="row" fxLayoutAlign="end">
-            <button mat-raised-button color="accent" (click)="submit()" [disabled]="submitting">Request Storage</button>
+            <button mat-raised-button color="accent" (click)="submit(requestTypeForm.controls.requestType.value, dataSizeForm)" [disabled]="submitting">Request Storage</button>
           </div>
         </div>
       </form>

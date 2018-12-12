@@ -319,7 +319,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   }
 
   ngOnDestroy() {
-    this.requestTypeSub.unsubscribe();
     this.routeParamsSub.unsubscribe();
     this.stepperSub.unsubscribe();
     this.dataRequirementsSub.unsubscribe();
@@ -337,50 +336,62 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     });
   }
 
-  submit() {
-    const isValid = this.dataSizeForm.valid;
-    this.dataSizeForm.markAsTouched();
-    this.dataSizeForm.markAsDirty();
-    this.dataSizeForm.markAsTouched();
+  submit(requestType: string, currentForm: FormGroup) {
+
+    const isValid = currentForm.valid; // Check if the form containing the submit button is valid
+    currentForm.markAsTouched(); // Programmatically fire the formGroup's validators
+    currentForm.markAsDirty();
+    currentForm.markAsTouched();
 
     if (isValid) {
+      console.log('Valid!');
       this.submitting = true;
+      let body;
 
-      const body = Object.assign({},
-        this.requestTypeForm.getRawValue(),
-        this.projectForm.getRawValue(),
-        this.dataInfoForm.getRawValue(),
-        this.dataSizeForm.getRawValue());
+      if (requestType === 'New') {
+        body =  Object.assign({},
+                this.requestTypeForm.getRawValue(),
+                this.projectForm.getRawValue(),
+                this.dataInfoForm.getRawValue(),
+                this.dataSizeForm.getRawValue());
 
-      // Convert endDate into string
-      body.endDate = format(body.endDate, 'YYYY-MM-DD');
+        // Convert endDate into string
+        body.endDate = format(body.endDate, 'YYYY-MM-DD');
+      } else if (requestType === 'Existing') {
+        body =  Object.assign({},
+                this.requestTypeForm.getRawValue(),
+                this.requestDetailsForm.getRawValue());
+      }
 
-      this.cerApiService.requestService('storage', body)
-        .subscribe(
-          (response) => {
-            this.analyticsService.trackActionIntegrated(this.title);
-            this.response = response;
-            this.stepper.selectedIndex = this.lastStepIndex; // Navigate to last step
-          },
-          (err: HttpErrorResponse) => {
-            this.submitting = false;
+      console.log('Submitting request body: ', body);
 
-            if (err.status === 401) {
-              const dialogRef = this.showErrorDialog(
-                'Session expired',
-                'Redirecting to UoA Single Sign On...',
-                'Login',
-                5000
-              );
-              dialogRef.afterClosed().subscribe(result => {
-                const url = this.location.path(false) + '?retry=true';
-                this.saveRequest();
-                this.authService.login(url);
-              });
-            } else {
-              this.showErrorDialog(`${err.name}: ${err.status.toString()}`, JSON.stringify(err.error), 'Close', undefined);
-            }
-          });
+      this.cerApiService.requestService('storage', body).subscribe(
+        (response) => {
+          this.analyticsService.trackActionIntegrated(this.title);
+          this.response = response;
+          this.stepper.selectedIndex = this.stepper._steps.length - 1; // Navigate to the 'Done' form
+        },
+        (err: HttpErrorResponse) => {
+          this.submitting = false;
+
+          if (err.status === 401) {
+            const dialogRef = this.showErrorDialog(
+              'Session expired',
+              'Redirecting to UoA Single Sign On...',
+              'Login',
+              5000
+            );
+            dialogRef.afterClosed().subscribe(result => {
+              const url = this.location.path(false) + '?retry=true';
+              this.saveRequest();
+              this.authService.login(url);
+            });
+          } else {
+            this.showErrorDialog(`${err.name}: ${err.status.toString()}`, JSON.stringify(err.error), 'Close', undefined);
+          }
+        }
+      );
+
     }
   }
 }
