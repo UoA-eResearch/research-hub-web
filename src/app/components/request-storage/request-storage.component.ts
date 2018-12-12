@@ -53,7 +53,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   public dataInfoForm: FormGroup;
   public dataSizeForm: FormGroup;
   public requestDetailsForm: FormGroup;
-  private lastStepIndex = 4;
   public isEditable = true;
   public showOtherField = false;
   public projectMembers: FormArray;
@@ -233,7 +232,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
         });
 
     this.stepperSub = this.stepper.selectionChange.subscribe(selection => {
-      this.isEditable = selection.selectedIndex !== this.lastStepIndex;
+      this.isEditable = selection.selectedIndex !== this.stepper._steps.length - 1;
       this.resultsDummyHeader.nativeElement.scrollIntoView();
     });
   }
@@ -280,7 +279,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       this.dataInfoForm.setValue(form['dataInfoForm']);
       this.dataSizeForm.setValue(form['dataSizeForm']);
 
-      this.stepper.selectedIndex = this.lastStepIndex - 1; // Navigate to last step
+      this.stepper.selectedIndex = this.stepper._steps.length - 1; // Navigate to last step
     }
   }
 
