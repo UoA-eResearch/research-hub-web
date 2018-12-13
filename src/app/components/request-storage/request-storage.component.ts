@@ -260,6 +260,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   saveRequest() {
     const form = {
       requestTypeForm: this.requestTypeForm.getRawValue(),
+      requestDetailsForm: this.requestDetailsForm.getRawValue(),
       projectForm: this.projectForm.getRawValue(),
       dataInfoForm: this.dataInfoForm.getRawValue(),
       dataSizeForm: this.dataSizeForm.getRawValue()
@@ -275,6 +276,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       form = JSON.parse(form);
 
       this.requestTypeForm.setValue(form['requestTypeForm']);
+      this.requestDetailsForm.setValue(form['requestDetailsForm']);
       this.projectForm.setValue(form['projectForm']);
       this.dataInfoForm.setValue(form['dataInfoForm']);
       this.dataSizeForm.setValue(form['dataSizeForm']);
