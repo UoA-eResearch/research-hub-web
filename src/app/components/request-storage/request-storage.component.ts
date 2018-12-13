@@ -48,23 +48,28 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   public title = 'Request Research Storage';
   public image = 'content/vault.jpg';
   public response: any;
-  public storageTypeForm: FormGroup;
+  public requestTypeForm: FormGroup;
   public projectForm: FormGroup;
   public dataInfoForm: FormGroup;
   public dataSizeForm: FormGroup;
-  private lastStepIndex = 4;
+  public requestDetailsForm: FormGroup;
   public isEditable = true;
   public showOtherField = false;
   public projectMembers: FormArray;
-  public storageTypeClicked = false;
+  public requestTypeClicked = false;
   public showSizeNextYear = true;
+
+  public updateOptionsList = [
+    'Extend Storage',
+    'Change Access',
+    'Other'
+  ];
 
   public storageOptionsList = [
     'Dropbox',
     'Network Research Storage',
-    'Archive',
-    'I don\'t know'
-  ]
+    'Something else'
+  ];
 
   public fieldOfResearchCodes = [
     '01 Mathematical Sciences',
@@ -133,16 +138,23 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   ngOnInit() {
     this.analyticsService.trackIntegratedService(this.title, this.location.path());
 
-    this.storageTypeForm = this.formBuilder.group({
-      storageType: new FormControl(undefined, Validators.required),
-      storageOptions: new FormControl(undefined, Validators.required)
+    this.requestTypeForm = this.formBuilder.group({
+      requestType: new FormControl('New', Validators.required)
     });
 
     this.projectForm = this.formBuilder.group({
       title: new FormControl(undefined, Validators.required),
       abstract: new FormControl(undefined, [Validators.required, Validators.minLength(50)]),
+      storageOptions: new FormControl(undefined, Validators.required),
       endDate: new FormControl(undefined, [Validators.required]),
       fieldOfResearch: new FormControl(undefined, Validators.required),
+    });
+
+    this.requestDetailsForm = this.formBuilder.group({
+      existingFolderName: new FormControl(undefined, [Validators.required]),
+      updateType: new FormControl(undefined, [Validators.required]),
+      requestDetails: new FormControl(undefined, [Validators.required]),
+      comments: new FormControl(undefined)
     });
 
     this.projectMembers = this.formBuilder.array([], Validators.compose([Validators.required]));
@@ -150,7 +162,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     this.dataInfoForm = this.formBuilder.group({
       dataRequirements: new FormControl(undefined),
       dataRequirementsOther: new FormControl(undefined),
-      shortName: new FormControl(undefined),
+      shortName: new FormControl(undefined, [Validators.required]),
       projectMembers: this.projectMembers
     });
 
@@ -220,13 +232,13 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
         });
 
     this.stepperSub = this.stepper.selectionChange.subscribe(selection => {
-      this.isEditable = selection.selectedIndex !== this.lastStepIndex;
+      this.isEditable = selection.selectedIndex !== this.stepper._steps.length - 1;
       this.resultsDummyHeader.nativeElement.scrollIntoView();
     });
   }
 
   canDeactivate() {
-    if ((!this.storageTypeForm.dirty && !this.projectForm.dirty && !this.dataInfoForm.dirty && !this.dataSizeForm.dirty) || this.response !== undefined) {
+    if ((!this.requestTypeForm.dirty && !this.projectForm.dirty && !this.dataInfoForm.dirty && !this.dataSizeForm.dirty) || this.response !== undefined) {
       return true;
     }
 
@@ -247,7 +259,8 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
 
   saveRequest() {
     const form = {
-      storageTypeForm: this.storageTypeForm.getRawValue(),
+      requestTypeForm: this.requestTypeForm.getRawValue(),
+      requestDetailsForm: this.requestDetailsForm.getRawValue(),
       projectForm: this.projectForm.getRawValue(),
       dataInfoForm: this.dataInfoForm.getRawValue(),
       dataSizeForm: this.dataSizeForm.getRawValue()
@@ -262,12 +275,13 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     if (form !== null) {
       form = JSON.parse(form);
 
-      this.storageTypeForm.setValue(form['storageTypeForm']);
+      this.requestTypeForm.setValue(form['requestTypeForm']);
+      this.requestDetailsForm.setValue(form['requestDetailsForm']);
       this.projectForm.setValue(form['projectForm']);
       this.dataInfoForm.setValue(form['dataInfoForm']);
       this.dataSizeForm.setValue(form['dataSizeForm']);
 
-      this.stepper.selectedIndex = this.lastStepIndex - 1; // Navigate to last step
+      this.stepper.selectedIndex = this.stepper._steps.length - 1; // Navigate to last step
     }
   }
 
@@ -323,50 +337,62 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     });
   }
 
-  submit() {
-    const isValid = this.dataSizeForm.valid;
-    this.dataSizeForm.markAsTouched();
-    this.dataSizeForm.markAsDirty();
-    this.dataSizeForm.markAsTouched();
+  submit(requestType: string, currentForm: FormGroup) {
+
+    const isValid = currentForm.valid; // Check if the form containing the submit button is valid
+    currentForm.markAsTouched(); // Programmatically fire the formGroup's validators
+    currentForm.markAsDirty();
+    currentForm.markAsTouched();
 
     if (isValid) {
+      console.log('Valid!');
       this.submitting = true;
+      let body;
 
-      const body = Object.assign({},
-        this.storageTypeForm.getRawValue(),
-        this.projectForm.getRawValue(),
-        this.dataInfoForm.getRawValue(),
-        this.dataSizeForm.getRawValue());
+      if (requestType === 'New') {
+        body =  Object.assign({},
+                this.requestTypeForm.getRawValue(),
+                this.projectForm.getRawValue(),
+                this.dataInfoForm.getRawValue(),
+                this.dataSizeForm.getRawValue());
 
-      // Convert endDate into string
-      body.endDate = format(body.endDate, 'YYYY-MM-DD');
+        // Convert endDate into string
+        body.endDate = format(body.endDate, 'YYYY-MM-DD');
+      } else if (requestType === 'Existing') {
+        body =  Object.assign({},
+                this.requestTypeForm.getRawValue(),
+                this.requestDetailsForm.getRawValue());
+      }
 
-      this.cerApiService.requestService('storage', body)
-        .subscribe(
-          (response) => {
-            this.analyticsService.trackActionIntegrated(this.title);
-            this.response = response;
-            this.stepper.selectedIndex = this.lastStepIndex; // Navigate to last step
-          },
-          (err: HttpErrorResponse) => {
-            this.submitting = false;
+      console.log('Submitting request body: ', body);
 
-            if (err.status === 401) {
-              const dialogRef = this.showErrorDialog(
-                'Session expired',
-                'Redirecting to UoA Single Sign On...',
-                'Login',
-                5000
-              );
-              dialogRef.afterClosed().subscribe(result => {
-                const url = this.location.path(false) + '?retry=true';
-                this.saveRequest();
-                this.authService.login(url);
-              });
-            } else {
-              this.showErrorDialog(`${err.name}: ${err.status.toString()}`, JSON.stringify(err.error), 'Close', undefined);
-            }
-          });
+      this.cerApiService.requestService('storage', body).subscribe(
+        (response) => {
+          this.analyticsService.trackActionIntegrated(this.title);
+          this.response = response;
+          this.stepper.selectedIndex = this.stepper._steps.length - 1; // Navigate to the 'Done' form
+        },
+        (err: HttpErrorResponse) => {
+          this.submitting = false;
+
+          if (err.status === 401) {
+            const dialogRef = this.showErrorDialog(
+              'Session expired',
+              'Redirecting to UoA Single Sign On...',
+              'Login',
+              5000
+            );
+            dialogRef.afterClosed().subscribe(result => {
+              const url = this.location.path(false) + '?retry=true';
+              this.saveRequest();
+              this.authService.login(url);
+            });
+          } else {
+            this.showErrorDialog(`${err.name}: ${err.status.toString()}`, JSON.stringify(err.error), 'Close', undefined);
+          }
+        }
+      );
+
     }
   }
 }
