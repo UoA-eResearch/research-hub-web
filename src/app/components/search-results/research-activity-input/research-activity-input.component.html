@@ -5,7 +5,7 @@
                     [disabled]="isDisabled"
                   [ngClass]="[activity.className]"
                   [checked]="model[activity.id].selected"
-                  (change)="onToggle(activity.id,$event)">
+                  (changed)="onToggle(activity.id,$event)">
   {{activity.name}}
 </mat-slide-toggle>
 </div>
