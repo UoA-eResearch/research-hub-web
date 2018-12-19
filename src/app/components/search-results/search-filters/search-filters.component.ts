@@ -1,11 +1,9 @@
 import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription, Observable, forkJoin} from 'rxjs';
 import {Tag} from '../mat-tags/mat-tags.component';
 import {OptionsService, RoleTypeId} from '../../../services/options.service';
 import {ResearchHubApiService, PeopleParams, Params} from 'app/services/research-hub-api.service';
-import {Observable} from 'rxjs/Observable';
-import {forkJoin} from 'rxjs/observable/forkJoin';
 import {SearchResultsComponent} from '../search-results.component';
 import {ListItem} from '../../../model/ListItem';
 import {OrgUnit} from '../../../model/OrgUnit';

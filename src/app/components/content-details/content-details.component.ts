@@ -6,7 +6,7 @@ import {Location} from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {ListItem} from '../../model/ListItem';
 import {ActionTypeId, ContentTypeId, RoleTypeId} from '../../services/options.service';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {LayoutService} from '../../services/layout.service';
 import {AppComponentService} from '../../app.component.service';

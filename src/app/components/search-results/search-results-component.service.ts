@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Page } from 'app/model/Page';
 import { ListItem } from 'app/model/ListItem';
 import { ResearchHubApiService, SearchResultsParams } from 'app/services/research-hub-api.service';
-import { map } from 'rxjs/operators';
-import { forkJoin } from 'rxjs/observable/forkJoin';
-import { delay } from 'rxjs/operators';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { map ,  delay } from 'rxjs/operators';
+import { forkJoin ,  BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class SearchResultsComponentService {
