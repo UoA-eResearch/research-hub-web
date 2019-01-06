@@ -4,7 +4,8 @@ import {Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, AfterViewIni
 import {CategoryId, OptionsService, OptionType} from './services/options.service';
 import {SearchBarService} from './components/search-bar/search-bar.service';
 import {NavigationEnd, Router} from '@angular/router';
-import {Subscription,  Observable } from 'rxjs';
+import {Subscription,  Observable, fromEvent } from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 import {ResearchHubApiService} from './services/research-hub-api.service';
 import {AnalyticsService} from './services/analytics.service';
 import {isPlatformBrowser} from '@angular/common';
@@ -249,7 +250,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
     });
     const restyleFn = () => (this.restyleContentSidenav());
     this.scrollSub = this.scrollDispatcher.scrolled(150).subscribe(restyleFn);
-    this.winResizeSub = Observable.fromEvent(window,'resize').debounceTime(150).subscribe(restyleFn);
+    this.winResizeSub = fromEvent(window,'resize').pipe(debounceTime(150)).subscribe(restyleFn);
     this.contentElementHeight = this.contentElement.nativeElement.clientHeight;
   }
 
