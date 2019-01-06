@@ -1,5 +1,5 @@
 
-import {map} from 'rxjs/operators';
+import {map, first} from 'rxjs/operators';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
@@ -256,7 +256,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     return afterClosedObs.pipe(map(result => {
       afterClosedSub.unsubscribe();
       return result;
-    })).first();
+    }), first());
   }
 
   saveRequest() {

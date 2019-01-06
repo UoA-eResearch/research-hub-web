@@ -1,5 +1,5 @@
 
-import {map} from 'rxjs/operators';
+import {map, first} from 'rxjs/operators';
 import {Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
@@ -88,7 +88,7 @@ export class RequestVmComponent implements OnInit, OnDestroy, CanComponentDeacti
     return afterClosedObs.pipe(map(result => {
       afterClosedSub.unsubscribe();
       return result;
-    })).first();
+    }), first());
   }
 
   excludeWeekendsFilter(d: Date): boolean {

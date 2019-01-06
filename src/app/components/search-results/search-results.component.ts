@@ -329,9 +329,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     // Return an observable containing the batches of observables for both personTags and orgUnitTags
     return forkJoin(
-      forkJoin(observablePersonBatch).map(x => x.map(y => {y['text'] = y['firstName'] + ' ' + y['lastName']; return (y)}))
+      forkJoin(observablePersonBatch).pipe(map(x => x.map(y => {y['text'] = y['firstName'] + ' ' + y['lastName']; return (y)})))
         .pipe(z => observablePersonBatch.length ? z : observableOf([])),
-      forkJoin(observableOrgUnitBatch).map(x => x.map(y => {y['text'] = y['name'];  return (y)}))
+      forkJoin(observableOrgUnitBatch).pipe(map(x => x.map(y => {y['text'] = y['name'];  return (y)})))
         .pipe(z => observableOrgUnitBatch.length ? z : observableOf([]))
     );
   }
