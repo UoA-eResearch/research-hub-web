@@ -36,8 +36,14 @@
 
 .list-item mat-chip-list mat-chip {
   font-size: 12px !important;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 22px;
+  height: 18px !important;
+}
+
+.list-item .mat-standard-chip {
+  min-height: 1.1em; 
 }
 
 .search-paginator {

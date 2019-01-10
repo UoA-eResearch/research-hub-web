@@ -56,7 +56,7 @@
               <p mat-line class="item-title">{{item.title}}</p>
               <p mat-line class="item-subtitle">{{item.subtitle}}</p>
               <mat-chip-list mat-line style="overflow: hidden;height: 18px;">
-                <mat-chip disabled *ngFor="let category of item.categories" style="cursor: pointer;"><span style="color: #004059;">{{category}}</span></mat-chip>
+                <mat-chip *ngFor="let category of item.categories" style="cursor: pointer;"><span style="color: #004059;">{{category}}</span></mat-chip>
               </mat-chip-list>
           </mat-list-item>
         </a>
@@ -80,7 +80,7 @@
           </div>
           <div class="card-result-chip-list">
             <mat-chip-list mat-line style="overflow: hidden; height: 1em;">
-              <mat-chip disabled *ngFor="let category of item.categories" style="margin: 2px 2px 2px 0px; cursor: pointer; background-color: #fff; height: .5em">
+              <mat-chip *ngFor="let category of item.categories" style="margin: 2px 2px 2px 0px; cursor: pointer; background-color: #fff; height: .5em">
                 <span style="color: #004059;font-size: small;">{{category}}</span>
               </mat-chip>
             </mat-chip-list>
