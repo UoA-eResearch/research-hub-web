@@ -79,8 +79,8 @@
             {{item.subtitle}}
           </div>
           <div class="card-result-chip-list">
-            <mat-chip-list mat-line style="overflow: hidden; height: 1em;">
-              <mat-chip *ngFor="let category of item.categories" style="margin: 2px 2px 2px 0px; cursor: pointer; background-color: #fff; height: .5em">
+            <mat-chip-list mat-line style="overflow: hidden;">
+              <mat-chip *ngFor="let category of item.categories" style="cursor: pointer; background-color: #fff;">
                 <span style="color: #004059;font-size: small;">{{category}}</span>
               </mat-chip>
             </mat-chip-list>
