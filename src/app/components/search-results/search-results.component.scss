@@ -29,37 +29,17 @@
   height: 64px;
 }
 
-//////////////////
-.card-result-chip-list mat-chip-list {
-  display: block;
-}
+mat-chip-list {
+  mat-chip {
+    font-size: 12px;
+    line-height: 26px;
+    height: 18px;
 
-.card-result-chip-list mat-chip-list mat-chip {
-  font-size: 12px !important;
-  line-height: 26px;
-  height: 22px !important;
+    &.mat-standard-chip { // Fixes predefined material CSS causing oversized chips
+      min-height: 100%;
+    }
+  }
 }
-
-.card-result-chip-list .mat-standard-chip {
-  min-height: 1.1em; 
-}
-
-.list-item mat-chip-list {
-  display: block;
-}
-
-.list-item mat-chip-list mat-chip {
-  font-size: 12px !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  line-height: 26px;
-  height: 18px !important;
-}
-
-.list-item .mat-standard-chip {
-  min-height: 1.1em; 
-}
-
 
 .search-paginator {
   background-color: $color-background;
