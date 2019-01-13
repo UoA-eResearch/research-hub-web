@@ -17,7 +17,7 @@ WORKDIR       /research-hub-web/
 
 # Copies files required to install dependencies
 COPY          /package.json .
-COPY          /.angular-cli.json .
+COPY          /angular.json .
 COPY          /tsconfig.json .
 COPY          /tslint.json .
 COPY          /protractor.conf.js .
@@ -57,7 +57,7 @@ COPY          --from=test ./research-hub-web/node_modules ./node_modules
 
 # Copies files required to install dependencies
 COPY          /package.json .
-COPY          /.angular-cli.json .
+COPY          /angular.json .
 COPY          /tsconfig.json .
 COPY          /tslint.json .
 COPY          /protractor.conf.js .
