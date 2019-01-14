@@ -70,7 +70,7 @@ RUN           npm rebuild
 COPY          /src ./src
 
 # Build
-RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --environment=prod
+RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod
 
 # ================   Clean stage   ================
 
