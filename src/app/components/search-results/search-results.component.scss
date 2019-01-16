@@ -29,6 +29,7 @@
   height: 64px;
 }
 
+// The mat-chips in the search result lists (both card and list view)
 mat-chip-list {
   mat-chip {
     font-size: 12px;
@@ -100,6 +101,7 @@ mat-chip-list {
   overflow: hidden;
 }
 
+// This is just the bottom section of the card view cards, not to be confused with mat-chip-list
 .card-result-chip-list {
   width: 90%;
   height: 20%;
@@ -109,6 +111,7 @@ mat-chip-list {
   overflow: hidden;
 }
 
+// Used in a div surrounding the category list that is displayed when the filter-panel is hidden
 .inline-category-list {
   margin-top:1.25em;
   margin-bottom: 0.25em;
