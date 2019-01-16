@@ -347,7 +347,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     currentForm.markAsTouched();
 
     if (isValid) {
-      console.log('Valid!');
       this.submitting = true;
       let body;
 

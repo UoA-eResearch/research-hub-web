@@ -1,5 +1,4 @@
 
-// import {of as observableOf, combineLatest as observableCombineLatest, Subscription, Observable, Subject, forkJoin} from 'rxjs';
 import {of, combineLatest, Subscription, Observable, Subject, forkJoin} from 'rxjs';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {SearchBarService} from 'app/components/search-bar/search-bar.service';
