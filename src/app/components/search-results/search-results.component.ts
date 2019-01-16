@@ -1,5 +1,6 @@
 
-import {of as observableOf, combineLatest as observableCombineLatest, Subscription, Observable, Subject, forkJoin} from 'rxjs';
+// import {of as observableOf, combineLatest as observableCombineLatest, Subscription, Observable, Subject, forkJoin} from 'rxjs';
+import {of, combineLatest, Subscription, Observable, Subject, forkJoin} from 'rxjs';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {SearchBarService} from 'app/components/search-bar/search-bar.service';
 import {CategoryId, OptionsService, RoleTypeId} from 'app/services/options.service';
@@ -239,7 +240,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     });
 
     // Subscribe to search parameter changes
-    this.searchChangeSub = observableCombineLatest(
+    this.searchChangeSub = combineLatest(
         this.searchBarService.searchTextChange.pipe(debounceTime(250),distinctUntilChanged()),
         this.filtersForm.valueChanges.pipe(distinctUntilChanged()),
         this.pageEventChange.pipe(distinctUntilChanged()),
@@ -330,9 +331,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     // Return an observable containing the batches of observables for both personTags and orgUnitTags
     return forkJoin(
       forkJoin(observablePersonBatch).pipe(map(x => x.map(y => {y['text'] = y['firstName'] + ' ' + y['lastName']; return (y)})))
-        .pipe(z => observablePersonBatch.length ? z : observableOf([])),
+        .pipe(z => observablePersonBatch.length ? z : of([])),
       forkJoin(observableOrgUnitBatch).pipe(map(x => x.map(y => {y['text'] = y['name'];  return (y)})))
-        .pipe(z => observableOrgUnitBatch.length ? z : observableOf([]))
+        .pipe(z => observableOrgUnitBatch.length ? z : of([]))
     );
   }
 
