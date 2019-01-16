@@ -26,7 +26,7 @@ import {PageEvent} from '@angular/material/paginator';
 import {MatPaginator} from '@angular/material/paginator';
 import {LayoutService} from '../../services/layout.service';
 
-import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+import {MediaChange, MediaObserver} from '@angular/flex-layout';
 
 import {SearchFiltersService} from './search-filters/search-filters.service';
 import { SearchResultsComponentService } from './search-results-component.service';
@@ -151,7 +151,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
               private analyticsService: AnalyticsService, private route: ActivatedRoute,
               private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService,
               private componentService : SearchResultsComponentService,
-              private layoutService: LayoutService, private media: ObservableMedia,
+              private layoutService: LayoutService, private media: MediaObserver,
               private searchFiltersService: SearchFiltersService) {
     this.filtersForm = searchFiltersService.filtersForm;
   }
@@ -223,7 +223,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     // Results cards
     this.updateCols(this.layoutService.getMQAlias());
 
-    this.mediaSub = this.media.subscribe((change: MediaChange) => {
+    this.mediaSub = this.media.media$.subscribe((change: MediaChange) => {
       this.updateCols(change.mqAlias);
       this.updateFiltersView(change.mqAlias);
     });

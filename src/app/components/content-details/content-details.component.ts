@@ -7,7 +7,7 @@ import {AnalyticsService} from 'app/services/analytics.service';
 import {ListItem} from '../../model/ListItem';
 import {ActionTypeId, ContentTypeId, RoleTypeId} from '../../services/options.service';
 import {Subscription} from 'rxjs';
-import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+import {MediaChange, MediaObserver } from '@angular/flex-layout';
 import {LayoutService} from '../../services/layout.service';
 import {AppComponentService} from '../../app.component.service';
 
@@ -26,7 +26,7 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
 
   readonly CONTENT_TYPE_ID_GUIDE: ContentTypeId = ContentTypeId.Guide; // Used to provide a link to all guides in guide breadcrumbs
 
-  constructor(private route: ActivatedRoute, private apiService: ResearchHubApiService, private media: ObservableMedia,
+  constructor(private route: ActivatedRoute, private apiService: ResearchHubApiService, private media: MediaObserver,
               private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService,
               private appComponentService: AppComponentService) {
   }
@@ -86,7 +86,7 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
 
             this.numCols = this.layoutService.getNumGridCols(this.layoutService.getMQAlias());
 
-            this.mediaSub = this.media.subscribe((change: MediaChange) => {
+            this.mediaSub = this.media.media$.subscribe((change: MediaChange) => {
               this.numCols = this.layoutService.getNumGridCols(change.mqAlias);
             });
           }
