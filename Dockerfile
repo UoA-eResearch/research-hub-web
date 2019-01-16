@@ -10,7 +10,7 @@ ARG           https_proxy
 RUN           apt-get update -qq && apt-get install -qqy curl build-essential git
 
 # Install nodejs and update npm to latest version
-RUN           curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN           curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN           apt-get update -qq && apt-get install -y nodejs
 
 WORKDIR       /research-hub-web/
@@ -47,7 +47,7 @@ ARG           https_proxy
 RUN           apt-get update -qq && apt-get install -qqy curl build-essential git
 
 # Install nodejs and update npm to latest version
-RUN           curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN           curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN           apt-get update -qq && apt-get install -y nodejs
 
 WORKDIR       /research-hub-web/
