@@ -1,3 +1,4 @@
+<!-- 
 <div fxLayout="column">
   <h2>Explore research activities</h2>
 
@@ -13,3 +14,20 @@
     </div>
   </div>
 </div>
+ -->
+
+<h2>Explore research activities</h2>
+<mat-chip-list>
+  <div 
+    fxLayout="row wrap"
+    fxLayout.lt-sm="column"
+    fxLayoutAlign="space-between"
+    style="width: 100%">
+    <mat-chip 
+      *ngFor="let activity of optionsService.researchActivityOptions"
+      [ngClass]="[activity.className]"
+      [ngClass.xs]="[activity.className, 'mobile-view']">
+        {{activity.name}}
+    </mat-chip>
+  </div>
+</mat-chip-list>

@@ -35,7 +35,7 @@ $ra-chip-height-touch: 48px;
 }
 
 @mixin research-activity-chip($class-name, $color) {
-  .#{$class-name} > mat-chip {
+  .#{$class-name} {
     @extend .ra-chip;
     background-color: $color !important;
   }
