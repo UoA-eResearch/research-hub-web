@@ -1,13 +1,7 @@
 @import "../../../../research-activity";
 
 /*
- * Spread the chips out evenly when the viewport is large
- * enough to display the chips on one line, with the
- * rightmost chip aligned to the right border.
- * $home-ra-chip-list-wrap-breakpoint depends on the length of each chip.
- * It will need to change in the future if:
- * - research activities have changed (e.g. added, removed, restyled,
- *   reworded)
+ * Sets the height of the research chips on the home page and sets the pointer style. Button size is increased at xs (corresponding to when flex layout is switched to column-based) to improve usability on mobile devices.
  */
 
 mat-chip {
@@ -19,50 +13,3 @@ mat-chip {
     height: $ra-chip-height-touch;
   }
 }
-
-
-/*
-$home-ra-chip-list-wrap-breakpoint: 1040px;
-:host {
-  .ra-chip-container {
-
-    mat-chip {
-      height: $ra-chip-height;
-      cursor: pointer;
-    }
-
-    mat-chip.sm {
-      // Make button size bigger on mobile devices so touch users can use them.
-      height: $ra-chip-height-touch;
-    }
-  }
-
-
-  @media screen and (min-width:$home-ra-chip-list-wrap-breakpoint) {
-    .ra-chip-container {
-	    margin-left:auto;
-	    margin-right: auto;
-    }
-
-    .ra-chip-container:first-child {
-	    margin-left: 0px;
-    }
-
-    .ra-chip-container:last-child {
-	    margin-right: 0px;
-    }
-  }
-}
-*/
-
-/*
-/deep/ mat-chip-list.home-research-activities div {
-  // background-color: blue !important;
-  // font-size: 300%;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between !important;
-  align-items: center;
-  margin: auto;
-}*/

@@ -22,9 +22,10 @@
     fxLayout="row wrap"
     fxLayout.lt-sm="column"
     fxLayoutAlign="space-between"
+    fxLayoutAlign.lt-lg="space-around"
     style="width: 100%">
     <mat-chip 
-      *ngFor="let activity of optionsService.researchActivityOptions"
+      *ngFor="let activity of optionsService.researchActivityOptions" [routerLink]="['/search']" [queryParams]="getQueryParams(activity)"
       [ngClass]="[activity.className]"
       [ngClass.xs]="[activity.className, 'mobile-view']">
         {{activity.name}}
