@@ -1,17 +1,21 @@
 @import "../../../../research-activity";
 
-@mixin research-activity-toggle($class-name, $color,$color-light) {
-  $checkbox-fill-color: rgba(255, 255, 255, 1.0);
 
-  .#{$class-name}.mat-slide-toggle.mat-checked:not(.mat-disabled) /deep/ .mat-slide-toggle-bar {
-    background-color: $color-light;
-  }
 
-  .#{$class-name}.mat-slide-toggle.mat-checked:not(.mat-disabled) /deep/ .mat-slide-toggle-thumb {
-    background-color: $color;
-  }
-}
+// @mixin research-activity-toggle($class-name, $color,$color-light) {
+//   $checkbox-fill-color: rgba(255, 255, 255, 1.0);
 
+//   .#{$class-name}.mat-slide-toggle.mat-checked:not(.mat-disabled) /deep/ .mat-slide-toggle-bar {
+//     background-color: $color-light;
+//   }
+
+//   .#{$class-name}.mat-slide-toggle.mat-checked:not(.mat-disabled) /deep/ .mat-slide-toggle-thumb {
+//     background-color: $color;
+//   }
+// }
+
+
+/*
 :host {
   .mat-slide-toggle /deep/ .mat-slide-toggle-content {
     color: #004059;
@@ -46,3 +50,4 @@
 @include research-activity-toggle('analyze', $color-analyze-bg, $color-analyze-bg-light);
 @include research-activity-toggle('publish', $color-publish-bg, $color-publish-bg-light);
 @include research-activity-toggle('discover', $color-discover-bg, $color-discover-bg-light);
+*/
