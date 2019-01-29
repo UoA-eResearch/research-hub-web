@@ -3,8 +3,8 @@
 <div class="inputs" [ngClass]="{'touch':touchFriendly}" fxLayout="column">
   <div
    *ngFor="let activity of optionsService.researchActivityOptions"
-   [ngClass]="[activity.className]"
-   [ngStyle.xs]="{'margin': '1em'}">
+   [ngClass]="[activity.className, 'ra-slide-container']"
+   [ngClass.xs]="[activity.className, 'ra-slide-container', 'mobile-view']">
     <mat-slide-toggle [disabled]="isDisabled"
                     [checked]="model[activity.id].selected"
                     (change)="onToggle(activity.id,$event)">
