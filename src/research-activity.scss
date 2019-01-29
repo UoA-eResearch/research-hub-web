@@ -133,7 +133,6 @@ $research-activity-palette-publish:  (
   )
 );
 
-
 $research-activity-palette-discover:  (
   50 : #f9e6e7,
   100 : #f0c2c2,
@@ -166,51 +165,3 @@ $research-activity-palette-discover:  (
       A700 : #000000,
   )
 );
-
-/*
- * Research Activity Chips
- */
-
-$ra-chip-margin: 0.5em;
-
-$color-plan-bg: #62388e;
-$color-plan-bg-light: #9074AE;
-$color-create-bg: #2f99cc;
-$color-create-bg-light: #6EB6DB;
-$color-analyze-bg: #329a37;
-$color-analyze-bg-light: #72B673;
-$color-publish-bg: #f49717;
-$color-publish-bg-light: #F7B660;
-$color-discover-bg: #cd3234;
-$color-discover-bg-light: #DB7070;
-$ra-chip-height: 37px;
-$ra-chip-height-touch: 48px;
-
-.ra-chip-container {
-  margin-bottom: $ra-chip-margin;
-}
-
-.ra-chip-container:not(:last-child) {
-  margin-right: $ra-chip-margin;
-}
-
-.ra-chip-container-stacked {
-  margin-bottom: $ra-chip-margin;
-}
-
-.ra-chip {
-  color: white !important;
-}
-
-// @mixin research-activity-chip($class-name, $color) {
-//   .#{$class-name} {
-//     @extend .ra-chip;
-//     background-color: $color !important;
-//   }
-// }
-
-// @include research-activity-chip('plan', $color-plan-bg);
-// @include research-activity-chip('create', $color-create-bg);
-// @include research-activity-chip('analyze', $color-analyze-bg);
-// @include research-activity-chip('publish', $color-publish-bg);
-// @include research-activity-chip('discover', $color-discover-bg);
