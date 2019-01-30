@@ -15,7 +15,8 @@
         [routerLink]="['/search']"
         [queryParams]="getQueryParams(activity)"
         [ngClass]="[activity.className, 'ra-chip']"
-        [ngClass.xs]="[activity.className, 'ra-chip', 'mobile-view']">
+        [ngClass.lt-md]="[activity.className, 'ra-chip', 'tablet-view']"
+        [ngClass.lt-sm]="[activity.className, 'ra-chip', 'mobile-view']">
         {{activity.name}}
       </mat-chip>
     </div>

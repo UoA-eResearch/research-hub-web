@@ -15,6 +15,10 @@
   color: white !important;
   font-size: $ra-chip-font-size;
 
+  &.tablet-view {
+    height: $ra-chip-height-touch;
+  }
+
   &.mobile-view {
     height: $ra-chip-height-touch;
     width: 100%;
