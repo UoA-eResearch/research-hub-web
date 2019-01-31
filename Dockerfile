@@ -35,9 +35,9 @@ COPY          /src ./src
 # when run on the CI server.
 #RUN          npm run ci-test
 
-# ================   Build stage   ================
+# ================   Prepare stage   ================
 
-FROM          nginx as build
+FROM          nginx as prepare
 
 # Build args required to work behind proxy
 ARG           http_proxy
@@ -54,6 +54,17 @@ WORKDIR       /research-hub-web/
 
 # Copy node_modules from test stage
 COPY          --from=test ./research-hub-web/node_modules ./node_modules
+
+# ================   Local development stage   ================
+FROM          prepare as dev
+WORKDIR       /research-hub-web/
+VOLUME        ["./package.json","./angular.json","./tsconfig.json","./tslint.json","./protractor.conf.js","./karma.conf.js","./e2e","./src","./src/assets/env.js"]
+COPY          docker-entrypoint.local.sh ./
+ENTRYPOINT    ["./docker-entrypoint.local.sh"]
+
+# ================   Build stage   ================
+
+FROM          prepare as build
 
 # Copies files required to install dependencies
 COPY          /package.json .
