@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import {OptionsService} from 'app/services/options.service';
-import {Subscription} from 'rxjs/Subscription';
-import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+import {Subscription} from 'rxjs';
+import {MediaChange, MediaObserver} from '@angular/flex-layout';
 import {LayoutService} from 'app/services/layout.service';
 
 @Component({
@@ -22,14 +22,14 @@ export class BrowseComponent implements OnInit, OnDestroy {
   @Input()
   numCols = 4;
 
-  constructor(public optionsService: OptionsService, private media: ObservableMedia,
+  constructor(public optionsService: OptionsService, private media: MediaObserver,
               private layoutService: LayoutService) {
   }
 
   ngOnInit() {
     this.updateCols(this.layoutService.getMQAlias());
 
-    this.mediaSub = this.media.subscribe((change: MediaChange) => {
+    this.mediaSub = this.media.media$.subscribe((change: MediaChange) => {
       this.updateCols(change.mqAlias);
     });
   }

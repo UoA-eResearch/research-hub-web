@@ -1,6 +1,6 @@
 <div class="search-bar-outer" ngClass.lt-md="search-bar-outer-xs" *ngIf="isVisible">
   <div class="search-bar-inner" fxFlex="100" fxLayout="row" fxLayoutGap="1em" fxLayoutAlign="space-between center">
-    <mat-form-field fxFlex floatPlaceholder="never">
+    <mat-form-field fxFlex floatLabel="never">
       <button matPrefix mat-icon-button>
         <mat-icon>search</mat-icon>
       </button>
@@ -10,7 +10,7 @@
       </button>
     </mat-form-field>
 
-    <mat-form-field fxFlex="200px" fxHide.lt-md floatPlaceholder="never" placeholder="Categories">
+    <mat-form-field fxFlex="200px" fxHide.lt-md floatLabel="never" placeholder="Categories">
       <mat-select [(ngModel)]="category">
         <mat-option *ngFor="let category of categoriesValue" [value]="category.id">
           {{category.name}}

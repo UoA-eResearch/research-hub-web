@@ -10,14 +10,14 @@ ARG           https_proxy
 RUN           apt-get update -qq && apt-get install -qqy curl build-essential git
 
 # Install nodejs and update npm to latest version
-RUN           curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN           curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN           apt-get update -qq && apt-get install -y nodejs
 
 WORKDIR       /research-hub-web/
 
 # Copies files required to install dependencies
 COPY          /package.json .
-COPY          /.angular-cli.json .
+COPY          /angular.json .
 COPY          /tsconfig.json .
 COPY          /tslint.json .
 COPY          /protractor.conf.js .
@@ -47,7 +47,7 @@ ARG           https_proxy
 RUN           apt-get update -qq && apt-get install -qqy curl build-essential git
 
 # Install nodejs and update npm to latest version
-RUN           curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN           curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN           apt-get update -qq && apt-get install -y nodejs
 
 WORKDIR       /research-hub-web/
@@ -57,7 +57,7 @@ COPY          --from=test ./research-hub-web/node_modules ./node_modules
 
 # Copies files required to install dependencies
 COPY          /package.json .
-COPY          /.angular-cli.json .
+COPY          /angular.json .
 COPY          /tsconfig.json .
 COPY          /tslint.json .
 COPY          /protractor.conf.js .
@@ -70,7 +70,7 @@ RUN           npm rebuild
 COPY          /src ./src
 
 # Build
-RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --environment=prod
+RUN           node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod
 
 # ================   Clean stage   ================
 

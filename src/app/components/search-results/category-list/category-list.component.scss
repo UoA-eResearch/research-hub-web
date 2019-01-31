@@ -8,25 +8,20 @@
   outline: none;
 }
 
-
 .category-list .mat-chip-selected {
   color: white;
 }
 
+// Category list that is displayed when the filter-panel is hidden
 .category-list.compact {
-  .mat-chip, .mat-chip-list {
+  mat-chip {
     font-size: 14px;
-  }
-
-  .mat-chip {
-    padding: 0.25em 9px;
-  }
-
-  mat-chip-list {
-    // Hide overflowing chips by setting the height to one line's height.
-    display: flex;
-    align-items: flex-start;
-    overflow: hidden;
-    height: 2.2em; // 1em from the chip text + 0.25 x 2 from top/bottom paddings + 0.15 x 2 from top/bottom margins + rest from the highlight shadow.
+    line-height: 26px;
+    height: 25px;
+  
+    &.mat-standard-chip { // Fixes predefined material CSS causing oversized chips
+      min-height: 100%;
+    }
   }
 }
+

@@ -1,6 +1,7 @@
+
+import {of, combineLatest, Subscription, Observable, Subject, forkJoin} from 'rxjs';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {SearchBarService} from 'app/components/search-bar/search-bar.service';
-import {Subscription} from 'rxjs/Subscription';
 import {CategoryId, OptionsService, RoleTypeId} from 'app/services/options.service';
 import {
   ResearchHubApiService, OrderBy,
@@ -15,25 +16,20 @@ import {Location} from '@angular/common';
 import {FilterDialogComponent} from './filter-dialog/filter-dialog.component';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/observable/of';
-import { map } from 'rxjs/operators';
+
+
+import { map ,  debounceTime,distinctUntilChanged } from 'rxjs/operators';
 import {Tag} from './mat-tags/mat-tags.component';
 import {ListItem} from '../../model/ListItem';
 import {AppComponentService} from '../../app.component.service';
 import {PageEvent} from '@angular/material/paginator';
-import {Subject} from 'rxjs/Subject';
 import {MatPaginator} from '@angular/material/paginator';
 import {LayoutService} from '../../services/layout.service';
 
-import {MediaChange, ObservableMedia} from '@angular/flex-layout';
-import {forkJoin} from 'rxjs/observable/forkJoin';
+import {MediaChange, MediaObserver} from '@angular/flex-layout';
 
 import {SearchFiltersService} from './search-filters/search-filters.service';
 import { SearchResultsComponentService } from './search-results-component.service';
-import { debounceTime,distinctUntilChanged } from 'rxjs/operators';
 
 // The screen size at which we should switch to opening filters in dialog or sidenav.
 const FILTER_VIEW_BREAKPOINT = "md";
@@ -155,7 +151,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
               private analyticsService: AnalyticsService, private route: ActivatedRoute,
               private location: Location, public dialog: MatDialog, private appComponentService: AppComponentService,
               private componentService : SearchResultsComponentService,
-              private layoutService: LayoutService, private media: ObservableMedia,
+              private layoutService: LayoutService, private media: MediaObserver,
               private searchFiltersService: SearchFiltersService) {
     this.filtersForm = searchFiltersService.filtersForm;
   }
@@ -227,7 +223,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     // Results cards
     this.updateCols(this.layoutService.getMQAlias());
 
-    this.mediaSub = this.media.subscribe((change: MediaChange) => {
+    this.mediaSub = this.media.media$.subscribe((change: MediaChange) => {
       this.updateCols(change.mqAlias);
       this.updateFiltersView(change.mqAlias);
     });
@@ -243,14 +239,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     });
 
     // Subscribe to search parameter changes
-    this.searchChangeSub = Observable
-      .combineLatest(
+    this.searchChangeSub = combineLatest(
         this.searchBarService.searchTextChange.pipe(debounceTime(250),distinctUntilChanged()),
         this.filtersForm.valueChanges.pipe(distinctUntilChanged()),
         this.pageEventChange.pipe(distinctUntilChanged()),
         this.orderByChange
-      )
-      .debounceTime(100)
+      ).pipe(
+      debounceTime(100))
       .subscribe(latestValues => {
         const [searchText, filtersFormValues, pageEvent, orderBy] = latestValues;
 
@@ -334,10 +329,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     // Return an observable containing the batches of observables for both personTags and orgUnitTags
     return forkJoin(
-      forkJoin(observablePersonBatch).map(x => x.map(y => {y['text'] = y['firstName'] + ' ' + y['lastName']; return (y)}))
-        .pipe(z => observablePersonBatch.length ? z : Observable.of([])),
-      forkJoin(observableOrgUnitBatch).map(x => x.map(y => {y['text'] = y['name'];  return (y)}))
-        .pipe(z => observableOrgUnitBatch.length ? z : Observable.of([]))
+      forkJoin(observablePersonBatch).pipe(map(x => x.map(y => {y['text'] = y['firstName'] + ' ' + y['lastName']; return (y)})))
+        .pipe(z => observablePersonBatch.length ? z : of([])),
+      forkJoin(observableOrgUnitBatch).pipe(map(x => x.map(y => {y['text'] = y['name'];  return (y)})))
+        .pipe(z => observableOrgUnitBatch.length ? z : of([]))
     );
   }
 

@@ -1,3 +1,5 @@
+
+import {map, first} from 'rxjs/operators';
 import {Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
@@ -10,11 +12,11 @@ import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material/dialog';
 import {ErrorDialogComponent} from '../shared/error-dialog/error-dialog.component';
 import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {AnalyticsService} from '../../services/analytics.service';
 import * as format from 'date-fns/format';
 import {CanComponentDeactivate} from '../../routing/routing.confirm-deactivate';
-import 'rxjs/add/operator/map';
+
 import {ConfirmDialogComponent} from '../shared/confirm-dialog/confirm-dialog.component';
 import {ResearchHubApiService} from '../../services/research-hub-api.service';
 
@@ -83,10 +85,10 @@ export class RequestVmComponent implements OnInit, OnDestroy, CanComponentDeacti
     const afterClosedObs = dialogRef.afterClosed();
     const afterClosedSub = afterClosedObs.subscribe();
 
-    return afterClosedObs.map(result => {
+    return afterClosedObs.pipe(map(result => {
       afterClosedSub.unsubscribe();
       return result;
-    }).first();
+    }), first());
   }
 
   excludeWeekendsFilter(d: Date): boolean {

@@ -1,3 +1,5 @@
+
+import {map, first} from 'rxjs/operators';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
@@ -10,7 +12,7 @@ import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material/dialog';
 import {ErrorDialogComponent} from '../shared/error-dialog/error-dialog.component';
 import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {AnalyticsService} from '../../services/analytics.service';
 import * as format from 'date-fns/format';
 import * as subYears from 'date-fns/sub_years';
@@ -251,10 +253,10 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     const afterClosedObs = dialogRef.afterClosed();
     const afterClosedSub = afterClosedObs.subscribe();
 
-    return afterClosedObs.map(result => {
+    return afterClosedObs.pipe(map(result => {
       afterClosedSub.unsubscribe();
       return result;
-    }).first();
+    }), first());
   }
 
   saveRequest() {
@@ -345,7 +347,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     currentForm.markAsTouched();
 
     if (isValid) {
-      console.log('Valid!');
       this.submitting = true;
       let body;
 

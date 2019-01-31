@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {SearchBarService} from './search-bar.service';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {MatInput} from '@angular/material/input';
 import {NavigationEnd, Router} from "@angular/router";
+import {filter} from 'rxjs/operators';
 
 
 @Component({
@@ -44,8 +45,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       this.isVisible = isVisible;
     });
 
-    this.routerSub = this.router.events
-      .filter(event => event instanceof NavigationEnd)
+    this.routerSub = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd))
       .subscribe(event => {
         this.isFilterBtnVisible = !event['urlAfterRedirects'].startsWith('/home');
       });

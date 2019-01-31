@@ -1,14 +1,16 @@
+
+import {retry} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from 'environments/environment';
-import 'rxjs/add/operator/map';
+
 import {Content} from '../model/Content';
 import {GuideCategory} from '../model/GuideCategory';
 import {Person} from '../model/Person';
 import {OrgUnit} from '../model/OrgUnit';
 import {Page} from '../model/Page';
 import {ListItem} from '../model/ListItem';
-import 'rxjs/add/operator/retry';
+
 
 
 export enum OrderBy {
@@ -227,32 +229,32 @@ export class ResearchHubApiService {
 
   getContent(id: number) {
     return this.http
-      .get<Content>(ResearchHubApiService.hostname + ResearchHubApiService.contentUrl + '/' + id, {headers: ResearchHubApiService.headers})
-      .retry(ResearchHubApiService.numRetries);
+      .get<Content>(ResearchHubApiService.hostname + ResearchHubApiService.contentUrl + '/' + id, {headers: ResearchHubApiService.headers}).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 
   getPerson(id: number) {
     return this.http
-      .get<Person>(ResearchHubApiService.hostname + ResearchHubApiService.personUrl + '/' + id, {headers: ResearchHubApiService.headers})
-      .retry(ResearchHubApiService.numRetries);
+      .get<Person>(ResearchHubApiService.hostname + ResearchHubApiService.personUrl + '/' + id, {headers: ResearchHubApiService.headers}).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 
   getOrgUnit(id: number) {
     return this.http
-      .get<OrgUnit>(ResearchHubApiService.hostname + ResearchHubApiService.orgUnitUrl + '/' + id, {headers: ResearchHubApiService.headers})
-      .retry(ResearchHubApiService.numRetries);
+      .get<OrgUnit>(ResearchHubApiService.hostname + ResearchHubApiService.orgUnitUrl + '/' + id, {headers: ResearchHubApiService.headers}).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 
   getGuideCategory(id: number) {
     return this.http
-      .get<GuideCategory>(ResearchHubApiService.hostname + ResearchHubApiService.guideCategoryUrl + '/' + id, {headers: ResearchHubApiService.headers})
-      .retry(ResearchHubApiService.numRetries);
+      .get<GuideCategory>(ResearchHubApiService.hostname + ResearchHubApiService.guideCategoryUrl + '/' + id, {headers: ResearchHubApiService.headers}).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 
   getGuideCategoryContentItems(id: number) {
     return this.http
-      .get<Content[]>(ResearchHubApiService.hostname + ResearchHubApiService.guideCategoryUrl + '/' + id + '/contentItems', {headers: ResearchHubApiService.headers})
-      .retry(ResearchHubApiService.numRetries);
+      .get<Content[]>(ResearchHubApiService.hostname + ResearchHubApiService.guideCategoryUrl + '/' + id + '/contentItems', {headers: ResearchHubApiService.headers}).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 
   getSearchResults(params: SearchResultsParams) {
@@ -260,8 +262,8 @@ export class ResearchHubApiService {
       .get<Page<ListItem>>(ResearchHubApiService.hostname + ResearchHubApiService.searchResultsUrl, {
         params: params.getParams(),
         headers: ResearchHubApiService.headers
-      })
-      .retry(ResearchHubApiService.numRetries);
+      }).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 
   // Same query as above, but returns total number of results from each category
@@ -274,8 +276,8 @@ export class ResearchHubApiService {
         {
           params: params.getParams(),
           headers: ResearchHubApiService.headers
-        })
-      .retry(ResearchHubApiService.numRetries);
+        }).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 
   getContentItems(params: ContentItemsParams) {
@@ -283,15 +285,15 @@ export class ResearchHubApiService {
       .get<Page<ListItem>>(ResearchHubApiService.hostname + ResearchHubApiService.contentUrl, {
         params: params.getParams(),
         headers: ResearchHubApiService.headers
-      })
-      .retry(ResearchHubApiService.numRetries);
+      }).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 
   getSimilarContentItems(id: number) {
     return this.http
       .get<Content[]>(ResearchHubApiService.hostname + ResearchHubApiService.contentUrl + '/' + id + '/' + ResearchHubApiService.similarContentUrl,
-        {headers: ResearchHubApiService.headers})
-      .retry(ResearchHubApiService.numRetries);
+        {headers: ResearchHubApiService.headers}).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 
   getPeople(params: PeopleParams) {
@@ -299,8 +301,8 @@ export class ResearchHubApiService {
       .get<Page<ListItem>>(ResearchHubApiService.hostname + ResearchHubApiService.personUrl, {
         params: params.getParams(),
         headers: ResearchHubApiService.headers
-      })
-      .retry(ResearchHubApiService.numRetries);
+      }).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 
   getOrgUnits(params: Params) {
@@ -308,8 +310,8 @@ export class ResearchHubApiService {
       .get<Page<OrgUnit>>(ResearchHubApiService.hostname + ResearchHubApiService.orgUnitUrl, {
         params: params.getParams(),
         headers: ResearchHubApiService.headers
-      })
-      .retry(ResearchHubApiService.numRetries);
+      }).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 
   getPolicies(params: Params) {
@@ -317,7 +319,7 @@ export class ResearchHubApiService {
       .get<Page<ListItem>>(ResearchHubApiService.hostname + ResearchHubApiService.policyUrl, {
         params: params.getParams(),
         headers: ResearchHubApiService.headers
-      })
-      .retry(ResearchHubApiService.numRetries);
+      }).pipe(
+      retry(ResearchHubApiService.numRetries));
   }
 }

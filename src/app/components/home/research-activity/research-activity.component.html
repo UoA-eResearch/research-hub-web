@@ -1,15 +1,24 @@
-<div fxLayout="column">
-  <h2>Explore research activities</h2>
+<h2>Explore research activities</h2>
 
-  <div fxFlex="noshrink">
-    <div fxFlex.lt-lg="100%">
-      <mat-chip-list ngClass.xs="mat-chip-list-stacked">
-        <div *ngFor="let activity of optionsService.researchActivityOptions" [ngClass]="['ra-chip-container', activity.className]" ngStyle.xs="margin-right: 0;">
-          <mat-chip fxLayout="row" fxLayoutAlign="start center" [ngClass.lt-md]="{'sm':true}"  [routerLink]="['/search']" [queryParams]="getQueryParams(activity)">
-            <span style="padding-left: 0.5em;padding-right: 0.5em;">{{activity.name}}</span>
-          </mat-chip>
-        </div>
-      </mat-chip-list>
+<mat-chip-list>
+    <div 
+      fxLayout="row wrap"
+      fxLayout.lt-sm="column"
+      fxLayoutAlign="space-between"
+      fxLayoutAlign.lt-lg="flex-start"
+      style="width: 100%">
+    <div
+      *ngFor="let activity of optionsService.researchActivityOptions"
+      [ngClass]="activity.className"> <!-- Need to specify class for containing div also in order to use custom themes on material components -->
+      <mat-chip 
+        selected
+        [routerLink]="['/search']"
+        [queryParams]="getQueryParams(activity)"
+        [ngClass]="[activity.className, 'ra-chip']"
+        [ngClass.lt-md]="[activity.className, 'ra-chip', 'tablet-view']"
+        [ngClass.lt-sm]="[activity.className, 'ra-chip', 'mobile-view']">
+        {{activity.name}}
+      </mat-chip>
     </div>
   </div>
-</div>
+</mat-chip-list>

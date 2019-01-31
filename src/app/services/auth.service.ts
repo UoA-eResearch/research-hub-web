@@ -1,6 +1,8 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {environment} from 'environments/environment';
-import {Subject} from 'rxjs/Subject';
+import {Subject} from 'rxjs';
 import {User} from '../model/User';
 import {HttpClient} from '@angular/common/http';
 import {Location} from '@angular/common';
@@ -47,10 +49,10 @@ export class AuthService {
   public getSession() {
     const headers = {'Accept': 'application/json'};
     return this.http
-      .get(environment.shibbolethSessionUrl, {headers})
-      .map((session) =>  {
+      .get(environment.shibbolethSessionUrl, {headers}).pipe(
+      map((session) =>  {
         this.updateSession(session);
         return this.isLoggedInVal;
-    });
+    }));
   }
 }

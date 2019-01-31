@@ -13,15 +13,16 @@ import { SharedModule } from 'app/components/shared/app.shared.module';
 import { Page } from 'app/model/Page';
 import { ListItem } from 'app/model/ListItem';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 
 // Stub class for the search results component service.
 // Currently it returns an empty page.
 class SearchResultsComponentStubService {
   private emptyPage = {totalElements: 0} as Page<ListItem>;
-  public results$ : Observable<Page<ListItem>> = Observable.of(this.emptyPage);
-  public resultsLoading$ : Observable<boolean> = Observable.of(false);
-  public resultsCategories$ : Observable<Page<ListItem>> = Observable.of(this.emptyPage);
-  public resultsCategoriesLoading$ : Observable<boolean> = Observable.of(false);
+  public results$ : Observable<Page<ListItem>> = of(this.emptyPage);
+  public resultsLoading$ : Observable<boolean> = of(false);
+  public resultsCategories$ : Observable<Page<ListItem>> = of(this.emptyPage);
+  public resultsCategoriesLoading$ : Observable<boolean> = of(false);
   public searchWithParams(params: any){
     return;
   }
@@ -30,7 +31,7 @@ class SearchResultsComponentStubService {
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
   let fixture: ComponentFixture<SearchResultsComponent>;
-  let activatedRoute = { queryParams: Observable.of({})};
+  let activatedRoute = { queryParams: of({})};
 
   function expectToHandleNulls(fn,expectedValue,thisArg){
     const undefinedArgs = [],

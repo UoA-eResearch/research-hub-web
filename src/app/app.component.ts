@@ -1,22 +1,24 @@
+
+import {filter, distinctUntilChanged} from 'rxjs/operators';
 import {Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild, AfterViewInit, ElementRef, NgZone} from '@angular/core';
 import {CategoryId, OptionsService, OptionType} from './services/options.service';
 import {SearchBarService} from './components/search-bar/search-bar.service';
 import {NavigationEnd, Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription,  Observable, fromEvent } from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 import {ResearchHubApiService} from './services/research-hub-api.service';
 import {AnalyticsService} from './services/analytics.service';
 import {isPlatformBrowser} from '@angular/common';
 import {AuthService} from './services/auth.service';
 import {ChangeDetectorRef} from '@angular/core';
 import * as format from 'date-fns/format';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/filter';
+
+
 import {HeaderService} from './components/header/header.service';
 import {Location} from '@angular/common';
 import {AppComponentService} from './app.component.service';
 import {Title} from "@angular/platform-browser";
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
-import { Observable } from 'rxjs';
 import {
   trigger,
   state,
@@ -133,7 +135,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
     });
 
     // Navigate to the search page if the user types text in
-    this.searchTextChangeSub = this.searchBarService.searchTextChange.distinctUntilChanged().subscribe(searchText => {
+    this.searchTextChangeSub = this.searchBarService.searchTextChange.pipe(distinctUntilChanged()).subscribe(searchText => {
       const url = this.location.path();
       if (url && !url.startsWith('/search') && searchText != null && searchText !== '') {
         this.router.navigate(['/search'], {
@@ -146,8 +148,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
     });
 
     if (isPlatformBrowser) {
-      this.routerSub = this.router.events
-        .filter(event => event instanceof NavigationEnd)
+      this.routerSub = this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd))
         .subscribe(event => {
           // Need to use urlAfterRedirects rather than url to get correct routeName, even when route redirected automatically
           const url = event['urlAfterRedirects'];
@@ -248,7 +250,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
     });
     const restyleFn = () => (this.restyleContentSidenav());
     this.scrollSub = this.scrollDispatcher.scrolled(150).subscribe(restyleFn);
-    this.winResizeSub = Observable.fromEvent(window,'resize').debounceTime(150).subscribe(restyleFn);
+    this.winResizeSub = fromEvent(window,'resize').pipe(debounceTime(150)).subscribe(restyleFn);
     this.contentElementHeight = this.contentElement.nativeElement.clientHeight;
   }
 

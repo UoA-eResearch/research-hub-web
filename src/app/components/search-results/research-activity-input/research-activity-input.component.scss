@@ -1,48 +1,11 @@
-@import "../../../../research-activity";
+.ra-slide-container {
+  $ra-slide-container-margin: 3px;
+  $ra-slide-container-margin-touch: 1em;
 
-@mixin research-activity-toggle($class-name, $color,$color-light) {
-  $checkbox-fill-color: rgba(255, 255, 255, 1.0);
+  margin: $ra-slide-container-margin;
 
-  .#{$class-name}.mat-slide-toggle.mat-checked:not(.mat-disabled) /deep/ .mat-slide-toggle-bar {
-    background-color: $color-light;
+  &.mobile-view {
+    margin: $ra-slide-container-margin-touch;
   }
 
-  .#{$class-name}.mat-slide-toggle.mat-checked:not(.mat-disabled) /deep/ .mat-slide-toggle-thumb {
-    background-color: $color;
-  }
 }
-
-:host {
-  .mat-slide-toggle /deep/ .mat-slide-toggle-content {
-    color: #004059;
-  }
-
-  .inputs * {
-    margin-bottom:0.5em;
-  }
-
-  .inputs.touch * {
-    margin-bottom:1.5em;
-  }
-
-  span, .mat-slide-toggle /deep/ .mat-slide-toggle-content {
-    transition: opacity 0.3s, color 0.3s;
-  }
-
-  .disabled {
-    span {
-      opacity: 0.4;
-    }
-
-    .mat-slide-toggle /deep/ .mat-slide-toggle-content {
-      color:rgba(0,0,0,0.54);
-      opacity: 0.4;
-    }
-  }
-}
-
-@include research-activity-toggle('plan', $color-plan-bg,$color-plan-bg-light);
-@include research-activity-toggle('create', $color-create-bg, $color-create-bg-light);
-@include research-activity-toggle('analyze', $color-analyze-bg, $color-analyze-bg-light);
-@include research-activity-toggle('publish', $color-publish-bg, $color-publish-bg-light);
-@include research-activity-toggle('discover', $color-discover-bg, $color-discover-bg-light);

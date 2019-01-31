@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import 'research-activity';
 
 // Include the common styles for Angular Material. Be sure that you only ever include this mixin once!
 @include mat-core();
@@ -162,3 +163,23 @@ $color-content-header: map-get($hub-navy, 500);
 $color-content-summary-bg: auto;
 $color-browse-tile-bg: $color-pink;
 $color-guide-tile-bg: #0294a5;
+
+/* Research activity custom material themes:
+ * These are used apply custom themes to Angular components (buttons, sliders etc)
+ * The research activity colour palettes are defined in research-activity.scss
+ */
+@mixin research-activity-theme($class-name, $research-activity-palette) {
+  .#{$class-name} {
+    $research-activity-primary: mat-palette($research-activity-palette);
+    $research-activity-accent: mat-palette($research-activity-palette);
+    $research-activity-warn: mat-palette($research-activity-palette);
+    $research-activity-theme: mat-light-theme($research-activity-primary, $research-activity-accent, $research-activity-warn);
+    @include angular-material-theme($research-activity-theme);
+  }
+}
+
+@include research-activity-theme('plan', $research-activity-palette-plan);
+@include research-activity-theme('create', $research-activity-palette-create);
+@include research-activity-theme('analyze', $research-activity-palette-analyze);
+@include research-activity-theme('publish', $research-activity-palette-publish);
+@include research-activity-theme('discover', $research-activity-palette-discover);
