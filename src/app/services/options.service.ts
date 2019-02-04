@@ -20,7 +20,7 @@ export enum ContentTypeId {
 export enum ResearchActivityId {
   PlanDesign = 1,
   CreateCollectCapture,
-  AnalyzeInterpret,
+  AnalyseInterpret,
   PublishReport,
   DiscoverReuse
 }
@@ -106,9 +106,9 @@ export class OptionsService {
         type: OptionType.ResearchActivity
       },
       {
-        id: ResearchActivityId.AnalyzeInterpret,
-        name: 'Analyze & Interpret',
-        className: 'analyze',
+        id: ResearchActivityId.AnalyseInterpret,
+        name: 'Analyse & Interpret',
+        className: 'analyse',
         type: OptionType.ResearchActivity
       },
       {

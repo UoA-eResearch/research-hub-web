@@ -5,8 +5,8 @@ import {Content} from 'app/model/Content';
 import {Location} from '@angular/common';
 import {AnalyticsService} from 'app/services/analytics.service';
 import {ListItem} from '../../model/ListItem';
-import {ActionTypeId, ContentTypeId, RoleTypeId} from '../../services/options.service';
-import {Subscription} from 'rxjs';
+import {ActionTypeId, ContentTypeId, RoleTypeId, OptionsService} from '../../services/options.service';
+import {Subscription, Observable, of} from 'rxjs';
 import {MediaChange, MediaObserver } from '@angular/flex-layout';
 import {LayoutService} from '../../services/layout.service';
 import {AppComponentService} from '../../app.component.service';
@@ -28,7 +28,7 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private apiService: ResearchHubApiService, private media: MediaObserver,
               private location: Location, private analyticsService: AnalyticsService, private layoutService: LayoutService,
-              private appComponentService: AppComponentService) {
+              private appComponentService: AppComponentService, private optionsService: OptionsService) {
   }
 
   isGuide() {
@@ -62,6 +62,14 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
           const url = this.location.path();
           const name = content.name;
           this.content = content;
+
+          console.log(content);
+          content['researchPhases'].map(researchPhase => 
+            researchPhase.className = this.optionsService.researchActivityOptions
+              .find((researchActivityOption: any) => researchPhase.name === researchActivityOption.name).className
+          );
+
+          console.log(content);
 
           this.appComponentService.setTitle(name);
 

@@ -77,12 +77,39 @@
         </mat-chip-list>
       </mat-card>
 
+      <mat-card *ngIf="content.researchPhases.length">
+        <h3>Research activities</h3>
+          <mat-chip-list>
+              <div 
+                fxLayout="row wrap"
+                fxLayout.lt-sm="column"
+                fxLayoutAlign="flex-start"
+                fxLayoutAlign.lt-lg="flex-start"
+                style="width: 100%">
+              <div
+                *ngFor="let activity of content.researchPhases"
+                [ngClass]="activity.className">
+                <mat-chip 
+                  selected
+                  [routerLink]="['/search']"
+                  [ngClass]="[activity.className]"
+                  style="color: white; cursor: pointer">
+                  {{activity.name}}
+                </mat-chip>
+              </div>
+            </div>
+          </mat-chip-list>
+      </mat-card>
+
       <mat-card *ngIf="content.policies.length">
         <h3>Policies</h3>
         <a class="policy-url" *ngFor="let policy of content.policies" [href]="policy.url" target="_blank" (click)="analyticsService.trackPolicy(policy.name, policy.url);">
           {{policy.name}}
         </a>
       </mat-card>
+
+
+
     </div>
   </div>
 </ng-container>
