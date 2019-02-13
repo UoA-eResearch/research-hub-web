@@ -13,6 +13,7 @@ export class AnalyticsService {
   eventCategoryOrgUnit = 'OrgUnit';
   eventCategoryIntegratedService = 'IntegratedService';
   eventCategoryPolicy = 'Policy';
+  eventCategoryUserExperience = 'User Experience';
 
   eventActionView = 'view';
   eventActionClick = 'click';
@@ -27,6 +28,11 @@ export class AnalyticsService {
     if (typeof ga === 'undefined') { return; }
     ga('create', environment.analyticsCode, 'auto');
   }
+
+  trackUserExperience(eventLabel: string, eventAction: string) {
+    this.trackEvent(this.eventCategoryUserExperience, eventAction, eventLabel);
+  }
+
 
   trackContent(name: string, url: string) {
     this.trackEvent(this.eventCategoryContent, this.eventActionView, name);
