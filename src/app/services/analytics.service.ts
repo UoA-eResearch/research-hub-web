@@ -2,6 +2,15 @@ import {Injectable} from '@angular/core';
 import {environment} from 'environments/environment';
 declare const ga: any;
 
+class UserExperienceEvent {
+    eventLabel: string;
+    eventActions: string[];
+
+    constructor(eventLabel: string, ...eventActions: string[]) {
+        this.eventLabel = eventLabel;
+        this.eventActions = eventActions;
+    }
+}
 
 @Injectable()
 export class AnalyticsService {
@@ -19,8 +28,15 @@ export class AnalyticsService {
   eventActionClick = 'click';
   eventActionGo = 'go';
 
+  // This array holds the list of recognized Google Analytics UX events
+  readonly UX_EVENTS: UserExperienceEvent[] = [];
+
   constructor () {
     this.initialize();
+
+    // Register known Google Analytics UX events
+    this.UX_EVENTS.push(new UserExperienceEvent('Have you seen', 'click'))
+    this.UX_EVENTS.push(new UserExperienceEvent('Card view', 'click', 'showCardView'));
   }
 
   // This method needs to be called first to initalise Google Analytics
@@ -30,9 +46,20 @@ export class AnalyticsService {
   }
 
   trackUserExperience(eventLabel: string, eventAction: string) {
-    this.trackEvent(this.eventCategoryUserExperience, eventAction, eventLabel);
+    if(this.isKnownEvent(eventLabel, eventAction)) {
+      // Send the Google Analytics UX event
+      // this.trackEvent(this.eventCategoryUserExperience, eventAction, eventLabel);
+    } else {
+      console.error('This is not a known Google Analytics event');
+    }
   }
 
+  isKnownEvent(eventLabel: string, eventAction: string) {
+    return this.UX_EVENTS
+        .filter(x => x.eventLabel === eventLabel)
+        .filter(x => x.eventActions.indexOf(eventAction) != -1)
+        .length != 0;
+  }
 
   trackContent(name: string, url: string) {
     this.trackEvent(this.eventCategoryContent, this.eventActionView, name);
