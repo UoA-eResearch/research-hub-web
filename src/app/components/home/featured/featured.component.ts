@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ResearchHubApiService, ContentItemsParams} from 'app/services/research-hub-api.service';
 import {Content} from 'app/model/Content';
+import { AnalyticsService } from 'app/services/analytics.service';
 
 @Component({
   selector: 'app-featured',
@@ -11,7 +12,8 @@ export class FeaturedComponent implements OnInit {
 
   content: Content;
 
-  constructor(private apiService: ResearchHubApiService) {
+  constructor(private apiService: ResearchHubApiService, public analyticsService: AnalyticsService)  {
+
   }
 
   ngOnInit() {
