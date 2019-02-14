@@ -1,6 +1,7 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {OptionsService} from 'app/services/options.service';
+import {AnalyticsService} from 'app/services/analytics.service';
 
 
 @Component({
@@ -43,7 +44,7 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
     this.updateState();
   }
 
-  constructor(public optionsService: OptionsService) {
+  constructor(public optionsService: OptionsService, public analyticsService: AnalyticsService) {
     for (const activity of optionsService.researchActivityOptions) {
       this.model[activity.id] = {selected: false};
     }
@@ -59,6 +60,7 @@ export class ResearchActivityInputComponent implements OnInit, ControlValueAcces
   onToggle(activityId,toggleEvent) {
     this.model[activityId].selected = !this.model[activityId].selected;
     this.updateValue();
+    this.analyticsService.trackUserExperience('Filter panel', 'filter by research activity');
   }
 
   registerOnChange(fn) {
