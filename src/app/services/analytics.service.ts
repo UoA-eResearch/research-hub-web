@@ -62,9 +62,16 @@ export class AnalyticsService {
     ga('create', environment.analyticsCode, 'auto');
   }
 
+  /**
+   * This method first checks whether the event is a known UX event.
+   * If so it calls trackEvent(), which then sets the relevant Google Analytics
+   * properties and sends the event.
+   * @param eventLabel Google Analytics eventLabel
+   * @param eventAction Google Analytics eventAction
+   */
   trackUserExperience(eventLabel: string, eventAction: string) {
     if(this.isKnownUXEvent(eventLabel, eventAction)) {
-      // Send the Google Analytics UX event
+      this.trackEvent(this.eventCategoryUserExperience, eventAction, eventLabel);
     } else {
       console.error('This is not a known Google Analytics UX event');
     }
