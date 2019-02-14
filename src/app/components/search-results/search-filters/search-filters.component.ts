@@ -7,6 +7,7 @@ import {ResearchHubApiService, PeopleParams, Params} from 'app/services/research
 import {SearchResultsComponent} from '../search-results.component';
 import {ListItem} from '../../../model/ListItem';
 import {OrgUnit} from '../../../model/OrgUnit';
+import { AnalyticsService } from 'app/services/analytics.service';
 
 @Component({
   selector: 'app-search-filters',
@@ -31,7 +32,7 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
   public personTagSource: Tag[] = [];
   public orgUnitTagSource: Tag[] = [];
 
-  constructor(private apiService: ResearchHubApiService, public optionsService: OptionsService) {
+  constructor(private apiService: ResearchHubApiService, public optionsService: OptionsService, public analyticsService: AnalyticsService) {
   }
 
   ngOnInit() {
@@ -74,6 +75,7 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
 
   setCategory(value){
     this.filtersForm.controls.categoryId.setValue(value);
+    this.analyticsService.trackUserExperience('Filter panel', 'filter by category')
   }
 
   updateFilterVisibility(categoryId: number) {
