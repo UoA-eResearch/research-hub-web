@@ -49,7 +49,7 @@ export class AnalyticsService {
      */
     this.UX_EVENTS.push(new UXEvent('Have you seen', 'click'))
     this.UX_EVENTS.push(new UXEvent('Card view', 'click', 'show card view', 'show list view'));
-    this.UX_EVENTS.push(new UXEvent('Sort by', 'click'));
+    this.UX_EVENTS.push(new UXEvent('Sort by', 'sort by alphabetical', 'sort by relevance'));
     this.UX_EVENTS.push(new UXEvent('Home page research activities', 'click'));
     this.UX_EVENTS.push(new UXEvent('Filter panel',
       'open', 'close', 'filter by research activity', 'filter by category',

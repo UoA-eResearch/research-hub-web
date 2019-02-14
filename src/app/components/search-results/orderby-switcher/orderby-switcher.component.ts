@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { OrderBy } from 'app/services/research-hub-api.service';
+import { AnalyticsService } from 'app/services/analytics.service';
 
 @Component({
   selector: 'orderby-switcher',
@@ -21,9 +22,10 @@ export class OrderbySwitcherComponent implements OnInit {
 
   onSortByChange(event){
     this.valueChange.emit(event.value);
+    event.value === 'alphabetical' ? this.analyticsService.trackUserExperience('Sort by', 'sort by alphabetical') : this.analyticsService.trackUserExperience('Sort by', 'sort by relevance'); 
   }
 
-  constructor() { }
+  constructor(public analyticsService: AnalyticsService) { }
 
   ngOnInit() {
   }
