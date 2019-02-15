@@ -165,7 +165,6 @@ export class AnalyticsService {
   }
 
   trackEvent(eventCategory, eventAction, eventLabel) {
-    console.log(`trackEvent called with eventCategory: ${eventCategory}, eventAction: ${eventAction}, eventLabel: ${eventLabel}`);
     if (typeof ga === 'undefined') { return; }
     ga('set', 'eventCategory', eventCategory);
     ga('set', 'eventAction', eventAction);
