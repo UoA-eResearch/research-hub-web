@@ -12,6 +12,7 @@ import {
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS
 } from '@angular/forms';
+import { AnalyticsService } from 'app/services/analytics.service';
 
 export interface Tag {
   id: number;
@@ -56,6 +57,8 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
   @Input() addNew = true;
 
   @Input() placeholder = '';
+
+  constructor(public analyticsService: AnalyticsService) {}
 
   @Input()
   set value(v: Tag[]) {
@@ -127,6 +130,7 @@ export class MatTagsComponent implements ControlValueAccessor, OnChanges {
 
   add(event: MatAutocompleteSelectedEvent, input: any): void {
     this.addTag(event.option.value, input);
+    this.placeholder.search('person') != -1 ? this.analyticsService.trackUserExperience('Filter panel', 'refine by person') : this.analyticsService.trackUserExperience('Filter panel', 'refine by org unit');
   }
 
   triggerAutocomplete(){
