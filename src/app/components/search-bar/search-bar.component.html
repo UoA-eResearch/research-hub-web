@@ -19,7 +19,7 @@
     </mat-form-field>
 
     <div fxFlex="40px" fxHide.gt-sm *ngIf="isFilterBtnVisible" fxLayoutAlign="center center">
-      <button mat-icon-button (click)="openSearchFilter()">
+      <button mat-icon-button (click)="openSearchFilter(); this.analyticsService.trackUserExperience('Filter panel', 'open')">
         <mat-icon class="mat-24" style="color: #757575;">filter_list</mat-icon>
       </button>
     </div>
