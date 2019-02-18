@@ -59,8 +59,8 @@ COPY          --from=test ./research-hub-web/node_modules ./node_modules
 FROM          prepare as dev
 WORKDIR       /research-hub-web/
 VOLUME        ["./package.json","./angular.json","./tsconfig.json","./tslint.json","./protractor.conf.js","./karma.conf.js","./e2e","./src","./src/assets/env.js"]
-COPY          docker-entrypoint.local.sh ./
-ENTRYPOINT    ["./docker-entrypoint.local.sh"]
+COPY          docker-entrypoint.sh ./
+ENTRYPOINT    ["./docker-entrypoint.sh","--local"]
 
 # ================   Build stage   ================
 
