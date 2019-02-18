@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewSwitcherComponent } from './view-switcher.component';
+import { AnalyticsService } from 'app/services/analytics.service';
 
 describe('ViewSwitcherComponent', () => {
   let component: ViewSwitcherComponent;
@@ -8,7 +9,10 @@ describe('ViewSwitcherComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewSwitcherComponent ]
+      declarations: [ ViewSwitcherComponent ],
+      providers: [
+        AnalyticsService
+      ]
     })
     .compileComponents();
   }));

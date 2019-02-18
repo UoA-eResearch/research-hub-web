@@ -11,7 +11,10 @@ export class User {
 
   private static getAttrValue(attributes: any, key: string) {
     for (const attr of attributes) {
-      if (attr['name'] === key) {
+      if(attr['name'] === 'mail') {
+        const knownEmailAddresses = attr['values'];
+        return User.getPrimaryEmail(knownEmailAddresses);
+      } else if (attr['name'] === key) {
         const values = attr['values'];
         if (values && values.length) {
           return values[0];
@@ -20,6 +23,25 @@ export class User {
     }
 
     return '';
+  }
+
+  /*
+   * If a user has multiple known email addresses, this function selects which to use as the 'primary'
+   * email address. Priority is given to institutional email addresses (staff->student->generic instutional->any).
+   */
+  private static getPrimaryEmail(knownEmailAddresses: any[]): String  {
+    const EMAIL_PRIORITIES = [
+      '.*@auckland.ac.nz',
+      '.*@aucklanduni.ac.nz',
+      '.*ac.nz'
+    ];
+
+    for(let emailPriority of EMAIL_PRIORITIES) 
+      for(let email of knownEmailAddresses) 
+        if(email.search(emailPriority) != -1)  
+          return email;
+
+    return knownEmailAddresses[0]; // None of the user's email addresses are institutional ¯\_(ツ)_/¯
   }
 
   public static fromSession(session: any): User {
