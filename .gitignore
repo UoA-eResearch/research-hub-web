@@ -41,3 +41,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Custom environment file - use it in special local development situations
+/src/environments/environment.custom.ts
