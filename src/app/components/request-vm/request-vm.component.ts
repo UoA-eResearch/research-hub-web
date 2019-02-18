@@ -98,7 +98,7 @@ export class RequestVmComponent implements OnInit, OnDestroy, CanComponentDeacti
   }
 
   ngOnInit() {
-    this.analyticsService.trackIntegratedService('Request a Research Virtual Machine', this.location.path());
+    this.analyticsService.trackIntegratedService(this.title, this.location.path());
 
     this.times = RequestVmComponent.getTimes();
     this.appComponentService.setTitle(this.title);

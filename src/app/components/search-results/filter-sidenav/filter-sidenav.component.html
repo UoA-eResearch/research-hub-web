@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="end" class="close-button">
-  <button mat-icon-button (click)="done()">
+  <button mat-icon-button (click)="done(); analyticsService.trackUserExperience('Filter panel', 'close')">
     <mat-icon aria-label="Close the refine search panel.">close</mat-icon>
   </button>
 </div>

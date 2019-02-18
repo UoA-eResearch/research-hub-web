@@ -3,7 +3,9 @@
   <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-lg="column">
     <div ngClass.gt-xs="card-gt-xs">
       <mat-card>
-        <a [routerLink]="['/content', content.id]">
+        <a 
+          [routerLink]="['/content', content.id]"
+          (click)="analyticsService.trackUserExperience('Have you seen', 'click')">
           <div style="margin: 2em;" >
             <img mat-card-image [src]="apiService.getAssetUrl(content.image)">
           </div>

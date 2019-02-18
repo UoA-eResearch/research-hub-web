@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {OptionsService} from 'app/services/options.service';
+import {AnalyticsService} from 'app/services/analytics.service';
 
 @Component({
   selector: 'app-research-activity',
@@ -8,7 +9,7 @@ import {OptionsService} from 'app/services/options.service';
 })
 export class ResearchActivityComponent implements OnInit {
 
-  constructor(public optionsService: OptionsService) {
+  constructor(public optionsService: OptionsService, public analyticsService: AnalyticsService) {
 
   }
 

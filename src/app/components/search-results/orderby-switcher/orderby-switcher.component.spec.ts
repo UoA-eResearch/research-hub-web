@@ -6,6 +6,7 @@ import { SharedModule } from 'app/components/shared/app.shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchResultsComponentService } from '../search-results-component.service';
 import { ResearchHubApiService } from 'app/services/research-hub-api.service';
+import { AnalyticsService } from 'app/services/analytics.service';
 
 describe('OrderbySwitcherComponent', () => {
   let component: OrderbySwitcherComponent;
@@ -23,7 +24,8 @@ describe('OrderbySwitcherComponent', () => {
       ],
       providers: [
         ResearchHubApiService,
-        SearchResultsComponentService
+        SearchResultsComponentService,
+        AnalyticsService
       ]
     })
     .compileComponents();
