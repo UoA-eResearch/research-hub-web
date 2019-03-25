@@ -1,8 +1,9 @@
 import { ResearchHubPage } from './app.po';
 import { browser, by, element } from 'protractor';
 
+let page: ResearchHubPage;
+
 describe('ResearchHub\'s Basic Functionality', () => {
-  let page: ResearchHubPage;
 
   beforeEach(() => {
     page = new ResearchHubPage();
@@ -21,6 +22,19 @@ describe('ResearchHub\'s Basic Functionality', () => {
           expect(browser.driver.findElement(by.className('search-results-title')).getText()).toEqual('Results');
         });
       });
+    });
+  });
+});
+
+describe('ResearchHub\'s Search Functionality', () => {
+
+  beforeEach(() => {
+    page = new ResearchHubPage();
+  });
+
+  it('can display search results page', () => {
+    page.navigateTo('https://research-hub.auckland.ac.nz/#/search').then(() => {
+      expect(browser.driver.findElement(by.className('search-results-title')).getText()).toEqual('Results');
     });
   });
 
