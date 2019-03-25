@@ -2,6 +2,7 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
 exports.config = {
+  allScriptsTimeout: 11000,
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
@@ -10,6 +11,7 @@ exports.config = {
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
     });
+    browser.driver.manage().window().maximize();
   },
 
   'seleniumAddress': 'http://hub-cloud.browserstack.com/wd/hub',
@@ -21,7 +23,9 @@ exports.config = {
   'commonCapabilities': {
     'browserstack.user' : '',
     'browserstack.key' : '',
-    'browserstack.debug' : 'true'
+    'browserstack.debug' : 'true',
+    'acceptSslCerts': true,
+    'resolution' : '1920x1080'
   },
 
   'multiCapabilities': [{
@@ -30,8 +34,6 @@ exports.config = {
     'browserName': 'Safari'
   },{
     'browserName': 'Firefox'
-  },{
-    'browserName': 'IE'
   }]
 };
 

@@ -6,6 +6,8 @@ let page: ResearchHubPage;
 describe('ResearchHub\'s Basic Functionality', () => {
 
   beforeEach(() => {
+
+
     page = new ResearchHubPage();
   });
 
@@ -47,5 +49,25 @@ describe('ResearchHub\'s Search Functionality', () => {
       });
     });
   });
+
+  /**
+   * Visits the home page, types 'biblioinformatics' in the search bar, navigates to the first search result
+   * item, and checks that its title = 'BiblioInformatics'
+   * TODO: Fix Firefox scroll into view issue
+   */
+  it('displays correct search results that can be navigated to', () => {
+    page.navigateTo().then(() => {
+      browser.driver.findElement(by.css('input')).sendKeys('biblioinformatics').then(() => {
+        browser.waitForAngular().then(() => {
+          browser.driver.findElement(by.css('.results-list .mat-list-item')).click().then(() => {
+            browser.waitForAngular().then(() => {
+              expect(browser.driver.findElement(by.css('h2')).getText()).toEqual('BiblioInformatics');
+            });
+          });
+        });
+      });
+    });
+  });
+
 
 });
