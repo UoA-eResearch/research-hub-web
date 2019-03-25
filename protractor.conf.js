@@ -11,7 +11,7 @@ exports.config = {
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
     });
-    browser.driver.manage().window().maximize();
+    // browser.driver.manage().window().maximize();
   },
 
   'seleniumAddress': 'http://hub-cloud.browserstack.com/wd/hub',
@@ -23,17 +23,23 @@ exports.config = {
   'commonCapabilities': {
     'browserstack.user' : '',
     'browserstack.key' : '',
-    'browserstack.debug' : 'true',
-    'acceptSslCerts': true,
-    'resolution' : '1920x1080'
+    'browserstack.debug' : true,
+    'browserstack.video' : true,
+    'acceptSslCerts' : true
   },
 
   'multiCapabilities': [{
     'browserName': 'Chrome',
+    'os' : 'Windows',
+    'os_version' : '10',
   },{
-    'browserName': 'Safari'
+    'browserName': 'Safari',
+    'os' : 'OS X',
+    'os_version' : 'Mojave',
   },{
-    'browserName': 'Firefox'
+    'browserName': 'Firefox',
+    'os' : 'Windows',
+    'os_version' : '10',
   }]
 };
 
