@@ -53,9 +53,7 @@ describe('ResearchHub\'s Search Functionality', () => {
   /**
    * Visits the home page, types 'biblioinformatics' in the search bar, navigates to the first search result
    * item, and checks that its title = 'BiblioInformatics'
-   * TODO: Fix Firefox scroll into view issues
    */
-  /*
   it('displays correct search results that can be navigated to', () => {
     page.navigateTo().then(() => {
       browser.driver.findElement(by.css('input')).sendKeys('biblioinformatics').then(() => {
@@ -69,6 +67,5 @@ describe('ResearchHub\'s Search Functionality', () => {
       });
     });
   });
-*/
 
 });
