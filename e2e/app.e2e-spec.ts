@@ -32,9 +32,19 @@ describe('ResearchHub\'s Search Functionality', () => {
     page = new ResearchHubPage();
   });
 
-  it('can display search results page', () => {
+  it('can directly navigate to search results page', () => {
     page.navigateTo('https://research-hub.auckland.ac.nz/#/search').then(() => {
       expect(browser.driver.findElement(by.className('search-results-title')).getText()).toEqual('Results');
+    });
+  });
+
+  it('displays search results after typing in homepage search bar', () => {
+    page.navigateTo().then(() => {
+      browser.driver.findElement(by.css('input')).sendKeys('vm').then(() => {
+        browser.waitForAngular().then(() => {
+          expect(browser.driver.findElement(by.className('search-results-title')).getText()).toEqual('Results');
+        });
+      });
     });
   });
 
