@@ -1,7 +1,7 @@
 import { browser, by, element } from 'protractor';
 
 export class ResearchHubPage {
-  navigateTo(url = 'https://research-hub.auckland.ac.nz') {
+  navigateTo(url) {
     return browser.driver.get(url);
   }
 
