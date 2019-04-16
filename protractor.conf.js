@@ -1,5 +1,6 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
+import {BROWSERSTACK_CREDENTIALS } from './e2e/browserstack-credentials';
 
 exports.config = {
   allScriptsTimeout: 11000,
@@ -21,8 +22,8 @@ exports.config = {
   ],
 
   'commonCapabilities': {
-    'browserstack.user' : '',
-    'browserstack.key' : '',
+    'browserstack.user' : BROWSERSTACK_CREDENTIALS.USER,
+    'browserstack.key' : BROWSERSTACK_CREDENTIALS.KEY,
     'browserstack.debug' : true,
     'browserstack.video' : true,
     'acceptSslCerts' : true
