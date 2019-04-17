@@ -1,6 +1,7 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
+var BROWSERSTACK_CREDENTIALS = require('./e2e/browserstack-credentials');
 var browserstack = require('browserstack-local');
 
 exports.config = {
@@ -23,8 +24,8 @@ exports.config = {
   ],
 
   'commonCapabilities': {
-    'browserstack.user' : '',
-    'browserstack.key' : '',
+    'browserstack.user' : BROWSERSTACK_CREDENTIALS.USER,
+    'browserstack.key' : BROWSERSTACK_CREDENTIALS.KEY,
     'browserstack.debug' : true,
     'browserstack.video' : true,
     'browserstack.local' : true,

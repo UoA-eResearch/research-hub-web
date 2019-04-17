@@ -46,7 +46,7 @@ run_protractor() {
             ./node_modules/.bin/protractor protractor.conf.js --baseUrl  $1
         else
             echo "Running BrowserStack tests against local host: $1"
-            ./node_modules/.bin/protractor protractor.conf.browsestack-local --baseUrl  $1
+            ./node_modules/.bin/protractor protractor.conf.browserstack-local --baseUrl  $1
         fi
     else
         echo "Running Local Selenium tests against host: $1"
