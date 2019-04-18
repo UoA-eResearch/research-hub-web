@@ -92,7 +92,7 @@ describe('ResearchHub\'s Search Functionality', () => {
 /**
  * Describes a series of tests of the ResearchHub's search result filters.
  */
-describe('ResearchHub\'s Search Functionality', () => {
+describe('ResearchHub\'s Filter Functionality', () => {
 
   beforeEach(() => {
     page = new ResearchHubPage();
@@ -124,4 +124,36 @@ describe('ResearchHub\'s Search Functionality', () => {
     });
   });
 
+});
+
+
+/**
+ * Describes a series of tests of the ResearchHub' integrated services.
+ */
+describe('ResearchHub\'s Integrated Services', () => {
+
+  beforeEach(() => {
+    page = new ResearchHubPage();
+  });
+
+  /**
+   * Searches for the item 'research vm' using the home page search box -> Clicks the first result -> 
+   * Clicks the 'Request' button -> checks for SSO page heading 'The University of Auckland'. 
+   */
+  it('clicking the \'Request\' button on the \'Research Virtual Machines\' page redirects to Single sign-on', () => {
+    page.navigateTo(browser.baseUrl).then(() => {
+      browser.driver.findElement(by.css('input')).sendKeys('research vm').then(() => {
+        browser.waitForAngular().then(() => {
+          browser.driver.findElement(by.css('.results-list .mat-list-item')).click().then(() => {
+            browser.waitForAngular().then(() => {
+              browser.driver.findElement(by.css('.mat-raised-button')).click().then(() => {
+                browser.driver.takeScreenshot();
+                expect(browser.driver.findElement(by.css('h1')).getText()).toEqual('The University of Auckland');
+              });
+            });
+          });
+        });
+      });
+    });
+  });
 });
