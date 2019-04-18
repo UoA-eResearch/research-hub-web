@@ -3,6 +3,46 @@ import { browser, by, element } from 'protractor';
 
 let page: ResearchHubPage;
 
+
+/**
+ * Describes a series of tests of the ResearchHub's search result filters.
+ */
+describe('ResearchHub\'s Search Functionality', () => {
+
+  beforeEach(() => {
+    page = new ResearchHubPage();
+  });
+
+  /**
+   * Directly navgiates to the search results page (which defaults to 'All Categories') -> Counts the number of results 
+   * -> Clicks one of the 'Limit items by research activity' filters -> Checks the number of results has decreased.
+   */
+  it('limiting items by research activity reduces the number of results returned', () => {
+
+    /**
+     * These two variables store the number of results returned before and after filtering.
+     */
+    let initialResultCount : number, filteredResultCount: number;
+
+    page.navigateTo(browser.baseUrl + '/#/search').then(() => {
+      browser.waitForAngular().then(() => {
+        browser.driver.findElement(by.className('search-results-text')).getText().then(result => initialResultCount = parseInt(result));
+        browser.driver.findElement(by.css('.mat-slide-toggle-thumb')).click().then(() => {
+          browser.waitForAngular().then(() => {
+            browser.driver.findElement(by.className('search-results-text')).getText().then(result => {
+              filteredResultCount = parseInt(result)
+              expect(initialResultCount).toBeGreaterThan(filteredResultCount);
+            });
+          });
+        });
+      });
+    });
+  });
+
+/**
+ * Tests the basic functionality of the ResearchHub, e.g. whether the home page
+ * loads successfully. 
+ */
 describe('ResearchHub\'s Basic Functionality', () => {
 
   beforeEach(() => {
@@ -33,6 +73,9 @@ describe('ResearchHub\'s Basic Functionality', () => {
   });
 });
 
+/**
+ * Describes a series of tests of the ResearchHub's search functionality.
+ */
 describe('ResearchHub\'s Search Functionality', () => {
 
   beforeEach(() => {
@@ -79,5 +122,7 @@ describe('ResearchHub\'s Search Functionality', () => {
       });
     });
   });
+
+});
 
 });
