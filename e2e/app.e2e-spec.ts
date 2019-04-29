@@ -1,5 +1,6 @@
 import { ResearchHubPage } from './app.po';
 import { browser, by, element } from 'protractor';
+import { protractor } from 'protractor/built/ptor';
 
 let page: ResearchHubPage;
 
@@ -147,8 +148,11 @@ describe('ResearchHub\'s Integrated Services', () => {
           browser.driver.findElement(by.css('.results-list .mat-list-item')).click().then(() => {
             browser.waitForAngular().then(() => {
               browser.driver.findElement(by.css('.mat-raised-button')).click().then(() => {
-                browser.driver.takeScreenshot();
-                expect(browser.driver.findElement(by.css('h1')).getText()).toEqual('The University of Auckland');
+                browser.ignoreSynchronization = true; // Don't wait for Angular components to load as this is an external site
+                browser.driver.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('h1'))), 5000).then(() => {
+                  browser.driver.takeScreenshot();
+                  expect(browser.driver.findElement(by.css('h1')).getText()).toEqual('The University of Auckland');
+                });
               });
             });
           });
