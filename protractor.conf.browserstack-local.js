@@ -27,6 +27,7 @@ exports.config = {
   'commonCapabilities': {
     'browserstack.user' : BROWSERSTACK_CREDENTIALS.USER,
     'browserstack.key' : BROWSERSTACK_CREDENTIALS.KEY,
+    'project' : 'ResearchHub',
     'browserstack.debug' : true,
     'browserstack.video' : true,
     'browserstack.local' : true,

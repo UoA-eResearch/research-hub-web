@@ -149,7 +149,7 @@ describe('ResearchHub\'s Integrated Services', () => {
             browser.waitForAngular().then(() => {
               browser.driver.findElement(by.css('.mat-raised-button')).click().then(() => {
                 browser.ignoreSynchronization = true; // Don't wait for Angular components to load as this is an external site
-                browser.driver.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('h1'))), 5000).then(() => {
+                browser.driver.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('h1'))), 7000).then(() => {
                   browser.driver.takeScreenshot();
                   expect(browser.driver.findElement(by.css('h1')).getText()).toEqual('The University of Auckland');
                 });
