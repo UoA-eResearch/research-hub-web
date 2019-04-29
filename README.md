@@ -41,6 +41,25 @@ Run `npm run build-prod` to build the project in production mode.
 You can also visualise the size of the webpack output files with [webpack bundle analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer), 
 an interactive zoomable treemap. To do this, once the build has finished, run `npm run bundle-report`.
 
+## Test runner
+
+This project comes bundled with an interactive test runner capable of launching your:
+ - Unit tests
+ - e2e tests
+    - Using Protractor+Angular's built in Selenium server
+    - Using BrowserStack's automation API/Selenium server, including BrowserStack-local (allowing you to run BrowserStack against local hosts)
+
+ Simply run `./test.sh` to specify the sort of testing you would like to do.
+ 
+ Note: if you wish to use BrowserStack automated e2e testing you must store your BrowserStack credentials in a file `./e2e/browserstack-credentials.json` in the format:
+
+```
+ {
+    "USER": "BrowserStack-username-here",
+    "KEY": "BrowserStack-api-key-here"
+ }
+```
+
 ## Running unit tests
 
 Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).

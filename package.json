@@ -13,7 +13,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
-    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json -w"
+    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json -w",
+    "testrunner": "./test.sh"
   },
   "private": true,
   "dependencies": {
@@ -49,6 +50,7 @@
     "@compodoc/compodoc": "^1.1.5",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.88",
+    "browserstack-local": "^1.3.7",
     "codelyzer": "~4.0.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
@@ -59,7 +61,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.0",
-    "ts-node": "~2.0.0",
+    "ts-node": "~5.0.0",
     "tslint": "~5.0.0",
     "typescript": "~3.2.2",
     "webpack-bundle-analyzer": "^2.9.0"
