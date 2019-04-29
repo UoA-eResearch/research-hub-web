@@ -27,6 +27,7 @@ exports.config = {
     'browserstack.user' : BROWSERSTACK_CREDENTIALS.USER,
     'browserstack.key' : BROWSERSTACK_CREDENTIALS.KEY,
     'project' : 'ResearchHub',
+    'build' : 'Production',
     'browserstack.debug' : true,
     'browserstack.video' : true,
     'acceptSslCerts' : true
