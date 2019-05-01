@@ -145,7 +145,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
 
     this.projectForm = this.formBuilder.group({
       title: new FormControl(undefined, Validators.required),
-      abstract: new FormControl(undefined, [Validators.required, Validators.minLength(50)]),
+      abstract: new FormControl(undefined, [Validators.required, Validators.minLength(150)]),
       storageOptions: new FormControl(undefined, Validators.required),
       endDate: new FormControl(undefined, [Validators.required]),
       fieldOfResearch: new FormControl(undefined, Validators.required),
