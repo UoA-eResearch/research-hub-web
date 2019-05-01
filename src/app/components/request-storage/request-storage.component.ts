@@ -107,7 +107,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     'Research involving children',
     'Commercially sensitive',
     'Research involves patent application',
-    'Requires encryption on disk',
     'Need for external collaborator access',
     'Requirement to delete data at end of project',
     'Other'
