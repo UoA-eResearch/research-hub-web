@@ -108,8 +108,8 @@
               <mat-error *ngIf="projectForm.controls.abstract.hasError('required')">* Please enter an abstract</mat-error>
               <mat-error *ngIf="projectForm.controls.abstract.hasError('minlength')" align="start">* Please enter at least 50 characters</mat-error>
               <mat-error *ngIf="projectForm.controls.abstract.hasError('minlength')" align="end">{{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0  }}/50</mat-error>
-              <mat-hint align="start">Min 50 Characters</mat-hint>
-              <mat-hint align="end">{{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0  }}/50</mat-hint>
+              <mat-hint align="start">Min 150 Characters</mat-hint>
+              <mat-hint align="end">{{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0  }}/150</mat-hint>
             </mat-form-field>
           </div>
 
