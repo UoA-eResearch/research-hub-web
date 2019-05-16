@@ -47,6 +47,8 @@ import {
 })
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
 
+  public CAMS_EMAIL = 'j.miller@auckland.ac.nz'; // Important stuff
+
   public aucklandUniUrl = 'https://auckland.ac.nz';
   public eResearchUrl = 'http://eresearch.auckland.ac.nz';
   public disclaimerUrl = 'https://www.auckland.ac.nz/en/admin/footer-links/disclaimer.html';

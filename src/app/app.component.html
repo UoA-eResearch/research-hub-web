@@ -115,9 +115,30 @@
           <mat-progress-bar class="app-progress-bar" mode="indeterminate" color="accent" [style.visibility]="showProgressBar ? 'visible' : 'hidden'"></mat-progress-bar>
         </div>
 
-        <app-header></app-header>
+        <app-header *ngIf="authService?.user?.mail != this.CAMS_EMAIL"></app-header>
+
+        <div *ngIf="authService?.user?.mail == this.CAMS_EMAIL" style="background-image: url(https://resbaz.auckland.ac.nz/img/people/cameron_mclean.png); padding: 50px 0 50px 0;">
+          <marquee scrollamount="35">
+            <div style="background-image: linear-gradient(to right, lime,yellow,purple,orange, lime,indigo,violet,pink); padding: 50px 0 50px 0; border-radius: 30px; border: 5px solid yellow">
+              <div style="text-align: center; font-size: 50pt; color: yellow; line-height: 50pt; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-shadow: pink 20px 0px 20px; display: flex;">
+                <div style="flex: 25%">
+                  <img src="https://resbaz.auckland.ac.nz/img/people/cameron_mclean.png" alt="unicorn" style="width: 180px; height: 180px;">
+                </div>
+                <div style="flex: 50%">
+                    ~* HAPPY BIRTHDAY CAM *~ <br />
+                    Wooooooooohooooooooooo! <br />
+                </div>
+                <div style="flex: 25%">
+                  <img src="https://resbaz.auckland.ac.nz/img/people/cameron_mclean.png" alt="unicorn" style="width: 180px; height: 180px;">
+                </div>
+              </div>
+            </div>
+          </marquee>
+        </div>
+
         <!-- <mat-drawer-container> -->
-        <mat-sidenav-container  fxFlex="grow" [ngStyle]="{'overflow':'visible'}">
+        <mat-sidenav-container  fxFlex="grow" [ngStyle]="{'overflow':'visible'}" style="background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
+">
           <!-- Content sidenav -->
           <mat-sidenav class="content-sidenav" mode="side"
                        disableClose [opened]="appComponentService.isContentSidenavVisible"
