@@ -199,7 +199,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
     topbarRect = topbar.getBoundingClientRect(),
     contentHeight = topContent.clientHeight,
     topbarBottom = topbarRect.bottom,
-    winY = window.scrollY,
+    winY = window.pageYOffset,
     winHeight = window.innerHeight;
     let newFixedValue, newSidenavHeight;
     if (topbarBottom < 0){
