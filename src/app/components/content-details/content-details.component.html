@@ -86,12 +86,14 @@
     </div>
   </div>
 </ng-container>
+
+<!-- Multi-page guides, not to be confused with knowledge articles -->
 <ng-container *ngIf="content && isGuide()">
   <div fxLayout="column" fxLayoutGap="1em">
     <mat-card class="description">
       <h2>{{content.name}}</h2>
       <div style="display: block;margin-bottom: 1em;">
-        <a [routerLink]="['/search']" [queryParams]="{categoryId: CONTENT_TYPE_ID_GUIDE}">Guides</a> <span class="breadcrumb-separator">&bull;</span>
+        <a [routerLink]="['/search']" [queryParams]="{categoryId: CONTENT_TYPE_ID_GUIDE}">Guides</a> <span class="breadcrumb-separator">&nbsp;&bull;&nbsp;</span>
         <a [routerLink]="['./']">{{content.name}}</a>
       </div>
       <app-markdown [data]="content.description"></app-markdown>

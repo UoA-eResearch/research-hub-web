@@ -1,2 +1,2 @@
-<div [innerHTML]="dataConverted">
+<div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(dataConverted)">
 </div>
