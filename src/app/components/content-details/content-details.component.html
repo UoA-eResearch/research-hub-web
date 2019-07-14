@@ -93,7 +93,7 @@
     <mat-card class="description">
       <h2>{{content.name}}</h2>
       <div style="display: block;margin-bottom: 1em;">
-        <a [routerLink]="['/search']" [queryParams]="{categoryId: CONTENT_TYPE_ID_GUIDE}">Guides</a> <span class="breadcrumb-separator">&nbsp;&bull;&nbsp;</span>
+        <a [routerLink]="['/search']" [queryParams]="{categoryId: CONTENT_TYPE_ID_GUIDE}">Guides</a><span class="breadcrumb-separator"></span>
         <a [routerLink]="['./']">{{content.name}}</a>
       </div>
       <app-markdown [data]="content.description"></app-markdown>
