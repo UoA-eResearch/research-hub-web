@@ -1,11 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import * as marked from 'marked';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-markdown',
   templateUrl: './markdown.component.html',
-  styleUrls: ['./markdown.component.scss']
+  styleUrls: ['./markdown.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownComponent {
 
