@@ -31,17 +31,12 @@ export class MarkdownComponent {
 
     //  Renders a link as either a standard <a> tag, or as an <iframe> if it is a YouTube embedded link
     this.renderer.link = function (href, title, linkText) {
-      if (href.includes('youtube.com/embed')) {
-        return `<iframe width="560" height="315" src="${href}" frameborder="0" allowfullscreen></iframe>`;
-      }
-      return `<a href="${href}">${linkText}</a>`;
+      return href.includes('youtube.com/embed') ?
+        `<iframe width="560" height="315" src="${href}" frameborder="0" allowfullscreen></iframe>` :
+        `<a href="${href}">${linkText}</a>`;
     };
 
     this.dataConverted = this.markedEngine.parse(val);
   }
 
-
-
 }
-
-
