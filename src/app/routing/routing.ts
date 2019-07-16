@@ -19,6 +19,10 @@ export const appRoutes: Routes = [
   {path: 'requestVm', loadChildren: 'app/components/request-vm/request-vm.module#RequestVmModule', canActivate: [CanActivateViaAuthGuard]},
   {path: 'requestStorage', loadChildren: 'app/components/request-storage/request-storage.module#RequestStorageModule', canActivate: [CanActivateViaAuthGuard]},
 
+  // Special Content Pages
+  // TODO: More generalizable solution (rather than hard-coding ID)
+  {path: 'impact', redirectTo: '/content/72', pathMatch: 'full'},
+
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];

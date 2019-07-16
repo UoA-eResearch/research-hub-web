@@ -127,6 +127,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
   ngOnInit() {
     this.titleSub = this.appComponentService.titleChange.subscribe((title) => {
       this.pageTitle = title;
+      this.titleService.setTitle('ResearchHub: ' + this.pageTitle);
     });
 
 
