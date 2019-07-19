@@ -68,7 +68,8 @@ export class OptionsService {
   public categoryOptions: any[];
   public researchActivityOptions: any[];
   public menuOptions: any[];
-  public pageInfo: any;
+  private _pageInfo: any;
+  private _customPagesMap: any;
   public contentTypeMap: any;
 
   constructor() {
@@ -141,7 +142,7 @@ export class OptionsService {
       {name: 'About', icon: 'info', routerLink: '/about', type: OptionType.Menu}
     ];
 
-    this.pageInfo = {
+    this._pageInfo = {
       home: {
         title: 'Welcome to the ResearchHub',
         description: 'The ResearchHub connects you with people, resources, and services from across the University to enhance and accelerate your research.',
@@ -184,7 +185,31 @@ export class OptionsService {
       guide: {isHeaderVisible: false, isSearchBarVisible: false},
       guideCategory: {isHeaderVisible: false, isSearchBarVisible: false},
       requestVm: {isHeaderVisible: false, isSearchBarVisible: false},
-      requestStorage: {isHeaderVisible: false, isSearchBarVisible: false}
+      requestStorage: {isHeaderVisible: false, isSearchBarVisible: false},
+      impact: {
+        title: 'Impact Guide',
+        description: 'Research Impact is "The contribution that research and creative practice makes to society, the environment and the economy".',
+        imageUrl: 'page-elements/DSC_0192_1680x220_BW.jpg',
+        isHeaderVisible: true,
+        isSearchBarVisible: false,
+        cssClassName: 'impact'
+      }
     };
+
+    // List of custom pages (identified by their page title)
+    this._customPagesMap = {};
+    this._customPagesMap['Impact Guide'] = this._pageInfo['impact'];
   }
-}
+
+  /**
+   * Needs to be called with either routeName and/or title.
+   * If the method is called with a value for title, it checks if the page title belongs to one of the known custom pages.
+   * If so, it returns the pageInfo for that page, otherwise it returns the standard page info for that routeName.
+   * @param routeName: name of the current route.
+   * @param title: the title of the current page, used to check if this is a known custom page.
+   */
+  public getPageInfo(routeName?: string, title?: string) {
+    return title && this._customPagesMap[title] ? this._customPagesMap[title] : this._pageInfo[routeName];
+  }
+
+ }
