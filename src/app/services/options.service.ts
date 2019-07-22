@@ -192,7 +192,7 @@ export class OptionsService {
         imageUrl: 'page-elements/DSC_0192_1680x220_BW.jpg',
         isHeaderVisible: true,
         isSearchBarVisible: false,
-        cssClassName: 'impact'
+        customCSSClassName: 'impact'
       }
     };
 

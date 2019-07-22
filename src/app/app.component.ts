@@ -126,20 +126,22 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
 
   /**
    * Sets the page title, and enables/disables the search bar and header.
+   * Also sets any custom CSS for the page.
    * @param pageInfo currentPage information object.
    */
-  setTitleSearchBarHeader(pageInfo: any) {
-      if(pageInfo.title) {
-        this.titleService.setTitle('ResearchHub: ' + this.pageTitle);
-      }
-      this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
-      this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
+  setTitleSearchBarHeaderCustomCSS(pageInfo: any) {
+    if (pageInfo.title) {
+      this.titleService.setTitle('ResearchHub: ' + this.pageTitle);
+    }
+    this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
+    this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
+    this.appComponentService.setCustomCSSClassName(pageInfo.customCSSClassName);
   }
 
   ngOnInit() {
     this.titleSub = this.appComponentService.titleChange.subscribe((title) => {
       this.pageTitle = title;
-      this.setTitleSearchBarHeader(this.optionsService.getPageInfo(this.currentRoute, this.pageTitle));
+      this.setTitleSearchBarHeaderCustomCSS(this.optionsService.getPageInfo(this.currentRoute, this.pageTitle));
     });
 
     this.progressBarVisibilitySub = this.appComponentService.progressBarVisibilityChange.subscribe((isVisible) => {
@@ -187,7 +189,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
                 this.analyticsService.trackPageView(url, pageInfo.title);
               }
 
-              this.setTitleSearchBarHeader(this.optionsService.getPageInfo(this.currentRoute, this.pageTitle));
+              this.setTitleSearchBarHeaderCustomCSS(this.optionsService.getPageInfo(this.currentRoute, this.pageTitle));
             } else {
               console.log('Error pageInfo not set for route:', routeName);
             }

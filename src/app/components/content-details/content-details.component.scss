@@ -101,3 +101,24 @@
   @extend .browse-tile;
   background-color: $color-guide-tile-bg !important;
 }
+
+// CSS for custom content pages
+.impact {
+  font-size: 130% !important;
+  color: red !important;
+
+  // Content Card
+  mat-card:first-child {
+    color: purple !important;
+    font-size: 50%;
+    background-color: aqua !important;
+  }
+
+  // Additional Info Card
+  mat-card:last-child {
+    color: purple !important;
+    font-size: 50%;
+    background-color: purple !important;
+  }
+
+}
