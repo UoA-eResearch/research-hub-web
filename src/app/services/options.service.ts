@@ -188,8 +188,8 @@ export class OptionsService {
       requestStorage: {isHeaderVisible: false, isSearchBarVisible: false},
       impact: {
         title: 'Impact Guide',
-        description: 'Research Impact is "The contribution that research and creative practice makes to society, the environment and the economy".',
-        imageUrl: 'page-elements/DSC_0192_1680x220_BW.jpg',
+        description: 'These pages contain tools and resources to support you in generating impact from your research.',
+        imageUrl: 'page-elements/20130930_UoA_Details_225_1680x220_BW.jpg',
         isHeaderVisible: true,
         isSearchBarVisible: false,
         customCSSClassName: 'impact'

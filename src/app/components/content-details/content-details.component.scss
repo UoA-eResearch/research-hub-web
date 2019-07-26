@@ -103,22 +103,76 @@
 }
 
 // CSS for custom content pages
-.impact {
-  font-size: 130% !important;
-  color: red !important;
-
-  // Content Card
+/deep/ .impact {
   mat-card:first-child {
-    color: purple !important;
-    font-size: 50%;
-    background-color: aqua !important;
+
+    // Common to all screen sizes
+    app-markdown div {
+      display: flex;
+      justify-content: space-between;
+      
+      p:first-of-type {
+        text-align: justify;
+      }
+   }
+
+    // Small screens
+    @media all and (max-width: 976px) {
+      app-markdown div {
+        flex-flow: column nowrap;
+        height: 100%;
+      }
+
+      p:first-of-type {
+        flex: 1 1 auto;
+      }
+
+      p:nth-of-type(2) {
+        flex: 1 1 auto;
+        width: 100%;
+        height: 100%;
+
+        .youtube-embedded {
+          max-width: 100%;
+          width: 100%;
+          height: 270px;
+          max-height: 270px;
+          max-width: 480px;
+        }
+      }
+    }
+
+    // Large screens
+    @media all and (min-width: 976px) {
+      app-markdown div {
+        flex-flow: row nowrap;
+      }
+      
+      p:first-of-type {
+        flex: 1 1 auto;
+        padding-right: 40px;
+      }
+
+      p:nth-of-type(2) {
+        width: 480px;
+        height: 270px;
+        flex: 1 0 auto;
+
+        .youtube-embedded {
+          width: 100%;
+          height: 100%;
+        }
+      }
+ 
+
+    }
+
+
   }
 
-  // Additional Info Card
+  
+
   mat-card:last-child {
-    color: purple !important;
-    font-size: 50%;
-    background-color: purple !important;
+    background-color: rgba(98,0,0,.07) !important;
   }
-
 }
