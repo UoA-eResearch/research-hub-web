@@ -114,6 +114,10 @@
       p:first-of-type {
         text-align: justify;
       }
+
+      .youtube-embedded {
+        box-shadow: 0 0 13px 0 #ccc;
+      }
    }
 
     // Small screens
@@ -169,10 +173,38 @@
 
 
   }
-
   
-
   mat-card:last-child {
-    background-color: rgba(98,0,0,.07) !important;
+    app-markdown div {
+      display: flex;
+      justify-content: space-between;
+      flex-flow: column wrap;
+      max-height: 350px;
+
+      // Make heading span both columns
+      > :first-child {
+        border: 5px solid gold;
+        flex: 1 0 100%;
+        // width: 100%;
+      }
+
+      // Skip the 'Media' title, select video, title, caption
+       > h3 ~ *:nth-child(-n+4) {
+         flex: 1 1 50%;
+         border: 5px solid red;
+        //  width: 50%;
+      }
+
+      // Select last 3 elements
+       > *:nth-last-child(-n+3) {
+         flex: 1 1 50%;
+         border: 5px solid blue;
+         width: 50%;
+      }
+
+
+    }
+
+
   }
 }
