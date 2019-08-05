@@ -31,7 +31,7 @@ export class LayoutService {
         numCols = 4;
         break;
       case 'xl':
-        numCols = 5;
+        numCols = 4;
         break;
       default:
         numCols = 4;
