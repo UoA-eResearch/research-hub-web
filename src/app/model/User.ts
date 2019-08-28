@@ -11,7 +11,7 @@ export class User {
 
   private static getAttrValue(attributes: any, key: string) {
     for (const attr of attributes) {
-      if(attr['name'] === 'mail') {
+      if(attr['name'] === 'mail' && key === 'mail') {
         const knownEmailAddresses = attr['values'];
         return User.getPrimaryEmail(knownEmailAddresses);
       } else if (attr['name'] === key) {
