@@ -28,7 +28,6 @@
               }
             ],
             "styles": [
-              "node_modules/material-design-icons/iconfont/material-icons.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -112,7 +111,6 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "node_modules/material-design-icons/iconfont/material-icons.css",
               "src/styles.scss"
             ],
             "assets": [
