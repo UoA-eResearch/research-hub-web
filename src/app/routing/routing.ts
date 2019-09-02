@@ -21,7 +21,7 @@ export const appRoutes: Routes = [
 
   // Special Content Pages
   // TODO: More generalizable solution (rather than hard-coding ID)
-  {path: 'impact', redirectTo: '/content/72', pathMatch: 'full'},
+  {path: 'researchimpact', redirectTo: '/content/72', pathMatch: 'full'},
 
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}

@@ -187,9 +187,9 @@ export class OptionsService {
       requestVm: {isHeaderVisible: false, isSearchBarVisible: false},
       requestStorage: {isHeaderVisible: false, isSearchBarVisible: false},
       impact: {
-        title: 'Impact Guide',
+        title: 'Research Impact Guide',
         description: 'These pages contain tools and resources to support you in generating impact from your research.',
-        imageUrl: 'page-elements/20130930_UoA_Details_225_1680x220_BW.jpg',
+        imageUrl: 'page-elements/impact_5993x775.jpg',
         isHeaderVisible: true,
         isSearchBarVisible: false,
         customCSSClassName: 'impact'
@@ -198,7 +198,7 @@ export class OptionsService {
 
     // List of custom pages (identified by their page title)
     this._customPagesMap = {};
-    this._customPagesMap['Impact Guide'] = this._pageInfo['impact'];
+    this._customPagesMap['Research Impact Guide'] = this._pageInfo['impact'];
   }
 
   /**
