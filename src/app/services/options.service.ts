@@ -189,7 +189,7 @@ export class OptionsService {
       impact: {
         title: 'Research Impact Guide',
         description: 'These pages contain tools and resources to support you in generating impact from your research.',
-        imageUrl: 'page-elements/impact_5993x775.jpg',
+        imageUrl: 'page-elements/impact-desaturated_5993x775.jpg',
         isHeaderVisible: true,
         isSearchBarVisible: false,
         customCSSClassName: 'impact'
