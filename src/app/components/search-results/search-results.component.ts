@@ -68,7 +68,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public resultsSummary = '';
   public showEmptyState = false;
 
-  public pageSizeOptions = [6, 12, 60, 120, 600];
+  public pageSizeOptions = [12, 21, 60, 120, 600];
 
   public orderBy;
   public pageSize;
@@ -280,7 +280,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         const orgUnitIds = SearchResultsComponent.parseParamArray(params['orgUnitIds']);
         const researchActivityIds = SearchResultsComponent.parseParamArray(params['researchActivityIds']);
         this.pageIndex = +(params['pageIndex'] || 0);
-        this.pageSize = +(params['pageSize'] || 12);
+        this.pageSize = +(params['pageSize'] || 21);
         this.orderBy = params['orderBy'] || OrderBy.Relevance;
 
 
