@@ -23,6 +23,7 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
   userSupport: ListItem[];
   numCols = 1;
   mediaSub: Subscription;
+  id: number;
 
   readonly CONTENT_TYPE_ID_GUIDE: ContentTypeId = ContentTypeId.Guide; // Used to provide a link to all guides in guide breadcrumbs
 
@@ -55,9 +56,14 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const id = params['contentId'];
 
-      this.apiService.getContent(id).subscribe(
+      /**
+       * Get the contentId from either the data observable (for pages with custom URLs),
+       * otherwise get the contentId from the route params.
+       */
+      this.route.data.subscribe(x => this.id = x.contentId || params['contentId']);
+
+      this.apiService.getContent(this.id).subscribe(
         content => {
           const url = this.location.path();
           const name = content.name;
@@ -68,14 +74,14 @@ export class ContentDetailsComponent implements OnInit, OnDestroy {
           if (!this.isGuide()) {
             this.analyticsService.trackContent(name, url);
 
-            this.apiService.getSimilarContentItems(id).subscribe(
+            this.apiService.getSimilarContentItems(this.id).subscribe(
               contentItems => {
                 this.similarContentItems = contentItems;
               }
             );
 
             const peopleParams = new PeopleParams();
-            peopleParams.setContentItems([id]);
+            peopleParams.setContentItems([this.id]);
             peopleParams.setRoleTypes([RoleTypeId.UserSupport]);
 
             this.apiService.getPeople(peopleParams).subscribe(userSupport => {
