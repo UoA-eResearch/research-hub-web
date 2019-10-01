@@ -248,8 +248,9 @@ app-filter-dialog {
 }
 
 /*
- * Colour of &bull; used to separate breadcrumbs
+ * Guide breadcrumb
  */
-.breadcrumb-separator {
-    color: map-get($hub-teal, 500);
+.breadcrumb-separator::after {
+  content: ' • ';
+  color: map-get($hub-teal, 500);
 }

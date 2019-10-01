@@ -101,3 +101,118 @@
   @extend .browse-tile;
   background-color: $color-guide-tile-bg !important;
 }
+
+// CSS for custom content pages
+/deep/ .impact {
+  mat-card:first-child {
+
+    // Common to all screen sizes
+    app-markdown div {
+      display: flex;
+      justify-content: space-between;
+      
+      p:first-of-type {
+        text-align: justify;
+      }
+
+      .youtube-embedded {
+        box-shadow: 0 0 13px 0 #ccc;
+      }
+   }
+
+    // Small screens
+    @media all and (max-width: 976px) {
+      app-markdown div {
+        flex-flow: column nowrap;
+        height: 100%;
+      }
+
+      p:first-of-type {
+        flex: 1 1 auto;
+      }
+
+      p:nth-of-type(2) {
+        flex: 1 1 auto;
+        width: 100%;
+        height: 100%;
+
+        .youtube-embedded {
+          max-width: 100%;
+          width: 100%;
+          height: 270px;
+          max-height: 270px;
+          max-width: 480px;
+        }
+      }
+    }
+
+    // Large screens
+    @media all and (min-width: 976px) {
+      app-markdown div {
+        flex-flow: row nowrap;
+      }
+      
+      p:first-of-type {
+        flex: 1 1 auto;
+        padding-right: 40px;
+      }
+
+      p:nth-of-type(2) {
+        width: 480px;
+        height: 270px;
+        flex: 1 0 auto;
+
+        .youtube-embedded {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  mat-card:last-child {
+    app-markdown div {
+      display: grid;
+
+      h3:not(:first-child) {
+        margin-top: 0px !important;
+      }
+
+      // Small screens
+      @media all and (max-width: 976px) {
+        grid-template-cols: 1fr;
+
+        .youtube-embedded {
+          width: 100%;
+          height: 270px;
+          max-height: 270px;
+          max-width: 480px;
+        }
+      }
+
+      // Large Screens
+      @media all and (min-width: 976px) {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 0 15px;
+        
+        // Rearrange markdown content for the grid layout
+        :nth-child(1) { order: 0; grid-column: 1 / span 2;}
+        :nth-child(2) { order: 1; }
+        :nth-child(3) { order: 3; }
+        :nth-child(4) { order: 5; }
+        :nth-child(5) { order: 2; }
+        :nth-child(6) { order: 4; }
+        :nth-child(7) { order: 6; }
+
+        .youtube-embedded {
+          width: 100%;
+          height: 252px;
+          max-height: 252px;
+          max-width: 450px;
+          box-shadow: 0 0 13px 0 #ccc;
+        }
+      }
+
+    }
+  }
+}

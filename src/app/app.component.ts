@@ -124,11 +124,25 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
     this.appComponentService.setContentSidenavHasContent(hasContent);
   }
 
+  /**
+   * Sets the page title, and enables/disables the search bar and header.
+   * Also sets any custom CSS for the page.
+   * @param pageInfo currentPage information object.
+   */
+  setTitleSearchBarHeaderCustomCSS(pageInfo: any) {
+    if (pageInfo.title) {
+      this.titleService.setTitle('ResearchHub: ' + this.pageTitle);
+    }
+    this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
+    this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
+    this.appComponentService.setCustomCSSClassName(pageInfo.customCSSClassName);
+  }
+
   ngOnInit() {
     this.titleSub = this.appComponentService.titleChange.subscribe((title) => {
       this.pageTitle = title;
+      this.setTitleSearchBarHeaderCustomCSS(this.optionsService.getPageInfo(this.currentRoute, this.pageTitle));
     });
-
 
     this.progressBarVisibilitySub = this.appComponentService.progressBarVisibilityChange.subscribe((isVisible) => {
       this.showProgressBar = isVisible;
@@ -165,19 +179,17 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit  {
             this.showBackBtn = routeName !== 'home';
 
             this.appComponentService.setProgressBarVisibility(false);
-            const pageInfo = this.optionsService.pageInfo[routeName];
+            const pageInfo = this.optionsService.getPageInfo(routeName);
 
             if (pageInfo) {
               this.pageTitle = pageInfo.title;
 
-              // Set title and track page view for pages with pre-defined titles
+              // Track page view for pages with pre-defined titles
               if (pageInfo.title) {
-                this.titleService.setTitle('ResearchHub: ' + pageInfo.title);
                 this.analyticsService.trackPageView(url, pageInfo.title);
               }
 
-              this.headerService.setBatchParams(pageInfo.title, pageInfo.description, pageInfo.imageUrl, pageInfo.isHeaderVisible);
-              this.searchBarService.setVisibility(pageInfo.isSearchBarVisible);
+              this.setTitleSearchBarHeaderCustomCSS(this.optionsService.getPageInfo(this.currentRoute, this.pageTitle));
             } else {
               console.log('Error pageInfo not set for route:', routeName);
             }
