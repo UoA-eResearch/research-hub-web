@@ -1,5 +1,5 @@
 <ng-container *ngIf="content">
-  <h2>Featured Content</h2>
+  <h2>Featured content</h2>
   <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-lg="column">
     <div ngClass.gt-xs="card-gt-xs">
       <mat-card>
@@ -11,14 +11,19 @@
           </div>
         </a>
         <mat-card-content>
-          <a [routerLink]="['/content', content.id]">
+          <a
+            [routerLink]="['/content', content.id]"
+            (click)="analyticsService.trackUserExperience('Have you seen', 'click')">
             <h2 style="font-size: 20px;">{{content.name}}</h2>
           </a>
           <p>{{content.summary}}</p>
         </mat-card-content>
         <mat-card-actions>
           <div fxLayout="column" fxLayoutAlign="center end">
-            <button mat-button [routerLink]="['/content', content.id]" color="primary">Details</button>
+            <button mat-button
+              [routerLink]="['/content', content.id]"
+              color="primary"
+              (click)="analyticsService.trackUserExperience('Have you seen', 'click')">Details</button>
           </div>
         </mat-card-actions>
       </mat-card>
