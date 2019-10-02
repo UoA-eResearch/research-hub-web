@@ -23,7 +23,12 @@ export class FeaturedComponent implements OnInit {
     this.apiService.getContentItems(params).subscribe(
       page => {
         const totalContentItems = page.totalElements;
-        const contentItemIndex = Math.floor(Math.random() * (totalContentItems - 1)) + 1;
+        /**
+         * Temporarily disabled random item. Displaying Featured Content instead.
+         */
+        // const contentItemIndex = Math.floor(Math.random() * (totalContentItems - 1)) + 1;
+        const contentItemIndex = 73;
+
         this.apiService.getContent(contentItemIndex).subscribe(content => {
           this.content = content;
         });
