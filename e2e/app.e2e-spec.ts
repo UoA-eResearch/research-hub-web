@@ -214,4 +214,26 @@ describe('ResearchHub\'s Research Impact Content', () => {
       });
     });
   });
+
+  /**
+   * Directly navigates to the Research Impact guide page, clicks on the first sub-page (guideCategory) and checks that
+   * the final part of the breadcrumbs is 'Planning for Impact'.
+   */
+  it('can display the breadcrumbs correctly', () => {
+    page.navigateTo(browser.baseUrl + '/#/researchimpact').then(() => {
+      browser.waitForAngular().then(() => {
+        browser.driver.findElement(by.css('mat-grid-list .browse-tile')).click().then(() => {
+          browser.waitForAngular().then(() => {
+            browser.driver.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('.description a:nth-of-type(3)'))), 9000).then(() => {
+              expect(browser.driver.findElement(by.css('.description a:nth-of-type(3)')).getText()).toEqual('Planning for Impact');
+
+            });
+          });
+        });
+      });
+    });
+  });
+
+
+
 });
