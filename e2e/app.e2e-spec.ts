@@ -4,6 +4,7 @@ import { protractor } from 'protractor/built/ptor';
 
 let page: ResearchHubPage;
 
+
 /**
  * Tests the basic functionality of the ResearchHub, e.g. whether the home page
  * loads successfully. 
@@ -160,4 +161,80 @@ describe('ResearchHub\'s Integrated Services', () => {
       });
     });
   });
+});
+
+/**
+ * Describes a series of tests of the ResearchHub' Research Impact services.
+ */
+describe('ResearchHub\'s Research Impact Content', () => {
+
+  beforeEach(() => {
+    page = new ResearchHubPage();
+  });
+
+  /**
+   * Directly navigates to the Research Impact guide page and checks the presence of the title 'Research Impact Guide'.
+   */
+  it('can directly navigate to main guide page', () => {
+    page.navigateTo(browser.baseUrl + '/#/researchimpact').then(() => {
+      browser.waitForAngular().then(() => {
+        browser.driver.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('.description h2'))), 9000).then(() => {
+          expect(browser.driver.findElement(by.css('.description h2')).getText()).toEqual('Research Impact Guide');
+        });
+      });
+    });
+  });
+
+  /**
+   * Directly navigates to the Research Impact guide page and checks the presence of an iframe with YouTube set as its
+   * src attribute.
+   */
+  it('can load an iframe with youtube as src attribute', () => {
+    page.navigateTo(browser.baseUrl + '/#/researchimpact').then(() => {
+      browser.waitForAngular().then(() => {
+        browser.driver.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('.description iframe'))), 9000).then(() => {
+          expect(browser.driver.findElement(by.css('.description iframe')).getAttribute('src')).toContain('youtube');
+        });
+      });
+    });
+  });
+
+  /**
+   * Directly navigates to the Research Impact guide page, clicks on the first sub-page (guideCategory) and checks that
+   * its title is 'Planning for Impact'.
+   */
+  it('can correctly load a sub-page (guideCategory) item', () => {
+    page.navigateTo(browser.baseUrl + '/#/researchimpact').then(() => {
+      browser.waitForAngular().then(() => {
+        browser.driver.findElement(by.css('mat-grid-list .browse-tile')).click().then(() => {
+          browser.waitForAngular().then(() => {
+            browser.driver.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('.description h1'))), 9000).then(() => {
+              expect(browser.driver.findElement(by.css('.description h1')).getText()).toEqual('Planning for Impact');
+            });
+          });
+        });
+      });
+    });
+  });
+
+  /**
+   * Directly navigates to the Research Impact guide page, clicks on the first sub-page (guideCategory) and checks that
+   * the final part of the breadcrumbs is 'Planning for Impact'.
+   */
+  it('can display the breadcrumbs correctly', () => {
+    page.navigateTo(browser.baseUrl + '/#/researchimpact').then(() => {
+      browser.waitForAngular().then(() => {
+        browser.driver.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('mat-grid-list .browse-tile:first-of-type'))), 9000).then(() => {
+          browser.driver.findElement(by.css('mat-grid-list .browse-tile:first-of-type')).click().then(() => {
+            browser.waitForAngular().then(() => {
+              browser.driver.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('.description a:nth-of-type(3)'))), 9000).then(() => {
+                expect(browser.driver.findElement(by.css('.description a:nth-of-type(3)')).getText()).toEqual('Planning for Impact');
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+
 });
