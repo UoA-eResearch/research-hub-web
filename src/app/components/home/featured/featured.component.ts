@@ -11,6 +11,7 @@ import { AnalyticsService } from 'app/services/analytics.service';
 export class FeaturedComponent implements OnInit {
 
   content: Content;
+  private featuredContentIndex: number; // Set in ngOnInit() to undefined || content item index number
 
   constructor(private apiService: ResearchHubApiService, public analyticsService: AnalyticsService)  {
 
@@ -24,12 +25,13 @@ export class FeaturedComponent implements OnInit {
       page => {
         const totalContentItems = page.totalElements;
         /**
-         * Temporarily disabled random item. Displaying Featured Content instead.
+         * If featuredContentIndex is set then the homepage will display 'Featured content' and the corresponding content item
+         * If featuredContentIndex === undefined, then the homepage will display 'Have you seen...' and a random content item
          */
-        // const contentItemIndex = Math.floor(Math.random() * (totalContentItems - 1)) + 1;
-        const contentItemIndex = 73;
+        this.featuredContentIndex = undefined; // undefined || content item index number
+        const contentItemIndex = Math.floor(Math.random() * (totalContentItems - 1)) + 1; // used if featuredContentIndex === undefined
 
-        this.apiService.getContent(contentItemIndex).subscribe(content => {
+        this.apiService.getContent(this.featuredContentIndex || contentItemIndex).subscribe(content => {
           this.content = content;
         });
       }
