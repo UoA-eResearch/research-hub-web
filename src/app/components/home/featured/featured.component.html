@@ -1,5 +1,5 @@
 <ng-container *ngIf="content">
-  <h2>Featured content</h2>
+  <h2>{{ featuredContentIndex ? 'Featured content' : 'Have you seen...?' }}</h2>
   <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-lg="column">
     <div ngClass.gt-xs="card-gt-xs">
       <mat-card>
