@@ -1,6 +1,6 @@
 # ================   Unit test stage  ================
 
-FROM          markadams/chromium-xvfb-js as test
+FROM          markadams/chromium-xvfb as test
 
 # Build args required to work behind proxy
 ARG           http_proxy
@@ -10,7 +10,7 @@ ARG           https_proxy
 RUN           apt-get update -qq && apt-get install -qqy curl build-essential git
 
 # Install nodejs and update npm to latest version
-RUN           curl -sL https://deb.nodesource.com/setup_11.x | bash -
+RUN           curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN           apt-get update -qq && apt-get install -y nodejs
 
 WORKDIR       /research-hub-web/
@@ -47,7 +47,7 @@ ARG           https_proxy
 RUN           apt-get update -qq && apt-get install -qqy curl build-essential git
 
 # Install nodejs and update npm to latest version
-RUN           curl -sL https://deb.nodesource.com/setup_11.x | bash -
+RUN           curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN           apt-get update -qq && apt-get install -y nodejs
 
 WORKDIR       /research-hub-web/
