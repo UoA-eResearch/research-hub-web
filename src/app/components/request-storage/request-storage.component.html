@@ -8,7 +8,7 @@
 
   <div #resultsDummyHeader style="margin-top: 3em;"></div>
   <mat-horizontal-stepper #stepper linear="true">
-    <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
+    <!-- <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
       <form [formGroup]="requestTypeForm" novalidate>
 
         <ng-template matStepLabel>Request Type</ng-template>
@@ -30,9 +30,9 @@
           </div>
         </div>
       </form>
-    </mat-step>
+    </mat-step> -->
 
-    <mat-step [editable]="isEditable" [stepControl]="requestDetailsForm" *ngIf="requestTypeForm.controls.requestType.value === 'Existing'">
+    <!-- <mat-step [editable]="isEditable" [stepControl]="requestDetailsForm" *ngIf="requestTypeForm.controls.requestType.value === 'Existing'">
       <form [formGroup]="requestDetailsForm">
         <ng-template matStepLabel>Request Details</ng-template>
 
@@ -86,9 +86,9 @@
           </div>
         </div>
       </form>
-    </mat-step>
+    </mat-step> -->
 
-    <mat-step [editable]="isEditable" [stepControl]="projectForm" *ngIf="requestTypeForm.controls.requestType.value === 'New'">  
+    <!-- <mat-step [editable]="isEditable" [stepControl]="projectForm" *ngIf="requestTypeForm.controls.requestType.value === 'New'">  
       <form [formGroup]="projectForm" novalidate>
         <ng-template matStepLabel>General Information</ng-template>
 
@@ -151,7 +151,7 @@
           </div>
         </div>
       </form>
-    </mat-step>
+    </mat-step> -->
 
     <mat-step [editable]="isEditable" [stepControl]="dataInfoForm" *ngIf="requestTypeForm.controls.requestType.value === 'New'">
       <form [formGroup]="dataInfoForm" novalidate>
@@ -195,35 +195,32 @@
                       <input matInput placeholder="Last name" formControlName="lastName" autocapitalize=words>
                       <mat-error *ngIf="member.controls.lastName.invalid">* Please enter a last name</mat-error>
                     </mat-form-field>
+                    <!-- <mat-error fxFlex="grow" floatLabel="never" class="no-floating-label"> -->
+                      <!-- <input matInput placeholder="Email" formControlName="email" type="email"> -->
+                      <!-- <mat-error *ngIf="member.controls.email.invalid">* Please enter an email</mat-error> -->
+                        <mat-radio-group>
+                      <div fxLayout="row">
+                          <mat-radio-button name="dataAccess"></mat-radio-button>
+                          <mat-radio-button name="dataAccess"></mat-radio-button>
+                      </div>
+                        </mat-radio-group>
+                      <mat-checkbox></mat-checkbox>
+                      <mat-checkbox></mat-checkbox>
+                      <mat-checkbox></mat-checkbox>
+                      <mat-checkbox></mat-checkbox>
+                      <div fxFlex="40px">
+                        <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;"><mat-icon>delete</mat-icon></button>
+                      </div>
+                  </div>
+
+                  <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="flex-hack data-person-row-inner">
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
                       <input matInput placeholder="Email" formControlName="email" type="email">
                       <mat-error *ngIf="member.controls.email.invalid">* Please enter an email</mat-error>
                     </mat-form-field>
                   </div>
-
-                  <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em" class="flex-hack data-person-row-inner">
-                    <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
-                      <input matInput placeholder="Username" formControlName="username" autocapitalize=off>
-                      <mat-error *ngIf="member.controls.username.invalid">* Please enter a username</mat-error>
-                    </mat-form-field>
-                    <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
-                      <mat-select placeholder="Access" formControlName="access">
-                        <mat-option *ngFor="let item of access;" [value]="item">{{item}}</mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="member.controls.access.invalid">* Please choose an option</mat-error>
-                    </mat-form-field>
-                    <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
-                      <mat-select placeholder="Role" formControlName="roles" multiple>
-                        <mat-option *ngFor="let item of roleTypes;" [value]="item">{{item}}</mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="member.controls.roles.invalid">* Please choose a role</mat-error>
-                    </mat-form-field>
-                  </div>
                 </div>
 
-                <div fxFlex="40px">
-                  <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;"><mat-icon>delete</mat-icon></button>
-                </div>
               </div>
               <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('required')">* Please add at least 1 person</mat-error>
               <div fxLayout="row" fxLayoutAlign="end center">
