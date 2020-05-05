@@ -219,17 +219,20 @@
       </div>
     </div>
 
-    <div class="person-grid">
+    <!-- <div class="person-grid"> -->
+
+ <div  class="person-grid" *ngFor="let member of projectMembers.controls; let i = index">
+   <!-- ngFor is actually creating multiple person grids equal to the person count. Alternative is adding ngFor on every element-->
       <div class="details">
         <input type="text">
         <input type="text">
         <input type="text">
       </div>
       <div class="read-only">
-        <input type="radio">
+        <input name="person-access-radio-{{i}}" type="radio">
       </div>
       <div class="read-write">
-        <input type="radio">
+        <input name="person-access-radio-{{i}}" type="radio">
       </div>
       <div class="data-user">
         <input type="checkbox">
@@ -244,8 +247,10 @@
         <input type="checkbox">
       </div>
       <div class="delete-icon">
-        delete
-      </div> 
+        <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </div>
 
             <div class="flex-hack" fxLayout="column" formArrayName="projectMembers">
