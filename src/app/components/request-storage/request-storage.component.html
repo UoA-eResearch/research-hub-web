@@ -221,35 +221,52 @@
 
             <!-- <div class="person-grid"> -->
 
-            <div class="person-grid" *ngFor="let member of projectMembers.controls; let i = index">
-              <!-- ngFor is actually creating multiple person grids equal to the person count. Alternative is adding ngFor on every element-->
-              <div class="details">
-                <input type="text">
-                <input type="text">
-                <input type="text">
-              </div>
-              <div class="read-only">
-                <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>
-              </div>
-              <div class="read-write">
-                <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>
-              </div>
-              <div class="data-user">
-                <mat-checkbox></mat-checkbox>
-              </div>
-              <div class="data-contact">
-                <mat-checkbox></mat-checkbox>
-              </div>
-              <div class="project-participant">
-                <mat-checkbox></mat-checkbox>
-              </div>
-              <div class="project-owner">
-                <mat-checkbox></mat-checkbox>
-              </div>
-              <div class="delete-icon">
-                <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
-                  <mat-icon>delete</mat-icon>
-                </button>
+            <div class="array-container" formArrayName="projectMembers">
+              <div *ngFor="let member of projectMembers.controls; let i = index">
+                <!-- <div class="person-grid" *ngFor="let member of projectMembers.controls; let i = index"> -->
+
+                <!-- ngFor is actually creating multiple person grids equal to the person count. Alternative is adding ngFor on every element-->
+                <div class="person-grid" [formGroupName]="i">
+
+                  <div class="details">
+                    <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
+                      <input matInput placeholder="First name" formControlName="firstName" autocapitalize=words>
+                      <mat-error *ngIf="member.controls.firstName.invalid">* Please enter a first name</mat-error>
+                    </mat-form-field>
+                      <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
+                      <input matInput placeholder="Last name" formControlName="lastName" autocapitalize=words>
+                      <mat-error *ngIf="member.controls.lastName.invalid">* Please enter a last name</mat-error>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
+                      <input matInput placeholder="Email" formControlName="email" type="email">
+                      <mat-error *ngIf="member.controls.email.invalid">* Please enter an email</mat-error>
+                    </mat-form-field>
+                    <input type="text">
+                  </div>
+                  <div class="read-only">
+                    <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>
+                  </div>
+                  <div class="read-write">
+                    <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>
+                  </div>
+                  <div class="data-user">
+                    <mat-checkbox></mat-checkbox>
+                  </div>
+                  <div class="data-contact">
+                    <mat-checkbox></mat-checkbox>
+                  </div>
+                  <div class="project-participant">
+                    <mat-checkbox></mat-checkbox>
+                  </div>
+                  <div class="project-owner">
+                    <mat-checkbox></mat-checkbox>
+                  </div>
+                  <div class="delete-icon">
+                    <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -257,7 +274,8 @@
               <div fxLayout="row" fxLayoutAlign="start center" class="flex-hack data-person-row" fxLayoutGap="1.5em"
                 *ngFor="let member of projectMembers.controls; let i = index">
                 hi2
-                <div class="flex-hack" style="width: 100%; max-width: calc(100% - 50px);" fxFlex="100" fxLayout="column" fxLayoutGap="1em">
+                <div class="flex-hack" style="width: 100%; max-width: calc(100% - 50px);" fxFlex="100" fxLayout="column"
+                  fxLayoutGap="1em" [formGroupName]="i">
                   <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em"
                     class="flex-hack data-person-row-inner">
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
@@ -269,7 +287,7 @@
                       <mat-error *ngIf="member.controls.lastName.invalid">* Please enter a last name</mat-error>
                     </mat-form-field>
                     <!-- <mat-error fxFlex="grow" floatLabel="never" class="no-floating-label"> -->
-                    <!-- <input matInput placeholder="Email" formControlName="email" type="email"> -->
+                    <input matInput placeholder="Email" formControlName="email" type="email">
                     <!-- <mat-error *ngIf="member.controls.email.invalid">* Please enter an email</mat-error> -->
                     <mat-radio-group>
                       <div fxLayout="row">
