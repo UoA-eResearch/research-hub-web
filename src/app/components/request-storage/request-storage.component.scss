@@ -125,8 +125,6 @@ table * {
 /* only need to set details as it's the only non-standard grid item */
 .details {
   grid-column: 1/3;
-  display: flex;
-  flex-direction: column;
 }
 
 .person-grid {

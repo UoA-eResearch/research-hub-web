@@ -228,7 +228,7 @@
                 <!-- ngFor is actually creating multiple person grids equal to the person count. Alternative is adding ngFor on every element-->
                 <div class="person-grid" [formGroupName]="i">
 
-                  <div class="details">
+                  <div class="details" fxLayout="column"> 
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
                       <input matInput placeholder="First name" formControlName="firstName" autocapitalize=words>
                       <mat-error *ngIf="member.controls.firstName.invalid">* Please enter a first name</mat-error>
@@ -241,7 +241,6 @@
                       <input matInput placeholder="Email" formControlName="email" type="email">
                       <mat-error *ngIf="member.controls.email.invalid">* Please enter an email</mat-error>
                     </mat-form-field>
-                    <input type="text">
                   </div>
                   <div class="read-only">
                     <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>
