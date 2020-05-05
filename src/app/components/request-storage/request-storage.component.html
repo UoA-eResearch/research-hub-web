@@ -229,11 +229,9 @@
                 <input type="text">
               </div>
               <div class="read-only">
-                <!-- <input name="person-access-radio-{{i}}" type="radio"> -->
                 <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>
               </div>
               <div class="read-write">
-                <!-- <input name="person-access-radio-{{i}}" type="radio"> -->
                 <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>
               </div>
               <div class="data-user">
@@ -259,8 +257,7 @@
               <div fxLayout="row" fxLayoutAlign="start center" class="flex-hack data-person-row" fxLayoutGap="1.5em"
                 *ngFor="let member of projectMembers.controls; let i = index">
                 hi2
-                <div class="flex-hack" style="width: 100%; max-width: calc(100% - 50px);" fxFlex="100" fxLayout="column"
-                  fxLayoutGap="1em" [formGroupName]="i">
+                <div class="flex-hack" style="width: 100%; max-width: calc(100% - 50px);" fxFlex="100" fxLayout="column" fxLayoutGap="1em">
                   <div fxFlex="100" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1em"
                     class="flex-hack data-person-row-inner">
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
