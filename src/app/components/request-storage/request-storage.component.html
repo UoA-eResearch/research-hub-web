@@ -191,67 +191,69 @@
           <div class="form-group">
             <h3>Please provide a list of people who require access</h3>
 
-               <div class="grid-container">
+            <div class="grid-container">
 
-      <div class="access">
-        Access
-      </div>
-      <div class="roles">
-        Roles
-      </div>
-      <div class="read-only-header">
-        read only
-      </div>
-      <div class="read-write-header">
-        read write
-      </div>
-      <div class="data-user-header">
-        data user
-      </div>
-      <div class="data-contact-header">
-        data contact
-      </div>
-      <div class="project-participant-header">
-        project participant
-      </div>
-      <div class="project-owner-header">
-        project owner
-      </div>
-    </div>
+              <div class="access">
+                Access
+              </div>
+              <div class="roles">
+                Roles
+              </div>
+              <div class="read-only-header">
+                read only
+              </div>
+              <div class="read-write-header">
+                read write
+              </div>
+              <div class="data-user-header">
+                data user
+              </div>
+              <div class="data-contact-header">
+                data contact
+              </div>
+              <div class="project-participant-header">
+                project participant
+              </div>
+              <div class="project-owner-header">
+                project owner
+              </div>
+            </div>
 
-    <!-- <div class="person-grid"> -->
+            <!-- <div class="person-grid"> -->
 
- <div  class="person-grid" *ngFor="let member of projectMembers.controls; let i = index">
-   <!-- ngFor is actually creating multiple person grids equal to the person count. Alternative is adding ngFor on every element-->
-      <div class="details">
-        <input type="text">
-        <input type="text">
-        <input type="text">
-      </div>
-      <div class="read-only">
-        <input name="person-access-radio-{{i}}" type="radio">
-      </div>
-      <div class="read-write">
-        <input name="person-access-radio-{{i}}" type="radio">
-      </div>
-      <div class="data-user">
-        <input type="checkbox">
-      </div>
-      <div class="data-contact">
-        <input type="checkbox">
-      </div>
-      <div class="project-participant">
-        <input type="checkbox">
-      </div>
-      <div class="project-owner">
-        <input type="checkbox">
-      </div>
-      <div class="delete-icon">
-        <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-    </div>
+            <div class="person-grid" *ngFor="let member of projectMembers.controls; let i = index">
+              <!-- ngFor is actually creating multiple person grids equal to the person count. Alternative is adding ngFor on every element-->
+              <div class="details">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+              </div>
+              <div class="read-only">
+                <!-- <input name="person-access-radio-{{i}}" type="radio"> -->
+                <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>
+              </div>
+              <div class="read-write">
+                <!-- <input name="person-access-radio-{{i}}" type="radio"> -->
+                <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>
+              </div>
+              <div class="data-user">
+                <mat-checkbox></mat-checkbox>
+              </div>
+              <div class="data-contact">
+                <mat-checkbox></mat-checkbox>
+              </div>
+              <div class="project-participant">
+                <mat-checkbox></mat-checkbox>
+              </div>
+              <div class="project-owner">
+                <mat-checkbox></mat-checkbox>
+              </div>
+              <div class="delete-icon">
+                <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
 
             <div class="flex-hack" fxLayout="column" formArrayName="projectMembers">
               <div fxLayout="row" fxLayoutAlign="start center" class="flex-hack data-person-row" fxLayoutGap="1.5em"
