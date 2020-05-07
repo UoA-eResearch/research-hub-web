@@ -220,8 +220,6 @@
 
             <div class="array-container" formArrayName="projectMembers">
               <div *ngFor="let member of projectMembers.controls; let i = index">
-                <!-- <div class="person-grid" *ngFor="let member of projectMembers.controls; let i = index"> -->
-
                 <!-- ngFor is actually creating multiple person grids equal to the person count. Alternative is adding ngFor on every element-->
                 <div class="person-grid" [formGroupName]="i">
 
@@ -240,7 +238,7 @@
                     </mat-form-field>
                   </div>
                   <div class="read-only">
-                    <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>
+                    <mat-radio-button name="person-access-radio-{{i}}" formControlName="access" value="read"></mat-radio-button>
                   </div>
                   <div class="read-write">
                     <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>

@@ -25,7 +25,8 @@ interface Person {
   firstName: string;
   lastName: string;
   email: string;
-  username: string;
+  // username: string;
+
   access: string;
   roles: string[];
 }
@@ -215,7 +216,8 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.mail,
-      username: user.uid,
+      // username: user.uid,
+
       access: 'Full Access',
       roles: []
     });
@@ -295,22 +297,27 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       firstName: undefined,
       lastName: undefined,
       email: undefined,
-      username: undefined,
+      // username: undefined,
       access: undefined,
       roles: []
     });
   }
 
   addPerson(person: Person) {
+    console.log("adding a person.")
     const control = <FormArray>this.dataInfoForm.get('projectMembers');
     control.push(
       this.formBuilder.group({
         firstName: new FormControl(person.firstName, Validators.required),
         lastName: new FormControl(person.lastName, Validators.required),
         email: new FormControl(person.email, Validators.required),
-        username: new FormControl(person.username),
-        access: new FormControl(person.access, Validators.required),
-        roles: new FormControl(person.roles, Validators.required)
+        // username: new FormControl(person.username),
+
+        // some cases no access but included in the project.
+        access: new FormControl(person.access),
+        roles: new FormControl(person.roles)
+        // access: new FormControl(person.access, Validators.required),
+        // roles: new FormControl(person.roles, Validators.required)
       })
     );
   }
