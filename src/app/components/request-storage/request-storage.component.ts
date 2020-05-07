@@ -166,6 +166,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       dataRequirementsOther: new FormControl(undefined),
       shortName: new FormControl(undefined, [Validators.required]),
       projectMembers: this.projectMembers
+
     });
 
     this.dataRequirementsSub = this.dataInfoForm.get('dataRequirements').valueChanges.subscribe(
@@ -314,10 +315,21 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
         // username: new FormControl(person.username),
 
         // some cases no access but included in the project.
-        access: new FormControl(person.access),
-        roles: new FormControl(person.roles)
+        // access: new FormControl(person.access),
+        // roles: new FormControl(person.roles)
+
         // access: new FormControl(person.access, Validators.required),
         // roles: new FormControl(person.roles, Validators.required)
+        access: this.formBuilder.group({
+          readOnly: new FormControl(person.access),
+          readwrite: new FormControl(person.access),
+        }),
+        roles: this.formBuilder.group({
+          dataUser: new FormControl(person.roles),
+          dataContact: new FormControl(person.roles),
+          projectParticipant: new FormControl(person.roles),
+          projectOwner: new FormControl(person.roles),
+        })
       })
     );
   }
