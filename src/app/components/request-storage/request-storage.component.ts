@@ -311,7 +311,10 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       this.formBuilder.group({
         firstName: new FormControl(person.firstName, Validators.required),
         lastName: new FormControl(person.lastName, Validators.required),
-        email: new FormControl(person.email, Validators.required),
+        email: new FormControl(person.email, [
+          Validators.required,
+          Validators.pattern('.*@(aucklanduni.ac.nz|auckland.ac.nz)$')
+        ]),
         // username: new FormControl(person.username),
 
         // some cases no access but included in the project.
