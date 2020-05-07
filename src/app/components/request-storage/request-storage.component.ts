@@ -313,7 +313,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
         lastName: new FormControl(person.lastName, Validators.required),
         email: new FormControl(person.email, [
           Validators.required,
-          Validators.pattern('.*@(aucklanduni.ac.nz|auckland.ac.nz)$')
+          Validators.pattern('.*(aucklanduni.ac.nz|auckland.ac.nz)$')
         ]),
         // username: new FormControl(person.username),
 
