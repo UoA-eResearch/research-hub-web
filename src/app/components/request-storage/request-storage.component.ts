@@ -314,19 +314,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
           Validators.required,
           Validators.pattern('.*(aucklanduni.ac.nz|auckland.ac.nz)$')
         ]),
-        // username: new FormControl(person.username),
-
-        // some cases no access but included in the project.
-        // access: new FormControl(person.access),
-        // roles: new FormControl(person.roles)
-
-        // access: new FormControl(person.access, Validators.required),
-        // roles: new FormControl(person.roles, Validators.required)
-
-        // access: this.formBuilder.group({
-        //   readOnly: new FormControl(person.access),
-        //   readwrite: new FormControl(person.access),
-        // }),
 
         access: new FormControl(person.access),
 
