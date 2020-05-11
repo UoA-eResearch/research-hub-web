@@ -234,24 +234,21 @@
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
                       <input matInput placeholder="Email" formControlName="email" type="email">
-                      <mat-error *ngIf="member.controls.email.invalid">* Please enter a University of Auckland email address. List external emails in the comments section.</mat-error>
+                      <mat-error *ngIf="member.controls.email.invalid">* Please enter a University of Auckland email
+                        address. List external emails in the comments section.</mat-error>
                     </mat-form-field>
                   </div>
-                  <div class="read-only">
-
-                    <!-- <mat-radio-button matInput name="access" formControlName="access" value="read"></mat-radio-button> -->
-                    <!-- <input type="radio" name=access formControlName="access"> -->
-
-                    <mat-radio-group class="normal-align" formControlName="access" >
+                  <mat-radio-group class="grid-radio-group" formControlName="access">
+                    <div class="read-only radio-group-item">
+                      <!-- <mat-radio-button matInput name="access" formControlName="access" value="read"></mat-radio-button> -->
+                      <!-- <input type="radio" name=access formControlName="access"> -->
                       <mat-radio-button matInput name="person-access-radio-{{i}}" value="read"></mat-radio-button>
-                    </mat-radio-group>
-                  </div>
-                  <div class="read-write">
-                    <!-- <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button> -->
-                    <mat-radio-group class="normal-align" formControlName="access" >
+                    </div>
+                    <div class="read-write">
+                      <!-- <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button> -->
                       <mat-radio-button matInput name="person-access-radio-{{i}}" value="read-write"></mat-radio-button>
-                    </mat-radio-group>
-                  </div>
+                    </div>
+                  </mat-radio-group>
                   <div class="data-user">
                     <mat-checkbox></mat-checkbox>
                   </div>
