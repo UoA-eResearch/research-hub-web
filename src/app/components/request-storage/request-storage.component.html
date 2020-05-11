@@ -254,18 +254,20 @@
                       </mat-radio-button>
                     </div>
                   </mat-radio-group>
+<div formGroupName="roles">
                   <div class="data-user">
-                    <mat-checkbox fromControlName="roles.dataUser"></mat-checkbox>
+                    <mat-checkbox fromControlName="dataUser"></mat-checkbox>
                   </div>
                   <div class="data-contact">
-                    <mat-checkbox formControlName="roles.dataContact"></mat-checkbox>
+                    <mat-checkbox formControlName="dataContact"></mat-checkbox>
                   </div>
                   <div class="project-participant">
-                    <mat-checkbox formControlName="roles.projectParticipant"></mat-checkbox>
+                    <mat-checkbox formControlName="projectParticipant"></mat-checkbox>
                   </div>
                   <div class="project-owner">
-                    <mat-checkbox formControlName="roles.projectOwner"></mat-checkbox>
+                    <mat-checkbox formControlName="projectOwner"></mat-checkbox>
                   </div>
+</div>
                   <div class="delete-icon">
                     <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
                       <mat-icon>delete</mat-icon>

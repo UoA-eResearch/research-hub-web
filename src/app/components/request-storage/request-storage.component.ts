@@ -25,10 +25,14 @@ interface Person {
   firstName: string;
   lastName: string;
   email: string;
-  // username: string;
-
   access: string;
-  roles: string[];
+  // roles: string[];
+  roles: {
+    dataUser: false;
+    dataContact: false;
+    projectParticipant: false;
+    projectOwner: false;
+  };
 }
 
 
@@ -219,7 +223,12 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       // username: user.uid,
 
       access: 'Full Access',
-      roles: []
+      roles: {
+        dataUser: false,
+        dataContact: false,
+        projectParticipant: false,
+        projectOwner: false,
+      }
     });
 
     this.routeParamsSub =
@@ -299,7 +308,12 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       email: undefined,
       // username: undefined,
       access: undefined,
-      roles: []
+      roles: {
+        dataUser: false,
+        dataContact: false,
+        projectParticipant: false,
+        projectOwner: false,
+      }
     });
   }
 
@@ -318,10 +332,10 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
         access: new FormControl(person.access),
 
         roles: this.formBuilder.group({
-          dataUser: new FormControl(person.roles),
-          dataContact: new FormControl(person.roles),
-          projectParticipant: new FormControl(person.roles),
-          projectOwner: new FormControl(person.roles),
+          dataUser: new FormControl(person.roles.dataUser),
+          dataContact: new FormControl(person.roles.dataContact),
+          projectParticipant: new FormControl(person.roles.projectParticipant),
+          projectOwner: new FormControl(person.roles.projectOwner),
         }),
         test: new FormControl(person.firstName)
       })
