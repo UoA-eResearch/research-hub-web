@@ -228,7 +228,6 @@
 
             <div class="array-container" formArrayName="projectMembers">
               <div *ngFor="let member of projectMembers.controls; let i = index">
-                <!-- ngFor is actually creating multiple person grids equal to the person count. Alternative is adding ngFor on every element-->
                 <div class="person-grid" [formGroupName]="i">
                   <div class="details" fxLayout="column">
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
@@ -256,16 +255,16 @@
                     </div>
                   </mat-radio-group>
                   <div class="data-user">
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox fromControlName="roles.dataUser"></mat-checkbox>
                   </div>
                   <div class="data-contact">
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox formControlName="roles.dataContact"></mat-checkbox>
                   </div>
                   <div class="project-participant">
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox formControlName="roles.projectParticipant"></mat-checkbox>
                   </div>
                   <div class="project-owner">
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox formControlName="roles.projectOwner"></mat-checkbox>
                   </div>
                   <div class="delete-icon">
                     <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
