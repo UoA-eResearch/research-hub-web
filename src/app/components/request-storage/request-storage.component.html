@@ -238,7 +238,10 @@
                     </mat-form-field>
                   </div>
                   <div class="read-only">
-                    <mat-radio-button name="person-access-radio-{{i}}" formControlName="access.readOnly" value="read"></mat-radio-button>
+                    <!-- <mat-radio-button matInput name="person-access-radio-{{i}}" [ngModel]="member.access" value="read"></mat-radio-button> -->
+                    <mat-radio-group formControlName="access" >
+                      <mat-radio-button matInput name="person-access-radio-{{i}}" value="read"></mat-radio-button>
+                    </mat-radio-group>
                   </div>
                   <div class="read-write">
                     <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button>
