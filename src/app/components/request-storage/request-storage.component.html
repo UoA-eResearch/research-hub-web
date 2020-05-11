@@ -1,12 +1,14 @@
 <mat-card>
   <mat-card-header class="request-card-header">
-    <img mat-card-avatar [src]="apiService.getAssetUrl(image)">
-    <h1>{{title}}</h1>
+    <img mat-card-avatar [src]="apiService.getAssetUrl(image)" />
+    <h1>{{ title }}</h1>
   </mat-card-header>
 
-  <p style="padding-left: 24px;">In order to provide you with research storage please complete the general information
-    in the following sections. If you have any questions feel free to add this into the comments field at the end of the
-    form.</p>
+  <p style="padding-left: 24px;">
+    In order to provide you with research storage please complete the general
+    information in the following sections. If you have any questions feel free
+    to add this into the comments field at the end of the form.
+  </p>
 
   <div #resultsDummyHeader style="margin-top: 3em;"></div>
   <mat-horizontal-stepper #stepper linear="true">
@@ -162,28 +164,34 @@
 
         <div class="step-form-container">
           <div class="form-group">
-            <h3>To help us store your data appropriately please tick any of the following that apply to the data being
-              stored</h3>
+            <h3>
+              To help us store your data appropriately please tick any of the
+              following that apply to the data being stored
+            </h3>
             <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
               <mat-select placeholder="Data information [optional]" formControlName="dataRequirements" multiple>
-                <mat-option *ngFor="let item of dataRequirements" [value]="item">{{item}}</mat-option>
+                <mat-option *ngFor="let item of dataRequirements" [value]="item">{{ item }}</mat-option>
               </mat-select>
               <mat-error *ngIf="dataInfoForm.controls.dataRequirements.invalid">* Please choose at least one item from
                 the list</mat-error>
             </mat-form-field>
             <mat-form-field style="margin-top: 1em;" *ngIf="showOtherField" floatLabel="never"
               class="no-floating-label input-full-width">
-              <input matInput placeholder="Other" formControlName="dataRequirementsOther">
+              <input matInput placeholder="Other" formControlName="dataRequirementsOther" />
               <mat-error *ngIf="dataInfoForm.controls.dataRequirementsOther.invalid">* Please enter a name for other
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="form-group">
-            <h3>Please provide a descriptive name for your storage folder (e.g. GDC-data)?</h3>
+            <h3>
+              Please provide a descriptive name for your storage folder (e.g.
+              GDC-data)?
+            </h3>
             <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
-              <input matInput placeholder="Short name" formControlName="shortName" type="text">
-              <mat-hint align="start">Avoid generic names like <i>my-project</i> or <i>my-data</i></mat-hint>
+              <input matInput placeholder="Short name" formControlName="shortName" type="text" />
+              <mat-hint align="start">Avoid generic names like <i>my-project</i> or
+                <i>my-data</i></mat-hint>
               <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">* Please enter a short name</mat-error>
             </mat-form-field>
           </div>
@@ -222,31 +230,32 @@
               <div *ngFor="let member of projectMembers.controls; let i = index">
                 <!-- ngFor is actually creating multiple person grids equal to the person count. Alternative is adding ngFor on every element-->
                 <div class="person-grid" [formGroupName]="i">
-
                   <div class="details" fxLayout="column">
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
-                      <input matInput placeholder="First name" formControlName="firstName" autocapitalize=words>
+                      <input matInput placeholder="First name" formControlName="firstName" autocapitalize="words" />
                       <mat-error *ngIf="member.controls.firstName.invalid">* Please enter a first name</mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
-                      <input matInput placeholder="Last name" formControlName="lastName" autocapitalize=words>
+                      <input matInput placeholder="Last name" formControlName="lastName" autocapitalize="words" />
                       <mat-error *ngIf="member.controls.lastName.invalid">* Please enter a last name</mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
-                      <input matInput placeholder="Email" formControlName="email" type="email">
+                      <input matInput placeholder="Email" formControlName="email" type="email" />
                       <mat-error *ngIf="member.controls.email.invalid">* Please enter a University of Auckland email
-                        address. List external emails in the comments section.</mat-error>
+                        address.
+                        List external emails in the comments section.</mat-error>
                     </mat-form-field>
                   </div>
                   <mat-radio-group class="grid-radio-group" formControlName="access">
-                    <div class="read-only radio-group-item">
+                    <div class="read-only radio-group-item" style="display: inline-block; width: 50%;">
                       <!-- <mat-radio-button matInput name="access" formControlName="access" value="read"></mat-radio-button> -->
                       <!-- <input type="radio" name=access formControlName="access"> -->
-                      <mat-radio-button matInput name="person-access-radio-{{i}}" value="read"></mat-radio-button>
+                      <mat-radio-button matInput name="person-access-radio-{{ i }}" value="read"></mat-radio-button>
                     </div>
-                    <div class="read-write">
+                    <div class="read-write" style="display: inline-block; width: 50%;">
                       <!-- <mat-radio-button name="person-access-radio-{{i}}"></mat-radio-button> -->
-                      <mat-radio-button matInput name="person-access-radio-{{i}}" value="read-write"></mat-radio-button>
+                      <mat-radio-button matInput name="person-access-radio-{{ i }}" value="read-write">
+                      </mat-radio-button>
                     </div>
                   </mat-radio-group>
                   <div class="data-user">
@@ -268,19 +277,23 @@
                   </div>
                 </div>
               </div>
-              <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('required')">* Please add at least 1
-                person</mat-error>
+              <mat-error *ngIf="
+                  dataInfoForm.controls.projectMembers.hasError('required')
+                ">* Please add at least 1 person</mat-error>
               <div fxLayout="row" fxLayoutAlign="end center">
-                <button mat-button color="primary" (click)="addNewPerson()">Add Person</button>
+                <button mat-button color="primary" (click)="addNewPerson()">
+                  Add Person
+                </button>
               </div>
             </div>
-
           </div>
         </div>
 
         <div style="margin-top: 3em;" fxLayout="column" fxLayoutAlign="end">
           <div fxLayout="row" fxLayoutAlign="end">
-            <button mat-raised-button color="accent" matStepperNext>Next</button>
+            <button mat-raised-button color="accent" matStepperNext>
+              Next
+            </button>
           </div>
         </div>
       </form>
@@ -293,16 +306,18 @@
 
         <div class="step-form-container">
           <div class="form-group">
-            <h3>Estimate how much total storage you need in the next 12 months</h3>
+            <h3>
+              Estimate how much total storage you need in the next 12 months
+            </h3>
             <div fxLayout="row" fxLayoutGap="1em" fxLayout.xs="column">
               <mat-form-field fxFlex="50">
-                <input matInput placeholder="Amount" formControlName="sizeThisYear" type="number" min="1">
+                <input matInput placeholder="Amount" formControlName="sizeThisYear" type="number" min="1" />
                 <mat-error *ngIf="dataSizeForm.controls.sizeThisYear.invalid">* Please enter a value above 0</mat-error>
               </mat-form-field>
               <mat-form-field fxFlex="50">
                 <mat-select formControlName="unitThisYear">
                   <mat-option *ngFor="let unit of units" [value]="unit">
-                    {{unit}}
+                    {{ unit }}
                   </mat-option>
                 </mat-select>
                 <mat-error *ngIf="dataSizeForm.controls.unitThisYear.invalid">* Please choose an option</mat-error>
@@ -311,16 +326,19 @@
           </div>
 
           <div class="form-group" *ngIf="showSizeNextYear">
-            <h3>Estimate how much total storage you need for the entire project duration</h3>
+            <h3>
+              Estimate how much total storage you need for the entire project
+              duration
+            </h3>
             <div fxLayout="row" fxLayoutGap="1em" fxLayout.xs="column">
               <mat-form-field fxFlex="50">
-                <input matInput placeholder="Amount" formControlName="sizeNextYear" type="number" min="1">
+                <input matInput placeholder="Amount" formControlName="sizeNextYear" type="number" min="1" />
                 <mat-error *ngIf="dataSizeForm.controls.sizeNextYear.invalid">* Please enter a value above 0</mat-error>
               </mat-form-field>
               <mat-form-field fxFlex="50">
                 <mat-select placeholder="Unit" formControlName="unitNextYear">
                   <mat-option *ngFor="let unit of units" [value]="unit">
-                    {{unit}}
+                    {{ unit }}
                   </mat-option>
                 </mat-select>
                 <mat-error *ngIf="dataSizeForm.controls.unitNextYear.invalid">* Please choose an option</mat-error>
@@ -342,9 +360,11 @@
 
         <div fxLayout="column" fxLayoutAlign="end">
           <div fxLayout="row" fxLayoutAlign="end">
-            <button mat-raised-button color="accent"
-              (click)="submit(requestTypeForm.controls.requestType.value, dataSizeForm)" [disabled]="submitting">Request
-              Storage</button>
+            <button mat-raised-button color="accent" (click)="
+                submit(requestTypeForm.controls.requestType.value, dataSizeForm)
+              " [disabled]="submitting">
+              Request Storage
+            </button>
           </div>
         </div>
       </form>
@@ -354,14 +374,24 @@
       <ng-template matStepLabel>Done</ng-template>
       <div class="step-form-container">
         <h3>Request submitted</h3>
-        <p>Your storage request has been submitted and an acknowledgement e-mail sent to <a *ngIf="authService.user"
-            [href]="'mailto:' + authService.user.mail" target="_blank">{{authService.user.mail}}</a>.</p>
-        <p>You may view your request here: <a *ngIf="response" [href]="response.ticketUrl"
-            target="_blank">{{response.ticketNumber}}</a></p>
+        <p>
+          Your storage request has been submitted and an acknowledgement e-mail
+          sent to
+          <a *ngIf="authService.user" [href]="'mailto:' + authService.user.mail"
+            target="_blank">{{ authService.user.mail }}</a>.
+        </p>
+        <p>
+          You may view your request here:
+          <a *ngIf="response" [href]="response.ticketUrl" target="_blank">{{
+            response.ticketNumber
+          }}</a>
+        </p>
       </div>
       <div fxLayout="column" fxLayoutAlign="end">
         <div fxLayout="row" fxLayoutAlign="end">
-          <button mat-raised-button color="accent" [routerLink]="['/content', 49]">Back to Research Storage</button>
+          <button mat-raised-button color="accent" [routerLink]="['/content', 49]">
+            Back to Research Storage
+          </button>
         </div>
       </div>
     </mat-step>
