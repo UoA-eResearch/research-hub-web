@@ -1,7 +1,7 @@
 
 import {map, first} from 'rxjs/operators';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, ValidationErrors} from '@angular/forms';
 import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
 import {CerApiService} from 'app/services/cer-api.service';
 import {AuthService} from '../../services/auth.service';
@@ -318,28 +318,39 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   }
 
   addPerson(person: Person) {
-    console.log("adding a person.")
+
+    // better off to add this to the dataInfoForm stage.
+
+    // function minimumProjectOwnersValidator(): ValidatorFn {
+    //   return (group: FormGroup): ValidationErrors => {
+    //     const dataUser = group.controls['dataUser'];
+    //     return dataUser;
+    //   }
+    // }
+
     const control = <FormArray>this.dataInfoForm.get('projectMembers');
-    control.push(
-      this.formBuilder.group({
+    let rolesFormGroup = this.formBuilder.group({
+          dataUser: new FormControl(person.roles.dataUser),
+          dataContact: new FormControl(person.roles.dataContact),
+          projectParticipant: new FormControl(person.roles.projectParticipant),
+          projectOwner: new FormControl(person.roles.projectOwner),
+        });
+
+    let personFormGroup = this.formBuilder.group({
         firstName: new FormControl(person.firstName, Validators.required),
         lastName: new FormControl(person.lastName, Validators.required),
         email: new FormControl(person.email, [
           Validators.required,
           Validators.pattern('.*(aucklanduni.ac.nz|auckland.ac.nz)$')
         ]),
-
         access: new FormControl(person.access),
-
-        roles: this.formBuilder.group({
-          dataUser: new FormControl(person.roles.dataUser),
-          dataContact: new FormControl(person.roles.dataContact),
-          projectParticipant: new FormControl(person.roles.projectParticipant),
-          projectOwner: new FormControl(person.roles.projectOwner),
-        }),
-        test: new FormControl(person.firstName)
+        roles: rolesFormGroup
       })
+      // bind/add custom validator here.
+    control.push(
+      personFormGroup
     );
+    console.log(this.dataInfoForm.getRawValue());
   }
 
   deletePerson(index: number) {
