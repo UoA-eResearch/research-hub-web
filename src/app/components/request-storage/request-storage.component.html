@@ -284,7 +284,11 @@
               </div>
               <mat-error *ngIf="
                   dataInfoForm.controls.projectMembers.hasError('required')
-                ">* Please add at least 1 person {{projectMembers.valid}}{{projectMembers.errors|json}}</mat-error>
+                ">* Please add at least 1 person {{projectMembers.errors|json}}
+              </mat-error>
+              <mat-error *ngIf="dataInfoForm.controls.projectMembers.minimumProjectOwnersValidator">
+
+              </mat-error>
               <div fxLayout="row" fxLayoutAlign="end center">
                 <button mat-button color="primary" (click)="addNewPerson()">
                   Add Person
