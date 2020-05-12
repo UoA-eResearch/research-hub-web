@@ -163,7 +163,35 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       comments: new FormControl(undefined)
     });
 
-    this.projectMembers = this.formBuilder.array([], Validators.compose([Validators.required]));
+    function minimumProjectOwnersValidator(): ValidatorFn {
+      return (formArray: FormArray) => {
+        let projectOwnerCount = 0;
+        let dataContactCount = 0;
+        formArray.value.forEach((projectMember, index) => {
+          let personRoles = projectMember.roles;
+          if (personRoles.dataContact) {
+            dataContactCount++;
+          }
+          if (personRoles.projectOwner) {
+            projectOwnerCount++;
+          }
+        });
+        if (projectOwnerCount !== 1) {
+            console.log("invalid, either missing one po or one dc");
+            return { error: "There must be one project owner."}
+        }
+        if (dataContactCount < 0) {
+          console.log("invalid, either missing one po or one dc");
+          return { error: "There must be at least one data contact."}
+        }
+        return null;
+      };
+    }
+
+    this.projectMembers = this.formBuilder.array([], Validators.compose([
+      Validators.required,
+      minimumProjectOwnersValidator()
+    ]));
 
     this.dataInfoForm = this.formBuilder.group({
       dataRequirements: new FormControl(undefined),
