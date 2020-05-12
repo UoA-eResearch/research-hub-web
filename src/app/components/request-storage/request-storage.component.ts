@@ -163,26 +163,33 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       comments: new FormControl(undefined)
     });
 
-    function minimumProjectOwnersValidator(): ValidatorFn {
+    function projectOwnerValidator(): ValidatorFn {
       return (formArray: FormArray) => {
         let projectOwnerCount = 0;
-        let dataContactCount = 0;
-        formArray.value.forEach((projectMember, index) => {
+        formArray.value.forEach((projectMember) => {
           let personRoles = projectMember.roles;
-          if (personRoles.dataContact) {
-            dataContactCount++;
-          }
           if (personRoles.projectOwner) {
             projectOwnerCount++;
           }
         });
         if (projectOwnerCount !== 1) {
-            console.log("invalid, either missing one po or one dc");
-            return { error: "There must be one project owner."}
+            return { invalidProjectOwnerCount: true }
         }
-        if (dataContactCount < 0) {
-          console.log("invalid, either missing one po or one dc");
-          return { error: "There must be at least one data contact."}
+        return null;
+      };
+    }
+    
+    function dataContactValidator(): ValidatorFn {
+      return (formArray: FormArray) => {
+        let dataContactCount = 0;
+        formArray.value.forEach((projectMember) => {
+          let personRoles = projectMember.roles;
+          if (personRoles.dataContact) {
+            dataContactCount++;
+          }
+        });
+        if (dataContactCount <= 0) {
+            return { invalidDataContactCount: true }
         }
         return null;
       };
@@ -190,7 +197,8 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
 
     this.projectMembers = this.formBuilder.array([], Validators.compose([
       Validators.required,
-      minimumProjectOwnersValidator()
+      projectOwnerValidator(),
+      dataContactValidator()
     ]));
 
     this.dataInfoForm = this.formBuilder.group({
