@@ -12,7 +12,7 @@
 
   <div #resultsDummyHeader style="margin-top: 3em;"></div>
   <mat-horizontal-stepper #stepper linear="true">
-    <!-- <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
+    <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
       <form [formGroup]="requestTypeForm" novalidate>
 
         <ng-template matStepLabel>Request Type</ng-template>
@@ -25,6 +25,10 @@
               <mat-radio-button value="Existing">Existing</mat-radio-button>
               <mat-error *ngIf="requestTypeForm.controls.requestType.invalid && requestTypeClicked">* Please choose an option</mat-error>
             </mat-radio-group>
+            <br>
+            <p>
+              Note: Personal or private Dropbox accounts do not qualify as existing storage.
+            </p>
           </div>
         </div>
 
@@ -34,9 +38,9 @@
           </div>
         </div>
       </form>
-    </mat-step> -->
+    </mat-step>
 
-    <!-- <mat-step [editable]="isEditable" [stepControl]="requestDetailsForm" *ngIf="requestTypeForm.controls.requestType.value === 'Existing'">
+    <mat-step [editable]="isEditable" [stepControl]="requestDetailsForm" *ngIf="requestTypeForm.controls.requestType.value === 'Existing'">
       <form [formGroup]="requestDetailsForm">
         <ng-template matStepLabel>Request Details</ng-template>
 
@@ -90,9 +94,9 @@
           </div>
         </div>
       </form>
-    </mat-step> -->
+    </mat-step>
 
-    <!-- <mat-step [editable]="isEditable" [stepControl]="projectForm" *ngIf="requestTypeForm.controls.requestType.value === 'New'">  
+    <mat-step [editable]="isEditable" [stepControl]="projectForm" *ngIf="requestTypeForm.controls.requestType.value === 'New'">  
       <form [formGroup]="projectForm" novalidate>
         <ng-template matStepLabel>General Information</ng-template>
 
@@ -155,7 +159,7 @@
           </div>
         </div>
       </form>
-    </mat-step> -->
+    </mat-step>
 
     <mat-step [editable]="isEditable" [stepControl]="dataInfoForm"
       *ngIf="requestTypeForm.controls.requestType.value === 'New'">
