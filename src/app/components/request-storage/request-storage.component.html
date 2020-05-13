@@ -198,7 +198,7 @@
 
           <div class="form-group">
             <h3>Please provide a list of people who require access</h3>
-            
+
             <div class="person-grid person-grid-headers">
               <div class="access">
                 Access
@@ -206,47 +206,49 @@
               <div class="roles">
                 Roles
               </div>
-              <div 
-                matTooltip="A person may read the files but can not write to existing files or create new files." 
-                [matTooltipShowDelay]="0"
-                [matTooltipHideDelay]="0"
-                class="read-only-header">
-                Read<br>Only
+              <div matTooltip="A person may read the files but can not write to existing files or create new files."
+                [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" class="read-only-header">
+                <div class="header__title">
+                  Read<br>Only
+                </div>
+                <mat-icon>help_outline</mat-icon>
               </div>
-              <div class="read-write-header"
-                matTooltip="Allow reading and writing to files." 
-                [matTooltipShowDelay]="0"
-                [matTooltipHideDelay]="0"
-              >
-                Read<br>& Write
+              <div class="read-write-header" matTooltip="Allow reading and writing to files." [matTooltipShowDelay]="0"
+                [matTooltipHideDelay]="0">
+                <div class="header__title">
+                  Read<br>& Write
+                </div>
+                <mat-icon>help_outline</mat-icon>
               </div>
-              <div class="data-user-header"
-                matTooltip="A person that is required to use the data." 
-                [matTooltipShowDelay]="0"
-                [matTooltipHideDelay]="0"
-              >
-                Data<br>User
+              <div class="data-user-header" matTooltip="A person that is required to use the data."
+                [matTooltipShowDelay]="0" [matTooltipHideDelay]="0">
+                <div class="header__title">
+                  Data<br>User
+                </div>
+                <mat-icon>help_outline</mat-icon>
               </div>
               <div class="data-contact-header"
-                matTooltip="A person that the Centre for eResearch can contact regarding the data." 
-                [matTooltipShowDelay]="0"
-                [matTooltipHideDelay]="0"
-              >
-                Data<br>Contact
+                matTooltip="A person that the Centre for eResearch can contact regarding the data."
+                [matTooltipShowDelay]="0" [matTooltipHideDelay]="0">
+                <div class="header__title">
+                  Data<br>Contact
+                </div>
+                <mat-icon>help_outline</mat-icon>
               </div>
-              <div class="project-participant-header"
-                matTooltip="A person that is participating in the project." 
-                [matTooltipShowDelay]="0"
-                [matTooltipHideDelay]="0"
-              >
-                Project<br>Participant
+              <div class="project-participant-header" matTooltip="A person that is participating in the project."
+                [matTooltipShowDelay]="0" [matTooltipHideDelay]="0">
+                <div class="header__title">
+                  Project<br>Participant
+                </div>
+                <mat-icon>help_outline</mat-icon>
               </div>
               <div class="project-owner-header"
-                matTooltip="The owner of the project. If you are a PhD student, this will be your supervisor." 
-                [matTooltipShowDelay]="0"
-                [matTooltipHideDelay]="0"
-              >
-                Project<br>Owner
+                matTooltip="The owner of the project. If you are a PhD student, this will be your supervisor."
+                [matTooltipShowDelay]="0" [matTooltipHideDelay]="0">
+                <div class="header__title">
+                  Project<br>Owner
+                </div>
+                <mat-icon>help_outline</mat-icon>
               </div>
             </div>
 
@@ -271,24 +273,26 @@
                   </div>
                   <mat-radio-group class="grid-radio-group" formControlName="access">
                     <div class="read-only access__radio-wrapper">
-                      <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}" value="read"></mat-radio-button>
+                      <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
+                        value="read"></mat-radio-button>
                     </div>
                     <div class="read-write access__radio-wrapper">
-                      <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}" value="read-write">
+                      <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
+                        value="read-write">
                       </mat-radio-button>
                     </div>
                   </mat-radio-group>
                   <div class="data-user" fromGroupName="roles">
-                      <mat-checkbox fromControlName="dataUser"></mat-checkbox>
+                    <mat-checkbox fromControlName="dataUser"></mat-checkbox>
                   </div>
                   <div class="data-contact" formGroupName="roles">
-                      <mat-checkbox formControlName="dataContact"></mat-checkbox>
+                    <mat-checkbox formControlName="dataContact"></mat-checkbox>
                   </div>
                   <div class="project-participant" formGroupName="roles">
-                      <mat-checkbox formControlName="projectParticipant"></mat-checkbox>
+                    <mat-checkbox formControlName="projectParticipant"></mat-checkbox>
                   </div>
                   <div class="project-owner" formGroupName="roles">
-                      <mat-checkbox formControlName="projectOwner"></mat-checkbox>
+                    <mat-checkbox formControlName="projectOwner"></mat-checkbox>
                   </div>
                   <div class="delete-icon">
                     <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
@@ -298,14 +302,14 @@
                 </div>
               </div>
               <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('invalidProjectOwnerCount')">
-                  * Requires 1 project owner.
+                * Requires 1 project owner.
               </mat-error>
               <mat-error *ngIf="
                   dataInfoForm.controls.projectMembers.hasError('required')
-                ">* Requires at least 1 person. 
+                ">* Requires at least 1 person.
               </mat-error>
               <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('invalidDataContactCount')">
-                  * Requires at least 1 data contact.
+                * Requires at least 1 data contact.
               </mat-error>
               <div fxLayout="row" fxLayoutAlign="end center">
                 <button mat-button color="primary" (click)="addNewPerson()">
