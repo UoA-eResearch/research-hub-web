@@ -128,9 +128,10 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   ];
 
   public roleTypes = [
-    'Data Owner',
+    'Data User',
     'Data Contact',
-    'Project Member'
+    'Project Participant',
+    'Project Owner'
   ];
 
   constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
@@ -258,7 +259,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       email: user.mail,
       // username: user.uid,
 
-      access: 'Full Access',
+      access: 'Read Only',
       roles: {
         dataUser: false,
         dataContact: false,
@@ -437,6 +438,20 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
                 this.requestTypeForm.getRawValue(),
                 this.requestDetailsForm.getRawValue());
       }
+
+      // restructure body to avoid needed to alter servicenow api.
+      body['projectMembers'].forEach(member => {
+        let rolesArray = [];
+        let roles = member['roles'];
+        Object.keys(roles).forEach(function(key) {
+          if (roles[key]) {
+            // Replaces camel case to a lowercase string.
+            let role = key.split(/(?=[A-Z])/).map(s => s.toLowerCase()).join(" ");
+            rolesArray.push(role);
+          }
+        });
+        member['roles'] = rolesArray;
+      });
 
       console.log('Submitting request body: ', body);
 
