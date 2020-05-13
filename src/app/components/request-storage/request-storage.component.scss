@@ -86,10 +86,14 @@ table * {
   padding-bottom: 2.5rem;
 }
 
-.person-grid-headers div {
+.person-grid-headers {
+  margin-top: 2rem;
+  
+  div {
     color: map-get($hub-navy, 500);
     margin: auto;
     text-align: center;
+  }
 }
 
 .access {
@@ -149,8 +153,11 @@ div .delete-icon {
 .access__radio-wrapper {
   display: inline-block;
   width: 50%;
+  display: flex;
+  align-items: center;
 }
 
 .access__radio-button {
   margin: auto;
+  width: 20px;
 }

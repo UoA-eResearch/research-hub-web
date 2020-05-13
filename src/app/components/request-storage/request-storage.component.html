@@ -206,23 +206,47 @@
               <div class="roles">
                 Roles
               </div>
-              <div class="read-only-header">
-                Read Only
+              <div 
+                matTooltip="A person may read the files but can not write to existing files or create new files." 
+                [matTooltipShowDelay]="0"
+                [matTooltipHideDelay]="0"
+                class="read-only-header">
+                Read<br>Only
               </div>
-              <div class="read-write-header">
-                Read <br>& Write
+              <div class="read-write-header"
+                matTooltip="Allow reading and writing to files." 
+                [matTooltipShowDelay]="0"
+                [matTooltipHideDelay]="0"
+              >
+                Read<br>& Write
               </div>
-              <div class="data-user-header">
-                Data User
+              <div class="data-user-header"
+                matTooltip="A person that is required to use the data." 
+                [matTooltipShowDelay]="0"
+                [matTooltipHideDelay]="0"
+              >
+                Data<br>User
               </div>
-              <div class="data-contact-header">
-                Data Contact
+              <div class="data-contact-header"
+                matTooltip="A person that the Centre for eResearch can contact regarding the data." 
+                [matTooltipShowDelay]="0"
+                [matTooltipHideDelay]="0"
+              >
+                Data<br>Contact
               </div>
-              <div class="project-participant-header">
-                Project Participant
+              <div class="project-participant-header"
+                matTooltip="A person that is participating in the project." 
+                [matTooltipShowDelay]="0"
+                [matTooltipHideDelay]="0"
+              >
+                Project<br>Participant
               </div>
-              <div class="project-owner-header">
-                Project Owner
+              <div class="project-owner-header"
+                matTooltip="The owner of the project. If you are a PhD student, this will be your supervisor." 
+                [matTooltipShowDelay]="0"
+                [matTooltipHideDelay]="0"
+              >
+                Project<br>Owner
               </div>
             </div>
 
@@ -246,11 +270,11 @@
                     </mat-form-field>
                   </div>
                   <mat-radio-group class="grid-radio-group" formControlName="access">
-                    <div class="read-only access__radio-button">
-                      <mat-radio-button matInput name="person-access-radio-{{ i }}" value="read"></mat-radio-button>
+                    <div class="read-only access__radio-wrapper">
+                      <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}" value="read"></mat-radio-button>
                     </div>
-                    <div class="read-write access__radio-button">
-                      <mat-radio-button matInput name="person-access-radio-{{ i }}" value="read-write">
+                    <div class="read-write access__radio-wrapper">
+                      <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}" value="read-write">
                       </mat-radio-button>
                     </div>
                   </mat-radio-group>
