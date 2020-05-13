@@ -41,11 +41,13 @@
   padding-left: 1em;
   padding-right: 1em;
   padding-top: 1em;
-  padding-bottom: 1.5em;
+  padding-bottom: 1em;
+  margin-bottom: 2rem;
 }
 
 .data-person-row:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.1);
+  // removing for now since error message isn't contained within the element properly
+  // background-color: rgba(0, 0, 0, 0.1);
 }
 
 .data-person-row-inner mat-form-field {
@@ -83,7 +85,6 @@ table * {
 
 .person-grid-body {
   grid-row-gap: 3rem;
-  padding-bottom: 2.5rem;
 }
 
 .person-grid-headers {

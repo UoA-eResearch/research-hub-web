@@ -253,7 +253,7 @@
             </div>
 
             <div class="array-container" formArrayName="projectMembers">
-              <div *ngFor="let member of projectMembers.controls; let i = index">
+              <div class="data-person-row" *ngFor="let member of projectMembers.controls; let i = index">
                 <div class="person-grid person-grid-body" [formGroupName]="i">
                   <div class="details" fxLayout="column">
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
