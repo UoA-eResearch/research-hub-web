@@ -198,8 +198,8 @@
 
           <div class="form-group">
             <h3>Please provide a list of people who require access</h3>
-
-            <div class="grid-container">
+            
+            <div class="person-grid person-grid-headers">
               <div class="access">
                 Access
               </div>
@@ -207,28 +207,28 @@
                 Roles
               </div>
               <div class="read-only-header">
-                read only
+                Read Only
               </div>
               <div class="read-write-header">
-                read write
+                Read <br>& Write
               </div>
               <div class="data-user-header">
-                data user
+                Data User
               </div>
               <div class="data-contact-header">
-                data contact
+                Data Contact
               </div>
               <div class="project-participant-header">
-                project participant
+                Project Participant
               </div>
               <div class="project-owner-header">
-                project owner
+                Project Owner
               </div>
             </div>
 
             <div class="array-container" formArrayName="projectMembers">
               <div *ngFor="let member of projectMembers.controls; let i = index">
-                <div class="person-grid" [formGroupName]="i">
+                <div class="person-grid person-grid-body" [formGroupName]="i">
                   <div class="details" fxLayout="column">
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
                       <input matInput placeholder="First name" formControlName="firstName" autocapitalize="words" />
@@ -266,7 +266,6 @@
                   <div class="project-owner" formGroupName="roles">
                       <mat-checkbox formControlName="projectOwner"></mat-checkbox>
                   </div>
-                  <!-- </div> -->
                   <div class="delete-icon">
                     <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
                       <mat-icon>delete</mat-icon>
@@ -274,15 +273,15 @@
                   </div>
                 </div>
               </div>
-              <mat-error *ngIf="
-                  dataInfoForm.controls.projectMembers.hasError('required')
-                ">* Please add at least 1 person {{projectMembers.errors|json}}
-              </mat-error>
               <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('invalidProjectOwnerCount')">
                   * Requires 1 project owner.
               </mat-error>
+              <mat-error *ngIf="
+                  dataInfoForm.controls.projectMembers.hasError('required')
+                ">* Requires at least 1 person. 
+              </mat-error>
               <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('invalidDataContactCount')">
-                  * Requires at least 1 data contact(s).
+                  * Requires at least 1 data contact.
               </mat-error>
               <div fxLayout="row" fxLayoutAlign="end center">
                 <button mat-button color="primary" (click)="addNewPerson()">

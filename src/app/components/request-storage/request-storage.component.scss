@@ -69,33 +69,34 @@ table * {
   border: 1px solid black;
 }
 
-.grid-container,
 .person-grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr) 40px;
   grid-template-rows: auto;
+
+  // only applies to checkboxes since the radio buttons are nested deeper
+  div {
+    padding: 0.2em;
+    margin: auto;
+  }
 }
 
-.grid-container div {
-  background: lightblue;
-  margin: 10px;
-  padding: 0.2em;
+.person-grid-body {
+  grid-row-gap: 3em;
 }
 
-.person-grid div {
-  background: lightblue;
-  margin: 10px;
-  padding: 0.2em;
+.person-grid-headers div {
+    color: map-get($hub-navy, 500);
+    margin: auto;
+    text-align: center;
 }
 
 .access {
-  /* grid-area: access; */
   grid-column: 3/5;
   grid-row: 1;
 }
 
 .roles {
-  /* grid-area: roles; */
   grid-column: 5/9;
   grid-row: 1;
 }
@@ -144,12 +145,7 @@ div .delete-icon {
   margin-right: 0;
 }
 
-.access__radio-button{
-  display: inline-block; 
+.access__radio-button {
+  display: inline-block;
   width: 50%;
-}
-
-div .form-group-wrapper {
-  margin: 0; 
-  padding: 0;
 }
