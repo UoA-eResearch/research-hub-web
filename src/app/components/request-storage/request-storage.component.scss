@@ -146,7 +146,11 @@ div .delete-icon {
   margin-right: 0;
 }
 
-.access__radio-button {
+.access__radio-wrapper {
   display: inline-block;
   width: 50%;
+}
+
+.access__radio-button {
+  margin: auto;
 }
