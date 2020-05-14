@@ -42,7 +42,6 @@
   padding-right: 1em;
   padding-top: 1em;
   padding-bottom: 1em;
-  margin-bottom: 2rem;
 }
 
 .data-person-row:nth-child(even) {
@@ -85,10 +84,12 @@ table * {
 
 .person-grid-body {
   grid-row-gap: 3rem;
+  margin-bottom: 3.5rem;
 }
 
 .person-grid-headers {
   margin-top: 2rem;
+  margin-bottom: 1rem;
 
   div {
     color: map-get($hub-navy, 500);
