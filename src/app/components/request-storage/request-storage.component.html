@@ -312,8 +312,11 @@
                   dataInfoForm.controls.projectMembers.hasError('required')
                 ">* Requires at least 1 person.
               </mat-error>
-              <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('invalidDataContactCount')">
-                * Requires at least 1 data contact.
+              <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('dataOwnerMinimumError')">
+                * Requires at least 1 data owner.
+              </mat-error>
+              <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('dataContactMinimumError')">
+                * Requires at least 1 data contact.<br>If no contact is assigned, the first data owner will be assigned as the contact.
               </mat-error>
               <div fxLayout="row" fxLayoutAlign="end center">
                 <button mat-button color="primary" (click)="addNewPerson()">

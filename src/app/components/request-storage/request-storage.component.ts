@@ -180,27 +180,30 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       };
     }
     
-    function dataContactValidator(): ValidatorFn {
+    function roleMinimumCountValidator(role, minimum): ValidatorFn {
       return (formArray: FormArray) => {
-        let dataContactCount = 0;
+        let roleCount = 0;
         formArray.value.forEach((projectMember) => {
           console.log(projectMember);
           let personRoles = projectMember.roles;
-          if (personRoles.dataContact) {
-            dataContactCount++;
+          if (personRoles[role]) {
+            roleCount++;
           }
         });
-        if (dataContactCount <= 0) {
-            return { invalidDataContactCount: true }
+        if (roleCount < minimum) {
+            let errorKey = `${role}MinimumError`
+            console.log(errorKey);
+            return { [errorKey]: true }
         }
         return null;
       };
     }
-
+    
     this.projectMembers = this.formBuilder.array([], Validators.compose([
       Validators.required,
       projectOwnerValidator(),
-      dataContactValidator()
+      roleMinimumCountValidator('dataContact', 1),
+      roleMinimumCountValidator('dataOwner', 1)
     ]));
 
     this.dataInfoForm = this.formBuilder.group({
