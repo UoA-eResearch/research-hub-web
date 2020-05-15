@@ -224,10 +224,10 @@
                 </div>
                 <mat-icon>help_outline</mat-icon>
               </div>
-              <div class="data-user-header" matTooltip="A person that is required to use the data."
+              <div class="data-owner-header" matTooltip="A person that has ownership of the data."
                 [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                 <div class="header__title">
-                  Data<br>User
+                  Data<br>Owner
                 </div>
                 <mat-icon>help_outline</mat-icon>
               </div>
@@ -287,7 +287,7 @@
                     </div>
                   </mat-radio-group>
                   <div formGroupName="roles">
-                    <mat-checkbox formControlName="dataUser"></mat-checkbox>
+                    <mat-checkbox formControlName="dataOwner"></mat-checkbox>
                   </div>
                   <div class="data-contact" formGroupName="roles">
                     <mat-checkbox formControlName="dataContact"></mat-checkbox>

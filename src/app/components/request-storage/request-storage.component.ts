@@ -28,7 +28,7 @@ interface Person {
   access: string;
   // roles: string[];
   roles: {
-    dataUser: false;
+    dataOwner: false;
     dataContact: false;
     projectParticipant: false;
     projectOwner: false;
@@ -128,7 +128,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   ];
 
   public roleTypes = [
-    'Data User',
+    'Data Owner',
     'Data Contact',
     'Project Participant',
     'Project Owner'
@@ -262,7 +262,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
 
       access: 'Read Only',
       roles: {
-        dataUser: false,
+        dataOwner: false,
         dataContact: false,
         projectParticipant: false,
         projectOwner: false,
@@ -344,10 +344,9 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       firstName: undefined,
       lastName: undefined,
       email: undefined,
-      // username: undefined,
       access: undefined,
       roles: {
-        dataUser: false,
+        dataOwner: false,
         dataContact: false,
         projectParticipant: false,
         projectOwner: false,
@@ -361,7 +360,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
           dataContact: new FormControl(person.roles.dataContact),
           projectParticipant: new FormControl(person.roles.projectParticipant),
           projectOwner: new FormControl(person.roles.projectOwner),
-          dataUser: new FormControl(person.roles.dataUser)
+          dataOwner: new FormControl(person.roles.dataOwner)
         });
 
     let personFormGroup = this.formBuilder.group({
@@ -374,7 +373,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
         access: new FormControl(person.access),
         roles: rolesFormGroup
       })
-      // bind/add custom validator here.
     control.push(
       personFormGroup
     );
