@@ -184,7 +184,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       return (formArray: FormArray) => {
         let roleCount = 0;
         formArray.value.forEach((projectMember) => {
-          console.log(projectMember);
           let personRoles = projectMember.roles;
           if (personRoles[role]) {
             roleCount++;
@@ -192,7 +191,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
         });
         if (roleCount < minimum) {
             let errorKey = `${role}MinimumError`
-            console.log(errorKey);
             return { [errorKey]: true }
         }
         return null;
@@ -379,7 +377,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     control.push(
       personFormGroup
     );
-    console.log(this.dataInfoForm.getRawValue());
   }
 
   deletePerson(index: number) {
