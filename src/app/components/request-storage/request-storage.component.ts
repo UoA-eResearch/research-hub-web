@@ -184,6 +184,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       return (formArray: FormArray) => {
         let dataContactCount = 0;
         formArray.value.forEach((projectMember) => {
+          console.log(projectMember);
           let personRoles = projectMember.roles;
           if (personRoles.dataContact) {
             dataContactCount++;
@@ -355,22 +356,12 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   }
 
   addPerson(person: Person) {
-
-    // better off to add this to the dataInfoForm stage.
-
-    // function minimumProjectOwnersValidator(): ValidatorFn {
-    //   return (group: FormGroup): ValidationErrors => {
-    //     const dataUser = group.controls['dataUser'];
-    //     return dataUser;
-    //   }
-    // }
-
     const control = <FormArray>this.dataInfoForm.get('projectMembers');
     let rolesFormGroup = this.formBuilder.group({
-          dataUser: new FormControl(person.roles.dataUser),
           dataContact: new FormControl(person.roles.dataContact),
           projectParticipant: new FormControl(person.roles.projectParticipant),
           projectOwner: new FormControl(person.roles.projectOwner),
+          dataUser: new FormControl(person.roles.dataUser)
         });
 
     let personFormGroup = this.formBuilder.group({

@@ -12,7 +12,7 @@
 
   <div #resultsDummyHeader style="margin-top: 3em;"></div>
   <mat-horizontal-stepper #stepper linear="true">
-    <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
+    <!-- <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
       <form [formGroup]="requestTypeForm" novalidate>
 
         <ng-template matStepLabel>Request Type</ng-template>
@@ -159,7 +159,7 @@
           </div>
         </div>
       </form>
-    </mat-step>
+    </mat-step> -->
 
     <mat-step [editable]="isEditable" [stepControl]="dataInfoForm"
       *ngIf="requestTypeForm.controls.requestType.value === 'New'">
@@ -286,8 +286,8 @@
                       </mat-radio-button>
                     </div>
                   </mat-radio-group>
-                  <div class="data-user" fromGroupName="roles">
-                    <mat-checkbox fromControlName="dataUser"></mat-checkbox>
+                  <div formGroupName="roles">
+                    <mat-checkbox formControlName="dataUser"></mat-checkbox>
                   </div>
                   <div class="data-contact" formGroupName="roles">
                     <mat-checkbox formControlName="dataContact"></mat-checkbox>
