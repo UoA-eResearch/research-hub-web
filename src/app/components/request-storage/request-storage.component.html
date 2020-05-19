@@ -12,7 +12,7 @@
 
   <div #resultsDummyHeader style="margin-top: 3em;"></div>
   <mat-horizontal-stepper #stepper linear="true">
-    <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
+    <!-- <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
       <form [formGroup]="requestTypeForm" novalidate>
 
         <ng-template matStepLabel>Request Type</ng-template>
@@ -159,7 +159,7 @@
           </div>
         </div>
       </form>
-    </mat-step>
+    </mat-step> -->
 
     <mat-step [editable]="isEditable" [stepControl]="dataInfoForm"
       *ngIf="requestTypeForm.controls.requestType.value === 'New'">
