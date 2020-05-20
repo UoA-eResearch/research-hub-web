@@ -262,15 +262,22 @@
                   <div class="details" fxLayout="column">
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
                       <input matInput placeholder="First name" formControlName="firstName" autocapitalize="words" />
-                      <mat-error *ngIf="member.controls.firstName.invalid">* Please enter a first name</mat-error>
+                      <mat-error
+                        *ngIf="member.controls.firstName.invalid && (member.controls.firstName.touched && member.controls.firstName.dirty)">
+                        * Please enter a first name</mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
                       <input matInput placeholder="Last name" formControlName="lastName" autocapitalize="words" />
-                      <mat-error *ngIf="member.controls.lastName.invalid">* Please enter a last name</mat-error>
+                      <mat-error
+                        *ngIf="member.controls.lastName.invalid && (member.controls.lastName.touched && member.controls.lastName.dirty)">
+                        * Please enter a last name</mat-error>
                     </mat-form-field>
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
                       <input matInput placeholder="Email" formControlName="email" type="email" />
-                      <mat-error *ngIf="member.controls.email.invalid">* Please enter a University of Auckland email
+                      <mat-error
+                        *ngIf="member.controls.email.invalid && (member.controls.email.touched && member.controls.email.dirty)">
+                        * Please enter a
+                        University of Auckland email
                         address.
                         List external emails in the comments in the next section.</mat-error>
                     </mat-form-field>

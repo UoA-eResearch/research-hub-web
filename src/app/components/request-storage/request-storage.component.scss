@@ -10,6 +10,45 @@
 //  margin-bottom: 1em;
 //}
 
+
+
+/* src: https://github.com//issues/4580 */
+::ng-deep mat-form-field {
+  &.ng-valid {
+    .mat-form-field-wrapper {
+      padding-bottom: 1.25em;
+    }
+  }
+
+  &.ng-invalid,
+  &.mat-form-field-invalid {
+    .mat-form-field-wrapper {
+      padding-bottom: 7px;
+    }
+  }
+
+  &.ng-untouched {
+    .mat-form-field-wrapper {
+      padding-bottom: 1.25em;
+    }
+  }
+
+  .mat-form-field {
+    &-underline {
+      position: static;
+    }
+
+    &-subscript-wrapper {
+      position: static;
+    }
+  }
+}
+
+
+
+
+
+
 .step-form-container {
   position: relative;
   margin-bottom: 1em;
@@ -83,10 +122,10 @@ table * {
 }
 
 .person-grid-body {
-  grid-row-gap: 3rem;
-  margin-bottom: 3.5rem;
-  background-color: #0296a349;
-  padding: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem 1rem .25rem;
+  border: 1px solid map-get($hub-teal, 100);
+  // background-color: map-get($hub-teal, 50);
   border-radius: 0.5rem;
 }
 
@@ -94,12 +133,19 @@ table * {
   margin-top: 2rem;
   margin-bottom: 1rem;
 
+
   div {
+    &.access, &.roles {
+      font-size: 115%;
+      color: map-get($hub-pink, 500);
+      margin-bottom: 0.4em;
+    }
     color: map-get($hub-navy, 500);
     margin: auto;
     text-align: center;
   }
 }
+
 
 .access {
   grid-column: 3/5;

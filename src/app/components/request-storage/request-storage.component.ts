@@ -1,24 +1,24 @@
 
-import {map, first} from 'rxjs/operators';
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, ValidationErrors} from '@angular/forms';
-import {DateAdapter, NativeDateAdapter} from '@angular/material/core';
-import {CerApiService} from 'app/services/cer-api.service';
-import {AuthService} from '../../services/auth.service';
-import {MatHorizontalStepper} from '@angular/material/stepper';
-import {AppComponentService} from '../../app.component.service';
-import {HttpErrorResponse} from '@angular/common/http';
-import {Location} from '@angular/common';
-import {MatDialog} from '@angular/material/dialog';
-import {ErrorDialogComponent} from '../shared/error-dialog/error-dialog.component';
-import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {AnalyticsService} from '../../services/analytics.service';
+import { map, first } from 'rxjs/operators';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { DateAdapter, NativeDateAdapter } from '@angular/material/core';
+import { CerApiService } from 'app/services/cer-api.service';
+import { AuthService } from '../../services/auth.service';
+import { MatHorizontalStepper } from '@angular/material/stepper';
+import { AppComponentService } from '../../app.component.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from '../shared/error-dialog/error-dialog.component';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AnalyticsService } from '../../services/analytics.service';
 import * as format from 'date-fns/format';
 import * as subYears from 'date-fns/sub_years';
-import {ConfirmDialogComponent} from '../shared/confirm-dialog/confirm-dialog.component';
-import {CanComponentDeactivate} from '../../routing/routing.confirm-deactivate';
-import {ResearchHubApiService} from '../../services/research-hub-api.service';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
+import { CanComponentDeactivate } from '../../routing/routing.confirm-deactivate';
+import { ResearchHubApiService } from '../../services/research-hub-api.service';
 
 
 interface Person {
@@ -135,10 +135,10 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   ];
 
   constructor(private formBuilder: FormBuilder, dateAdapter: DateAdapter<NativeDateAdapter>,
-              private cerApiService: CerApiService, public apiService: ResearchHubApiService,
-              public authService: AuthService, private appComponentService: AppComponentService,
-              public dialog: MatDialog, private location: Location, private route: ActivatedRoute,
-              private analyticsService: AnalyticsService, private el: ElementRef) {
+    private cerApiService: CerApiService, public apiService: ResearchHubApiService,
+    public authService: AuthService, private appComponentService: AppComponentService,
+    public dialog: MatDialog, private location: Location, private route: ActivatedRoute,
+    private analyticsService: AnalyticsService, private el: ElementRef) {
     dateAdapter.setLocale('en-GB');
   }
 
@@ -168,35 +168,35 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       return (formArray: FormArray) => {
         let projectOwnerCount = 0;
         formArray.value.forEach((projectMember) => {
-          let personRoles = projectMember.roles;
+          const personRoles = projectMember.roles;
           if (personRoles.projectOwner) {
             projectOwnerCount++;
           }
         });
         if (projectOwnerCount !== 1) {
-            return { invalidProjectOwnerCount: true }
+          return { invalidProjectOwnerCount: true }
         }
         return null;
       };
     }
-    
+
     function roleMinimumCountValidator(role, minimum): ValidatorFn {
       return (formArray: FormArray) => {
         let roleCount = 0;
         formArray.value.forEach((projectMember) => {
-          let personRoles = projectMember.roles;
+          const personRoles = projectMember.roles;
           if (personRoles[role]) {
             roleCount++;
           }
         });
         if (roleCount < minimum) {
-            let errorKey = `${role}MinimumError`
-            return { [errorKey]: true }
+          const errorKey = `${role}MinimumError`
+          return { [errorKey]: true }
         }
         return null;
       };
     }
-    
+
     this.projectMembers = this.formBuilder.array([], Validators.compose([
       Validators.required,
       projectOwnerValidator(),
@@ -357,23 +357,23 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
 
   addPerson(person: Person) {
     const control = <FormArray>this.dataInfoForm.get('projectMembers');
-    let rolesFormGroup = this.formBuilder.group({
-          dataContact: new FormControl(person.roles.dataContact),
-          projectParticipant: new FormControl(person.roles.projectParticipant),
-          projectOwner: new FormControl(person.roles.projectOwner),
-          dataOwner: new FormControl(person.roles.dataOwner)
-        });
+    const rolesFormGroup = this.formBuilder.group({
+      dataContact: new FormControl(person.roles.dataContact),
+      projectParticipant: new FormControl(person.roles.projectParticipant),
+      projectOwner: new FormControl(person.roles.projectOwner),
+      dataOwner: new FormControl(person.roles.dataOwner)
+    });
 
-    let personFormGroup = this.formBuilder.group({
-        firstName: new FormControl(person.firstName, Validators.required),
-        lastName: new FormControl(person.lastName, Validators.required),
-        email: new FormControl(person.email, [
-          Validators.required,
-          Validators.pattern('.*(aucklanduni.ac.nz|auckland.ac.nz)$')
-        ]),
-        access: new FormControl(person.access),
-        roles: rolesFormGroup
-      })
+    const personFormGroup = this.formBuilder.group({
+      firstName: new FormControl(person.firstName, Validators.required),
+      lastName: new FormControl(person.lastName, Validators.required),
+      email: new FormControl(person.email, [
+        Validators.required,
+        Validators.pattern('.*(aucklanduni.ac.nz|auckland.ac.nz)$')
+      ]),
+      access: new FormControl(person.access),
+      roles: rolesFormGroup
+    })
     control.push(
       personFormGroup
     );
@@ -414,28 +414,28 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       let body;
 
       if (requestType === 'New') {
-        body =  Object.assign({},
-                this.requestTypeForm.getRawValue(),
-                this.projectForm.getRawValue(),
-                this.dataInfoForm.getRawValue(),
-                this.dataSizeForm.getRawValue());
+        body = Object.assign({},
+          this.requestTypeForm.getRawValue(),
+          this.projectForm.getRawValue(),
+          this.dataInfoForm.getRawValue(),
+          this.dataSizeForm.getRawValue());
 
         // Convert endDate into string
         body.endDate = format(body.endDate, 'YYYY-MM-DD');
       } else if (requestType === 'Existing') {
-        body =  Object.assign({},
-                this.requestTypeForm.getRawValue(),
-                this.requestDetailsForm.getRawValue());
+        body = Object.assign({},
+          this.requestTypeForm.getRawValue(),
+          this.requestDetailsForm.getRawValue());
       }
 
       // restructure body to avoid needed to alter servicenow api.
       body['projectMembers'].forEach(member => {
-        let rolesArray = [];
-        let roles = member['roles'];
-        Object.keys(roles).forEach(function(key) {
+        const rolesArray = [];
+        const roles = member['roles'];
+        Object.keys(roles).forEach(function (key) {
           if (roles[key]) {
             // Replaces camel case to a lowercase string.
-            let role = key.split(/(?=[A-Z])/).map(s => s.toLowerCase()).join(" ");
+            const role = key.split(/(?=[A-Z])/).map(s => s.toLowerCase()).join(' ');
             rolesArray.push(role);
           }
         });
