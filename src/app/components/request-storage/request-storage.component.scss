@@ -110,6 +110,9 @@ table * {
 }
 
 .person-grid {
+  // display: flex;
+  // flex-direction: column;
+  
   display: grid;
   grid-template-columns: repeat(8, 1fr) 40px;
   grid-template-rows: auto;
@@ -119,6 +122,7 @@ table * {
   div {
     padding: 0.2em;
     margin: auto;
+    // grid-column: 1/9;
   }
 }
 
@@ -126,6 +130,20 @@ table * {
   margin-bottom: 1rem;
   border: 1px solid map-get($hub-teal, 100);
   border-radius: 0.5rem;
+}
+
+.person-flex-layout { 
+  display: flex;
+  flex-direction: column;
+}
+
+.container-sx {
+  background-color: red;
+}
+
+.grid-radio-group--horizontal {
+  display: flex;
+  flex-direction: column;
 }
 
 .person-grid-headers {
@@ -143,6 +161,15 @@ table * {
     margin: auto;
     text-align: center;
   }
+}
+
+.person-grid-headers--hidden {
+  display: none;
+}
+
+.delete-icon-container--center {
+  display: flex;
+  align-items: center;
 }
 
 
@@ -193,7 +220,7 @@ table * {
   grid-column: 3/5;
 }
 
-div .delete-icon {
+div .delete-icon-container {
   padding-left: 0;
   padding-right: 0;
   margin-left: 0;

@@ -203,7 +203,7 @@
           <div class="form-group">
             <h3>Please provide a list of University of Auckland people who require access</h3>
 
-            <div class="person-grid person-grid-headers">
+            <div class="person-grid person-grid-headers" [ngClass.lt-md]="['person-grid-headers--hidden']">
               <div class="access">
                 Access
               </div>
@@ -258,7 +258,7 @@
 
             <div class="array-container" formArrayName="projectMembers">
               <div *ngFor="let member of projectMembers.controls; let i = index">
-                <div class="person-grid person-grid-body" [formGroupName]="i">
+                <div class="person-grid person-grid-body" [formGroupName]="i" [ngClass.lt-md]="['person-flex-layout']">
                   <div class="details" fxLayout="column">
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
                       <input matInput placeholder="First name" formControlName="firstName" autocapitalize="words" />
@@ -282,7 +282,7 @@
                         List external emails in the comments in the next section.</mat-error>
                     </mat-form-field>
                   </div>
-                  <mat-radio-group class="grid-radio-group" formControlName="access">
+                  <mat-radio-group class="grid-radio-group" formControlName="access" [ngClass.lt-md]="['grid-radio-group--horizontal']">
                     <div class="read-only access__radio-wrapper">
                       <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
                         value="Read Only"></mat-radio-button>
@@ -305,7 +305,7 @@
                   <div class="project-owner" formGroupName="roles">
                     <mat-checkbox formControlName="projectOwner"></mat-checkbox>
                   </div>
-                  <div class="delete-icon">
+                  <div [ngClass.gt-md]="['delete-icon-container']" [ngClass.lt-md]="['delete-icon-container--center']">
                     <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
                       <mat-icon>delete</mat-icon>
                     </button>
