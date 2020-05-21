@@ -294,16 +294,16 @@
                     </div>
                   </mat-radio-group>
                   <div formGroupName="roles">
-                    <mat-checkbox formControlName="dataOwner"></mat-checkbox>
+                    <mat-checkbox formControlName="dataOwner"><div [ngClass.gt-sm]="['role__checkbox--hidden']">Data Owner</div></mat-checkbox>
                   </div>
                   <div class="data-contact" formGroupName="roles">
-                    <mat-checkbox formControlName="dataContact"></mat-checkbox>
+                    <mat-checkbox formControlName="dataContact"><div [ngClass.gt-sm]="['role__checkbox--hidden']">Data Contact</div></mat-checkbox>
                   </div>
                   <div class="project-participant" formGroupName="roles">
-                    <mat-checkbox formControlName="projectParticipant"></mat-checkbox>
+                    <mat-checkbox formControlName="projectParticipant"><div [ngClass.gt-sm]="['role__checkbox--hidden']">Project Participant</div></mat-checkbox>
                   </div>
                   <div class="project-owner" formGroupName="roles">
-                    <mat-checkbox formControlName="projectOwner"></mat-checkbox>
+                    <mat-checkbox formControlName="projectOwner"><div [ngClass.gt-sm]="['role__checkbox--hidden']">Project Owner</div></mat-checkbox>
                   </div>
                   <div [ngClass.gt-md]="['delete-icon-container']" [ngClass.lt-md]="['delete-icon-container--center']">
                     <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
