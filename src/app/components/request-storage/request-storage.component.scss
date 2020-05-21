@@ -130,15 +130,20 @@ table * {
   margin-bottom: 1rem;
   border: 1px solid map-get($hub-teal, 100);
   border-radius: 0.5rem;
+
+  div {
+    background-color: #a8a8a8;
+  }
+}
+
+.person-section__header--hidden {
+  display: none;
 }
 
 .person-flex-layout { 
   display: flex;
   flex-direction: column;
-}
-
-.container-sx {
-  background-color: red;
+  background-color: map-get($hub-teal, 100);
 }
 
 .grid-radio-group--horizontal {

@@ -259,6 +259,7 @@
             <div class="array-container" formArrayName="projectMembers">
               <div *ngFor="let member of projectMembers.controls; let i = index">
                 <div class="person-grid person-grid-body" [formGroupName]="i" [ngClass.lt-md]="['person-flex-layout']">
+                  <div [ngClass.gt-sm]="['person-section__header--hidden']">Person Details</div>
                   <div class="details" fxLayout="column">
                     <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
                       <input matInput placeholder="First name" formControlName="firstName" autocapitalize="words" />
@@ -282,6 +283,7 @@
                         List external emails in the comments in the next section.</mat-error>
                     </mat-form-field>
                   </div>
+                  <div [ngClass.gt-sm]="['person-section__header--hidden']">Access</div>
                   <mat-radio-group class="grid-radio-group" formControlName="access" [ngClass.lt-md]="['grid-radio-group--horizontal']">
                     <div class="read-only access__radio-wrapper">
                       <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
@@ -293,7 +295,8 @@
                       </mat-radio-button>
                     </div>
                   </mat-radio-group>
-                  <div formGroupName="roles">
+                  <div [ngClass.gt-sm]="['person-section__header--hidden']">Roles</div>
+                  <div class="data-owner__container" formGroupName="roles">
                     <mat-checkbox formControlName="dataOwner"><div [ngClass.gt-sm]="['role__checkbox--hidden']">Data Owner</div></mat-checkbox>
                   </div>
                   <div class="data-contact" formGroupName="roles">
