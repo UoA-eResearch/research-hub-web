@@ -113,6 +113,7 @@ table * {
   display: grid;
   grid-template-columns: repeat(8, 1fr) 40px;
   grid-template-rows: auto;
+  padding: 1rem 1rem .25rem;
 
   // only applies to checkboxes since the radio buttons are nested deeper
   div {
@@ -123,9 +124,7 @@ table * {
 
 .person-grid-body {
   margin-bottom: 1rem;
-  padding: 1rem 1rem .25rem;
   border: 1px solid map-get($hub-teal, 100);
-  // background-color: map-get($hub-teal, 50);
   border-radius: 0.5rem;
 }
 
@@ -138,7 +137,7 @@ table * {
     &.access, &.roles {
       font-size: 115%;
       color: map-get($hub-pink, 500);
-      margin-bottom: 0.4em;
+      margin-bottom: 0.5em;
     }
     color: map-get($hub-navy, 500);
     margin: auto;
