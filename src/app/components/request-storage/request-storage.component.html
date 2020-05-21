@@ -290,11 +290,20 @@
                   <mat-radio-group class="grid-radio-group" formControlName="access" [ngClass.lt-md]="['grid-radio-group--horizontal']">
                     <div class="read-only access__radio-wrapper">
                       <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
-                        value="Read Only"></mat-radio-button>
+                        value="Read Only">
+                        <div [ngClass.gt-sm]="['role__checkbox--hidden']">
+                          Read Only
+                        <mat-icon>help_outline</mat-icon>
+                        </div>
+                      </mat-radio-button>
                     </div>
                     <div class="read-write access__radio-wrapper">
                       <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
                         value="Full Access">
+                        <div [ngClass.gt-sm]="['role__checkbox--hidden']">
+                          Full Access
+                        <mat-icon>help_outline</mat-icon>
+                        </div>
                       </mat-radio-button>
                     </div>
                   </mat-radio-group>
@@ -302,16 +311,31 @@
                   <div  [ngClass.lt-md]="['person-section__wrapper--enabled']" [ngClass.gt-sm]="['person-section__wrapper--disabled']">
                   <div [ngClass.lt-md]="['person-section__header--enabled']" [ngClass.gt-sm]="['person-section__header--hidden']">Roles</div>
                   <div class="data-owner__container" formGroupName="roles">
-                    <mat-checkbox formControlName="dataOwner"><div [ngClass.gt-sm]="['role__checkbox--hidden']">Data Owner</div></mat-checkbox>
+                    <mat-checkbox formControlName="dataOwner"><div [ngClass.gt-sm]="['role__checkbox--hidden']">Data Owner
+                        <mat-icon>help_outline</mat-icon>
+                    </div></mat-checkbox>
                   </div>
                   <div class="data-contact" formGroupName="roles">
-                    <mat-checkbox formControlName="dataContact"><div [ngClass.gt-sm]="['role__checkbox--hidden']">Data Contact</div></mat-checkbox>
+                    <mat-checkbox formControlName="dataContact">
+                      <div [ngClass.gt-sm]="['role__checkbox--hidden']">
+                        Data Contact
+                        <mat-icon>help_outline</mat-icon>
+                      </div>
+                    </mat-checkbox>
                   </div>
                   <div class="project-participant" formGroupName="roles">
-                    <mat-checkbox formControlName="projectParticipant"><div [ngClass.gt-sm]="['role__checkbox--hidden']">Project Participant</div></mat-checkbox>
+                    <mat-checkbox formControlName="projectParticipant">
+                      <div [ngClass.gt-sm]="['role__checkbox--hidden']">Project Participant
+                        <mat-icon>help_outline</mat-icon>
+                      </div>
+                    </mat-checkbox>
                   </div>
                   <div class="project-owner" formGroupName="roles">
-                    <mat-checkbox formControlName="projectOwner"><div [ngClass.gt-sm]="['role__checkbox--hidden']">Project Owner</div></mat-checkbox>
+                    <mat-checkbox formControlName="projectOwner">
+                      <div [ngClass.gt-sm]="['role__checkbox--hidden']">Project Owner
+                        <mat-icon>help_outline</mat-icon>
+                      </div>
+                    </mat-checkbox>
                   </div>
                   <div [ngClass.gt-md]="['delete-icon-container']" [ngClass.lt-md]="['delete-icon-container--center']">
                     <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
