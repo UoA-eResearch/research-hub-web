@@ -156,12 +156,14 @@ table * {
 
 div.person-grid-body .person-section__wrapper--enabled {
   background-color: rgb(255, 255, 255);
-    margin:1.5rem 20%;
+  margin:1.5rem 20%;
+  padding: 0.5rem;
 }
 
 .grid-radio-group--horizontal {
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .person-grid-headers {
@@ -245,12 +247,20 @@ div .delete-icon-container {
   margin-right: 0;
 }
 
-.access__radio-wrapper {
-  display: inline-block;
+
+// if radio wrapper grid then flex, else in-line
+.access__radio-wrapper--centered {
   width: 50%;
   display: flex;
   align-items: center;
 }
+
+.access__radio-wrapper--left {
+  display: inline-block;
+  width: 50%;
+  align-items: center;
+}
+
 
 .access__radio-button {
   margin: auto;

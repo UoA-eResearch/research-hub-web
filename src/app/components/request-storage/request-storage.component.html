@@ -258,7 +258,9 @@
 
             <div class="array-container" formArrayName="projectMembers">
               <div *ngFor="let member of projectMembers.controls; let i = index">
-                <div class="person-grid person-grid-body" [formGroupName]="i" [ngClass.lt-md]="['person-flex-layout']">
+                <div [formGroupName]="i" 
+                [ngClass.gt-sm]="['person-grid person-grid-body']"
+                [ngClass.lt-md]="['person-grid-body person-flex-layout']">
                   <div  [ngClass.lt-md]="['person-section__wrapper--enabled']" [ngClass.gt-sm]="['person-section__wrapper--disabled']">
                   <div [ngClass.lt-md]="['person-section__header--enabled']" [ngClass.gt-sm]="['person-section__header--hidden']">Person Details</div>
                   <div class="details" fxLayout="column">
@@ -288,7 +290,10 @@
                   <div  [ngClass.lt-md]="['person-section__wrapper--enabled']" [ngClass.gt-sm]="['person-section__wrapper--disabled']">
                   <div [ngClass.lt-md]="['person-section__header--enabled']" [ngClass.gt-sm]="['person-section__header--hidden']">Access</div>
                   <mat-radio-group class="grid-radio-group" formControlName="access" [ngClass.lt-md]="['grid-radio-group--horizontal']">
-                    <div class="read-only access__radio-wrapper">
+                    <div class="read-only access__radio-wrapper"
+                      [ngClass.lt-md]="['.access__radio-wrapper--left']"
+                      [ngClass.gt-sm]="['.access__radio-wrapper--centered']"
+                    >
                       <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
                         value="Read Only">
                         <div [ngClass.gt-sm]="['role__checkbox--hidden']">
