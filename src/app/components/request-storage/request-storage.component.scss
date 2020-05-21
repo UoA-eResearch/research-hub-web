@@ -112,7 +112,7 @@ table * {
 .person-grid {
   // display: flex;
   // flex-direction: column;
-  
+
   display: grid;
   grid-template-columns: repeat(8, 1fr) 40px;
   grid-template-rows: auto;
@@ -130,20 +130,33 @@ table * {
   margin-bottom: 1rem;
   border: 1px solid map-get($hub-teal, 100);
   border-radius: 0.5rem;
-
-  div {
-    background-color: #a8a8a8;
-  }
 }
 
 .person-section__header--hidden {
   display: none;
 }
 
+.person-section__header--enabled {
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  text-align: center;
+  color: map-get($hub-navy, 500);
+}
+
 .person-flex-layout { 
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   background-color: map-get($hub-teal, 100);
+}
+
+.person-section__wrapper--disabled {
+  display: contents;
+}
+
+div.person-grid-body .person-section__wrapper--enabled {
+  background-color: rgb(255, 255, 255);
+    margin:1.5rem 20%;
 }
 
 .grid-radio-group--horizontal {
