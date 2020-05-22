@@ -210,14 +210,14 @@
               <div class="roles">
                 Roles
               </div>
-              <div matTooltip="A person may read the files but can not write to existing files or create new files."
+              <div matTooltip="A person may read files but they cannot write to them or create new files."
                 [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above" class="read-only-header">
                 <div class="header__title">
                   Read<br>Only
                 </div>
                 <mat-icon>help_outline</mat-icon>
               </div>
-              <div class="read-write-header" matTooltip="Allow reading and writing to files." [matTooltipShowDelay]="0"
+              <div class="read-write-header" matTooltip="A person may read, write, and create new files." [matTooltipShowDelay]="0"
                 [matTooltipHideDelay]="0" matTooltipPosition="above">
                 <div class="header__title">
                   Read<br>& Write
@@ -298,7 +298,11 @@
                         [ngClass.gt-sm]="['.access__radio-wrapper--centered']">
                         <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
                           value="Read Only">
-                          <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                          <div [ngClass.lt-md]="['role__checkbox--active']"
+                            [ngClass.gt-sm]="['role__checkbox--hidden']"
+                          matTooltip="A person may read files but they cannot write to them or create new files."
+                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above"
+                            >
                             <div>
                               Read Only
                             </div>
@@ -309,7 +313,11 @@
                       <div class="read-write access__radio-wrapper">
                         <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
                           value="Full Access">
-                          <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                          <div [ngClass.lt-md]="['role__checkbox--active']"
+                            [ngClass.gt-sm]="['role__checkbox--hidden']"
+                          matTooltip="A person may read, write, and create new files."
+                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above"
+                            >
                             <div>
                               Full Access
                             </div>
@@ -325,9 +333,12 @@
                       [ngClass.gt-sm]="['person-section__header--hidden']">Roles</div>
                     <div class="data-owner__container" formGroupName="roles">
                       <mat-checkbox formControlName="dataOwner">
-                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']"
+                          matTooltip="A person that has ownership of the data."
+                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above"
+                        >
                           <div>
-                          Data Owner
+                            Data Owner
                           </div>
                           <mat-icon>help_outline</mat-icon>
                         </div>
@@ -335,7 +346,10 @@
                     </div>
                     <div class="data-contact" formGroupName="roles">
                       <mat-checkbox formControlName="dataContact">
-                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']"
+                          matTooltip="A person that the Centre for eResearch can contact regarding the data."
+                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above"
+                        >
                           <div>
                             Data Contact
                           </div>
@@ -345,7 +359,10 @@
                     </div>
                     <div class="project-participant" formGroupName="roles">
                       <mat-checkbox formControlName="projectParticipant">
-                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']"
+                          matTooltip="A person that is participating in the project."
+                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above"
+                          >
                           <div>
                             Project Participant
                           </div>
@@ -355,24 +372,28 @@
                     </div>
                     <div class="project-owner" formGroupName="roles">
                       <mat-checkbox formControlName="projectOwner">
-                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']"
+                          matTooltip="The owner of the project. If you are a PhD student, this will be your supervisor."
+                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                           <div>
-                          Project Owner
+                            Project Owner
                           </div>
                           <mat-icon>help_outline</mat-icon>
                         </div>
                       </mat-checkbox>
                     </div>
-                    <div [ngClass.gt-md]="['delete-icon-container']"
-                      [ngClass.lt-md]="['delete-icon-container--center']">
+                    <div [ngClass.gt-sm]="['delete-icon-container']"
+                      [ngClass.lt-md]="['delete-icon-container--hidden']">
                       <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
                         <mat-icon>delete</mat-icon>
                       </button>
                     </div>
                   </div>
-            <button mat-raised-button [ngClass.lt-md]="['person__delete-button']" [ngClass.gt-sm]="['person__delete-button--hidden']" (click)="deletePerson(i)" color="accent" matStepperNext>
-              Delete Person
-            </button>
+                  <button mat-raised-button [ngClass.lt-md]="['person__delete-button']"
+                    [ngClass.gt-sm]="['person__delete-button--hidden']" (click)="deletePerson(i)" color="accent"
+                    matStepperNext>
+                    Delete Person
+                  </button>
                 </div>
               </div>
               <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('invalidProjectOwnerCount')">
@@ -389,7 +410,7 @@
                 * Requires at least 1 data contact.
               </mat-error>
               <div fxLayout="row" fxLayoutAlign="end center">
-                <button mat-button color="primary" (click)="addNewPerson()">
+                <button mat-raised-button color="primary" (click)="addNewPerson()">
                   Add Person
                 </button>
               </div>
