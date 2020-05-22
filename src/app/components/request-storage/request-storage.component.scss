@@ -147,9 +147,9 @@ table * {
   justify-content: space-evenly;
   background-color: map-get($hub-teal, 100);
 
-   -moz-box-shadow:    2px 2px 3px 4px #ccc;
-  -webkit-box-shadow: 2px 2px 3px 4px #ccc;
-  box-shadow:         2px 2px 3px 4px #ccc;
+   -moz-box-shadow:    1px 1px 2px 2px #ccc;
+  -webkit-box-shadow: 1px 1px 2px 2px #ccc;
+  box-shadow:         1px 1px 2px 2px #ccc;
 }
 
 .person-section__wrapper--disabled {
