@@ -136,7 +136,7 @@ table * {
 
 .person-section__header--enabled {
   margin-bottom: 0.5rem;
-  font-weight: 400;
+  font-weight: 600;
   text-align: center;
   color: map-get($hub-navy, 500);
 }
@@ -146,6 +146,10 @@ table * {
   flex-direction: column;
   justify-content: space-evenly;
   background-color: map-get($hub-teal, 100);
+
+   -moz-box-shadow:    2px 2px 3px 4px #ccc;
+  -webkit-box-shadow: 2px 2px 3px 4px #ccc;
+  box-shadow:         2px 2px 3px 4px #ccc;
 }
 
 .person-section__wrapper--disabled {
@@ -156,6 +160,7 @@ div.person-grid-body .person-section__wrapper--enabled {
   background-color: rgb(255, 255, 255);
   margin:1.5rem 1.5rem;
   padding: 0.5rem;
+  border-radius: 0.5rem;
 
   div {
     margin: 0.2rem;
@@ -276,6 +281,12 @@ div .delete-icon-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-weight: 600;
+  color: map-get($hub-navy, 500);
+
+  .mat-icon {
+  color: map-get($hub-teal, 500);
+  }
 }
 
 
