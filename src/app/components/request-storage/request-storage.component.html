@@ -258,95 +258,117 @@
 
             <div class="array-container" formArrayName="projectMembers">
               <div *ngFor="let member of projectMembers.controls; let i = index">
-                <div [formGroupName]="i" 
-                [ngClass.gt-sm]="['person-grid person-grid-body']"
-                [ngClass.lt-md]="['person-grid-body person-flex-layout']">
-                  <div  [ngClass.lt-md]="['person-section__wrapper--enabled']" [ngClass.gt-sm]="['person-section__wrapper--disabled']">
-                  <div [ngClass.lt-md]="['person-section__header--enabled']" [ngClass.gt-sm]="['person-section__header--hidden']">Person Details</div>
-                  <div class="details" fxLayout="column">
-                    <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
-                      <input matInput placeholder="First name" formControlName="firstName" autocapitalize="words" />
-                      <mat-error
-                        *ngIf="member.controls.firstName.invalid && (member.controls.firstName.touched || member.controls.firstName.dirty)">
-                        * Please enter a first name</mat-error>
-                    </mat-form-field>
-                    <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
-                      <input matInput placeholder="Last name" formControlName="lastName" autocapitalize="words" />
-                      <mat-error
-                        *ngIf="member.controls.lastName.invalid && (member.controls.lastName.touched || member.controls.lastName.dirty)">
-                        * Please enter a last name</mat-error>
-                    </mat-form-field>
-                    <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
-                      <input matInput placeholder="Email" formControlName="email" type="email" />
-                      <mat-error
-                        *ngIf="member.controls.email.invalid && (member.controls.email.touched || member.controls.email.dirty)">
-                        * Please enter a
-                        University of Auckland email
-                        address.
-                        List external emails in the comments in the next section.</mat-error>
-                    </mat-form-field>
-                  </div>
-                  </div>
-                  <div  [ngClass.lt-md]="['person-section__wrapper--enabled']" [ngClass.gt-sm]="['person-section__wrapper--disabled']">
-                  <div [ngClass.lt-md]="['person-section__header--enabled']" [ngClass.gt-sm]="['person-section__header--hidden']">Access</div>
-                  <mat-radio-group class="grid-radio-group" formControlName="access" [ngClass.lt-md]="['grid-radio-group--horizontal']">
-                    <div class="read-only access__radio-wrapper"
-                      [ngClass.lt-md]="['.access__radio-wrapper--left']"
-                      [ngClass.gt-sm]="['.access__radio-wrapper--centered']"
-                    >
-                      <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
-                        value="Read Only">
-                        <div [ngClass.gt-sm]="['role__checkbox--hidden']">
-                          Read Only
-                        <mat-icon>help_outline</mat-icon>
-                        </div>
-                      </mat-radio-button>
+                <div [formGroupName]="i" [ngClass.gt-sm]="['person-grid person-grid-body']"
+                  [ngClass.lt-md]="['person-grid-body person-flex-layout']">
+                  <div [ngClass.lt-md]="['person-section__wrapper--enabled']"
+                    [ngClass.gt-sm]="['person-section__wrapper--disabled']">
+                    <div [ngClass.lt-md]="['person-section__header--enabled']"
+                      [ngClass.gt-sm]="['person-section__header--hidden']">Person Details</div>
+                    <div class="details" fxLayout="column">
+                      <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
+                        <input matInput placeholder="First name" formControlName="firstName" autocapitalize="words" />
+                        <mat-error
+                          *ngIf="member.controls.firstName.invalid && (member.controls.firstName.touched || member.controls.firstName.dirty)">
+                          * Please enter a first name</mat-error>
+                      </mat-form-field>
+                      <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
+                        <input matInput placeholder="Last name" formControlName="lastName" autocapitalize="words" />
+                        <mat-error
+                          *ngIf="member.controls.lastName.invalid && (member.controls.lastName.touched || member.controls.lastName.dirty)">
+                          * Please enter a last name</mat-error>
+                      </mat-form-field>
+                      <mat-form-field fxFlex="grow" floatLabel="never" class="no-floating-label">
+                        <input matInput placeholder="Email" formControlName="email" type="email" />
+                        <mat-error
+                          *ngIf="member.controls.email.invalid && (member.controls.email.touched || member.controls.email.dirty)">
+                          * Please enter a
+                          University of Auckland email
+                          address.
+                          List external emails in the comments in the next section.</mat-error>
+                      </mat-form-field>
                     </div>
-                    <div class="read-write access__radio-wrapper">
-                      <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
-                        value="Full Access">
-                        <div [ngClass.gt-sm]="['role__checkbox--hidden']">
-                          Full Access
-                        <mat-icon>help_outline</mat-icon>
+                  </div>
+                  <div [ngClass.lt-md]="['person-section__wrapper--enabled']"
+                    [ngClass.gt-sm]="['person-section__wrapper--disabled']">
+                    <div [ngClass.lt-md]="['person-section__header--enabled']"
+                      [ngClass.gt-sm]="['person-section__header--hidden']">Access</div>
+                    <mat-radio-group class="grid-radio-group" formControlName="access"
+                      [ngClass.lt-md]="['grid-radio-group--horizontal']">
+                      <div class="read-only access__radio-wrapper" [ngClass.lt-md]="['.access__radio-wrapper--left']"
+                        [ngClass.gt-sm]="['.access__radio-wrapper--centered']">
+                        <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
+                          value="Read Only">
+                          <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                            <div>
+                              Read Only
+                            </div>
+                            <mat-icon>help_outline</mat-icon>
+                          </div>
+                        </mat-radio-button>
+                      </div>
+                      <div class="read-write access__radio-wrapper">
+                        <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
+                          value="Full Access">
+                          <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                            <div>
+                              Full Access
+                            </div>
+                            <mat-icon>help_outline</mat-icon>
+                          </div>
+                        </mat-radio-button>
+                      </div>
+                    </mat-radio-group>
+                  </div>
+                  <div [ngClass.lt-md]="['person-section__wrapper--enabled']"
+                    [ngClass.gt-sm]="['person-section__wrapper--disabled']">
+                    <div [ngClass.lt-md]="['person-section__header--enabled']"
+                      [ngClass.gt-sm]="['person-section__header--hidden']">Roles</div>
+                    <div class="data-owner__container" formGroupName="roles">
+                      <mat-checkbox formControlName="dataOwner">
+                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                          <div>
+                          Data Owner
+                          </div>
+                          <mat-icon>help_outline</mat-icon>
                         </div>
-                      </mat-radio-button>
+                      </mat-checkbox>
                     </div>
-                  </mat-radio-group>
-                  </div>
-                  <div  [ngClass.lt-md]="['person-section__wrapper--enabled']" [ngClass.gt-sm]="['person-section__wrapper--disabled']">
-                  <div [ngClass.lt-md]="['person-section__header--enabled']" [ngClass.gt-sm]="['person-section__header--hidden']">Roles</div>
-                  <div class="data-owner__container" formGroupName="roles">
-                    <mat-checkbox formControlName="dataOwner"><div [ngClass.gt-sm]="['role__checkbox--hidden']">Data Owner
-                        <mat-icon>help_outline</mat-icon>
-                    </div></mat-checkbox>
-                  </div>
-                  <div class="data-contact" formGroupName="roles">
-                    <mat-checkbox formControlName="dataContact">
-                      <div [ngClass.gt-sm]="['role__checkbox--hidden']">
-                        Data Contact
-                        <mat-icon>help_outline</mat-icon>
-                      </div>
-                    </mat-checkbox>
-                  </div>
-                  <div class="project-participant" formGroupName="roles">
-                    <mat-checkbox formControlName="projectParticipant">
-                      <div [ngClass.gt-sm]="['role__checkbox--hidden']">Project Participant
-                        <mat-icon>help_outline</mat-icon>
-                      </div>
-                    </mat-checkbox>
-                  </div>
-                  <div class="project-owner" formGroupName="roles">
-                    <mat-checkbox formControlName="projectOwner">
-                      <div [ngClass.gt-sm]="['role__checkbox--hidden']">Project Owner
-                        <mat-icon>help_outline</mat-icon>
-                      </div>
-                    </mat-checkbox>
-                  </div>
-                  <div [ngClass.gt-md]="['delete-icon-container']" [ngClass.lt-md]="['delete-icon-container--center']">
-                    <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </div>
+                    <div class="data-contact" formGroupName="roles">
+                      <mat-checkbox formControlName="dataContact">
+                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                          <div>
+                            Data Contact
+                          </div>
+                          <mat-icon>help_outline</mat-icon>
+                        </div>
+                      </mat-checkbox>
+                    </div>
+                    <div class="project-participant" formGroupName="roles">
+                      <mat-checkbox formControlName="projectParticipant">
+                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                          <div>
+                            Project Participant
+                          </div>
+                          <mat-icon>help_outline</mat-icon>
+                        </div>
+                      </mat-checkbox>
+                    </div>
+                    <div class="project-owner" formGroupName="roles">
+                      <mat-checkbox formControlName="projectOwner">
+                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']">
+                          <div>
+                          Project Owner
+                          </div>
+                          <mat-icon>help_outline</mat-icon>
+                        </div>
+                      </mat-checkbox>
+                    </div>
+                    <div [ngClass.gt-md]="['delete-icon-container']"
+                      [ngClass.lt-md]="['delete-icon-container--center']">
+                      <button mat-icon-button (click)="deletePerson(i)" style="color: #757575;">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

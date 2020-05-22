@@ -110,9 +110,6 @@ table * {
 }
 
 .person-grid {
-  // display: flex;
-  // flex-direction: column;
-
   display: grid;
   grid-template-columns: repeat(8, 1fr) 40px;
   grid-template-rows: auto;
@@ -122,7 +119,8 @@ table * {
   div {
     padding: 0.2em;
     margin: auto;
-    // grid-column: 1/9;
+
+    // need to change to align checkboxes
   }
 }
 
@@ -270,3 +268,9 @@ div .delete-icon-container {
 .role__checkbox--hidden {
   display: none;
 }
+
+.role__checkbox--active {
+  display: flex;
+  flex-direction: row;
+}
+
