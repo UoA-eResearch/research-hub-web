@@ -9,10 +9,13 @@
     information in the following sections. If you have any questions feel free
     to add them into the comments field at the end of the form.
   </p>
+  <p style="padding-left: 24px;">
+    We provide Research Drive and Institutitonal Dropbox <a href="http://dropbox.com/business">(Dropbox Business)</a> storage folders to University of Auckland staff and graduate students. You may share data with external collaborators through Institutional Dropbox after your folder has been provisioned.
+  </p>
 
   <div #resultsDummyHeader style="margin-top: 3em;"></div>
   <mat-horizontal-stepper #stepper linear="true">
-    <!-- <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
+    <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
       <form [formGroup]="requestTypeForm" novalidate>
 
         <ng-template matStepLabel>Request Type</ng-template>
@@ -159,7 +162,7 @@
           </div>
         </div>
       </form>
-    </mat-step> -->
+    </mat-step>
 
     <mat-step [editable]="isEditable" [stepControl]="dataInfoForm"
       *ngIf="requestTypeForm.controls.requestType.value === 'New'">
