@@ -370,6 +370,9 @@
                       </button>
                     </div>
                   </div>
+            <button mat-raised-button [ngClass.lt-md]="['person__delete-button']" [ngClass.gt-sm]="['person__delete-button--hidden']" (click)="deletePerson(i)" color="accent" matStepperNext>
+              Delete Person
+            </button>
                 </div>
               </div>
               <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('invalidProjectOwnerCount')">

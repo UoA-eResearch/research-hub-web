@@ -156,6 +156,10 @@ div.person-grid-body .person-section__wrapper--enabled {
   background-color: rgb(255, 255, 255);
   margin:1.5rem 20%;
   padding: 0.5rem;
+
+  div {
+    margin: 0.2rem;
+  }
 }
 
 .grid-radio-group--horizontal {
@@ -275,3 +279,13 @@ div .delete-icon-container {
   align-items: center;
 }
 
+
+.person__delete-button--hidden {
+  display: none;
+}
+
+.person__delete-button {
+  margin: 0.8rem;
+  width: auto;
+  display: inline-block;
+}
