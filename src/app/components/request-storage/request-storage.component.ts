@@ -435,7 +435,10 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
         Object.keys(roles).forEach(function (key) {
           if (roles[key]) {
             // Replaces camel case to a lowercase string.
-            const role = key.split(/(?=[A-Z])/).map(s => s.toLowerCase()).join(' ');
+            const role = key.split(/(?=[A-Z])/).map(s => {
+              s.toLowerCase()
+              return s.charAt(0).toUpperCase() + s.slice(1);
+            }).join(' ');
             rolesArray.push(role);
           }
         });
