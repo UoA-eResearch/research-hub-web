@@ -15,7 +15,7 @@
 
   <div #resultsDummyHeader style="margin-top: 3em;"></div>
   <mat-horizontal-stepper #stepper linear="true">
-    <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
+    <!-- <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
       <form [formGroup]="requestTypeForm" novalidate>
 
         <ng-template matStepLabel>Request Type</ng-template>
@@ -162,7 +162,7 @@
           </div>
         </div>
       </form>
-    </mat-step>
+    </mat-step> -->
 
     <mat-step [editable]="isEditable" [stepControl]="dataInfoForm"
       *ngIf="requestTypeForm.controls.requestType.value === 'New'">
@@ -211,7 +211,7 @@
                 Access
               </div>
               <div class="roles">
-                Roles
+                Administrative Roles
               </div>
               <div matTooltip="A person may read files but they cannot write to them or create new files."
                 [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above" class="read-only-header">
@@ -333,7 +333,7 @@
                   <div [ngClass.lt-md]="['person-section__wrapper--enabled']"
                     [ngClass.gt-sm]="['person-section__wrapper--disabled']">
                     <div [ngClass.lt-md]="['person-section__header--enabled']"
-                      [ngClass.gt-sm]="['person-section__header--hidden']">Roles</div>
+                      [ngClass.gt-sm]="['person-section__header--hidden']">Administrative Roles</div>
                     <div class="data-owner__container" formGroupName="roles">
                       <mat-checkbox formControlName="dataOwner">
                         <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']"
