@@ -30,7 +30,6 @@ interface Person {
   roles: {
     dataOwner: false;
     dataContact: false;
-    projectParticipant: false;
     projectOwner: false;
   };
 }
@@ -130,7 +129,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
   public roleTypes = [
     'Data Owner',
     'Data Contact',
-    'Project Participant',
     'Project Owner'
   ];
 
@@ -259,13 +257,10 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.mail,
-      // username: user.uid,
-
       access: 'Full Access',
       roles: {
         dataOwner: false,
         dataContact: false,
-        projectParticipant: false,
         projectOwner: false,
       }
     });
@@ -349,7 +344,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       roles: {
         dataOwner: false,
         dataContact: false,
-        projectParticipant: false,
         projectOwner: false,
       }
     });
@@ -359,7 +353,6 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
     const control = <FormArray>this.dataInfoForm.get('projectMembers');
     const rolesFormGroup = this.formBuilder.group({
       dataContact: new FormControl(person.roles.dataContact),
-      projectParticipant: new FormControl(person.roles.projectParticipant),
       projectOwner: new FormControl(person.roles.projectOwner),
       dataOwner: new FormControl(person.roles.dataOwner)
     });

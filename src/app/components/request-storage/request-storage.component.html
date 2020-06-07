@@ -9,24 +9,26 @@
     information in the following sections. If you have any questions feel free
     to add them into the comments field at the end of the form.
   </p>
-  <p style="padding-left: 24px;">
-    We provide Research Drive and Institutitonal Dropbox <a href="http://dropbox.com/business">(Dropbox Business)</a> storage folders to University of Auckland staff and graduate students. You may share data with external collaborators through Institutional Dropbox after your folder has been provisioned.
-  </p>
-
   <div #resultsDummyHeader style="margin-top: 3em;"></div>
   <mat-horizontal-stepper #stepper linear="true">
-    <!-- <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
+    <mat-step [editable]="isEditable" [stepControl]="requestTypeForm">
       <form [formGroup]="requestTypeForm" novalidate>
-
         <ng-template matStepLabel>Request Type</ng-template>
 
         <div class="step-form-container">
           <div class="form-group">
             <h3>Do you want to request new storage or update existing storage?</h3>
+            <p>
+              We provide Research Drive and Institutitonal Dropbox <a href="http://dropbox.com/business">(Dropbox
+                Business)</a>
+              storage folders to University of Auckland staff and graduate students. You may share data with external
+              collaborators through Institutional Dropbox after your folder has been provisioned.
+            </p>
             <mat-radio-group fxLayout="column" fxLayoutGap="1em" formControlName="requestType">
               <mat-radio-button value="New">New</mat-radio-button>
               <mat-radio-button value="Existing">Existing</mat-radio-button>
-              <mat-error *ngIf="requestTypeForm.controls.requestType.invalid && requestTypeClicked">* Please choose an option</mat-error>
+              <mat-error *ngIf="requestTypeForm.controls.requestType.invalid && requestTypeClicked">* Please choose an
+                option</mat-error>
             </mat-radio-group>
             <br>
             <p>
@@ -43,7 +45,8 @@
       </form>
     </mat-step>
 
-    <mat-step [editable]="isEditable" [stepControl]="requestDetailsForm" *ngIf="requestTypeForm.controls.requestType.value === 'Existing'">
+    <mat-step [editable]="isEditable" [stepControl]="requestDetailsForm"
+      *ngIf="requestTypeForm.controls.requestType.value === 'Existing'">
       <form [formGroup]="requestDetailsForm">
         <ng-template matStepLabel>Request Details</ng-template>
 
@@ -53,53 +56,60 @@
 
             <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
               <input matInput placeholder="Folder name" formControlName="existingFolderName" type="text">
-              <mat-error *ngIf="requestDetailsForm.controls.existingFolderName.invalid">* Please enter folder name</mat-error>
+              <mat-error *ngIf="requestDetailsForm.controls.existingFolderName.invalid">* Please enter folder name
+              </mat-error>
             </mat-form-field>
 
 
-          <div class="form-group">
-            <h3>Would you like to: </h3>
-            <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
-              <mat-select placeholder="Type of update" formControlName="updateType" multiple>
-                <mat-option *ngFor="let item of updateOptionsList" [value]="item">{{item}}</mat-option>
-              </mat-select>
-              <mat-error *ngIf="requestDetailsForm.controls.updateType.invalid">* Please choose at least one item from the list</mat-error>
-            </mat-form-field>
-          </div>
-
-
-          <div class="form-group">
-            <h3>Please provide details of your request</h3>
-            <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
-              <textarea matInput placeholder="Request Details" formControlName="requestDetails" type="text"></textarea>
-              <mat-error *ngIf="requestDetailsForm.controls.requestDetails.invalid">* Please provide details of your request</mat-error>
-            </mat-form-field>
-          </div>
-
-
-          <div class="form-group">
-            <h3>Is there anything else you would like to tell us?</h3>
-            <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
-              <textarea matInput placeholder="Comments [optional]" formControlName="comments" type="text"></textarea>
-            </mat-form-field>
-          </div>
-
-          <div class="step-overlay" fxLayout="row" fxLayoutAlign="center center" *ngIf="submitting">
-            <mat-spinner></mat-spinner>
-          </div>
-
-          <div fxLayout="column" fxLayoutAlign="end">
-            <div fxLayout="row" fxLayoutAlign="end">
-              <button mat-raised-button color="accent" (click)="submit(requestTypeForm.controls.requestType.value, requestDetailsForm)" [disabled]="submitting">Request Storage</button>
+            <div class="form-group">
+              <h3>Would you like to: </h3>
+              <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
+                <mat-select placeholder="Type of update" formControlName="updateType" multiple>
+                  <mat-option *ngFor="let item of updateOptionsList" [value]="item">{{item}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="requestDetailsForm.controls.updateType.invalid">* Please choose at least one item from
+                  the list</mat-error>
+              </mat-form-field>
             </div>
-          </div>
+
+
+            <div class="form-group">
+              <h3>Please provide details of your request</h3>
+              <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
+                <textarea matInput placeholder="Request Details" formControlName="requestDetails"
+                  type="text"></textarea>
+                <mat-error *ngIf="requestDetailsForm.controls.requestDetails.invalid">* Please provide details of your
+                  request</mat-error>
+              </mat-form-field>
+            </div>
+
+
+            <div class="form-group">
+              <h3>Is there anything else you would like to tell us?</h3>
+              <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
+                <textarea matInput placeholder="Comments [optional]" formControlName="comments" type="text"></textarea>
+              </mat-form-field>
+            </div>
+
+            <div class="step-overlay" fxLayout="row" fxLayoutAlign="center center" *ngIf="submitting">
+              <mat-spinner></mat-spinner>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="end">
+              <div fxLayout="row" fxLayoutAlign="end">
+                <button mat-raised-button color="accent"
+                  (click)="submit(requestTypeForm.controls.requestType.value, requestDetailsForm)"
+                  [disabled]="submitting">Request Storage</button>
+              </div>
+            </div>
 
           </div>
         </div>
       </form>
     </mat-step>
 
-    <mat-step [editable]="isEditable" [stepControl]="projectForm" *ngIf="requestTypeForm.controls.requestType.value === 'New'">  
+    <mat-step [editable]="isEditable" [stepControl]="projectForm"
+      *ngIf="requestTypeForm.controls.requestType.value === 'New'">
       <form [formGroup]="projectForm" novalidate>
         <ng-template matStepLabel>General Information</ng-template>
 
@@ -116,11 +126,17 @@
             <h3>Brief abstract or summary of the research for this storage</h3>
             <mat-form-field class="no-floating-label input-full-width" floatLabel="never">
               <textarea matInput placeholder="Project abstract" formControlName="abstract" type="text"></textarea>
-              <mat-error *ngIf="projectForm.controls.abstract.hasError('required')">* Please enter an abstract</mat-error>
-              <mat-error *ngIf="projectForm.controls.abstract.hasError('minlength')" align="start">* Please enter at least 500 characters</mat-error>
-              <mat-error *ngIf="projectForm.controls.abstract.hasError('minlength')" align="end">{{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0  }}/500</mat-error>
+              <mat-error *ngIf="projectForm.controls.abstract.hasError('required')">* Please enter an abstract
+              </mat-error>
+              <mat-error *ngIf="projectForm.controls.abstract.hasError('minlength')" align="start">* Please enter at
+                least 500 characters</mat-error>
+              <mat-error *ngIf="projectForm.controls.abstract.hasError('minlength')" align="end">
+                {{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0  }}/500
+              </mat-error>
               <mat-hint align="start">Min 500 Characters</mat-hint>
-              <mat-hint align="end">{{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0  }}/500</mat-hint>
+              <mat-hint align="end">
+                {{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0  }}/500
+              </mat-hint>
             </mat-form-field>
           </div>
 
@@ -130,14 +146,16 @@
               <mat-select placeholder="Storage options" formControlName="storageOptions" multiple>
                 <mat-option *ngFor="let item of storageOptionsList" [value]="item">{{item}}</mat-option>
               </mat-select>
-              <mat-error *ngIf="projectForm.controls.storageOptions.invalid">* Please choose at least one item from the list</mat-error>
+              <mat-error *ngIf="projectForm.controls.storageOptions.invalid">* Please choose at least one item from the
+                list</mat-error>
             </mat-form-field>
           </div>
 
           <div class="form-group">
             <h3>Estimated project end date</h3>
             <mat-form-field floatLabel="never" class="no-floating-label" (click)="picker.open()">
-              <input matInput [matDatepicker]="picker" [min]="dateToday" formControlName="endDate" placeholder="Choose a date" readonly>
+              <input matInput [matDatepicker]="picker" [min]="dateToday" formControlName="endDate"
+                placeholder="Choose a date" readonly>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
               <mat-error *ngIf="projectForm.controls.endDate.invalid">* Please choose a date</mat-error>
@@ -146,12 +164,14 @@
 
 
           <div class="form-group">
-            <h3>Please choose at least one FOR code from the Australian and New Zealand Standard Research Classification (ANZSRC)</h3>
+            <h3>Please choose at least one FOR code from the Australian and New Zealand Standard Research Classification
+              (ANZSRC)</h3>
             <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
               <mat-select placeholder="Field of research" formControlName="fieldOfResearch" multiple>
                 <mat-option *ngFor="let item of fieldOfResearchCodes" [value]="item">{{item}}</mat-option>
               </mat-select>
-              <mat-error *ngIf="projectForm.controls.fieldOfResearch.invalid">* Please choose at least one item from the list</mat-error>
+              <mat-error *ngIf="projectForm.controls.fieldOfResearch.invalid">* Please choose at least one item from the
+                list</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -162,7 +182,7 @@
           </div>
         </div>
       </form>
-    </mat-step> -->
+    </mat-step>
 
     <mat-step [editable]="isEditable" [stepControl]="dataInfoForm"
       *ngIf="requestTypeForm.controls.requestType.value === 'New'">
@@ -205,6 +225,11 @@
 
           <div class="form-group">
             <h3>Please provide a list of University of Auckland people who require access</h3>
+            <!-- <p style="padding-left: 24px;"> -->
+            <p>
+              Please also nominate at least one person in each of the administrative roles. If you are a PhD candidate
+              or research graduate student, you must include your supervisor and designate them as the Project Owner.
+            </p>
 
             <div class="person-grid person-grid-headers" [ngClass.lt-md]="['person-grid-headers--hidden']">
               <div class="access">
@@ -220,8 +245,8 @@
                 </div>
                 <mat-icon>help_outline</mat-icon>
               </div>
-              <div class="read-write-header" matTooltip="A person may read, write, and create new files." [matTooltipShowDelay]="0"
-                [matTooltipHideDelay]="0" matTooltipPosition="above">
+              <div class="read-write-header" matTooltip="A person may read, write, and create new files."
+                [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                 <div class="header__title">
                   Read<br>& Write
                 </div>
@@ -239,13 +264,6 @@
                 [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                 <div class="header__title">
                   Data<br>Contact
-                </div>
-                <mat-icon>help_outline</mat-icon>
-              </div>
-              <div class="project-participant-header" matTooltip="A person that is participating in the project."
-                [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
-                <div class="header__title">
-                  Project<br>Participant
                 </div>
                 <mat-icon>help_outline</mat-icon>
               </div>
@@ -301,11 +319,9 @@
                         [ngClass.gt-sm]="['.access__radio-wrapper--centered']">
                         <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
                           value="Read Only">
-                          <div [ngClass.lt-md]="['role__checkbox--active']"
-                            [ngClass.gt-sm]="['role__checkbox--hidden']"
-                          matTooltip="A person may read files but they cannot write to them or create new files."
-                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above"
-                            >
+                          <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']"
+                            matTooltip="A person may read files but they cannot write to them or create new files."
+                            [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                             <div>
                               Read Only
                             </div>
@@ -316,11 +332,9 @@
                       <div class="read-write access__radio-wrapper">
                         <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
                           value="Full Access">
-                          <div [ngClass.lt-md]="['role__checkbox--active']"
-                            [ngClass.gt-sm]="['role__checkbox--hidden']"
-                          matTooltip="A person may read, write, and create new files."
-                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above"
-                            >
+                          <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']"
+                            matTooltip="A person may read, write, and create new files." [matTooltipShowDelay]="0"
+                            [matTooltipHideDelay]="0" matTooltipPosition="above">
                             <div>
                               Full Access
                             </div>
@@ -334,12 +348,14 @@
                     [ngClass.gt-sm]="['person-section__wrapper--disabled']">
                     <div [ngClass.lt-md]="['person-section__header--enabled']"
                       [ngClass.gt-sm]="['person-section__header--hidden']">Administrative Roles</div>
+                    <div class="roles__divider" formGroupName="roles">
+
+                    </div>
                     <div class="data-owner__container" formGroupName="roles">
                       <mat-checkbox formControlName="dataOwner">
                         <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']"
-                          matTooltip="A person that has ownership of the data."
-                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above"
-                        >
+                          matTooltip="A person that has ownership of the data." [matTooltipShowDelay]="0"
+                          [matTooltipHideDelay]="0" matTooltipPosition="above">
                           <div>
                             Data Owner
                           </div>
@@ -347,27 +363,13 @@
                         </div>
                       </mat-checkbox>
                     </div>
-                    <div class="data-contact" formGroupName="roles">
+                    <div class="project-participant" formGroupName="roles">
                       <mat-checkbox formControlName="dataContact">
                         <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']"
                           matTooltip="A person that the Centre for eResearch can contact regarding the data."
-                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above"
-                        >
+                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                           <div>
                             Data Contact
-                          </div>
-                          <mat-icon>help_outline</mat-icon>
-                        </div>
-                      </mat-checkbox>
-                    </div>
-                    <div class="project-participant" formGroupName="roles">
-                      <mat-checkbox formControlName="projectParticipant">
-                        <div [ngClass.lt-md]="['role__checkbox--active']" [ngClass.gt-sm]="['role__checkbox--hidden']"
-                          matTooltip="A person that is participating in the project."
-                          [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above"
-                          >
-                          <div>
-                            Project Participant
                           </div>
                           <mat-icon>help_outline</mat-icon>
                         </div>
