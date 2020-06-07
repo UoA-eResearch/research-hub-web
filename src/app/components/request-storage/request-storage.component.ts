@@ -261,7 +261,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       email: user.mail,
       // username: user.uid,
 
-      access: 'Read Only',
+      access: 'Full Access',
       roles: {
         dataOwner: false,
         dataContact: false,
@@ -345,7 +345,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       firstName: undefined,
       lastName: undefined,
       email: undefined,
-      access: undefined,
+      access: 'Full Access',
       roles: {
         dataOwner: false,
         dataContact: false,
