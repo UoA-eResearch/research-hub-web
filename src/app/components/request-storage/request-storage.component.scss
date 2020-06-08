@@ -269,11 +269,17 @@ div .delete-icon-container {
   width: 20px;
 }
 
-.role__checkbox--hidden {
+.role__checkbox-info--hidden {
   display: none;
 }
 
-.role__checkbox--active {
+
+::ng-deep label.mat-checkbox-layout {
+    width: 16px;
+    height: 16px;
+}
+
+.role__checkbox-info--active {
   display: flex;
   flex-direction: row;
   align-items: center;
