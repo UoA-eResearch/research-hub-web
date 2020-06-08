@@ -3,20 +3,10 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-// export const environment = {
-//   production: false,
-//   shibbolethSessionUrl: '',
-//   researchHubApiUrl: '',
-//   cerApiUrl: '',
-//   analyticsCode: ''
-// };
-
 export const environment = {
   production: false,
-  shibbolethSessionUrl: 'http://localhost:4200/Session.json',
-  //  researchHubApiUrl: 'http://localhost/api/',
-  researchHubApiUrl: 'https://test.research-hub.cer.auckland.ac.nz/api/',
-  //  cerApiUrl: 'http://localhost/cer-api/',
-  cerApiUrl: 'https://test.research-hub.cer.auckland.ac.nz/cer-api/',
-  analyticsCode: 'UA-77710107-3'
+  shibbolethSessionUrl: '',
+  researchHubApiUrl: '',
+  cerApiUrl: '',
+  analyticsCode: ''
 };
