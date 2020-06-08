@@ -273,13 +273,14 @@ div .delete-icon-container {
   display: none;
 }
 
-
-::ng-deep label.mat-checkbox-layout {
-    width: 16px;
-    height: 16px;
+.role__container--gt-sm {
+  ::ng-deep label{
+    width: 16px !important;
+    height: 16px !important;
+  }
 }
 
-.role__checkbox-info--active {
+.person__input-info--active {
   display: flex;
   flex-direction: row;
   align-items: center;

@@ -319,7 +319,7 @@
                         [ngClass.gt-sm]="['.access__radio-wrapper--centered']">
                         <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
                           value="Read Only">
-                          <div [ngClass.lt-md]="['role__checkbox-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
+                          <div [ngClass.lt-md]="['person__input-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
                             matTooltip="A person may read files but they cannot write to them or create new files."
                             [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                             <div>
@@ -332,7 +332,7 @@
                       <div class="read-write access__radio-wrapper">
                         <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
                           value="Full Access">
-                          <div [ngClass.lt-md]="['role__checkbox-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
+                          <div [ngClass.lt-md]="['person__input-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
                             matTooltip="A person may read, write, and create new files." [matTooltipShowDelay]="0"
                             [matTooltipHideDelay]="0" matTooltipPosition="above">
                             <div>
@@ -351,9 +351,10 @@
                     <div class="roles__divider" formGroupName="roles">
 
                     </div>
-                    <div class="data-owner__container" formGroupName="roles">
-                      <mat-checkbox formControlName="dataOwner">
-                        <div [ngClass.lt-md]="['role__checkbox-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
+                    <div 
+                    [ngClass.gt-sm]="['role__container--gt-sm']" [ngClass.lt-md]="['role__container--lt-md']" formGroupName="roles">
+                      <mat-checkbox aria-label="data owner" formControlName="dataOwner">
+                        <div [ngClass.lt-md]="['person__input-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
                           matTooltip="A person that has ownership of the data." [matTooltipShowDelay]="0"
                           [matTooltipHideDelay]="0" matTooltipPosition="above">
                           <div>
@@ -363,9 +364,9 @@
                         </div>
                       </mat-checkbox>
                     </div>
-                    <div class="project-participant" formGroupName="roles">
+                    <div [ngClass.gt-sm]="['role__container--gt-sm']" [ngClass.lt-md]="['role__container--lt-md']" formGroupName="roles">
                       <mat-checkbox formControlName="dataContact">
-                        <div [ngClass.lt-md]="['role__checkbox-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
+                        <div [ngClass.lt-md]="['person__input-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
                           matTooltip="A person that the Centre for eResearch can contact regarding the data."
                           [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                           <div>
@@ -375,9 +376,9 @@
                         </div>
                       </mat-checkbox>
                     </div>
-                    <div class="project-owner" formGroupName="roles">
+                    <div [ngClass.gt-sm]="['role__container--gt-sm']" [ngClass.lt-md]="['role__container--lt-md']" formGroupName="roles">
                       <mat-checkbox formControlName="projectOwner">
-                        <div [ngClass.lt-md]="['role__checkbox-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
+                        <div [ngClass.lt-md]="['person__input-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
                           matTooltip="The owner of the project. If you are a PhD student, this will be your supervisor."
                           [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                           <div>
