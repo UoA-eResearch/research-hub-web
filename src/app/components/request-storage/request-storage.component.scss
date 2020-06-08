@@ -111,16 +111,13 @@ table * {
 
 .person-grid {
   display: grid;
+  // applies to both person headers and columns
   grid-template-columns: 120px 120px repeat(2, 1fr) 50px repeat(3,1fr) 40px;
   grid-template-rows: auto;
   padding: 1rem 1rem .25rem;
-
-  // only applies to checkboxes since the radio buttons are nested deeper
   div {
     padding: 0.2em;
     margin: auto;
-
-    // need to change to align checkboxes
   }
 }
 
@@ -235,7 +232,6 @@ div.person-grid-body .person-section__wrapper--enabled {
   grid-row: 2;
 }
 
-/* only need to set details as it's the only non-standard grid item */
 .details {
   grid-column: 1/3;
   width: 95%
