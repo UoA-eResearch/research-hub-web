@@ -422,21 +422,23 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       }
 
       // restructure body to avoid needed to alter servicenow api.
-      body['projectMembers'].forEach(member => {
-        const rolesArray = [];
-        const roles = member['roles'];
-        Object.keys(roles).forEach(function (key) {
-          if (roles[key]) {
-            // Replaces camel case to a lowercase string.
-            const role = key.split(/(?=[A-Z])/).map(s => {
-              s.toLowerCase()
-              return s.charAt(0).toUpperCase() + s.slice(1);
-            }).join(' ');
-            rolesArray.push(role);
-          }
+      if (body['projectMembers'] > 0) {
+        body['projectMembers'].forEach(member => {
+          const rolesArray = [];
+          const roles = member['roles'];
+          Object.keys(roles).forEach(function (key) {
+            if (roles[key]) {
+              // Replaces camel case to a lowercase string.
+              const role = key.split(/(?=[A-Z])/).map(s => {
+                s.toLowerCase()
+                return s.charAt(0).toUpperCase() + s.slice(1);
+              }).join(' ');
+              rolesArray.push(role);
+            }
+          });
+          member['roles'] = rolesArray;
         });
-        member['roles'] = rolesArray;
-      });
+      }
 
       console.log('Submitting request body: ', body);
 
