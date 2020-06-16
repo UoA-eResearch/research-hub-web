@@ -422,7 +422,8 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       }
 
       // restructure body to avoid needed to alter servicenow api.
-      if (body['projectMembers'] > 0) {
+      if (body['projectMembers']) {
+        console.log("project members restructure.")
         body['projectMembers'].forEach(member => {
           const rolesArray = [];
           const roles = member['roles'];
