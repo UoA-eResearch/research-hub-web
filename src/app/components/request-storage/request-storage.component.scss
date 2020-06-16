@@ -1,4 +1,4 @@
-@import '../../../themes';
+@import "../../../themes";
 
 .form-group {
   margin-top: 1em;
@@ -9,6 +9,45 @@
 //  margin-top: 1em !important;
 //  margin-bottom: 1em;
 //}
+
+
+
+/* src: https://github.com//issues/4580 */
+::ng-deep mat-form-field {
+  &.ng-valid {
+    .mat-form-field-wrapper {
+      padding-bottom: 1.25em;
+    }
+  }
+
+  &.ng-invalid,
+  &.mat-form-field-invalid {
+    .mat-form-field-wrapper {
+      padding-bottom: 7px;
+    }
+  }
+
+  &.ng-untouched {
+    .mat-form-field-wrapper {
+      padding-bottom: 1.25em;
+    }
+  }
+
+  .mat-form-field {
+    &-underline {
+      position: static;
+    }
+
+    &-subscript-wrapper {
+      position: static;
+    }
+  }
+}
+
+
+
+
+
 
 .step-form-container {
   position: relative;
@@ -41,18 +80,22 @@
   padding-left: 1em;
   padding-right: 1em;
   padding-top: 1em;
-  padding-bottom: 1.5em;
+  padding-bottom: 1em;
 }
 
 .data-person-row:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.1);
+  // removing for now since error message isn't contained within the element properly
+  // background-color: rgba(0, 0, 0, 0.1);
 }
 
 .data-person-row-inner mat-form-field {
   min-width: 0 !important;
 }
 
-mat-horizontal-stepper /deep/ div.mat-horizontal-stepper-header-container>:last-child {
+mat-horizontal-stepper
+  /deep/
+  div.mat-horizontal-stepper-header-container
+  > :last-child {
   pointer-events: none !important;
 }
 
@@ -60,4 +103,202 @@ h3 {
   color: map-get($hub-navy, 500);
 }
 
-//pointer-events: none !important;
+// pointer-events: none !important;
+
+table * {
+  border: 1px solid black;
+}
+
+.person-grid {
+  display: grid;
+  // applies to both person headers and columns
+  grid-template-columns: 120px 120px repeat(2, 1fr) 50px repeat(3,1fr) 40px;
+  grid-template-rows: auto;
+  padding: 1rem 1rem .25rem;
+  div {
+    padding: 0.2em;
+    margin: auto;
+  }
+}
+
+.person-grid-body {
+  margin-bottom: 1rem;
+  border: 1px solid map-get($hub-teal, 100);
+  border-radius: 0.5rem;
+}
+
+.person-section__header--hidden {
+  display: none;
+}
+
+.person-section__header--enabled {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  text-align: center;
+  color: map-get($hub-navy, 500);
+}
+
+.person-flex-layout { 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: map-get($hub-teal, 100);
+
+   -moz-box-shadow:    1px 1px 2px 2px #ccc;
+  -webkit-box-shadow: 1px 1px 2px 2px #ccc;
+  box-shadow:         1px 1px 2px 2px #ccc;
+}
+
+.person-section__wrapper--disabled {
+  display: contents;
+}
+
+div.person-grid-body .person-section__wrapper--enabled {
+  background-color: rgb(255, 255, 255);
+  margin:1.5rem 1.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+
+  div {
+    margin: 0.2rem;
+  }
+}
+
+.grid-radio-group--horizontal {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.person-grid-headers {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+
+
+  div {
+    &.access, &.roles {
+      font-size: 115%;
+      color: map-get($hub-pink, 500);
+      margin-bottom: 0.5em;
+    }
+    color: map-get($hub-navy, 500);
+    margin: auto;
+    text-align: center;
+  }
+}
+
+.person-grid-headers--hidden {
+  display: none;
+}
+
+.delete-icon-container--hidden {
+  display: none;
+}
+
+.access {
+  grid-column: 3/5;
+  grid-row: 1;
+}
+
+.roles {
+  grid-column: 6/9;
+  grid-row: 1;
+}
+
+.read-only-header {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.read-write-header {
+  grid-column: 4;
+  grid-row: 2;
+}
+
+.data-owner-header {
+  grid-column: 6;
+  grid-row: 2;
+}
+.data-contact-header {
+  grid-column: 7;
+  grid-row: 2;
+}
+.project-participant-header {
+  grid-column: 7;
+  grid-row: 2;
+}
+.project-owner-header {
+  grid-column: 8;
+  grid-row: 2;
+}
+
+.details {
+  grid-column: 1/3;
+  width: 95%
+}
+
+.grid-radio-group {
+  display: flex;
+  grid-column: 3/5;
+}
+
+div .delete-icon-container {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
+// if radio wrapper grid then flex, else in-line
+.access__radio-wrapper--centered {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.access__radio-wrapper--left {
+  display: inline-block;
+  width: 50%;
+  align-items: center;
+}
+
+
+.access__radio-button {
+  margin: auto;
+  width: 20px;
+}
+
+.role__checkbox-info--hidden {
+  display: none;
+}
+
+.role__container--gt-sm {
+  ::ng-deep label{
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+.person__input-info--active {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 600;
+  color: map-get($hub-navy, 500);
+
+  .mat-icon {
+  color: map-get($hub-teal, 500);
+  }
+}
+
+
+.person__delete-button--hidden {
+  display: none;
+}
+
+.person__delete-button {
+  margin: 0.8rem auto;
+  width: fit-content;
+  display: inline-block;
+}
