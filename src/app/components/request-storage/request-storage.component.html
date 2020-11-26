@@ -27,7 +27,6 @@
             <mat-radio-group fxLayout="column" fxLayoutGap="1em" formControlName="requestType">
               <mat-radio-button value="New">New</mat-radio-button>
               <mat-radio-button value="Existing">Existing</mat-radio-button>
-              <mat-radio-button *ngIf="requestTypeForm.controls.requestType.value === 'Existing' || requestTypeForm.controls.requestType.value === 'New - Dropbox'" value="New - Dropbox">Existing - Personal Dropbox</mat-radio-button>
               <mat-error *ngIf="requestTypeForm.controls.requestType.invalid && requestTypeClicked">* Please choose an
                 option</mat-error>
             </mat-radio-group>
@@ -110,7 +109,7 @@
     </mat-step>
 
     <mat-step [editable]="isEditable" [stepControl]="projectForm"
-      *ngIf="requestTypeForm.controls.requestType.value === 'New' || requestTypeForm.controls.requestType.value === 'New - Dropbox'">
+      *ngIf="requestTypeForm.controls.requestType.value === 'New'">
       <form [formGroup]="projectForm" novalidate>
         <ng-template matStepLabel>General Information</ng-template>
 
@@ -186,7 +185,7 @@
     </mat-step>
 
     <mat-step [editable]="isEditable" [stepControl]="dataInfoForm"
-      *ngIf="requestTypeForm.controls.requestType.value === 'New' || requestTypeForm.controls.requestType.value === 'New - Dropbox' ">
+      *ngIf="requestTypeForm.controls.requestType.value === 'New'">
       <form [formGroup]="dataInfoForm" novalidate>
         <ng-template matStepLabel>Data Information</ng-template>
 
@@ -217,10 +216,10 @@
               GDC-data)?
             </h3>
             <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
-              <input matInput placeholder="Short name" formControlName="shortName" type="text"/>
+              <input matInput placeholder="Short name" formControlName="shortName" type="text" />
               <mat-hint align="start">Avoid generic names like <i>my-project</i> or
                 <i>my-data</i></mat-hint>
-              <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">* Please enter a short name containing less than 45 characters</mat-error>
+              <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">* Please enter a short name</mat-error>
             </mat-form-field>
           </div>
 
@@ -436,7 +435,7 @@
     </mat-step>
 
     <mat-step [editable]="isEditable" [stepControl]="dataSizeForm"
-      *ngIf="requestTypeForm.controls.requestType.value === 'New' || requestTypeForm.controls.requestType.value === 'New - Dropbox' ">
+      *ngIf="requestTypeForm.controls.requestType.value === 'New'">
       <form [formGroup]="dataSizeForm" novalidate>
         <ng-template matStepLabel>Data Size</ng-template>
 
