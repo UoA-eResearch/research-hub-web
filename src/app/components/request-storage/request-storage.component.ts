@@ -421,7 +421,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
           this.requestDetailsForm.getRawValue());
       }
 
-      // restructure body to avoid needed to alter servicenow api.
+      // restructure body to avoid needing to alter servicenow api.
       if (body['projectMembers']) {
         console.log("project members restructure.")
         body['projectMembers'].forEach(member => {
@@ -440,6 +440,8 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
           member['roles'] = rolesArray;
         });
       }
+      // convert new - dropbox to the same value as new
+      body['requestType'] === 'New - Dropbox' ? body['requestType'] = 'New' : null;
 
       console.log('Submitting request body: ', body);
 
