@@ -406,7 +406,7 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       this.submitting = true;
       let body;
 
-      if (requestType === 'New') {
+      if (requestType === 'New' || requestType === 'New - Dropbox') {
         body = Object.assign({},
           this.requestTypeForm.getRawValue(),
           this.projectForm.getRawValue(),
