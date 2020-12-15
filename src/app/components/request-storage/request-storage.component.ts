@@ -207,27 +207,25 @@ export class RequestStorageComponent
       };
     }
 
-    function projectOwnerIsEmployee(): ValidationErrors {
+    function projectOwnerIsEmployee(): ValidatorFn {
       let projectOwner = null;
+      let isValid = null;
       (formArray: FormArray) => {
         formArray.value.forEach((projectMember) => {
           const personRoles = projectMember.roles;
-          console.log(personRoles);
-          console.log(projectMember);
-
           if (personRoles["projectOwner"]) {
             projectOwner = projectMember;
           }
         });
+        let staffEmailRegex = /.*auckland.ac.nz$/;
+        if (!!projectOwner) {
+          isValid = staffEmailRegex.test(projectOwner.email)
+            ? null
+            : { invalidProjectOwnerEmail: true };
+        }
       };
-      let staffEmailRegex = /.*auckland.ac.nz$/;
-      if (!projectOwner) {
-        return null;
-      }
-      if (staffEmailRegex.test(projectOwner.email)) {
-        return null;
-      }  
-      return { 'invalidProjectOwnerEmail': true }
+      console.log(isValid);
+      return isValid;
     }
 
     this.projectMembers = this.formBuilder.array(
