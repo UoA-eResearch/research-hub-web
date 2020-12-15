@@ -416,6 +416,9 @@
               <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('dataContactMinimumError')">
                 * Requires at least 1 data contact.
               </mat-error>
+              <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('invalidProjectOwnerEmail')">
+                * The project owner must have an email staff address. Email addresses ending in "@aucklanduni.ac.nz" are invalid.
+              </mat-error>
               <div fxLayout="row" fxLayoutAlign="end center">
                 <button mat-raised-button color="primary" (click)="addNewPerson()">
                   Add Person
