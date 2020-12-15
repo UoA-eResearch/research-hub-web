@@ -195,11 +195,24 @@ export class RequestStorageComponent implements OnInit, OnDestroy, CanComponentD
       };
     }
 
+    function projectOwnerIsEmployee(): ValidatorFn {
+      return (formArray: FormArray) => {
+        formArray.value.forEach((projectMember) => {
+          const personRoles = projectMember.roles;
+          console.log(personRoles);
+          console.log(projectMember);
+        });
+        return { 'nonStaffProjectOwner': true };
+        // return null;
+      };
+    }
+
     this.projectMembers = this.formBuilder.array([], Validators.compose([
       Validators.required,
       projectOwnerValidator(),
       roleMinimumCountValidator('dataContact', 1),
-      roleMinimumCountValidator('dataOwner', 1)
+      roleMinimumCountValidator('dataOwner', 1),
+      projectOwnerIsEmployee()
     ]));
 
     this.dataInfoForm = this.formBuilder.group({
