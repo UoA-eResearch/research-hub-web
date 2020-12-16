@@ -211,10 +211,8 @@ export class RequestStorageComponent
       return (formArray: FormArray) => {
         let isValid = false;
         formArray.value.forEach((projectMember) => {
-          console.log(projectMember);
           let regex = /.*auckland.ac.nz$/;
           if (projectMember.roles.projectOwner && regex.test(projectMember.email)) {
-            console.log('isValid');
             isValid = true;
           }
         });
