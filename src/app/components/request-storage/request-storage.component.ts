@@ -208,30 +208,18 @@ export class RequestStorageComponent
     }
 
     function projectOwnerIsEmployee(): ValidatorFn {
-      let projectOwner = null;
-      let isValid = null;
-      (formArray: FormArray) => {
+      return (formArray: FormArray) => {
+        let isValid = false;
         formArray.value.forEach((projectMember) => {
-          const personRoles = projectMember.roles;
-          if (personRoles["projectOwner"]) {
-            projectOwner = projectMember;
+          console.log(projectMember);
+          let regex = /.*auckland.ac.nz$/;
+          if (projectMember.roles.projectOwner && regex.test(projectMember.email)) {
+            console.log('isValid');
+            isValid = true;
           }
         });
+        return isValid ? null : { invalidProjectOwnerEmail: true }
       };
-      let staffEmailRegex = /.*auckland.ac.nz$/;
-      if (!!projectOwner) {
-        console.log("po is truthy", projectOwner);
-        console.log("po email", projectOwner.email);
-        console.log(
-          "regex working: ",
-          staffEmailRegex.test(projectOwner.email)
-        );
-        isValid = staffEmailRegex.test(projectOwner.email)
-          ? null
-          : { invalidProjectOwnerEmail: true };
-      }
-      console.log(isValid);
-      return isValid;
     }
 
     this.projectMembers = this.formBuilder.array(
@@ -241,7 +229,7 @@ export class RequestStorageComponent
         projectOwnerValidator(),
         roleMinimumCountValidator("dataContact", 1),
         roleMinimumCountValidator("dataOwner", 1),
-        projectOwnerIsEmployee,
+        projectOwnerIsEmployee(),
       ])
     );
 
