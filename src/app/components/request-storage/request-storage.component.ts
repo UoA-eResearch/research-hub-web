@@ -219,6 +219,9 @@ export class RequestStorageComponent
         });
         let staffEmailRegex = /.*auckland.ac.nz$/;
         if (!!projectOwner) {
+          console.log('po is truthy', projectOwner);
+          console.log('po email', projectOwner.email);
+          console.log('regex working: ', staffEmailRegex.test(projectOwner.email));
           isValid = staffEmailRegex.test(projectOwner.email)
             ? null
             : { invalidProjectOwnerEmail: true };
