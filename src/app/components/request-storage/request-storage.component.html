@@ -417,7 +417,7 @@
                 * Requires at least 1 data contact.
               </mat-error>
               <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('invalidProjectOwnerEmail')">
-                * The project owner must have a staff email  address. Email addresses ending in "@aucklanduni.ac.nz" are invalid.
+                * The project owner must have an employee email address ending with "auckland.ac.nz".
               </mat-error>
               <div fxLayout="row" fxLayoutAlign="end center">
                 <button mat-raised-button color="primary" (click)="addNewPerson()">
