@@ -154,6 +154,7 @@ export class RequestStorageComponent
 
     this.requestTypeForm = this.formBuilder.group({
       requestType: new FormControl("New", Validators.required),
+      isPersonalDropbox: new FormControl(false)
     });
 
     this.projectForm = this.formBuilder.group({
@@ -385,6 +386,13 @@ export class RequestStorageComponent
     localStorage.removeItem(this.requestFormKey);
   }
 
+  /**
+   * Unchecks the personal dropbox checkbox on the first page.
+   */
+  uncheckPersonalDropboxCheckbox() {
+    this.requestTypeForm.controls.isPersonalDropbox.setValue(false);
+  }
+
   addNewPerson() {
     this.addPerson({
       firstName: undefined,
@@ -458,7 +466,7 @@ export class RequestStorageComponent
       this.submitting = true;
       let body;
 
-      if (requestType === "New" || requestType === "New - Dropbox") {
+      if (requestType === "New" || this.requestTypeForm.controls.isPersonalDropbox.value ) {
         body = Object.assign(
           {},
           this.requestTypeForm.getRawValue(),
@@ -499,10 +507,12 @@ export class RequestStorageComponent
           member["roles"] = rolesArray;
         });
       }
+
       // convert new - dropbox to the same value as new
-      body["requestType"] === "New - Dropbox"
-        ? (body["requestType"] = "New")
-        : null;
+      this.requestTypeForm.controls.isPersonalDropbox.value ? body["requestType"] = "New" : null;
+
+      // remove property used for form processing
+      delete body['isPersonalDropbox'];
 
       console.log("Submitting request body: ", body);
 
