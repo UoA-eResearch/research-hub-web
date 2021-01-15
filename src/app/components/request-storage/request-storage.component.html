@@ -25,15 +25,24 @@
               collaborators through Institutional Dropbox after your folder has been provisioned.
             </p>
             <mat-radio-group fxLayout="column" fxLayoutGap="1em" formControlName="requestType">
-              <mat-radio-button value="New">New</mat-radio-button>
+              <mat-radio-button 
+                value="New"
+                (change)="uncheckPersonalDropboxCheckbox()"
+              >New</mat-radio-button>
               <mat-radio-button value="Existing">Existing</mat-radio-button>
               <mat-error *ngIf="requestTypeForm.controls.requestType.invalid && requestTypeClicked">* Please choose an
                 option</mat-error>
+              <mat-checkbox
+                class="form___checkbox--indent"
+                aria-label="This request relates to an existing personal Dropbox account"
+                [disabled]="requestTypeForm.controls.requestType.value === 'New'"
+                change
+                formControlName="isPersonalDropbox"
+              >
+                This request relates to an existing personal Dropbox account
+              </mat-checkbox>
             </mat-radio-group>
             <br>
-            <p>
-              Note: Personal or private Dropbox accounts do not qualify as existing storage.
-            </p>
           </div>
         </div>
 
@@ -46,7 +55,7 @@
     </mat-step>
 
     <mat-step [editable]="isEditable" [stepControl]="requestDetailsForm"
-      *ngIf="requestTypeForm.controls.requestType.value === 'Existing'">
+      *ngIf="requestTypeForm.controls.requestType.value === 'Existing' && !requestTypeForm.controls.isPersonalDropbox.value ">
       <form [formGroup]="requestDetailsForm">
         <ng-template matStepLabel>Request Details</ng-template>
 
@@ -109,7 +118,7 @@
     </mat-step>
 
     <mat-step [editable]="isEditable" [stepControl]="projectForm"
-      *ngIf="requestTypeForm.controls.requestType.value === 'New'">
+      *ngIf="requestTypeForm.controls.requestType.value === 'New' || requestTypeForm.controls.isPersonalDropbox.value ">
       <form [formGroup]="projectForm" novalidate>
         <ng-template matStepLabel>General Information</ng-template>
 
@@ -131,11 +140,11 @@
               <mat-error *ngIf="projectForm.controls.abstract.hasError('minlength')" align="start">* Please enter at
                 least 500 characters</mat-error>
               <mat-error *ngIf="projectForm.controls.abstract.hasError('minlength')" align="end">
-                {{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0  }}/500
+                {{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0 }}/500
               </mat-error>
               <mat-hint align="start">Min 500 Characters</mat-hint>
               <mat-hint align="end">
-                {{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0  }}/500
+                {{ projectForm.controls.abstract.value ? projectForm.controls.abstract.value.length : 0 }}/500
               </mat-hint>
             </mat-form-field>
           </div>
@@ -185,7 +194,7 @@
     </mat-step>
 
     <mat-step [editable]="isEditable" [stepControl]="dataInfoForm"
-      *ngIf="requestTypeForm.controls.requestType.value === 'New'">
+      *ngIf="requestTypeForm.controls.requestType.value === 'New' || requestTypeForm.controls.isPersonalDropbox.value ">
       <form [formGroup]="dataInfoForm" novalidate>
         <ng-template matStepLabel>Data Information</ng-template>
 
@@ -216,10 +225,12 @@
               GDC-data)?
             </h3>
             <mat-form-field floatLabel="never" class="no-floating-label input-full-width">
-              <input matInput placeholder="Short name" formControlName="shortName" type="text" />
+              <input matInput maxLength=45 placeholder="Short name" formControlName="shortName" type="text" />
               <mat-hint align="start">Avoid generic names like <i>my-project</i> or
-                <i>my-data</i></mat-hint>
-              <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">* Please enter a short name</mat-error>
+                <i>my-data</i>
+              </mat-hint>
+              <mat-error *ngIf="dataInfoForm.controls.shortName.invalid">* Please enter a short name containing less
+                than 45 characters</mat-error>
             </mat-form-field>
           </div>
 
@@ -227,7 +238,8 @@
             <h3>Please provide a list of University of Auckland people who require access</h3>
             <!-- <p style="padding-left: 24px;"> -->
             <p>
-              Please also nominate at least one person in each of the given administrative roles. If you are a PhD candidate
+              Please also nominate at least one person in each of the given administrative roles. If you are a PhD
+              candidate
               or research graduate student, you must include your supervisor and designate them as the Project Owner.
             </p>
 
@@ -319,7 +331,8 @@
                         [ngClass.gt-sm]="['.access__radio-wrapper--centered']">
                         <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
                           value="Read Only">
-                          <div [ngClass.lt-md]="['person__input-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
+                          <div [ngClass.lt-md]="['person__input-info--active']"
+                            [ngClass.gt-sm]="['role__checkbox-info--hidden']"
                             matTooltip="A person may read files but they cannot write to them or create new files."
                             [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                             <div>
@@ -332,7 +345,8 @@
                       <div class="read-write access__radio-wrapper">
                         <mat-radio-button matInput class="access__radio-button" name="person-access-radio-{{ i }}"
                           value="Full Access">
-                          <div [ngClass.lt-md]="['person__input-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
+                          <div [ngClass.lt-md]="['person__input-info--active']"
+                            [ngClass.gt-sm]="['role__checkbox-info--hidden']"
                             matTooltip="A person may read, write, and create new files." [matTooltipShowDelay]="0"
                             [matTooltipHideDelay]="0" matTooltipPosition="above">
                             <div>
@@ -351,10 +365,11 @@
                     <div class="roles__divider" formGroupName="roles">
 
                     </div>
-                    <div 
-                    [ngClass.gt-sm]="['role__container--gt-sm']" [ngClass.lt-md]="['role__container--lt-md']" formGroupName="roles">
+                    <div [ngClass.gt-sm]="['role__container--gt-sm']" [ngClass.lt-md]="['role__container--lt-md']"
+                      formGroupName="roles">
                       <mat-checkbox aria-label="data owner" formControlName="dataOwner">
-                        <div [ngClass.lt-md]="['person__input-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
+                        <div [ngClass.lt-md]="['person__input-info--active']"
+                          [ngClass.gt-sm]="['role__checkbox-info--hidden']"
                           matTooltip="A person that has ownership of the data." [matTooltipShowDelay]="0"
                           [matTooltipHideDelay]="0" matTooltipPosition="above">
                           <div>
@@ -364,9 +379,11 @@
                         </div>
                       </mat-checkbox>
                     </div>
-                    <div [ngClass.gt-sm]="['role__container--gt-sm']" [ngClass.lt-md]="['role__container--lt-md']" formGroupName="roles">
+                    <div [ngClass.gt-sm]="['role__container--gt-sm']" [ngClass.lt-md]="['role__container--lt-md']"
+                      formGroupName="roles">
                       <mat-checkbox formControlName="dataContact">
-                        <div [ngClass.lt-md]="['person__input-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
+                        <div [ngClass.lt-md]="['person__input-info--active']"
+                          [ngClass.gt-sm]="['role__checkbox-info--hidden']"
                           matTooltip="A person that the Centre for eResearch can contact regarding the data."
                           [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                           <div>
@@ -376,9 +393,11 @@
                         </div>
                       </mat-checkbox>
                     </div>
-                    <div [ngClass.gt-sm]="['role__container--gt-sm']" [ngClass.lt-md]="['role__container--lt-md']" formGroupName="roles">
+                    <div [ngClass.gt-sm]="['role__container--gt-sm']" [ngClass.lt-md]="['role__container--lt-md']"
+                      formGroupName="roles">
                       <mat-checkbox formControlName="projectOwner">
-                        <div [ngClass.lt-md]="['person__input-info--active']" [ngClass.gt-sm]="['role__checkbox-info--hidden']"
+                        <div [ngClass.lt-md]="['person__input-info--active']"
+                          [ngClass.gt-sm]="['role__checkbox-info--hidden']"
                           matTooltip="The owner of the project. If you are a PhD student, this will be your supervisor."
                           [matTooltipShowDelay]="0" [matTooltipHideDelay]="0" matTooltipPosition="above">
                           <div>
@@ -415,6 +434,9 @@
               <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('dataContactMinimumError')">
                 * Requires at least 1 data contact.
               </mat-error>
+              <mat-error *ngIf="dataInfoForm.controls.projectMembers.hasError('invalidProjectOwnerEmail')">
+                * The project owner must have an employee email address ending with "auckland.ac.nz".
+              </mat-error>
               <div fxLayout="row" fxLayoutAlign="end center">
                 <button mat-raised-button color="primary" (click)="addNewPerson()">
                   Add Person
@@ -435,7 +457,7 @@
     </mat-step>
 
     <mat-step [editable]="isEditable" [stepControl]="dataSizeForm"
-      *ngIf="requestTypeForm.controls.requestType.value === 'New'">
+      *ngIf="requestTypeForm.controls.requestType.value === 'New' || requestTypeForm.controls.isPersonalDropbox.value ">
       <form [formGroup]="dataSizeForm" novalidate>
         <ng-template matStepLabel>Data Size</ng-template>
 
@@ -512,14 +534,14 @@
         <p>
           Your storage request has been submitted and an acknowledgement e-mail
           sent to
-          <a *ngIf="authService.user" [href]="'mailto:' + authService.user.mail"
-            target="_blank">{{ authService.user.mail }}</a>.
+          <a *ngIf="authService.user" [href]="'mailto:' + authService.user.mail" target="_blank">{{
+            authService.user.mail }}</a>.
         </p>
         <p>
           You may view your request here:
           <a *ngIf="response" [href]="response.ticketUrl" target="_blank">{{
             response.ticketNumber
-          }}</a>
+            }}</a>
         </p>
       </div>
       <div fxLayout="column" fxLayoutAlign="end">

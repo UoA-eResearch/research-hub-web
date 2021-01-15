@@ -33,6 +33,10 @@ npm-debug.log
 package-lock.json
 testem.log
 /typings
+# Remove Emacs temporary files
+*~
+.#*
+\#*\#
 
 # e2e
 /e2e/*.js
